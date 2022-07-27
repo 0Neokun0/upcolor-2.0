@@ -1,8 +1,11 @@
+import { HomeLayout } from "components/templates"
+import { Box } from "@mui/material"
+
 const Home = () => {
     return (
-        <div>
-            
-        </div>
+        <Box>
+            <HomeLayout />
+        </Box>
     );
 }
 
