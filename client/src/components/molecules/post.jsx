@@ -2,12 +2,16 @@ import { Avatar, Card, CardActionArea, CardContent, CardHeader } from "@mui/mate
 
 const Post = (props) => {
     return (
-        <Card>
+        <Card
+            sx={{
+                mt: 1,
+            }}
+        >
             <CardActionArea>
                 <CardHeader
                     avatar={
                         <Avatar>
-                            name
+                            {props.name}
                         </Avatar>
                     }
                     title={props.name}

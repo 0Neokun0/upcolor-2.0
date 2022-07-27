@@ -2,16 +2,21 @@ import { Post } from "components/molecules"
 import { Box } from "@mui/material"
 
 const Feed = (props) => {
+    console.log(props.posts)
     return (
         <Box>
-            {/* {
+            {
                 props.posts.map((post) => {
                     return (
-                        <Post />
+                        <Post
+                            key={post.id}
+                            name={post.name}
+                            time={post.time}
+                            content={post.content}
+                        />
                     )
                 })
-            } */}
-            <Post name="まつお" time="1111:11:11" content="どうもまつおです。ヴァロラントが大好きです。kay/oは苦手です。よろしくお願いします。"/>
+            }
         </Box>
     );
 }
