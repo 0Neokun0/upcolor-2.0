@@ -9,8 +9,8 @@ import {
   Divider,
 } from "@mui/material";
 
-import SignUpButton from "components/atom/landingPageButtons/signUpButton";
-import SignInButton from "components/atom/landingPageButtons/signInButton";
+import SignUpButton from "components/atoms/landingPageButtons/signUpButton";
+import SignInButton from "components/atoms/landingPageButtons/signInButton";
 
 const ContainerMain = styled(Container)(({ theme }) => ({
   justifyContent: "center",
@@ -56,7 +56,7 @@ const LandingPageMainComponent = () => {
           height="80"
           type="image"
           alt="photo"
-          src={require("../../atom/logo/upcolor_logo.png")}
+          src={require("../../atoms/logo/upcolor_logo.png")}
         />
         <Grid
           spacing={{ xs: 6, md: 10 }}

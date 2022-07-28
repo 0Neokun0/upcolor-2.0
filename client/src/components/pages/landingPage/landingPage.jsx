@@ -7,7 +7,7 @@ import LandingPageFeatureCards from "components/organisms/landingPage/feature";
 const LandingPage = () => {
   return (
     <>
-      <Box>
+      <Box sx={{ mt: 10 }}>
         <LandingPageMainComponent />
       </Box>
       <Box sx={{ mt: 35 }}>
