@@ -1,4 +1,4 @@
-import { AppBar, Button, Link, Toolbar, Typography } from "@mui/material"
+import { AppBar, Button, Dialog, DialogActions, DialogTitle, Link, Toolbar, Typography } from "@mui/material"
 
 const Header = (props) => {
     return (
@@ -56,15 +56,41 @@ const Header = (props) => {
                     })
                 }
 
-                <Button
-                    variant="contained"
-                    sx={{
-                        ml: 5,
-                    }}
-                >
-                    サインアウト
-                </Button>
+                {
+                    props.signInState
+                        ?
+                        <Button
+                            variant="contained"
+                            sx={{
+                                ml: 5,
+                            }}
+                            onClick={props.toggleAlertOpen}
+                        >
+                            サインアウト
+                        </Button>
+                        :
+                        <Button
+                            variant="contained"
+                            href="signin"
+                        >
+                            サインイン
+                        </Button>
+                }
             </Toolbar>
+
+            {/* サインアウトアラート */}
+
+            <Dialog open={Boolean(props.open)} onClose={props.toggleAlertClose}>
+                <DialogTitle>本当にサインアウトしますか?</DialogTitle>
+
+                <DialogActions>
+                    <Button onClick={props.toggleAlertClose}>キャンセル</Button>
+
+                    <Button onClick={props.toggleSignout}>
+                        サインアウト
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </AppBar>
     );
 }

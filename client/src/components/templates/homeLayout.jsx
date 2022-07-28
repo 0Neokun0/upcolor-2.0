@@ -1,10 +1,16 @@
 import { Outlet } from "react-router-dom"
-import { MainMenu, News } from "components/organisms"
+import { MainMenu, News, SendPost } from "components/organisms"
 import { Container, Grid } from "@mui/material"
 
 const HomeLayout = (props) => {
     return (
         <Container>
+            <SendPost
+                open={props.open}
+                toggleModalOpen={props.toggleModalOpen}
+                toggleModalClose={props.toggleModalClose}
+            />
+
             <Grid
                 container
                 sx={{

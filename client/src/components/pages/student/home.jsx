@@ -1,9 +1,12 @@
 import { HomeLayout } from "components/templates"
+import { useState } from "react"
 import { useParams } from "react-router-dom"
 
 const Home = () => {
     const postId = useParams()["postId"]
     console.log(postId)
+
+    const [open, setOpen] = useState(false);
 
     const post = {
         name: "まつお",
@@ -144,6 +147,13 @@ const Home = () => {
         },
     ]
 
+    const toggleModalOpen = () => {
+        setOpen(true)
+    }
+    const toggleModalClose = () => {
+        setOpen(false)
+    }
+
     const news = [
         {
             id: 1,
@@ -159,7 +169,16 @@ const Home = () => {
         },
     ]
     return (
-        <HomeLayout post={post} posts={posts} replys={replys} menus={menus} news={news} />
+        <HomeLayout
+            open={open}
+            toggleModalOpen={toggleModalOpen}
+            toggleModalClose={toggleModalClose}
+            post={post}
+            posts={posts}
+            replys={replys}
+            menus={menus}
+            news={news}
+        />
     );
 }
 
