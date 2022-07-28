@@ -86,7 +86,18 @@ router.post("/sendChat", (req, res) => {
 router.post("/getGroupChat", (req, res) => {
     const groupId = req.body.group_id
 
-    const sqlSelectGroupChat = "SELECT group_chat.*, user_profiles.user_name FROM group_chat INNER JOIN user_profiles ON group_chat.sent_user_id = user_profiles.user_id WHERE received_group_id = ?"
+    const sqlSelectGroupChat = ```
+        SELECT
+            group_chat.*,
+            user_profiles.user_name
+        FROM
+            group_chat
+            INNER JOIN
+                user_profiles ON
+                group_chat.sent_user_id = user_profiles.user_id
+        WHERE
+            received_group_id = ?"
+    ```
     const groupChat = await sql.handleSelect(sqlSelectGroupChat, [groupId])
 
     res.json(groupChat)

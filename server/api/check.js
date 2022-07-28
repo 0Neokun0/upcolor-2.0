@@ -22,7 +22,14 @@ router.post("/company", async (req, res) => {
 
     const name = get.name(token)
 
-    const sqlSelectCompany = "SELECT company_id FROM company_profiles WHERE company_name = ?"
+    const sqlSelectCompany = ```
+        SELECT
+            company_id
+        FROM
+            company_profiles
+        WHERE
+            company_name = ?
+    ```
     const companyId = await sql.handleSelect(sqlSelectCompany, [name])
 
     if (!companyId) {

@@ -9,7 +9,13 @@ router.use((req, res, next) => {
 })
 
 router.post("/course", (req, res) => {
-    const sqlSelectCourses = "SELECT course_id, course_name FROM courses"
+    const sqlSelectCourses = ```
+        SELECT
+            course_id,
+            course_name
+        FROM
+            courses
+    ```
     const courses = await sql.handleSelect(sqlSelectCourses, [])
 
     res.json(courses)

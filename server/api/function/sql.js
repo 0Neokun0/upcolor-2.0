@@ -3,14 +3,14 @@ const mysql = require("mysql")
 const db = mysql.createConnection(config.db)
 
 exports.handleSelect = async (sqlSelect, values) => {
-    const getValue = await new Promise((res, rej) => {
+    const getValue = await new Promise((response, reject) => {
         db.query(sqlSelect, values, (err, res) => {
-            if (err) rej(err)
+            if (err) reject(err)
 
             if (res.length) {
-                res(res)
+                response(res)
             } else {
-                res(false)
+                response(false)
             }
         })
     })
@@ -19,11 +19,11 @@ exports.handleSelect = async (sqlSelect, values) => {
 }
 
 exports.handleInsert = async (sqlInsert, values) => {
-    const getValue = await new Promise((res, rej) => {
+    const getValue = await new Promise((response, reject) => {
         db.query(sqlInsert, values, (err, res) => {
-            if (err) rej(err)
+            if (err) reject(err)
 
-            res(res)
+            response(res)
         })
     })
 
