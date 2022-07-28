@@ -11,7 +11,7 @@ const GroupChatLayout = (props) => {
                 xs={4}
                 sx={{
                     borderRight: 1,
-                    borderColor: "lightgray",
+                    borderColor: "rgba(0, 0, 0, 0.12)",
                 }}
             >
                 <GroupList groups={props.groups} />

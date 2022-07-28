@@ -16,7 +16,7 @@ const GroupLayout = (props) => {
                     xs={2}
                     sx={{
                         borderRight: 1,
-                        borderColor: "lightgray",
+                        borderColor: "rgba(0, 0, 0, 0.12)",
                     }}
                 >
                     <GroupMenu menus={props.menus} />

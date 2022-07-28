@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material"
-import NewsCard from "components/molecules/newsCard"
+import { NewsCard } from "components/molecules"
 
 const News = (props) => {
     return (

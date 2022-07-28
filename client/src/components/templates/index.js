@@ -1,3 +1,5 @@
-export {default as HomeLayout} from "./homeLayout"
-export {default as GroupChatLayout} from "./groupChatLayout"
-export {default as GroupLayout} from "./groupLayout"
+export { default as HomeLayout } from "./homeLayout"
+export { default as GroupChatLayout } from "./groupChatLayout"
+export { default as GroupLayout } from "./groupLayout"
+export { default as LandingPageLayout } from "./landingPageLayout"
+export { default as SignLayout } from "./signLayout"

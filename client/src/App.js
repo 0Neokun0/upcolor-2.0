@@ -1,11 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
-import LandingPage from "components/pages/landingPage/landingPage";
-
-
-
-import { Group, Home } from "components/pages/student"
+import { LandingPage } from "components/pages"
+import { Group, Home, SignIn } from "components/pages/student"
 import { GroupChatLayout } from "components/templates"
+import { Feed, FeedDetail } from "components/organisms"
 
 import { AddLectures } from "components/pages/teacher"
 
@@ -37,9 +35,15 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="" element={<LandingPage />} />
-                <Route path="Home" element={<Home/>}/>
 
-                <Route path="group" element={<Group />}>
+                <Route path="signin" element={<SignIn />} />
+
+                <Route path="Home" element={<Home />}>
+                    <Route path="" element={<Feed />} />
+                    <Route path=":postId" element={<FeedDetail />} />
+                </Route>
+
+                <Route path="/group" element={<Group />}>
                     <Route path="" element={<GroupChatLayout groups={groups} />} />
                 </Route>
 
