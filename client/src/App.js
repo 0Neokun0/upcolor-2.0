@@ -7,6 +7,7 @@ import LandingPage from "components/pages/landingPage/landingPage";
 import { Group, Home } from "components/pages/student"
 import { GroupChatLayout } from "components/templates"
 
+import { AddLectures } from "components/pages/teacher"
 
 function App() {
     const groups = [
@@ -41,6 +42,8 @@ function App() {
                 <Route path="group" element={<Group />}>
                     <Route path="" element={<GroupChatLayout groups={groups} />} />
                 </Route>
+
+                <Route path="develop" element={<AddLectures />} />
             </Routes>
         </BrowserRouter>
     );

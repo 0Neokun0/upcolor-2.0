@@ -11,16 +11,24 @@ router.use((req, res, next) => {
     next()
 })
 
-router.post("/getGroup", (req, res) => {
+router.post("/getGroup", async (req, res) => {
     const inviteToken = req.body.inviteToken
 
     try {
-        jwt.verify(inviteToken, config.jwt.secret, (err, res) => {
+        jwt.verify(inviteToken, config.jwt.secret, async (err, res) => {
             if (err) throw err
 
             const groupId = res["groupId"]
 
-            const sqlSelectGroup = "SELECT group_id, group_name FROM group_list WHERE group_id = ?"
+            const sqlSelectGroup = `
+                SELECT
+                    group_id,
+                    group_name
+                FROM
+                    group_list
+                WHERE
+                    group_id = ?
+            `
             const groupList = await sql.handleSelect(sqlSelectGroup, [groupId])
 
             if (groupList.length) {
@@ -34,59 +42,127 @@ router.post("/getGroup", (req, res) => {
     }
 })
 
-router.post("/addGroup", (req, res) => {
+router.post("/addGroup", async (req, res) => {
     const userId = get.userId(req)
     const name = req.body.name
 
-    const sqlInsertGroup = "INSERT INTO groups_list(created_user_id, group_name) VALUES(?, ?)"
+    const sqlInsertGroup = `
+        INSERT INTO groups_list(
+            created_user_id,
+            group_name
+        )
+        VALUES(
+            ?,
+            ?
+        )
+    `
     const group = await sql.handleInsert(sqlInsertGroup, [userId, name])
 
     const groupId = group["insertId"]
 
-    const sqlInsertJoinedGroup = "INSERT INTO users_joined_group(group_id, joined_user_id) VALUES(?, ?)"
+    const sqlInsertJoinedGroup = `
+        INSERT INTO users_joined_group(
+            group_id,
+            joined_user_id
+        )
+        VALUES(
+            ?,
+            ?
+        )
+    `
     await sql.handleInsert(sqlInsertJoinedGroup, [groupId, userId])
 })
 
-router.post("/joinGroup", (req, res) => {
+router.post("/joinGroup", async (req, res) => {
     const userId = get.userId(req)
     const groupId = req.body.group_id
 
-    const sqlSelectJoinedGroup = "SELECT group_id FROM users_joined_group WHERE group_id = ? AND joined_user_id = ?"
+    const sqlSelectJoinedGroup = `
+        SELECT
+            group_id
+        FROM
+            users_joined_group
+        WHERE
+            group_id = ? AND
+            joined_user_id = ?
+    `
     const joinedGroup = await sql.handleSelect(sqlSelectJoinedGroup, [groupId, userId])
 
     if (!joinedGroup.length) {
-        const sqlInsertJoinGroup = "INSERT INTO users_joined_group(group_id, joined_user_id) VALUES(?, ?)"
+        const sqlInsertJoinGroup = `
+            INSERT INTO users_joined_group(
+                group_id,
+                joined_user_id
+            )
+            VALUES(
+                ?,
+                ?
+            )
+        `
         await sql.handleInsert(sqlInsertJoinGroup, [groupId, userId])
     }
 })
 
-router.post("/getJoinedGroupList", (req, res) => {
+router.post("/getJoinedGroupList", async (req, res) => {
     const userId = get.userId(req)
 
-    const sqlSelectJoinGroup = "SELECT groups_list.group_id, groups_list.group_name FROM users_joined_group INNER JOIN groups_list ON users_joined_group.group_id = groups_list.group_id WHERE users_joined_group.joined_user_id = ?"
+    const sqlSelectJoinGroup = `
+        SELECT
+            groups_list.group_id,
+            groups_list.group_name
+        FROM
+            users_joined_group
+            INNER JOIN
+                groups_list ON
+                users_joined_group.group_id = groups_list.group_id
+        WHERE
+            users_joined_group.joined_user_id = ?
+    `
     const groupsList = await sql.handleSelect(sqlSelectJoinGroup)
 
     res.json(groupsList)
 })
 
-router.post("/sendChat", (req, res) => {
+router.post("/sendChat", async (req, res) => {
     const userId = get.userId(req)
     const groupId = req.body.group_id
     const text = req.body.text
 
-    const sqlInsertChat = "INSERT INTO group_chat(sent_user_id, received_group_id, sent_text) VALUES(?, ?, ?)"
+    const sqlInsertChat = `
+        INSERT INTO group_chat(
+            sent_user_id,
+            received_group_id,
+            sent_text
+        )
+        VALUES(
+            ?,
+            ?,
+            ?
+        )
+    `
     await sql.handleInsert(sqlInsertChat, [userId, groupId, text])
 
-    const sqlSelectGroupChat = "SELECT group_chat.*, user_profiles.user_name FROM group_chat INNER JOIN user_profiles ON group_chat.sent_user_id = user_profiles.user_id WHERE received_group_id = ?"
+    const sqlSelectGroupChat = `
+        SELECT
+            group_chat.*,
+            user_profiles.user_name
+        FROM
+            group_chat
+            INNER JOIN
+                user_profiles ON
+                group_chat.sent_user_id = user_profiles.user_id
+        WHERE
+            received_group_id = ?
+    `
     const groupChat = await sql.handleSelect(sqlSelectGroupChat, [groupId])
 
     res.json(groupChat)
 })
 
-router.post("/getGroupChat", (req, res) => {
+router.post("/getGroupChat", async (req, res) => {
     const groupId = req.body.group_id
 
-    const sqlSelectGroupChat = ```
+    const sqlSelectGroupChat = `
         SELECT
             group_chat.*,
             user_profiles.user_name
@@ -97,7 +173,7 @@ router.post("/getGroupChat", (req, res) => {
                 group_chat.sent_user_id = user_profiles.user_id
         WHERE
             received_group_id = ?"
-    ```
+    `
     const groupChat = await sql.handleSelect(sqlSelectGroupChat, [groupId])
 
     res.json(groupChat)

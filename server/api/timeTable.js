@@ -7,14 +7,14 @@ router.post("/addLectures", async (req, res) => {
     let timeTable = req.body["timeTable"]
     let courseId = true
 
-    const sqlSelectCourseId = ```
+    const sqlSelectCourseId = `
         SELECT
             course_id
         FROM
             courses
         WHERE
             course_name = ?
-    ```
+    `
     for (let i = 0; i < timeTable.length && courseId; i ++) {
         courseId = await sql.handleSelect(sqlSelectCourseId, timeTable[i][5])
 
@@ -22,15 +22,15 @@ router.post("/addLectures", async (req, res) => {
     }
 
     if (courseId) {
-        const sqlInsertTimeTable = ```
+        const sqlInsertTimeTable = `
             INSERT INTO lectures_list(
                 lecture_name,
                 lecture_room,
                 lecture_teacher,
                 lecture_day,
                 lecture_period,
-                lecture_course_id,
-                lecture_student_year
+                target_course_id,
+                target_student_year
             )
             VALUES(
                 ?,
@@ -41,7 +41,7 @@ router.post("/addLectures", async (req, res) => {
                 ?,
                 ?
             )
-        ```
+        `
         await Promise.all(timeTable.map(async (cell) => {
             await sql.handleInsert(sqlInsertTimeTable, cell)
         }))
@@ -55,7 +55,7 @@ router.post("/addLectures", async (req, res) => {
 router.post("/getLecturesList", async (req, res) => {
     const userId = get.userId(req)
 
-    const sqlSelectUser = ```
+    const sqlSelectUser = `
         SELECT
             student_course_id,
             student_year
@@ -63,27 +63,27 @@ router.post("/getLecturesList", async (req, res) => {
             student_profiles
         WHERE
             user_id = ?
-    ```
+    `
     const user = await sql.handleSelect(sqlSelectUser, userId)
 
     const course = user["student_course_id"]
     const year = "%" + user["student_year"] + "%"
 
-    const sqlSelectLectures = ```
+    const sqlSelectLectures = `
         SELECT
             lecture_name,
             lecture_room,
             lecture_teacher,
             lecture_day,
             lecture_period,
-            lecture_course_id,
-            lecture_student_year
+            target_course_id,
+            target_student_year
         FROM
             lectures_list
         WHERE
             course_id = ? AND
             student_year LIKE ?
-    ```
+    `
     const lecturesList = await sql.handleSelect(sqlSelectLectures, [course, year])
 
     if (lecturesList) {
@@ -97,18 +97,18 @@ router.post("/addTimeTable", async (req, res) => {
     const timeTable = req.body
     const userId = get.userId(req)
 
-    const sqlSelectTimeTable = ```
+    const sqlSelectTimeTable = `
         SELECT
             lecture_id
         FROM
             student_time_table
         WHERE
             student_id = ?
-    ```
+    `
     const lecturesId = await sql.handleSelect(sqlSelectTimeTable, userId)
 
     if (!lecturesId.length) {
-        const sqlInsertTimeTable = ```
+        const sqlInsertTimeTable = `
             INSERT INTO student_time_table(
                 student_id,
                 lecture_id
@@ -117,7 +117,7 @@ router.post("/addTimeTable", async (req, res) => {
                 ?,
                 ?
             )
-        ```
+        `
         await Promise.all(timeTable.map(async (lectureId) => {
             if (lectureId) {
                 await sql.handleInsert(sqlInsertTimeTable, [userId, lectureId])
@@ -134,16 +134,16 @@ router.post("/overWriteTimeTable", async (req, res) => {
     const timeTable = req.body
     const userId = get.userId(req)
 
-    const sqlDeleteTimeTable = ```
+    const sqlDeleteTimeTable = `
         DELETE
         FROM
             student_time_table
         WHERE
             student_id = ?
-    ```
+    `
     await sql.handleDelete(sqlDeleteTimeTable, userId)
 
-    const sqlInsertTimeTable = ```
+    const sqlInsertTimeTable = `
         INSERT INTO student_time_table(
             student_id,
             lecture_id
@@ -152,7 +152,7 @@ router.post("/overWriteTimeTable", async (req, res) => {
             ?,
             ?
         )
-    ```
+    `
     await Promise.all(timeTable.map(async (lectureId) => {
         if (lectureId) {
             await sql.handleInsert(sqlInsertTimeTable, [userId, lectureId])
@@ -165,15 +165,15 @@ router.post("/overWriteTimeTable", async (req, res) => {
 router.post("/getTimeTable", async (req, res) => {
     const userId = get.userId(req)
 
-    const sqlSelectLecturesContent = ```
+    const sqlSelectLecturesContent = `
         SELECT
             lectures_list.lecture_name,
             lectures_list.lecture_room,
             lectures_list.lecture_teacher,
             lectures_list.lecture_day,
             lectures_list.lecture_period,
-            lectures_list.lecture_course_id,
-            lectures_list.lecture_student_year
+            lectures_list.target_course_id,
+            lectures_list.target_student_year
         FROM
             student_time_table
             INNER JOIN
@@ -181,7 +181,7 @@ router.post("/getTimeTable", async (req, res) => {
                 student_time_table.lecture_id = lectures_list.lecture_id
         WHERE
             student_time_table.student_id = ?
-    ```
+    `
     const lecturesContent = await sql.handleSelect(sqlSelectLecturesContent, userId)
 
     if (lecturesContent.length) {
