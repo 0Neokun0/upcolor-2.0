@@ -1,66 +1,115 @@
 import { HomeLayout } from "components/templates"
+import { useParams } from "react-router-dom"
 
 const Home = () => {
+    const postId = useParams()["postId"]
+    console.log(postId)
+
+    const post = {
+        name: "まつお",
+        time: "YYYY/MM/DD",
+        content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    }
+
     const posts = [
         {
             id: 1,
             name: "まつお",
             time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。"
+            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
         },
         {
             id: 2,
             name: "まつお",
             time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。"
+            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
         },
         {
             id: 3,
             name: "まつお",
             time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。"
+            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
         },
         {
             id: 4,
             name: "まつお",
             time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。"
+            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
         },
         {
             id: 5,
             name: "まつお",
             time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。"
+            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
         },
         {
             id: 6,
             name: "まつお",
             time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。"
+            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
         },
         {
             id: 7,
             name: "まつお",
             time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。"
+            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
         },
         {
             id: 8,
             name: "まつお",
             time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。"
+            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
         },
         {
             id: 9,
             name: "まつお",
             time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。"
+            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
         },
         {
             id: 10,
             name: "まつお",
             time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。"
+            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+        },
+    ]
+
+    const replys = [
+        {
+            id: 1,
+            name: "おおにし",
+            time: "YYYY/MM/DD",
+            content: "あのkey/oはひどかった。",
+        },
+        {
+            id: 2,
+            name: "おおにし",
+            time: "YYYY/MM/DD",
+            content: "あのkey/oはひどかった。",
+        },
+        {
+            id: 3,
+            name: "おおにし",
+            time: "YYYY/MM/DD",
+            content: "あのkey/oはひどかった。",
+        },
+        {
+            id: 4,
+            name: "おおにし",
+            time: "YYYY/MM/DD",
+            content: "あのkey/oはひどかった。",
+        },
+        {
+            id: 5,
+            name: "おおにし",
+            time: "YYYY/MM/DD",
+            content: "あのkey/oはひどかった。",
+        },
+        {
+            id: 6,
+            name: "おおにし",
+            time: "YYYY/MM/DD",
+            content: "あのkey/oはひどかった。",
         },
     ]
 
@@ -110,7 +159,7 @@ const Home = () => {
         },
     ]
     return (
-        <HomeLayout posts={posts} menus={menus} news={news} />
+        <HomeLayout post={post} posts={posts} replys={replys} menus={menus} news={news} />
     );
 }
 

@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Group, Home } from "components/pages/student"
 import { GroupChatLayout } from "components/templates"
+import { Feed, FeedDetail } from "components/organisms"
 
 function App() {
     const groups = [
@@ -29,7 +30,10 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="" element={<Home />} />
+                <Route path="" element={<Home />}>
+                    <Route path="" element={<Feed />} />
+                    <Route path="/:postId" element={<FeedDetail />} />
+                </Route>
 
                 <Route path="group" element={<Group />}>
                     <Route path="" element={<GroupChatLayout groups={groups} />} />
