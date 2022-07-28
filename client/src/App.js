@@ -1,14 +1,42 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Home } from "components/pages/student"
+import { Group, Home } from "components/pages/student"
+import { GroupChatLayout } from "components/templates"
 
-function App () {
-  return (
-    <BrowserRouter>
-        <Routes>
-            <Route path="" element={<Home />} />
-        </Routes>
-    </BrowserRouter>
-  );
+function App() {
+    const groups = [
+        {
+            id: 1,
+            name: "Valorant",
+            latest: "key/o難しい",
+        },
+        {
+            id: 2,
+            name: "Valorant",
+            latest: "key/o難しい",
+        },
+        {
+            id: 3,
+            name: "Valorant",
+            latest: "key/o難しい",
+        },
+        {
+            id: 4,
+            name: "Valorant",
+            latest: "key/o難しい",
+        },
+    ]
+
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="" element={<Home />} />
+
+                <Route path="group" element={<Group />}>
+                    <Route path="" element={<GroupChatLayout groups={groups} />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;
