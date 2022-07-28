@@ -30,7 +30,11 @@ const menus = [
 ]
 root.render(
     <React.StrictMode>
-        <Header logoSrc={logo} name={"UPCOLOR"} menus={menus} />
+        <Header
+            logoSrc={logo}
+            name={"UPCOLOR"}
+            menus={menus}
+        />
 
         <App />
     </React.StrictMode>
