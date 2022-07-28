@@ -4,7 +4,7 @@ import LandingPage from "components/pages/landingPage/landingPage";
 
 
 
-import { Group, Home } from "components/pages/student"
+import { Group, Home, RegistTimeTable, ShowTimeTable } from "components/pages/student"
 import { GroupChatLayout } from "components/templates"
 
 import { AddLectures } from "components/pages/teacher"
@@ -41,6 +41,10 @@ function App() {
 
                 <Route path="group" element={<Group />}>
                     <Route path="" element={<GroupChatLayout groups={groups} />} />
+                </Route>
+
+                <Route path="timeTable" element={<ShowTimeTable />}>
+                    <Route path="regist" element={<RegistTimeTable />} />
                 </Route>
 
                 <Route path="develop" element={<AddLectures />} />
