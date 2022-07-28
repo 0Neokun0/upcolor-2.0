@@ -2,7 +2,6 @@ import { Post } from "components/molecules"
 import { Box } from "@mui/material"
 
 const Feed = (props) => {
-    console.log(props.posts)
     return (
         <Box>
             {

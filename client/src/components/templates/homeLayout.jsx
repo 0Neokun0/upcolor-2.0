@@ -1,4 +1,4 @@
-import { Feed } from "components/organisms"
+import { Feed, MainMenu, News } from "components/organisms"
 import { Container, Grid } from "@mui/material"
 
 const HomeLayout = (props) => {
@@ -8,13 +8,14 @@ const HomeLayout = (props) => {
                 container
                 sx={{
                     background: "white",
+                    height: "100%",
                 }}
             >
                 <Grid
                     item
                     xs={3}
                 >
-
+                    <MainMenu menus={props.menus} />
                 </Grid>
 
                 <Grid
@@ -34,8 +35,12 @@ const HomeLayout = (props) => {
                 <Grid
                     item
                     xs={3}
+                    sx={{
+                        p: 2,
+                        pt: 0,
+                    }}
                 >
-
+                    <News news={props.news} />
                 </Grid>
             </Grid>
         </Container>
