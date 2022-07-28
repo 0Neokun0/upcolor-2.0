@@ -40,10 +40,10 @@ function App() {
                 
                 <Route path="Home" element={<Home />}>
                     <Route path="" element={<Feed />} />
-                    <Route path="/:postId" element={<FeedDetail />} />
+                    <Route path=":postId" element={<FeedDetail />} />
                 </Route>
 
-                <Route path="group" element={<Group />}>
+                <Route path="/group" element={<Group />}>
                     <Route path="" element={<GroupChatLayout groups={groups} />} />
                 </Route>
             </Routes>

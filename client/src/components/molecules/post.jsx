@@ -3,7 +3,7 @@ import { Avatar, Card, CardActionArea, CardContent, CardHeader } from "@mui/mate
 
 const Post = (props) => {
     return (
-        <Link to={"/" + props.id}>
+        <Link to={"/home/" + props.id}>
             <Card
                 variant="outlined"
                 sx={{
