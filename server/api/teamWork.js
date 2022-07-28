@@ -18,7 +18,7 @@ router.post("/addTeamWork", async (req, res) => {
     const setChatPublish = req.body.setChatPublish
     const setGanttPublish = req.body.setGanttPublish
 
-    const sqlInsertTeamWork = ```
+    const sqlInsertTeamWork = `
         INSERT INTO team_works_list(
             created_user_id,
             team_name,
@@ -35,12 +35,12 @@ router.post("/addTeamWork", async (req, res) => {
             ?,
             0
         )
-    ```
+    `
     const teamWork = await sql.handleInsert(sqlInsertTeamWork, [userId, teamName, teamWorkName, setChatPublish, setGanttPublish])
 
     const teamWorkId = teamWork["insertId"]
 
-    const sqlInsertjoinTeam = ```
+    const sqlInsertjoinTeam = `
         INSERT INTO users_joined_team_work(
             team_work_id,
             joined_user_id
@@ -49,24 +49,24 @@ router.post("/addTeamWork", async (req, res) => {
             ?,
             ?
         )
-    ```
+    `
     await sql.handleInsert(sqlInsertjoinTeam, [teamWorkId, userId])
 
-    const sqlUpdateStudent = ```
+    const sqlUpdateStudent = `
         UPDATE
             student_profiles
         SET
             is_colaborating = ?
         WHERE
             user_id = ?
-    ```
+    `
     await sql.handleUpdate(sqlUpdateStudent, [teamWorkId, userId])
 })
 
 router.post("/getTeamWork", async (req, res) => {
     const teamWorkId = req.body.teamWorkId
     
-    const sqlSelectTeam = ```
+    const sqlSelectTeam = `
         SELECT
             team_name,
             team_work_name,
@@ -83,7 +83,7 @@ router.post("/getTeamWork", async (req, res) => {
             team_works_list
         WHERE
             team_work_id = ?
-    ```
+    `
     const team = await sql.handleSelect(sqlSelectTeam, [teamWorkId])
 
     res.json(team)
@@ -92,7 +92,7 @@ router.post("/getTeamWork", async (req, res) => {
 router.post("/getJoinedTeamWork", async (req, res) => {
     const userId = get.userId(req)
 
-    const sqlSelectJoinedTeam = ```
+    const sqlSelectJoinedTeam = `
         SELECT
             team_works_list.team_name,
             team_works_list.team_work_name,
@@ -112,7 +112,7 @@ router.post("/getJoinedTeamWork", async (req, res) => {
                 users_joined_team_work.team_work_id = team_works_list.team_work_id
         WHERE
             users_joined_team_work.joined_user_id = ?
-    ```
+    `
     const joinedTeam = await sql.handleSelect(sqlSelectJoinedTeam, [userId])
 
     if (joinedTeam) {
@@ -125,7 +125,7 @@ router.post("/getJoinedTeamWork", async (req, res) => {
 router.post("/getJoinedUser", async (req, res) => {
     const teamWorkId = req.body.teamWorkId
 
-    const sqlSelectJoinedUser = ```
+    const sqlSelectJoinedUser = `
         SELECT
             user_profiles.user_id,
             user_profiles.user_name
@@ -136,19 +136,19 @@ router.post("/getJoinedUser", async (req, res) => {
                 users_joined_team_work.joined_user_id = user_profiles.user_id
         WHERE
             users_joined_team_work.team_work_id = ?
-    ```
+    `
     const joinedUser = await sql.handleSelect(sqlSelectJoinedUser, [teamWorkId])
 
     res.json(joinedUser)
 })
 
 router.post("/getTeamWorkList", async (req, res) => {
-    const sqlSelectTeamList = ```
+    const sqlSelectTeamList = `
         SELECT
             *
         FROM
             team_works_list
-    ```
+    `
     const teamList = await sql.handleSelect(sqlSelectTeamList)
 
     res.json(teamList)
@@ -157,18 +157,18 @@ router.post("/getTeamWorkList", async (req, res) => {
 router.post("/getTeamChat", async (req, res) => {
     const userId = get.userId(req)
 
-    const sqlSelectTeamId = ```
+    const sqlSelectTeamId = `
         SELECT
             is_colaborating
         FROM
             student_profiles
         WHERE
             user_id = ?
-    ```
+    `
     const teamId = await sql.handleSelect(sqlSelectTeamId, [userId])
 
     if (teamId) {
-        const sqlSelectTeamChat = ```
+        const sqlSelectTeamChat = `
             SELECT
                 team_works_chat.*,
                 user_profiles.user_name
@@ -179,7 +179,7 @@ router.post("/getTeamChat", async (req, res) => {
                     team_works_chat.sent_user_id = user_profiles.user_id
             WHERE
                 team_works_chat.received_team_work_id = ?
-        ```
+        `
         const teamChat = await sql.handleSelect(sqlSelectTeamChat, [teamId[0]["is_colaborating"]])
 
         res.json(teamChat)
@@ -190,17 +190,17 @@ router.post("/sendChat", async (req, res) => {
     const userId = get.userId(req)
     const text = req.body.text
 
-    const sqlSelectTeamId = ```
+    const sqlSelectTeamId = `
         SELECT
             is_colaborating
         FROM
             student_profiles
         WHERE
             user_id = ?
-    ```
+    `
     const teamId = await sql.handleSelect(sqlSelectTeamId, [userId])
 
-    const sqlInsertChat = ```
+    const sqlInsertChat = `
         INSERT INTO team_works_chat(
             sent_user_id,
             received_team_work_id,
@@ -211,10 +211,10 @@ router.post("/sendChat", async (req, res) => {
             ?,
             ?
         )
-    ```
+    `
     await sql.handleInsert(sqlInsertChat, [userId, teamId[0]["is_colaborating"], text])
 
-    const sqlSelectTeamChat = ```
+    const sqlSelectTeamChat = `
         SELECT
             team_works_chat.*,
             user_profiles.user_name
@@ -225,7 +225,7 @@ router.post("/sendChat", async (req, res) => {
                 team_works_chat.sent_user_id = user_profiles.user_id
         WHERE
             received_team_work_id = ?
-    ```
+    `
     const teamChat = await sql.handleSelect(sqlSelectTeamChat, [teamId[0]["is_colaborating"]])
 
     res.json(teamChat)
@@ -234,7 +234,7 @@ router.post("/sendChat", async (req, res) => {
 router.post("/getGantt", async (req, res) => {
     const teamWorkId = req.body.teamWorkId
 
-    const sqlSelectTasks = ```
+    const sqlSelectTasks = `
         SELECT
             task_id,
             task_name,
@@ -246,10 +246,10 @@ router.post("/getGantt", async (req, res) => {
             gantt_tasks
         WHERE
             team_work_id = ?
-    ```
+    `
     const tasks = await sql.handleSelect(sqlSelectTasks, [teamWorkId])
 
-    const sqlSelectLinks = ```
+    const sqlSelectLinks = `
         SELECT
             link_id,
             source,
@@ -259,7 +259,7 @@ router.post("/getGantt", async (req, res) => {
             gantt_links
         WHERE
             team_work_id = ?
-    ```
+    `
     const links = await sql.handleSelect(sqlSelectLinks, [teamWorkId])
 
     res.json({
@@ -273,25 +273,25 @@ router.post("/saveGantt", async (req, res) => {
     const tasks = req.body.tasks
     const links = req.body.links
 
-    const sqlDeleteTasks = ```
+    const sqlDeleteTasks = `
         DELETE
         FROM
             gantt_tasks
         WHERE
             team_work_id = ?
-    ```
+    `
     await sql.handleDeleteSql(sqlDeleteTasks, [teamWorkId])
 
-    const sqlDeleteLinks = ```
+    const sqlDeleteLinks = `
         DELETE
         FROM
             gantt_links
         WHERE
             team_work_id = ?
-    ```
+    `
     await sql.handleDeleteSql(sqlDeleteLinks, [teamWorkId])
 
-    const sqlInsertTasks = ```
+    const sqlInsertTasks = `
         INSERT INTO gantt_tasks(
             team_work_id,
             task_id,
@@ -310,7 +310,7 @@ router.post("/saveGantt", async (req, res) => {
             ?,
             ?
         )
-    ```
+    `
     tasks.map(async (task) => {
         const toJST = (time) => {
             const timestamp = newDate(time)
@@ -324,7 +324,7 @@ router.post("/saveGantt", async (req, res) => {
         await sql.handleInsert(sqlInsertTasks, [teamWorkId, task["id"], task["text"], start_date, end_date, task["progress"], task["parent"]])
     })
 
-    const sqlInsertLinks = ```
+    const sqlInsertLinks = `
         INSERT INTO gantt_links(
             team_work_id,
             source,
@@ -337,7 +337,7 @@ router.post("/saveGantt", async (req, res) => {
             ?,
             ?
         )
-    ```
+    `
     links.map(async (link) => {
         await sql.handleInsert(sqlInsertLinks, [teamWorkId, link["source"], link["target"], link["type"]])
     })
@@ -361,18 +361,18 @@ router.post("/joinTeamWork", (req, res) => {
         
             const teamWorkId = res["teamWorkId"]
 
-            const sqlSelectTeamId = ```
+            const sqlSelectTeamId = `
                 SELECT
                     is_colaborating
                 FROM
                     student_profiles
                 WHERE
                     user_id = ?
-            ```
+            `
             const teamId = await sql.handleSelectSql(sqlSelectTeamId [userId])
 
             if (!teamId[0]["is_colaborating"]) {
-                const sqlSelectTeam = ```
+                const sqlSelectTeam = `
                     SELECT
                         team_name,
                         team_work_name,
@@ -389,7 +389,7 @@ router.post("/joinTeamWork", (req, res) => {
                         team_works_list
                     WHERE
                         team_work_id = ?
-                ```
+                `
                 const team = await sql.handleSelectSql(sqlSelectTeam, [teamWorkId])
 
                 res.json(team)
@@ -405,23 +405,23 @@ router.post("/joinTeamWork", (req, res) => {
 router.post("/leaveTeam", async (req, res) => {
     const userId = get.userId(req)
 
-    const sqlDeleteJoinedUser = ```
+    const sqlDeleteJoinedUser = `
         DELETE
         FROM
             users_joined_team_work
         WHERE
             users_joined_team_work.joined_user_id = ?
-    ```
+    `
     await sql.handleDelete(sqlDeleteJoinedUser, [userId])
 
-    const sqlUpdateColab = ```
+    const sqlUpdateColab = `
         UPDATE
             student_profiles
         SET
             is_colaborating = 0
         WHERE
             user_id = ?
-    ```
+    `
     await sql.handleUpdate(sqlUpdateColab, [userId])
 })
 
