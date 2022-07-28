@@ -21,24 +21,24 @@ router.post("/signState", (req, res) => {
     }
 })
 
-router.post("/signup", (req, res) => {
+router.post("/signup", async (req, res) => {
     const name = req.body.name
     const email = req.body.email
     const password = req.body.password
     const course = req.body.course
 
-    const sqlSelectUser = ```
+    const sqlSelectUser = `
         SELECT
             user_id
         FROM
             user_profiles
         WHERE
             user_mail = ?
-    ```
+    `
     const userId = await sql.handleSelect(sqlSelectUser, [email])
 
     if (!userId.length) {
-        const sqlInsertUser = ```
+        const sqlInsertUser = `
             INSERT INTO user_profiles(
                 user_name,
                 user_mail,
@@ -51,12 +51,12 @@ router.post("/signup", (req, res) => {
                 ?,
                 1
             )
-        ```
+        `
         const user = await sql.handleInsert(sqlInsertUser, [name, email, password])
 
         const userId = user.insertId
 
-        const sqlInsertStudent = ```
+        const sqlInsertStudent = `
             INSERT INTO student_profiles(
                 user_id,
                 student_course_id,
@@ -67,7 +67,7 @@ router.post("/signup", (req, res) => {
                 ?,
                 0
             )
-        ```
+        `
         await sql.handleInsert(sqlInsertStudent, [userId, course])
 
         const token = jwt.sign({userId: userId}, config.jwt.secret, config.jwt.options)
@@ -92,18 +92,18 @@ router.post("/teacherSignup", async (req, res) => {
     const email = req.body.email
     const password = req.body.password
 
-    const sqlSelectUser = ```
+    const sqlSelectUser = `
         SELECT
             user_id
         FROM
             user_profiles
         WHERE
             user_mail = ?
-    ```
+    `
     const userId = await sql.handleSelect(sqlSelectUser, [email])
 
     if (!userId.length) {
-        const sqlInsertUser = ```
+        const sqlInsertUser = `
             INSERT INTO user_profiles(
                 user_name,
                 user_mail,
@@ -116,19 +116,19 @@ router.post("/teacherSignup", async (req, res) => {
                 ?,
                 2
             )
-        ```
+        `
         const user = await sql.handleInsert(sqlInsertUser, [name, email, password])
 
         const userId = user.insertId
 
-        const sqlInsertTeacher = ```
+        const sqlInsertTeacher = `
             INSERT INTO teacher_profiles(
                 user_id
             )
             VALUES(
                 ?
             )
-        ```
+        `
         await sql.handleInsert(sqlInsertTeacher, [userId])
 
         const token = sign({userId: userId}, config.jwt.secret, config.jwt.options)
@@ -154,18 +154,18 @@ router.post("/companySignup", async (req, res) => {
     const password = req.body.password
     const company = req.body.company
 
-    const sqlSelectUser = ```
+    const sqlSelectUser = `
         SELECT
             user_id
         FROM
             user_profiles
         WHERE
             user_mail = ?
-    ```
+    `
     const userId = await sql.handleSelect(sqlSelectUser, [email])
 
     if (!userId.length) {
-        const sqlInsertUser = ```
+        const sqlInsertUser = `
             INSERT INTO user_profiles(
                 user_name,
                 user_mail,
@@ -178,12 +178,12 @@ router.post("/companySignup", async (req, res) => {
                 ?,
                 3
             )
-        ```
+        `
         const user = await sql.handleInsert(sqlInsertUser, [name, email, password])
 
         const userId = user.insertId
 
-        const sqlInsertCompany = ```
+        const sqlInsertCompany = `
             INSERT INTO company_profiles(
                 user_id,
                 company_name
@@ -192,7 +192,7 @@ router.post("/companySignup", async (req, res) => {
                 ?,
                 ?
             )
-        ```
+        `
         await sql.handleInsert(sqlInsertCompany, [userId, company])
 
         const token = jwt.sign({userId: userId}, config.jwt.secret, config.jwt.options)
@@ -212,11 +212,11 @@ router.post("/companySignup", async (req, res) => {
     }
 })
 
-router.post("/signin", (req, res) => {
+router.post("/signin", async (req, res) => {
     const email = req.body.email
     const password = req.body.password
 
-    const sqlSelectUserId = ```
+    const sqlSelectUserId = `
         SELECT
             user_id
         FROM
@@ -224,7 +224,7 @@ router.post("/signin", (req, res) => {
         WHERE
             user_mail = ? AND
             user_password = ?
-    ```
+    `
     const userId = await sql.handleSelect(sqlSelectUserId, [email, password])
     
     if (userId.length) {

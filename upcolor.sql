@@ -281,11 +281,11 @@ CREATE TABLE lectures_list(
     lecture_teacher varchar(255),
     lecture_day INT,
     lecture_period INT,
-    lecture_course_id INT,
-    lecture_student_year varchar(255),
+    target_course_id INT,
+    target_student_year varchar(255),
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
     updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
-    FOREIGN KEY(course_id) REFERENCES courses(course_id)
+    FOREIGN KEY(target_course_id) REFERENCES courses(course_id)
 );
 
 CREATE TABLE student_time_table(
