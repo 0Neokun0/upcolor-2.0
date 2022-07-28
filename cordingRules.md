@@ -197,12 +197,37 @@ handleSelect(sqlSelectHoge, [hoge, fuga])
 <br>
 
 > カラムは指定するように！アスタリスク禁止！
+>> フォーマットはここで整えてよし！
+>> https://atl2.net/webtool/sql%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%82%BF%E3%83%BCfor-web/
 ```sql
-SELECT column1, column2, column3 FROM table1
+SELECT
+    column1,
+    column2,
+    column3
+FROM
+    table1
 
-INSERT INTO table1(column1, column2, column3) VALUES("value1", "value2", "value3")
+INSERT INTO table1(
+    column1,
+    column2,
+    column3
+)
+VALUES(
+    "value1",
+    "value2",
+    "value3"
+)
 
-UPDATE table1 SET column1 = "value1", column2 = "value2", column3 = "value3"
+UPDATE
+    table1
+SET
+    column1 = "value1",
+    column2 = "value2",
+    column3 = "value3"
 
-DELETE FROM table1 WHERE column1 = "value1"
+DELETE
+FROM
+    table1
+WHERE
+    column1 = "value1"
 ```
