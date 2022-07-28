@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
+import { Group, Home, SignIn, RegistTimeTable, ShowTimeTable } from "components/pages/student"
 import { LandingPage } from "components/pages"
-import { Group, Home, SignIn } from "components/pages/student"
+
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail } from "components/organisms"
 
@@ -45,6 +46,10 @@ function App() {
 
                 <Route path="/group" element={<Group />}>
                     <Route path="" element={<GroupChatLayout groups={groups} />} />
+                </Route>
+
+                <Route path="timeTable" element={<ShowTimeTable />}>
+                    <Route path="regist" element={<RegistTimeTable />} />
                 </Route>
 
                 <Route path="develop" element={<AddLectures />} />
