@@ -2,24 +2,30 @@ import { Avatar, Card, CardActionArea, CardContent, CardHeader } from "@mui/mate
 
 const Post = (props) => {
     return (
-        <Card>
+        <Card
+            variant="outlined"
+            sx={{
+                mt: 2,
+                boxShadow: 0,
+            }}
+        >
             <CardActionArea>
                 <CardHeader
                     avatar={
                         <Avatar>
-                            name
+                            {props.name}
                         </Avatar>
                     }
                     title={props.name}
                     subheader={props.time}
                 />
-                
+
                 <CardContent>
                     {props.content}
                 </CardContent>
             </CardActionArea>
 
-            
+
         </Card>
     );
 }
