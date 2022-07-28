@@ -1,14 +1,18 @@
 import { Post } from "components/molecules"
 import { Box } from "@mui/material"
+import { useOutletContext } from "react-router-dom";
 
-const Feed = (props) => {
+const Feed = () => {
+    const posts = useOutletContext()["posts"]
+
     return (
         <Box>
             {
-                props.posts.map((post) => {
+                posts.map((post) => {
                     return (
                         <Post
                             key={post.id}
+                            id={post.id}
                             name={post.name}
                             time={post.time}
                             content={post.content}

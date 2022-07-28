@@ -2,4 +2,9 @@ body {
     margin: 0;
     margin-top: 64px;
     background-color: whitesmoke;
+    overflow-y: scroll;
+}
+
+a {
+    text-decoration: none;
 }

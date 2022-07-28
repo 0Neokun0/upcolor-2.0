@@ -1,4 +1,5 @@
-import { Feed, MainMenu, News } from "components/organisms"
+import { Outlet } from "react-router-dom"
+import { MainMenu, News } from "components/organisms"
 import { Container, Grid } from "@mui/material"
 
 const HomeLayout = (props) => {
@@ -15,7 +16,9 @@ const HomeLayout = (props) => {
                     item
                     xs={3}
                 >
-                    <MainMenu menus={props.menus} />
+                    <MainMenu
+                        menus={props.menus}
+                    />
                 </Grid>
 
                 <Grid
@@ -26,10 +29,16 @@ const HomeLayout = (props) => {
                         borderRight: 1,
                         p: 2,
                         pt: 0,
-                        borderColor: "lightgray",
+                        borderColor: "rgba(0, 0, 0, 0.12)",
                     }}
                 >
-                    <Feed posts={props.posts} />
+                    <Outlet
+                        context={{
+                            "post": props.post,
+                            "posts": props.posts,
+                            "replys": props.replys,
+                        }}
+                    />
                 </Grid>
 
                 <Grid
@@ -40,7 +49,9 @@ const HomeLayout = (props) => {
                         pt: 0,
                     }}
                 >
-                    <News news={props.news} />
+                    <News
+                        news={props.news}
+                    />
                 </Grid>
             </Grid>
         </Container>
