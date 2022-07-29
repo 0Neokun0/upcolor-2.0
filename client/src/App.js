@@ -113,8 +113,7 @@ function App() {
                 <Route path="develop" element={<ReqAuthAdm component={<AddLectures />} />} />
             </Routes>
         </BrowserRouter>
-    );
-
+    )
 }
 
 export default App;
