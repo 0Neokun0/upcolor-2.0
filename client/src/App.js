@@ -43,21 +43,25 @@ function App() {
             id: 1,
             name: "Valorant",
             latest: "key/o難しい",
+            time: "YYYY/MM/DD",
         },
         {
             id: 2,
             name: "Valorant",
             latest: "key/o難しい",
+            time: "YYYY/MM/DD",
         },
         {
             id: 3,
             name: "Valorant",
             latest: "key/o難しい",
+            time: "YYYY/MM/DD",
         },
         {
             id: 4,
             name: "Valorant",
             latest: "key/o難しい",
+            time: "YYYY/MM/DD",
         },
     ]
 
@@ -172,15 +176,10 @@ function App() {
                         <Route path=":postId" element={<FeedDetail />} />
                     </Route>
 
-                    <Route path="Home" element={<Home />}>
-                        <Route path="" element={<Feed />} />
-                        <Route path=":postId" element={<FeedDetail />} />
-                    </Route>
-
                     <Route path="group" element={<Group />}>
                         <Route path="" element={<GroupChatLayout groups={groups} />} />
                     </Route>
-
+                    
                     <Route path="timeTable" element={<ShowTimeTable />}>
                         <Route path="regist" element={<RegistTimeTable />} />
                     </Route>
@@ -189,7 +188,6 @@ function App() {
 
                     <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} />
                         <Route path="registTimeTable" element={<ReqAuthStu component={<RegistTimeTable />} />} />
-
                     <Route path="develop" element={<ReqAuthAdm component={<AddLectures />} />} />
                 </Routes>
             </BrowserRouter>

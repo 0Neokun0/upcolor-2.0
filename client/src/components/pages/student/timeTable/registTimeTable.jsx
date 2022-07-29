@@ -1,9 +1,8 @@
+import axios from "axios"
 import { TimeTableLayout } from "components/templates"
 import { useEffect, useState } from "react"
 
 const RegistTimeTable = () => {
-    const axios = require("axios")
-
     const [viewTimeTable, setViewTimeTable] = useState([])
     const [registTimeTable, setRegistTimeTable] = useState([])
     const [overWrite, setOverWrite] = useState(true)

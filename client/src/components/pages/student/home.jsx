@@ -7,77 +7,8 @@ const Home = () => {
     const postId = useParams()["postId"]
     console.log(postId)
 
-    const [open, setOpen] = useState(false);
-    const [posts, setPosts] = useState([]);
-
-    const post = {
-        name: "まつお",
-        time: "YYYY/MM/DD",
-        content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-    }
-
-    // const posts = [
-    //     {
-    //         id: 1,
-    //         name: "まつお",
-    //         time: "YYYY/MM/DD",
-    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "まつお",
-    //         time: "YYYY/MM/DD",
-    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-    //     },
-    //     {
-    //         id: 3,
-    //         name: "まつお",
-    //         time: "YYYY/MM/DD",
-    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-    //     },
-    //     {
-    //         id: 4,
-    //         name: "まつお",
-    //         time: "YYYY/MM/DD",
-    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-    //     },
-    //     {
-    //         id: 5,
-    //         name: "まつお",
-    //         time: "YYYY/MM/DD",
-    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-    //     },
-    //     {
-    //         id: 6,
-    //         name: "まつお",
-    //         time: "YYYY/MM/DD",
-    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-    //     },
-    //     {
-    //         id: 7,
-    //         name: "まつお",
-    //         time: "YYYY/MM/DD",
-    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-    //     },
-    //     {
-    //         id: 8,
-    //         name: "まつお",
-    //         time: "YYYY/MM/DD",
-    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-    //     },
-    //     {
-    //         id: 9,
-    //         name: "まつお",
-    //         time: "YYYY/MM/DD",
-    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-    //     },
-    //     {
-    //         id: 10,
-    //         name: "まつお",
-    //         time: "YYYY/MM/DD",
-    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-    //     },
-    // ]
+    const [open, setOpen] = useState(false)
+    const [posts, setPosts] = useState([])
 
     const replys = [
         {
@@ -172,8 +103,8 @@ const Home = () => {
         axios.post("/post/addPost", {
             text: data.get("text")
         })
-            .then((res) => {
-                window.location.href = "/home/" + res.data
+            .then(() => {
+                window.location.reload()
             })
     }
 
@@ -186,11 +117,10 @@ const Home = () => {
 
     useEffect(() => {
         axios.post("/post/getPostList")
-        .then((res) => {
-            setPosts(res.data)
-            console.log(res.data)
-        })
-      }, []);
+            .then((res) => {
+                setPosts(res.data)
+            })
+    }, []);
 
     return (
         <HomeLayout
@@ -198,7 +128,7 @@ const Home = () => {
             open={open}
             toggleModalOpen={toggleModalOpen}
             toggleModalClose={toggleModalClose}
-            post={post}
+            postId={postId}
             posts={posts}
             replys={replys}
             menus={menus}

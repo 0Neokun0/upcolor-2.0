@@ -19,7 +19,7 @@ const ViewFeed = (props) => {
                         ml: 1,
                     }}
                 >
-                    {props.name}
+                    {props.post["user_name"]}
                 </Typography>
             </Box>
 
@@ -30,7 +30,7 @@ const ViewFeed = (props) => {
                     mt: 1,
                 }}
             >
-                {props.content}
+                {props.post["post_text"]}
             </Box>
 
             <Typography
@@ -40,7 +40,7 @@ const ViewFeed = (props) => {
                     mt: 2,
                 }}
             >
-                {props.time}
+                {props.post["created_at"]}
             </Typography>
 
             <Divider />

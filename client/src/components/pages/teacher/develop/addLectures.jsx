@@ -1,7 +1,7 @@
+import axios from "axios"
 import { useState } from "react"
 
 const AddLectures = () => {
-    const axios = require("axios")
 
     const [csvFile, setCsvFile] = useState(null)
 
