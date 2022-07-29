@@ -7,7 +7,7 @@ import FormControl from "@mui/material/FormControl";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import { InputAdornment, TextField } from "@mui/material";
 
-export default function StudentYearInput() {
+const StudentYearInput = () => {
   const [studentYear, setstudentYear] = React.useState("");
 
   const handleChange = (event) => {
@@ -45,3 +45,5 @@ export default function StudentYearInput() {
     </Box>
   );
 }
+
+export default StudentYearInput;

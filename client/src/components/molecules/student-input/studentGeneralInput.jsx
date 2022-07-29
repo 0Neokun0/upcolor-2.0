@@ -16,7 +16,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import EmailIcon from "@mui/icons-material/Email";
 import DetailsIcon from "@mui/icons-material/Details";
 
-export default function StudentGeneralInput() {
+const StudentGeneralInput = () => {
   const [studentEmail, setStudentEmail] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -130,3 +130,5 @@ export default function StudentGeneralInput() {
     </Card>
   );
 }
+
+export default StudentGeneralInput;

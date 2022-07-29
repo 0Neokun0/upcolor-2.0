@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CompanyLocationInput() {
+const CompanyLocationInput = () => {
   return (
     <div>
       Company Location 

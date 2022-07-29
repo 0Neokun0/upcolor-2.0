@@ -18,7 +18,7 @@ import React from "react";
 import axios from "axios";
 import StudentYearInput from "./studentYearInput";
 
-export default function StudentCourseInput() {
+const StudentCourseInput = () => {
   const [course, setcourse] = useState("");
   const [studentCourse, setstudentCourse] = useState([]);
 
@@ -122,12 +122,13 @@ export default function StudentCourseInput() {
                 </MenuItem>
               ))}
             </TextField>
-            
           </div>
         </Box>
         <Divider sx={{ mt: 5, mb: 5 }} />
-        <StudentYearInput/>
+        <StudentYearInput />
       </CardContent>
     </Card>
   );
-}
+};
+
+export default StudentCourseInput;

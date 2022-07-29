@@ -12,7 +12,8 @@ import {
 import React from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import BadgeIcon from "@mui/icons-material/Badge";
-export default function StudentIntroductionInput() {
+
+const StudentIntroductionInput = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handlePopoverOpen = (event) => {
@@ -92,3 +93,5 @@ export default function StudentIntroductionInput() {
     </Card>
   );
 }
+
+export default StudentIntroductionInput;

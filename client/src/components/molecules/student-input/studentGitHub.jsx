@@ -12,7 +12,7 @@ import {
 import React from "react";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
-export default function StudentGitHub() {
+const StudentGitHub = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handlePopoverOpen = (event) => {
@@ -83,3 +83,5 @@ export default function StudentGitHub() {
     </Card>
   );
 }
+
+export default StudentGitHub;

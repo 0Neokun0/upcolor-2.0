@@ -6,12 +6,13 @@ import React from "react";
 import { Footer } from "components/molecules";
 import { Box, Container, Grid } from "@mui/material";
 
-
-
-
-
 import StudentInputPageTitle from "components/atoms/input-page-title/studentInputPageTitle";
-import { StudentCourseAndYearInput, StudentGeneralInput, StudentGitHub, StudentIntroductionInput } from "components/molecules/student-input";
+import {
+  StudentCourseAndYearInput,
+  StudentGeneralInput,
+  StudentGitHub,
+  StudentIntroductionInput,
+} from "components/molecules/student-input";
 import { SubmitButton } from "components/atoms/button";
 import { SkillsInput } from "components/molecules/skills-input";
 
@@ -56,7 +57,6 @@ const StudentInput = () => {
       <Box sx={{ mt: 2, flexWrap: "wrap" }}>
         <ThemeProvider theme={darkTheme}>
           <Box bgcolor={"background.default"} color={"text.primary"}>
-            
             <StudentInputPageTitle />
             <Container component="form" onSubmit={studentData} maxWidth="lg">
               <Grid
@@ -76,7 +76,7 @@ const StudentInput = () => {
                   <StudentIntroductionInput />
                 </Grid>
                 <Grid item xs={12}>
-                  <SkillsInput/>
+                  <SkillsInput />
                 </Grid>
                 <Grid item xs={12}>
                   <StudentGitHub />

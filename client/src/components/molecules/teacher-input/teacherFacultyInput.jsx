@@ -43,7 +43,7 @@ const courses = [
   },
 ];
 
-export default function TeacherFacultyInput() {
+const TeacherFacultyInput = () => {
   const [course, setcourse] = useState("honka");
 
   const handleChange = (event) => {
@@ -143,4 +143,6 @@ export default function TeacherFacultyInput() {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default TeacherFacultyInput;

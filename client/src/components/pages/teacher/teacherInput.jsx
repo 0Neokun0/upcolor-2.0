@@ -11,10 +11,11 @@ import TeacherInputPageTitle from "components/atoms/input-page-title/teacherInpu
 
 import { Footer } from "components/molecules";
 import { SkillsInput } from "components/molecules/skills-input";
-import { TeacherFacultyInput, TeacherGeneralInput, TeacherIntroductionInput } from "components/molecules/teacher-input";
-
-
-
+import {
+  TeacherFacultyInput,
+  TeacherGeneralInput,
+  TeacherIntroductionInput,
+} from "components/molecules/teacher-input";
 
 import React, { useEffect, useState } from "react";
 
@@ -57,7 +58,6 @@ const TeacherInput = () => {
       <Box sx={{ mt: 2, flexWrap: "wrap" }}>
         <ThemeProvider theme={darkTheme}>
           <Box bgcolor={"background.default"} color={"text.primary"}>
-            
             <TeacherInputPageTitle />
             <Container component="form" onSubmit={teacherData} maxWidth="lg">
               <Grid
@@ -68,7 +68,7 @@ const TeacherInput = () => {
                 spacing={3}
               >
                 <Grid item xs={12} sx={{ mt: 2 }}>
-                  <TeacherGeneralInput/>
+                  <TeacherGeneralInput />
                 </Grid>
                 <Grid item xs={12}>
                   <TeacherFacultyInput />
@@ -90,6 +90,6 @@ const TeacherInput = () => {
       <Footer />
     </>
   );
-}
+};
 
 export default TeacherInput;

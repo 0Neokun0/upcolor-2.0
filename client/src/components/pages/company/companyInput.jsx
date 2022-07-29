@@ -8,13 +8,9 @@ import {
   ThemeProvider,
 } from "@mui/material";
 
-
-
 import { Footer } from "components/molecules";
 import CompanyInputPageTitle from "components/atoms/input-page-title/companyInputPageTItle";
 import CompanyGeneralInput from "components/molecules/organisms/company-input/companyGeneralInput";
-
-
 
 const CompanyInput = () => {
   const axios = require("axios");
@@ -49,7 +45,6 @@ const CompanyInput = () => {
       <Box sx={{ mt: 2, flexWrap: "wrap" }}>
         <ThemeProvider theme={darkTheme}>
           <Box bgcolor={"background.default"} color={"text.primary"}>
-            
             <CompanyInputPageTitle />
             <Container component="form" onSubmit={companyData} maxWidth="lg">
               <Grid

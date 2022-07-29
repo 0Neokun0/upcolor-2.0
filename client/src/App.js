@@ -7,9 +7,9 @@ import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail } from "components/organisms"
 
 import { AddLectures } from "components/pages/teacher"
-import StudentInput from "components/pages/userInput/studentInput"
-import TeacherInput from "components/pages/userInput/teacherInput"
-import CompanyInput from "components/pages/userInput/companyInput"
+import StudentInput from "components/pages/student/studentInput"
+import TeacherInput from "components/pages/teacher/teacherInput"
+import CompanyInput from "components/pages/company/companyInput"
 
 function App() {
     const groups = [

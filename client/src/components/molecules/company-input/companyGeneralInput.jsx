@@ -16,7 +16,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import DetailsIcon from "@mui/icons-material/Details";
 import CompanyLocationInput from "./companyLocationInput";
 
-export default function CompanyGeneralInput() {
+const CompanyGeneralInput = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handlePopoverOpen = (event) => {
@@ -125,3 +125,5 @@ export default function CompanyGeneralInput() {
     </Card>
   );
 }
+
+export default CompanyGeneralInput;
