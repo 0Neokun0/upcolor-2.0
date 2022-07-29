@@ -7,6 +7,9 @@ import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail } from "components/organisms"
 
 import { AddLectures } from "components/pages/teacher"
+import StudentInput from "components/pages/userInput/studentInput"
+import TeacherInput from "components/pages/userInput/teacherInput"
+import CompanyInput from "components/pages/userInput/companyInput"
 
 function App() {
     const groups = [
@@ -111,6 +114,12 @@ function App() {
                 </Route>
 
                 <Route path="develop" element={<ReqAuthAdm component={<AddLectures />} />} />
+
+                <Route path="studentInput" element={<StudentInput/>} /> 
+                <Route path="teacherInput" element={<TeacherInput/>} /> 
+                <Route path="companyInput" element={<CompanyInput/>} />
+
+            
             </Routes>
         </BrowserRouter>
     );
