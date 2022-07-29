@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Paper, TextField, Typography } from "@mui/material"
+import { Alert, Box, Button, Link, Paper, TextField, Typography } from "@mui/material"
 import logo from "components/atoms/logo/upcolor_logo.svg"
 
 const SignInBox = (props) => {
@@ -64,7 +64,7 @@ const SignInBox = (props) => {
                         mt: 5,
                     }}
                 >
-                    Sign In
+                    サインイン
                 </Button>
 
                 {
@@ -73,11 +73,26 @@ const SignInBox = (props) => {
                     <Alert
                     severity="error"
                     sx={{
-                        mt: 3,
+                        mt: 2,
                     }}>
                         Email Address と Password の組み合わせが存在しません
                     </Alert>
                 }
+            </Box>
+
+            <Box
+                sx={{
+                    mt: 2,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}
+            >
+                <Link
+                    href="signup"
+                >
+                    アカウント作成
+                </Link>
             </Box>
         </Paper>
     );

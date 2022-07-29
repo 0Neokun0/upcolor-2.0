@@ -1,4 +1,4 @@
-import { AppBar, Button, Link, Toolbar, Typography } from "@mui/material"
+import { AppBar, Box, Button, Dialog, DialogActions, DialogTitle, Link, Toolbar, Typography } from "@mui/material"
 
 const Header = (props) => {
     return (
@@ -8,7 +8,7 @@ const Header = (props) => {
         >
             <Toolbar>
                 <Link
-                    href="/"
+                    href="/home"
                     sx={{
                         display: "flex",
                         alignItems: "center"
@@ -56,15 +56,51 @@ const Header = (props) => {
                     })
                 }
 
-                <Button
-                    variant="contained"
+                <Box
                     sx={{
                         ml: 5,
                     }}
                 >
-                    サインアウト
-                </Button>
+                    {
+                        props.signInState
+                            ?
+                            <Button
+                                variant="contained"
+                                onClick={props.toggleAlertOpen}
+                            >
+                                サインアウト
+                            </Button>
+                            :
+                            <Button
+                                variant="contained"
+                                href="/signin"
+                            >
+                                サインイン
+                            </Button>
+                    }
+                </Box>
             </Toolbar>
+
+            {/* サインアウトダイアログ */}
+            <Dialog open={Boolean(props.open)} onClose={props.toggleAlertClose}>
+                <DialogTitle>
+                    本当にサインアウトしますか?
+                </DialogTitle>
+
+                <DialogActions>
+                    <Button
+                        onClick={props.toggleAlertClose}
+                    >
+                        キャンセル
+                    </Button>
+
+                    <Button
+                        onClick={props.toggleSignout}
+                    >
+                        サインアウト
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </AppBar>
     );
 }
