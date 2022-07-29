@@ -78,15 +78,22 @@ const Header = (props) => {
                 }
             </Toolbar>
 
-            {/* サインアウトアラート */}
-
+            {/* サインアウトダイアログ */}
             <Dialog open={Boolean(props.open)} onClose={props.toggleAlertClose}>
-                <DialogTitle>本当にサインアウトしますか?</DialogTitle>
+                <DialogTitle>
+                    本当にサインアウトしますか?
+                </DialogTitle>
 
                 <DialogActions>
-                    <Button onClick={props.toggleAlertClose}>キャンセル</Button>
+                    <Button
+                        onClick={props.toggleAlertClose}
+                    >
+                        キャンセル
+                    </Button>
 
-                    <Button onClick={props.toggleSignout}>
+                    <Button
+                        onClick={props.toggleSignout}
+                    >
                         サインアウト
                     </Button>
                 </DialogActions>

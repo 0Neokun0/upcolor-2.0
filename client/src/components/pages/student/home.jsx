@@ -1,3 +1,4 @@
+import axios from "axios"
 import { HomeLayout } from "components/templates"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
@@ -147,13 +148,6 @@ const Home = () => {
         },
     ]
 
-    const toggleModalOpen = () => {
-        setOpen(true)
-    }
-    const toggleModalClose = () => {
-        setOpen(false)
-    }
-
     const news = [
         {
             id: 1,
@@ -168,8 +162,30 @@ const Home = () => {
             content: "23卒学生各位本日より就職先が決定している学生から、このクラスルームから退出処理を行います。24卒向けの内容にシフトしていくからです。内定を獲得していて、今暫くこのクラスルームを使いたい学生はメールで連絡ください。宜しくお願いいたします。",
         },
     ]
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const data = new FormData(e.currentTarget)
+
+        axios.post("/post/addPost", {
+            text: data.get("text")
+        })
+            .then((res) => {
+                window.location.href = "/viewpost/" + res.data
+            })
+    }
+
+    const toggleModalOpen = () => {
+        setOpen(true)
+    }
+    const toggleModalClose = () => {
+        setOpen(false)
+    }
+
     return (
         <HomeLayout
+            handleSubmit={handleSubmit}
             open={open}
             toggleModalOpen={toggleModalOpen}
             toggleModalClose={toggleModalClose}

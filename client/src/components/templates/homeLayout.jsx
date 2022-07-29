@@ -6,6 +6,7 @@ const HomeLayout = (props) => {
     return (
         <Container>
             <SendPost
+                handleSubmit={props.handleSubmit}
                 open={props.open}
                 toggleModalOpen={props.toggleModalOpen}
                 toggleModalClose={props.toggleModalClose}
