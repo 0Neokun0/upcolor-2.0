@@ -32,14 +32,72 @@ function App() {
         },
     ]
 
+    const ReqAuthStu = (props) => {
+        const myAuthority = sessionStorage.getItem("AUTHORITY")
+
+        if (myAuthority === "STUDENT") {
+            return props.component
+        } else if (myAuthority == null) {
+            document.location = "/login"
+        }
+
+        document.location = "/"
+    }
+
+    const ReqAuthTea = (props) => {
+        const myAuthority = sessionStorage.getItem("AUTHORITY")
+
+        if (myAuthority === "TEACHER") {
+            return props.component
+        } else if (myAuthority == null) {
+            document.location = "/login"
+        }
+
+        document.location = "/"
+    }
+
+    const ReqAuthCom = (props) => {
+        const myAuthority = sessionStorage.getItem("AUTHORITY")
+
+        if (myAuthority === "COMPANY") {
+            return props.component
+        } else if (myAuthority == null) {
+            document.location = "/login"
+        }
+
+        document.location = "/"
+    }
+
+    const ReqAuthAdm = (props) => {
+        const myAuthority = sessionStorage.getItem("AUTHORITY")
+
+        if (myAuthority === "ADMIN") {
+            return props.component
+        } else if (myAuthority == null) {
+            document.location = "/login"
+        }
+
+        document.location = "/"
+    }
+
+    const ReqNoAuth = (props) => {
+        const myAuthority = sessionStorage.getItem("AUTHORITY")
+
+        if (myAuthority === null) {
+            return props.component
+        } 
+
+        document.location = "/"
+    }
+
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="" element={<LandingPage />} />
 
-                <Route path="signin" element={<SignIn />} />
+                <Route path="signin" element={<ReqNoAuth component={<SignIn />} />} />
 
-                <Route path="Home" element={<Home />}>
+                <Route path="Home" element={<ReqAuthStu component={<Home />} />} >
                     <Route path="" element={<Feed />} />
                     <Route path=":postId" element={<FeedDetail />} />
                 </Route>
@@ -48,11 +106,11 @@ function App() {
                     <Route path="" element={<GroupChatLayout groups={groups} />} />
                 </Route>
 
-                <Route path="timeTable" element={<ShowTimeTable />}>
+                <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} >
                     <Route path="regist" element={<RegistTimeTable />} />
                 </Route>
 
-                <Route path="develop" element={<AddLectures />} />
+                <Route path="develop" element={<ReqAuthAdm component={<AddLectures />} />} />
             </Routes>
         </BrowserRouter>
     );
