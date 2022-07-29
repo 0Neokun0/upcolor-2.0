@@ -1,6 +1,6 @@
 import axios from "axios"
 import { HomeLayout } from "components/templates"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
 const Home = () => {
@@ -8,6 +8,7 @@ const Home = () => {
     console.log(postId)
 
     const [open, setOpen] = useState(false);
+    const [posts, setPosts] = useState([]);
 
     const post = {
         name: "まつお",
@@ -15,68 +16,68 @@ const Home = () => {
         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
     }
 
-    const posts = [
-        {
-            id: 1,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 2,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 3,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 4,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 5,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 6,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 7,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 8,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 9,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 10,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-    ]
+    // const posts = [
+    //     {
+    //         id: 1,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 2,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 3,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 4,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 5,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 6,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 7,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 8,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 9,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 10,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    // ]
 
     const replys = [
         {
@@ -172,7 +173,7 @@ const Home = () => {
             text: data.get("text")
         })
             .then((res) => {
-                window.location.href = "/viewpost/" + res.data
+                window.location.href = "/home/" + res.data
             })
     }
 
@@ -182,6 +183,14 @@ const Home = () => {
     const toggleModalClose = () => {
         setOpen(false)
     }
+
+    useEffect(() => {
+        axios.post("/post/getPostList")
+        .then((res) => {
+            setPosts(res.data)
+            console.log(res.data)
+        })
+      }, []);
 
     return (
         <HomeLayout

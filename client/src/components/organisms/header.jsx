@@ -1,4 +1,4 @@
-import { AppBar, Button, Dialog, DialogActions, DialogTitle, Link, Toolbar, Typography } from "@mui/material"
+import { AppBar, Box, Button, Dialog, DialogActions, DialogTitle, Link, Toolbar, Typography } from "@mui/material"
 
 const Header = (props) => {
     return (
@@ -8,7 +8,7 @@ const Header = (props) => {
         >
             <Toolbar>
                 <Link
-                    href="/"
+                    href="/home"
                     sx={{
                         display: "flex",
                         alignItems: "center"
@@ -56,26 +56,29 @@ const Header = (props) => {
                     })
                 }
 
-                {
-                    props.signInState
-                        ?
-                        <Button
-                            variant="contained"
-                            sx={{
-                                ml: 5,
-                            }}
-                            onClick={props.toggleAlertOpen}
-                        >
-                            サインアウト
-                        </Button>
-                        :
-                        <Button
-                            variant="contained"
-                            href="signin"
-                        >
-                            サインイン
-                        </Button>
-                }
+                <Box
+                    sx={{
+                        ml: 5,
+                    }}
+                >
+                    {
+                        props.signInState
+                            ?
+                            <Button
+                                variant="contained"
+                                onClick={props.toggleAlertOpen}
+                            >
+                                サインアウト
+                            </Button>
+                            :
+                            <Button
+                                variant="contained"
+                                href="/signin"
+                            >
+                                サインイン
+                            </Button>
+                    }
+                </Box>
             </Toolbar>
 
             {/* サインアウトダイアログ */}

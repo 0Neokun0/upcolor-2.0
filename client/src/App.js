@@ -1,10 +1,10 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
 import axios from "axios"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-import { LandingPage, SignIn } from "components/pages"
+import { LandingPage, SignIn, SignUp } from "components/pages"
 import { AddLectures } from "components/pages/teacher"
-import { Group, Home, SignIn, RegistTimeTable, ShowTimeTable } from "components/pages/student"
+import { Group, Home, RegistTimeTable, ShowTimeTable } from "components/pages/student"
 
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
@@ -99,6 +99,7 @@ function App() {
                     <Route path="" element={<LandingPage />} />
 
                     <Route path="signin" element={<SignIn />} />
+                    <Route path="signup" element={<SignUp />} />
 
                     <Route path="Home" element={<Home />}>
                         <Route path="" element={<Feed />} />

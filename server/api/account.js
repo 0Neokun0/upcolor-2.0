@@ -228,7 +228,7 @@ router.post("/signin", async (req, res) => {
     const userId = await sql.handleSelect(sqlSelectUserId, [email, password])
     
     if (userId.length) {
-        const token = jwt.sign({userId: userId}, config.jwt.secret, config.jwt.options)
+        const token = jwt.sign({userId: userId[0]["user_id"]}, config.jwt.secret, config.jwt.options)
 
         const date = new Date()
         const expires = new Date(date.getTime() + 864000000)
