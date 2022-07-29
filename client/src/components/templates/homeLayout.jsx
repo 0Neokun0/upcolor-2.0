@@ -41,7 +41,7 @@ const HomeLayout = (props) => {
                 >
                     <Outlet
                         context={{
-                            "post": props.post,
+                            "postId": props.postId,
                             "posts": props.posts,
                             "replys": props.replys,
                         }}
