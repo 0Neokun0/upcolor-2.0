@@ -4,6 +4,7 @@ import { useOutletContext } from "react-router-dom";
 
 const Feed = () => {
     const posts = useOutletContext()["posts"]
+    console.log(posts)
 
     return (
         <Box>
@@ -11,11 +12,11 @@ const Feed = () => {
                 posts.map((post) => {
                     return (
                         <Post
-                            key={post.id}
-                            id={post.id}
-                            name={post.name}
-                            time={post.time}
-                            content={post.content}
+                            key={post["post_id"]}
+                            id={post["post_id"]}
+                            name={post["user_name"]}
+                            time={post["created_at"]}
+                            content={post["post_text"]}
                         />
                     )
                 })

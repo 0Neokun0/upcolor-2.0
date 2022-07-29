@@ -12,7 +12,7 @@ router.use((req, res, next) => {
 })
 
 router.post("/signState", (req, res) => {
-    const userId = getUserId(req)
+    const userId = get.userId(req)
 
     if (userId) {
         res.json(true)

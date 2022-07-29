@@ -1,9 +1,14 @@
+import axios from "axios"
 import { HomeLayout } from "components/templates"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
 const Home = () => {
     const postId = useParams()["postId"]
     console.log(postId)
+
+    const [open, setOpen] = useState(false);
+    const [posts, setPosts] = useState([]);
 
     const post = {
         name: "まつお",
@@ -11,68 +16,68 @@ const Home = () => {
         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
     }
 
-    const posts = [
-        {
-            id: 1,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 2,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 3,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 4,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 5,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 6,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 7,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 8,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 9,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-        {
-            id: 10,
-            name: "まつお",
-            time: "YYYY/MM/DD",
-            content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
-        },
-    ]
+    // const posts = [
+    //     {
+    //         id: 1,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 2,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 3,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 4,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 5,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 6,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 7,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 8,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 9,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    //     {
+    //         id: 10,
+    //         name: "まつお",
+    //         time: "YYYY/MM/DD",
+    //         content: "こんにちはまつおです。valorantが好きです。kay/oは苦手です。",
+    //     },
+    // ]
 
     const replys = [
         {
@@ -158,8 +163,47 @@ const Home = () => {
             content: "23卒学生各位本日より就職先が決定している学生から、このクラスルームから退出処理を行います。24卒向けの内容にシフトしていくからです。内定を獲得していて、今暫くこのクラスルームを使いたい学生はメールで連絡ください。宜しくお願いいたします。",
         },
     ]
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const data = new FormData(e.currentTarget)
+
+        axios.post("/post/addPost", {
+            text: data.get("text")
+        })
+            .then((res) => {
+                window.location.href = "/home/" + res.data
+            })
+    }
+
+    const toggleModalOpen = () => {
+        setOpen(true)
+    }
+    const toggleModalClose = () => {
+        setOpen(false)
+    }
+
+    useEffect(() => {
+        axios.post("/post/getPostList")
+        .then((res) => {
+            setPosts(res.data)
+            console.log(res.data)
+        })
+      }, []);
+
     return (
-        <HomeLayout post={post} posts={posts} replys={replys} menus={menus} news={news} />
+        <HomeLayout
+            handleSubmit={handleSubmit}
+            open={open}
+            toggleModalOpen={toggleModalOpen}
+            toggleModalClose={toggleModalClose}
+            post={post}
+            posts={posts}
+            replys={replys}
+            menus={menus}
+            news={news}
+        />
     );
 }
 

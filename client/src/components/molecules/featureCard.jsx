@@ -21,9 +21,10 @@ const FeatureCard = (props) => {
                 }}
             >
                 {
-                    props.features.map((feature) => {
+                    props.features.map((feature, index) => {
                         return (
                             <Typography
+                                key={index}
                                 sx={{
                                     lineHeight: "2em",
                                     fontWeight: "bold",
