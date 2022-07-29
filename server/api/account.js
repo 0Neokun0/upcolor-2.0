@@ -218,17 +218,21 @@ router.post("/signin", async (req, res) => {
 
     const sqlSelectUserId = `
         SELECT
-            user_id
+            user_profiles.user_id,
+            user_types.type_name
         FROM
             user_profiles
+            INNER JOIN
+                user_types ON
+                user_profiles.user_type_id = user_types.type_id
         WHERE
             user_mail = ? AND
             user_password = ?
     `
-    const userId = await sql.handleSelect(sqlSelectUserId, [email, password])
+    const user = await sql.handleSelect(sqlSelectUserId, [email, password])
     
-    if (userId.length) {
-        const token = jwt.sign({userId: userId[0]["user_id"]}, config.jwt.secret, config.jwt.options)
+    if (user.length) {
+        const token = jwt.sign({userId: user[0]["user_id"]}, config.jwt.secret, config.jwt.options)
 
         const date = new Date()
         const expires = new Date(date.getTime() + 864000000)
@@ -239,7 +243,7 @@ router.post("/signin", async (req, res) => {
             httpOnly: true,
         })
 
-        res.json(true)
+        res.json(user[0])
     } else {
         res.json(false)
     }

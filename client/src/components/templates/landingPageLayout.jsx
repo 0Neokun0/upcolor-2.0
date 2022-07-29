@@ -19,7 +19,8 @@ const LandingPageLayout = (props) => {
             <Typography
                 variant="h5"
                 sx={{
-                    mt: 5,
+                    mt: 3,
+                    mb: 3
                 }}
             >
                 Upcolor 2.0の機能
