@@ -18,7 +18,7 @@ router.post("/addLectures", async (req, res) => {
     for (let i = 0; i < timeTable.length && courseId; i ++) {
         courseId = await sql.handleSelect(sqlSelectCourseId, timeTable[i][5])
 
-        timeTable[i][5] = courseId["course_id"]
+        timeTable[i][5] = courseId[0]["course_id"]
     }
 
     if (courseId) {
@@ -66,8 +66,9 @@ router.post("/getLecturesList", async (req, res) => {
     `
     const user = await sql.handleSelect(sqlSelectUser, userId)
 
-    const course = user["student_course_id"]
-    const year = "%" + user["student_year"] + "%"
+
+    const course = user[0]["student_course_id"]
+    const year = "%" + user[0]["student_year"] + "%"
 
     const sqlSelectLectures = `
         SELECT
@@ -86,8 +87,8 @@ router.post("/getLecturesList", async (req, res) => {
     `
     const lecturesList = await sql.handleSelect(sqlSelectLectures, [course, year])
 
-    if (lecturesList) {
-        res.json(lecturesList)
+    if (lecturesList[0]) {
+        res.json(lecturesList[0])
     } else {
         res.json(403)
     }

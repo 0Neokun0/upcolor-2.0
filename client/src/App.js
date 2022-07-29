@@ -187,9 +187,8 @@ function App() {
 
                     <Route path="develop" element={<AddLectures />} />
 
-                    <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} >
-                        <Route path="regist" element={<RegistTimeTable />} />
-                    </Route>
+                    <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} />
+                        <Route path="registTimeTable" element={<ReqAuthStu component={<RegistTimeTable />} />} />
 
                     <Route path="develop" element={<ReqAuthAdm component={<AddLectures />} />} />
                 </Routes>
