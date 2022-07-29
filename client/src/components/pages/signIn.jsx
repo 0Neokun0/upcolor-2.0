@@ -17,8 +17,6 @@ const SignIn = () => {
         })
             .then((res) => {
                 if (res.data) {
-                    const authority = res.data["type_name"]
-                    sessionStorage.setItem("AUTHORITY", authority)
                     window.location.href = "home"
                 } else {
                     setAvailability(true)
