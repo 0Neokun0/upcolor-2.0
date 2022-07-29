@@ -179,11 +179,15 @@ function App() {
                     <Route path="group" element={<Group />}>
                         <Route path="" element={<GroupChatLayout groups={groups} />} />
                     </Route>
-
-                    <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} >
+                    
+                    <Route path="timeTable" element={<ShowTimeTable />}>
                         <Route path="regist" element={<RegistTimeTable />} />
                     </Route>
 
+                    <Route path="develop" element={<AddLectures />} />
+
+                    <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} />
+                        <Route path="registTimeTable" element={<ReqAuthStu component={<RegistTimeTable />} />} />
                     <Route path="develop" element={<ReqAuthAdm component={<AddLectures />} />} />
                 </Routes>
             </BrowserRouter>
