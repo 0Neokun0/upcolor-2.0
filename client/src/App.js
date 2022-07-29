@@ -62,9 +62,11 @@ function App() {
     ]
 
     const toggleSignout = () => {
-        axios.post("/account/signout").then(() => {
-            window.location.reload();
-        })
+        axios.post("/account/signout")
+            .then(() => {
+                sessionStorage.removeItem('AUTHORITY');
+                window.location.reload();
+            })
     }
 
     const toggleAlertOpen = () => {
@@ -79,7 +81,7 @@ function App() {
 
         if (myAuthority === "STUDENT") {
             return props.component
-        } else if (myAuthority == null) {
+        } else if (myAuthority === null) {
             document.location = "/login"
         }
 
@@ -91,7 +93,7 @@ function App() {
 
         if (myAuthority === "TEACHER") {
             return props.component
-        } else if (myAuthority == null) {
+        } else if (myAuthority === null) {
             document.location = "/login"
         }
 
@@ -103,7 +105,7 @@ function App() {
 
         if (myAuthority === "COMPANY") {
             return props.component
-        } else if (myAuthority == null) {
+        } else if (myAuthority === null) {
             document.location = "/login"
         }
 
@@ -115,7 +117,7 @@ function App() {
 
         if (myAuthority === "ADMIN") {
             return props.component
-        } else if (myAuthority == null) {
+        } else if (myAuthority === null) {
             document.location = "/login"
         }
 
@@ -135,9 +137,15 @@ function App() {
     useEffect(() => {
         axios.post("/account/signState")
             .then((res) => {
-                setSignInState(res.data);
-            });
-    }, []);
+                if (res.data) {
+                    const authority = res.data["type_name"]
+                    sessionStorage.setItem("AUTHORITY", authority)
+                    setSignInState(true)
+                } else {
+                    setSignInState(false)
+                }
+            })
+    }, [])
 
     return (
         <Box>

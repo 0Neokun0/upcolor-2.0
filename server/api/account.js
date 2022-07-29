@@ -11,11 +11,24 @@ router.use((req, res, next) => {
     next()
 })
 
-router.post("/signState", (req, res) => {
+router.post("/signState", async (req, res) => {
     const userId = get.userId(req)
 
+    sqlSelectUserType = `
+        SELECT
+            user_types.type_name
+        FROM
+            user_profiles
+            INNER JOIN
+                user_types ON
+                user_profiles.user_type_id = user_types.type_id
+        WHERE
+            user_profiles.user_id = ?
+    `
+    const user = await sql.handleSelect(sqlSelectUserType, [userId])
+
     if (userId) {
-        res.json(true)
+        res.json(user[0])
     } else {
         res.json(false)
     }
@@ -81,7 +94,7 @@ router.post("/signup", async (req, res) => {
             httpOnly: true,
         })
 
-        res.json(true)
+        res.json({type_name: "STUDENT"})
     } else {
         res.json(false)
     }
@@ -142,7 +155,7 @@ router.post("/teacherSignup", async (req, res) => {
             httpOnly: true,
         })
 
-        res.json(true)
+        res.json({type_name: "TEACHER"})
     } else {
         res.json(false)
     }
@@ -206,7 +219,7 @@ router.post("/companySignup", async (req, res) => {
             httpOnly: true,
         })
 
-        res.json(true)
+        res.json({type_name: "COMPANY"})
     } else {
         res.json(false)
     }
