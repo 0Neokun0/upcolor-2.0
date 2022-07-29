@@ -13,7 +13,7 @@ const GroupLayout = (props) => {
             >
                 <Grid
                     item
-                    xs={2}
+                    xs={1}
                     sx={{
                         borderRight: 1,
                         borderColor: "rgba(0, 0, 0, 0.12)",
@@ -24,7 +24,7 @@ const GroupLayout = (props) => {
 
                 <Grid
                     item
-                    xs={10}
+                    xs={11}
                 >
                     <Outlet />
                 </Grid>
