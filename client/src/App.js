@@ -187,7 +187,7 @@ function App() {
                 </Routes>
             </BrowserRouter>
         </Box>
-    );
+    )
 }
 
 export default App;
