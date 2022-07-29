@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material";
 
 import React from "react";
 
@@ -55,39 +55,37 @@ const StudentInput = () => {
   return (
     <>
       <Box sx={{ mt: 2, flexWrap: "wrap" }}>
-        <ThemeProvider theme={darkTheme}>
-          <Box bgcolor={"background.default"} color={"text.primary"}>
-            <StudentInputPageTitle />
-            <Container component="form" onSubmit={studentData} maxWidth="lg">
-              <Grid
-                container
-                direction="row"
-                justifyContent="center"
-                alignItems="stretch"
-                spacing={3}
-              >
-                <Grid item xs={12} sx={{ mt: 2 }}>
-                  <StudentGeneralInput />
-                </Grid>
-                <Grid item xs={12}>
-                  <StudentCourseAndYearInput />
-                </Grid>
-                <Grid item xs={12}>
-                  <StudentIntroductionInput />
-                </Grid>
-                <Grid item xs={12}>
-                  <SkillsInput />
-                </Grid>
-                <Grid item xs={12}>
-                  <StudentGitHub />
-                </Grid>
-                <Grid item xs={12}>
-                  <SubmitButton />
-                </Grid>
+        <Box bgcolor={"background.default"} color={"text.primary"}>
+          <StudentInputPageTitle />
+          <Container component="form" onSubmit={studentData} maxWidth="lg">
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="stretch"
+              spacing={3}
+            >
+              <Grid item xs={12} sx={{ mt: 2 }}>
+                <StudentGeneralInput />
               </Grid>
-            </Container>
-          </Box>
-        </ThemeProvider>
+              <Grid item xs={12}>
+                <StudentCourseAndYearInput />
+              </Grid>
+              <Grid item xs={12}>
+                <StudentIntroductionInput />
+              </Grid>
+              <Grid item xs={12}>
+                <SkillsInput />
+              </Grid>
+              <Grid item xs={12}>
+                <StudentGitHub />
+              </Grid>
+              <Grid item xs={12}>
+                <SubmitButton />
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
       </Box>
       <Footer />
     </>

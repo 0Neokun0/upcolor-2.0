@@ -1,10 +1,4 @@
-import {
-  Box,
-  Container,
-  createTheme,
-  Grid,
-  ThemeProvider,
-} from "@mui/material";
+import { Box, Container, createTheme, Grid } from "@mui/material";
 import { SubmitButton } from "components/atoms/button";
 
 import TeacherInputPageTitle from "components/atoms/input-page-title/teacherInputPageTitle";
@@ -56,36 +50,34 @@ const TeacherInput = () => {
   return (
     <>
       <Box sx={{ mt: 2, flexWrap: "wrap" }}>
-        <ThemeProvider theme={darkTheme}>
-          <Box bgcolor={"background.default"} color={"text.primary"}>
-            <TeacherInputPageTitle />
-            <Container component="form" onSubmit={teacherData} maxWidth="lg">
-              <Grid
-                container
-                direction="row"
-                justifyContent="center"
-                alignItems="stretch"
-                spacing={3}
-              >
-                <Grid item xs={12} sx={{ mt: 2 }}>
-                  <TeacherGeneralInput />
-                </Grid>
-                <Grid item xs={12}>
-                  <TeacherFacultyInput />
-                </Grid>
-                <Grid item xs={12}>
-                  <TeacherIntroductionInput />
-                </Grid>
-                <Grid item xs={12}>
-                  <SkillsInput />
-                </Grid>
-                <Grid item xs={12}>
-                  <SubmitButton />
-                </Grid>
+        <Box bgcolor={"background.default"} color={"text.primary"}>
+          <TeacherInputPageTitle />
+          <Container component="form" onSubmit={teacherData} maxWidth="lg">
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="stretch"
+              spacing={3}
+            >
+              <Grid item xs={12} sx={{ mt: 2 }}>
+                <TeacherGeneralInput />
               </Grid>
-            </Container>
-          </Box>
-        </ThemeProvider>
+              <Grid item xs={12}>
+                <TeacherFacultyInput />
+              </Grid>
+              <Grid item xs={12}>
+                <TeacherIntroductionInput />
+              </Grid>
+              <Grid item xs={12}>
+                <SkillsInput />
+              </Grid>
+              <Grid item xs={12}>
+                <SubmitButton />
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
       </Box>
       <Footer />
     </>

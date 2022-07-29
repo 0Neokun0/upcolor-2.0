@@ -1,12 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import {
-  Box,
-  Container,
-  createTheme,
-  Grid,
-  ThemeProvider,
-} from "@mui/material";
+import { Box, Container, createTheme, Grid } from "@mui/material";
 
 import { Footer } from "components/molecules";
 import CompanyInputPageTitle from "components/atoms/input-page-title/companyInputPageTItle";
@@ -43,24 +37,22 @@ const CompanyInput = () => {
   return (
     <>
       <Box sx={{ mt: 2, flexWrap: "wrap" }}>
-        <ThemeProvider theme={darkTheme}>
-          <Box bgcolor={"background.default"} color={"text.primary"}>
-            <CompanyInputPageTitle />
-            <Container component="form" onSubmit={companyData} maxWidth="lg">
-              <Grid
-                container
-                direction="row"
-                justifyContent="center"
-                alignItems="stretch"
-                spacing={3}
-              >
-                <Grid item xs={12} sx={{ mt: 2 }}>
-                  <CompanyGeneralInput />
-                </Grid>
+        <Box bgcolor={"background.default"} color={"text.primary"}>
+          <CompanyInputPageTitle />
+          <Container component="form" onSubmit={companyData} maxWidth="lg">
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="stretch"
+              spacing={3}
+            >
+              <Grid item xs={12} sx={{ mt: 2 }}>
+                <CompanyGeneralInput />
               </Grid>
-            </Container>
-          </Box>
-        </ThemeProvider>
+            </Grid>
+          </Container>
+        </Box>
       </Box>
       <Footer />
     </>
