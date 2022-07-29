@@ -4,10 +4,12 @@ import { useEffect, useState } from "react"
 
 import { LandingPage, SignIn } from "components/pages"
 import { AddLectures } from "components/pages/teacher"
-import { Group, Home } from "components/pages/student"
+import { Group, Home, SignIn, RegistTimeTable, ShowTimeTable } from "components/pages/student"
+
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
 import { Box } from "@mui/material"
+
 
 import logo from "components/atoms/logo/upcolor_logo.svg"
 import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
@@ -105,6 +107,10 @@ function App() {
 
                     <Route path="group" element={<Group />}>
                         <Route path="" element={<GroupChatLayout groups={groups} />} />
+                    </Route>
+                    
+                    <Route path="timeTable" element={<ShowTimeTable />}>
+                        <Route path="regist" element={<RegistTimeTable />} />
                     </Route>
 
                     <Route path="develop" element={<AddLectures />} />
