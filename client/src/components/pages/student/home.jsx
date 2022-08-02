@@ -5,49 +5,50 @@ import { useParams } from "react-router-dom"
 
 const Home = () => {
     const postId = useParams()["postId"]
-    console.log(postId)
 
     const [open, setOpen] = useState(false)
+    const [post, setPost] = useState([])
     const [posts, setPosts] = useState([])
+    const [replys, setReplys] = useState([])
 
-    const replys = [
-        {
-            id: 1,
-            name: "おおにし",
-            time: "YYYY/MM/DD",
-            content: "あのkey/oはひどかった。",
-        },
-        {
-            id: 2,
-            name: "おおにし",
-            time: "YYYY/MM/DD",
-            content: "あのkey/oはひどかった。",
-        },
-        {
-            id: 3,
-            name: "おおにし",
-            time: "YYYY/MM/DD",
-            content: "あのkey/oはひどかった。",
-        },
-        {
-            id: 4,
-            name: "おおにし",
-            time: "YYYY/MM/DD",
-            content: "あのkey/oはひどかった。",
-        },
-        {
-            id: 5,
-            name: "おおにし",
-            time: "YYYY/MM/DD",
-            content: "あのkey/oはひどかった。",
-        },
-        {
-            id: 6,
-            name: "おおにし",
-            time: "YYYY/MM/DD",
-            content: "あのkey/oはひどかった。",
-        },
-    ]
+    // const replys = [
+    //     {
+    //         id: 1,
+    //         name: "おおにし",
+    //         time: "YYYY/MM/DD",
+    //         content: "あのkey/oはひどかった。",
+    //     },
+    //     {
+    //         id: 2,
+    //         name: "おおにし",
+    //         time: "YYYY/MM/DD",
+    //         content: "あのkey/oはひどかった。",
+    //     },
+    //     {
+    //         id: 3,
+    //         name: "おおにし",
+    //         time: "YYYY/MM/DD",
+    //         content: "あのkey/oはひどかった。",
+    //     },
+    //     {
+    //         id: 4,
+    //         name: "おおにし",
+    //         time: "YYYY/MM/DD",
+    //         content: "あのkey/oはひどかった。",
+    //     },
+    //     {
+    //         id: 5,
+    //         name: "おおにし",
+    //         time: "YYYY/MM/DD",
+    //         content: "あのkey/oはひどかった。",
+    //     },
+    //     {
+    //         id: 6,
+    //         name: "おおにし",
+    //         time: "YYYY/MM/DD",
+    //         content: "あのkey/oはひどかった。",
+    //     },
+    // ]
 
     const menus = [
         {
@@ -122,13 +123,25 @@ const Home = () => {
             })
     }, []);
 
+    useEffect(() => {
+        setPost([])
+
+        axios.post("/post/getPost", {
+            postId: postId,
+        })
+            .then((res) => {
+                setPost(res.data["post"][0])
+                setReplys(res.data["replys"])
+            })
+    }, [postId]);
+
     return (
         <HomeLayout
             handleSubmit={handleSubmit}
             open={open}
             toggleModalOpen={toggleModalOpen}
             toggleModalClose={toggleModalClose}
-            postId={postId}
+            post={post}
             posts={posts}
             replys={replys}
             menus={menus}

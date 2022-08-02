@@ -49,7 +49,24 @@ router.use("/getPost", async (req, res) => {
     `
     const post = await sql.handleSelect(sqlSelectPost, [postId])
 
-    res.json(post)
+    const sqlSelectReplys = `
+        SELECT
+            posts.*,
+            user_profiles.user_name
+        FROM
+            posts
+            INNER JOIN
+                user_profiles ON
+                posts.post_user_id = user_profiles.user_id
+        WHERE
+            parent_id = ?
+    `
+    const replys = await sql.handleSelect(sqlSelectReplys, [postId])
+
+    res.json({
+        post: post,
+        replys: replys,
+    })
 })
 
 router.use("/getPostList", async (req, res) => {

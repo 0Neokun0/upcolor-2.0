@@ -32,6 +32,8 @@ const HomeLayout = (props) => {
                     item
                     xs={6}
                     sx={{
+                        height: "calc(100vh - 64px)",
+                        overflowY: "scroll",
                         borderLeft: 1,
                         borderRight: 1,
                         p: 2,
@@ -41,7 +43,7 @@ const HomeLayout = (props) => {
                 >
                     <Outlet
                         context={{
-                            "postId": props.postId,
+                            "post": props.post,
                             "posts": props.posts,
                             "replys": props.replys,
                         }}

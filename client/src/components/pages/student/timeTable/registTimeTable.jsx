@@ -36,7 +36,7 @@ const RegistTimeTable = () => {
         .catch((err) => {
             console.log(err)
         })
-    }, [axios])
+    }, [])
 
     const handleChange = (e, key) => {
         setRegistTimeTable(

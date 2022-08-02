@@ -1,10 +1,9 @@
 import { useOutletContext } from "react-router-dom"
-import { Box } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import { Post, ViewFeed } from "components/molecules"
 
 const FeedDetail = () => {
-    const postId = useOutletContext()["postId"]
-    const posts = useOutletContext()["posts"]
+    const post = useOutletContext()["post"]
     const replys = useOutletContext()["replys"]
 
     return (
@@ -13,11 +12,17 @@ const FeedDetail = () => {
                 mt: 2,
             }}
         >
-            <ViewFeed
-                post={posts[posts.length - postId]}
-            />
+            {
+                post
+                &&
+                <ViewFeed
+                    post={post}
+                />
+            }
 
             {
+                replys
+                ?
                 replys.map((reply) => {
                     return (
                         <Post
@@ -29,6 +34,11 @@ const FeedDetail = () => {
                         />
                     )
                 })
+                
+                :
+                <Typography>
+                    返信がありません
+                </Typography>
             }
         </Box>
     );
