@@ -13,9 +13,10 @@ const LandingPageFeature = (props) => {
             }}
         >
             {
-                props.features.map((feature) => {
+                props.features.map((feature, index) => {
                     return (
                         <FeatureCard
+                            key={index}
                             icon={feature.icon}
                             title={feature.title}
                             color={feature.color}

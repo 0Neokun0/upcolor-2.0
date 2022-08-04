@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemButton } from "@mui/material"
+import { List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material"
 
 const GroupList = (props) => {
     return (
@@ -20,7 +20,25 @@ const GroupList = (props) => {
                         >
                             <ListItemButton
                             >
-                                {group.name}
+                                <ListItemText>
+                                    <Typography
+                                        variant="h6"
+                                    >
+                                        {group.name}
+                                    </Typography>
+    
+                                    <Typography
+                                        variant="body2"
+                                        sx={{
+                                            ml: 2,
+                                            color: "gray",
+                                        }}
+                                    >
+                                        {group.latest}
+                                        :
+                                        {group.time}
+                                    </Typography>
+                                </ListItemText>
                             </ListItemButton>
                         </ListItem>
                     )

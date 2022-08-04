@@ -3,7 +3,8 @@ import { Box } from "@mui/material"
 import { Post, ViewFeed } from "components/molecules"
 
 const FeedDetail = () => {
-    const post = useOutletContext()["post"]
+    const postId = useOutletContext()["postId"]
+    const posts = useOutletContext()["posts"]
     const replys = useOutletContext()["replys"]
 
     return (
@@ -13,9 +14,7 @@ const FeedDetail = () => {
             }}
         >
             <ViewFeed
-                name={post.name}
-                time={post.time}
-                content={post.content}
+                post={posts[posts.length - postId]}
             />
 
             {
