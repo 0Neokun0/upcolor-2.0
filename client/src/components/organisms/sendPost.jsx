@@ -14,14 +14,14 @@ const SendPost = (props) => {
                     bottom: 20,
                     backgroundColor: cyan[100],
                 }}
-                onClick={props.toggleModalOpen}
+                onClick={props.togglePostModalOpen}
             >
                 <AddIcon />
             </IconButton>
 
             <Modal
-                open={Boolean(props.open)}
-                onClose={props.toggleModalClose}
+                open={Boolean(props.openPostModal)}
+                onClose={props.togglePostModalClose}
                 sx={{
                     display: "flex",
                     alignItems: "center",
@@ -43,7 +43,7 @@ const SendPost = (props) => {
                         textAlign="right"
                     >
                         <IconButton
-                            onClick={props.toggleModalClose}
+                            onClick={props.togglePostModalClose}
                         >
                             <CloseRoundedIcon />
                         </IconButton>
@@ -52,7 +52,7 @@ const SendPost = (props) => {
                     <TextField
                         name="text"
                         variant="standard"
-                        placeholder="What's on your mind?"
+                        placeholder="今どうしてる?"
                         fullWidth
                         multiline
                         rows={3}

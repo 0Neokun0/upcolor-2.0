@@ -1,17 +1,10 @@
 import { Outlet } from "react-router-dom"
-import { MainMenu, News, SendPost } from "components/organisms"
+import { MainMenu, News, ReplyModal, SendPost } from "components/organisms"
 import { Container, Grid } from "@mui/material"
 
 const HomeLayout = (props) => {
     return (
         <Container>
-            <SendPost
-                handleSubmit={props.handleSubmit}
-                open={props.open}
-                toggleModalOpen={props.toggleModalOpen}
-                toggleModalClose={props.toggleModalClose}
-            />
-
             <Grid
                 container
                 sx={{
@@ -46,6 +39,7 @@ const HomeLayout = (props) => {
                             "post": props.post,
                             "posts": props.posts,
                             "replys": props.replys,
+                            "toggleReplyModalOpen": props.toggleReplyModalOpen,
                         }}
                     />
                 </Grid>
@@ -63,6 +57,20 @@ const HomeLayout = (props) => {
                     />
                 </Grid>
             </Grid>
+
+            <SendPost
+                handleSubmit={props.handleSubmit}
+                openPostModal={props.openPostModal}
+                togglePostModalOpen={props.togglePostModalOpen}
+                togglePostModalClose={props.togglePostModalClose}
+            />
+
+            <ReplyModal
+                handleReplySubmit={props.handleReplySubmit}
+                openReplyModal={props.openReplyModal}
+                toggleReplyModalClose={props.toggleReplyModalClose}
+                postId={props.postId}
+            />
         </Container>
     );
 }

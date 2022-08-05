@@ -6,49 +6,11 @@ import { useParams } from "react-router-dom"
 const Home = () => {
     const postId = useParams()["postId"]
 
-    const [open, setOpen] = useState(false)
+    const [openPostModal, setOpenPostModal] = useState(false)
+    const [openReplyModal, setOpenReplyModal] = useState(false)
     const [post, setPost] = useState([])
     const [posts, setPosts] = useState([])
     const [replys, setReplys] = useState([])
-
-    // const replys = [
-    //     {
-    //         id: 1,
-    //         name: "おおにし",
-    //         time: "YYYY/MM/DD",
-    //         content: "あのkey/oはひどかった。",
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "おおにし",
-    //         time: "YYYY/MM/DD",
-    //         content: "あのkey/oはひどかった。",
-    //     },
-    //     {
-    //         id: 3,
-    //         name: "おおにし",
-    //         time: "YYYY/MM/DD",
-    //         content: "あのkey/oはひどかった。",
-    //     },
-    //     {
-    //         id: 4,
-    //         name: "おおにし",
-    //         time: "YYYY/MM/DD",
-    //         content: "あのkey/oはひどかった。",
-    //     },
-    //     {
-    //         id: 5,
-    //         name: "おおにし",
-    //         time: "YYYY/MM/DD",
-    //         content: "あのkey/oはひどかった。",
-    //     },
-    //     {
-    //         id: 6,
-    //         name: "おおにし",
-    //         time: "YYYY/MM/DD",
-    //         content: "あのkey/oはひどかった。",
-    //     },
-    // ]
 
     const menus = [
         {
@@ -102,18 +64,39 @@ const Home = () => {
         const data = new FormData(e.currentTarget)
 
         axios.post("/post/addPost", {
-            text: data.get("text")
+            text: data.get("text"),
         })
             .then(() => {
                 window.location.reload()
             })
     }
+    const handleReplySubmit = (e) => {
+        e.preventDefault()
 
-    const toggleModalOpen = () => {
-        setOpen(true)
+        const data = new FormData(e.currentTarget)
+
+        axios.post("/post/addReply", {
+            text: data.get("text"),
+            parentId: data.get("parentId"),
+        })
+            .then(() => {
+                window.location.reload()
+                console.log("run")
+            })
     }
-    const toggleModalClose = () => {
-        setOpen(false)
+
+    const togglePostModalOpen = () => {
+        setOpenPostModal(true)
+    }
+    const togglePostModalClose = () => {
+        setOpenPostModal(false)
+    }
+
+    const toggleReplyModalOpen = () => {
+        setOpenReplyModal(true)
+    }
+    const toggleReplyModalClose = () => {
+        setOpenReplyModal(false)
     }
 
     useEffect(() => {
@@ -138,9 +121,16 @@ const Home = () => {
     return (
         <HomeLayout
             handleSubmit={handleSubmit}
-            open={open}
-            toggleModalOpen={toggleModalOpen}
-            toggleModalClose={toggleModalClose}
+            openPostModal={openPostModal}
+            togglePostModalOpen={togglePostModalOpen}
+            togglePostModalClose={togglePostModalClose}
+
+            handleReplySubmit={handleReplySubmit}
+            openReplyModal={openReplyModal}
+            toggleReplyModalOpen={toggleReplyModalOpen}
+            toggleReplyModalClose={toggleReplyModalClose}
+            postId={postId}
+
             post={post}
             posts={posts}
             replys={replys}

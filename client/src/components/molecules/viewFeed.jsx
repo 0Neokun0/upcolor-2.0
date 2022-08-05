@@ -54,7 +54,9 @@ const ViewFeed = (props) => {
                     justifyContent: "space-between"
                 }}
             >
-                <IconButton>
+                <IconButton
+                    onClick={props.toggleReplyModalOpen}
+                >
                     <CommentRoundedIcon />
                 </IconButton>
 
