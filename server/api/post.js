@@ -32,6 +32,30 @@ router.post("/addPost", async (req, res) => {
     res.json(addPost["insertId"])
 })
 
+router.post("/addReply", async (req, res) => {
+    const userId = get.userId(req)
+    const text = req.body.text
+    const parentId = req.body.parentId
+
+    const sqlInsertReply = `
+        INSERT INTO posts(
+            post_user_id,
+            post_text,
+            post_likes,
+            parent_id
+        )
+        VALUES(
+            ?,
+            ?,
+            0,
+            ?
+        )
+    `
+    const addReply = await sql.handleInsert(sqlInsertReply, [userId, text, parentId])
+
+    res.json(addReply["insertId"])
+})
+
 router.use("/getPost", async (req, res) => {
     const postId = req.body.postId
 
@@ -49,7 +73,26 @@ router.use("/getPost", async (req, res) => {
     `
     const post = await sql.handleSelect(sqlSelectPost, [postId])
 
-    res.json(post)
+    const sqlSelectReplys = `
+        SELECT
+            posts.*,
+            user_profiles.user_name
+        FROM
+            posts
+            INNER JOIN
+                user_profiles ON
+                posts.post_user_id = user_profiles.user_id
+        WHERE
+            parent_id = ?
+        ORDER BY
+            posts.created_at DESC
+    `
+    const replys = await sql.handleSelect(sqlSelectReplys, [postId])
+
+    res.json({
+        post: post,
+        replys: replys,
+    })
 })
 
 router.use("/getPostList", async (req, res) => {
@@ -62,6 +105,7 @@ router.use("/getPostList", async (req, res) => {
             INNER JOIN
                 user_profiles ON
                 posts.post_user_id = user_profiles.user_id
+        WHERE parent_id = 0
         ORDER BY
             posts.created_at DESC
     `

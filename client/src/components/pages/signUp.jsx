@@ -22,7 +22,7 @@ const SignUp = () => {
         })
             .then((res) => {
                 if (res.data) {
-                    window.location.href = "studentInput"
+                    window.location.href = "home"
                 } else {
                     setCheckExist(true)
                 }
