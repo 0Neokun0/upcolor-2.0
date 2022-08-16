@@ -19,14 +19,20 @@ const GroupLayout = (props) => {
                         borderColor: "rgba(0, 0, 0, 0.12)",
                     }}
                 >
-                    <GroupMenu menus={props.menus} />
+                    <GroupMenu
+                        menus={props.menus}
+                    />
                 </Grid>
 
                 <Grid
                     item
                     xs={11}
                 >
-                    <Outlet />
+                    <Outlet
+                        context={{
+                            handleCreateSubmit: props.handleCreateSubmit 
+                        }}
+                    />
                 </Grid>
             </Grid>
         </Container>

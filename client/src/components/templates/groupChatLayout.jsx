@@ -10,6 +10,8 @@ const GroupChatLayout = (props) => {
                 item
                 xs={4}
                 sx={{
+                    height: "calc(100vh - 64px)",
+                    overflowY: "scroll",
                     borderRight: 1,
                     borderColor: "rgba(0, 0, 0, 0.12)",
                 }}
@@ -20,6 +22,10 @@ const GroupChatLayout = (props) => {
             <Grid
                 item
                 xs={8}
+                sx={{
+                    height: "calc(100vh - 64px)",
+                    overflowY: "scroll",
+                }}
             >
                 a
             </Grid>
