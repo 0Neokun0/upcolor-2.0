@@ -11,7 +11,7 @@ import { Feed, FeedDetail, Header } from "components/organisms"
 import { Box } from "@mui/material"
 
 
-import { AddLectures } from "components/pages/teacher"
+
 import StudentInput from "components/pages/student/studentInput"
 import TeacherInput from "components/pages/teacher/teacherInput"
 import CompanyInput from "components/pages/company/companyInput"
