@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 import { Container, Grid } from "@mui/material"
-import { GroupMenu } from "components/organisms";
+import { GroupMenu } from "components/organisms"
 
 const GroupLayout = (props) => {
     return (
@@ -30,7 +30,13 @@ const GroupLayout = (props) => {
                 >
                     <Outlet
                         context={{
-                            handleCreateSubmit: props.handleCreateSubmit 
+                            groups: props.groups,
+                            selectGroupId: props.selectGroupId,
+                            setSelectGroupId: props.setSelectGroupId,
+                            handleCreateSubmit: props.handleCreateSubmit,
+
+                            chats: props.chats,
+                            handleSendChat: props.handleSendChat,
                         }}
                     />
                 </Grid>
