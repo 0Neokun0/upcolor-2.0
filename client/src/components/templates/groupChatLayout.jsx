@@ -1,7 +1,18 @@
-import { GroupList } from "components/organisms"
-import { Grid } from "@mui/material"
+import { useOutletContext } from "react-router-dom"
+import { GroupChat, GroupList } from "components/organisms"
+import { Box, Grid, IconButton, TextField } from "@mui/material"
+import SendRoundedIcon from '@mui/icons-material/SendRounded'
 
-const GroupChatLayout = (props) => {
+const GroupChatLayout = () => {
+    const groups = useOutletContext()["groups"]
+    const selectGroupId = useOutletContext()["selectGroupId"]
+    const setSelectGroupId = useOutletContext()["setSelectGroupId"]
+
+    const chats = useOutletContext()["chats"]
+    const handleSendChat = useOutletContext()["handleSendChat"]
+
+    console.log(chats)
+
     return (
         <Grid
             container
@@ -16,7 +27,11 @@ const GroupChatLayout = (props) => {
                     borderColor: "rgba(0, 0, 0, 0.12)",
                 }}
             >
-                <GroupList groups={props.groups} />
+                <GroupList
+                    groups={groups}
+                    selectGroupId={selectGroupId}
+                    setSelectGroupId={setSelectGroupId}
+                />
             </Grid>
 
             <Grid
@@ -27,7 +42,44 @@ const GroupChatLayout = (props) => {
                     overflowY: "scroll",
                 }}
             >
-                a
+                <Box
+                    sx={{
+                        height: "100%",
+                        position: "relative",
+                    }}
+                >
+                    <GroupChat
+                        chats={chats}
+                    />
+
+                    <Box
+                        component={"form"}
+                        onSubmit={handleSendChat}
+                        sx={{
+                            width: "100%",
+                            display: "flex",
+                            position: "absolute",
+                            bottom: 0,
+                            backgroundColor: "white",
+                        }}
+                    >
+                        <TextField
+                            id="chatInput"
+                            variant="outlined"
+                            size="small"
+                            fullWidth
+                            required
+                            name="text"
+                        />
+
+                        <IconButton
+                            color={"primary"}
+                            type={"submit"}
+                        >
+                            <SendRoundedIcon />
+                        </IconButton>
+                    </Box>
+                </Box>
             </Grid>
         </Grid>
     );

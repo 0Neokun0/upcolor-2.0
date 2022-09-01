@@ -23,7 +23,7 @@ const Home = () => {
         },
         {
             value: "自分の進級制作",
-            url: "#",
+            url: "/teamwork",
         },
         {
             value: "ユーザー",
