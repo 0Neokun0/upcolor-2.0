@@ -66,12 +66,12 @@ router.post("/getLecturesList", async (req, res) => {
     `
     const user = await sql.handleSelect(sqlSelectUser, userId)
 
-
     const course = user[0]["student_course_id"]
     const year = "%" + user[0]["student_year"] + "%"
 
     const sqlSelectLectures = `
         SELECT
+            lecture_id,
             lecture_name,
             lecture_room,
             lecture_teacher,
@@ -82,20 +82,20 @@ router.post("/getLecturesList", async (req, res) => {
         FROM
             lectures_list
         WHERE
-            course_id = ? AND
-            student_year LIKE ?
+            target_course_id = ? AND
+            target_student_year LIKE ?
     `
     const lecturesList = await sql.handleSelect(sqlSelectLectures, [course, year])
 
-    if (lecturesList[0]) {
-        res.json(lecturesList[0])
+    if (lecturesList) {
+        res.json(lecturesList)
     } else {
         res.json(403)
     }
 })
 
 router.post("/addTimeTable", async (req, res) => {
-    const timeTable = req.body
+    const timeTable = req.body.timeTable
     const userId = get.userId(req)
 
     const sqlSelectTimeTable = `
@@ -132,7 +132,7 @@ router.post("/addTimeTable", async (req, res) => {
 })
 
 router.post("/overWriteTimeTable", async (req, res) => {
-    const timeTable = req.body
+    const timeTable = req.body.timeTable
     const userId = get.userId(req)
 
     const sqlDeleteTimeTable = `
