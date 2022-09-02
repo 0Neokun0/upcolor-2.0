@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 
 import { LandingPage, SignIn, SignUp } from "components/pages"
-import { DevelopHome, AddLectures, TeacherSignupUrl } from "components/pages/teacher"
-import { Group, Home, RegistTimeTable, ShowTimeTable, TeamWork } from "components/pages/student"
 
+import { Group, Home, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo } from "components/pages/student"
+import { DevelopHome, AddLectures, TeacherSignupUrl } from "components/pages/teacher"
 
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
@@ -157,6 +157,7 @@ function App() {
                     </Route>
 
                     <Route path="teamWork" element={<TeamWork />} />
+                    <Route path="teamWorkInfo" element={<TeamWorkInfo />} />
                     
                     <Route path="timeTable" element={<ShowTimeTable />}>
                         <Route path="regist" element={<RegistTimeTable />} />
