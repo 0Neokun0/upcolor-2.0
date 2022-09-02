@@ -22,6 +22,8 @@ router.post("/company", async (req, res) => {
 
     const name = get.name(token)
 
+    console.log(name)
+
     const sqlSelectCompany = `
         SELECT
             company_id

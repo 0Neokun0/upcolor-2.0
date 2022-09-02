@@ -1,46 +1,39 @@
-import { Button, Box } from "@mui/material"
+import { DevelopLayout } from "components/templates"
+import { DevelopMenus } from "components/organisms"
 
 const DevelopHome = () => {
+    const menus = [
+        {
+            value: "講師登録",
+            url: "./genTeacherSign",
+        },
+        {
+            value: "時間割登録",
+            url: "./addLectures",
+        },
+        {
+            value: "企業登録",
+            url: "./genCompanySign",
+        },
+    ]
+
+    const sx = [{
+        width: "40vh",
+        height: "40vh",
+        mx: 1,
+        mt: 2,
+        fontSize: "3em"
+    }]
 
     return (
-        <Box
-            sx={{
-                width: "80%",
-                mx: "auto",
-                textAlign: "center",
-                "a": {
-                    width: "40vh",
-                    height: "40vh",
-                    mx: 1,
-                    mt: 2,
-                    fontSize: "3em"
-                }
-            }}
-        >
-            <Button
-                variant="contained"
-                color="primary"
-                href="teacherSignupUrl"
-            >
-                企業登録
-            </Button>
-        
-            <Button
-                variant="contained"
-                color="primary"
-                href="addLectures"
-            >
-                時間割登録
-            </Button>
-        
-            <Button
-                variant="contained"
-                color="primary"
-                href="teacherSignupUrl"
-            >
-                企業登録
-            </Button>
-        </Box>
+        <DevelopLayout
+            component={
+                <DevelopMenus
+                    menus={menus}
+                    sx={sx}
+                />
+            }
+        />
     )
 }
 

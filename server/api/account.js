@@ -38,7 +38,7 @@ router.post("/signup", async (req, res) => {
     const name = req.body.name
     const email = req.body.email
     const password = req.body.password
-    const course = req.body.course
+    const userType = req.body.userType
 
     const sqlSelectUser = `
         SELECT
@@ -62,27 +62,12 @@ router.post("/signup", async (req, res) => {
                 ?,
                 ?,
                 ?,
-                1
+                ?
             )
         `
-        const user = await sql.handleInsert(sqlInsertUser, [name, email, password])
+        const user = await sql.handleInsert(sqlInsertUser, [name, email, password, userType])
 
         const userId = user.insertId
-
-        const sqlInsertStudent = `
-            INSERT INTO student_profiles(
-                user_id,
-                student_course_id,
-                is_colaborating
-            )
-            VALUES(
-                ?,
-                ?,
-                0
-            )
-        `
-        await sql.handleInsert(sqlInsertStudent, [userId, course])
-
         const token = jwt.sign({userId: userId}, config.jwt.secret, config.jwt.options)
 
         const date = new Date()
@@ -93,133 +78,60 @@ router.post("/signup", async (req, res) => {
             path: "/",
             httpOnly: true,
         })
-
-        res.json({type_name: "STUDENT"})
-    } else {
-        res.json(false)
-    }
-})
-
-router.post("/teacherSignup", async (req, res) => {
-    const name = req.body.name
-    const email = req.body.email
-    const password = req.body.password
-
-    const sqlSelectUser = `
-        SELECT
-            user_id
-        FROM
-            user_profiles
-        WHERE
-            user_mail = ?
-    `
-    const userId = await sql.handleSelect(sqlSelectUser, [email])
-
-    if (!userId.length) {
-        const sqlInsertUser = `
-            INSERT INTO user_profiles(
-                user_name,
-                user_mail,
-                user_password,
-                user_type_id
-            )
-            VALUES(
-                ?,
-                ?,
-                ?,
-                2
-            )
-        `
-        const user = await sql.handleInsert(sqlInsertUser, [name, email, password])
-
-        const userId = user.insertId
-
-        const sqlInsertTeacher = `
-            INSERT INTO teacher_profiles(
-                user_id
-            )
-            VALUES(
-                ?
-            )
-        `
-        await sql.handleInsert(sqlInsertTeacher, [userId])
-
-        const token = sign({userId: userId}, config.jwt.secret, config.jwt.options)
-
-        const date = new Date()
-        const expires = new Date(date.getTime() + 864000000)
-
-        res.cookie("token", token, {
-            expires: expires,
-            path: "/",
-            httpOnly: true,
-        })
-
-        res.json({type_name: "TEACHER"})
-    } else {
-        res.json(false)
-    }
-})
-
-router.post("/companySignup", async (req, res) => {
-    const name = req.body.name
-    const email = req.body.email
-    const password = req.body.password
-    const company = req.body.company
-
-    const sqlSelectUser = `
-        SELECT
-            user_id
-        FROM
-            user_profiles
-        WHERE
-            user_mail = ?
-    `
-    const userId = await sql.handleSelect(sqlSelectUser, [email])
-
-    if (!userId.length) {
-        const sqlInsertUser = `
-            INSERT INTO user_profiles(
-                user_name,
-                user_mail,
-                user_password,
-                user_type_id
-            )
-            VALUES(
-                ?,
-                ?,
-                ?,
-                3
-            )
-        `
-        const user = await sql.handleInsert(sqlInsertUser, [name, email, password])
-
-        const userId = user.insertId
-
-        const sqlInsertCompany = `
-            INSERT INTO company_profiles(
-                user_id,
-                company_name
-            )
-            VALUES(
-                ?,
-                ?
-            )
-        `
-        await sql.handleInsert(sqlInsertCompany, [userId, company])
-
-        const token = jwt.sign({userId: userId}, config.jwt.secret, config.jwt.options)
-
-        const date = new Date()
-        const expires = new Date(date.getTime() + 864000000)
-
-        res.cookie("token", token, {
-            expires: expires,
-            path: "/",
-            httpOnly: true,
-        })
-
-        res.json({type_name: "COMPANY"})
+        
+        if (userType === 1) {
+            const course = req.body.course
+            const sqlInsertStudent = `
+                INSERT INTO student_profiles(
+                    user_id,
+                    student_course_id,
+                    is_colaborating
+                )
+                VALUES(
+                    ?,
+                    ?,
+                    0
+                )
+            `
+            await sql.handleInsert(sqlInsertStudent, [userId, course])
+            res.json({type_name: "STUDENT"})
+        } else if (userType === 2) {
+            const sqlInsertTeacher = `
+                INSERT INTO teacher_profiles(
+                    user_id
+                )
+                VALUES(
+                    ?
+                )
+            `
+            await sql.handleInsert(sqlInsertTeacher, [userId])
+            res.json({type_name: "TEACEHR"})
+        } else if (userType === 3) {
+            const company = req.body.company
+            const sqlInsertCompany = `
+                INSERT INTO company_profiles(
+                    user_id,
+                    company_name
+                )
+                VALUES(
+                    ?,
+                    ?
+                )
+            `
+            await sql.handleInsert(sqlInsertCompany, [userId, company])
+            res.json({type_name: "COMPANY"})
+        } else if (userType === 4) {
+            const sqlInsertTeacher = `
+                INSERT INTO teacher_profiles(
+                    user_id
+                )
+                VALUES(
+                    ?
+                )
+            `
+            await sql.handleInsert(sqlInsertTeacher, [userId])
+            res.json({type_name: "ADMIN"})
+        }
     } else {
         res.json(false)
     }

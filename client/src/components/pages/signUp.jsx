@@ -19,10 +19,11 @@ const SignUp = () => {
             email: data.get('email'),
             password: data.get('password'),
             course: data.get('course'),
+            userType: 1,
         })
             .then((res) => {
                 if (res.data) {
-                    window.location.href = "home"
+                    window.location.href = "/home"
                 } else {
                     setCheckExist(true)
                 }

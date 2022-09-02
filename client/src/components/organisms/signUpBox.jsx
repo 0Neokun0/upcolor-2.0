@@ -24,11 +24,24 @@ const SignUpBox = (props) => {
                 SignUp
             </Typography>
 
+            {
+                props.company
+                &&
+                <Typography
+                    sx={{
+                        mt: 2,
+                        fontSize: "20px"
+                    }}
+                >
+                    {props.company} 様
+                </Typography>
+            }
+
             <Box
                 component="form"
                 onSubmit={props.handleSubmit}
                 sx={{
-                    mt: 5,
+                    mt: 2,
                 }}
             >
                 <TextField
@@ -64,43 +77,47 @@ const SignUpBox = (props) => {
                     autoComplete="current-password"
                 />
 
-                <FormControl
-                    margin="normal"
-                    size="small"
-                    fullWidth
-                >
-                    <InputLabel>
-                        コース
-                    </InputLabel>
-
-                    <Select
-                        label="コース"
-                        name="course"
-                        value={props.course}
-                        onChange={props.handleChange}
+                {
+                    props.course
+                    &&
+                    <FormControl
+                        margin="normal"
+                        size="small"
+                        fullWidth
                     >
+                        <InputLabel>
+                            コース
+                        </InputLabel>
 
-                        {
-                            props.courseList.map((element) => {
-                                return (
-                                    <MenuItem
-                                        key={element["course_id"]}
-                                        value={element["course_id"]}
-                                    >
-                                        {element["course_name"]}
-                                    </MenuItem>
-                                )
-                            })
-                        }
-                    </Select>
-                </FormControl>
+                        <Select
+                            label="コース"
+                            name="course"
+                            value={props.course}
+                            onChange={props.handleChange}
+                        >
+
+                            {
+                                props.courseList.map((element) => {
+                                    return (
+                                        <MenuItem
+                                            key={element["course_id"]}
+                                            value={element["course_id"]}
+                                        >
+                                            {element["course_name"]}
+                                        </MenuItem>
+                                    )
+                                })
+                            }
+                        </Select>
+                    </FormControl>
+                }
 
                 <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     sx={{
-                        mt: 5,
+                        mt: 2,
                     }}
                 >
                     アカウント作成
