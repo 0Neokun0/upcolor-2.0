@@ -94,6 +94,7 @@ router.post("/getJoinedTeamWork", async (req, res) => {
 
     const sqlSelectJoinedTeam = `
         SELECT
+            team_works_list.team_work_id,
             team_works_list.team_name,
             team_works_list.team_work_name,
             team_works_list.team_work_course,
@@ -280,7 +281,7 @@ router.post("/saveGantt", async (req, res) => {
         WHERE
             team_work_id = ?
     `
-    await sql.handleDeleteSql(sqlDeleteTasks, [teamWorkId])
+    await sql.handleDelete(sqlDeleteTasks, [teamWorkId])
 
     const sqlDeleteLinks = `
         DELETE
@@ -289,7 +290,7 @@ router.post("/saveGantt", async (req, res) => {
         WHERE
             team_work_id = ?
     `
-    await sql.handleDeleteSql(sqlDeleteLinks, [teamWorkId])
+    await sql.handleDelete(sqlDeleteLinks, [teamWorkId])
 
     const sqlInsertTasks = `
         INSERT INTO gantt_tasks(
@@ -313,7 +314,7 @@ router.post("/saveGantt", async (req, res) => {
     `
     tasks.map(async (task) => {
         const toJST = (time) => {
-            const timestamp = newDate(time)
+            const timestamp = new Date(time)
 
             return new Date(timestamp.getTime())
         }
@@ -423,6 +424,47 @@ router.post("/leaveTeam", async (req, res) => {
             user_id = ?
     `
     await sql.handleUpdate(sqlUpdateColab, [userId])
+})
+
+router.post("/updateTeamWorkInfo", async (req, res) => {
+    const teamWorkId = req.body.teamWorkId
+    const description = req.body.description
+    const target = req.body.target
+    const strategy = req.body.strategy
+
+    const sqlUpdateTeamWorkInfo = `
+        UPDATE
+            team_works_list
+        SET
+            team_work_description = ?,
+            team_target = ?,
+            team_strategy = ?
+        WHERE
+            team_work_id = ?
+    `
+
+    await sql.handleUpdate(sqlUpdateTeamWorkInfo, [description, target, strategy, teamWorkId])
+})
+
+router.post("/getTeamMembers", async (req, res) => {
+    const teamWorkId = req.body.teamWorkId
+
+    const sqlSelectTeamMembers = `
+        SELECT
+            user_profiles.user_id,
+            user_profiles.user_name
+        FROM
+            users_joined_team_work
+        INNER JOIN
+            user_profiles ON
+            users_joined_team_work.joined_user_id = user_profiles.user_id
+        WHERE
+            users_joined_team_work.team_work_id = ?
+    `
+
+    const members = await sql.handleSelect(sqlSelectTeamMembers, [teamWorkId])
+
+    res.json(members)
 })
 
 module.exports = router
