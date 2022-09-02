@@ -4,12 +4,12 @@ import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
 import { LandingPage, SignIn, SignUp } from "components/pages"
-import { Group, Home, RegistTimeTable, ShowTimeTable, TeamWork } from "components/pages/student"
+
+import { Group, Home, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo } from "components/pages/student"
 import { DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherSignup } from "components/pages/teacher"
 import { CompanySignup } from "components/pages/company"
 
 import { GroupChatLayout } from "components/templates"
-
 import { Feed, FeedDetail, Header } from "components/organisms"
 
 import logo from "components/atoms/logo/upcolor_logo.svg"
@@ -162,6 +162,7 @@ function App() {
                     </Route>
 
                     <Route path="teamWork" element={<TeamWork />} />
+                    <Route path="teamWorkInfo" element={<TeamWorkInfo />} />
                     
                     <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} />
                     <Route path="timeTable/regist" element={<ReqAuthStu component={<RegistTimeTable />} />} />

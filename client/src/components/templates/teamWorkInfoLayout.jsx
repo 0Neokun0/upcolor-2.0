@@ -1,6 +1,6 @@
 import { Box } from "@mui/material"
 
-const TeamWorkLayout = (props) => {
+const TeamWorkInfoLayout = (props) => {
     return (
         <Box
             sx={{
@@ -15,4 +15,4 @@ const TeamWorkLayout = (props) => {
     );
 }
 
-export default TeamWorkLayout;
+export default TeamWorkInfoLayout;
