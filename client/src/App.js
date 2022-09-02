@@ -4,7 +4,8 @@ import { useEffect, useState } from "react"
 
 import { LandingPage, SignIn, SignUp } from "components/pages"
 import { DevelopHome, AddLectures, TeacherSignupUrl } from "components/pages/teacher"
-import { Group, Home, RegistTimeTable, ShowTimeTable } from "components/pages/student"
+import { Group, Home, RegistTimeTable, ShowTimeTable, TeamWork } from "components/pages/student"
+
 
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
@@ -36,33 +37,6 @@ function App() {
             icon: <BusinessRoundedIcon />,
             value: "企業",
             url: "#",
-        },
-    ]
-
-    const groups = [
-        {
-            id: 1,
-            name: "Valorant",
-            latest: "key/o難しい",
-            time: "YYYY/MM/DD",
-        },
-        {
-            id: 2,
-            name: "Valorant",
-            latest: "key/o難しい",
-            time: "YYYY/MM/DD",
-        },
-        {
-            id: 3,
-            name: "Valorant",
-            latest: "key/o難しい",
-            time: "YYYY/MM/DD",
-        },
-        {
-            id: 4,
-            name: "Valorant",
-            latest: "key/o難しい",
-            time: "YYYY/MM/DD",
         },
     ]
 
@@ -178,8 +152,14 @@ function App() {
                     </Route>
 
                     <Route path="group" element={<Group />}>
-                        <Route path="" element={<GroupChatLayout groups={groups} />} />
+                        <Route path="" element={<GroupChatLayout />} />
                         <Route path="create" element={<GroupCreateLayout />} />
+                    </Route>
+
+                    <Route path="teamWork" element={<TeamWork />} />
+                    
+                    <Route path="timeTable" element={<ShowTimeTable />}>
+                        <Route path="regist" element={<RegistTimeTable />} />
                     </Route>
 
                     <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />

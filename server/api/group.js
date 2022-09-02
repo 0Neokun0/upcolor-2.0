@@ -118,14 +118,14 @@ router.post("/getJoinedGroupList", async (req, res) => {
         WHERE
             users_joined_group.joined_user_id = ?
     `
-    const groupsList = await sql.handleSelect(sqlSelectJoinGroup)
+    const groupsList = await sql.handleSelect(sqlSelectJoinGroup, [userId])
 
     res.json(groupsList)
 })
 
 router.post("/sendChat", async (req, res) => {
     const userId = get.userId(req)
-    const groupId = req.body.group_id
+    const groupId = req.body.groupId
     const text = req.body.text
 
     const sqlInsertChat = `
@@ -160,7 +160,7 @@ router.post("/sendChat", async (req, res) => {
 })
 
 router.post("/getGroupChat", async (req, res) => {
-    const groupId = req.body.group_id
+    const groupId = req.body.groupId
 
     const sqlSelectGroupChat = `
         SELECT
@@ -172,7 +172,7 @@ router.post("/getGroupChat", async (req, res) => {
                 user_profiles ON
                 group_chat.sent_user_id = user_profiles.user_id
         WHERE
-            received_group_id = ?"
+            received_group_id = ?
     `
     const groupChat = await sql.handleSelect(sqlSelectGroupChat, [groupId])
 
@@ -180,7 +180,7 @@ router.post("/getGroupChat", async (req, res) => {
 })
 
 router.post("/getInviteUrl", (req, res) => {
-    const groupId = req.body.group_id
+    const groupId = req.body.groupId
 
     const token = jwt.sign({groupId: groupId}, config.jwt.secret, config.jwt.options)
 

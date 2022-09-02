@@ -12,22 +12,27 @@ const GroupList = (props) => {
             }}
         >
             {
-                props.groups.map((group, index) => {
+                props.groups.map((group) => {
                     return (
                         <ListItem
                             disablePadding
-                            key={index}
+                            selected={props.selectGroupId === group["group_id"]}
+                            key={group["group_id"]}
                         >
                             <ListItemButton
+                                onClick={
+                                    () => props.setSelectGroupId(group["group_id"])
+                                }
                             >
                                 <ListItemText>
                                     <Typography
                                         variant="h6"
                                     >
-                                        {group.name}
+                                        {group["group_name"]}
                                     </Typography>
-    
-                                    <Typography
+
+                                    {/* 最終投稿とか出したい */}
+                                    {/* <Typography
                                         variant="body2"
                                         sx={{
                                             ml: 2,
@@ -37,7 +42,7 @@ const GroupList = (props) => {
                                         {group.latest}
                                         :
                                         {group.time}
-                                    </Typography>
+                                    </Typography> */}
                                 </ListItemText>
                             </ListItemButton>
                         </ListItem>
