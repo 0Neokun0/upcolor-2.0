@@ -12,5 +12,9 @@ module.exports = {
             algorithm: "HS256",
             expiresIn: "7d",
         }
-    }
+    },
+
+    server: {
+        host: "localhost:3000"
+    },
 }
