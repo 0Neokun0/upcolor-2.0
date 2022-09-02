@@ -3,8 +3,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 
 import { LandingPage, SignIn, SignUp } from "components/pages"
-import { AddLectures } from "components/pages/teacher"
+import { DevelopHome, AddLectures, TeacherSignupUrl } from "components/pages/teacher"
 import { Group, Home, RegistTimeTable, ShowTimeTable, TeamWork } from "components/pages/student"
+
 
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
@@ -161,11 +162,12 @@ function App() {
                         <Route path="regist" element={<RegistTimeTable />} />
                     </Route>
 
-                    <Route path="develop" element={<AddLectures />} />
+                    <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />
+                    <Route path="develop/addLectures" element={<ReqAuthAdm component={<AddLectures />} />} />
+                    <Route path="develop/teacherSignupUrl" element={<ReqAuthAdm component={<TeacherSignupUrl />} />} />
 
                     <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} />
-                        <Route path="registTimeTable" element={<ReqAuthStu component={<RegistTimeTable />} />} />
-                    <Route path="develop" element={<ReqAuthAdm component={<AddLectures />} />} />
+                    <Route path="registTimeTable" element={<ReqAuthStu component={<RegistTimeTable />} />} />
                 </Routes>
             </BrowserRouter>
         </Box>

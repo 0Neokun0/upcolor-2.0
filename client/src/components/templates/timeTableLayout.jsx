@@ -11,7 +11,7 @@ const TimeTableLayout = (props) => {
                             <TableCell>時間割</TableCell>
                             {props.days.map((day, index) => {
                                 return (
-                                    <TableCell key={index} align="right">{props.days[day]}</TableCell>
+                                    <TableCell key={index} align="right">{day}</TableCell>
                                 )
                             })}
                         </TableRow>
@@ -21,10 +21,10 @@ const TimeTableLayout = (props) => {
                             {props.viewTimeTable.map((row, period) => {
                                 return (
                                     <TableRow key={period}>
-                                        <TableCell component="th" scope="row">{props.periods[period]}</TableCell>
+                                        <TableCell component="th" scope="row">{period + 1}</TableCell>
                                         {row.map((cell, day) => {
                                             let key = period * 5 + day
-                                            if (cell !== "undefined" && !cell.length) {
+                                            if (cell) {
                                                 return (
                                                     <TableCell key={key} align="right">
                                                         <Select
