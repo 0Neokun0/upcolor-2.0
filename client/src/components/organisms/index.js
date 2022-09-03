@@ -16,5 +16,5 @@ export { default as DevelopMenus } from "./developMenus"
 export { default as TeamJoinForm } from "./teamJoinForm"
 export { default as TeamDetail } from "./teamDetail"
 export { default as TeamWorkInfoForm } from "./teamWorkInfoForm"
-export { default as TeamMenbers } from "./teamMenbers"
-
+export { default as TeamMembers } from "./teamMembers"
+export { default as ProfileDetail } from "./profileDetail"
