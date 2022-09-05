@@ -17,6 +17,7 @@ import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
 import GroupCreateLayout from "components/templates/groupCreateLayout"
+import StudentProfileCard from "components/organisms/studentProfileCard"
 
 function App() {
     const [open, setOpen] = useState(false)
@@ -180,6 +181,14 @@ function App() {
                     <Route path="develop/addLectures" element={<ReqAuthAdm component={<AddLectures />} />} />
                     <Route path="develop/genTeacherSign" element={<ReqAuthAdm component={<GenTeacherSign />} />} />
                     <Route path="develop/genCompanySign" element={<ReqAuthAdm component={<GenCompanySign />} />} />
+
+
+
+
+
+
+
+                    <Route path="StudentProfileCard" element={<StudentProfileCard />} />
                 </Routes>
             </BrowserRouter>
         </Box>
