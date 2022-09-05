@@ -14,7 +14,7 @@ router.use((req, res, next) => {
 router.post("/signState", async (req, res) => {
     const userId = get.userId(req)
 
-    sqlSelectUserType = `
+    const sqlSelectUserType = `
         SELECT
             user_types.type_name
         FROM
@@ -183,8 +183,39 @@ router.post("/signout", (req, res) => {
     res.end()
 })
 
+// 自分
 router.post("/getProfile", async (req, res) => {
     const userId = get.userId(req)
+
+    const sqlSelectUser = `
+        SELECT
+            user_profiles.user_name,
+            user_profiles.user_mail,
+            user_profiles.user_introduction,
+            student_profiles.student_year,
+            student_profiles.student_programming_languages,
+            student_profiles.student_tools_and_framework,
+            student_profiles.student_country_language,
+            student_profiles.student_qualifications,
+            student_profiles.student_github,
+            student_profiles.is_colaborating
+        FROM
+            user_profiles
+        INNER JOIN
+            student_profiles ON
+            user_profiles.user_id = student_profiles.user_id
+        WHERE
+            user_profiles.user_id = ?
+    `
+
+    const profile = await sql.handleSelect(sqlSelectUser, [userId])
+
+    res.json(profile)
+})
+
+// 他人
+router.post("/getStudentProfile", async (req, res) => {
+    const userId = req.body.userId
 
     const sqlSelectUser = `
         SELECT

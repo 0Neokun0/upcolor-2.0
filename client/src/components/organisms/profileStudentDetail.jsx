@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom"
-import { Avatar, Box, Button, Card, Grid, Tooltip, Typography } from "@mui/material"
+import { Avatar, Box, Card, Grid, Tooltip, Typography } from "@mui/material"
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import GitHubIcon from '@mui/icons-material/GitHub'
 
-const ProfileDetail = (props) => {
+const ProfileStudentDetail = (props) => {
     return (
         <Card
             sx={{
@@ -135,22 +134,9 @@ const ProfileDetail = (props) => {
                         }
                     </Box>
                 </Grid>
-
-                <Button
-                    component={Link}
-                    to="./edit"
-                    variant="contained"
-                    size="small"
-                    sx={{
-                        width: "80%",
-                        mx: "auto",
-                    }}
-                >
-                    編集
-                </Button>
             </Grid>
         </Card>
-    )
+    );
 }
 
-export default ProfileDetail
+export default ProfileStudentDetail
