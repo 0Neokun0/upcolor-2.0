@@ -3,7 +3,7 @@ import { useState } from "react"
 import { SignInBox } from "components/organisms"
 import { SignLayout } from "components/templates"
 
-const SignIn = () => {
+const Signin = () => {
     const [availability, setAvailability] = useState(false)
 
     const handleSubmit = (e) => {
@@ -38,4 +38,4 @@ const SignIn = () => {
     );
 }
 
-export default SignIn;
+export default Signin;
