@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
-import { LandingPage, SignIn, SignUp } from "components/pages"
+import { LandingPage, Signin } from "components/pages"
 
-import { Group, Home, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList } from "components/pages/student"
+import { StudentSignup, Group, Home, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList } from "components/pages/student"
 import { DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherSignup } from "components/pages/teacher"
 import { CompanySignup } from "components/pages/company"
 
@@ -143,13 +143,14 @@ function App() {
                 <Routes>
                     <Route path="" element={<LandingPage />} />
 
-                    <Route path="signup" element={<SignUp />} />
+                    {/* <Route path="student/signup" element={<ReqNoAuth component={<StudentSignup />} />} /> */}
                     {/* <Route path="teacher/signup" element={<ReqNoAuth component={<TeacherSignup />} />} /> */}
                     {/* <Route path="company/signup" element={<ReqNoAuth component={<CompanySignup />} />} /> */}
+                    <Route path="student/signup" element={<StudentSignup />} />
                     <Route path="teacher/signup" element={<TeacherSignup />} />
                     <Route path="company/signup" element={<CompanySignup />} />
 
-                    <Route path="signin" element={<ReqNoAuth component={<SignIn />} />} />
+                    <Route path="signin" element={<ReqNoAuth component={<Signin />} />} />
 
                     <Route path="Home" element={<ReqAuthStu component={<Home />} />} >
                         <Route path="" element={<Feed />} />

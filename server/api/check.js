@@ -19,10 +19,7 @@ router.post("/teacher", (req, res) => {
 
 router.post("/company", async (req, res) => {
     const token = req.body.token
-
     const name = get.name(token)
-
-    console.log(name)
 
     const sqlSelectCompany = `
         SELECT
