@@ -183,18 +183,47 @@ router.post("/signout", (req, res) => {
     res.end()
 })
 
-router.post("/studentProfileEdit", async (req, res) => {
+router.post("/getProfile", async (req, res) => {
     const userId = get.userId(req)
-    const name = req.body.name
-    const email = req.body.email
-    const course = req.body.course
-    const year = req.body.studentYear
-    const selfIntroduction = req.body.studentSelfIntroduction
-    const programmingLanguage = req.body.programmingLanguage
-    const ToolsAndFramework = req.body.ToolsAndFrameword
-    const qualification = req.body.qualification
-    const github = req.body.githubLink
-    
+
+    const sqlSelectUser = `
+        SELECT
+            user_profiles.user_name,
+            user_profiles.user_mail,
+            user_profiles.user_introduction,
+            student_profiles.student_year,
+            student_profiles.student_programming_languages,
+            student_profiles.student_tools_and_framework,
+            student_profiles.student_country_language,
+            student_profiles.student_qualifications,
+            student_profiles.student_github,
+            student_profiles.is_colaborating
+        FROM
+            user_profiles
+        INNER JOIN
+            student_profiles ON
+            user_profiles.user_id = student_profiles.user_id
+        WHERE
+            user_profiles.user_id = ?
+    `
+
+    const profile = await sql.handleSelect(sqlSelectUser, [userId])
+
+    res.json(profile)
 })
+
+// router.post("/studentProfileEdit", async (req, res) => {
+//     const userId = get.userId(req)
+//     const name = req.body.name
+//     const email = req.body.email
+//     const course = req.body.course
+//     const year = req.body.studentYear
+//     const selfIntroduction = req.body.studentSelfIntroduction
+//     const programmingLanguage = req.body.programmingLanguage
+//     const ToolsAndFramework = req.body.ToolsAndFrameword
+//     const qualification = req.body.qualification
+//     const github = req.body.githubLink
+    
+// })
 
 module.exports = router

@@ -1,6 +1,6 @@
-import { Box, Typography } from "@mui/material"
+import { Typography } from "@mui/material"
 
-const TeamMenbers = (props) => {
+const TeamMembers = (props) => {
     return (
         props.members
         &&
@@ -14,4 +14,4 @@ const TeamMenbers = (props) => {
     );
 }
 
-export default TeamMenbers;
+export default TeamMembers

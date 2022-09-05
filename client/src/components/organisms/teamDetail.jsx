@@ -1,7 +1,7 @@
 import Gantt from "components/atoms/gantt"
 import { Link } from "react-router-dom"
 import { Box, Button, Card, Typography } from "@mui/material"
-import { TeamMenbers } from "components/organisms"
+import { TeamMembers } from "components/organisms"
 import { TeamInfoCard } from "components/molecules"
 import Toolbar from "components/atoms/toolbar"
 
@@ -38,7 +38,7 @@ const TeamDetail = (props) => {
                         </Typography>
                     </Box>
 
-                    <TeamMenbers
+                    <TeamMembers
                         members={props.teamMembers}
                     />
 

@@ -1,4 +1,5 @@
-import { Link, List, ListItem, ListItemButton } from "@mui/material"
+import { Link } from "react-router-dom"
+import { List, ListItem, ListItemButton } from "@mui/material"
 
 const MainMenu = (props) => {
     return (
@@ -20,7 +21,7 @@ const MainMenu = (props) => {
                         >
                             <ListItemButton
                                 LinkComponent={Link}
-                                href={menu.url}
+                                to={menu.url}
                             >
                                 {menu.value}
                             </ListItemButton>

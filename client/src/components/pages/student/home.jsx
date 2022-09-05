@@ -31,7 +31,7 @@ const Home = () => {
         },
         {
             value: "プロフィール",
-            url: "#",
+            url: "/profile",
         },
         {
             value: "時間割",

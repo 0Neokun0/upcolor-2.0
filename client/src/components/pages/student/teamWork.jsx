@@ -1,10 +1,10 @@
 import axios from "axios"
 import { gantt } from 'dhtmlx-gantt'
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 
 import { TeamWorkLayout } from "components/templates"
 import { TeamDetail, TeamJoinForm } from "components/organisms"
-import { useState } from "react";
+import { useState } from "react"
 
 const TeamWork = () => {
     const [teamId, setTeamId] = useState(null)
@@ -27,18 +27,20 @@ const TeamWork = () => {
             setChatPublish: true,
             setGanttPublish: true,
         })
+        
+        window.location.reload()
     }
 
     const handleZoomChange = (zoom) => {
         setCurrentZoom(zoom)
     }
 
-    const setGantt = () => {
+    const setGantt = useCallback(() => {
         const formatDate = (currentDatetime) => {
-            // let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
+            // let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()
             let formattedDate = currentDatetime.getFullYear() + "-" + (currentDatetime.getMonth() + 1) + "-" + currentDatetime.getDate()
 
-            return formattedDate;
+            return formattedDate
         }
 
         axios.post("/teamWork/getGantt", {
@@ -79,7 +81,7 @@ const TeamWork = () => {
                     })
                 }
             })
-    }
+    }, [teamId])
 
     const saveGantt = () => {
         const tasks = []
@@ -105,7 +107,7 @@ const TeamWork = () => {
 
     useEffect(() => {
         setGantt()
-    }, [teamId])
+    }, [teamId, setGantt])
 
     useEffect(() => {
         axios.post("/teamWork/getTeamMembers", {
@@ -117,7 +119,7 @@ const TeamWork = () => {
     }, [teamId])
 
     return (
-        team
+        team.length
             ?
             <TeamWorkLayout
                 component={
@@ -141,7 +143,7 @@ const TeamWork = () => {
                     />
                 }
             />
-    );
+    )
 }
 
-export default TeamWork;
+export default TeamWork

@@ -5,7 +5,7 @@ import { Box } from "@mui/material"
 
 import { LandingPage, SignIn, SignUp } from "components/pages"
 
-import { Group, Home, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo } from "components/pages/student"
+import { Group, Home, Profile, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo } from "components/pages/student"
 import { DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherSignup } from "components/pages/teacher"
 import { CompanySignup } from "components/pages/company"
 
@@ -19,8 +19,8 @@ import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
 import GroupCreateLayout from "components/templates/groupCreateLayout"
 
 function App() {
-    const [open, setOpen] = useState(false);
-    const [signInState, setSignInState] = useState("");
+    const [open, setOpen] = useState(false)
+    const [signInState, setSignInState] = useState("")
 
     const menus = [
         {
@@ -43,16 +43,16 @@ function App() {
     const toggleSignout = () => {
         axios.post("/account/signout")
             .then(() => {
-                sessionStorage.removeItem('AUTHORITY');
-                window.location.reload();
+                sessionStorage.removeItem('AUTHORITY')
+                window.location.reload()
             })
     }
 
     const toggleAlertOpen = () => {
-        setOpen(true);
+        setOpen(true)
     }
     const toggleAlertClose = () => {
-        setOpen(false);
+        setOpen(false)
     }
 
     const ReqAuthStu = (props) => {
@@ -163,7 +163,9 @@ function App() {
 
                     <Route path="teamWork" element={<TeamWork />} />
                     <Route path="teamWorkInfo" element={<TeamWorkInfo />} />
-                    
+
+                    <Route path="profile" element={<Profile />} />
+
                     <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} />
                     <Route path="timeTable/regist" element={<ReqAuthStu component={<RegistTimeTable />} />} />
 
@@ -177,4 +179,4 @@ function App() {
     )
 }
 
-export default App;
+export default App
