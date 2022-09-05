@@ -11,7 +11,8 @@ const GroupList = (props) => {
                 }
             }}
         >
-            {
+            {   props.groups
+                &&
                 props.groups.map((group) => {
                     return (
                         <ListItem
