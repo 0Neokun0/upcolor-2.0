@@ -10,7 +10,7 @@ import { DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherSignup
 import { CompanySignup } from "components/pages/company"
 
 import { GroupChatLayout } from "components/templates"
-import { Feed, FeedDetail, Header } from "components/organisms"
+import { Feed, FeedDetail, Header, TeacherProfileCard } from "components/organisms"
 
 import logo from "components/atoms/logo/upcolor_logo.svg"
 import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
@@ -180,6 +180,17 @@ function App() {
                     <Route path="develop/addLectures" element={<ReqAuthAdm component={<AddLectures />} />} />
                     <Route path="develop/genTeacherSign" element={<ReqAuthAdm component={<GenTeacherSign />} />} />
                     <Route path="develop/genCompanySign" element={<ReqAuthAdm component={<GenCompanySign />} />} />
+
+
+
+
+
+
+
+
+
+
+                    <Route path="teacherProfileCard" element={<TeacherProfileCard />} />
                 </Routes>
             </BrowserRouter>
         </Box>

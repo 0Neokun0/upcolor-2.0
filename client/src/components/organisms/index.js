@@ -21,3 +21,7 @@ export { default as ProfileDetail } from "./profileDetail"
 export { default as ProfileForm } from "./profileForm"
 export { default as ProfileStudentDetail } from "./profileStudentDetail"
 export { default as TeamView } from "./teamView"
+
+
+
+export { default as TeacherProfileCard } from "./teacherProfileCard"
