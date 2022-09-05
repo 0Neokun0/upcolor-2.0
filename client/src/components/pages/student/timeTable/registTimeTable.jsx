@@ -1,3 +1,4 @@
+import { Box, Divider, Grid, MenuItem, Paper, Select } from "@mui/material"
 import axios from "axios"
 import { TimeTableLayout } from "components/templates"
 import { useEffect, useState } from "react"
@@ -72,15 +73,122 @@ const RegistTimeTable = () => {
     }
 
     return (
-        <TimeTableLayout
-            viewTimeTable={viewTimeTable}
-            overWrite={overWrite}
-            periods={periods}
-            days={days}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            toggleOverWrite={toggleOverWrite}
-        />
+        <Box
+            sx={{
+                width: "80%",
+                minWidth: "600px",
+                pt: 2,
+                mx: "auto",
+            }}
+        >
+            <Paper
+                sx={{
+                    p: 2,
+                    textAlign: "center",
+                }}
+            >
+                <Grid
+                    container
+                >
+                    <Grid
+                        item
+                        xs={1}
+                        sx={{
+                            p: 2,
+                        }}
+                    >
+                        時間割
+                    </Grid>
+                    {
+                        days.map((day, index) => {
+                            return (
+                                <Grid
+                                    item
+                                    key={index}
+                                    xs
+                                    sx={{
+                                        p: 2,
+                                    }}
+                                >
+                                    {day}
+                                </Grid>
+                            )
+                        })
+                    }
+                    <Grid
+                        xs={12}
+                    >
+                        <Divider />
+                    </Grid>
+                    {
+                        viewTimeTable.map((row, period) => {
+                            return (
+                                <Grid
+                                    container
+                                >
+                                    <Grid
+                                        item
+                                        key={period}
+                                        xs={1}
+                                        sx={{
+                                            m: "auto",
+                                            p: 2,
+                                        }}
+                                    >
+                                        {period + 1}
+                                    </Grid>
+                                    {
+                                        row.map((cell, day) => {
+                                            let key = period * 5 + day
+                                            return (
+                                                <Grid
+                                                    item
+                                                    key={key}
+                                                    xs
+                                                    sx={{
+                                                        p: 2,
+                                                    }}
+                                                >
+                                                    {
+                                                        cell
+                                                        &&
+                                                        <Select
+                                                            defaultValue={cell["lecture_id"]}
+                                                            onChange={(e) => handleChange(e, key)}
+                                                            sx={{
+                                                                width: "100%",
+                                                                textAlign: "left",
+                                                            }}
+                                                        >
+                                                            <MenuItem value={cell["lecture_id"]}>{cell["lecture_name"]}</MenuItem>
+                                                            <MenuItem value=""><em>None</em></MenuItem>
+                                                        </Select>
+                                                    }
+                                                </Grid>
+                                            )
+                                        })
+                                    }
+                                    <Grid
+                                        xs={12}
+                                    >
+                                        <Divider />
+                                    </Grid>
+                                </Grid>
+                            )
+                        })
+                    }
+                </Grid>
+            </Paper>
+        </Box>
+        // <TimeTableLayout
+        //     viewTimeTable={viewTimeTable}
+        //     overWrite={overWrite}
+        //     periods={periods}
+        //     days={days}
+        //     handleChange={handleChange}
+        //     handleSubmit={handleSubmit}
+        //     toggleOverWrite={toggleOverWrite}
+        // />
     )
 }
 

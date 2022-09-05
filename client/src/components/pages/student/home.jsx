@@ -35,7 +35,7 @@ const Home = () => {
         },
         {
             value: "時間割",
-            url: "#",
+            url: "/timeTable/regist",
         },
         {
             value: "設定",
@@ -60,7 +60,6 @@ const Home = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
         const data = new FormData(e.currentTarget)
 
         axios.post("/post/addPost", {

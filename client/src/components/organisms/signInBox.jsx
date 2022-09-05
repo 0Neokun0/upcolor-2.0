@@ -1,4 +1,5 @@
-import { Alert, Box, Button, Link, Paper, TextField, Typography } from "@mui/material"
+import { Alert, Box, Button, Paper, TextField, Typography } from "@mui/material"
+import { Link } from "react-router-dom"
 import logo from "components/atoms/logo/upcolor_logo.svg"
 
 const SignInBox = (props) => {
@@ -55,7 +56,6 @@ const SignInBox = (props) => {
                     autoComplete="current-password"
                 />
 
-
                 <Button
                     type="submit"
                     fullWidth
@@ -81,6 +81,8 @@ const SignInBox = (props) => {
             </Box>
 
             <Box
+                component={Link}
+                to="/student/signup"
                 sx={{
                     mt: 2,
                     display: "flex",
@@ -88,11 +90,7 @@ const SignInBox = (props) => {
                     justifyContent: "center",
                 }}
             >
-                <Link
-                    href="signup"
-                >
-                    アカウント作成
-                </Link>
+                アカウント作成
             </Box>
         </Paper>
     );

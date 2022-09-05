@@ -14,7 +14,7 @@ router.use((req, res, next) => {
 router.post("/signState", async (req, res) => {
     const userId = get.userId(req)
 
-    sqlSelectUserType = `
+    const sqlSelectUserType = `
         SELECT
             user_types.type_name
         FROM
@@ -157,8 +157,9 @@ router.post("/signin", async (req, res) => {
     const user = await sql.handleSelect(sqlSelectUserId, [email, password])
     
     if (user.length) {
-        const token = jwt.sign({userId: user[0]["user_id"]}, config.jwt.secret, config.jwt.options)
-
+        const userId = user[0]["user_id"]
+        
+        const token = jwt.sign({userId: userId}, config.jwt.secret, config.jwt.options)
         const date = new Date()
         const expires = new Date(date.getTime() + 864000000)
 
