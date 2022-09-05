@@ -5,7 +5,7 @@ import { Box } from "@mui/material"
 
 import { LandingPage, SignIn, SignUp } from "components/pages"
 
-import { Group, Home, Profile, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo } from "components/pages/student"
+import { Group, Home, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList } from "components/pages/student"
 import { DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherSignup } from "components/pages/teacher"
 import { CompanySignup } from "components/pages/company"
 
@@ -162,9 +162,15 @@ function App() {
                     </Route>
 
                     <Route path="teamWork" element={<TeamWork />} />
+                    <Route path="TeamList" element={<TeamList />} />
                     <Route path="teamWorkInfo" element={<TeamWorkInfo />} />
 
-                    <Route path="profile" element={<Profile />} />
+                    <Route path="profile">
+                        <Route path="" element={<Profile />} />
+                        <Route path=":userId" element={<ProfileView />} />
+                    </Route>
+
+                    <Route path="profile/edit" element={<ProfileEdit />} />
 
                     <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} />
                     <Route path="timeTable/regist" element={<ReqAuthStu component={<RegistTimeTable />} />} />

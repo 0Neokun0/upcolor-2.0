@@ -1,4 +1,5 @@
-import { Typography } from "@mui/material"
+import { Link } from "react-router-dom"
+import { Button } from "@mui/material"
 
 const TeamMembers = (props) => {
     return (
@@ -6,9 +7,13 @@ const TeamMembers = (props) => {
         &&
         props.members.map((member) => {
             return (
-                <Typography>
+                <Button
+                    key={member["user_id"]}
+                    component={Link}
+                    to={"/profile/" + member["user_id"]}
+                >
                     {member["user_name"]}
-                </Typography>
+                </Button>
             )
         })
     );
