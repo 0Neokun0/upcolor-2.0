@@ -15,6 +15,9 @@ import CompanyDetails from './companyDetails'
 import CompanyRecruitment from './companyRecruitment'
 import CompanySeminar from './companySeminar'
 import CompanyLinks from './companyLinks'
+
+const company_name = "会社名"
+const company_occupation = "業種"
 function TabPanel(props) {
   const { children, value, index, ...other } = props
   return (
@@ -65,17 +68,15 @@ const CompanyProfilePage = () => {
           <Grid item xs={12} sx={{ mt: 2 }}>
             <Card sx={{ maxWidth: '100%', p: 2 }}>
               <Typography gutterBottom variant="h2" component="div">
-                企業名前
+                {company_name}
               </Typography>
               <Stack direction="row" spacing={2}>
-                <Chip color="info" label="業種" />
-                <Chip color="info" label="業種" />
-                <Chip color="info" label="業種" />
+                <Chip color="info" label={company_occupation} />
               </Stack>
             </Card>
           </Grid>
 
-          
+
           <Grid item xs={12} sx={{ mt: 2 }}>
             <Card sx={{ maxWidth: '100%' }}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
