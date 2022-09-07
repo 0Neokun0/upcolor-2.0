@@ -6,8 +6,6 @@ import { TeamInfoCard } from "components/molecules"
 import Toolbar from "components/atoms/toolbar"
 
 const TeamDetail = (props) => {
-
-    console.log(props.team)
     return (
         props.team.map((info, index) => {
             return (
@@ -39,7 +37,11 @@ const TeamDetail = (props) => {
                     </Box>
 
                     <TeamMembers
+                        teamId={info["team_work_id"]}
                         members={props.teamMembers}
+                        handleGenerateInviteUrl={props.handleGenerateInviteUrl}
+                        anchorEl={props.anchorEl}
+                        handleClose={props.handleClose}
                     />
 
                     <Box
@@ -62,18 +64,18 @@ const TeamDetail = (props) => {
                                 title="作品説明"
                                 content={info["team_work_description"]}
                             />
-    
+
                             <TeamInfoCard
                                 title="ターゲット"
                                 content={info["team_target"]}
                             />
-    
+
                             <TeamInfoCard
                                 title="競合サービス、差別化"
                                 content={info["team_strategy"]}
                             />
                         </Box>
-                        
+
                         <Box
                             sx={{
                                 textAlign: "right",
@@ -82,7 +84,7 @@ const TeamDetail = (props) => {
                             <Button
                                 variant="contained"
                                 component={Link}
-                                to="/teamWorkInfo"
+                                to="/teamworkinfo"
                             >
                                 編集
                             </Button>

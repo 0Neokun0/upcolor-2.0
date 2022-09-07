@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom"
 import { Avatar, Box, Button, Card, Grid, Tooltip, Typography } from "@mui/material"
-import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
-import GitHubIcon from '@mui/icons-material/GitHub'
 
 const ProfileDetail = (props) => {
     return (
         <Card
             sx={{
-                width: "900px",
+                width: "1000px",
                 mx: "auto",
                 borderRadius: 0,
             }}
@@ -39,69 +37,57 @@ const ProfileDetail = (props) => {
 
                         <Typography
                             variant="h5"
-                            sx={{
-                                mb: 2,
-                            }}
                         >
                             {props.profile["user_name"]}
+                        </Typography>
+
+                        <Typography
+                            variant="subtitle2"
+                        >
+                            {props.profile["course_name"]}
                         </Typography>
 
                         <Box
                             sx={{
                                 textAlign: "left",
+                                mt: 2,
                             }}
                         >
-                            <Grid
-                                container
-                            >
-                                <Grid
-                                    item
-                                    xs={2}
-                                >
-                                    <Tooltip
-                                        title="メールアドレス"
-                                        placement="right"
-                                    >
-                                        <EmailRoundedIcon />
-                                    </Tooltip>
-                                </Grid>
+                            {
+                                props.profileLists.map((profileLists, index) => {
+                                    return (
+                                        <Grid
+                                            key={index}
+                                            container
+                                        >
+                                            <Grid
+                                                item
+                                                xs={2}
+                                            >
+                                                <Tooltip
+                                                    title={profileLists["title"]}
+                                                    placement="right"
+                                                >
+                                                    {profileLists["icon"]}
+                                                </Tooltip>
+                                            </Grid>
 
-                                <Grid
-                                    item
-                                    xs={10}
-                                >
-                                    {props.profile["user_mail"]}
-                                </Grid>
-                            </Grid>
-
-                            <Grid
-                                container
-                            >
-                                <Grid
-                                    item
-                                    xs={2}
-                                >
-                                    <Tooltip
-                                        title="Github"
-                                        placement="right"
-                                    >
-                                        <GitHubIcon />
-                                    </Tooltip>
-                                </Grid>
-
-                                <Grid
-                                    item
-                                    xs={10}
-                                >
-                                    {
-                                        props.profile["user_github"]
-                                            ?
-                                            props.profile["user_github"]
-                                            :
-                                            "未設定"
-                                    }
-                                </Grid>
-                            </Grid>
+                                            <Grid
+                                                item
+                                                xs={10}
+                                            >
+                                                {
+                                                    profileLists["content"]
+                                                        ?
+                                                        profileLists["content"]
+                                                        :
+                                                        "未設定"
+                                                }
+                                            </Grid>
+                                        </Grid>
+                                    )
+                                })
+                            }
                         </Box>
                     </Box>
                 </Grid>
@@ -149,7 +135,7 @@ const ProfileDetail = (props) => {
                     編集
                 </Button>
             </Grid>
-        </Card>
+        </Card >
     )
 }
 

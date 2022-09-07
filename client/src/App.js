@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
-import { LandingPage, Signin } from "components/pages"
+import { LandingPage, NotFound, Signin } from "components/pages"
 
-import { StudentSignup, Group, Home, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList } from "components/pages/student"
+import { StudentSignup, Group, Home, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite } from "components/pages/student"
 import { DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherSignup } from "components/pages/teacher"
 import { CompanySignup } from "components/pages/company"
 
@@ -165,6 +165,10 @@ function App() {
                     <Route path="teamWork" element={<TeamWork />} />
                     <Route path="TeamList" element={<TeamList />} />
                     <Route path="teamWorkInfo" element={<TeamWorkInfo />} />
+                    <Route path="teamWorkInvite">
+                        <Route path="" element={<NotFound />} />
+                        <Route path=":inviteToken" element={<TeamWorkInvite />} />
+                    </Route>
 
                     <Route path="profile">
                         <Route path="" element={<Profile />} />
