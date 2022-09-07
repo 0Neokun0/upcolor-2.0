@@ -1,6 +1,5 @@
-import { useState } from "react"
-import { useEffect } from "react"
 import axios from "axios"
+import { useState, useEffect } from "react"
 import GroupLayout from "components/templates/groupLayout"
 import CommentRoundedIcon from '@mui/icons-material/CommentRounded'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'

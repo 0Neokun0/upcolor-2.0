@@ -1,39 +1,41 @@
 import { Container, Box, Button, TextField, Dialog, DialogContent, DialogContentText } from "@mui/material"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import { SignLayout } from "components/templates"
 import { SignUpBox } from "components/organisms"
 
 const TeacherSignup = () => {
+    const token = useParams()["token"]
     const [dialog, setDialog] = useState(true)
     const [checkExist, setCheckExist] = useState(false)
 
-    useEffect(() => {
-        if (!window.location.search) {
-            window.location.href = "/"
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (!window.location.search) {
+    //         window.location.href = "/"
+    //     }
+    // }, [])
 
-    const getParam = (name, url) => {
-        if (!url) url = window.location.href
+    // const getParam = (name, url) => {
+    //     if (!url) url = window.location.href
 
-        name = name.replace(/[[\]]/g, "\\$g")
+    //     name = name.replace(/[[\]]/g, "\\$g")
 
-        let regex = new RegExp("[?%]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url)
+    //     let regex = new RegExp("[?%]" + name + "(=([^&#]*)|&|#|$)"),
+    //         results = regex.exec(url)
 
-        if (!results) return null
-        if (!results[2]) return null
+    //     if (!results) return null
+    //     if (!results[2]) return null
 
-        return decodeURIComponent(results[2].replace(/\+/g, " "))
-    }
+    //     return decodeURIComponent(results[2].replace(/\+/g, " "))
+    // }
 
     const handlePassword = (e) => {
         e.preventDefault()
         const data = new FormData(e.currentTarget)
 
         axios.post("/check/teacher", {
-            token: getParam("token"),
+            token: token,
             password: data.get("tokenPassword"),
         })
         .then((res) => {
