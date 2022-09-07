@@ -6,7 +6,7 @@ import { Box } from "@mui/material"
 import { LandingPage, Signin } from "components/pages"
 
 import { StudentSignup, Group, Home, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList } from "components/pages/student"
-import { DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherSignup } from "components/pages/teacher"
+import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign } from "components/pages/teacher"
 import { CompanySignup } from "components/pages/company"
 
 import { GroupChatLayout } from "components/templates"
@@ -146,11 +146,12 @@ function App() {
                     {/* <Route path="student/signup" element={<ReqNoAuth component={<StudentSignup />} />} /> */}
                     {/* <Route path="teacher/signup" element={<ReqNoAuth component={<TeacherSignup />} />} /> */}
                     {/* <Route path="company/signup" element={<ReqNoAuth component={<CompanySignup />} />} /> */}
-                    <Route path="student/signup" element={<StudentSignup />} />
-                    <Route path="teacher/signup" element={<TeacherSignup />} />
-                    <Route path="company/signup" element={<CompanySignup />} />
+                    <Route path="signup/student" element={<StudentSignup />} />
+                    <Route path="signup/teacher/:token" element={<TeacherSignup />} />
+                    <Route path="signup/company/:token" element={<CompanySignup />} />
 
-                    <Route path="signin" element={<ReqNoAuth component={<Signin />} />} />
+                    {/* <Route path="signin" element={<ReqNoAuth component={<Signin />} />} /> */}
+                    <Route path="signin" element={<Signin />} />
 
                     <Route path="Home" element={<ReqAuthStu component={<Home />} />} >
                         <Route path="" element={<Feed />} />

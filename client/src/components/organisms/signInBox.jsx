@@ -82,7 +82,7 @@ const SignInBox = (props) => {
 
             <Box
                 component={Link}
-                to="/student/signup"
+                to="/signup/student"
                 sx={{
                     mt: 2,
                     display: "flex",

@@ -1,6 +1,5 @@
-import { Box, Divider, Grid, MenuItem, Paper, Select } from "@mui/material"
+import { Box, Button, Dialog, DialogActions, DialogTitle, Divider, Grid, MenuItem, Paper, Select } from "@mui/material"
 import axios from "axios"
-import { TimeTableLayout } from "components/templates"
 import { useEffect, useState } from "react"
 
 const RegistTimeTable = () => {
@@ -121,25 +120,25 @@ const RegistTimeTable = () => {
                         <Divider />
                     </Grid>
                     {
-                        viewTimeTable.map((row, period) => {
+                        viewTimeTable.map((row, index) => {
                             return (
                                 <Grid
                                     container
                                 >
                                     <Grid
                                         item
-                                        key={period}
+                                        key={index}
                                         xs={1}
                                         sx={{
                                             m: "auto",
                                             p: 2,
                                         }}
                                     >
-                                        {period + 1}
+                                        {periods[index]}
                                     </Grid>
                                     {
                                         row.map((cell, day) => {
-                                            let key = period * 5 + day
+                                            let key = index * 5 + day
                                             return (
                                                 <Grid
                                                     item
@@ -179,6 +178,19 @@ const RegistTimeTable = () => {
                     }
                 </Grid>
             </Paper>
+
+            <Button variant="outlined" onClick={handleSubmit}>履修登録</Button>
+
+            <Dialog open={Boolean(!overWrite)} onClose={toggleAlertClose}>
+                <DialogTitle>上書きしますか?</DialogTitle>
+
+                <DialogActions>
+                    <Button onClick={toggleAlertClose}>キャンセル</Button>
+
+                    <Button onClick={toggleOverWrite} autoFocus>上書き保存</Button>
+                </DialogActions>
+            </Dialog>
+
         </Box>
         // <TimeTableLayout
         //     viewTimeTable={viewTimeTable}

@@ -1,4 +1,4 @@
-import { Box, Select, MenuItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogActions, DialogTitle, Grid,} from '@mui/material'
+import { Select, MenuItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogActions, DialogTitle } from '@mui/material'
 
 
 const TimeTableLayout = (props) => {
@@ -16,7 +16,7 @@ const TimeTableLayout = (props) => {
                             })}
                         </TableRow>
                     </TableHead>
-                    {props.viewTimeTable.length > 0 && 
+                    {props.viewTimeTable.length > 0 &&
                         <TableBody>
                             {props.viewTimeTable.map((row, period) => {
                                 return (
