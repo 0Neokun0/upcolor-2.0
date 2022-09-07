@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
-import { LandingPage, Signin } from "components/pages"
+import { LandingPage, SignIn } from "components/pages"
 
 import { StudentSignup, Group, Home, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList } from "components/pages/student"
 import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign } from "components/pages/teacher"
@@ -151,7 +151,7 @@ function App() {
                     <Route path="signup/company/:token" element={<CompanySignup />} />
 
                     {/* <Route path="signin" element={<ReqNoAuth component={<Signin />} />} /> */}
-                    <Route path="signin" element={<Signin />} />
+                    <Route path="signIn" element={<SignIn />} />
 
                     <Route path="Home" element={<ReqAuthStu component={<Home />} />} >
                         <Route path="" element={<Feed />} />
