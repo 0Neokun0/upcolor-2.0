@@ -20,7 +20,7 @@ const MainMenu = (props) => {
                             key={index}
                         >
                             <ListItemButton
-                                LinkComponent={Link}
+                                component={Link}
                                 to={menu.url}
                             >
                                 {menu.value}

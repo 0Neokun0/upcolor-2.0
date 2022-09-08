@@ -1,11 +1,13 @@
-import { Box, Button, Dialog, DialogActions, DialogTitle, Divider, Grid, MenuItem, Paper, Select } from "@mui/material"
+import { Box } from "@mui/material"
+import { SaveButton, CancelButton } from "components/molecules"
+import { TimeTableGrid, CheckDialog } from "components/organisms"
 import axios from "axios"
 import { useEffect, useState } from "react"
 
 const RegistTimeTable = () => {
     const [viewTimeTable, setViewTimeTable] = useState([])
     const [registTimeTable, setRegistTimeTable] = useState([])
-    const [overWrite, setOverWrite] = useState(true)
+    const [overWrite, setOverWrite] = useState(false)
 
     const days = ["月", "火", "水", "木", "金"]
     const periods = ["1", "2", "3", "4", "5"]
@@ -54,13 +56,13 @@ const RegistTimeTable = () => {
             if (res.data) {
                 console.log("登録完了")
             } else {
-                setOverWrite(false)
+                setOverWrite(true)
             }
         })
     }
 
     const toggleAlertClose = () => {
-        setOverWrite(true)
+        setOverWrite(false)
     }
 
     const toggleOverWrite = () => {
@@ -71,136 +73,51 @@ const RegistTimeTable = () => {
         })
     }
 
+    const buttons = []
+    buttons.push(
+        <CancelButton
+            size={"small"}
+            click={toggleAlertClose}
+        />
+    )
+    buttons.push(
+        <SaveButton
+            size={"small"}
+            click={toggleOverWrite}
+        />
+    )
+
     return (
         <Box
             sx={{
                 width: "80%",
-                minWidth: "600px",
+                minWidth: "800px",
                 pt: 2,
                 mx: "auto",
             }}
         >
-            <Paper
-                sx={{
-                    p: 2,
-                    textAlign: "center",
+            <TimeTableGrid
+                viewTimeTable={viewTimeTable}
+                days={days}
+                periods={periods}
+                change={handleChange}
+            />
+
+            <SaveButton
+                size={"large"}
+                style={{
+                    m: 2,
                 }}
-            >
-                <Grid
-                    container
-                >
-                    <Grid
-                        item
-                        xs={1}
-                        sx={{
-                            p: 2,
-                        }}
-                    >
-                        時間割
-                    </Grid>
-                    {
-                        days.map((day, index) => {
-                            return (
-                                <Grid
-                                    item
-                                    key={index}
-                                    xs
-                                    sx={{
-                                        p: 2,
-                                    }}
-                                >
-                                    {day}
-                                </Grid>
-                            )
-                        })
-                    }
-                    <Grid
-                        xs={12}
-                    >
-                        <Divider />
-                    </Grid>
-                    {
-                        viewTimeTable.map((row, index) => {
-                            return (
-                                <Grid
-                                    container
-                                >
-                                    <Grid
-                                        item
-                                        key={index}
-                                        xs={1}
-                                        sx={{
-                                            m: "auto",
-                                            p: 2,
-                                        }}
-                                    >
-                                        {periods[index]}
-                                    </Grid>
-                                    {
-                                        row.map((cell, day) => {
-                                            let key = index * 5 + day
-                                            return (
-                                                <Grid
-                                                    item
-                                                    key={key}
-                                                    xs
-                                                    sx={{
-                                                        p: 2,
-                                                    }}
-                                                >
-                                                    {
-                                                        cell
-                                                        &&
-                                                        <Select
-                                                            defaultValue={cell["lecture_id"]}
-                                                            onChange={(e) => handleChange(e, key)}
-                                                            sx={{
-                                                                width: "100%",
-                                                                textAlign: "left",
-                                                            }}
-                                                        >
-                                                            <MenuItem value={cell["lecture_id"]}>{cell["lecture_name"]}</MenuItem>
-                                                            <MenuItem value=""><em>None</em></MenuItem>
-                                                        </Select>
-                                                    }
-                                                </Grid>
-                                            )
-                                        })
-                                    }
-                                    <Grid
-                                        xs={12}
-                                    >
-                                        <Divider />
-                                    </Grid>
-                                </Grid>
-                            )
-                        })
-                    }
-                </Grid>
-            </Paper>
+                click={handleSubmit}
+            />
 
-            <Button variant="outlined" onClick={handleSubmit}>履修登録</Button>
-
-            <Dialog open={Boolean(!overWrite)} onClose={toggleAlertClose}>
-                <DialogTitle>上書きしますか?</DialogTitle>
-
-                <DialogActions>
-                    <Button onClick={toggleAlertClose}>キャンセル</Button>
-
-                    <Button onClick={toggleOverWrite} autoFocus>上書き保存</Button>
-                </DialogActions>
-            </Dialog>
-
+            <CheckDialog
+                openFlg={overWrite}
+                close={toggleAlertClose}
+                title={"上書きしますか？"}
+                buttons={buttons}
+            />
         </Box>
-        // <TimeTableLayout
-        //     viewTimeTable={viewTimeTable}
-        //     overWrite={overWrite}
-        //     periods={periods}
-        //     days={days}
-        //     handleChange={handleChange}
-        //     handleSubmit={handleSubmit}
-        //     toggleOverWrite={toggleOverWrite}
-        // />
     )
 }
 
