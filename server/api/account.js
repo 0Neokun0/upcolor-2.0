@@ -194,6 +194,7 @@ router.post("/getProfile", async (req, res) => {
             user_profiles.user_name,
             user_profiles.user_mail,
             user_profiles.user_introduction,
+            student_profiles.student_course_id,
             student_profiles.student_year,
             student_profiles.student_programming_languages,
             student_profiles.student_tools_and_framework,

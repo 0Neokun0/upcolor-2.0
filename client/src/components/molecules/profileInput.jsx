@@ -1,6 +1,7 @@
-import { Box, Paper, TextField, Typography } from "@mui/material"
+import { Paper, Typography } from "@mui/material"
 
 const ProfileInput = (props) => {
+    console.log(props)
     return (
         <Paper
             sx={{
@@ -11,22 +12,14 @@ const ProfileInput = (props) => {
                 variant="h5"
                 sx={{
                     borderBottom: 1,
+                    borderColor: "lightgrey",
+                    mb: 2,
                 }}
             >
-                {props.title}
+                {props["title"]}
             </Typography>
 
-            <Box
-                sx={{
-                    p: 2,
-                }}
-            >
-                <TextField
-                    label={props.content}
-                    size="small"
-                    fullWidth
-                />
-            </Box>
+            {props.children}
         </Paper>
     );
 }
