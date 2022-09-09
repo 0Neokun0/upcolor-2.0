@@ -65,7 +65,7 @@ router.post("/addTeamWork", async (req, res) => {
 
 router.post("/getTeamWork", async (req, res) => {
     const teamWorkId = req.body.teamWorkId
-    
+
     const sqlSelectTeam = `
         SELECT
             team_name,
@@ -346,61 +346,51 @@ router.post("/saveGantt", async (req, res) => {
 
 router.post("/getInviteURL", (req, res) => {
     const teamWorkId = req.body.teamWorkId
-    
-    const token = jwt.sign({teamWorkId: teamWorkId}, config.jwt.secret, config.jwt.options)
+
+    const token = jwt.sign({ teamWorkId: teamWorkId }, config.jwt.secret, config.jwt.options)
 
     res.json(token)
 })
 
-router.post("/joinTeamWork", (req, res) => {
+router.post("/checkTeamWork", (req, res) => {
     const userId = get.userId(req)
     const token = req.body.token
 
-    try {
-        jwt.verify(token, config.jwt.secret, async (err, res) => {
-            if (err) throw err
-        
-            const teamWorkId = res["teamWorkId"]
+    jwt.verify(token, config.jwt.secret, async (err, result) => {
+        // if (err) throw err
+
+        if (result) {
+            const teamWorkId = result["teamWorkId"]
 
             const sqlSelectTeamId = `
-                SELECT
-                    is_colaborating
-                FROM
-                    student_profiles
-                WHERE
-                    user_id = ?
-            `
-            const teamId = await sql.handleSelectSql(sqlSelectTeamId [userId])
+                    SELECT
+                        is_colaborating
+                    FROM
+                        student_profiles
+                    WHERE
+                        user_id = ?
+                `
+            const teamId = await sql.handleSelect(sqlSelectTeamId, [userId])
 
             if (!teamId[0]["is_colaborating"]) {
                 const sqlSelectTeam = `
-                    SELECT
-                        team_name,
-                        team_work_name,
-                        team_work_course,
-                        team_work_description,
-                        team_target,
-                        team_concept,
-                        team_strategy,
-                        technology_used,
-                        publish_team_chat,
-                        publish_team_ganttchart,
-                        registered_team_work_on
-                    FROM
-                        team_works_list
-                    WHERE
-                        team_work_id = ?
-                `
-                const team = await sql.handleSelectSql(sqlSelectTeam, [teamWorkId])
+                        SELECT
+                            team_name
+                        FROM
+                            team_works_list
+                        WHERE
+                            team_work_id = ?
+                    `
+                const team = await sql.handleSelect(sqlSelectTeam, [teamWorkId])
 
                 res.json(team)
             } else {
                 res.json(false)
             }
-        })
-    } catch (err) {
-        res.json(false)
-    }
+        } else {
+            res.json(false)
+        }
+    })
 })
 
 router.post("/leaveTeam", async (req, res) => {

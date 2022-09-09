@@ -41,22 +41,20 @@ const ProfileForm = (props) => {
                     >
                         <ProfileSelect
                             label="専攻"
-                            value={props["course"]}
+                            value={info["student_course_id"]}
                             onChange={props["handleCourse"]}
-                            items={props.courses}
+                            items={props["courses"]}
                             id="course_id"
                             column="course_name"
-                            defaultValue={props["student_course_id"]}
                         />
 
                         <ProfileSelect
                             label="学年"
-                            value={props["year"]}
+                            value={info["student_year"]}
                             onChange={props["handleYear"]}
                             items={props.years}
                             id="value"
                             column="item"
-                            defaultValue={props["student_year"]}
                         />
                     </ProfileInput>
 
@@ -65,7 +63,7 @@ const ProfileForm = (props) => {
                     >
                         <TextField
                             label="ユーザー名"
-                            name="name"
+                            name="introduction"
                             rows={3}
                             fullWidth
                             multiline

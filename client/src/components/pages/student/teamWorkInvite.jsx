@@ -1,24 +1,29 @@
 import { useParams } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import { TeamWorkLayout } from "components/templates"
 import { TeamWorkInviteForm } from "components/organisms"
 
 const TeamWorkInvite = () => {
     const inviteToken = useParams()["inviteToken"]
+    const [teamWork, setTeamWork] = useState([])
 
     useEffect(() => {
-        axios.post("/teamwork/joinTeamWork", {
+        axios.post("/teamWork/checkTeamWork", {
             token: inviteToken,
         })
-        .then((res) => {
-            console.log(res.data)
-        })
-    }, []);
+            .then((res) => {
+                console.log(res.data[0])
+                setTeamWork(res.data[0])
+            })
+    }, [inviteToken])
+
     return (
         <TeamWorkLayout
             component={
-                <TeamWorkInviteForm />
+                <TeamWorkInviteForm
+                    teamWork={teamWork}
+                />
             }
         />
     )

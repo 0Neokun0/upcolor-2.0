@@ -256,15 +256,20 @@ router.post("/getStudentProfile", async (req, res) => {
 
 router.post("/updateProfile", async (req, res) => {
     const userId = get.userId(req)
+
+    const name = req.body.name
+    const mail = req.body.mail
+    const course = req.body.course
+    const year = req.body.year
     const introduction = req.body.introduction
-    const qualifications = req.body.qualifications
-    const programming = req.body.programming
     const github = req.body.github
 
     const sqlUpdateUserProfile = `
     UPDATE
         user_profiles
     SET
+        user_profiles.user_name = ?
+        user_profiles.user_introduction = ?
         user_profiles.user_introduction = ?
     WHERE
         user_profiles.user_id = ?
