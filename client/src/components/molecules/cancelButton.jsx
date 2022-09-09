@@ -4,11 +4,12 @@ import DeleteIcon from '@material-ui/icons/Delete'
 const CancelButton = (props) => {
     return (
         <Button
+            key={props.key}
             variant="contained"
             color="error"
             size={props.size}
             startIcon={<DeleteIcon />}
-            onClick={props.click}
+            onClick={props.close}
         >
             キャンセル
         </Button>
