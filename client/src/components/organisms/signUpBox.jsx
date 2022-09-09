@@ -28,9 +28,9 @@ const SignUpBox = (props) => {
                 props.company
                 &&
                 <Typography
+                    variant="h5"
                     sx={{
                         mt: 2,
-                        fontSize: "20px"
                     }}
                 >
                     {props.company} 様
@@ -78,7 +78,7 @@ const SignUpBox = (props) => {
                 />
 
                 {
-                    props.course
+                    props.courseList
                     &&
                     <FormControl
                         margin="normal"

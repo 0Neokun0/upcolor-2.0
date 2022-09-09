@@ -3,11 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
-import { LandingPage, NotFound, Signin } from "components/pages"
-
-import { StudentSignup, Group, Home, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite } from "components/pages/student"
+import { LandingPage, NotFound, SignIn } from "components/pages"
+import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite } from "components/pages/student"
 import { DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherSignup } from "components/pages/teacher"
-import { CompanySignup } from "components/pages/company"
+import { CompanySignup, CompanyHome, Recruitment } from "components/pages/company"
 
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
@@ -31,12 +30,12 @@ function App() {
         {
             icon: <SchoolRoundedIcon />,
             value: "学校",
-            url: "#",
+            url: "/teacher/home",
         },
         {
             icon: <BusinessRoundedIcon />,
             value: "企業",
-            url: "#",
+            url: "/company/home",
         },
     ]
 
@@ -146,13 +145,16 @@ function App() {
                     {/* <Route path="student/signup" element={<ReqNoAuth component={<StudentSignup />} />} /> */}
                     {/* <Route path="teacher/signup" element={<ReqNoAuth component={<TeacherSignup />} />} /> */}
                     {/* <Route path="company/signup" element={<ReqNoAuth component={<CompanySignup />} />} /> */}
-                    <Route path="student/signup" element={<StudentSignup />} />
-                    <Route path="teacher/signup" element={<TeacherSignup />} />
-                    <Route path="company/signup" element={<CompanySignup />} />
+                    <Route path="signup/student" element={<StudentSignup />} />
+                    <Route path="signup/teacher/:token" element={<TeacherSignup />} />
+                    <Route path="signup/teacher/" element={<LandingPage />} />
+                    <Route path="signup/company/:token" element={<CompanySignup />} />
+                    <Route path="signup/company/" element={<LandingPage />} />
 
-                    <Route path="signin" element={<ReqNoAuth component={<Signin />} />} />
+                    {/* <Route path="signin" element={<ReqNoAuth component={<Signin />} />} /> */}
+                    <Route path="signIn" element={<SignIn />} />
 
-                    <Route path="Home" element={<ReqAuthStu component={<Home />} />} >
+                    <Route path="home" element={<ReqAuthStu component={<StudentHome />} />} >
                         <Route path="" element={<Feed />} />
                         <Route path=":postId" element={<FeedDetail />} />
                     </Route>
@@ -184,6 +186,9 @@ function App() {
                     <Route path="develop/addLectures" element={<ReqAuthAdm component={<AddLectures />} />} />
                     <Route path="develop/genTeacherSign" element={<ReqAuthAdm component={<GenTeacherSign />} />} />
                     <Route path="develop/genCompanySign" element={<ReqAuthAdm component={<GenCompanySign />} />} />
+
+                    <Route path="company/home" element={<CompanyHome />} />
+                    <Route path="company/recruitment" element={<Recruitment />} />
                 </Routes>
             </BrowserRouter>
         </Box>

@@ -9,7 +9,7 @@ router.post("/teacher", (req, res) => {
 
     const token = jwt.sign({team: "NAOKO"}, password, {algorithm: "HS256", expiresIn: "1h"})
 
-    const url = config.server.host + "/teacher/signup?token=" + token
+    const url = config.server.host + "/signup/teacher/" + token
 
     res.json(url)
 })
@@ -19,7 +19,7 @@ router.post("/company", (req, res) => {
 
     const token = jwt.sign({name: name}, config.jwt.secret, config.jwt.options)
 
-    const url = config.server.host + "/company/signup?token=" + token
+    const url = config.server.host + "/signup/company/" + token
 
     res.json(url)
 })
