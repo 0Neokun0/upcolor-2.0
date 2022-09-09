@@ -17,6 +17,8 @@ const TeamWorkInfo = () => {
             target: data.get("target"),
             strategy: data.get("strategy"),
         })
+
+        window.location.href = "/teamwork"
     }
 
     useEffect(() => {

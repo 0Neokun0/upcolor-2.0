@@ -10,6 +10,7 @@ const TeamWork = () => {
     const [teamId, setTeamId] = useState(null)
     const [team, setTeam] = useState([])
     const [teamMembers, setTeamMembers] = useState([])
+    const [anchorEl, setAnchorEl] = useState(null)
     const [currentZoom, setCurrentZoom] = useState("Days")
     const data = {
         data: [],
@@ -27,8 +28,26 @@ const TeamWork = () => {
             setChatPublish: true,
             setGanttPublish: true,
         })
-        
+
         window.location.reload()
+    }
+
+    const handleGenerateInviteUrl = (e) => {
+        const target = e.currentTarget
+
+        axios.post("teamWork/getInviteURL", {
+            teamWorkId: teamId,
+        })
+            .then((res) => {
+                navigator.clipboard.writeText(res.data)
+                .then(() => {
+                    setAnchorEl(target)
+                })
+            })
+    }
+
+    const handleClose = () => {
+        setAnchorEl(null)
     }
 
     const handleZoomChange = (zoom) => {
@@ -130,8 +149,10 @@ const TeamWork = () => {
                         saveGantt={saveGantt}
 
                         team={team}
-
                         teamMembers={teamMembers}
+                        anchorEl={anchorEl}
+                        handleGenerateInviteUrl={handleGenerateInviteUrl}
+                        handleClose={handleClose}
                     />
                 }
             />
