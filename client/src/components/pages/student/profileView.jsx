@@ -15,7 +15,7 @@ const ProfileView = () => {
             .then((res) => {
                 setProfile(res.data[0])
             })
-    }, [])
+    }, [userId])
 
     return (
         <ProfileLayout
