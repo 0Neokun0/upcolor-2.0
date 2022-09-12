@@ -15,12 +15,12 @@ const CompanySignup = () => {
             token: token,
         })
         .then((res) => {
-            const companyName = res.data
-            if (companyName) {
+            const company = res.data
+            if (company) {
                 setCompanyExist(true)
-                setCompany(companyName)
+                setCompany(company)
             } else {
-                window.location.href = "/"
+                window.location.href = "/company/home"
             }
         })
 
