@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
 import { LandingPage, NotFound, Signin } from "components/pages"
-import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite } from "components/pages/student"
+import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite, CompanyList } from "components/pages/student"
 import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, Recruitment } from "components/pages/company"
 
@@ -141,15 +141,14 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="" element={<LandingPage />} />
+                    <Route path="*" element={<NotFound />} />
 
                     {/* <Route path="student/signup" element={<ReqNoAuth component={<StudentSignup />} />} /> */}
                     {/* <Route path="teacher/signup" element={<ReqNoAuth component={<TeacherSignup />} />} /> */}
                     {/* <Route path="company/signup" element={<ReqNoAuth component={<CompanySignup />} />} /> */}
                     <Route path="signup/student" element={<StudentSignup />} />
                     <Route path="signup/teacher/:token" element={<TeacherSignup />} />
-                    <Route path="signup/teacher/" element={<LandingPage />} />
                     <Route path="signup/company/:token" element={<CompanySignup />} />
-                    <Route path="signup/company/" element={<LandingPage />} />
 
                     {/* <Route path="signin" element={<ReqNoAuth component={<Signin />} />} /> */}
                     <Route path="signin" element={<Signin />} />
@@ -179,8 +178,14 @@ function App() {
 
                     <Route path="profile/edit" element={<ProfileEdit />} />
 
-                    <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} />
-                    <Route path="timeTable/regist" element={<ReqAuthStu component={<RegistTimeTable />} />} />
+                    <Route path="companyList" element={<CompanyList />} />
+
+
+                    <Route path="timeTable" element={<ShowTimeTable />} />
+                    <Route path="timeTable/regist" element={<RegistTimeTable />} />
+
+                    {/* <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} />
+                    <Route path="timeTable/regist" element={<ReqAuthStu component={<RegistTimeTable />} />} /> */}
 
                     <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />
                     <Route path="develop/addLectures" element={<ReqAuthAdm component={<AddLectures />} />} />

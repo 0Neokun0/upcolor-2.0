@@ -168,6 +168,7 @@ router.post("/getTimeTable", async (req, res) => {
 
     const sqlSelectLecturesContent = `
         SELECT
+            lectures_list.lecture_id,
             lectures_list.lecture_name,
             lectures_list.lecture_room,
             lectures_list.lecture_teacher,
@@ -183,10 +184,10 @@ router.post("/getTimeTable", async (req, res) => {
         WHERE
             student_time_table.student_id = ?
     `
-    const lecturesContent = await sql.handleSelect(sqlSelectLecturesContent, userId)
+    const lecturesContent = await sql.handleSelect(sqlSelectLecturesContent, [userId])
 
     if (lecturesContent.length) {
-        req.json(lecturesContent)
+        res.json(lecturesContent)
     } else {
         res.json(404)
     }

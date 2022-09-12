@@ -12,9 +12,19 @@ router.post("/recruitment", async (req, res) => {
         FROM company_profiles
         WHERE user_id = ?
     `
-    const company = await sql.handleSelect(sqlSelectCompany, userId)
+    const company = await sql.handleSelect(sqlSelectCompany, [userId])
 
     res.json(company[0])
+})
+
+router.post("/list" , async (req, res) => {
+    const sqlSelectCompany = `
+        SELECT *
+        FROM company_profiles
+    `
+    const companyList = await sql.handleSelect(sqlSelectCompany, [])
+
+    res.json(companyList)
 })
 
 module.exports = router
