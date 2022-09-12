@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
-import { LandingPage, NotFound, SignIn } from "components/pages"
+import { LandingPage, NotFound, Signin } from "components/pages"
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite } from "components/pages/student"
-import { DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherSignup } from "components/pages/teacher"
+import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, Recruitment } from "components/pages/company"
 
 import { GroupChatLayout } from "components/templates"
@@ -152,7 +152,7 @@ function App() {
                     <Route path="signup/company/" element={<LandingPage />} />
 
                     {/* <Route path="signin" element={<ReqNoAuth component={<Signin />} />} /> */}
-                    <Route path="signIn" element={<SignIn />} />
+                    <Route path="signin" element={<Signin />} />
 
                     <Route path="home" element={<ReqAuthStu component={<StudentHome />} />} >
                         <Route path="" element={<Feed />} />

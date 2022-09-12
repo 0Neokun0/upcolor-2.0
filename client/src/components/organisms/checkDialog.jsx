@@ -1,4 +1,4 @@
-import { Dialog, DialogActions, DialogTitle } from "@mui/material"
+import { Box, Dialog, DialogActions, DialogTitle } from "@mui/material"
 
 const CheckDialog = (props) => {
     return (
@@ -8,7 +8,15 @@ const CheckDialog = (props) => {
             </DialogTitle>
 
             <DialogActions>
-                {props.buttons}
+                {
+                    props.buttons.map((button, index) => {
+                        return (
+                            <Box key={index}>
+                                {button}
+                            </Box>
+                        )
+                    })
+                }
             </DialogActions>
         </Dialog>
     )

@@ -4,12 +4,13 @@ import SaveIcon from '@material-ui/icons/Save'
 const SaveButton = (props) => {
     return (
         <Button
+            key={props.key}
             variant="contained"
             color="primary"
             size={props.size}
             startIcon={<SaveIcon />}
             sx={props.style}
-            onClick={props.click}
+            onClick={props.submit}
         >
             保存
         </Button>
