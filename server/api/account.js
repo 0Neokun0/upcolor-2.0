@@ -68,7 +68,7 @@ router.post("/signup", async (req, res) => {
         const user = await sql.handleInsert(sqlInsertUser, [name, email, password, userType])
 
         const userId = user.insertId
-        const token = jwt.sign({userId: userId}, config.jwt.secret, config.jwt.options)
+        const token = jwt.sign({ userId: userId }, config.jwt.secret, config.jwt.options)
 
         const date = new Date()
         const expires = new Date(date.getTime() + 864000000)
@@ -78,7 +78,7 @@ router.post("/signup", async (req, res) => {
             path: "/",
             httpOnly: true,
         })
-        
+
         if (userType === 1) {
             const course = req.body.course
             const sqlInsertStudent = `
@@ -94,7 +94,7 @@ router.post("/signup", async (req, res) => {
                 )
             `
             await sql.handleInsert(sqlInsertStudent, [userId, course])
-            res.json({type_name: "STUDENT"})
+            res.json({ type_name: "STUDENT" })
         } else if (userType === 2) {
             const sqlInsertTeacher = `
                 INSERT INTO teacher_profiles(
@@ -105,7 +105,7 @@ router.post("/signup", async (req, res) => {
                 )
             `
             await sql.handleInsert(sqlInsertTeacher, [userId])
-            res.json({type_name: "TEACEHR"})
+            res.json({ type_name: "TEACEHR" })
         } else if (userType === 3) {
             const company = req.body.company
             const sqlInsertCompany = `
@@ -119,7 +119,7 @@ router.post("/signup", async (req, res) => {
                 )
             `
             await sql.handleInsert(sqlInsertCompany, [userId, company])
-            res.json({type_name: "COMPANY"})
+            res.json({ type_name: "COMPANY" })
         } else if (userType === 4) {
             const sqlInsertTeacher = `
                 INSERT INTO teacher_profiles(
@@ -130,7 +130,7 @@ router.post("/signup", async (req, res) => {
                 )
             `
             await sql.handleInsert(sqlInsertTeacher, [userId])
-            res.json({type_name: "ADMIN"})
+            res.json({ type_name: "ADMIN" })
         }
     } else {
         res.json(false)
@@ -155,11 +155,11 @@ router.post("/signin", async (req, res) => {
             user_password = ?
     `
     const user = await sql.handleSelect(sqlSelectUserId, [email, password])
-    
+
     if (user.length) {
         const userId = user[0]["user_id"]
-        
-        const token = jwt.sign({userId: userId}, config.jwt.secret, config.jwt.options)
+
+        const token = jwt.sign({ userId: userId }, config.jwt.secret, config.jwt.options)
         const date = new Date()
         const expires = new Date(date.getTime() + 864000000)
 
@@ -190,21 +190,27 @@ router.post("/getProfile", async (req, res) => {
 
     const sqlSelectUser = `
         SELECT
+            user_profiles.user_id,
             user_profiles.user_name,
             user_profiles.user_mail,
             user_profiles.user_introduction,
+            student_profiles.student_course_id,
             student_profiles.student_year,
             student_profiles.student_programming_languages,
             student_profiles.student_tools_and_framework,
             student_profiles.student_country_language,
             student_profiles.student_qualifications,
             student_profiles.student_github,
-            student_profiles.is_colaborating
+            student_profiles.is_colaborating,
+            courses.course_name
         FROM
             user_profiles
         INNER JOIN
             student_profiles ON
             user_profiles.user_id = student_profiles.user_id
+        INNER JOIN
+            courses ON
+            student_profiles.student_course_id = courses.course_id
         WHERE
             user_profiles.user_id = ?
     `
@@ -229,12 +235,16 @@ router.post("/getStudentProfile", async (req, res) => {
             student_profiles.student_country_language,
             student_profiles.student_qualifications,
             student_profiles.student_github,
-            student_profiles.is_colaborating
+            student_profiles.is_colaborating,
+            courses.course_name
         FROM
             user_profiles
         INNER JOIN
             student_profiles ON
             user_profiles.user_id = student_profiles.user_id
+        INNER JOIN
+            courses ON
+            student_profiles.student_course_id = courses.course_id
         WHERE
             user_profiles.user_id = ?
     `
@@ -242,6 +252,36 @@ router.post("/getStudentProfile", async (req, res) => {
     const profile = await sql.handleSelect(sqlSelectUser, [userId])
 
     res.json(profile)
+})
+
+router.post("/updateProfile", async (req, res) => {
+    const userId = get.userId(req)
+    const introduction = req.body.introduction
+    const qualifications = req.body.qualifications
+    const programming = req.body.programming
+    const github = req.body.github
+
+    const sqlUpdateUserProfile = `
+    UPDATE
+        user_profiles
+    SET
+        user_profiles.user_introduction = ?
+    WHERE
+        user_profiles.user_id = ?
+    `
+    const sqlUpdateStudentProfile = `
+        UPDATE
+            student_profiles
+        SET
+            student_profiles.student_qualifications = ?,
+            student_profiles.student_programming_languages = ?,
+            student_profiles.student_github = ?
+        WHERE
+            student_profiles.user_id = ?
+    `
+
+    await sql.handleUpdate(sqlUpdateUserProfile, [introduction, userId])
+    await sql.handleUpdate(sqlUpdateStudentProfile, [qualifications, programming, github, userId])
 })
 
 // router.post("/studentProfileEdit", async (req, res) => {
@@ -255,7 +295,7 @@ router.post("/getStudentProfile", async (req, res) => {
 //     const ToolsAndFramework = req.body.ToolsAndFrameword
 //     const qualification = req.body.qualification
 //     const github = req.body.githubLink
-    
+
 // })
 
 module.exports = router

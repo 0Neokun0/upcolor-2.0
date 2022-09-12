@@ -69,7 +69,7 @@ const LandingPageCard = (props) => {
 
                 <Button
                     variant="outlined"
-                    href="signin"
+                    href="/signin"
                 >
                     サインイン
                 </Button>
