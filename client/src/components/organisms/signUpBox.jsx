@@ -112,6 +112,34 @@ const SignUpBox = (props) => {
                     </FormControl>
                 }
 
+                <FormControl
+                    margin="normal"
+                    size="small"
+                    fullWidth
+                >
+                    <InputLabel>
+                        学年
+                    </InputLabel>
+
+                    <Select
+                        label="学年"
+                        name="year"
+                    >
+                        {
+                            props.years.map((year) => {
+                                return (
+                                    <MenuItem
+                                        key={year["value"]}
+                                        value={year["value"]}
+                                    >
+                                        {year["item"]}
+                                    </MenuItem>
+                                )
+                            })
+                        }
+                    </Select>
+                </FormControl>
+
                 <Button
                     type="submit"
                     fullWidth

@@ -1,8 +1,8 @@
 import { Box, Button, TextField } from "@mui/material"
 import { ProfileInput, ProfileSelect, ProfileSelectChip } from "components/molecules"
 
-
 const ProfileForm = (props) => {
+    console.log(props.profile)
     return (
         props.profile.map((info, index) => {
             return (
@@ -62,7 +62,7 @@ const ProfileForm = (props) => {
                         title="自己紹介・自己アピール"
                     >
                         <TextField
-                            label="ユーザー名"
+                            label="自己紹介・自己アピール"
                             name="introduction"
                             rows={3}
                             fullWidth

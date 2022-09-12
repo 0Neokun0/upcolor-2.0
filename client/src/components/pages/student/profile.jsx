@@ -15,7 +15,6 @@ const Profile = () => {
     useEffect(() => {
         axios.post("/account/getProfile")
             .then((res) => {
-                console.log(res.data[0])
                 setProfile(res.data[0])
                 setProfileLists([
                     {

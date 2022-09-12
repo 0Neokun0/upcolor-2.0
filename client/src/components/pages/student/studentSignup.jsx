@@ -8,6 +8,25 @@ const SignUp = () => {
     const [course, setCourse] = useState("")
     const [courseList, setCourseList] = useState([])
 
+    const years = [
+        {
+            value: 1,
+            item: "1年",
+        },
+        {
+            value: 2,
+            item: "2年",
+        },
+        {
+            value: 3,
+            item: "3年",
+        },
+        {
+            value: 4,
+            item: "4年",
+        },
+    ]
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setCheckExist(false)
@@ -19,6 +38,7 @@ const SignUp = () => {
             email: data.get('email'),
             password: data.get('password'),
             course: data.get('course'),
+            year: data.get("year"),
             userType: 1,
         })
             .then((res) => {
@@ -50,6 +70,7 @@ const SignUp = () => {
                     checkExist={checkExist}
                     course={course}
                     courseList={courseList}
+                    years={years}
                 />
             }
         />

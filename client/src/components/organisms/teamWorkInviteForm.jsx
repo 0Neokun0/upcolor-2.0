@@ -1,4 +1,4 @@
-import { Box, Button, Card, Typography } from "@mui/material"
+import { Alert, Box, Button, Card, Typography } from "@mui/material"
 import logo from "components/atoms/logo/upcolor_logo.svg"
 
 const TeamWorkInviteForm = (props) => {
@@ -41,6 +41,7 @@ const TeamWorkInviteForm = (props) => {
                             <Button
                                 variant="contained"
                                 size="small"
+                                onClick={props.teamJoinSubmit}
                                 fullWidth
                                 sx={{
                                     mt: 3,
@@ -51,6 +52,18 @@ const TeamWorkInviteForm = (props) => {
                         </Box>
                         :
                         "すでにチームに参加しているか、チームが存在しません。"
+                }
+
+                {
+                    props.joinCheck
+                    &&
+                    <Alert
+                        severity="error"
+                        sx={{
+                            mt: 2,
+                        }}>
+                        チームに参加できませんでした
+                    </Alert>
                 }
             </Box>
         </Card>

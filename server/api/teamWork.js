@@ -457,4 +457,28 @@ router.post("/getTeamMembers", async (req, res) => {
     res.json(members)
 })
 
+router.post("/updateJoinTeam", async (req, res) => {
+    const userId = get.userId(req)
+    const token = req.body.token
+
+    try {
+        const teamWorkId = jwt.decode(token, config.jwt.secret)["teamWorkId"]
+
+        const sqlUpdateJoinedTeam = `
+            UPDATE
+                student_profiles
+            SET
+                is_colaborating = ?
+            WHERE
+                user_id = ?
+        `
+
+        await sql.handleUpdate(sqlUpdateJoinedTeam, [teamWorkId, userId])
+
+        res.json(true)
+    } catch (error) {
+        res.json(false)
+    }
+})
+
 module.exports = router
