@@ -58,28 +58,6 @@ const ProfileForm = (props) => {
                         />
                     </ProfileInput>
 
-                    {/* <ProfileInput
-                        title="専攻情報"
-                    >
-                        <ProfileSelect
-                            label="専攻"
-                            value={info["student_course_id"]}
-                            onChange={props["handleCourse"]}
-                            items={props["courses"]}
-                            id="course_id"
-                            column="course_name"
-                        />
-
-                        <ProfileSelect
-                            label="学年"
-                            value={info["student_year"]}
-                            onChange={props["handleYear"]}
-                            items={props.years}
-                            id="value"
-                            column="item"
-                        />
-                    </ProfileInput> */}
-
                     <ProfileInput
                         title="自己紹介・自己アピール"
                     >

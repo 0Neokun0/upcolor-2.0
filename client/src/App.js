@@ -5,7 +5,7 @@ import { Box } from "@mui/material"
 
 import { LandingPage, NotFound, Signin } from "components/pages"
 
-import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite, CompanyList } from "components/pages/student"
+import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite, CompanyList, GroupInvite } from "components/pages/student"
 import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, Recruitment } from "components/pages/company"
 
@@ -164,8 +164,13 @@ function App() {
                         <Route path="create" element={<GroupCreateLayout />} />
                     </Route>
 
+                    <Route path="groupInvite">
+                        <Route path="" element={<NotFound />} />
+                        <Route path=":inviteToken" element={<GroupInvite />} />
+                    </Route>
+
                     <Route path="teamWork" element={<TeamWork />} />
-                    <Route path="TeamList" element={<TeamList />} />
+                    <Route path="teamList" element={<TeamList />} />
                     <Route path="teamWorkInfo" element={<TeamWorkInfo />} />
                     <Route path="teamWorkInvite">
                         <Route path="" element={<NotFound />} />
