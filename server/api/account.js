@@ -81,19 +81,23 @@ router.post("/signup", async (req, res) => {
 
         if (userType === 1) {
             const course = req.body.course
+            const year = req.body.year
+
             const sqlInsertStudent = `
                 INSERT INTO student_profiles(
                     user_id,
                     student_course_id,
+                    student_year,
                     is_colaborating
                 )
                 VALUES(
                     ?,
                     ?,
+                    ?,
                     0
                 )
             `
-            await sql.handleInsert(sqlInsertStudent, [userId, course])
+            await sql.handleInsert(sqlInsertStudent, [userId, course, year])
             res.json({ type_name: "STUDENT" })
         } else if (userType === 2) {
             const sqlInsertTeacher = `
@@ -256,46 +260,46 @@ router.post("/getStudentProfile", async (req, res) => {
 
 router.post("/updateProfile", async (req, res) => {
     const userId = get.userId(req)
+
+    const name = req.body.name
+    const mail = req.body.mail
     const introduction = req.body.introduction
+
+    const course = req.body.course
+    const year = req.body.year
     const qualifications = req.body.qualifications
-    const programming = req.body.programming
+    const programming_languages = req.body.programming_languages
+    const tools_and_framework = req.body.tools_and_framework
+    const country_language = req.body.country_language
     const github = req.body.github
 
     const sqlUpdateUserProfile = `
     UPDATE
         user_profiles
     SET
-        user_profiles.user_introduction = ?
+        user_name = ?,
+        user_mail = ?,
+        user_introduction = ?
     WHERE
-        user_profiles.user_id = ?
+        user_id = ?
     `
     const sqlUpdateStudentProfile = `
         UPDATE
             student_profiles
         SET
-            student_profiles.student_qualifications = ?,
-            student_profiles.student_programming_languages = ?,
-            student_profiles.student_github = ?
+            student_course_id = ?,
+            student_year = ?,
+            student_qualifications = ?,
+            student_programming_languages = ?,
+            student_tools_and_framework = ?,
+            student_country_language = ?,
+            student_github = ?
         WHERE
-            student_profiles.user_id = ?
+            user_id = ?
     `
 
-    await sql.handleUpdate(sqlUpdateUserProfile, [introduction, userId])
-    await sql.handleUpdate(sqlUpdateStudentProfile, [qualifications, programming, github, userId])
+    await sql.handleUpdate(sqlUpdateUserProfile, [name, mail, introduction, userId])
+    await sql.handleUpdate(sqlUpdateStudentProfile, [course, year, qualifications, programming_languages, tools_and_framework, country_language, github, userId])
 })
-
-// router.post("/studentProfileEdit", async (req, res) => {
-//     const userId = get.userId(req)
-//     const name = req.body.name
-//     const email = req.body.email
-//     const course = req.body.course
-//     const year = req.body.studentYear
-//     const selfIntroduction = req.body.studentSelfIntroduction
-//     const programmingLanguage = req.body.programmingLanguage
-//     const ToolsAndFramework = req.body.ToolsAndFrameword
-//     const qualification = req.body.qualification
-//     const github = req.body.githubLink
-
-// })
 
 module.exports = router

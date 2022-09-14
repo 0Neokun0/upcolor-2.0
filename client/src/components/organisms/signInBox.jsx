@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Paper, TextField, Typography } from "@mui/material"
+import { Alert, Box, Button, Paper, TextField, Typography, Link as Mlink } from "@mui/material"
 import { Link } from "react-router-dom"
 import logo from "components/atoms/logo/upcolor_logo.svg"
 
@@ -80,7 +80,7 @@ const SignInBox = (props) => {
                 }
             </Box>
 
-            <Box
+            <Mlink
                 component={Link}
                 to="/signup/student"
                 sx={{
@@ -91,7 +91,7 @@ const SignInBox = (props) => {
                 }}
             >
                 アカウント作成
-            </Box>
+            </Mlink>
         </Paper>
     );
 }

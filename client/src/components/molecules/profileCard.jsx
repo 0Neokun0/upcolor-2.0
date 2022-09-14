@@ -13,7 +13,7 @@ const ProfileCard = (props) => {
                 borderRadius: "25px",
                 cursor: "pointer",
                 "&:hover": {
-                    backgroundColor: "#eeeeee",
+                    backgroundColor: grey[200],
                 },
             }}
         >
@@ -66,13 +66,13 @@ const ProfileCard = (props) => {
                     <Button
                         startIcon={<AccountBoxRoundedIcon />}
                     >
-                        ボタン1
+                        {props.button1}
                     </Button>
 
                     <Button
                         endIcon={<SendRoundedIcon />}
                     >
-                        ボタン2
+                        {props.button2}
                     </Button>
                 </ButtonGroup>
             </Box>

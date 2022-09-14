@@ -39,7 +39,7 @@ const TeamWork = () => {
             teamWorkId: teamId,
         })
             .then((res) => {
-                navigator.clipboard.writeText(res.data)
+                navigator.clipboard.writeText("http://localhost:3000/teamworkinvite/" + res.data)
                 .then(() => {
                     setAnchorEl(target)
                 })

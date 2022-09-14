@@ -1,7 +1,6 @@
 import { Paper, Typography } from "@mui/material"
 
 const ProfileInput = (props) => {
-    console.log(props)
     return (
         <Paper
             sx={{

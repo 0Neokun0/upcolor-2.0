@@ -56,9 +56,15 @@ const ProfileEdit = () => {
         const data = new FormData(e.currentTarget)
 
         axios.post("/account/updateProfile", {
-            introduction: data.get("introduction"),
+            name: data.get("name"),
+            mail: data.get("mail"),
+            course: course,
+            year: year,
             qualifications: data.get("qualifications"),
-            programming: data.get("programming"),
+            programming_languages: data.get("programming_languages"),
+            tools_and_framework: data.get("student_tools_and_framework"),
+            country_language: data.get("country_language"),
+            introduction: data.get("introduction"),
             github: data.get("github"),
         })
 
@@ -73,7 +79,6 @@ const ProfileEdit = () => {
 
         axios.post("/course/course")
             .then((res) => {
-                console.log(res.data)
                 setCourses(res.data)
             })
     }, [])
@@ -85,9 +90,8 @@ const ProfileEdit = () => {
             component={
                 <ProfileForm
                     profile={profile}
-                    courses={courses}
-
                     course={course}
+                    courses={courses}
                     year={year}
                     years={years}
                     handleCourse={handleCourse}

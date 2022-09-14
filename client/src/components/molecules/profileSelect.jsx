@@ -1,30 +1,32 @@
-import { FormControl, InputLabel, NativeSelect } from "@mui/material"
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material"
 
 const ProfileSelect = (props) => {
     return (
+        props["value"]
+        &&
         <FormControl fullWidth>
             <InputLabel>
                 {props["label"]}
             </InputLabel>
 
-            <NativeSelect
+            <Select
                 label={props["label"]}
-                value={props["value"]}
                 onChange={props["onChange"]}
+                defaultValue={props["value"]}
             >
                 {
                     props.items.map((item) => {
                         return (
-                            <option
-                                key={item[props.id]}
-                                value={item[props.id]}
+                            <MenuItem
+                                key={item[props["id"]]}
+                                value={item[props["id"]]}
                             >
                                 {item[props.column]}
-                            </option>
+                            </MenuItem>
                         )
                     })
                 }
-            </NativeSelect>
+            </Select>
         </FormControl>
     );
 }
