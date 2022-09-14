@@ -1,6 +1,5 @@
-import { Box } from "@mui/material"
 import { SaveButton, CancelButton } from "components/molecules"
-import { TimeTableGrid, CheckDialog } from "components/organisms"
+import { TimeTableLayout } from "components/templates"
 import axios from "axios"
 import { useEffect, useState } from "react"
 
@@ -65,7 +64,7 @@ const RegistTimeTable = () => {
         setOverWrite(false)
     }
 
-    const toggleOverWrite = () => {
+    const overWriteSubmit = () => {
         toggleAlertClose()
         axios.post("/timeTable/overWriteTimeTable", {timeTable: registTimeTable})
         .then((res) => {
@@ -77,47 +76,34 @@ const RegistTimeTable = () => {
     buttons.push(
         <CancelButton
             size={"small"}
-            click={toggleAlertClose}
+            close={toggleAlertClose}
         />
     )
     buttons.push(
         <SaveButton
             size={"small"}
-            click={toggleOverWrite}
+            submit={overWriteSubmit}
         />
     )
 
     return (
-        <Box
-            sx={{
-                width: "80%",
-                minWidth: "800px",
-                pt: 2,
-                mx: "auto",
+        <TimeTableLayout
+            viewTimeTable={viewTimeTable}
+            days={days}
+            periods={periods}
+            change={handleChange}
+
+            size={"large"}
+            style={{
+                m: 2,
             }}
-        >
-            <TimeTableGrid
-                viewTimeTable={viewTimeTable}
-                days={days}
-                periods={periods}
-                change={handleChange}
-            />
+            submit={handleSubmit}
 
-            <SaveButton
-                size={"large"}
-                style={{
-                    m: 2,
-                }}
-                click={handleSubmit}
-            />
-
-            <CheckDialog
-                openFlg={overWrite}
-                close={toggleAlertClose}
-                title={"上書きしますか？"}
-                buttons={buttons}
-            />
-        </Box>
+            openFlg={overWrite}
+            close={toggleAlertClose}
+            title={"上書きしますか？"}
+            buttons={buttons}
+        />
     )
 }
 
