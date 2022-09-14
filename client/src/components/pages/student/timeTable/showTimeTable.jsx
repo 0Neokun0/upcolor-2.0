@@ -6,7 +6,7 @@ const ShowTimeTable = () => {
     const [timeTable, setTimeTable] = useState([])
     const [timeTableId, setTimeTableId] = useState([])
     const [lecture, setLecture] = useState([])
-    const [dialog, setDialog] = useState(-1)
+    const [dialog, setDialog] = useState(false)
 
     const days = ["月", "火", "水", "木", "金"]
     const periods = ["1", "2", "3", "4", "5"]
@@ -42,7 +42,7 @@ const ShowTimeTable = () => {
     }
 
     const handleCloseToggle = () => {
-        setDialog(-1)
+        setDialog(false)
     }
 
     return (

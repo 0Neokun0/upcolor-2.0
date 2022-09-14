@@ -3,7 +3,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 const ClassDetailDialog = (props) => {
     return (
         <Dialog
-            open={Boolean(props.dialog !== -1)}
+            open={Boolean(props.dialog !== false)}
             onClose={props.close}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
