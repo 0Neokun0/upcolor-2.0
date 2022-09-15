@@ -105,7 +105,6 @@ const TeamWork = () => {
     const saveGantt = () => {
         const tasks = []
         const links = gantt.getLinks()
-
         gantt.eachTask((task) => {
             tasks.push(task)
         })

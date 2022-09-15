@@ -1,4 +1,3 @@
-const { response } = require("express")
 const express = require("express")
 const router = express.Router()
 
@@ -12,49 +11,33 @@ router.use((req, res, next) => {
     next()
 })
 
-/**
- * グループ参加
- * request: token
- * response: Boolean
- */
-router.post("/joinGroup", async (req, res) => {
-    const userId = get.userId(req)
-    const token = req.body.token
+router.post("/getGroup", async (req, res) => {
+    const inviteToken = req.body.inviteToken
 
     try {
-        const groupId = jwt.decode(token, config.jwt.secret)["groupId"]
+        jwt.verify(inviteToken, config.jwt.secret, async (err, res) => {
+            if (err) throw err
 
-        const sqlSelectJoinedGroup = `
-            SELECT
-                ID
-            FROM
-                users_joined_group
-            WHERE
-                users_joined_group.group_id = ? AND
-                users_joined_group.joined_user_id = ?
-        `
+            const groupId = res["groupId"]
 
-        const count = await sql.handleSelect(sqlSelectJoinedGroup, [groupId, userId])
-
-        if (!count.length) {
-            const sqlInsertJoinedGroup = `
-                INSERT INTO users_joined_group (
+            const sqlSelectGroup = `
+                SELECT
                     group_id,
-                    joined_user_id
-                )
-                VALUES (
-                    ?,
-                    ?
-                )
+                    group_name
+                FROM
+                    group_list
+                WHERE
+                    group_id = ?
             `
+            const groupList = await sql.handleSelect(sqlSelectGroup, [groupId])
 
-            await sql.handleInsert(sqlInsertJoinedGroup, [groupId, userId])
-
-            res.json(true)
-        } else {
-            res.json(false)
-        }
-    } catch (error) {
+            if (groupList.length) {
+                res.json(groupList)
+            } else {
+                res.json(false)
+            } 
+        })
+    } catch (err) {
         res.json(false)
     }
 })
@@ -90,13 +73,42 @@ router.post("/addGroup", async (req, res) => {
     await sql.handleInsert(sqlInsertJoinedGroup, [groupId, userId])
 })
 
+router.post("/joinGroup", async (req, res) => {
+    const userId = get.userId(req)
+    const groupId = req.body.group_id
+
+    const sqlSelectJoinedGroup = `
+        SELECT
+            group_id
+        FROM
+            users_joined_group
+        WHERE
+            group_id = ? AND
+            joined_user_id = ?
+    `
+    const joinedGroup = await sql.handleSelect(sqlSelectJoinedGroup, [groupId, userId])
+
+    if (!joinedGroup.length) {
+        const sqlInsertJoinGroup = `
+            INSERT INTO users_joined_group(
+                group_id,
+                joined_user_id
+            )
+            VALUES(
+                ?,
+                ?
+            )
+        `
+        await sql.handleInsert(sqlInsertJoinGroup, [groupId, userId])
+    }
+})
+
 router.post("/getJoinedGroupList", async (req, res) => {
     const userId = get.userId(req)
 
     const sqlSelectJoinGroup = `
         SELECT
             groups_list.group_id,
-            groups_list.created_user_id,
             groups_list.group_name
         FROM
             users_joined_group
@@ -108,10 +120,7 @@ router.post("/getJoinedGroupList", async (req, res) => {
     `
     const groupsList = await sql.handleSelect(sqlSelectJoinGroup, [userId])
 
-    res.json({
-        groupsList: groupsList,
-        userId: userId,
-    })
+    res.json(groupsList)
 })
 
 router.post("/sendChat", async (req, res) => {
@@ -170,38 +179,12 @@ router.post("/getGroupChat", async (req, res) => {
     res.json(groupChat)
 })
 
-/**
- * 招待url生成
- * request: groupId
- * response: token
- */
 router.post("/getInviteUrl", (req, res) => {
     const groupId = req.body.groupId
 
-    const token = jwt.sign({ groupId: groupId }, config.jwt.secret, config.jwt.options)
+    const token = jwt.sign({groupId: groupId}, config.jwt.secret, config.jwt.options)
 
     res.json(token)
-})
-
-/**
- * グループ退出
- * request: groupId
- * response: none
- */
-router.post("/deleteJoinedGroup", async (req, res) => {
-    const userId = get.userId(req)
-    const groupId = req.body.groupId
-
-    const sqlDeleteJoinedGroup = `
-        DELETE
-        FROM
-            users_joined_group
-        WHERE
-            group_id = ? AND
-            joined_user_id = ?
-    `
-
-    await sql.handleDelete(sqlDeleteJoinedGroup, [groupId, userId])
 })
 
 module.exports = router
