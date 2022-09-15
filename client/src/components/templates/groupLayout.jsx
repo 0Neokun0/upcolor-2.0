@@ -30,10 +30,13 @@ const GroupLayout = (props) => {
                 >
                     <Outlet
                         context={{
+                            userId: props.userId,
                             groups: props.groups,
                             selectGroupId: props.selectGroupId,
                             setSelectGroupId: props.setSelectGroupId,
                             handleCreateSubmit: props.handleCreateSubmit,
+                            handleGenerateInviteUrl: props.handleGenerateInviteUrl,
+                            handleLeaveGroup: props.handleLeaveGroup,
 
                             chats: props.chats,
                             handleSendChat: props.handleSendChat,

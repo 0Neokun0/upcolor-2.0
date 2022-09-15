@@ -2,9 +2,9 @@ import { Box, Button, TextField } from "@mui/material"
 import { ProfileInput, ProfileSelect, ProfileSelectChip } from "components/molecules"
 
 const ProfileForm = (props) => {
-    console.log(props.profile)
     return (
         props.profile.map((info, index) => {
+            console.log(info)
             return (
                 <Box
                     key={index}
@@ -41,20 +41,20 @@ const ProfileForm = (props) => {
                     >
                         <ProfileSelect
                             label="専攻"
-                            value={info["student_course_id"]}
-                            onChange={props["handleCourse"]}
-                            items={props["courses"]}
-                            id="course_id"
-                            column="course_name"
+                            defaultValue={info["student_course_id"]}
+                            name="course"
+                            element={props["courses"]}
+                            valueId="course_id"
+                            valueColumn="course_name"
                         />
 
                         <ProfileSelect
                             label="学年"
-                            value={info["student_year"]}
-                            onChange={props["handleYear"]}
-                            items={props.years}
-                            id="value"
-                            column="item"
+                            defaultValue={info["student_year"]}
+                            name="year"
+                            element={props["years"]}
+                            valueId="value"
+                            valueColumn="item"
                         />
                     </ProfileInput>
 

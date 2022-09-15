@@ -4,9 +4,12 @@ import { Box, Grid, IconButton, TextField } from "@mui/material"
 import SendRoundedIcon from '@mui/icons-material/SendRounded'
 
 const GroupChatLayout = () => {
+    const userId = useOutletContext()["userId"]
     const groups = useOutletContext()["groups"]
     const selectGroupId = useOutletContext()["selectGroupId"]
     const setSelectGroupId = useOutletContext()["setSelectGroupId"]
+    const handleGenerateInviteUrl = useOutletContext()["handleGenerateInviteUrl"]
+    const handleLeaveGroup = useOutletContext()["handleLeaveGroup"]
 
     const chats = useOutletContext()["chats"]
     const handleSendChat = useOutletContext()["handleSendChat"]
@@ -28,9 +31,13 @@ const GroupChatLayout = () => {
                 }}
             >
                 <GroupList
+                    userId={userId}
                     groups={groups}
                     selectGroupId={selectGroupId}
                     setSelectGroupId={setSelectGroupId}
+
+                    handleGenerateInviteUrl={handleGenerateInviteUrl}
+                    handleLeaveGroup={handleLeaveGroup}
                 />
             </Grid>
 
