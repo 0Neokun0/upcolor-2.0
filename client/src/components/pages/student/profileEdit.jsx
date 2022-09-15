@@ -7,9 +7,6 @@ const ProfileEdit = () => {
     const [profile, setProfile] = useState([])
     const [courses, setCourses] = useState([])
 
-    const [course, setCourse] = useState("")
-    const [year, setYear] = useState("")
-
     const years = [
         {
             value: 1,
@@ -43,13 +40,6 @@ const ProfileEdit = () => {
         "Ruby",
     ]
 
-    const handleCourse = (e) => {
-        setCourse(e.target.value)
-    }
-    const handleYear = (e) => {
-        setYear(e.target.value)
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -58,8 +48,8 @@ const ProfileEdit = () => {
         axios.post("/account/updateProfile", {
             name: data.get("name"),
             mail: data.get("mail"),
-            course: course,
-            year: year,
+            course: data.get("course"),
+            year: data.get("year"),
             qualifications: data.get("qualifications"),
             programming_languages: data.get("programming_languages"),
             tools_and_framework: data.get("student_tools_and_framework"),
@@ -90,13 +80,8 @@ const ProfileEdit = () => {
             component={
                 <ProfileForm
                     profile={profile}
-                    course={course}
                     courses={courses}
-                    year={year}
                     years={years}
-                    handleCourse={handleCourse}
-                    handleYear={handleYear}
-
                     programs={programs}
 
                     handleSubmit={handleSubmit}
