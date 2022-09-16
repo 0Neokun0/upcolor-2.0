@@ -34,16 +34,11 @@ router.post("/list" , async (req, res) => {
         SELECT prefecture_id, prefecture_name
         FROM prefectures
     `
-    const sqlSelectRegion = `
-        SELECT region_id, region_name
-        FROM regions
-    `
 
     const companies = await sql.handleSelect(sqlSelectCompany, [])
     const occupations = await sql.handleSelect(sqlSelectOccupation, [])
     const courses = await sql.handleSelect(sqlSelectCourse, [])
     const prefectures = await sql.handleSelect(sqlSelectPrefecture, [])
-    const regions = await sql.handleSelect(sqlSelectRegion, [])
 
     const list = [
         {
@@ -51,7 +46,6 @@ router.post("/list" , async (req, res) => {
             occupation: occupations,
             course: courses,
             prefecture: prefectures,
-            region: regions,
         }
     ]
 

@@ -5,7 +5,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 import { Box, Collapse, List, ListItem, ListItemIcon, ListItemText, ToggleButton, ToggleButtonGroup } from "@mui/material"
 import { useState } from 'react'
 
-const ListOccupation = (props) => {
+const SearchEntry = (props) => {
     const [open, setOpen] = useState(false)
 
     const handleClick = () => {
@@ -37,7 +37,7 @@ const ListOccupation = (props) => {
                         onChange={handleFormat}
                         sx={{
                             width: "100%",
-                            maxHeight: "65vh",
+                            maxHeight: "50vh",
                             overflowY: "scroll",
                         }}
                     >
@@ -60,4 +60,4 @@ const ListOccupation = (props) => {
     )
 }
 
-export default ListOccupation
+export default SearchEntry

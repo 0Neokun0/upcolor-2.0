@@ -1,7 +1,5 @@
 import { Avatar, Box, Card, Typography } from "@mui/material"
 import { blue, grey } from "@mui/material/colors"
-// import AccountBoxRoundedIcon from '@mui/icons-material/AccountBoxRounded'
-// import SendRoundedIcon from '@mui/icons-material/SendRounded'
 
 const CompanyCard = (props) => {
     return (
@@ -60,7 +58,7 @@ const CompanyCard = (props) => {
                 </Box>
             </Box>
         </Card>
-    );
+    )
 }
 
 export default CompanyCard

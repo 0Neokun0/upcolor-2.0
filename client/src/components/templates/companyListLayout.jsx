@@ -1,12 +1,23 @@
-import { CompanyGrid } from "components/organisms"
+import { Container, Stack } from "@mui/material"
+import { CompanyGrid, CompanySearch } from "components/organisms"
 
 const CompanyListLayout = (props) => {
     return (
-        <CompanyGrid
-            companies={props.companies}
-            searchList={props.searchList}
-            regions={props.regions}
-        />
+        <Container
+            maxWidth="xl"
+        >
+            <Stack
+                direction="row"
+                spacing={2}
+            >
+                <CompanySearch
+                    searchList={props.searchList}
+                />
+                <CompanyGrid
+                    companies={props.companies}
+                />
+            </Stack>
+        </Container>
     )
 }
 
