@@ -75,7 +75,7 @@ const LandingPageCard = (props) => {
                 </Button>
             </Box>
         </Paper>
-    );
+    )
 }
 
-export default LandingPageCard;
+export default LandingPageCard
