@@ -1,32 +1,42 @@
-import * as React from 'react';
+import Box from '@mui/material/Box'
+import Collapse from '@mui/material/Collapse'
+import IconButton from '@mui/material/IconButton'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Typography from '@mui/material/Typography'
+import Paper from '@mui/material/Paper'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+import { Stack, styled } from '@mui/material'
+import { useState } from 'react'
 
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+const CompanyArticleBox = styled(Box)({
+  border: '1px solid black',
+  margin: '1rem',
+  padding: '2rem 2rem',
+  textAlign: 'center',
+})
 
+const CompanyImages = {
+  companyArticleImage : "https://s7d1.scene7.com/is/image/dxc/Konica-IMG_0751-promocard?$landscape-x4_desktop$",
+  
+}
 function createData(name) {
   return {
-    name,
-
-  };
+    name
+  }
 }
 
 function Row(props) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
+  const { row } = props
+  const [open, setOpen] = useState(false)
 
   return (
-    <React.Fragment>
+    <>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
         <TableCell>
           <IconButton
@@ -42,35 +52,25 @@ function Row(props) {
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 2, paddingTop: 2 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                Item
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-
-                </TableHead>
-
-              </Table>
-            </Box>
+            <Stack direction="row" spacing={3} justifyContent="flex-start">
+              <CompanyArticleBox flex={1}><Box><img  width={100} height={70} src={CompanyImages.companyArticleImage}></img></Box></CompanyArticleBox>
+              <CompanyArticleBox flex={7}></CompanyArticleBox>
+            </Stack>
           </Collapse>
         </TableCell>
       </TableRow>
-    </React.Fragment>
-  );
+    </>
+  )
 }
-
 
 const rows = [
   createData('会社紹介記事'),
   createData('プロフィール'),
   createData('本社所在地'),
   createData('事業内容'),
-
-
-];
+]
 
 const CompanyDetails = () => {
   return (
@@ -79,8 +79,11 @@ const CompanyDetails = () => {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell ><Typography variant='h5'>会社基本情報と会社理念についての情報</Typography></TableCell>
-
+            <TableCell>
+              <Typography variant="h5">
+                会社基本情報と会社理念についての情報
+              </Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -90,6 +93,6 @@ const CompanyDetails = () => {
         </TableBody>
       </Table>
     </TableContainer>
-  );
+  )
 }
 export default CompanyDetails
