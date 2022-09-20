@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom"
-import { Box, List, ListItem, ListItemButton, ListItemIcon} from "@mui/material"
+import { Box, Hidden, List, ListItem, ListItemButton, ListItemIcon} from "@mui/material"
 
 
 
 
 const MainMenu = (props) => {
     return (
-        <Box flex={1} p={2} sx={{ display: { xs: "none", md: "block" }, mt: 2, ml: 2}} >
+        <Hidden lgDown>
+        <Box flex={1} p={2} sx={{ mt: 2, ml: 2}} >
 
             <Box position="sticky" >
 
@@ -43,6 +44,7 @@ const MainMenu = (props) => {
                 </List>
             </Box>
         </Box>
+        </Hidden>
     );
 }
 
