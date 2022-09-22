@@ -12,9 +12,18 @@ const TeamWork = () => {
     const [teamMembers, setTeamMembers] = useState([])
     const [anchorEl, setAnchorEl] = useState(null)
     const [currentZoom, setCurrentZoom] = useState("Days")
+    const [leaveModal, setLeaveModal] = useState(false)
+
     const data = {
         data: [],
         links: [],
+    }
+
+    const leaveModalOpen = () => {
+        setLeaveModal(true)
+    }
+    const leaveModalClose = () => {
+        setLeaveModal(false)
     }
 
     const handleTeamCreate = (e) => {
@@ -117,6 +126,12 @@ const TeamWork = () => {
         })
     }
 
+    const leaveTeam = () => {
+        axios.post("/teamWork/leaveTeam")
+
+        window.location.reload()
+    }
+
     useEffect(() => {
         axios.post("/teamWork/getJoinedTeamWork")
             .then((res) => {
@@ -154,6 +169,11 @@ const TeamWork = () => {
                         anchorEl={anchorEl}
                         handleGenerateInviteUrl={handleGenerateInviteUrl}
                         handleClose={handleClose}
+
+                        leaveTeam={leaveTeam}
+                        leaveModal={leaveModal}
+                        leaveModalOpen={leaveModalOpen}
+                        leaveModalClose={leaveModalClose}
                     />
                 }
             />
