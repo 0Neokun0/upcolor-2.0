@@ -7,6 +7,11 @@ const ProfileEdit = () => {
     const [profile, setProfile] = useState([])
     const [courses, setCourses] = useState([])
 
+    const [selectQualifications, setSelectQualifications] = useState([])
+    const [selectPrograms, setSelectPrograms] = useState([])
+    const [selectTools, setSelectTools] = useState([])
+    const [selectLanguages, setSelectLanguages] = useState([])
+
     const years = [
         {
             value: 1,
@@ -26,6 +31,16 @@ const ProfileEdit = () => {
         },
     ]
 
+    // データベースにしたほうがいいと思う
+    const qualifications = [
+        "MOS/WORD",
+        "MOS/EXCEL",
+        "ITパスポート",
+        "基本情報技術者試験",
+        "応用情報技術者試験",
+        "セキュリティマネジメント",
+    ]
+
     const programs = [
         "C言語",
         "C#",
@@ -40,6 +55,18 @@ const ProfileEdit = () => {
         "Ruby",
     ]
 
+    const tools = [
+        "Adobe Photoshop",
+        "Adobe Premiere Pro",
+        "Adobe illustrator",
+    ]
+
+    const languages = [
+        "日本語",
+        "英語",
+        "ヒンディー語",
+    ]
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -50,10 +77,10 @@ const ProfileEdit = () => {
             mail: data.get("mail"),
             course: data.get("course"),
             year: data.get("year"),
-            qualifications: data.get("qualifications"),
-            programming_languages: data.get("programming_languages"),
-            tools_and_framework: data.get("student_tools_and_framework"),
-            country_language: data.get("country_language"),
+            qualifications: selectQualifications,
+            programming_languages: selectPrograms,
+            tools_and_framework: selectTools,
+            country_language: selectLanguages,
             introduction: data.get("introduction"),
             github: data.get("github"),
         })
@@ -83,6 +110,18 @@ const ProfileEdit = () => {
                     courses={courses}
                     years={years}
                     programs={programs}
+                    qualifications={qualifications}
+                    tools={tools}
+                    languages={languages}
+
+                    selectQualifications={selectQualifications}
+                    selectPrograms={selectPrograms}
+                    selectTools={selectTools}
+                    selectLanguages={selectLanguages}
+                    setSelectQualifications={setSelectQualifications}
+                    setSelectPrograms={setSelectPrograms}
+                    setSelectTools={setSelectTools}
+                    setSelectLanguages={setSelectLanguages}
 
                     handleSubmit={handleSubmit}
                 />

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Box from '@mui/material/Box'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputLabel from '@mui/material/InputLabel'
@@ -18,13 +17,11 @@ const MenuProps = {
 }
 
 const MultipleSelectChip = (props) => {
-    const [personName, setPersonName] = useState([])
-
     const handleChange = (event) => {
         const {
             target: { value },
         } = event
-        setPersonName(
+        props["setSelect"](
             typeof value === 'string' ? value.split(',') : value,
         )
     }
@@ -34,7 +31,7 @@ const MultipleSelectChip = (props) => {
             <InputLabel>{props["label"]}</InputLabel>
             <Select
                 multiple
-                value={personName}
+                value={props["select"]}
                 onChange={handleChange}
                 input={<OutlinedInput label={props["label"]} />}
                 renderValue={(selected) => (
