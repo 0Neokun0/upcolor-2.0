@@ -22,9 +22,34 @@ router.post("/list" , async (req, res) => {
         SELECT *
         FROM company_profiles
     `
-    const companyList = await sql.handleSelect(sqlSelectCompany, [])
+    const sqlSelectOccupation = `
+        SELECT occupation_id, occupation_name
+        FROM occupations
+    `
+    const sqlSelectCourse = `
+        SELECT course_id, course_name
+        FROM courses
+    `
+    const sqlSelectPrefecture = `
+        SELECT prefecture_id, prefecture_name
+        FROM prefectures
+    `
 
-    res.json(companyList)
+    const companies = await sql.handleSelect(sqlSelectCompany, [])
+    const occupations = await sql.handleSelect(sqlSelectOccupation, [])
+    const courses = await sql.handleSelect(sqlSelectCourse, [])
+    const prefectures = await sql.handleSelect(sqlSelectPrefecture, [])
+
+    const list = [
+        {
+            company: companies,
+            occupation: occupations,
+            course: courses,
+            prefecture: prefectures,
+        }
+    ]
+
+    res.json(list[0])
 })
 
 module.exports = router
