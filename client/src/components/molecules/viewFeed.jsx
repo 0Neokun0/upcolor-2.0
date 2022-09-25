@@ -1,10 +1,10 @@
-import { Avatar, Box, Divider, IconButton, Typography } from "@mui/material"
+import { Avatar, Box, Card, Divider, IconButton, Typography } from "@mui/material"
 import CommentRoundedIcon from '@mui/icons-material/CommentRounded'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 
 const ViewFeed = (props) => {
     return (
-        <Box>
+        <Card sx={{ p: 3, borderRadius: '10px', mt: 2 }}>
             <Box
                 sx={{
                     display: "flex",
@@ -66,7 +66,7 @@ const ViewFeed = (props) => {
             </Box>
 
             <Divider />
-        </Box>
+        </Card>
     );
 }
 

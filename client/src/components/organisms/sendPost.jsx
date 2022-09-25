@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Modal, TextField } from "@mui/material"
+import { Box, Button, Card, IconButton, Modal, TextField } from "@mui/material"
 import AddIcon from '@mui/icons-material/Add'
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import { cyan } from "@mui/material/colors"
@@ -28,7 +28,7 @@ const SendPost = (props) => {
                     justifyContent: "center",
                 }}
             >
-                <Box
+                <Card
                     component={"form"}
                     onSubmit={props.handleSubmit}
                     sx={{
@@ -69,7 +69,7 @@ const SendPost = (props) => {
                     >
                         投稿
                     </Button>
-                </Box>
+                </Card>
             </Modal>
         </Box>
     );

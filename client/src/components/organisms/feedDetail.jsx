@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom"
-import { Box, Typography } from "@mui/material"
+import { Card, Typography } from "@mui/material"
 import { Post, ViewFeed } from "components/molecules"
 
 const FeedDetail = () => {
@@ -8,10 +8,8 @@ const FeedDetail = () => {
     const toggleReplyModalOpen = useOutletContext()["toggleReplyModalOpen"]
 
     return (
-        <Box
-            sx={{
-                mt: 2,
-            }}
+        <Card
+        sx={{ p: 3, borderRadius: '15px', mt: 2 , boxShadow: 3}}
         >
             {
                 post
@@ -42,7 +40,7 @@ const FeedDetail = () => {
                         返信がありません
                     </Typography>
             }
-        </Box>
+        </Card>
     );
 }
 

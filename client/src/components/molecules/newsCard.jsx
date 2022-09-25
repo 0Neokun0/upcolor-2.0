@@ -3,9 +3,7 @@ import { Card, CardActionArea, CardContent, CardHeader, Typography } from "@mui/
 const NewsCard = (props) => {
     return (
         <Card
-            sx={{
-                mt: 2,
-            }}
+        sx={{ textAlign: 'center', p: 1, borderRadius: '15px', mt: 2, boxShadow: 2}}
         >
             <CardActionArea>
                 <CardHeader

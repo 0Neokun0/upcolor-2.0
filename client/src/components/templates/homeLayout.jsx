@@ -11,7 +11,7 @@ import { Box, Stack } from "@mui/material";
 const HomeLayout = (props) => {
   return (
     <>
-      <Box bgcolor={"background.default"} pt={2}>
+      <Box bgcolor={"#e0e0e0"} pt={2}>
         <Stack direction="row" spacing={4} justifyContent="space-between">
           <MainMenu profile={props.profile} user={props.user} menus={props.menus} />
 

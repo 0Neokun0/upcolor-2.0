@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import {
   Box,
+  Card,
   Hidden,
   List,
   ListItem,
@@ -26,27 +27,31 @@ const MainMenu = (props) => {
     <>
       <Hidden lgDown>
         <MainMenuWrapper flex={1} p={2} sx={{ mt: 2, ml: 2 }} position="sticky">
-          <MainMenuProfileCard profile={props.profile} />
+          
+          <Card sx={{ p: 2, borderRadius: '15px' }}>
 
-          <List
-            sx={{
-              'li + li': {
-                borderTop: 1,
-                borderColor: '#e3f2fd',
-              },
-            }}
-          >
-            {props.menus.map((menu, index) => {
-              return (
-                <ListItem disablePadding key={index}>
-                  <ListItemButton component={Link} to={menu.url}>
-                    <ListItemIcon>{menu.icon}</ListItemIcon>
-                    {menu.value}
-                  </ListItemButton>
-                </ListItem>
-              )
-            })}
-          </List>
+            <MainMenuProfileCard profile={props.profile} />
+
+            <List
+              sx={{
+                'li + li': {
+                  borderTop: 1,
+                  borderColor: '#e3f2fd',
+                },
+              }}
+            >
+              {props.menus.map((menu, index) => {
+                return (
+                  <ListItem disablePadding key={index}>
+                    <ListItemButton component={Link} to={menu.url}>
+                      <ListItemIcon>{menu.icon}</ListItemIcon>
+                      {menu.value}
+                    </ListItemButton>
+                  </ListItem>
+                )
+              })}
+            </List>
+          </Card>
         </MainMenuWrapper>
       </Hidden>
     </>

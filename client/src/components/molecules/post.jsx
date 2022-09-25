@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Avatar, Box, Card, CardActionArea, CardContent, CardHeader } from "@mui/material"
+import { Avatar, Box, Card, CardActionArea, CardContent, CardHeader, Divider } from "@mui/material"
 
 const Post = (props) => {
     return (
@@ -9,7 +9,8 @@ const Post = (props) => {
                     variant="outlined"
                     sx={{
                         mt: 2,
-                        boxShadow: 0,
+                        p: 2,
+                        boxShadow: 1,
                     }}
                 >
                     <CardActionArea onClick={props.togglePostViewModalOpen}>
@@ -22,6 +23,7 @@ const Post = (props) => {
                             title={props.name}
                             subheader={props.time}
                         />
+                        <Divider/>
 
                         <CardContent>
                             {props.content}

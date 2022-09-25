@@ -22,29 +22,21 @@ const MainMenuProfileCard = (props) => {
   console.log(props)
   return (
     <>
-      <Card>
+      <Card sx={{  textAlign: 'center', p: 1, borderRadius: '15px', boxShadow: 10, mb: 2 }}>
         <Box sx={{ p: 2, display: 'flex' }}>
-
           <Stack direction="row" spacing={2}>
 
             <CardItems>
               <Avatar />
             </CardItems>
 
-            <CardItems minWidth={100}>
+            <CardItems maxWidth={100}>
               <Typography overflow="hidden" fontWeight={700}>
                 neokun
               </Typography>
             </CardItems>
 
-            <CardItems>
-              <IconButton>
-                <EditIcon sx={{ fontSize: 14 }} />
-              </IconButton>
-            </CardItems>
-
           </Stack>
-
         </Box>
         <Divider />
         <Stack
