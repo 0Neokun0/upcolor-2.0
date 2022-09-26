@@ -10,7 +10,8 @@ const FooterWrapper = styled(Container)(
 const Footer = () => {
     return (
         <FooterWrapper
-            className="footer-wrapper">
+            className="footer-wrapper"
+            >
             <Box
                 pb={4}
                 display={{ xs: 'block', md: 'flex' }}
