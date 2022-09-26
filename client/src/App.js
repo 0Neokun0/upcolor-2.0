@@ -17,6 +17,7 @@ import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
 import GroupCreateLayout from "components/templates/groupCreateLayout"
+import CompanyprofileEdit from "components/pages/company/companyprofileEdit"
 
 function App() {
     const [open, setOpen] = useState(false)
@@ -183,6 +184,8 @@ function App() {
                     </Route>
 
                     <Route path="profile/edit" element={<ProfileEdit />} />
+                    <Route path="companyprofile/edit" element={<CompanyprofileEdit />} />
+
 
                     <Route path="companyList" element={<CompanyList />} />
 
