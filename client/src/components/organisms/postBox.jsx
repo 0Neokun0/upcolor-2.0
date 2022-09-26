@@ -20,8 +20,6 @@ const PostBox = (props) => {
           width: '100%',
           height: '170px',
           borderRadius: '10px',
-          boxShadow: '0px 0px 16px -8px rgba(0, 0, 0, 0.68)',
-          padding: '5px',
         }}
       >
         <Box sx={{ padding: '20px' }}>

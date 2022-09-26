@@ -18,6 +18,7 @@ const Home = () => {
     const [post, setPost] = useState([])
     const [posts, setPosts] = useState([])
     const [replys, setReplys] = useState([])
+    const [profile, setProfile] = useState([])
 
     const user = [
         {
@@ -139,29 +140,35 @@ const Home = () => {
             })
     }, [postId]);
 
+    useEffect(() => {
+        axios.post("/account/getProfile")
+        .then((res) => {
+            setProfile(res.data[0])
+        })
+    }, [])
+
     return (
         <>
+            <HomeLayout
+                profile={profile}
 
-        <HomeLayout
-            user={user[0]}
+                handleSubmit={handleSubmit}
+                openPostModal={openPostModal}
+                togglePostModalOpen={togglePostModalOpen}
+                togglePostModalClose={togglePostModalClose}
 
-            handleSubmit={handleSubmit}
-            openPostModal={openPostModal}
-            togglePostModalOpen={togglePostModalOpen}
-            togglePostModalClose={togglePostModalClose}
+                handleReplySubmit={handleReplySubmit}
+                openReplyModal={openReplyModal}
+                toggleReplyModalOpen={toggleReplyModalOpen}
+                toggleReplyModalClose={toggleReplyModalClose}
+                postId={postId}
 
-            handleReplySubmit={handleReplySubmit}
-            openReplyModal={openReplyModal}
-            toggleReplyModalOpen={toggleReplyModalOpen}
-            toggleReplyModalClose={toggleReplyModalClose}
-            postId={postId}
-
-            post={post}
-            posts={posts}
-            replys={replys}
-            menus={menus}
-            news={news}
-        />
+                post={post}
+                posts={posts}
+                replys={replys}
+                menus={menus}
+                news={news}
+            />
         </>
     );
 }
