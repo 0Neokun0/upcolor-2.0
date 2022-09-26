@@ -130,12 +130,14 @@ const PostBox = (props) => {
                                         >
                                             写真
                                         </Button>
+
                                         <Button
                                             color="primary"
                                             startIcon={<PhotoSizeSelectActualIcon />}
                                         >
                                             ビデオ
                                         </Button>
+
                                         <Button
                                             color="error"
                                             startIcon={<PhotoSizeSelectActualIcon />}
