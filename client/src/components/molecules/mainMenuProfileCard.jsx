@@ -38,7 +38,6 @@ const MainMenuProfileCard = (props) => {
                         direction="row"
                         spacing={2}
                     >
-
                         <CardItems>
                             <Avatar />
                         </CardItems>
@@ -52,11 +51,13 @@ const MainMenuProfileCard = (props) => {
                             >
                                 {props.profile.user_name}
                             </Typography>
-                        </CardItems>
 
+                        </CardItems>
                     </Stack>
                 </Box>
+
                 <Divider />
+
                 <Stack
                     direction="row"
                     alignItems="center"
@@ -68,6 +69,7 @@ const MainMenuProfileCard = (props) => {
                     }}
                 >
                     <Switch />
+
                     <Chip
                         label="naoko"
                     />

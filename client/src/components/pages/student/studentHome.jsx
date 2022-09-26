@@ -22,7 +22,7 @@ const Home = () => {
 
     const user = [
         {
-            name : "Nishant",
+            name: "Nishant",
             course: "報告処理ネットワー",
         }
     ]
@@ -142,9 +142,9 @@ const Home = () => {
 
     useEffect(() => {
         axios.post("/account/getProfile")
-        .then((res) => {
-            setProfile(res.data[0])
-        })
+            .then((res) => {
+                setProfile(res.data[0])
+            })
     }, [])
 
     return (

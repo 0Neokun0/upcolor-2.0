@@ -9,7 +9,12 @@ const FeedDetail = () => {
 
     return (
         <Card
-        sx={{ p: 3, borderRadius: '15px', mt: 2 , boxShadow: 3}}
+            sx={{
+                p: 3,
+                borderRadius: '15px',
+                mt: 2,
+                boxShadow: 3
+            }}
         >
             {
                 post
