@@ -1,10 +1,10 @@
-import { Paper, Typography } from "@mui/material"
+import { Card, Typography } from "@mui/material"
 
 const ProfileInput = (props) => {
     return (
-        <Paper
+        <Card
             sx={{
-                p: 2,
+                p: 3,
             }}
         >
             <Typography
@@ -19,7 +19,7 @@ const ProfileInput = (props) => {
             </Typography>
 
             {props.children}
-        </Paper>
+        </Card>
     );
 }
 
