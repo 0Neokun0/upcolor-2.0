@@ -13,6 +13,7 @@ const CompanyListLayout = (props) => {
                 <CompanySearch
                     searchList={props.searchList}
                 />
+                
                 <CompanyGrid
                     companies={props.companies}
                 />

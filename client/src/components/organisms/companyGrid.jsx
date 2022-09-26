@@ -19,6 +19,8 @@ const CompanyGrid = (props) => {
                 &&
                 props.companies.map((company, index) => {
                     return (
+                        company
+                        &&
                         <CompanyCard
                             key={index}
                             image={userPictureUrl}
