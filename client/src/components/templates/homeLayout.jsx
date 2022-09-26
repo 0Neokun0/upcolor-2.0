@@ -7,6 +7,7 @@ import {
     SendPost,
 } from "components/organisms";
 import { Box, Stack } from "@mui/material";
+import Footer from "components/organisms/footer/footer";
 
 const HomeLayout = (props) => {
     return (
@@ -73,7 +74,11 @@ const HomeLayout = (props) => {
                         postId={props.postId}
                     />
                 </Stack>
+
+                <Footer />
+
             </Box>
+
         </>
     );
 };
