@@ -267,10 +267,10 @@ router.post("/updateProfile", async (req, res) => {
 
     const course = req.body.course
     const year = req.body.year
-    const qualifications = req.body.qualifications
-    const programming_languages = req.body.programming_languages
-    const tools_and_framework = req.body.tools_and_framework
-    const country_language = req.body.country_language
+    const qualifications = req.body.qualifications.join(",")
+    const programming_languages = req.body.programming_languages.join(",")
+    const tools_and_framework = req.body.tools_and_framework.join(",")
+    const country_language = req.body.country_language.join(",")
     const github = req.body.github
 
     const sqlUpdateUserProfile = `

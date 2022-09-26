@@ -2,9 +2,9 @@ import { Box, Button, TextField } from "@mui/material"
 import { ProfileInput, ProfileSelect, ProfileSelectChip } from "components/molecules"
 
 const ProfileForm = (props) => {
+    console.log(props["selectQualifications"])
     return (
         props.profile.map((info, index) => {
-            console.log(info)
             return (
                 <Box
                     key={index}
@@ -72,26 +72,34 @@ const ProfileForm = (props) => {
                     </ProfileInput>
 
                     <ProfileInput
-                        title="スキル(未実装)"
+                        title="スキル"
                     >
                         <ProfileSelectChip
                             label="資格"
-                            lists={props["programs"]}
+                            lists={props["qualifications"]}
+                            select={props["selectQualifications"]}
+                            setSelect={props["setSelectQualifications"]}
                         />
 
                         <ProfileSelectChip
                             label="プログラミング言語"
                             lists={props["programs"]}
+                            select={props["selectPrograms"]}
+                            setSelect={props["setSelectPrograms"]}
                         />
 
                         <ProfileSelectChip
                             label="ツール・フレームワーク"
-                            lists={props["programs"]}
+                            lists={props["tools"]}
+                            select={props["selectTools"]}
+                            setSelect={props["setSelectTools"]}
                         />
 
                         <ProfileSelectChip
                             label="言語"
-                            lists={props["programs"]}
+                            lists={props["languages"]}
+                            select={props["selectLanguages"]}
+                            setSelect={props["setSelectLanguages"]}
                         />
                     </ProfileInput>
 
