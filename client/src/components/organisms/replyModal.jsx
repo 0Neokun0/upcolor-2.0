@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Modal, TextField } from "@mui/material"
+import { Box, Button, Card, IconButton, Modal, TextField } from "@mui/material"
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 
 const ReplyModal = (props) => {
@@ -12,7 +12,7 @@ const ReplyModal = (props) => {
                 justifyContent: "center",
             }}
         >
-            <Box
+            <Card
                 component={"form"}
                 onSubmit={props.handleReplySubmit}
                 sx={{
@@ -55,7 +55,7 @@ const ReplyModal = (props) => {
                 >
                     投稿
                 </Button>
-            </Box>
+            </Card>
         </Modal>
     )
 }

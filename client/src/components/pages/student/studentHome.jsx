@@ -2,6 +2,13 @@ import axios from "axios"
 import { HomeLayout } from "components/templates"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import WorkspacesIcon from '@mui/icons-material/Workspaces';
+import GroupWorkIcon from '@mui/icons-material/GroupWork';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+import BadgeIcon from '@mui/icons-material/Badge';
+import ViewTimelineIcon from '@mui/icons-material/ViewTimeline';
+import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 
 const Home = () => {
     const postId = useParams()["postId"]
@@ -11,35 +18,51 @@ const Home = () => {
     const [post, setPost] = useState([])
     const [posts, setPosts] = useState([])
     const [replys, setReplys] = useState([])
+    const [profile, setProfile] = useState([])
+
+    const user = [
+        {
+            name: "Nishant",
+            course: "報告処理ネットワー",
+        }
+    ]
 
     const menus = [
         {
             value: "グループ",
             url: "/group",
+            icon: <WorkspacesIcon />,
         },
         {
             value: "自分の進級制作",
             url: "/teamwork",
+            icon: <GroupWorkIcon />,
+
         },
         {
             value: "みんなの進級制作",
             url: "/teamlist",
+            icon: <AccountTreeIcon />,
         },
         {
             value: "ユーザー",
             url: "#",
+            icon: <PersonSearchIcon />,
         },
         {
             value: "プロフィール",
             url: "/profile",
+            icon: <BadgeIcon />,
         },
         {
             value: "時間割",
             url: "/timeTable/regist",
+            icon: <ViewTimelineIcon />,
         },
         {
             value: "設定",
             url: "#",
+            icon: <SettingsSuggestIcon />,
         },
     ]
 
@@ -117,25 +140,36 @@ const Home = () => {
             })
     }, [postId]);
 
+    useEffect(() => {
+        axios.post("/account/getProfile")
+            .then((res) => {
+                setProfile(res.data[0])
+            })
+    }, [])
+
     return (
-        <HomeLayout
-            handleSubmit={handleSubmit}
-            openPostModal={openPostModal}
-            togglePostModalOpen={togglePostModalOpen}
-            togglePostModalClose={togglePostModalClose}
+        <>
+            <HomeLayout
+                profile={profile}
 
-            handleReplySubmit={handleReplySubmit}
-            openReplyModal={openReplyModal}
-            toggleReplyModalOpen={toggleReplyModalOpen}
-            toggleReplyModalClose={toggleReplyModalClose}
-            postId={postId}
+                handleSubmit={handleSubmit}
+                openPostModal={openPostModal}
+                togglePostModalOpen={togglePostModalOpen}
+                togglePostModalClose={togglePostModalClose}
 
-            post={post}
-            posts={posts}
-            replys={replys}
-            menus={menus}
-            news={news}
-        />
+                handleReplySubmit={handleReplySubmit}
+                openReplyModal={openReplyModal}
+                toggleReplyModalOpen={toggleReplyModalOpen}
+                toggleReplyModalClose={toggleReplyModalClose}
+                postId={postId}
+
+                post={post}
+                posts={posts}
+                replys={replys}
+                menus={menus}
+                news={news}
+            />
+        </>
     );
 }
 
