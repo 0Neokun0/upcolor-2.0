@@ -52,4 +52,28 @@ router.post("/list" , async (req, res) => {
     res.json(list[0])
 })
 
+router.post("/regist", async (req, res) => {
+    const userId = get.userId(req)
+
+    // 募集対象 1.専攻 2.業種 3.地域
+    const courseIds = req.courseIds
+    const occupationIds = req.occupationIds
+    const locationIds = req.locationIds
+
+    // 会社紹介
+    const introduction = req.introduction
+    // 事業紹介
+    const business = req.business
+    // 本社住所
+    const officeAdress = req.officeAdress
+
+    // 企業ホームページURL・就活サイトURL
+    const companyUrl = req.companyUrl
+    const jobSiteUrl = req.jobSiteUrl
+
+    // 専攻フロー（未定）
+
+    res.json(true)
+})
+
 module.exports = router
