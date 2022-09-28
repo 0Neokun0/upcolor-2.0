@@ -41,9 +41,11 @@ const FeedDetail = () => {
                     })
 
                     :
-                    <Typography>
+
+                    <Typography sx={{ p: 2, mt: 2}}>
                         返信がありません
                     </Typography>
+
             }
         </Card>
     );
