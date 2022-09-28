@@ -102,7 +102,7 @@ const Header = (props) => {
                 </DialogActions>
             </Dialog>
         </AppBar>
-    );
+    )
 }
 
-export default Header;
+export default Header

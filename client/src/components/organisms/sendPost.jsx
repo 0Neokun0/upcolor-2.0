@@ -1,7 +1,7 @@
-import { Box, Button, Card, IconButton, Modal, TextField } from "@mui/material"
+import { Avatar, Box, Button, Card, IconButton, Modal, TextField } from "@mui/material"
 import AddIcon from '@mui/icons-material/Add'
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import { cyan } from "@mui/material/colors"
+import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual'
 
 const SendPost = (props) => {
     return (
@@ -40,28 +40,67 @@ const SendPost = (props) => {
                     }}
                 >
                     <Box
-                        textAlign="right"
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}
                     >
-                        <IconButton
-                            onClick={props.togglePostModalClose}
-                        >
-                            <CloseRoundedIcon />
-                        </IconButton>
+                        <Avatar
+                            variant="rounded"
+                            sx={{
+                                width: '50',
+                                height: '50',
+                                borderRadius: '50%',
+                                objectFit: 'cover',
+                                mr: '20px',
+                            }}
+                        />
+
+                        <TextField
+                            name="text"
+                            id="outlined-multiline-flexible"
+                            variant="standard"
+                            placeholder="今どうしてる?"
+                            fullWidth
+                            multiline
+                            rows={2}
+                            autoFocus
+                        />
                     </Box>
 
-                    <TextField
-                        name="text"
-                        variant="standard"
-                        placeholder="今どうしてる?"
-                        fullWidth
-                        multiline
-                        rows={3}
-                        autoFocus
-                    />
+                    <Box
+                        justifyContent={'end'}
+                        sx={{
+                            display: 'flex',
+                            mt: 2,
+                        }}
+                    >
+                        <Button
+                            color="success"
+                            startIcon={<PhotoSizeSelectActualIcon />}
+                        >
+                            写真
+                        </Button>
+
+                        <Button
+                            color="primary"
+                            startIcon={<PhotoSizeSelectActualIcon />}
+                        >
+                            ビデオ
+                        </Button>
+
+                        <Button
+                            color="error"
+                            startIcon={<PhotoSizeSelectActualIcon />}
+                        >
+                            Tag
+                        </Button>
+                    </Box>
 
                     <Button
                         variant="contained"
                         type="submit"
+                        size="small"
                         fullWidth
                         sx={{
                             mt: 2,

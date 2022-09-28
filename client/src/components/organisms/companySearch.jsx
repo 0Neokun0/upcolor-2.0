@@ -4,6 +4,12 @@ import { SearchEntry } from "components/molecules"
 const CompanySearch = (props) => {
     return (
         <List
+            component="nav"
+            subheader={
+                <ListSubheader component="div" id="nested-list-subheader">
+                    絞り込み
+                </ListSubheader>
+            }
             sx={{
                 width: "20%",
                 maxWidth: 360,
@@ -13,13 +19,6 @@ const CompanySearch = (props) => {
                 bgcolor: "background.paper",
                 overflowY: "scroll",
             }}
-            component="nav"
-            aria-labelledby="nested-list-subheader"
-            subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
-                    絞り込み
-                </ListSubheader>
-            }
         >
             {
                 props.searchList

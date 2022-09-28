@@ -77,7 +77,7 @@ const ProfileCard = (props) => {
                 </ButtonGroup>
             </Box>
         </Card>
-    );
+    )
 }
 
 export default ProfileCard

@@ -1,10 +1,11 @@
-import { Avatar, Box, Card, Divider, IconButton, Typography } from "@mui/material"
+import { Avatar, Box, Divider, IconButton, Typography, Link as Mlink } from "@mui/material"
 import CommentRoundedIcon from '@mui/icons-material/CommentRounded'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
+import { Link } from "react-router-dom"
 
 const ViewFeed = (props) => {
     return (
-        <Card sx={{ p: 3, borderRadius: '10px', mt: 2 }}>
+        <Box>
             <Box
                 sx={{
                     display: "flex",
@@ -13,14 +14,16 @@ const ViewFeed = (props) => {
             >
                 <Avatar />
 
-                <Typography
+                <Mlink
+                    component={Link}
+                    to={"/profile/" + props.post["post_user_id"]}
                     fontWeight={"bold"}
                     sx={{
                         ml: 1,
                     }}
                 >
                     {props.post["user_name"]}
-                </Typography>
+                </Mlink>
             </Box>
 
             <Box
@@ -49,7 +52,6 @@ const ViewFeed = (props) => {
                 sx={{
                     width: "80%",
                     m: "auto",
-                    my: 1,
                     display: "flex",
                     justifyContent: "space-between"
                 }}
@@ -64,10 +66,8 @@ const ViewFeed = (props) => {
                     <FavoriteRoundedIcon />
                 </IconButton>
             </Box>
-
-            <Divider />
-        </Card>
-    );
+        </Box>
+    )
 }
 
-export default ViewFeed;
+export default ViewFeed
