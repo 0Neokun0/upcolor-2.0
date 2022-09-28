@@ -1,12 +1,21 @@
 import { Post } from "components/molecules"
 import { Box, Typography } from "@mui/material"
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom"
 
 const Feed = () => {
     const posts = useOutletContext()["posts"]
 
     return (
-        <Box>
+        <Box
+            sx={{
+                "a": {
+                    display: "block",
+                },
+                "a + a": {
+                    mt: 2,
+                },
+            }}
+        >
             {
                 posts.length
                     ?
@@ -27,7 +36,7 @@ const Feed = () => {
                     </Typography>
             }
         </Box>
-    );
+    )
 }
 
-export default Feed;
+export default Feed

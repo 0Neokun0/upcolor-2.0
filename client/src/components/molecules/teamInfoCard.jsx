@@ -27,7 +27,7 @@ const TeamInfoCard = (props) => {
                 }
             </Typography>
         </Card>
-    );
+    )
 }
 
-export default TeamInfoCard;
+export default TeamInfoCard

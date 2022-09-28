@@ -16,7 +16,7 @@ const GroupInviteForm = (props) => {
                 </Alert>
             }
         </Box>
-    );
+    )
 }
 
 export default GroupInviteForm

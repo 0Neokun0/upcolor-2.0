@@ -22,7 +22,7 @@ const GroupChat = (props) => {
                 })
             }
         </Box>
-    );
+    )
 }
 
-export default GroupChat;
+export default GroupChat

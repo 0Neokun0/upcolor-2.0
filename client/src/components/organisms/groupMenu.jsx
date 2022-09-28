@@ -31,7 +31,7 @@ const GroupMenu = (props) => {
                 })
             }
         </List>
-    );
+    )
 }
 
-export default GroupMenu;
+export default GroupMenu
