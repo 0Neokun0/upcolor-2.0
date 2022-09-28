@@ -21,13 +21,10 @@ const CompanyArticleBox = styled(Box)({
   textAlign: 'center',
 })
 
-const CompanyImages = {
-  companyArticleImage : "https://s7d1.scene7.com/is/image/dxc/Konica-IMG_0751-promocard?$landscape-x4_desktop$",
-  
-}
+
 function createData(name) {
   return {
-    name
+    name,
   }
 }
 
@@ -35,9 +32,10 @@ function Row(props) {
   const { row } = props
   const [open, setOpen] = useState(false)
 
+
   return (
     <>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} >
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -55,8 +53,20 @@ function Row(props) {
         <TableCell style={{ paddingBottom: 2, paddingTop: 2 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Stack direction="row" spacing={3} justifyContent="flex-start">
-              <CompanyArticleBox flex={1}><Box><img  width={100} height={70} src={CompanyImages.companyArticleImage}></img></Box></CompanyArticleBox>
-              <CompanyArticleBox flex={7}></CompanyArticleBox>
+
+              <CompanyArticleBox flex={1} >
+                <Box>
+                  <img alt='companyAriticleImage'
+                    width={100}
+                    height={70}
+
+                  ></img>
+                </Box>
+              </CompanyArticleBox>
+              <CompanyArticleBox flex={7}>
+                <Typography></Typography>
+              </CompanyArticleBox>
+
             </Stack>
           </Collapse>
         </TableCell>
@@ -72,7 +82,11 @@ const rows = [
   createData('事業内容'),
 ]
 
-const CompanyDetails = () => {
+const CompanyDetails = (props) => {
+
+
+console.log(props)
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -95,4 +109,4 @@ const CompanyDetails = () => {
     </TableContainer>
   )
 }
-export default CompanyDetails
+export default CompanyDetails;

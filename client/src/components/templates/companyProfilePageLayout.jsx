@@ -1,4 +1,4 @@
-import * as React from 'react'
+
 import {
   Box,
   Card,
@@ -11,13 +11,15 @@ import {
   Typography,
 } from '@mui/material'
 import PropTypes from 'prop-types'
-import CompanyDetails from './companyDetails'
-import CompanyRecruitment from './companyRecruitment'
-import CompanySeminar from './companySeminar'
-import CompanyLinks from './companyLinks'
+import { useState } from 'react'
+import CompanyDetails from '../organisms/companyDetails'
+import CompanyRecruitment from '../organisms/companyRecruitment'
+import CompanySeminar from '../organisms/companySeminar'
+
 
 const company_name = "会社名"
 const company_occupation = "業種"
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props
   return (
@@ -49,13 +51,17 @@ function a11yProps(index) {
     'aria-controls': `simple-tabpanel-${index}`,
   }
 }
-const CompanyProfilePage = () => {
-  const [value, setValue] = React.useState(0)
+const CompanyProfilePageLayout = (props) => {
+  const [value, setValue] = useState(0)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
+
   }
+
+
   return (
+
     <Container maxWidth="100%" justifyContent="center">
       <Box sx={{ bgcolor: '#eeeeee', height: '100vh' }}>
         <Grid
@@ -84,11 +90,10 @@ const CompanyProfilePage = () => {
                   <Tab label="会社概要" {...a11yProps(0)} />
                   <Tab label="採用データ" {...a11yProps(1)} />
                   <Tab label="説明会・セミナー" {...a11yProps(2)} />
-                  <Tab label="企業マイページ" {...a11yProps(3)} />
                 </Tabs>
               </Box>
               <TabPanel value={value} index={0}>
-                <CompanyDetails/>
+                <CompanyDetails companyDetailsTabs={props.companyDetailsTabs}/>
               </TabPanel>
               <TabPanel value={value} index={1}>
               <CompanyRecruitment/>
@@ -96,9 +101,7 @@ const CompanyProfilePage = () => {
               <TabPanel value={value} index={2}>
                 <CompanySeminar/>
               </TabPanel>
-              <TabPanel value={value} index={3}>
-                <CompanyLinks/>
-              </TabPanel>
+
             </Card>
           </Grid>
         </Grid>
@@ -107,4 +110,4 @@ const CompanyProfilePage = () => {
   )
 }
 
-export default CompanyProfilePage
+export default CompanyProfilePageLayout

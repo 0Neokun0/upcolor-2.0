@@ -64,21 +64,22 @@ function Row(props) {
 
 
 const rows = [
-  createData('募集要項'),
-  createData('採用フロー'),
-  createData('問合せ先'),
-
+  createData('学内説明会'),
+  createData('マイナビ．リクナビ'),
+  createData('ホームページ'),
+  createData('マイナビ．リクナビ'),
+  createData('SNS'),
 
 ];
 
-const CompanyRecruitment = () => {
+const CompanySeminar = () => {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell ><Typography variant='h5'>会社の採用情報と募集．インターンシップ情報について</Typography></TableCell>
+            <TableCell ><Typography variant='h5'>会社のリンク {'\u2022'} ホームページ {'\u2022'} SNS</Typography></TableCell>
 
           </TableRow>
         </TableHead>
@@ -92,4 +93,4 @@ const CompanyRecruitment = () => {
   );
 }
 
-export default CompanyRecruitment
+export default CompanySeminar

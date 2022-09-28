@@ -17,7 +17,7 @@ import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
 import GroupCreateLayout from "components/templates/groupCreateLayout"
-import CompanyProfilePage from "components/pages/company/companyProfilePage"
+import CompanyProfilePage from "components/templates/companyProfilePageLayout"
 
 function App() {
     const [open, setOpen] = useState(false)
