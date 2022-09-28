@@ -10,15 +10,12 @@ import {
   Tabs,
   Typography,
 } from '@mui/material'
+import { CompanyPageTitle } from 'components/molecules'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import CompanyDetails from '../organisms/companyDetails'
 import CompanyRecruitment from '../organisms/companyRecruitment'
 import CompanySeminar from '../organisms/companySeminar'
-
-
-const company_name = "会社名"
-const company_occupation = "業種"
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props
@@ -51,6 +48,7 @@ function a11yProps(index) {
     'aria-controls': `simple-tabpanel-${index}`,
   }
 }
+
 const CompanyProfilePageLayout = (props) => {
   const [value, setValue] = useState(0)
 
@@ -59,10 +57,8 @@ const CompanyProfilePageLayout = (props) => {
 
   }
 
-
   return (
-
-    <Container maxWidth="100%" justifyContent="center">
+    <Container maxWidth="100%">
       <Box sx={{ bgcolor: '#eeeeee', height: '100vh' }}>
         <Grid
           container
@@ -71,20 +67,11 @@ const CompanyProfilePageLayout = (props) => {
           alignItems="stretch"
           spacing={3}
         >
-          <Grid item xs={12} sx={{ mt: 2 }}>
-            <Card sx={{ maxWidth: '100%', p: 2 }}>
-              <Typography gutterBottom variant="h2" component="div">
-                {company_name}
-              </Typography>
-              <Stack direction="row" spacing={2}>
-                <Chip color="info" label={company_occupation} />
-              </Stack>
-            </Card>
-          </Grid>
+          <CompanyPageTitle/>
 
 
           <Grid item xs={12} sx={{ mt: 2 }}>
-            <Card sx={{ maxWidth: '100%' }}>
+            <Card>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} centered>
                   <Tab label="会社概要" {...a11yProps(0)} />

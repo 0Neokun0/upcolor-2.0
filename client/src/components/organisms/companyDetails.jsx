@@ -21,7 +21,6 @@ const CompanyArticleBox = styled(Box)({
   textAlign: 'center',
 })
 
-
 function createData(name) {
   return {
     name,
@@ -32,10 +31,9 @@ function Row(props) {
   const { row } = props
   const [open, setOpen] = useState(false)
 
-
   return (
     <>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} >
+      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -53,20 +51,19 @@ function Row(props) {
         <TableCell style={{ paddingBottom: 2, paddingTop: 2 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Stack direction="row" spacing={3} justifyContent="flex-start">
-
-              <CompanyArticleBox flex={1} >
+              <CompanyArticleBox flex={1}>
                 <Box>
-                  <img alt='companyAriticleImage'
+                  <img
+                    alt="companyAriticleImage"
                     width={100}
                     height={70}
-
+                    src={props.image}
                   ></img>
                 </Box>
               </CompanyArticleBox>
               <CompanyArticleBox flex={7}>
-                <Typography></Typography>
+                <Typography>{props.text}</Typography>
               </CompanyArticleBox>
-
             </Stack>
           </Collapse>
         </TableCell>
@@ -83,10 +80,6 @@ const rows = [
 ]
 
 const CompanyDetails = (props) => {
-
-
-console.log(props)
-
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -102,11 +95,16 @@ console.log(props)
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.name} row={row} />
+            <Row
+              key={row.name}
+              row={row}
+              image={props.companyDetailsTabs[0].companyArticleImage}
+              text={props.companyDetailsTabs[0].companyArticleData}
+            />
           ))}
         </TableBody>
       </Table>
     </TableContainer>
   )
 }
-export default CompanyDetails;
+export default CompanyDetails

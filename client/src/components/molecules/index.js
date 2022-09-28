@@ -6,3 +6,5 @@ export { default as FeatureCard } from "./featureCard"
 export { default as Chat } from "./chat"
 export { default as TeamDescriptionCard } from "./teamInfoCard"
 export { default as TeamInfoCard } from "./teamInfoCard"
+export { default as CompanyPageTitle } from "./companyPageTitle"
+

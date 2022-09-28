@@ -7,7 +7,7 @@ import { LandingPage, SignIn } from "components/pages"
 
 import { StudentSignup, Group, Home, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList } from "components/pages/student"
 import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign } from "components/pages/teacher"
-import { CompanySignup } from "components/pages/company"
+import { CompanySignup, CompanyProfile } from "components/pages/company"
 
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
@@ -17,7 +17,8 @@ import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
 import GroupCreateLayout from "components/templates/groupCreateLayout"
-import CompanyProfilePage from "components/templates/companyProfilePageLayout"
+
+
 
 function App() {
     const [open, setOpen] = useState(false)
@@ -183,7 +184,7 @@ function App() {
                     <Route path="develop/genTeacherSign" element={<ReqAuthAdm component={<GenTeacherSign />} />} />
                     <Route path="develop/genCompanySign" element={<ReqAuthAdm component={<GenCompanySign />} />} />
 
-                    <Route path="companyProfilePage" element={<CompanyProfilePage />} />
+                    <Route path="companyProfile" element={<CompanyProfile />} />
                 </Routes>
             </BrowserRouter>
         </Box>
