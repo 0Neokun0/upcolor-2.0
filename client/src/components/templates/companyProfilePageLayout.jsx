@@ -1,4 +1,3 @@
-
 import {
   Box,
   Card,
@@ -54,46 +53,69 @@ const CompanyProfilePageLayout = (props) => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
-
   }
 
   return (
-    <Container maxWidth="100%">
-      <Box sx={{ bgcolor: '#eeeeee', height: '100vh' }}>
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="stretch"
-          spacing={3}
-        >
-          <CompanyPageTitle/>
-
+    <>
+      <Box
+        sx={{
+          p: 2,
+        }}
+      >
+        <Grid container direction="row" spacing={3}>
+          <CompanyPageTitle />
 
           <Grid item xs={12} sx={{ mt: 2 }}>
-            <Card>
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Card
+              sx={{
+                borderRadius: '10px',
+              }}
+            >
+              <Box
+                sx={{
+                  borderBottom: 1,
+                  borderColor: 'divider',
+                }}
+              >
                 <Tabs value={value} onChange={handleChange} centered>
-                  <Tab label="会社概要" {...a11yProps(0)} />
-                  <Tab label="採用データ" {...a11yProps(1)} />
-                  <Tab label="説明会・セミナー" {...a11yProps(2)} />
+                  <Tab
+				   label="会社概要" {...a11yProps(0)}
+				   />
+
+                  <Tab
+				  label="採用データ" {...a11yProps(1)}
+				  />
+
+                  <Tab
+				  label="説明会・セミナー" {...a11yProps(2)}
+				  />
                 </Tabs>
               </Box>
-              <TabPanel value={value} index={0}>
-                <CompanyDetails companyDetailsTabs={props.companyDetailsTabs}/>
+
+              <TabPanel
+			  value={value}
+			  index={0}
+			  >
+                <CompanyDetails companyDetailsTabs={props.companyDetailsTabs} />
               </TabPanel>
-              <TabPanel value={value} index={1}>
-              <CompanyRecruitment/>
+
+              <TabPanel
+			  value={value}
+			  index={1}>
+                <CompanyRecruitment />
               </TabPanel>
-              <TabPanel value={value} index={2}>
-                <CompanySeminar/>
+
+              <TabPanel
+			  value={value}
+			  index={2}>
+                <CompanySeminar />
               </TabPanel>
 
             </Card>
           </Grid>
         </Grid>
       </Box>
-    </Container>
+    </>
   )
 }
 
