@@ -6,7 +6,7 @@ import { Box } from "@mui/material"
 import { LandingPage, NotFound, Signin } from "components/pages"
 
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite, CompanyList, GroupInvite } from "components/pages/student"
-import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign } from "components/pages/teacher"
+import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, Recruitment } from "components/pages/company"
 
 import { GroupChatLayout } from "components/templates"
@@ -192,6 +192,9 @@ function App() {
 
                     {/* <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} />
                     <Route path="timeTable/regist" element={<ReqAuthStu component={<RegistTimeTable />} />} /> */}
+
+                    <Route path="teacher" element={<ReqAuthTea component={<TeacherHome />} />} />
+                    <Route path="teacher/teacherNews" element={<ReqAuthTea component={<TeacherNews />} />} />
 
                     <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />
                     <Route path="develop/addLectures" element={<ReqAuthAdm component={<AddLectures />} />} />
