@@ -7,7 +7,7 @@ import { LandingPage, NotFound, Signin } from "components/pages"
 
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite, CompanyList, GroupInvite } from "components/pages/student"
 import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign } from "components/pages/teacher"
-import { CompanySignup, CompanyHome, Recruitment } from "components/pages/company"
+import { CompanySignup, CompanyHome } from "components/pages/company"
 
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
@@ -199,7 +199,6 @@ function App() {
                     <Route path="develop/genCompanySign" element={<ReqAuthAdm component={<GenCompanySign />} />} />
 
                     <Route path="company/home" element={<CompanyHome />} />
-                    <Route path="company/recruitment" element={<Recruitment />} />
                 </Routes>
             </BrowserRouter>
         </Box>
