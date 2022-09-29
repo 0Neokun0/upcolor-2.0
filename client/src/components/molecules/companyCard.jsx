@@ -6,7 +6,8 @@ const CompanyCard = (props) => {
         <Card
             sx={{
                 mx: "auto",
-                p: 2,
+                p: 3,
+                mb: 2,
                 width: "250px",
                 borderRadius: "25px",
                 cursor: "pointer",

@@ -7,6 +7,7 @@ const CompanyGrid = (props) => {
     return (
         <Box
             sx={{
+                justifyItems: "center",
                 width: "100%",
                 minHeight: "90vh",
                 maxHeight: "90vh",
