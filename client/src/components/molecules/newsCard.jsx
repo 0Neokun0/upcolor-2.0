@@ -5,9 +5,7 @@ const NewsCard = (props) => {
         <Card
             sx={{
                 textAlign: 'center',
-                p: 1,
                 borderRadius: '15px',
-                mt: 2,
                 boxShadow: 2,
             }}
         >
