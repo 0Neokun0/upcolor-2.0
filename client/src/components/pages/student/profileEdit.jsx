@@ -4,6 +4,8 @@ import { TeamWorkInfoLayout } from "components/templates"
 import { ProfileForm } from "components/organisms"
 
 const ProfileEdit = () => {
+    const [icon, setIcon] = useState([])
+
     const [profile, setProfile] = useState([])
     const [courses, setCourses] = useState([])
 
@@ -67,6 +69,10 @@ const ProfileEdit = () => {
         "ヒンディー語",
     ]
 
+    const handleIcon = (e) => {
+        setIcon(e.target.files[0])
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -83,6 +89,16 @@ const ProfileEdit = () => {
             country_language: selectLanguages,
             introduction: data.get("introduction"),
             github: data.get("github"),
+        })
+
+
+        const image = new FormData()
+        image.append("icon", icon)
+
+        axios.post("/account/getImage", image, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
         })
 
         window.location.href = "/profile"
@@ -123,6 +139,7 @@ const ProfileEdit = () => {
                     setSelectTools={setSelectTools}
                     setSelectLanguages={setSelectLanguages}
 
+                    handleIcon={handleIcon}
                     handleSubmit={handleSubmit}
                 />
             }
