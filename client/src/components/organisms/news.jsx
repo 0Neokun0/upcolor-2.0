@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material"
+import { Box } from "@mui/material"
 import { NewsCard } from "components/molecules"
 
 const News = (props) => {
@@ -21,7 +21,7 @@ const News = (props) => {
                         )
                     })
                 }
-            
+
         </Box>
     );
 }

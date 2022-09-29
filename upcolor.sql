@@ -38,7 +38,6 @@ CREATE TABLE user_profiles (
     user_name VARCHAR(255) NOT NULL,
     user_mail VARCHAR(255) NOT NULL,
     user_password VARCHAR(255) NOT NULL,
-    user_picture_url VARCHAR(255),
     user_introduction TEXT,
     user_type_id INT,
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
@@ -79,16 +78,16 @@ CREATE TABLE teacher_profiles(
 
 CREATE TABLE company_profiles(
     company_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    company_name VARCHAR(255),
-    company_url VARCHAR(255),
-    company_industry VARCHAR(255),
-    company_course_preference_id VARCHAR(255),
+    user_id INT NOT NULL,
+    company_name VARCHAR(255) NOT NULL,
+    company_course_id VARCHAR(255),
     company_occupation_id VARCHAR(255),
-    company_occupation VARCHAR(255),
     company_location_id VARCHAR(255),
-    company_location VARCHAR(255),
     company_introduction TEXT,
+    company_business TEXT,
+    company_address TEXT,
+    company_url VARCHAR(255),
+    job_site_url VARCHAR(255),
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
     updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
     FOREIGN KEY(user_id) REFERENCES user_profiles(user_id) ON DELETE CASCADE
@@ -287,8 +286,8 @@ CREATE TABLE gantt_links(
 
 CREATE TABLE images(
     ID INT AUTO_INCREMENT PRIMARY KEY,
-    image_id INT,
     image_url varchar(255),
+    image_id INT,
     image_type INT,
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
     updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp

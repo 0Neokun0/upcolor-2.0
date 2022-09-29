@@ -20,13 +20,6 @@ const Home = () => {
     const [replys, setReplys] = useState([])
     const [profile, setProfile] = useState([])
 
-    const user = [
-        {
-            name: "Nishant",
-            course: "報告処理ネットワー",
-        }
-    ]
-
     const menus = [
         {
             value: "グループ",
