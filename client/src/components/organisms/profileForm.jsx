@@ -2,7 +2,6 @@ import { Box, Button, TextField } from "@mui/material"
 import { ProfileInput, ProfileSelect, ProfileSelectChip } from "components/molecules"
 
 const ProfileForm = (props) => {
-    console.log(props["selectQualifications"])
     return (
         props.profile.map((info, index) => {
             return (
@@ -33,6 +32,14 @@ const ProfileForm = (props) => {
                             name="mail"
                             fullWidth
                             defaultValue={info["user_mail"]}
+                        />
+
+                        <Box
+                            component="input"
+                            type="file"
+                            accept="image/*"
+                            name="icon"
+                            onChange={(e) => props.handleIcon(e)}
                         />
                     </ProfileInput>
 

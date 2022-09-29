@@ -1,10 +1,14 @@
 const express = require("express")
 const router = express.Router()
 
+const multer = require("multer")
+const upload = multer()
+
 const jwt = require("jsonwebtoken")
 const config = require("./config")
 const get = require("./function/get")
 const sql = require("./function/sql")
+
 
 router.use((req, res, next) => {
     console.log("[account] Time: ", Date.now())
@@ -300,6 +304,10 @@ router.post("/updateProfile", async (req, res) => {
 
     await sql.handleUpdate(sqlUpdateUserProfile, [name, mail, introduction, userId])
     await sql.handleUpdate(sqlUpdateStudentProfile, [course, year, qualifications, programming_languages, tools_and_framework, country_language, github, userId])
+})
+
+router.post("/getImage", upload.single("icon"), async (req, res) => {
+    console.log(req.file)
 })
 
 module.exports = router
