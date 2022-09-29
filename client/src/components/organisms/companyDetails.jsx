@@ -130,6 +130,7 @@ const CompanyDetails = (props) => {
 
           </TableRow>
         </TableHead>
+
         <TableBody>
           {rows.map((row) => (
             <Row
