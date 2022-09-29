@@ -1,4 +1,10 @@
-import { Card, Chip, Grid, Stack, Typography } from '@mui/material'
+import {
+  Card,
+  Chip,
+  Grid,
+  Stack,
+  Typography
+} from '@mui/material'
 
 const company_name = '会社名'
 const company_occupation = '業種'

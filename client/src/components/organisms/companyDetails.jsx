@@ -33,7 +33,11 @@ function Row(props) {
 
   return (
     <>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableRow
+        sx={{
+          '& > *': { borderBottom: 'unset' },
+        }}
+      >
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -43,27 +47,52 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
+
+        <TableCell
+            component="th"
+            scope="row"
+        >
           {row.name}
         </TableCell>
       </TableRow>
+
       <TableRow>
-        <TableCell style={{ paddingBottom: 2, paddingTop: 2 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Stack direction="row" spacing={3} justifyContent="flex-start">
-              <CompanyArticleBox flex={1}>
+        <TableCell
+            style={{
+                paddingBottom: 2,
+                paddingTop: 2
+            }}
+            colSpan={6}
+            >
+          <Collapse
+            in={open}
+            timeout="auto" unmountOnExit
+          >
+            <Stack
+                direction="row" spacing={3}
+                justifyContent="flex-start"
+             >
+              <CompanyArticleBox
+              flex={1}
+              >
                 <Box>
                   <img
                     alt="companyAriticleImage"
                     width={100}
                     height={70}
                     src={props.image}
-                  ></img>
+                  />
                 </Box>
               </CompanyArticleBox>
-              <CompanyArticleBox flex={7}>
-                <Typography>{props.text}</Typography>
+
+              <CompanyArticleBox
+              flex={7}
+              >
+                <Typography>
+                    {props.text}
+                </Typography>
               </CompanyArticleBox>
+
             </Stack>
           </Collapse>
         </TableCell>
@@ -81,16 +110,24 @@ const rows = [
 
 const CompanyDetails = (props) => {
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
+    <TableContainer
+    component={Paper}
+    >
+      <Table
+      aria-label="collapsible table"
+      >
         <TableHead>
           <TableRow>
             <TableCell />
+
             <TableCell>
-              <Typography variant="h5">
+              <Typography
+              variant="h5"
+              >
                 会社基本情報と会社理念についての情報
               </Typography>
             </TableCell>
+
           </TableRow>
         </TableHead>
         <TableBody>
