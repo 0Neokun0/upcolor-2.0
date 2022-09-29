@@ -1,8 +1,9 @@
-import { List, ListSubheader } from "@mui/material"
+import { Card, List, ListSubheader } from "@mui/material"
 import { SearchEntry } from "components/molecules"
 
 const CompanySearch = (props) => {
     return (
+        <>
         <List
             sx={{
                 width: "20%",
@@ -39,6 +40,7 @@ const CompanySearch = (props) => {
                 })
             }
         </List>
+        </>
     )
 }
 
