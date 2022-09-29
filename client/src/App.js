@@ -9,7 +9,7 @@ import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, R
 import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, Recruitment } from "components/pages/company"
 
-import { GroupChatLayout } from "components/templates"
+import { ClassRoomLayout, GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
 
 import logo from "components/atoms/logo/upcolor_logo.svg"
@@ -200,6 +200,8 @@ function App() {
 
                     <Route path="company/home" element={<CompanyHome />} />
                     <Route path="company/recruitment" element={<Recruitment />} />
+
+                    <Route path="classroom" element={<ClassRoomLayout />} />
                 </Routes>
             </BrowserRouter>
         </Box>
