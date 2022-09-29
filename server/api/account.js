@@ -274,14 +274,14 @@ router.post("/updateProfile", async (req, res) => {
     const github = req.body.github
 
     const sqlUpdateUserProfile = `
-    UPDATE
-        user_profiles
-    SET
-        user_name = ?,
-        user_mail = ?,
-        user_introduction = ?
-    WHERE
-        user_id = ?
+        UPDATE
+            user_profiles
+        SET
+            user_name = ?,
+            user_mail = ?,
+            user_introduction = ?
+        WHERE
+            user_id = ?
     `
     const sqlUpdateStudentProfile = `
         UPDATE
