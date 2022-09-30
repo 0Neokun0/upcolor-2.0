@@ -4,7 +4,7 @@ import { DevelopLayout } from "components/templates"
 const TeacherHome = () => {
     const menus = [
         {
-            value: "ニュース投稿",
+            value: "ニュース",
             url: "./teachernews",
         },
     ]
