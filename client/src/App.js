@@ -202,7 +202,6 @@ function App() {
                     <Route path="develop/genCompanySign" element={<ReqAuthAdm component={<GenCompanySign />} />} />
 
                     <Route path="company/home" element={<CompanyHome />} />
-                    <Route path="company/recruitment" element={<Recruitment />} />
                 </Routes>
             </BrowserRouter>
         </Box>
