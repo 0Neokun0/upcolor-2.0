@@ -6,7 +6,7 @@ import { Box } from "@mui/material"
 import { LandingPage, NotFound, Signin } from "components/pages"
 
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite, CompanyList, GroupInvite } from "components/pages/student"
-import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign } from "components/pages/teacher"
+import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherHome} from "components/pages/teacher"
 import { CompanySignup, CompanyHome, Recruitment } from "components/pages/company"
 
 import { ClassRoomLayout, GroupChatLayout } from "components/templates"
@@ -17,6 +17,7 @@ import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
 import GroupCreateLayout from "components/templates/groupCreateLayout"
+
 
 function App() {
     const [open, setOpen] = useState(false)
@@ -199,6 +200,7 @@ function App() {
                     <Route path="develop/genCompanySign" element={<ReqAuthAdm component={<GenCompanySign />} />} />
 
                     <Route path="company/home" element={<CompanyHome />} />
+                    <Route path="teacher/home" element={<TeacherHome />} />
                     <Route path="company/recruitment" element={<Recruitment />} />
 
                     <Route path="classroom" element={<ClassRoomLayout />} />

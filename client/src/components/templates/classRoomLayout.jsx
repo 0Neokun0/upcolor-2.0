@@ -1,12 +1,13 @@
-import { Outlet } from "react-router-dom"
+import ClassRoomPageHeader from "components/organisms/classRoomPageHeader"
 
-import ClassRoomPageTitle from "components/molecules/classRoomPageTitle"
-import ClassRoomDrawer from "components/organisms/classRoomDrawer"
 
-const ClassRoomLayout = () => {
+
+const ClassRoomLayout = (props) => {
   return (
     <>
-    <ClassRoomPageTitle/>
+        <ClassRoomPageHeader
+            classRoomPageHeaderContents={props.classRoomPageHeaderContents}
+        />
     </>
   )
 }
