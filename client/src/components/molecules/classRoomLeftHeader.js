@@ -45,12 +45,22 @@ const classRoomLeftHeader = (props) => {
               transform: "translateX(-50%)",
             }}
           >
-            <Typography variant="h7" gutterBottom>
-              {classRoomLeftHeaderTitle}
+            <Typography
+                variant="h7"
+                gutterBottom
+                sx = {{
+                    fontWeight: 1000
+                }}
+                >
+                {classRoomLeftHeaderTitle}
             </Typography>
             <CardActions>
-            <Button sx={{ mt: 2}} variant="contained" color="success">
-              Join
+            <Button
+                sx={{ mt: 2}}
+                variant="contained"
+                color="success"
+                >
+                Join
             </Button>
             </CardActions>
           </Box>
