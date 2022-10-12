@@ -9,7 +9,7 @@ import {
 const company_name = '会社名'
 const company_occupation = '業種'
 
-const CompanyPageTitle = () => {
+const CompanyPageTitle = (props) => {
   return (
     <>
       <Grid
@@ -31,7 +31,7 @@ const CompanyPageTitle = () => {
             variant="h2"
             component="div"
             >
-            {company_name}
+            {props.companyName}
           </Typography>
           <Stack
             direction="row"
@@ -39,7 +39,7 @@ const CompanyPageTitle = () => {
           >
             <Chip
             color="info"
-            label={company_occupation}
+            label={props.companyOccupation}
             />
           </Stack>
         </Card>

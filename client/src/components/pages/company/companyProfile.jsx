@@ -5,6 +5,10 @@ import { CompanyProfilePageLayout } from 'components/templates'
 
 const CompanyProfile = () => {
 
+    const companyName = '会社名前'
+
+    const companyOccupation = '業種'
+
     const companyDetailsTabs = [
         {
             companyDetailsTabsRow: '会社紹介記事',
@@ -68,26 +72,27 @@ const CompanyProfile = () => {
     const companyLinksTabs = [
         {
             companyLinksRow: '学内説明会',
-            companyLinksData: 'うちの会社は○○です。',
+            companyLinksData: 'wwww.marumarukaisha.com',
         },
         {
             companyLinksRow: 'マイナビ．リクナビ',
-            companyLinksData:
-            'うちの会社何やっているか分からないですが、是非ご来社宜しくお願い致します。',
+            companyLinksData: 'wwww.marumarukaishamynabi.com',
         },
         {
             companyLinksRow: 'ホームページ',
-            companyLinksData: '本社: 火星',
+            companyLinksData: 'wwww.marumarukaisha.com',
         },
         {
             companyLinksRow: 'SNS',
-            companyLinksData: '本社: 火星',
+            companyLinksData: 'wwww.marumarukaishainstagram.com',
         },
   ]
 
   return (
     <>
       <CompanyProfilePageLayout
+            companyName={companyName}
+            companyOccupation={companyOccupation}
             companyDetailsTabs={companyDetailsTabs}
             companyRecruitmentTabs={companyRecruitmentTabs}
             companyLinksTabs={companyLinksTabs}
