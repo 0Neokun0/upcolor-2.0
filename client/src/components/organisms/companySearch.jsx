@@ -14,10 +14,18 @@ const CompanySearch = (props) => {
                 width: "20%",
                 maxWidth: 360,
                 p: 2,
-                minHeight: "90vh",
-                maxHeight: "90vh",
                 bgcolor: "background.paper",
                 overflowY: "scroll",
+                "::-webkit-scrollbar": {
+                    width: "5px",
+                },
+                "::-webkit-scrollbar-thumb": {
+                    backgroundColor: "rgba(0, 0, 50, .5)",
+                    borderRadius: "5px",
+                },
+                "::-webkit-scrollbar-track": {
+                    boxShadow: 2,
+                },
             }}
         >
             {

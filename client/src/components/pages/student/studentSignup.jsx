@@ -62,18 +62,16 @@ const SignUp = () => {
     }, []);
 
     return (
-        <SignLayout
-            component={
-                <SignUpBox
-                    handleSubmit={handleSubmit}
-                    handleChange={handleChange}
-                    checkExist={checkExist}
-                    course={course}
-                    courseList={courseList}
-                    years={years}
-                />
-            }
-        />
+        <SignLayout>
+            <SignUpBox
+                handleSubmit={handleSubmit}
+                handleChange={handleChange}
+                checkExist={checkExist}
+                course={course}
+                courseList={courseList}
+                years={years}
+            />
+        </SignLayout>
     )
 }
 
