@@ -1,24 +1,32 @@
-import { Card, List, ListSubheader } from "@mui/material"
+import { CardOverflow } from "@mui/joy"
+import { Box, Card, List, ListSubheader } from "@mui/material"
 import { SearchEntry } from "components/molecules"
 
 const CompanySearch = (props) => {
     return (
-        <>
+        <Card sx={{
+            width: 300,
+            p: 1,
+            borderRadius: 2,
+        }}>
         <List
             sx={{
-                width: "20%",
-                maxWidth: 360,
+                maxWidth: 350,
                 p: 2,
-                minHeight: "90vh",
-                maxHeight: "90vh",
                 bgcolor: "background.paper",
-                overflowY: "scroll",
+                overflowY: "hidden",
             }}
             component="nav"
             aria-labelledby="nested-list-subheader"
             subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
-                    絞り込み
+                <ListSubheader>
+
+                    <Box sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}>
+                        絞り込み
+                    </Box>
                 </ListSubheader>
             }
         >
@@ -35,12 +43,13 @@ const CompanySearch = (props) => {
                             sqlId={search.sqlId}
                             sqlName={search.sqlName}
                             set={search.set}
+                            icon={search.icon}
                         />
                     )
                 })
             }
         </List>
-        </>
+        </Card>
     )
 }
 

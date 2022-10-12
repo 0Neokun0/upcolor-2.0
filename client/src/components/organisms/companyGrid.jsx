@@ -12,7 +12,7 @@ const CompanyGrid = (props) => {
                 minHeight: "90vh",
                 maxHeight: "90vh",
                 p: 2,
-                overflowY: "scroll",
+                overflowY: "hidden",
             }}
         >
             {

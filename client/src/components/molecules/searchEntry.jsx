@@ -1,18 +1,9 @@
-import ReduceCapacityIcon from '@mui/icons-material/ReduceCapacity';
-import LocalConvenienceStoreIcon from '@mui/icons-material/LocalConvenienceStore';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 
 import { Box, Collapse, List, ListItem, ListItemIcon, ListItemText, ToggleButton, ToggleButtonGroup } from "@mui/material"
 import { useState } from 'react'
-
-const data = [
-    { icon: <ReduceCapacityIcon />},
-    { icon: <LocalConvenienceStoreIcon />},
-    { icon: <TravelExploreIcon />},
-  ];
-
 
 
 
@@ -34,7 +25,7 @@ const SearchEntry = (props) => {
         <Box>
             <ListItem onClick={handleClick}>
                 <ListItemIcon>
-                <ReduceCapacityIcon/>
+                    {props.icon}
                 </ListItemIcon>
                 <ListItemText primary={props.title} />
                 {open ? <ExpandLess /> : <ExpandMore />}
@@ -48,8 +39,8 @@ const SearchEntry = (props) => {
                         onChange={handleFormat}
                         sx={{
                             width: "100%",
-                            maxHeight: "50vh",
-                            overflowY: "scroll",
+                            maxHeight: "30vh",
+                            overflowY: "auto",
                         }}
                     >
                         {

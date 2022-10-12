@@ -2,6 +2,10 @@ import axios from "axios"
 import { CompanyListLayout } from "components/templates"
 import { useState, useEffect, useRef } from "react"
 
+import ReduceCapacityIcon from '@mui/icons-material/ReduceCapacity';
+import LocalConvenienceStoreIcon from '@mui/icons-material/LocalConvenienceStore';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+
 const CompanyList = () => {
     const [companies, setCompanies] = useState([])
     const [viewCompanies, setViewCompanies] = useState([])
@@ -31,6 +35,7 @@ const CompanyList = () => {
                         sqlId: "course_id",
                         sqlName: "course_name",
                         set: setCourses,
+                        icon: <ReduceCapacityIcon />,
                     },
                     {
                         title: "業種",
@@ -39,6 +44,7 @@ const CompanyList = () => {
                         sqlId: "occupation_id",
                         sqlName: "occupation_name",
                         set: setOccupations,
+                        icon: <LocalConvenienceStoreIcon />,
                     },
                     {
                         title: "地域",
@@ -47,6 +53,7 @@ const CompanyList = () => {
                         sqlId: "prefecture_id",
                         sqlName: "prefecture_name",
                         set: setPrefectures,
+                        icon: <TravelExploreIcon />,
                     },
                 ]
                 setSearchList(search)
