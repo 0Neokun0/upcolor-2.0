@@ -42,7 +42,17 @@ const HomeLayout = (props) => {
                         borderRight: 1,
                         p: 2,
                         borderColor: "rgba(0, 0, 0, 0.12)",
-                        backgroundColor: "white"
+                        backgroundColor: "white",
+                        "::-webkit-scrollbar": {
+                            width: "5px",
+                        },
+                        "::-webkit-scrollbar-thumb": {
+                            backgroundColor: "rgba(0, 0, 50, .5)",
+                            borderRadius: "5px",
+                        },
+                        "::-webkit-scrollbar-track": {
+                            boxShadow: 2,
+                        },
                     }}
                 >
                     {/* <PostBox
