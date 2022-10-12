@@ -1,17 +1,14 @@
-import {
-  Box,
-  Card,
-  Grid,
-  Tab,
-  Tabs,
-  Typography,
-} from '@mui/material'
+import { Box, Card, Grid, Tab, Tabs, Typography } from '@mui/material'
 import { CompanyPageTitle } from 'components/molecules'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import CompanyDetails from '../organisms/companyDetails'
 import CompanyRecruitment from '../organisms/companyRecruitment'
-import CompanySeminar from '../organisms/companySeminar'
+import CompanySeminar from '../organisms/companyLinks'
+
+import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props
@@ -54,11 +51,11 @@ const CompanyProfilePageLayout = (props) => {
 
   return (
     <>
-      <Box
-        sx={{
-          p: 2,
-        }}
-      >
+        <Box
+            sx={{
+            p: 2,
+            }}
+        >
         <Grid container direction="row" spacing={3}>
           <CompanyPageTitle />
 
@@ -75,39 +72,25 @@ const CompanyProfilePageLayout = (props) => {
                 }}
               >
                 <Tabs value={value} onChange={handleChange} centered>
-                  <Tab
-				   label="会社概要" {...a11yProps(0)}
-				   />
+                  <Tab label="会社概要" icon={<BusinessRoundedIcon />} iconPosition="top" {...a11yProps(0)} />
 
-                  <Tab
-				  label="採用データ" {...a11yProps(1)}
-				  />
+                  <Tab label="採用データ" icon={<ContactMailIcon  />} iconPosition="top" {...a11yProps(1)} />
 
-                  <Tab
-				  label="説明会・セミナー" {...a11yProps(2)}
-				  />
+                  <Tab label="説明会・セミナー" icon={<AutoStoriesIcon />} iconPosition="top" {...a11yProps(2)} />
                 </Tabs>
               </Box>
 
-              <TabPanel
-			  value={value}
-			  index={0}
-			  >
+              <TabPanel value={value} index={0}>
                 <CompanyDetails companyDetailsTabs={props.companyDetailsTabs} />
               </TabPanel>
 
-              <TabPanel
-			  value={value}
-			  index={1}>
-                <CompanyRecruitment />
+              <TabPanel value={value} index={1}>
+                <CompanyRecruitment companyRecruitmentTabs={props.companyRecruitmentTabs}/>
               </TabPanel>
 
-              <TabPanel
-			  value={value}
-			  index={2}>
-                <CompanySeminar />
+              <TabPanel value={value} index={2}>
+                <CompanySeminar companyLinksTabs={props.companyLinksTabs} />
               </TabPanel>
-
             </Card>
           </Grid>
         </Grid>

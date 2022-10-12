@@ -7,26 +7,25 @@ import {
 } from '@mui/material'
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded'
 
-
-const companyRecruitment = (props) => {
+const companyLinks = (props) => {
   return (
     <Card>
-      {props.companyRecruitmentTabs.map((companyElem) => {
+      {props.companyLinksTabs.map((companyElem) => {
         return (
-          <Accordion key={companyElem['companyRecruitmentRow']}>
+          <Accordion key={companyElem['companyLinksRow']}>
             <AccordionSummary
                 sx={{
                     bgcolor: '#f5f5f5'
                 }}
                 expandIcon={<ExpandMoreRoundedIcon />}>
                 <Typography>
-                    {companyElem['companyRecruitmentRow']}
+                    {companyElem['companyLinksRow']}
                 </Typography>
             </AccordionSummary>
 
             <AccordionDetails>
                 <Typography>
-                    {companyElem['companyRecruitmentData']}
+                    {companyElem['companyLinksData']}
                 </Typography>
             </AccordionDetails>
           </Accordion>
@@ -36,4 +35,4 @@ const companyRecruitment = (props) => {
   )
 }
 
-export default companyRecruitment
+export default companyLinks
