@@ -192,7 +192,7 @@ router.post("/signout", (req, res) => {
     res.end()
 })
 
-// 自分
+// 自分 *生徒専用
 router.post("/getProfile", async (req, res) => {
     const userId = get.userId(req)
 

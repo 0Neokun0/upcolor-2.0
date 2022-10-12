@@ -3,23 +3,20 @@ import { NewsCard } from "components/molecules"
 
 const News = (props) => {
     return (
-        <Box
-            sx={{
-                "div + div": {
-                    mt: 2,
-                }
-            }}
-        >
+        <Box>
             {
                 props.news.map((elem) => {
                     return (
                         <Box
                             key={elem.id}
+                            sx={{
+                                mt: 2,
+                            }}
                         >
                             <NewsCard
                                 title={elem.title}
                                 name={elem.name}
-                                content={elem.content}
+                                text={elem.text}
                             />
                         </Box>
                     )
