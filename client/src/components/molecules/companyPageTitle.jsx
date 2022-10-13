@@ -1,13 +1,4 @@
-import {
-  Card,
-  Chip,
-  Grid,
-  Stack,
-  Typography
-} from '@mui/material'
-
-const company_name = '会社名'
-const company_occupation = '業種'
+import { Card, Chip, Grid, Stack, Typography } from '@mui/material'
 
 const CompanyPageTitle = (props) => {
   return (
@@ -26,21 +17,11 @@ const CompanyPageTitle = (props) => {
             borderRadius: '10px',
           }}
         >
-          <Typography
-            gutterBottom
-            variant="h2"
-            component="div"
-            >
+          <Typography gutterBottom variant="h2" component="div">
             {props.companyName}
           </Typography>
-          <Stack
-            direction="row"
-            spacing={2}
-          >
-            <Chip
-            color="info"
-            label={props.companyOccupation}
-            />
+          <Stack direction="row" spacing={2}>
+            <Chip color="info" label={props.companyOccupation} />
           </Stack>
         </Card>
       </Grid>
