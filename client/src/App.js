@@ -3,11 +3,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
-import { LandingPage, SignIn } from "components/pages"
+import { LandingPage, NotFound, Signin } from "components/pages"
 
-import { StudentSignup, Group, Home, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList } from "components/pages/student"
-import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign } from "components/pages/teacher"
-import { CompanySignup, CompanyProfile } from "components/pages/company"
+import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite, CompanyList, GroupInvite } from "components/pages/student"
+import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
+import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment, CompanyProfile } from "components/pages/company"
 
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
@@ -33,12 +33,12 @@ function App() {
         {
             icon: <SchoolRoundedIcon />,
             value: "学校",
-            url: "#",
+            url: "/teacher/home",
         },
         {
             icon: <BusinessRoundedIcon />,
             value: "企業",
-            url: "#",
+            url: "/company/home",
         },
     ]
 
@@ -144,6 +144,7 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="" element={<LandingPage />} />
+                    <Route path="*" element={<NotFound />} />
 
                     {/* <Route path="student/signup" element={<ReqNoAuth component={<StudentSignup />} />} /> */}
                     {/* <Route path="teacher/signup" element={<ReqNoAuth component={<TeacherSignup />} />} /> */}
@@ -153,9 +154,9 @@ function App() {
                     <Route path="signup/company/:token" element={<CompanySignup />} />
 
                     {/* <Route path="signin" element={<ReqNoAuth component={<Signin />} />} /> */}
-                    <Route path="signIn" element={<SignIn />} />
+                    <Route path="signin" element={<Signin />} />
 
-                    <Route path="Home" element={<ReqAuthStu component={<Home />} />} >
+                    <Route path="home" element={<ReqAuthStu component={<StudentHome />} />} >
                         <Route path="" element={<Feed />} />
                         <Route path=":postId" element={<FeedDetail />} />
                     </Route>
@@ -165,9 +166,18 @@ function App() {
                         <Route path="create" element={<GroupCreateLayout />} />
                     </Route>
 
+                    <Route path="groupInvite">
+                        <Route path="" element={<NotFound />} />
+                        <Route path=":inviteToken" element={<GroupInvite />} />
+                    </Route>
+
                     <Route path="teamWork" element={<TeamWork />} />
-                    <Route path="TeamList" element={<TeamList />} />
+                    <Route path="teamList" element={<TeamList />} />
                     <Route path="teamWorkInfo" element={<TeamWorkInfo />} />
+                    <Route path="teamWorkInvite">
+                        <Route path="" element={<NotFound />} />
+                        <Route path=":inviteToken" element={<TeamWorkInvite />} />
+                    </Route>
 
                     <Route path="profile">
                         <Route path="" element={<Profile />} />
@@ -176,8 +186,17 @@ function App() {
 
                     <Route path="profile/edit" element={<ProfileEdit />} />
 
-                    <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} />
-                    <Route path="timeTable/regist" element={<ReqAuthStu component={<RegistTimeTable />} />} />
+                    <Route path="companyList" element={<CompanyList />} />
+
+
+                    <Route path="timeTable" element={<ShowTimeTable />} />
+                    <Route path="timeTable/regist" element={<RegistTimeTable />} />
+
+                    {/* <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} />
+                    <Route path="timeTable/regist" element={<ReqAuthStu component={<RegistTimeTable />} />} /> */}
+
+                    <Route path="teacher" element={<ReqAuthTea component={<TeacherHome />} />} />
+                    <Route path="teacher/teacherNews" element={<ReqAuthTea component={<TeacherNews />} />} />
 
                     <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />
                     <Route path="develop/addLectures" element={<ReqAuthAdm component={<AddLectures />} />} />
@@ -185,6 +204,8 @@ function App() {
                     <Route path="develop/genCompanySign" element={<ReqAuthAdm component={<GenCompanySign />} />} />
 
                     <Route path="companyProfile" element={<CompanyProfile />} />
+                    <Route path="company/home" element={<CompanyHome />} />
+                    <Route path="company/profile/edit" element={<CompanyProfileEdit />} />
                 </Routes>
             </BrowserRouter>
         </Box>

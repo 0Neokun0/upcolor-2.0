@@ -5,8 +5,28 @@ import { SignUpBox } from "components/organisms"
 
 const SignUp = () => {
     const [checkExist, setCheckExist] = useState(false)
-    const [course, setCourse] = useState("")
     const [courseList, setCourseList] = useState([])
+    const [course, setCourse] = useState("")
+    const [year, setYear] = useState("")
+
+    const years = [
+        {
+            value: 1,
+            item: "1年",
+        },
+        {
+            value: 2,
+            item: "2年",
+        },
+        {
+            value: 3,
+            item: "3年",
+        },
+        {
+            value: 4,
+            item: "4年",
+        },
+    ]
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,7 +38,8 @@ const SignUp = () => {
             name: data.get('name'),
             email: data.get('email'),
             password: data.get('password'),
-            course: data.get('course'),
+            course: course,
+            year: year,
             userType: 1,
         })
             .then((res) => {
@@ -30,10 +51,6 @@ const SignUp = () => {
             })
     };
 
-    const handleChange = (e) => {
-        setCourse(e.target.value)
-    }
-
     useEffect(() => {
         axios.post("/course/course")
             .then((res) => {
@@ -42,17 +59,16 @@ const SignUp = () => {
     }, []);
 
     return (
-        <SignLayout
-            component={
-                <SignUpBox
-                    handleSubmit={handleSubmit}
-                    handleChange={handleChange}
-                    checkExist={checkExist}
-                    course={course}
-                    courseList={courseList}
-                />
-            }
-        />
+        <SignLayout>
+            <SignUpBox
+                handleSubmit={handleSubmit}
+                handleChange={handleChange}
+                checkExist={checkExist}
+                course={course}
+                courseList={courseList}
+                years={years}
+            />
+        </SignLayout>
     )
 }
 

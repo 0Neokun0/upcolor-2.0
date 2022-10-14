@@ -1,29 +1,54 @@
-import { Card, CardActionArea, CardContent, CardHeader, Typography } from "@mui/material"
+import { Avatar, Card, CardActionArea, CardContent, CardHeader, Divider, Typography } from "@mui/material"
 
 const NewsCard = (props) => {
     return (
         <Card
             sx={{
+                boxShadow: 2,
+                borderRadius: '15px',
                 mt: 2,
             }}
         >
-            <CardActionArea>
+            <CardActionArea
+                sx={{
+                    p: 2,
+                }}
+            >
                 <CardHeader
-                    title={props.title}
-                    subheader={props.name}
+                    avatar={<Avatar>{props.name}</Avatar>}
+                    title={props.name}
+                    subheader={props.time}
+                    sx={{
+                        p: 0,
+                    }}
                 />
-                <CardContent>
 
+                <Divider
+                    sx={{
+                        my: 2,
+                    }}
+                />
+
+                <CardContent
+                    sx={{
+                        p: 0,
+                    }}
+                >
                     <Typography
-                        variant="body2"
-                        color={"text.secondary"}
+                        variant="h5"
+                        textAlign={"center"}
+                        sx={{
+                            mb: 2,
+                        }}
                     >
-                        {props.content}
+                        {props.title}
                     </Typography>
+
+                    {props.text}
                 </CardContent>
             </CardActionArea>
         </Card>
-    );
+    )
 }
 
-export default NewsCard;
+export default NewsCard

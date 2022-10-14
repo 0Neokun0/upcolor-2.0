@@ -1,28 +1,22 @@
-import { Box, Typography } from "@mui/material"
+import { Box } from "@mui/material"
 import { NewsCard } from "components/molecules"
 
 const News = (props) => {
     return (
         <Box>
-            <Typography
-                variant="h5"
-                sx={{
-                    mt: 2,
-                    textAlign: "center",
-                }}
-            >
-                先生の投稿
-            </Typography>
             {
                 props.news.map((elem) => {
                     return (
                         <Box
                             key={elem.id}
+                            sx={{
+                                mt: 2,
+                            }}
                         >
                             <NewsCard
                                 title={elem.title}
                                 name={elem.name}
-                                content={elem.content}
+                                text={elem.text}
                             />
                         </Box>
                     )

@@ -1,13 +1,11 @@
 import Gantt from "components/atoms/gantt"
 import { Link } from "react-router-dom"
-import { Box, Button, Card, Typography } from "@mui/material"
+import { Box, Button, Card, Dialog, DialogActions, DialogTitle, Typography } from "@mui/material"
 import { TeamMembers } from "components/organisms"
 import { TeamInfoCard } from "components/molecules"
 import Toolbar from "components/atoms/toolbar"
 
 const TeamDetail = (props) => {
-
-    console.log(props.team)
     return (
         props.team.map((info, index) => {
             return (
@@ -39,7 +37,11 @@ const TeamDetail = (props) => {
                     </Box>
 
                     <TeamMembers
+                        teamId={info["team_work_id"]}
                         members={props.teamMembers}
+                        handleGenerateInviteUrl={props.handleGenerateInviteUrl}
+                        anchorEl={props.anchorEl}
+                        handleClose={props.handleClose}
                     />
 
                     <Box
@@ -62,18 +64,18 @@ const TeamDetail = (props) => {
                                 title="作品説明"
                                 content={info["team_work_description"]}
                             />
-    
+
                             <TeamInfoCard
                                 title="ターゲット"
                                 content={info["team_target"]}
                             />
-    
+
                             <TeamInfoCard
                                 title="競合サービス、差別化"
                                 content={info["team_strategy"]}
                             />
                         </Box>
-                        
+
                         <Box
                             sx={{
                                 textAlign: "right",
@@ -82,7 +84,7 @@ const TeamDetail = (props) => {
                             <Button
                                 variant="contained"
                                 component={Link}
-                                to="/teamWorkInfo"
+                                to="/teamworkinfo"
                             >
                                 編集
                             </Button>
@@ -125,6 +127,42 @@ const TeamDetail = (props) => {
                             保存
                         </Button>
                     </Box>
+
+                    <Box
+                        sx={{
+                            textAlign: "right",
+                            mt: 2,
+                        }}
+                    >
+                        <Button
+                            variant="contained"
+                            color="error"
+                            onClick={props.leaveModalOpen}
+                        >
+                            チームを抜ける
+                        </Button>
+                    </Box>
+
+                    {/* ダイアログ */}
+                    <Dialog open={Boolean(props.leaveModal)} onClose={props.leaveModalClose}>
+                        <DialogTitle>
+                            本当にチームを抜けますか?
+                        </DialogTitle>
+
+                        <DialogActions>
+                            <Button
+                                onClick={props.leaveModalClose}
+                            >
+                                キャンセル
+                            </Button>
+
+                            <Button
+                                onClick={props.leaveTeam}
+                            >
+                                チームを抜ける
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </Card>
             )
         })

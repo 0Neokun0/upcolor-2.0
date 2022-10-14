@@ -26,14 +26,12 @@ const DevelopHome = () => {
     }]
 
     return (
-        <DevelopLayout
-            component={
-                <DevelopMenus
-                    menus={menus}
-                    sx={sx}
-                />
-            }
-        />
+        <DevelopLayout>
+            <DevelopMenus
+                menus={menus}
+                sx={sx}
+            />
+        </DevelopLayout>
     )
 }
 

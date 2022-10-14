@@ -11,9 +11,26 @@ CREATE TABLE user_types(
     type_name varchar(255)
 );
 
-CREATE TABLE courses(
+CREATE TABLE courses (
     course_id INT AUTO_INCREMENT PRIMARY KEY,
     course_name VARCHAR(255)
+);
+
+CREATE TABLE regions (
+    region_id INT AUTO_INCREMENT PRIMARY KEY,
+    region_name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE prefectures (
+    prefecture_id INT AUTO_INCREMENT PRIMARY KEY,
+    prefecture_name VARCHAR(255) NOT NULL,
+    region_id INT,
+    FOREIGN KEY(region_id) REFERENCES regions(region_id)
+);
+
+CREATE TABLE occupations (
+    occupation_id INT AUTO_INCREMENT PRIMARY KEY,
+    occupation_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE user_profiles (
@@ -21,7 +38,6 @@ CREATE TABLE user_profiles (
     user_name VARCHAR(255) NOT NULL,
     user_mail VARCHAR(255) NOT NULL,
     user_password VARCHAR(255) NOT NULL,
-    user_picture_url VARCHAR(255),
     user_introduction TEXT,
     user_type_id INT,
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
@@ -62,13 +78,16 @@ CREATE TABLE teacher_profiles(
 
 CREATE TABLE company_profiles(
     company_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    company_name VARCHAR(255),
-    company_url VARCHAR(255),
-    company_industry VARCHAR(255),
-    company_occupation VARCHAR(255),
-    company_location VARCHAR(255),
+    user_id INT NOT NULL,
+    company_name VARCHAR(255) NOT NULL,
+    company_course_id VARCHAR(255),
+    company_occupation_id VARCHAR(255),
+    company_location_id VARCHAR(255),
     company_introduction TEXT,
+    company_business TEXT,
+    company_address TEXT,
+    company_url VARCHAR(255),
+    job_site_url VARCHAR(255),
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
     updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
     FOREIGN KEY(user_id) REFERENCES user_profiles(user_id) ON DELETE CASCADE
@@ -179,6 +198,17 @@ CREATE TABLE class_chat(
     FOREIGN KEY(received_class_id) REFERENCES classes_list(class_id) ON DELETE CASCADE
 );
 
+CREATE TABLE news(
+    news_id INT AUTO_INCREMENT PRIMARY KEY,
+    news_user_id INT,
+    news_title VARCHAR(255),
+    news_text VARCHAR(255),
+    target_course_id VARCHAR(255),
+    created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+    updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+    FOREIGN KEY(news_user_id) REFERENCES user_profiles(user_id) ON DELETE cascade
+);
+
 CREATE TABLE users_joined_company(
     ID INT AUTO_INCREMENT PRIMARY KEY,
     company_id INT,
@@ -267,8 +297,8 @@ CREATE TABLE gantt_links(
 
 CREATE TABLE images(
     ID INT AUTO_INCREMENT PRIMARY KEY,
-    image_id INT,
     image_url varchar(255),
+    image_id INT,
     image_type INT,
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
     updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp
@@ -353,3 +383,75 @@ VALUES
     ("ゲーム専攻/ゲームプログラムコース"),
     ("ゲーム専攻/ゲームグラフィック・アニメーションコース"),
     ("デザイン・イラスト専攻");
+
+INSERT INTO
+    regions(region_name)
+VALUES
+    ("北海道・東北"),
+    ("関東"),
+    ("甲信越"),
+    ("北陸"),
+    ("東海・中部"),
+    ("関西"),
+    ("中国・四国"),
+    ("九州・沖縄");
+
+INSERT INTO
+    prefectures(prefecture_name, region_id)
+VALUES
+    ("北海道", 1),
+    ("青森", 1),
+    ("岩手", 1),
+    ("宮城", 1),
+    ("秋田", 1),
+    ("山形", 1),
+    ("福島", 1),
+    ("茨城", 2),
+    ("栃木", 2),
+    ("群馬", 2),
+    ("埼玉", 2),
+    ("千葉", 2),
+    ("東京", 2),
+    ("神奈川", 2),
+    ("新潟", 3),
+    ("富山", 4),
+    ("石川", 4),
+    ("福井", 4),
+    ("山梨", 3),
+    ("長野", 3),
+    ("岐阜", 5),
+    ("静岡", 5),
+    ("愛知", 5),
+    ("三重", 5),
+    ("滋賀", 6),
+    ("京都", 6),
+    ("大阪", 6),
+    ("兵庫", 6),
+    ("奈良", 6),
+    ("和歌山", 6),
+    ("鳥取", 7),
+    ("島根", 7),
+    ("岡山", 7),
+    ("広島", 7),
+    ("山口", 7),
+    ("徳島", 7),
+    ("香川", 7),
+    ("愛媛", 7),
+    ("高知", 7),
+    ("福岡", 8),
+    ("佐賀", 8),
+    ("長崎", 8),
+    ("熊本", 8),
+    ("大分", 8),
+    ("宮崎", 8),
+    ("鹿児島", 8),
+    ("沖縄", 8);
+
+INSERT INTO
+    occupations(occupation_name)
+VALUES
+    ("インターネット・WEB"),
+    ("通信"),
+    ("ソフトウェア"),
+    ("ハードウェア・インフラ"),
+    ("情報処理サービス");

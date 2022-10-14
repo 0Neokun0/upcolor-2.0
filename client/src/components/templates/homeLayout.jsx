@@ -1,62 +1,92 @@
 import { Outlet } from "react-router-dom"
-import { MainMenu, News, ReplyModal, SendPost } from "components/organisms"
-import { Container, Grid } from "@mui/material"
+import {
+    MainMenu,
+    News,
+    ReplyModal,
+    SendPost,
+} from "components/organisms"
+import { Box, Hidden, Stack } from "@mui/material"
+import Footer from "components/organisms/footer/footer"
 
 const HomeLayout = (props) => {
     return (
-        <Container>
-            <Grid
-                container
-                sx={{
-                    background: "white",
-                    height: "100%",
-                }}
+        <Box
+            bgcolor={"#f5f5f5"}
+        >
+            <Stack
+                direction={"row"}
             >
-                <Grid
-                    item
-                    xs={3}
+                <Hidden
+                    lgDown
                 >
-                    <MainMenu
-                        menus={props.menus}
-                    />
-                </Grid>
+                    <Box
+                        sx={{
+                            p: 2,
+                            width: "40%",
+                        }}
+                    >
+                        <MainMenu
+                            profile={props.profile}
+                            user={props.user}
+                            menus={props.menus}
+                        />
+                    </Box>
+                </Hidden>
 
-                <Grid
-                    item
-                    xs={6}
+                <Box
                     sx={{
-                        height: "calc(100vh - 64px)",
+                        height: "100vh",
+                        width: "100%",
                         overflowY: "scroll",
                         borderLeft: 1,
                         borderRight: 1,
                         p: 2,
-                        pt: 0,
                         borderColor: "rgba(0, 0, 0, 0.12)",
+                        backgroundColor: "white",
+                        "::-webkit-scrollbar": {
+                            width: "5px",
+                        },
+                        "::-webkit-scrollbar-thumb": {
+                            backgroundColor: "rgba(0, 0, 50, .5)",
+                            borderRadius: "5px",
+                        },
+                        "::-webkit-scrollbar-track": {
+                            boxShadow: 2,
+                        },
                     }}
                 >
+                    {/* <PostBox
+                            openPostModal={props.openPostModal}
+                            togglePostModalOpen={props.togglePostModalOpen}
+                            togglePostModalClose={props.togglePostModalClose}
+                        /> */}
+
                     <Outlet
                         context={{
-                            "post": props.post,
-                            "posts": props.posts,
-                            "replys": props.replys,
-                            "toggleReplyModalOpen": props.toggleReplyModalOpen,
+                            post: props.post,
+                            posts: props.posts,
+                            replys: props.replys,
+                            toggleReplyModalOpen: props.toggleReplyModalOpen,
                         }}
                     />
-                </Grid>
+                </Box>
 
-                <Grid
-                    item
-                    xs={3}
-                    sx={{
-                        p: 2,
-                        pt: 0,
-                    }}
+                <Hidden
+                    lgDown
                 >
-                    <News
-                        news={props.news}
-                    />
-                </Grid>
-            </Grid>
+                    <Box
+                        sx={{
+                            p: 2,
+                            pt: 0,
+                            width: "40%",
+                        }}
+                    >
+                        <News
+                            news={props.news}
+                        />
+                    </Box>
+                </Hidden>
+            </Stack>
 
             <SendPost
                 handleSubmit={props.handleSubmit}
@@ -71,8 +101,10 @@ const HomeLayout = (props) => {
                 toggleReplyModalClose={props.toggleReplyModalClose}
                 postId={props.postId}
             />
-        </Container>
-    );
+
+            <Footer />
+        </Box>
+    )
 }
 
-export default HomeLayout;
+export default HomeLayout

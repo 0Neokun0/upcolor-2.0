@@ -1,4 +1,7 @@
-import { List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material"
+import { Box, IconButton, List, ListItem, ListItemButton, ListItemText, Tooltip, Typography } from "@mui/material"
+import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded'
+import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded'
+import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded'
 
 const GroupList = (props) => {
     return (
@@ -20,10 +23,62 @@ const GroupList = (props) => {
                             disablePadding
                             selected={props.selectGroupId === group["group_id"]}
                             key={group["group_id"]}
+                            secondaryAction={
+                                <Box
+                                    sx={{
+                                        "button + button": {
+                                            ml: 2,
+                                        }
+                                    }}
+                                >
+                                    {
+                                        group["created_user_id"] === props["userId"]
+                                        &&
+                                        <IconButton
+                                            edge="end"
+                                            onClick={() => props.handleGenerateInviteUrl(group["group_id"])}
+                                        >
+                                            <Tooltip
+                                                title={"招待urlコピー"}
+                                                placement="bottom"
+                                            >
+                                                <PersonAddAltRoundedIcon />
+                                            </Tooltip>
+                                        </IconButton>
+                                    }
+
+                                    {
+                                        group["created_user_id"] === props["userId"]
+                                        &&
+                                        <IconButton
+                                            edge="end"
+                                        >
+                                            <Tooltip
+                                                title={"グループを削除"}
+                                                placement="bottom"
+                                            >
+                                                <DeleteForeverRoundedIcon />
+                                            </Tooltip>
+                                        </IconButton>
+                                    }
+
+                                    <IconButton
+                                        edge="end"
+                                        onClick={() => props.handleLeaveGroup(group["group_id"])}
+                                    >
+                                        <Tooltip
+                                            title={"グループを抜ける"}
+                                            placement="bottom"
+                                        >
+                                            <ExitToAppRoundedIcon />
+                                        </Tooltip>
+                                    </IconButton>
+                                </Box>
+                            }
                         >
                             <ListItemButton
                                 onClick={
-                                    () => props.setSelectGroupId(group["group_id"])
+                                    () => props.handleLeaveGroup(group["group_id"])
                                 }
                             >
                                 <ListItemText>
@@ -51,8 +106,8 @@ const GroupList = (props) => {
                     )
                 })
             }
-        </List>
-    );
+        </List >
+    )
 }
 
-export default GroupList;
+export default GroupList

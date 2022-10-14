@@ -1,36 +1,59 @@
-import { Link } from "react-router-dom"
-import { List, ListItem, ListItemButton } from "@mui/material"
+import { Link } from 'react-router-dom'
+import {
+    Box,
+    Card,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+} from '@mui/material'
+
+import MainMenuProfileCard from 'components/molecules/mainMenuProfileCard'
 
 const MainMenu = (props) => {
     return (
-        <List
-            disablePadding
-            sx={{
-                "li + li": {
-                    borderTop: 1,
-                    borderColor: "lightgray",
-                }
-            }}
-        >
-            {
-                props.menus.map((menu, index) => {
-                    return (
-                        <ListItem
-                            disablePadding
-                            key={index}
-                        >
-                            <ListItemButton
-                                LinkComponent={Link}
-                                to={menu.url}
+        <Box>
+            <Card
+                sx={{
+                    p: 2,
+                }}
+            >
+                <MainMenuProfileCard
+                    profile={props.profile}
+                />
+
+                <List
+                    disablePadding
+                    sx={{
+                        'li + li': {
+                            borderTop: 1,
+                            borderColor: '#e3f2fd',
+                        },
+                    }}
+                >
+                    {props.menus.map((menu, index) => {
+                        return (
+                            <ListItem
+                                disablePadding
+                                key={index}
                             >
-                                {menu.value}
-                            </ListItemButton>
-                        </ListItem>
-                    )
-                })
-            }
-        </List>
-    );
+                                <ListItemButton
+                                    component={Link}
+                                    to={menu.url}
+                                >
+                                    <ListItemIcon>
+                                        {menu.icon}
+                                    </ListItemIcon>
+
+                                    {menu.value}
+                                </ListItemButton>
+                            </ListItem>
+                        )
+                    })}
+                </List>
+            </Card>
+        </Box>
+    )
 }
 
-export default MainMenu;
+export default MainMenu

@@ -37,7 +37,7 @@ const FeatureCard = (props) => {
                 }
             </Box>
         </Box>
-    );
+    )
 }
 
-export default FeatureCard;
+export default FeatureCard

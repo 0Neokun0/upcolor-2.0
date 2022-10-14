@@ -9,7 +9,7 @@ const DevelopLayout = (props) => {
                 textAlign: "center",
             }}
         >
-            {props.component}
+            {props.children}
         </Box>
     )
 }

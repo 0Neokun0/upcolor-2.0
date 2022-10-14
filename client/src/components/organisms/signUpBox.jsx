@@ -84,6 +84,9 @@ const SignUpBox = (props) => {
                         margin="normal"
                         size="small"
                         fullWidth
+                        sx={{
+                            textAlign: "left",
+                        }}
                     >
                         <InputLabel>
                             コース
@@ -91,9 +94,8 @@ const SignUpBox = (props) => {
 
                         <Select
                             label="コース"
-                            name="course"
                             value={props.course}
-                            onChange={props.handleChange}
+                            onChange={(e) => props.setCourse(e.target.value)}
                         >
 
                             {
@@ -104,6 +106,41 @@ const SignUpBox = (props) => {
                                             value={element["course_id"]}
                                         >
                                             {element["course_name"]}
+                                        </MenuItem>
+                                    )
+                                })
+                            }
+                        </Select>
+                    </FormControl>
+                }
+                {
+                    props.years
+                    &&
+                    <FormControl
+                        margin="normal"
+                        size="small"
+                        fullWidth
+                        sx={{
+                            textAlign: "left",
+                        }}
+                    >
+                        <InputLabel>
+                            学年
+                        </InputLabel>
+
+                        <Select
+                            label="学年"
+                            value={props.year}
+                            onChange={(e) => props.setYear(e.target.value)}
+                        >
+                            {
+                                props.years.map((year) => {
+                                    return (
+                                        <MenuItem
+                                            key={year["value"]}
+                                            value={year["value"]}
+                                        >
+                                            {year["item"]}
                                         </MenuItem>
                                     )
                                 })

@@ -1,34 +1,54 @@
-import { Link } from "react-router-dom"
-import { Avatar, Card, CardActionArea, CardContent, CardHeader } from "@mui/material"
+import { Link } from 'react-router-dom'
+import {
+    Avatar,
+    Card,
+    CardActionArea,
+    CardContent,
+    CardHeader,
+    Divider,
+} from '@mui/material'
 
 const Post = (props) => {
     return (
-        <Link to={"/home/" + props.id}>
+        <Link to={'/home/' + props.id}>
             <Card
-                variant="outlined"
                 sx={{
-                    mt: 2,
-                    boxShadow: 0,
+                    boxShadow: 2,
+                    borderRadius: '15px',
                 }}
             >
-                <CardActionArea>
+                <CardActionArea
+                    sx={{
+                        p: 2,
+                    }}
+                    onClick={props.togglePostViewModalOpen}
+                >
                     <CardHeader
-                        avatar={
-                            <Avatar>
-                                {props.name}
-                            </Avatar>
-                        }
+                        avatar={<Avatar>{props.name}</Avatar>}
                         title={props.name}
                         subheader={props.time}
+                        sx={{
+                            p: 0,
+                        }}
                     />
-    
-                    <CardContent>
+
+                    <Divider
+                        sx={{
+                            my: 2,
+                        }}
+                    />
+
+                    <CardContent
+                        sx={{
+                            p: 0,
+                        }}
+                    >
                         {props.content}
                     </CardContent>
                 </CardActionArea>
             </Card>
         </Link>
-    );
+    )
 }
 
-export default Post;
+export default Post

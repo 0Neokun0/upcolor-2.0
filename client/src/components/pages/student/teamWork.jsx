@@ -10,10 +10,20 @@ const TeamWork = () => {
     const [teamId, setTeamId] = useState(null)
     const [team, setTeam] = useState([])
     const [teamMembers, setTeamMembers] = useState([])
+    const [anchorEl, setAnchorEl] = useState(null)
     const [currentZoom, setCurrentZoom] = useState("Days")
+    const [leaveModal, setLeaveModal] = useState(false)
+
     const data = {
         data: [],
         links: [],
+    }
+
+    const leaveModalOpen = () => {
+        setLeaveModal(true)
+    }
+    const leaveModalClose = () => {
+        setLeaveModal(false)
     }
 
     const handleTeamCreate = (e) => {
@@ -27,8 +37,26 @@ const TeamWork = () => {
             setChatPublish: true,
             setGanttPublish: true,
         })
-        
+
         window.location.reload()
+    }
+
+    const handleGenerateInviteUrl = (e) => {
+        const target = e.currentTarget
+
+        axios.post("teamWork/getInviteURL", {
+            teamWorkId: teamId,
+        })
+            .then((res) => {
+                navigator.clipboard.writeText("http://localhost:3000/teamworkinvite/" + res.data)
+                .then(() => {
+                    setAnchorEl(target)
+                })
+            })
+    }
+
+    const handleClose = () => {
+        setAnchorEl(null)
     }
 
     const handleZoomChange = (zoom) => {
@@ -86,6 +114,7 @@ const TeamWork = () => {
     const saveGantt = () => {
         const tasks = []
         const links = gantt.getLinks()
+
         gantt.eachTask((task) => {
             tasks.push(task)
         })
@@ -95,6 +124,12 @@ const TeamWork = () => {
             tasks: tasks,
             links: links,
         })
+    }
+
+    const leaveTeam = () => {
+        axios.post("/teamWork/leaveTeam")
+
+        window.location.reload()
     }
 
     useEffect(() => {
@@ -130,8 +165,15 @@ const TeamWork = () => {
                         saveGantt={saveGantt}
 
                         team={team}
-
                         teamMembers={teamMembers}
+                        anchorEl={anchorEl}
+                        handleGenerateInviteUrl={handleGenerateInviteUrl}
+                        handleClose={handleClose}
+
+                        leaveTeam={leaveTeam}
+                        leaveModal={leaveModal}
+                        leaveModalOpen={leaveModalOpen}
+                        leaveModalClose={leaveModalClose}
                     />
                 }
             />
