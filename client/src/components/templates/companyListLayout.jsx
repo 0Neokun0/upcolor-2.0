@@ -9,11 +9,14 @@ const CompanyListLayout = (props) => {
             <Stack
                 direction="row"
                 spacing={2}
+                sx={{
+                    height: "calc(100vh - 64px)",
+                }}
             >
                 <CompanySearch
                     searchList={props.searchList}
                 />
-                
+
                 <CompanyGrid
                     companies={props.companies}
                 />

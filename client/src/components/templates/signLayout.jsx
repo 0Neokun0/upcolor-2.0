@@ -7,9 +7,9 @@ const SignInLayout = (props) => {
                 pt: 8,
             }}
         >
-            {props.component}
+            {props.children}
         </Box>
     );
 }
 
-export default SignInLayout;
+export default SignInLayout

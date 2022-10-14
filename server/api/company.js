@@ -52,7 +52,7 @@ router.post("/list", async (req, res) => {
     res.json(list[0])
 })
 
-router.post("/regist", async (req, res) => {
+router.post("/company/update", async (req, res) => {
     const userId = get.userId(req)
 
     // 募集対象 1.専攻 2.業種 3.地域

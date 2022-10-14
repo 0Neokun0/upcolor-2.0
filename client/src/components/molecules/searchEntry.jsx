@@ -39,6 +39,16 @@ const SearchEntry = (props) => {
                             width: "100%",
                             maxHeight: "50vh",
                             overflowY: "scroll",
+                            "::-webkit-scrollbar": {
+                                width: "3px",
+                            },
+                            "::-webkit-scrollbar-thumb": {
+                                backgroundColor: "rgba(0, 0, 50, .5)",
+                                borderRadius: "5px",
+                            },
+                            "::-webkit-scrollbar-track": {
+                                boxShadow: 2,
+                            },
                         }}
                     >
                         {
