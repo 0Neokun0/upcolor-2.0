@@ -11,6 +11,7 @@ const TeacherNewsLayout = (props) => {
                 borderLeft: 1,
                 borderRight: 1,
                 borderColor: "rgba(0, 0, 0, 0.12)",
+                p: 2,
             }}
         >
             {props.children}

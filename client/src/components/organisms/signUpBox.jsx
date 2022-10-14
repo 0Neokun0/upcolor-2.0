@@ -94,9 +94,8 @@ const SignUpBox = (props) => {
 
                         <Select
                             label="コース"
-                            name="course"
                             value={props.course}
-                            onChange={props.handleChange}
+                            onChange={(e) => props.setCourse(e.target.value)}
                         >
 
                             {
@@ -131,7 +130,8 @@ const SignUpBox = (props) => {
 
                         <Select
                             label="学年"
-                            name="year"
+                            value={props.year}
+                            onChange={(e) => props.setYear(e.target.value)}
                         >
                             {
                                 props.years.map((year) => {

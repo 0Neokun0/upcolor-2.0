@@ -1,19 +1,17 @@
 import axios from "axios"
 import { TeacherNewsLayout } from "components/templates"
-import { NewsForm } from "components/organisms"
+import { NewsForm, NewsList } from "components/organisms"
 import { useState } from "react"
 import { useEffect } from "react"
+import { Divider } from "@mui/material"
 
 const TeacherNews = () => {
     const [profile, setProfile] = useState([])
     const [courses, setCourses] = useState([])
+    const [news, setNews] = useState([])
     const [formState, setFormState] = useState(false)
 
     const [target, setTarget] = useState([])
-
-    const toggleForm = () => {
-        setFormState(!formState)
-    }
 
     const handleTarget = (e) => {
         const {
@@ -26,16 +24,17 @@ const TeacherNews = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const data = new FormData()
+        const data = new FormData(e.currentTarget)
 
-        axios.post("/teacher/addPost", {
-            news: data.get("news"),
+        axios.post("/teacher/addNews", {
+            title: data.get("title"),
+            text: data.get("text"),
             target: target,
         })
     }
 
     useEffect(() => {
-        axios.post("/account/getProfile")
+        axios.post("/teacher/getProfile")
             .then((res) => {
                 setProfile(res.data[0])
             })
@@ -44,13 +43,19 @@ const TeacherNews = () => {
             .then((res) => {
                 setCourses(res.data)
             })
+
+        axios.post("/teacher/getMyNews")
+            .then((res) => {
+                setNews(res.data)
+                console.log(res.data)
+            })
     }, [])
 
     return (
         <TeacherNewsLayout>
             <NewsForm
                 formState={formState}
-                toggleForm={toggleForm}
+                setFormState={setFormState}
 
                 profile={profile}
                 courses={courses}
@@ -59,6 +64,16 @@ const TeacherNews = () => {
                 handleTarget={handleTarget}
 
                 handleSubmit={handleSubmit}
+            />
+
+            <Divider
+                sx={{
+                    mt: 2,
+                }}
+            />
+
+            <NewsList
+                news={news}
             />
         </TeacherNewsLayout>
     )

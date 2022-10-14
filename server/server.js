@@ -8,6 +8,7 @@ const post = require("./api/post")
 const check = require("./api/check")
 const company = require("./api/company")
 const teacher = require("./api/teacher")
+const news = require("./api/news")
 
 const express = require("express")
 
@@ -26,3 +27,4 @@ app.use("/post", post)
 app.use("/check", check)
 app.use("/company", company)
 app.use("/teacher", teacher)
+app.use("/news", news)

@@ -198,6 +198,17 @@ CREATE TABLE class_chat(
     FOREIGN KEY(received_class_id) REFERENCES classes_list(class_id) ON DELETE CASCADE
 );
 
+CREATE TABLE news(
+    news_id INT AUTO_INCREMENT PRIMARY KEY,
+    news_user_id INT,
+    news_title VARCHAR(255),
+    news_text VARCHAR(255),
+    target_course_id VARCHAR(255),
+    created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+    updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+    FOREIGN KEY(news_user_id) REFERENCES user_profiles(user_id) ON DELETE cascade
+);
+
 CREATE TABLE users_joined_company(
     ID INT AUTO_INCREMENT PRIMARY KEY,
     company_id INT,

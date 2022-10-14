@@ -12,7 +12,6 @@ const Post = (props) => {
     return (
         <Link to={'/home/' + props.id}>
             <Card
-                variant="outlined"
                 sx={{
                     boxShadow: 2,
                     borderRadius: '15px',
