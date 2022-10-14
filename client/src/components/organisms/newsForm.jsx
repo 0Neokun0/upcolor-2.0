@@ -59,6 +59,7 @@ const NewsForm = (props) => {
                             <TextField
                                 label="タイトル"
                                 name="title"
+                                variant="filled"
                                 fullWidth
                             />
 

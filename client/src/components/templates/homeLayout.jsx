@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom"
 import {
     MainMenu,
-    News,
+    NewsList,
     ReplyModal,
     SendPost,
 } from "components/organisms"
@@ -81,7 +81,7 @@ const HomeLayout = (props) => {
                             width: "40%",
                         }}
                     >
-                        <News
+                        <NewsList
                             news={props.news}
                         />
                     </Box>

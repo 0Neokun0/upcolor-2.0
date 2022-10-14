@@ -20,6 +20,7 @@ router.post("/getStudentNews", async (req, res) => {
     const sqlSelectNews = `
         SELECT
             user_profiles.user_name,
+            news.news_id,
             news.news_title,
             news.news_text,
             news.created_at

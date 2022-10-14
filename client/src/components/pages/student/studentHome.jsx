@@ -129,6 +129,7 @@ const Home = () => {
         axios.post("/news/getStudentNews")
         .then((res) => {
             console.log(res.data)
+            setNews(res.data)
         })
     }, []);
 
