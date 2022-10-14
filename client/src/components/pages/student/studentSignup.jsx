@@ -5,8 +5,9 @@ import { SignUpBox } from "components/organisms"
 
 const SignUp = () => {
     const [checkExist, setCheckExist] = useState(false)
-    const [course, setCourse] = useState("")
     const [courseList, setCourseList] = useState([])
+    const [course, setCourse] = useState("")
+    const [year, setYear] = useState("")
 
     const years = [
         {
@@ -37,8 +38,8 @@ const SignUp = () => {
             name: data.get('name'),
             email: data.get('email'),
             password: data.get('password'),
-            course: data.get('course'),
-            year: data.get("year"),
+            course: course,
+            year: year,
             userType: 1,
         })
             .then((res) => {
@@ -49,10 +50,6 @@ const SignUp = () => {
                 }
             })
     };
-
-    const handleChange = (e) => {
-        setCourse(e.target.value)
-    }
 
     useEffect(() => {
         axios.post("/course/course")

@@ -3,11 +3,7 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 
 const NewsForm = (props) => {
     return (
-        <Box
-            sx={{
-                p: 2,
-            }}
-        >
+        <Box>
             {
                 props.formState
                     ?
@@ -15,6 +11,8 @@ const NewsForm = (props) => {
                         sx={{
                             p: 2,
                             position: "relative",
+                            boxShadow: 2,
+                            borderRadius: '15px',
                         }}
                     >
                         <IconButton
@@ -24,7 +22,7 @@ const NewsForm = (props) => {
                                 top: 0,
                                 right: 0,
                             }}
-                            onClick={props.toggleForm}
+                            onClick={() => props.setFormState(!props.formState)}
                         >
                             <CloseRoundedIcon />
                         </IconButton>
@@ -59,8 +57,15 @@ const NewsForm = (props) => {
                             }}
                         >
                             <TextField
+                                label="タイトル"
+                                name="title"
+                                fullWidth
+                            />
+
+                            <TextField
                                 label="ニュース"
-                                name="news"
+                                name="text"
+                                variant="filled"
                                 rows={6}
                                 multiline
                                 fullWidth
@@ -109,12 +114,17 @@ const NewsForm = (props) => {
                         </Box>
                     </Card>
                     :
-                    <Card>
+                    <Card
+                        sx={{
+                            boxShadow: 2,
+                            borderRadius: '15px',
+                        }}
+                    >
                         <CardActionArea
                             sx={{
                                 p: 2,
                             }}
-                            onClick={props.toggleForm}
+                            onClick={() => props.setFormState(!props.formState)}
                         >
                             <Typography>
                                 ニュースを投稿

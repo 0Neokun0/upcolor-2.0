@@ -77,6 +77,7 @@ const HomeLayout = (props) => {
                     <Box
                         sx={{
                             p: 2,
+                            pt: 0,
                             width: "40%",
                         }}
                     >
