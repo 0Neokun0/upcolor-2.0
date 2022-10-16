@@ -5,6 +5,7 @@ import {
   Box,
   Card,
   Divider,
+  Grid,
   Stack,
   Typography,
 } from '@mui/material'
@@ -22,9 +23,34 @@ const companyRecruitment = (props) => {
                     }}
                     expandIcon={<ExpandMoreRoundedIcon />}
                 >
-                <Typography>
-                    {companyElem['companyRecruitmentRow']}
-                </Typography>
+                    <Grid
+                        container
+                        direction="row"
+                        alignItems="center"
+                    >
+                        <Grid
+                            item
+                            sx={{
+                                mr: 2,
+                                }}
+                        >
+                            {companyElem['companyRecruitmentIcon']}
+                        </Grid>
+
+                        <Divider
+                            orientation="vertical"
+                            flexItem
+                            sx={{
+                                mr: 2,
+                            }}
+                        />
+
+                        <Grid item>
+                            <Typography>
+                                {companyElem['companyRecruitmentRow']}
+                            </Typography>
+                        </Grid>
+                </Grid>
                 </AccordionSummary>
 
                 <Divider />

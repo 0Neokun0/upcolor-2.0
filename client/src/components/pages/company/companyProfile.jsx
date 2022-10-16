@@ -2,6 +2,20 @@
 import { CompanyProfilePageLayout } from 'components/templates'
 // import { useEffect, useState } from 'react'
 // import { useParams } from 'react-router-dom'
+import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import BadgeIcon from '@mui/icons-material/Badge';
+import MapIcon from '@mui/icons-material/Map';
+import FolderCopyIcon from '@mui/icons-material/FolderCopy';
+import TryIcon from '@mui/icons-material/Try';
+
+import HailIcon from '@mui/icons-material/Hail';
+import SchemaIcon from '@mui/icons-material/Schema';
+import EventSeatIcon from '@mui/icons-material/EventSeat';
+
+import TodayIcon from '@mui/icons-material/Today';
+import WebIcon from '@mui/icons-material/Web';
+import HouseIcon from '@mui/icons-material/House';
+import InstagramIcon from '@mui/icons-material/Instagram';
 
 const CompanyProfile = () => {
     const companyName = '会社名前'
@@ -11,6 +25,7 @@ const CompanyProfile = () => {
     const companyDetailsTabs = [
         {
             companyDetailsTabsRow: '会社紹介記事',
+            companyDetailsIcon: <CorporateFareIcon />,
             companyDetailsImage:
                 'https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg?cs=srgb&dl=pexels-pixabay-269077.jpg&fm=jpg',
             companyDetailsData:
@@ -18,6 +33,7 @@ const CompanyProfile = () => {
         },
         {
             companyDetailsTabsRow: 'プロフィール',
+            companyDetailsIcon: <BadgeIcon />,
             companyDetailsImage:
                 'https://slidemodel.com/wp-content/uploads/30050-01-company-profile-powerpoint-template-1.jpg',
             companyDetailsData:
@@ -25,12 +41,14 @@ const CompanyProfile = () => {
         },
         {
             companyDetailsTabsRow: '本社所在地',
+            companyDetailsIcon: <MapIcon />,
             companyDetailsImage:
                 'https://job.mynavi.jp/common/img23/advance/228893-01ol.jpg',
             companyDetailsData: '本社: 火星',
         },
         {
             companyDetailsTabsRow: '事業内容',
+            companyDetailsIcon: <FolderCopyIcon />,
             companyDetailsImage:
                 'https://job.mynavi.jp/common/img23/crp_thumb/228893-thumb1_0001.jpg',
             companyDetailsData:
@@ -38,6 +56,7 @@ const CompanyProfile = () => {
         },
         {
             companyDetailsTabsRow: '社長.代表.CEO.メッセージ',
+            companyDetailsIcon: <TryIcon />,
             companyDetailsImage:
                 'https://job.mynavi.jp/common/img23/crp_thumb/228893-thumb4_0002.jpg',
             companyDetailsData:
@@ -48,12 +67,14 @@ const CompanyProfile = () => {
     const companyRecruitmentTabs = [
         {
             companyRecruitmentRow: '募集要項',
+            companyRecruitmentIcon: <HailIcon />,
             companyRecruitmentImage:
                 'https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg?cs=srgb&dl=pexels-pixabay-269077.jpg&fm=jpg',
             companyRecruitmentData: 'うちの会社は○○です。',
         },
         {
             companyRecruitmentRow: '採用フロー',
+            companyRecruitmentIcon: <SchemaIcon />,
             companyRecruitmentImage:
                 'https://slidemodel.com/wp-content/uploads/30050-01-company-profile-powerpoint-template-1.jpg',
             companyRecruitmentData:
@@ -61,6 +82,7 @@ const CompanyProfile = () => {
         },
         {
             companyRecruitmentRow: '問合せ先',
+            companyRecruitmentIcon: <EventSeatIcon />,
             companyRecruitmentImage:
                 'https://slidemodel.com/wp-content/uploads/30050-01-company-profile-powerpoint-template-1.jpg',
             companyRecruitmentData: '本社: 火星',
@@ -70,18 +92,22 @@ const CompanyProfile = () => {
     const companyLinksTabs = [
         {
             companyLinksRow: '学内説明会',
+            companyLinkIcon: <TodayIcon />,
             companyLinksData: 'wwww.marumarukaisha.com',
         },
         {
             companyLinksRow: 'マイナビ．リクナビ',
+            companyLinkIcon: <WebIcon />,
             companyLinksData: 'wwww.marumarukaishamynabi.com',
         },
         {
             companyLinksRow: 'ホームページ',
+            companyLinkIcon: <HouseIcon />,
             companyLinksData: 'wwww.marumarukaisha.com',
         },
         {
             companyLinksRow: 'SNS',
+            companyLinkIcon: <InstagramIcon />,
             companyLinksData: 'wwww.marumarukaishainstagram.com',
         },
     ]

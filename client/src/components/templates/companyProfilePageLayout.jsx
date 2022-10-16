@@ -74,6 +74,7 @@ const CompanyProfilePageLayout = (props) => {
                 <Card
                     sx={{
                     borderRadius: '10px',
+                    boxShadow: 3,
                     }}
                 >
                     <Box

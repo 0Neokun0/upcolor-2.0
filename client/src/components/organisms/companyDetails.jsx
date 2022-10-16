@@ -5,13 +5,16 @@ import {
   Box,
   Card,
   Divider,
+  Grid,
   Stack,
   Typography,
 } from '@mui/material'
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded'
 
+
 const companyDetails = (props) => {
     return (
+
         <Card>
             {props.companyDetailsTabs.map((companyElem) => {
                 return (
@@ -21,10 +24,42 @@ const companyDetails = (props) => {
                                 bgcolor: '#f5f5f5',
                             }}
                             expandIcon={<ExpandMoreRoundedIcon />}
+
                         >
-                            <Typography>
-                                {companyElem['companyDetailsTabsRow']}
-                            </Typography>
+                            <Grid
+                                container
+                                direction="row"
+                                alignItems="center"
+                            >
+                                <Grid
+                                    item
+                                    sx={{
+                                        mr: 2,
+                                    }}
+                                >
+                                    {companyElem['companyDetailsIcon']}
+                                </Grid>
+
+                                <Divider
+                                    orientation="vertical"
+                                    flexItem
+                                    sx={{
+                                        mr: 2,
+                                    }}
+                                />
+
+                                <Grid
+                                    item
+                                >
+                                    <Typography
+                                        gutterBottom
+                                        variant="h7"
+                                        component="div"
+                                        >
+                                        {companyElem['companyDetailsTabsRow']}
+                                    </Typography>
+                                </Grid>
+                            </Grid>
                         </AccordionSummary>
 
                         <Divider />
