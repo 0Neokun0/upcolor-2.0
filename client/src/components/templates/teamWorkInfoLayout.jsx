@@ -15,4 +15,4 @@ const TeamWorkInfoLayout = (props) => {
     );
 }
 
-export default TeamWorkInfoLayout;
+export default TeamWorkInfoLayout

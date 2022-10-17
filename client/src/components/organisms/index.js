@@ -1,6 +1,5 @@
 export { default as Feed } from "./feed"
 export { default as MainMenu } from "./mainMenu"
-export { default as News } from "./news"
 export { default as Header } from "./header"
 export { default as GroupList } from "./groupList"
 export { default as GroupMenu } from "./groupMenu"
