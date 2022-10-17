@@ -36,7 +36,7 @@ function App() {
         {
             icon: <BusinessRoundedIcon />,
             value: "企業",
-            url: "/company/home",
+            url: "/company/profile/edit",
         },
     ]
 
