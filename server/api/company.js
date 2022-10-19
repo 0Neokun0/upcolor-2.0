@@ -52,46 +52,87 @@ router.post("/list", async (req, res) => {
     res.json(list[0])
 })
 
-router.post("/company/update", async (req, res) => {
+router.post("/update", async (req, res) => {
     const userId = get.userId(req)
 
+    // // 募集対象 1.専攻 2.業種 3.地域
+    // const courseIds = req.courseIds
+    // const occupationIds = req.occupationIds
+    // const locationIds = req.locationIds
+
+    // // 会社紹介
+    // const introduction = req.introduction
+    // // 事業紹介
+    // const business = req.business
+    // // 本社住所
+    // const officeAddress = req.officeAddress
+
+    // // 企業ホームページURL・就活サイトURL
+    // const companyUrl = req.companyUrl
+    // const jobSiteUrl = req.jobSiteUrl
+
     // 募集対象 1.専攻 2.業種 3.地域
-    const courseIds = req.courseIds
-    const occupationIds = req.occupationIds
-    const locationIds = req.locationIds
+    const courseIds = req.body.courseIds
+    const occupationIds = ""
+    const locationIds = ""
 
     // 会社紹介
-    const introduction = req.introduction
+    const introduction = ""
     // 事業紹介
-    const business = req.business
+    const business = ""
     // 本社住所
-    const officeAddress = req.officeAddress
+    const officeAddress = ""
 
     // 企業ホームページURL・就活サイトURL
-    const companyUrl = req.companyUrl
-    const jobSiteUrl = req.jobSiteUrl
+    const companyUrl = ""
+    const jobSiteUrl = ""
 
-    const updateCompanyProfiles = `
+    console.log(courseIds)
+
+    const sqlUpdateCompanyProfiles = `
         UPDATE
             company_profiles
         SET
-            company_course_id = ?,
+            company_course_preference_id = ?,
             company_occupation_id = ?,
             company_location_id = ?,
             company_introduction = ?,
-            company_business = ?,
-            company_address = ?,
-            company_url = ?,
-            job_site_url = ?
+            company_url = ?
         WHERE
             user_id = ?
     `
 
-    await sql.handleUpdate(updateCompanyProfiles, [courseIds, occupationIds, locationIds, introduction, business, officeAddress, companyUrl, jobSiteUrl, userId])
+    await sql.handleUpdate(sqlUpdateCompanyProfiles, [courseIds, occupationIds, locationIds, introduction, companyUrl, userId])
 
     // 専攻フロー（未定）
 
     res.json(true)
+})
+
+router.post("/courses", async (req, res) => {
+    const selectCourses = `
+        SELECT
+            course_id,
+            course_name
+        FROM
+            courses
+    `
+    const courses = await sql.handleSelect(selectCourses, [])
+
+    res.json(courses)
+})
+
+router.post("/occupations", async (req, res) => {
+    const selectOccupations = `
+        SELECT
+            occupation_id,
+            occupation_name
+        FROM
+            occupations
+    `
+    const occupations = await sql.handleSelect(selectOccupations, [])
+
+    res.json(occupations)
 })
 
 module.exports = router

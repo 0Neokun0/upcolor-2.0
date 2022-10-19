@@ -62,11 +62,13 @@ const SignUp = () => {
         <SignLayout>
             <SignUpBox
                 handleSubmit={handleSubmit}
-                handleChange={handleChange}
                 checkExist={checkExist}
                 course={course}
                 courseList={courseList}
                 years={years}
+                year={year}
+                setCourse={setCourse}
+                setYear={setYear}
             />
         </SignLayout>
     )
