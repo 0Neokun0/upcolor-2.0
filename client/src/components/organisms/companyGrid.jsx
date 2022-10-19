@@ -12,7 +12,17 @@ const CompanyGrid = (props) => {
                 minHeight: "80vh",
                 maxHeight: "80vh",
                 p: 2,
-                overflowY: "hidden",
+                overflowY: "auto",
+                "::-webkit-scrollbar": {
+                    width: "5px",
+                },
+                "::-webkit-scrollbar-thumb": {
+                    backgroundColor: "rgba(0, 0, 50, .5)",
+                    borderRadius: "5px",
+                },
+                "::-webkit-scrollbar-track": {
+                    boxShadow: 2,
+                },
 
             }}
         >
@@ -29,7 +39,6 @@ const CompanyGrid = (props) => {
                         return (
                             company
                             &&
-
                             <Grid
                                 item
                                 xs={12}

@@ -5,8 +5,6 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 import { Box, Collapse, List, ListItem, ListItemIcon, ListItemText, ToggleButton, ToggleButtonGroup } from "@mui/material"
 import { useState } from 'react'
 
-
-
 const SearchEntry = (props) => {
     const [open, setOpen] = useState(false)
 
@@ -22,19 +20,33 @@ const SearchEntry = (props) => {
     }
 
     return (
-        <Box>
+        <Box sx={{
+            m:1,
+        }}
+        >
             <ListItem onClick={handleClick}>
                 <ListItemIcon>
                     {props.icon}
                 </ListItemIcon>
-                <ListItemText primary={props.title} />
-
-                {open ? <ExpandLess /> : <ExpandMore />}
-                
+                <ListItemText
+                    primary={props.title}
+                />
+                {open
+                    ?
+                    <ExpandLess />
+                    :
+                    <ExpandMore />
+                }
             </ListItem>
-
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
+                <Collapse
+                    in={open}
+                    timeout="auto"
+                    unmountOnExit
+                >
+                    <List
+                        component="div"
+                        disablePadding
+                    >
                         <ToggleButtonGroup
                             orientation="vertical"
                             name={props.name}
@@ -43,7 +55,17 @@ const SearchEntry = (props) => {
                             sx={{
                                 width: 1,
                                 maxHeight: "30vh",
-                                overflowY: "auto",
+                                overflow: "auto",
+                                "::-webkit-scrollbar": {
+                                    width: "5px",
+                                },
+                                "::-webkit-scrollbar-thumb": {
+                                    backgroundColor: "rgba(0, 0, 50, .5)",
+                                    borderRadius: "5px",
+                                },
+                                "::-webkit-scrollbar-track": {
+                                    boxShadow: 2,
+                                },
                             }}
                         >
                             {

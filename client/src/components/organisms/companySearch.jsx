@@ -8,8 +8,18 @@ const CompanySearch = (props) => {
             width: 350,
             p: 1,
             borderRadius: 2,
-            alignContent: 'center',
             boxShadow: 3,
+            overflowY: "auto",
+            "::-webkit-scrollbar": {
+                width: "5px",
+            },
+            "::-webkit-scrollbar-thumb": {
+                backgroundColor: "rgba(0, 0, 50, .5)",
+                borderRadius: "5px",
+            },
+            "::-webkit-scrollbar-track": {
+                boxShadow: 2,
+            },
             }}
         >
             <CardHeader sx={{
@@ -23,7 +33,7 @@ const CompanySearch = (props) => {
                     sx={{
                         maxWidth: 350,
                         p: 2,
-                        overflowY: "hidden",
+
                     }}
                         component="nav"
                         subheader={

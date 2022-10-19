@@ -9,7 +9,7 @@ const CompanyCard = (props) => {
                 p: 3,
                 mb: 2,
                 width: "250px",
-                borderRadius: "20px",
+                borderRadius: "25px",
                 cursor: "pointer",
                 "&:hover": {
                     backgroundColor: grey[200],

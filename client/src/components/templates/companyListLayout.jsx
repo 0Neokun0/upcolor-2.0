@@ -3,7 +3,10 @@ import { CompanyGrid, CompanySearch } from "components/organisms"
 
 const CompanyListLayout = (props) => {
     return (
-        <Box sx={{ p: 2 }}
+        <Box
+            sx={{
+                p: 2,
+            }}
         >
             <Stack
                 direction="row"
