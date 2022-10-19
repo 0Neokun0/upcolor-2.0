@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, Typography } from "@mui/material"
+import { Avatar, Box, Card, Chip, Stack, Typography } from "@mui/material"
 import { blue, grey } from "@mui/material/colors"
 
 const CompanyCard = (props) => {
@@ -9,7 +9,7 @@ const CompanyCard = (props) => {
                 p: 3,
                 mb: 2,
                 width: "250px",
-                borderRadius: "25px",
+                borderRadius: "20px",
                 cursor: "pointer",
                 "&:hover": {
                     backgroundColor: grey[200],
@@ -47,6 +47,10 @@ const CompanyCard = (props) => {
                     >
                         {props.name}
                     </Typography>
+
+                    <Chip
+                        label="業種"
+                    />
 
                     <Typography
                         variant="subtitle1"

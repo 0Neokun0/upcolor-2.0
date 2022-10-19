@@ -1,54 +1,60 @@
-import { CardOverflow } from "@mui/joy"
-import { Box, Card, List, ListSubheader } from "@mui/material"
+import { Box, Card, CardHeader, List, ListSubheader } from "@mui/material"
 import { SearchEntry } from "components/molecules"
+
 
 const CompanySearch = (props) => {
     return (
         <Card sx={{
-            width: 300,
+            width: 350,
             p: 1,
             borderRadius: 2,
-        }}>
-        <List
-            sx={{
-                maxWidth: 350,
-                p: 2,
-                bgcolor: "background.paper",
-                overflowY: "hidden",
+            alignContent: 'center',
+            boxShadow: 3,
             }}
-            component="nav"
-            aria-labelledby="nested-list-subheader"
-            subheader={
-                <ListSubheader>
-
-                    <Box sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}>
-                        絞り込み
-                    </Box>
-                </ListSubheader>
-            }
         >
-            {
-                props.searchList
-                &&
-                props.searchList.map((search, index) => {
-                    return (
-                        <SearchEntry
-                            key={index}
-                            title={search.title}
-                            select={search.selectList}
-                            name={search.name}
-                            sqlId={search.sqlId}
-                            sqlName={search.sqlName}
-                            set={search.set}
-                            icon={search.icon}
-                        />
-                    )
-                })
-            }
-        </List>
+            <CardHeader sx={{
+                textAlign: 'center',
+                p:1,
+            }}
+                title={"企業検索"}
+                subheader={"UPCOLORに掲載されている企業を検索してください。"}
+            />
+                <List
+                    sx={{
+                        maxWidth: 350,
+                        p: 2,
+                        overflowY: "hidden",
+                    }}
+                        component="nav"
+                        subheader={
+                        <ListSubheader>
+                            <Box sx={{
+                                textAlign: 'center',
+                            }}>
+                                絞り込み
+                            </Box>
+                        </ListSubheader>
+                    }
+                >
+                    {
+                        props.searchList
+                        &&
+                        props.searchList.map((search, index) => {
+                            return (
+                                <SearchEntry
+                                    key={index}
+                                    title={search.title}
+                                    select={search.selectList}
+                                    name={search.name}
+                                    sqlId={search.sqlId}
+                                    sqlName={search.sqlName}
+                                    set={search.set}
+                                    icon={search.icon}
+                                />
+                            )
+                        })
+                    }
+                </List>
         </Card>
     )
 }

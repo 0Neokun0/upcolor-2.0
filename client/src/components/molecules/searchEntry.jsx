@@ -28,36 +28,40 @@ const SearchEntry = (props) => {
                     {props.icon}
                 </ListItemIcon>
                 <ListItemText primary={props.title} />
+
                 {open ? <ExpandLess /> : <ExpandMore />}
+                
             </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                    <ToggleButtonGroup
-                        orientation="vertical"
-                        name={props.name}
-                        value={formats}
-                        onChange={handleFormat}
-                        sx={{
-                            width: "100%",
-                            maxHeight: "30vh",
-                            overflowY: "auto",
-                        }}
-                    >
-                        {
-                            props.select.map((value, index) => {
-                                return (
-                                    <ToggleButton
-                                        key={index}
-                                        value={value[props.sqlId]}
-                                    >
-                                        {value[props.sqlName]}
-                                    </ToggleButton>
-                                )
-                            })
-                        }
-                    </ToggleButtonGroup>
-                </List>
-            </Collapse>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                        <ToggleButtonGroup
+                            orientation="vertical"
+                            name={props.name}
+                            value={formats}
+                            onChange={handleFormat}
+                            sx={{
+                                width: 1,
+                                maxHeight: "30vh",
+                                overflowY: "auto",
+                            }}
+                        >
+                            {
+                                props.select.map((value, index) => {
+                                    return (
+                                        <ToggleButton sx={{
+                                            borderRadius: '10px'
+                                            }}
+                                            key={index}
+                                            value={value[props.sqlId]}
+                                        >
+                                            {value[props.sqlName]}
+                                        </ToggleButton>
+                                    )
+                                })
+                            }
+                        </ToggleButtonGroup>
+                    </List>
+                </Collapse>
         </Box>
     )
 }

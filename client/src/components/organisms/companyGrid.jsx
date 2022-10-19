@@ -1,4 +1,4 @@
-import { Box } from "@mui/material"
+import { Box, Grid } from "@mui/material"
 import { CompanyCard } from "components/molecules"
 
 const CompanyGrid = (props) => {
@@ -9,28 +9,45 @@ const CompanyGrid = (props) => {
             sx={{
                 justifyItems: "center",
                 width: "100%",
-                minHeight: "90vh",
-                maxHeight: "90vh",
+                minHeight: "80vh",
+                maxHeight: "80vh",
                 p: 2,
                 overflowY: "hidden",
             }}
         >
-            {
-                props.companies
-                &&
-                props.companies.map((company, index) => {
-                    return (
-                        company
-                        &&
-                        <CompanyCard
-                            key={index}
-                            image={userPictureUrl}
-                            name={company["company_name"]}
-                            recruite={"プログラマーなど"}
-                        />
-                    )
-                })
-            }
+            <Grid
+                container
+                spacing={4}
+                mt={0}
+                justifyContent="left"
+            >
+                {
+                    props.companies
+                    &&
+                    props.companies.map((company, index) => {
+                        return (
+                            company
+                            &&
+
+                            <Grid
+                                item
+                                xs={12}
+                                sm={8}
+                                md={5}
+                                lg={4}
+                                xl={3}
+                            >
+                                <CompanyCard
+                                    key={index}
+                                    image={userPictureUrl}
+                                    name={company["company_name"]}
+                                    recruite={"プログラマーなど"}
+                                />
+                            </Grid>
+                        )
+                    })
+                }
+            </Grid>
         </Box>
     )
 }
