@@ -12,7 +12,7 @@ const CompanyGrid = (props) => {
                 minHeight: "80vh",
                 maxHeight: "80vh",
                 p: 2,
-                overflowY: "auto",
+                overflow: "auto",
                 "::-webkit-scrollbar": {
                     width: "5px",
                 },
