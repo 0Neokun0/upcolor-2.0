@@ -14,7 +14,7 @@ const CompanyGrid = (props) => {
                 p: 2,
                 overflowY: "hidden",
 
-            }
+            }}
         >
             <Grid
                 container
