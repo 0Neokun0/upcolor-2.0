@@ -18,9 +18,10 @@ const MenuProps = {
 
 const MultipleSelectChip = (props) => {
     const handleChange = (event) => {
-        const {
-            target: { value },
-        } = event
+        // const {
+        //     target: { value },
+        // } = event
+        const value = event.target.value
         props["setSelect"](
             typeof value === 'string' ? value.split(',') : value,
         )
@@ -36,19 +37,19 @@ const MultipleSelectChip = (props) => {
                 input={<OutlinedInput label={props["label"]} />}
                 renderValue={(selected) => (
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                        {selected.map((value) => (
-                            <Chip key={value} label={value} sx={{ mt: "0 !important" }} />
+                        {selected.map((value, index) => (
+                            <Chip key={index} label={props.lists[value][props["name"]]} sx={{ mt: "0 !important" }} />
                         ))}
                     </Box>
                 )}
                 MenuProps={MenuProps}
             >
-                {props.lists.map((name) => (
+                {props.lists.map((item, index) => (
                     <MenuItem
-                        key={name}
-                        value={name}
+                        key={index}
+                        value={item[props["id"]]}
                     >
-                        {name}
+                        {item[props["name"]]}
                     </MenuItem>
                 ))}
             </Select>

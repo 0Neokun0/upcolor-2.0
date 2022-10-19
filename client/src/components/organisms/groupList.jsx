@@ -107,7 +107,7 @@ const GroupList = (props) => {
                 })
             }
         </List >
-    );
+    )
 }
 
-export default GroupList;
+export default GroupList

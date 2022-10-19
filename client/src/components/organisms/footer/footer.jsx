@@ -1,31 +1,21 @@
-
-import { Box, Container, Typography, styled } from '@mui/material';
-
-const FooterWrapper = styled(Container)(
-    ({ theme }) => `
-        margin-top: ${theme.spacing(4)};
-`
-);
+import { Box, Typography } from '@mui/material'
 
 const Footer = () => {
     return (
-        <FooterWrapper
-            className="footer-wrapper"
+        <Box
+            sx={{
+                py: 4,
+                textAlign: "center",
+                backgroundColor: "#bdbdbd",
+                boxShadow: 2,
+            }}
+        >
+            <Typography
+                variant="caption"
             >
-            <Box
-                pb={4}
-                display={{ xs: 'block', md: 'flex' }}
-                alignItems="center"
-                textAlign={{ xs: 'center', md: 'left' }}
-                justifyContent="space-between"
-            >
-                <Box>
-                    <Typography variant="subtitle1">
-                        &copy; 2022 - upcolor 進級制作2022
-                    </Typography>
-                </Box>
-            </Box>
-        </FooterWrapper>
+                &copy; 2022 - upcolor 進級制作2022
+            </Typography>
+        </Box>
     );
 }
 

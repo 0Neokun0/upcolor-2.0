@@ -13,7 +13,8 @@ const CompanyGrid = (props) => {
                 maxHeight: "80vh",
                 p: 2,
                 overflowY: "hidden",
-            }}
+
+            }
         >
             <Grid
                 container

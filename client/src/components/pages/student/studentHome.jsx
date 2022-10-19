@@ -19,13 +19,7 @@ const Home = () => {
     const [posts, setPosts] = useState([])
     const [replys, setReplys] = useState([])
     const [profile, setProfile] = useState([])
-
-    const user = [
-        {
-            name: "Nishant",
-            course: "報告処理ネットワー",
-        }
-    ]
+    const [news, setNews] = useState([])
 
     const menus = [
         {
@@ -66,20 +60,20 @@ const Home = () => {
         },
     ]
 
-    const news = [
-        {
-            id: 1,
-            title: "体調チェックアンケート",
-            name: "八木勇貴 先生",
-            content: "再度体調チェックアンケートを実施する事となりました。本日の9:20までに回答お願いします。※授業が無い学生も回答お願いします。",
-        },
-        {
-            id: 2,
-            title: "SPI模試",
-            name: "友金牧人 先生",
-            content: "キャリタスのSPI模試が本日からスタートしました。22日(木)までWebで受験できます。無料で受けられる貴重な練習の機会です。無駄にしないようにしてください。",
-        },
-    ]
+    // const news = [
+    //     {
+    //         id: 1,
+    //         title: "体調チェックアンケート",
+    //         name: "八木勇貴 先生",
+    //         text: "再度体調チェックアンケートを実施する事となりました。本日の9:20までに回答お願いします。※授業が無い学生も回答お願いします。",
+    //     },
+    //     {
+    //         id: 2,
+    //         title: "SPI模試",
+    //         name: "友金牧人 先生",
+    //         text: "キャリタスのSPI模試が本日からスタートしました。22日(木)までWebで受験できます。無料で受けられる貴重な練習の機会です。無駄にしないようにしてください。",
+    //     },
+    // ]
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -126,6 +120,17 @@ const Home = () => {
             .then((res) => {
                 setPosts(res.data)
             })
+
+        axios.post("/account/getProfile")
+            .then((res) => {
+                setProfile(res.data[0])
+            })
+
+        axios.post("/news/getStudentNews")
+        .then((res) => {
+            console.log(res.data)
+            setNews(res.data)
+        })
     }, []);
 
     useEffect(() => {
@@ -139,13 +144,6 @@ const Home = () => {
                 setReplys(res.data["replys"])
             })
     }, [postId]);
-
-    useEffect(() => {
-        axios.post("/account/getProfile")
-            .then((res) => {
-                setProfile(res.data[0])
-            })
-    }, [])
 
     return (
         <>

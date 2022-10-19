@@ -31,7 +31,7 @@ const ProfileSelect = (props) => {
                 }
             </NativeSelect>
         </FormControl>
-    );
+    )
 }
 
 export default ProfileSelect

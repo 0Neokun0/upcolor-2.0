@@ -1,7 +1,9 @@
-import { Box, Button, Card, IconButton, Modal, TextField } from "@mui/material"
+import { Avatar, Box, Button, Card, IconButton, Modal, TextField, Tooltip } from "@mui/material"
 import AddIcon from '@mui/icons-material/Add'
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import { cyan } from "@mui/material/colors"
+import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
+import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded'
+import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded'
 
 const SendPost = (props) => {
     return (
@@ -40,28 +42,81 @@ const SendPost = (props) => {
                     }}
                 >
                     <Box
-                        textAlign="right"
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}
                     >
-                        <IconButton
-                            onClick={props.togglePostModalClose}
-                        >
-                            <CloseRoundedIcon />
-                        </IconButton>
+                        <Avatar
+                            variant="rounded"
+                            sx={{
+                                width: '50',
+                                height: '50',
+                                borderRadius: '50%',
+                                objectFit: 'cover',
+                                mr: '20px',
+                            }}
+                        />
+
+                        <TextField
+                            name="text"
+                            id="outlined-multiline-flexible"
+                            variant="standard"
+                            placeholder="今どうしてる?"
+                            fullWidth
+                            multiline
+                            rows={4}
+                            autoFocus
+                        />
                     </Box>
 
-                    <TextField
-                        name="text"
-                        variant="standard"
-                        placeholder="今どうしてる?"
-                        fullWidth
-                        multiline
-                        rows={3}
-                        autoFocus
-                    />
+                    <Box
+                        justifyContent={'end'}
+                        sx={{
+                            display: 'flex',
+                        }}
+                    >
+                        <Tooltip
+                            title="写真"
+                            placement="right"
+                        >
+                            <IconButton
+                                size="small"
+                                color="success"
+                            >
+                                <AddPhotoAlternateRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip
+                            title="ビデオ"
+                            placement="right"
+                        >
+                            <IconButton
+                                size="small"
+                                color="primary"
+                            >
+                                <VideoCallRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip
+                            title="タグ"
+                            placement="right"
+                        >
+                            <IconButton
+                                size="small"
+                                color="error"
+                            >
+                                <LocalOfferRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
 
                     <Button
                         variant="contained"
                         type="submit"
+                        size="small"
                         fullWidth
                         sx={{
                             mt: 2,

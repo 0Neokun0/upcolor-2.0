@@ -32,6 +32,7 @@ const SearchEntry = (props) => {
                 {open ? <ExpandLess /> : <ExpandMore />}
                 
             </ListItem>
+
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
                         <ToggleButtonGroup

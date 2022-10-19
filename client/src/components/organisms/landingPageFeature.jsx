@@ -1,5 +1,5 @@
 import { Card } from "@mui/material"
-import { FeatureCard } from "components/molecules";
+import { FeatureCard } from "components/molecules"
 
 const LandingPageFeature = (props) => {
     return (
@@ -26,7 +26,7 @@ const LandingPageFeature = (props) => {
                 })
             }
         </Card>
-    );
+    )
 }
 
-export default LandingPageFeature;
+export default LandingPageFeature

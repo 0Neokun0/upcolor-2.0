@@ -20,7 +20,7 @@ const ProfileInput = (props) => {
 
             {props.children}
         </Paper>
-    );
+    )
 }
 
-export default ProfileInput;
+export default ProfileInput

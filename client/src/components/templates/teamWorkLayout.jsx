@@ -15,4 +15,4 @@ const TeamWorkLayout = (props) => {
     );
 }
 
-export default TeamWorkLayout;
+export default TeamWorkLayout

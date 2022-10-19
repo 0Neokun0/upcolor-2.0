@@ -71,10 +71,11 @@ const SignInBox = (props) => {
                     props.availability
                     &&
                     <Alert
-                    severity="error"
-                    sx={{
-                        mt: 2,
-                    }}>
+                        severity="error"
+                        sx={{
+                            mt: 2,
+                        }}
+                    >
                         Email Address と Password の組み合わせが存在しません
                     </Alert>
                 }

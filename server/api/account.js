@@ -1,10 +1,14 @@
 const express = require("express")
 const router = express.Router()
 
+const multer = require("multer")
+const upload = multer()
+
 const jwt = require("jsonwebtoken")
 const config = require("./config")
 const get = require("./function/get")
 const sql = require("./function/sql")
+
 
 router.use((req, res, next) => {
     console.log("[account] Time: ", Date.now())
@@ -188,7 +192,7 @@ router.post("/signout", (req, res) => {
     res.end()
 })
 
-// 自分
+// 自分 *生徒専用
 router.post("/getProfile", async (req, res) => {
     const userId = get.userId(req)
 
@@ -274,14 +278,14 @@ router.post("/updateProfile", async (req, res) => {
     const github = req.body.github
 
     const sqlUpdateUserProfile = `
-    UPDATE
-        user_profiles
-    SET
-        user_name = ?,
-        user_mail = ?,
-        user_introduction = ?
-    WHERE
-        user_id = ?
+        UPDATE
+            user_profiles
+        SET
+            user_name = ?,
+            user_mail = ?,
+            user_introduction = ?
+        WHERE
+            user_id = ?
     `
     const sqlUpdateStudentProfile = `
         UPDATE
@@ -300,6 +304,10 @@ router.post("/updateProfile", async (req, res) => {
 
     await sql.handleUpdate(sqlUpdateUserProfile, [name, mail, introduction, userId])
     await sql.handleUpdate(sqlUpdateStudentProfile, [course, year, qualifications, programming_languages, tools_and_framework, country_language, github, userId])
+})
+
+router.post("/getImage", upload.single("icon"), async (req, res) => {
+    console.log(req.file)
 })
 
 module.exports = router
