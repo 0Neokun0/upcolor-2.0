@@ -78,6 +78,26 @@ const ProfileForm = (props) => {
                         />
                     </ProfileInput>
 
+
+                    <ProfileInput
+                        title="スキル・経歴"
+                    >
+                        <TextField
+                        //user_introductionの変更忘れずにする
+                        //10/19
+                            label="スキル・経歴"
+                            name="skillsCareer"
+                            rows={3}
+                            fullWidth
+                            multiline
+                            defaultValue={info["user_introduction"]}
+                        />
+                    </ProfileInput>
+
+
+
+
+
                     <ProfileInput
                         title="スキル"
                     >

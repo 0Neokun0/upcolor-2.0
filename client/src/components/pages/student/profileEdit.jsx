@@ -14,6 +14,7 @@ const ProfileEdit = () => {
     const [selectTools, setSelectTools] = useState([])
     const [selectLanguages, setSelectLanguages] = useState([])
 
+
     const years = [
         {
             value: 1,
@@ -68,6 +69,11 @@ const ProfileEdit = () => {
         "英語",
         "ヒンディー語",
     ]
+
+
+
+
+
 
     const handleIcon = (e) => {
         setIcon(e.target.files[0])

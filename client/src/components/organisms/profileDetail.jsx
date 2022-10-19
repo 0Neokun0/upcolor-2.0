@@ -1,13 +1,23 @@
 import { Link } from "react-router-dom"
-import { Avatar, Box, Button, Card, Grid, Tooltip, Typography } from "@mui/material"
+import { Avatar, Box, Button, ButtonGroup, Card, Grid, Tooltip, Typography } from "@mui/material"
+
+
+
+
+
+
 
 const ProfileDetail = (props) => {
+
+
     return (
         <Card
             sx={{
-                width: "1000px",
+                width: "60%",
+                height: "600px",
                 mx: "auto",
                 borderRadius: 0,
+
             }}
         >
             <Grid
@@ -98,9 +108,26 @@ const ProfileDetail = (props) => {
                 >
                     <Box
                         sx={{
-                            p: 5,
+                            p: 5
+
                         }}
                     >
+
+
+                    <Button
+                        component={Link}
+                        to="./edit"
+                        variant="contained"
+                        size="small"
+                        sx={{
+                            width: "10%",
+                            height: "20%",
+                            mx: "89%",
+                        }}
+                    >
+                        編集
+                    </Button>
+
                         <Typography
                             variant="h5"
                             sx={{
@@ -112,31 +139,146 @@ const ProfileDetail = (props) => {
                             自己紹介
                         </Typography>
 
-                        {
+
+
+                        <Box
+                            id="introductionBox"
+                            sx={{
+                                position: "relative",
+                                border: 1,
+                                p: 2,
+                                marginBottom: -1,
+                                height: "150px",
+                                wordBreak: "break-all",
+                                overflow: "hidden",
+                            }}
+
+                        >{
                             props.profile["user_introduction"]
                                 ?
                                 props.profile["user_introduction"]
                                 :
-                                "未設定"
+                                ""
                         }
+
+
+                            <Box
+                                id="openBox"
+                                sx={{
+                                    position: "absolute",
+                                    bottom: "0px",
+                                    width: "100%",
+                                    py: 2,
+                                    ml: -2,
+                                    textAlign: "center",
+                                    backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0.5), white)",
+                                }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    onClick={() => props.handleOpen()}
+                                >
+                                    続きを読む
+                                </Button>
+                            </Box>
+
+                            <Box
+                                id="closeBox"
+                                sx={{
+                                    bottom: "0px",
+                                    width: "100%",
+                                    pt: 2,
+                                    textAlign: "center",
+                                    display: "none",
+                                }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    onClick={() => props.handleClose()}
+                                >
+                                    閉じる
+                                </Button>
+                            </Box>
+                        </Box>
                     </Box>
+
+                    <Grid>
+                        <Box
+                            sx={{
+                                paddingLeft: 5
+                            }}>
+                            <ButtonGroup
+                                disableElevation
+                                variant="contained"
+
+                            >
+                                <Button
+                                    onClick={() => props.setToggle(1)}
+                                >
+                                    作品
+                                </Button>
+
+                                <Button
+                                    onClick={() => props.setToggle(2)}
+                                >
+                                    スキル・経歴
+                                </Button>
+
+                                <Button
+                                    onClick={() => props.setToggle(3)}
+                                >
+                                    取り組み業務
+                                </Button>
+                            </ButtonGroup>
+                        </Box>
+
+                        {
+                            props.toggle === 1
+                            &&
+
+                            /*toggle1に作品画像出力＆選択
+                            toggle2にスキル・経歴の表示ボックス＆入力欄
+                            toggle3に取り組み業務の表示ボックス＆入力欄
+                            */
+
+                            <Box>
+
+                                aaaaaaaaaaaaaa
+                            </Box>
+                        }
+
+                        {
+                            props.toggle === 2
+                            &&
+                            <Box
+
+                            >
+                                bbbbbbbbbbbbbbbb
+                            </Box>
+                        }
+
+                        {
+                            props.toggle === 3
+                            &&
+                            <Box>
+                                ccccccccccccc
+                            </Box>
+                        }
+                    </Grid>
+
+
                 </Grid>
 
-                <Button
-                    component={Link}
-                    to="./edit"
-                    variant="contained"
-                    size="small"
-                    sx={{
-                        width: "80%",
-                        mx: "auto",
-                    }}
-                >
-                    編集
-                </Button>
+
+                <Grid>
+
+
+                </Grid>
             </Grid>
         </Card >
     )
 }
+
+
 
 export default ProfileDetail
