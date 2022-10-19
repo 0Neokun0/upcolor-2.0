@@ -60,28 +60,22 @@ const Home = () => {
         },
     ]
 
-    // const news = [
-    //     {
-    //         id: 1,
-    //         title: "体調チェックアンケート",
-    //         name: "八木勇貴 先生",
-    //         text: "再度体調チェックアンケートを実施する事となりました。本日の9:20までに回答お願いします。※授業が無い学生も回答お願いします。",
-    //     },
-    //     {
-    //         id: 2,
-    //         title: "SPI模試",
-    //         name: "友金牧人 先生",
-    //         text: "キャリタスのSPI模試が本日からスタートしました。22日(木)までWebで受験できます。無料で受けられる貴重な練習の機会です。無駄にしないようにしてください。",
-    //     },
-    // ]
-
     const handleSubmit = (e) => {
         e.preventDefault()
+
         const data = new FormData(e.currentTarget)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
 
         axios.post("/post/addPost", {
             text: data.get("text"),
-        })
+            icon: data.get("icon"),
+        },
+            config
+        )
             .then(() => {
                 window.location.reload()
             })
@@ -97,7 +91,6 @@ const Home = () => {
         })
             .then(() => {
                 window.location.reload()
-                console.log("run")
             })
     }
 
@@ -118,6 +111,7 @@ const Home = () => {
     useEffect(() => {
         axios.post("/post/getPostList")
             .then((res) => {
+                console.log(res.data)
                 setPosts(res.data)
             })
 
@@ -127,10 +121,9 @@ const Home = () => {
             })
 
         axios.post("/news/getStudentNews")
-        .then((res) => {
-            console.log(res.data)
-            setNews(res.data)
-        })
+            .then((res) => {
+                setNews(res.data)
+            })
     }, []);
 
     useEffect(() => {
@@ -171,4 +164,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default Home

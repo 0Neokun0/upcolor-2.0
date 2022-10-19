@@ -35,12 +35,30 @@ const ProfileEdit = () => {
 
     // データベースにしたほうがいいと思う
     const qualifications = [
-        "MOS/WORD",
-        "MOS/EXCEL",
-        "ITパスポート",
-        "基本情報技術者試験",
-        "応用情報技術者試験",
-        "セキュリティマネジメント",
+        {
+            id: 1,
+            value: "MOS/WORD",
+        },
+        {
+            id: 2,
+            value: "MOS/EXCEL",
+        },
+        {
+            id: 3,
+            value: "ITパスポート",
+        },
+        {
+            id: 4,
+            value: "基本情報技術者試験",
+        },
+        {
+            id: 5,
+            value: "応用情報技術者試験",
+        },
+        {
+            id: 6,
+            value: "セキュリティマネジメント",
+        },
     ]
 
     const programs = [

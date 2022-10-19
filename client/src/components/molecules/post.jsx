@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
 import {
     Avatar,
+    Box,
     Card,
     CardActionArea,
     CardContent,
     CardHeader,
     Divider,
+    Typography,
 } from '@mui/material'
 
 const Post = (props) => {
@@ -43,7 +45,30 @@ const Post = (props) => {
                             p: 0,
                         }}
                     >
-                        {props.content}
+                        <Typography>
+                            {props.content}
+                        </Typography>
+
+                        {
+                            props.url
+                            &&
+                            <Box
+                                sx={{
+                                    width: "100%",
+                                    textAlign: "center",
+                                }}
+                            >
+                                <Box
+                                    component="img"
+                                    src={"http://localhost:4000/images/post/" + props.url}
+                                    sx={{
+                                        border: 1,
+                                        maxWidth: "60%",
+                                        maxHeight: "400px"
+                                    }}
+                                />
+                            </Box>
+                        }
                     </CardContent>
                 </CardActionArea>
             </Card>

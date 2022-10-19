@@ -76,6 +76,7 @@ const SendPost = (props) => {
                             display: 'flex',
                         }}
                     >
+
                         <Tooltip
                             title="写真"
                             placement="right"
@@ -83,7 +84,15 @@ const SendPost = (props) => {
                             <IconButton
                                 size="small"
                                 color="success"
+                                component="label"
                             >
+                                <input
+                                    type="file"
+                                    name="icon"
+                                    accept=".png, .jpg, .jpeg"
+                                    hidden
+                                />
+
                                 <AddPhotoAlternateRoundedIcon />
                             </IconButton>
                         </Tooltip>

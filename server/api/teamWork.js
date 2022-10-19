@@ -107,12 +107,12 @@ router.post("/getJoinedTeamWork", async (req, res) => {
             team_works_list.publish_team_ganttchart,
             team_works_list.registered_team_work_on
         FROM
-            users_joined_team_work
+            team_works_list
             INNER JOIN
-                team_works_list ON
-                users_joined_team_work.team_work_id = team_works_list.team_work_id
+                student_profiles ON
+                team_works_list.team_work_id = student_profiles.is_colaborating
         WHERE
-            users_joined_team_work.joined_user_id = ?
+            student_profiles.user_id = ?
     `
     const joinedTeam = await sql.handleSelect(sqlSelectJoinedTeam, [userId])
 
@@ -123,24 +123,25 @@ router.post("/getJoinedTeamWork", async (req, res) => {
     }
 })
 
-router.post("/getJoinedUser", async (req, res) => {
+router.post("/getTeamMembers", async (req, res) => {
     const teamWorkId = req.body.teamWorkId
 
-    const sqlSelectJoinedUser = `
-        SELECT
-            user_profiles.user_id,
-            user_profiles.user_name
-        FROM
-            users_joined_team_work
-            INNER JOIN
-                user_profiles ON
-                users_joined_team_work.joined_user_id = user_profiles.user_id
-        WHERE
-            users_joined_team_work.team_work_id = ?
+    const sqlSelectTeamMembers = `
+    SELECT
+        user_profiles.user_id,
+        user_profiles.user_name
+    FROM
+        student_profiles
+        INNER JOIN
+            user_profiles ON
+            student_profiles.user_id = user_profiles.user_id
+    WHERE
+        student_profiles.is_colaborating = ?
     `
-    const joinedUser = await sql.handleSelect(sqlSelectJoinedUser, [teamWorkId])
 
-    res.json(joinedUser)
+    const members = await sql.handleSelect(sqlSelectTeamMembers, [teamWorkId])
+
+    res.json(members)
 })
 
 router.post("/getTeamWorkList", async (req, res) => {
@@ -434,27 +435,6 @@ router.post("/updateTeamWorkInfo", async (req, res) => {
     `
 
     await sql.handleUpdate(sqlUpdateTeamWorkInfo, [description, target, strategy, teamWorkId])
-})
-
-router.post("/getTeamMembers", async (req, res) => {
-    const teamWorkId = req.body.teamWorkId
-
-    const sqlSelectTeamMembers = `
-        SELECT
-            user_profiles.user_id,
-            user_profiles.user_name
-        FROM
-            users_joined_team_work
-        INNER JOIN
-            user_profiles ON
-            users_joined_team_work.joined_user_id = user_profiles.user_id
-        WHERE
-            users_joined_team_work.team_work_id = ?
-    `
-
-    const members = await sql.handleSelect(sqlSelectTeamMembers, [teamWorkId])
-
-    res.json(members)
 })
 
 router.post("/updateJoinTeam", async (req, res) => {
