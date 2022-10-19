@@ -11,26 +11,44 @@ CREATE TABLE user_types(
     type_name varchar(255)
 );
 
+CREATE TABLE years (
+    year_id INT AUTO_INCREMENT PRIMARY KEY,
+    year_name VARCHAR(255)
+);
+
 CREATE TABLE courses (
     course_id INT AUTO_INCREMENT PRIMARY KEY,
     course_name VARCHAR(255)
 );
 
-CREATE TABLE regions (
-    region_id INT AUTO_INCREMENT PRIMARY KEY,
-    region_name VARCHAR(255) NOT NULL
+CREATE TABLE qualifications (
+    qualification_id INT AUTO_INCREMENT PRIMARY KEY,
+    qualification_name VARCHAR(255)
 );
 
-CREATE TABLE prefectures (
-    prefecture_id INT AUTO_INCREMENT PRIMARY KEY,
-    prefecture_name VARCHAR(255) NOT NULL,
-    region_id INT,
-    FOREIGN KEY(region_id) REFERENCES regions(region_id)
+CREATE TABLE programs (
+    program_id INT AUTO_INCREMENT PRIMARY KEY,
+    program_name VARCHAR (255)
+);
+
+CREATE TABLE tools (
+    tool_id INT AUTO_INCREMENT PRIMARY KEY,
+    tool_name VARCHAR (255)
+);
+
+CREATE TABLE languages (
+    language_id INT AUTO_INCREMENT PRIMARY KEY,
+    language_name VARCHAR (255)
 );
 
 CREATE TABLE occupations (
     occupation_id INT AUTO_INCREMENT PRIMARY KEY,
     occupation_name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE prefectures (
+    prefecture_id INT AUTO_INCREMENT PRIMARY KEY,
+    prefecture_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE user_profiles (
@@ -85,9 +103,10 @@ CREATE TABLE company_profiles(
     company_location_id VARCHAR(255),
     company_introduction TEXT,
     company_business TEXT,
+    company_ceo_message TEXT,
     company_address TEXT,
-    company_url VARCHAR(255),
-    job_site_url VARCHAR(255),
+    company_homepage_url VARCHAR(255),
+    company_jobsite_url VARCHAR(255),
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
     updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
     FOREIGN KEY(user_id) REFERENCES user_profiles(user_id) ON DELETE CASCADE
@@ -371,6 +390,14 @@ VALUES
     ("ADMIN");
 
 INSERT INTO
+    years(year_name)
+VALUES
+    ("1年"),
+    ("2年"),
+    ("3年"),
+    ("4年");
+
+INSERT INTO
     courses(course_name)
 VALUES
     ("本科/システム系"),
@@ -385,67 +412,42 @@ VALUES
     ("デザイン・イラスト専攻");
 
 INSERT INTO
-    regions(region_name)
+    qualifications(qualification_name)
 VALUES
-    ("北海道・東北"),
-    ("関東"),
-    ("甲信越"),
-    ("北陸"),
-    ("東海・中部"),
-    ("関西"),
-    ("中国・四国"),
-    ("九州・沖縄");
+    ("MOS/WORD"),
+    ("MOS/EXCEL"),
+    ("ITパスポート"),
+    ("基本情報技術者試験"),
+    ("応用情報技術者試験"),
+    ("セキュリティマネジメント");
 
 INSERT INTO
-    prefectures(prefecture_name, region_id)
+    programs(program_name)
 VALUES
-    ("北海道", 1),
-    ("青森", 1),
-    ("岩手", 1),
-    ("宮城", 1),
-    ("秋田", 1),
-    ("山形", 1),
-    ("福島", 1),
-    ("茨城", 2),
-    ("栃木", 2),
-    ("群馬", 2),
-    ("埼玉", 2),
-    ("千葉", 2),
-    ("東京", 2),
-    ("神奈川", 2),
-    ("新潟", 3),
-    ("富山", 4),
-    ("石川", 4),
-    ("福井", 4),
-    ("山梨", 3),
-    ("長野", 3),
-    ("岐阜", 5),
-    ("静岡", 5),
-    ("愛知", 5),
-    ("三重", 5),
-    ("滋賀", 6),
-    ("京都", 6),
-    ("大阪", 6),
-    ("兵庫", 6),
-    ("奈良", 6),
-    ("和歌山", 6),
-    ("鳥取", 7),
-    ("島根", 7),
-    ("岡山", 7),
-    ("広島", 7),
-    ("山口", 7),
-    ("徳島", 7),
-    ("香川", 7),
-    ("愛媛", 7),
-    ("高知", 7),
-    ("福岡", 8),
-    ("佐賀", 8),
-    ("長崎", 8),
-    ("熊本", 8),
-    ("大分", 8),
-    ("宮崎", 8),
-    ("鹿児島", 8),
-    ("沖縄", 8);
+    ("HTML5/CSS3"),
+    ("C言語"),
+    ("C++"),
+    ("PHP"),
+    ("SQL"),
+    ("JavaScript"),
+    ("C#"),
+    ("Java"),
+    ("Python"),
+    ("Visual Basic(VB, VBA)");
+
+INSERT INTO
+    tools(tool_name)
+VALUES
+    ("Adobe Photoshop"),
+    ("Adobe Premiere Pro"),
+    ("Adobe illustrator");
+
+INSERT INTO
+    languages(language_name)
+VALUES
+    ("日本語"),
+    ("英語"),
+    ("ヒンディー語");
 
 INSERT INTO
     occupations(occupation_name)
@@ -455,3 +457,54 @@ VALUES
     ("ソフトウェア"),
     ("ハードウェア・インフラ"),
     ("情報処理サービス");
+
+INSERT INTO
+    prefectures(prefecture_name)
+VALUES
+    ("北海道"),
+    ("青森"),
+    ("岩手"),
+    ("宮城"),
+    ("秋田"),
+    ("山形"),
+    ("福島"),
+    ("茨城"),
+    ("栃木"),
+    ("群馬"),
+    ("埼玉"),
+    ("千葉"),
+    ("東京"),
+    ("神奈川"),
+    ("新潟"),
+    ("富山"),
+    ("石川"),
+    ("福井"),
+    ("山梨"),
+    ("長野"),
+    ("岐阜"),
+    ("静岡"),
+    ("愛知"),
+    ("三重"),
+    ("滋賀"),
+    ("京都"),
+    ("大阪"),
+    ("兵庫"),
+    ("奈良"),
+    ("和歌山"),
+    ("鳥取"),
+    ("島根"),
+    ("岡山"),
+    ("広島"),
+    ("山口"),
+    ("徳島"),
+    ("香川"),
+    ("愛媛"),
+    ("高知"),
+    ("福岡"),
+    ("佐賀"),
+    ("長崎"),
+    ("熊本"),
+    ("大分"),
+    ("宮崎"),
+    ("鹿児島"),
+    ("沖縄");
