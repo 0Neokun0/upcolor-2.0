@@ -34,13 +34,23 @@ const ProfileForm = (props) => {
                             defaultValue={info["user_mail"]}
                         />
 
-                        <Box
-                            component="input"
-                            type="file"
-                            accept="image/*"
-                            name="icon"
-                            onChange={(e) => props.handleIcon(e)}
-                        />
+                        <Button
+                            variant="contained"
+                            fullWidth
+                            component="label"
+                            sx={{
+                                mt: 2,
+                            }}
+                        >
+                            アイコンの選択
+                            <Box
+                                component="input"
+                                type="file"
+                                name="icon"
+                                accept=".png, .jpg, .jpeg"
+                                hidden
+                            />
+                        </Button>
                     </ProfileInput>
 
                     <ProfileInput

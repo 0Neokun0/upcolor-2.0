@@ -9,6 +9,8 @@ import {
     Divider,
     Typography,
 } from '@mui/material'
+import { grey } from '@mui/material/colors'
+import { server } from "components/config"
 
 const Post = (props) => {
     return (
@@ -26,7 +28,13 @@ const Post = (props) => {
                     onClick={props.togglePostViewModalOpen}
                 >
                     <CardHeader
-                        avatar={<Avatar>{props.name}</Avatar>}
+                        avatar={
+                        <Avatar
+                            src={server.host + "/images/icon/" + props.url_icon}
+                        >
+                            {props.name}
+                        </Avatar>
+                    }
                         title={props.name}
                         subheader={props.time}
                         sx={{
@@ -45,12 +53,14 @@ const Post = (props) => {
                             p: 0,
                         }}
                     >
-                        <Typography>
-                            {props.content}
-                        </Typography>
+                        <Typography
+                            dangerouslySetInnerHTML={{
+                                __html: props.content
+                            }}
+                        />
 
                         {
-                            props.url
+                            props.url_post
                             &&
                             <Box
                                 sx={{
@@ -60,10 +70,11 @@ const Post = (props) => {
                             >
                                 <Box
                                     component="img"
-                                    src={"http://localhost:4000/images/post/" + props.url}
+                                    src={server.host + "/images/post/" + props.url_post}
                                     sx={{
                                         border: 1,
-                                        maxWidth: "60%",
+                                        borderColor: grey[500],
+                                        maxWidth: "50%",
                                         maxHeight: "400px"
                                     }}
                                 />

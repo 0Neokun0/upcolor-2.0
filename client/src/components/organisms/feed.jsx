@@ -27,7 +27,8 @@ const Feed = () => {
                                 name={post["user_name"]}
                                 time={post["created_at"]}
                                 content={post["post_text"]}
-                                url={post["image_url"]}
+                                url_icon={post["url_icon"]}
+                                url_post={post["url_post"]}
                             />
                         )
                     })

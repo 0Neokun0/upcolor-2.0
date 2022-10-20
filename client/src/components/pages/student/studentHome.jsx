@@ -72,7 +72,7 @@ const Home = () => {
 
         axios.post("/post/addPost", {
             text: data.get("text"),
-            icon: data.get("icon"),
+            image: data.get("image"),
         },
             config
         )
@@ -84,11 +84,19 @@ const Home = () => {
         e.preventDefault()
 
         const data = new FormData(e.currentTarget)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
 
         axios.post("/post/addReply", {
             text: data.get("text"),
+            image: data.get("image"),
             parentId: data.get("parentId"),
-        })
+        },
+            config
+        )
             .then(() => {
                 window.location.reload()
             })
@@ -111,8 +119,8 @@ const Home = () => {
     useEffect(() => {
         axios.post("/post/getPostList")
             .then((res) => {
-                console.log(res.data)
                 setPosts(res.data)
+                console.log(res.data)
             })
 
         axios.post("/account/getProfile")

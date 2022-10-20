@@ -2,7 +2,17 @@ const express = require("express")
 const router = express.Router()
 
 const multer = require("multer")
-const upload = multer()
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/images/icon/')
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+        cb(null, uniqueSuffix + ".png")
+    }
+})
+const upload = multer({ storage: storage })
 
 const jwt = require("jsonwebtoken")
 const config = require("./config")
@@ -72,6 +82,23 @@ router.post("/signup", async (req, res) => {
         const user = await sql.handleInsert(sqlInsertUser, [name, email, password, userType])
 
         const userId = user.insertId
+
+        // 初期アイコンを設定
+        const sqlInsertIcon = `
+            INSERT INTO images(
+                image_url,
+                image_id,
+                image_type
+            )
+            VALUES(
+                "userIcon.png",
+                ?,
+                1
+            )
+        `
+        await sql.handleInsert(sqlInsertIcon, [userId])
+        //
+
         const token = jwt.sign({ userId: userId }, config.jwt.secret, config.jwt.options)
 
         const date = new Date()
@@ -210,7 +237,8 @@ router.post("/getProfile", async (req, res) => {
             student_profiles.student_qualifications,
             student_profiles.student_github,
             student_profiles.is_colaborating,
-            courses.course_name
+            courses.course_name,
+            images.image_url
         FROM
             user_profiles
         INNER JOIN
@@ -219,6 +247,9 @@ router.post("/getProfile", async (req, res) => {
         INNER JOIN
             courses ON
             student_profiles.student_course_id = courses.course_id
+        INNER JOIN
+            images ON
+            user_profiles.user_id = images.image_id AND images.image_type = 1
         WHERE
             user_profiles.user_id = ?
     `
@@ -244,7 +275,8 @@ router.post("/getStudentProfile", async (req, res) => {
             student_profiles.student_qualifications,
             student_profiles.student_github,
             student_profiles.is_colaborating,
-            courses.course_name
+            courses.course_name,
+            images.image_url
         FROM
             user_profiles
         INNER JOIN
@@ -253,6 +285,9 @@ router.post("/getStudentProfile", async (req, res) => {
         INNER JOIN
             courses ON
             student_profiles.student_course_id = courses.course_id
+        INNER JOIN
+            images ON
+            user_profiles.user_id = images.image_id AND images.image_type = 1
         WHERE
             user_profiles.user_id = ?
     `
@@ -306,8 +341,22 @@ router.post("/updateProfile", async (req, res) => {
     await sql.handleUpdate(sqlUpdateStudentProfile, [course, year, qualifications, programming_languages, tools_and_framework, country_language, github, userId])
 })
 
-router.post("/getImage", upload.single("icon"), async (req, res) => {
-    console.log(req.file)
+router.post("/updateUserIcon", upload.single("icon"), async (req, res) => {
+    if (req.file) {
+        const userId = get.userId(req)
+        const sqlUpdateIcon = `
+            UPDATE
+                images
+            SET
+                image_url = ?
+            WHERE
+                image_type = 1 AND
+                image_id = ?
+        `
+        const icon = await sql.handleUpdate(sqlUpdateIcon, [req.file.filename, userId])
+
+        res.json(icon)
+    }
 })
 
 module.exports = router

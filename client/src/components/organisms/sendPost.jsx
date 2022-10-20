@@ -1,6 +1,7 @@
 import { Avatar, Box, Button, Card, IconButton, Modal, TextField, Tooltip } from "@mui/material"
 import AddIcon from '@mui/icons-material/Add'
 import { cyan } from "@mui/material/colors"
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
 import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded'
 import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded'
@@ -42,6 +43,16 @@ const SendPost = (props) => {
                     }}
                 >
                     <Box
+                        textAlign="right"
+                    >
+                        <IconButton
+                            onClick={props.togglePostModalClose}
+                        >
+                            <CloseRoundedIcon />
+                        </IconButton>
+                    </Box>
+
+                    <Box
                         sx={{
                             display: 'flex',
                             alignItems: 'center',
@@ -60,13 +71,17 @@ const SendPost = (props) => {
 
                         <TextField
                             name="text"
-                            id="outlined-multiline-flexible"
                             variant="standard"
                             placeholder="今どうしてる?"
                             fullWidth
                             multiline
                             rows={4}
+                            type="text"
                             autoFocus
+                            inputProps={{
+                                minLength: 5,
+                            }}
+                            required
                         />
                     </Box>
 
@@ -86,9 +101,10 @@ const SendPost = (props) => {
                                 color="success"
                                 component="label"
                             >
-                                <input
+                                <Box
+                                    component="input"
                                     type="file"
-                                    name="icon"
+                                    name="image"
                                     accept=".png, .jpg, .jpeg"
                                     hidden
                                 />
