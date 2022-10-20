@@ -33,7 +33,7 @@ const Signin = () => {
                 availability={availability}
             />
         </SignLayout>
-    );
+    )
 }
 
 export default Signin;
