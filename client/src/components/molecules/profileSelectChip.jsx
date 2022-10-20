@@ -19,13 +19,14 @@ const MenuProps = {
 const MultipleSelectChip = (props) => {
     const handleChange = (event) => {
         const value = event.target.value
-        console.log(value.slice(-1)[0])
-        if (!value.includes(NaN)) {
+        if (!value.includes(-1)) {
             props["setSelect"] (
                 typeof value === 'string' ? value.split(',') : value,
             )
         } else {
-            if (value.slice(-1)[0] === NaN) {
+            if (value.slice(-1)[0] === -1) {
+                props["setSelect"] ([value.slice(-1)[0]])
+            } else if (value[0] === -1 && value.length === 1) {
                 props["setSelect"] ([])
             } else {
                 value.shift()
@@ -35,8 +36,6 @@ const MultipleSelectChip = (props) => {
             }
         }
     }
-
-    console.log(Boolean(props.select[0]))
 
     return (
         <FormControl fullWidth>
@@ -55,30 +54,34 @@ const MultipleSelectChip = (props) => {
                             gap: 0.5
                         }}
                     >
-                        {selected.map((value, index) => (
-                            !Boolean(value) ?
-                            <Chip
-                                key={index}
-                                label="なし"
-                                sx={{
-                                    mt: "0 !important"
-                                }}
-                            />
-                            :
-                            <Chip
-                                key={index}
-                                label={props.lists[value - 1][props["name"]]}
-                                sx={{
-                                    mt: "0 !important"
-                                }}
-                            />
-                        ))}
+                        {
+                            selected.map((value, index) => (
+                                value !== -1 ?
+                                <Chip
+                                    key={index}
+                                    label={props.lists[value - 1][props["sqlName"]]}
+                                    sx={{
+                                        mt: "0 !important"
+                                    }}
+                                />
+                                :
+                                <Chip
+                                    key={index}
+                                    label="なし"
+                                    sx={{
+                                        mt: "0 !important"
+                                    }}
+                                />
+                            ))
+
+                        }
+
                     </Box>
                 )}
                 MenuProps={MenuProps}
             >
                 <MenuItem
-                    value={NaN}
+                    value={-1}
                 >
                     なし
                 </MenuItem>
@@ -86,9 +89,9 @@ const MultipleSelectChip = (props) => {
                 {props.lists.map((item, index) => (
                     <MenuItem
                         key={index}
-                        value={item[props["id"]]}
+                        value={item[props["sqlId"]]}
                     >
-                        {item[props["name"]]}
+                        {item[props["sqlName"]]}
                     </MenuItem>
                 ))}
             </Select>

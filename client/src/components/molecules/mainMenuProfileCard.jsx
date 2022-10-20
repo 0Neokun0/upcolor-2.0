@@ -31,7 +31,8 @@ const MainMenuProfileCard = (props) => {
                     textAlign={"center"}
                     width="100%"
                 >
-                    {props.profile.user_name}
+                    {/* {props.profile.user_name} */}
+                    {/* {props["displayValue"]["user_name"]} */}
                 </Typography>
             </Box>
 

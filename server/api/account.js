@@ -196,34 +196,7 @@ router.post("/signout", (req, res) => {
 router.post("/getProfile", async (req, res) => {
     const userId = get.userId(req)
 
-    const sqlSelectUser = `
-        SELECT
-            user_profiles.user_id,
-            user_profiles.user_name,
-            user_profiles.user_mail,
-            user_profiles.user_introduction,
-            student_profiles.student_course_id,
-            student_profiles.student_year,
-            student_profiles.student_programming_languages,
-            student_profiles.student_tools_and_framework,
-            student_profiles.student_country_language,
-            student_profiles.student_qualifications,
-            student_profiles.student_github,
-            student_profiles.is_colaborating,
-            courses.course_name
-        FROM
-            user_profiles
-        INNER JOIN
-            student_profiles ON
-            user_profiles.user_id = student_profiles.user_id
-        INNER JOIN
-            courses ON
-            student_profiles.student_course_id = courses.course_id
-        WHERE
-            user_profiles.user_id = ?
-    `
-
-    const profile = await sql.handleSelect(sqlSelectUser, [userId])
+    const profile = await get.user(userId)
 
     res.json(profile)
 })
@@ -232,32 +205,7 @@ router.post("/getProfile", async (req, res) => {
 router.post("/getStudentProfile", async (req, res) => {
     const userId = req.body.userId
 
-    const sqlSelectUser = `
-        SELECT
-            user_profiles.user_name,
-            user_profiles.user_mail,
-            user_profiles.user_introduction,
-            student_profiles.student_year,
-            student_profiles.student_programming_languages,
-            student_profiles.student_tools_and_framework,
-            student_profiles.student_country_language,
-            student_profiles.student_qualifications,
-            student_profiles.student_github,
-            student_profiles.is_colaborating,
-            courses.course_name
-        FROM
-            user_profiles
-        INNER JOIN
-            student_profiles ON
-            user_profiles.user_id = student_profiles.user_id
-        INNER JOIN
-            courses ON
-            student_profiles.student_course_id = courses.course_id
-        WHERE
-            user_profiles.user_id = ?
-    `
-
-    const profile = await sql.handleSelect(sqlSelectUser, [userId])
+    const profile = await get.user(userId)
 
     res.json(profile)
 })
@@ -272,7 +220,7 @@ router.post("/editProfile", async (req, res) => {
     const tools = await get.list("tool")
     const languages = await get.list("language")
 
-    res.json([{
+    res.json({
         profile: profile[0],
         courses: courses,
         years: years,
@@ -280,22 +228,21 @@ router.post("/editProfile", async (req, res) => {
         programs: programs,
         tools: tools,
         languages: languages
-    }][0])
+    })
 })
 
 router.post("/updateProfile", async (req, res) => {
     const userId = get.userId(req)
 
     const name = req.body.name
-    const mail = req.body.mail
     const introduction = req.body.introduction
 
     const course = req.body.course
     const year = req.body.year
-    const qualifications = req.body.qualifications.join(",")
-    const programming_languages = req.body.programming_languages.join(",")
-    const tools_and_framework = req.body.tools_and_framework.join(",")
-    const country_language = req.body.country_language.join(",")
+    const qualifications = req.body.qualifications
+    const programming_languages = req.body.programming_languages
+    const tools_and_framework = req.body.tools_and_framework
+    const country_language = req.body.country_language
     const github = req.body.github
 
     const sqlUpdateUserProfile = `

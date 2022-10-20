@@ -51,8 +51,6 @@ const CompanyProfileEdit = () => {
             })
     }, [])
 
-    console.log(profile)
-
     return (
         profile
         &&
@@ -118,8 +116,8 @@ const CompanyProfileEdit = () => {
                         select={courseIds}
                         setSelect={setCourseIds}
                         lists={coursesList}
-                        id="course_id"
-                        name="course_name"
+                        sqlId="course_id"
+                        sqlName="course_name"
                     />
 
                     <ProfileSelectChip
@@ -127,8 +125,8 @@ const CompanyProfileEdit = () => {
                         select={occupationIds}
                         setSelect={setOccupationIds}
                         lists={occupationsList}
-                        id="occupation_id"
-                        name="occupation_name"
+                        sqlId="occupation_id"
+                        sqlName="occupation_name"
                     />
 
                     <ProfileSelectChip
@@ -136,8 +134,8 @@ const CompanyProfileEdit = () => {
                         select={locationIds}
                         setSelect={setLocationIds}
                         lists={locationsList}
-                        id="prefecture_id"
-                        name="prefecture_name"
+                        sqlId="prefecture_id"
+                        sqlName="prefecture_name"
                     />
                 </ProfileInput>
 

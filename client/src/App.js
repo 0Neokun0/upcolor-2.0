@@ -5,7 +5,7 @@ import { Box } from "@mui/material"
 
 import { LandingPage, NotFound, Signin } from "components/pages"
 
-import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite, CompanyList, GroupInvite } from "components/pages/student"
+import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite } from "components/pages/student"
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment } from "components/pages/company"
 
@@ -184,7 +184,8 @@ function App() {
 
                     <Route path="profile/edit" element={<ProfileEdit />} />
 
-                    <Route path="companyList" element={<CompanyList />} />
+                    <Route path="list/student" element={<StudentList />} />
+                    <Route path="list/company" element={<CompanyList />} />
 
 
                     <Route path="timeTable" element={<ShowTimeTable />} />
