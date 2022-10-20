@@ -1,32 +1,30 @@
-import { Outlet } from "react-router-dom"
-import { Container, Grid } from "@mui/material"
-import { GroupMenu } from "components/organisms"
+import { Outlet } from "react-router-dom";
+import { Box, Card, Stack } from "@mui/material";
+import { GroupMenu } from "components/organisms";
+import ChatUserCard from "components/molecules/chatUserCard";
+import GroupSideBar from "components/organisms/groupSideBar";
 
 const GroupLayout = (props) => {
     return (
-        <Container>
-            <Grid
-                container
+        <Box
+            sx={{
+                pt: 2,
+                m: 1,
+            }}
+        >
+            <Stack
+                direction="row"
+                spacing={2}
                 sx={{
-                    background: "white",
+                    height: "calc(100vh - 64px)",
                 }}
             >
-                <Grid
-                    item
-                    xs={1}
-                    sx={{
-                        borderRight: 1,
-                        borderColor: "rgba(0, 0, 0, 0.12)",
-                    }}
-                >
-                    <GroupMenu
-                        menus={props.menus}
-                    />
-                </Grid>
+                <GroupSideBar menus={props.menus} />
 
-                <Grid
-                    item
-                    xs={11}
+                <Card
+                    sx={{
+                        width: 1,
+                    }}
                 >
                     <Outlet
                         context={{
@@ -35,17 +33,18 @@ const GroupLayout = (props) => {
                             selectGroupId: props.selectGroupId,
                             setSelectGroupId: props.setSelectGroupId,
                             handleCreateSubmit: props.handleCreateSubmit,
-                            handleGenerateInviteUrl: props.handleGenerateInviteUrl,
+                            handleGenerateInviteUrl:
+                                props.handleGenerateInviteUrl,
                             handleLeaveGroup: props.handleLeaveGroup,
 
                             chats: props.chats,
                             handleSendChat: props.handleSendChat,
                         }}
                     />
-                </Grid>
-            </Grid>
-        </Container>
+                </Card>
+            </Stack>
+        </Box>
     );
-}
+};
 
 export default GroupLayout;
