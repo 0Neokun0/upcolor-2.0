@@ -3,11 +3,9 @@ import axios from "axios"
 import { ProfileEditLayout } from "components/templates"
 import { ProfileForm } from "components/organisms"
 import { ProfileInput, ProfileSelect, ProfileSelectChip } from "components/molecules"
-import { TextField } from "@mui/material"
+import { Box, Button, TextField } from "@mui/material"
 
 const ProfileEdit = () => {
-    const [icon, setIcon] = useState([])
-
     const [profile, setProfile] = useState(false)
     const [coursesList, setCoursesList] = useState([])
     const [courseId, setCourseId] = useState("")
@@ -48,12 +46,12 @@ const ProfileEdit = () => {
         },
             config
         )
-        .then(() => {
-            window.location.href = "/profile"
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+            .then(() => {
+                window.location.href = "/profile"
+            })
+            .catch((error) => {
+                console.log(error)
+            })
 
     }
 
@@ -113,23 +111,23 @@ const ProfileEdit = () => {
                         fullWidth
                         disabled
                     />
-                    
+
                     <Button
-                          variant="contained"
-                          fullWidth
-                          component="label"
-                          sx={{
-                              mt: 2,
-                          }}
-                      >
-                          アイコンの選択
-                          <Box
-                              component="input"
-                              type="file"
-                              name="icon"
-                              accept=".png, .jpg, .jpeg"
-                              hidden
-                          />
+                        variant="contained"
+                        fullWidth
+                        component="label"
+                        sx={{
+                            mt: 2,
+                        }}
+                    >
+                        アイコンの選択
+                        <Box
+                            component="input"
+                            type="file"
+                            name="icon"
+                            accept=".png, .jpg, .jpeg"
+                            hidden
+                        />
                     </Button>
                 </ProfileInput>
 
@@ -222,7 +220,7 @@ const ProfileEdit = () => {
                 </ProfileInput>
             </ProfileForm>
         </ProfileEditLayout>
-        
+
         // <TeamWorkInfoLayout
         //     component={
         //         <ProfileForm
