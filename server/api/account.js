@@ -297,6 +297,27 @@ router.post("/getStudentProfile", async (req, res) => {
     res.json(profile)
 })
 
+router.post("/editProfile", async (req, res) => {
+    const userId = get.userId(req)
+    const profile = await get.user(userId)
+    const courses = await get.list("course")
+    const years = await get.list("year")
+    const qualifications = await get.list("qualification")
+    const programs = await get.list("program")
+    const tools = await get.list("tool")
+    const languages = await get.list("language")
+
+    res.json([{
+        profile: profile[0],
+        courses: courses,
+        years: years,
+        qualifications: qualifications,
+        programs: programs,
+        tools: tools,
+        languages: languages
+    }][0])
+})
+
 router.post("/updateProfile", async (req, res) => {
     const userId = get.userId(req)
 
@@ -317,7 +338,6 @@ router.post("/updateProfile", async (req, res) => {
             user_profiles
         SET
             user_name = ?,
-            user_mail = ?,
             user_introduction = ?
         WHERE
             user_id = ?
@@ -337,7 +357,7 @@ router.post("/updateProfile", async (req, res) => {
             user_id = ?
     `
 
-    await sql.handleUpdate(sqlUpdateUserProfile, [name, mail, introduction, userId])
+    await sql.handleUpdate(sqlUpdateUserProfile, [name, introduction, userId])
     await sql.handleUpdate(sqlUpdateStudentProfile, [course, year, qualifications, programming_languages, tools_and_framework, country_language, github, userId])
 })
 
