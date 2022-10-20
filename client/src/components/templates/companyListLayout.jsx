@@ -1,10 +1,12 @@
-import { Container, Stack } from "@mui/material"
+import { Box, Stack } from "@mui/material"
 import { CompanyGrid, CompanySearch } from "components/organisms"
 
 const CompanyListLayout = (props) => {
     return (
-        <Container
-            maxWidth="xl"
+        <Box
+            sx={{
+                p: 2,
+            }}
         >
             <Stack
                 direction="row"
@@ -21,7 +23,7 @@ const CompanyListLayout = (props) => {
                     companies={props.companies}
                 />
             </Stack>
-        </Container>
+        </Box>
     )
 }
 
