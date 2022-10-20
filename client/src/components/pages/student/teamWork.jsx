@@ -14,9 +14,22 @@ const TeamWork = () => {
     const [currentZoom, setCurrentZoom] = useState("Days")
     const [leaveModal, setLeaveModal] = useState(false)
 
+    const [inviteState, setInviteState] = useState(false)
+    const [chatState, setChatState] = useState(false)
+    const [ganttState, setGanttState] = useState(false)
+
     const data = {
         data: [],
         links: [],
+    }
+
+    const saveSetting = () => {
+        axios.post("/teamWork/updateSetting", {
+            teamWorkId: teamId,
+            inviteState: inviteState,
+            chatState: chatState,
+            ganttState: ganttState,
+        })
     }
 
     const leaveModalOpen = () => {
@@ -49,9 +62,9 @@ const TeamWork = () => {
         })
             .then((res) => {
                 navigator.clipboard.writeText("http://localhost:3000/teamworkinvite/" + res.data)
-                .then(() => {
-                    setAnchorEl(target)
-                })
+                    .then(() => {
+                        setAnchorEl(target)
+                    })
             })
     }
 
@@ -137,6 +150,15 @@ const TeamWork = () => {
             .then((res) => {
                 setTeamId(res.data[0]["team_work_id"])
                 setTeam(res.data)
+
+                axios.post("/teamWork/getSetting", {
+                    teamWorkId: res.data[0]["team_work_id"],
+                })
+                    .then((res) => {
+                        setInviteState(Boolean(res.data["invite"]))
+                        setChatState(Boolean(res.data["chat"]))
+                        setGanttState(Boolean(res.data["gantt"]))
+                    })
             })
     }, [])
 
@@ -174,6 +196,15 @@ const TeamWork = () => {
                         leaveModal={leaveModal}
                         leaveModalOpen={leaveModalOpen}
                         leaveModalClose={leaveModalClose}
+
+                        inviteState={inviteState}
+                        chatState={chatState}
+                        ganttState={ganttState}
+
+                        setInviteState={setInviteState}
+                        setChatState={setChatState}
+                        setGanttState={setGanttState}
+                        saveSetting={saveSetting}
                     />
                 }
             />
