@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom"
 import { Avatar, Box, Divider, IconButton, Typography, Link as Mlink } from "@mui/material"
 import CommentRoundedIcon from '@mui/icons-material/CommentRounded'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
-import { Link } from "react-router-dom"
+import { grey } from "@mui/material/colors"
+import { server } from "components/config"
 
 const ViewFeed = (props) => {
     return (
@@ -12,7 +14,11 @@ const ViewFeed = (props) => {
                     alignItems: "center",
                 }}
             >
-                <Avatar />
+                <Avatar
+                    src={server.host + "/images/icon/" + props.post["url_icon"]}
+                >
+                    {props.post["user_name"]}
+                </Avatar>
 
                 <Mlink
                     component={Link}
@@ -34,6 +40,28 @@ const ViewFeed = (props) => {
                 }}
             >
                 {props.post["post_text"]}
+
+                {
+                    props.post["url_post"]
+                    &&
+                    <Box
+                        sx={{
+                            width: "100%",
+                            textAlign: "center",
+                        }}
+                    >
+                        <Box
+                            component="img"
+                            src={server.host + "/images/post/" + props.post["url_post"]}
+                            sx={{
+                                border: 1,
+                                borderColor: grey[500],
+                                maxWidth: "100%",
+                                maxHeight: "500px"
+                            }}
+                        />
+                    </Box>
+                }
             </Box>
 
             <Typography

@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom'
 import {
     Avatar,
+    Box,
     Card,
     CardActionArea,
     CardContent,
     CardHeader,
     Divider,
+    Typography,
 } from '@mui/material'
+import { grey } from '@mui/material/colors'
+import { server } from "components/config"
 
 const Post = (props) => {
     return (
@@ -24,7 +28,13 @@ const Post = (props) => {
                     onClick={props.togglePostViewModalOpen}
                 >
                     <CardHeader
-                        avatar={<Avatar>{props.name}</Avatar>}
+                        avatar={
+                        <Avatar
+                            src={server.host + "/images/icon/" + props.url_icon}
+                        >
+                            {props.name}
+                        </Avatar>
+                    }
                         title={props.name}
                         subheader={props.time}
                         sx={{
@@ -43,7 +53,33 @@ const Post = (props) => {
                             p: 0,
                         }}
                     >
-                        {props.content}
+                        <Typography
+                            dangerouslySetInnerHTML={{
+                                __html: props.content
+                            }}
+                        />
+
+                        {
+                            props.url_post
+                            &&
+                            <Box
+                                sx={{
+                                    width: "100%",
+                                    textAlign: "center",
+                                }}
+                            >
+                                <Box
+                                    component="img"
+                                    src={server.host + "/images/post/" + props.url_post}
+                                    sx={{
+                                        border: 1,
+                                        borderColor: grey[500],
+                                        maxWidth: "50%",
+                                        maxHeight: "400px"
+                                    }}
+                                />
+                            </Box>
+                        }
                     </CardContent>
                 </CardActionArea>
             </Card>

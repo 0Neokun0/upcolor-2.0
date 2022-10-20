@@ -22,14 +22,15 @@ const ProfileEdit = () => {
     const [languagesList, setLanguagesList] = useState([])
     const [languageIds, setLanguageIds] = useState([])
 
-    const handleIcon = (e) => {
-        setIcon(e.target.files[0])
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault()
 
         const data = new FormData(e.currentTarget)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
 
         axios.post("/account/updateProfile", {
             name: data.get("name"),
@@ -42,18 +43,18 @@ const ProfileEdit = () => {
             introduction: data.get("introduction"),
             github: data.get("github"),
         })
-
-
-        const image = new FormData()
-        image.append("icon", icon)
-
-        axios.post("/account/getImage", image, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
+        axios.post("/account/updateUserIcon", {
+            icon: data.get("icon"),
+        },
+            config
+        )
+        .then(() => {
+            window.location.href = "/profile"
+        })
+        .catch((error) => {
+            console.log(error)
         })
 
-        window.location.href = "/profile"
     }
 
     useEffect(() => {
@@ -112,14 +113,24 @@ const ProfileEdit = () => {
                         fullWidth
                         disabled
                     />
-
-                    {/* <Box
-                        component="input"
-                        type="file"
-                        accept="image/*"
-                        name="icon"
-                        onChange={(e) => props.handleIcon(e)}
-                    /> */}
+                    
+                    <Button
+                          variant="contained"
+                          fullWidth
+                          component="label"
+                          sx={{
+                              mt: 2,
+                          }}
+                      >
+                          アイコンの選択
+                          <Box
+                              component="input"
+                              type="file"
+                              name="icon"
+                              accept=".png, .jpg, .jpeg"
+                              hidden
+                          />
+                    </Button>
                 </ProfileInput>
 
                 <ProfileInput
@@ -209,9 +220,9 @@ const ProfileEdit = () => {
                         defaultValue={profile["student_github"]}
                     />
                 </ProfileInput>
-
             </ProfileForm>
         </ProfileEditLayout>
+        
         // <TeamWorkInfoLayout
         //     component={
         //         <ProfileForm
