@@ -1,66 +1,63 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { CompanyProfileEditLayout } from "components/templates"
-import { CompanyProfileForm } from "components/organisms"
+import { ProfileEditLayout } from "components/templates"
+import { ProfileForm } from "components/organisms"
 import { ProfileInput, ProfileSelectChip } from "components/molecules"
-import { Box, TextField } from "@mui/material"
+import { TextField } from "@mui/material"
 
 const CompanyProfileEdit = () => {
 
     const [profile, setProfile] = useState(false)
     const [courseIds, setCourseIds] = useState([])
-    const [coursesList, setCoursesList] = useState(false)
+    const [coursesList, setCoursesList] = useState([])
     const [occupationIds, setOccupationIds] = useState([])
     const [occupationsList, setOccupationsList] = useState([])
     const [locationIds, setLocationIds] = useState([])
+    const [locationsList, setLocationsList] = useState([])
 
     const handleSubmit = (e) => {
         e.preventDefault()
         const data = new FormData(e.currentTarget)
 
         axios.post("/company/update", {
-            courseIds: courseIds.join(),
-            occupationIds: occupationIds,
-            locationIds: locationIds,
             introduction: data.get("introduction"),
             business: data.get("business"),
+            ceoMessage: data.get("ceoMessage"),
+            courseIds: courseIds.join(),
+            occupationIds: occupationIds.join(),
+            locationIds: locationIds.join(),
             officeAddress: data.get("officeAddress"),
-            companyUrl: data.get("companyUrl"),
+            homePageUrl: data.get("homePageUrl"),
             jobSiteUrl: data.get("jobSiteUrl"),
         })
     }
 
     useEffect(() => {
-        axios.post("/company/getProfile")
+        axios.post("/company/editProfile")
             .then((res) => {
-                setProfile(res.data[0])
-                if (res.data[0]["company_course_preference_id"]) {
-                    setCourseIds(res.data[0]["company_course_preference_id"].split(",").map(Number))
+                setProfile(res.data["company"])
+                if (res.data["company"]["company_course_id"]) {
+                    setCourseIds(res.data["company"]["company_course_id"].split(",").map(Number))
                 }
-            })
-
-        axios.post("/company/courses")
-            .then((res) => {
-                setCoursesList(res.data)
-            })
-
-        axios.post("/company/occupations")
-            .then((res) => {
-                setOccupationsList(res.data)
+                if (res.data["company"]["company_occupation_id"]) {
+                    setOccupationIds(res.data["company"]["company_occupation_id"].split(",").map(Number))
+                }
+                if (res.data["company"]["company_location_id"]) {
+                    setLocationIds(res.data["company"]["company_location_id"].split(",").map(Number))
+                }
+                setCoursesList(res.data["courses"])
+                setOccupationsList(res.data["occupations"])
+                setLocationsList(res.data["locations"])
             })
     }, [])
 
-    console.log(courseIds)
+    console.log(profile)
 
     return (
         profile
         &&
-        coursesList
-        &&
-        occupationsList
-        &&
-        <CompanyProfileEditLayout>
-            <CompanyProfileForm
+        <ProfileEditLayout>
+            <ProfileForm
                 handleSubmit={handleSubmit}
             >
                 <ProfileInput
@@ -89,31 +86,33 @@ const CompanyProfileEdit = () => {
                         label="企業紹介"
                         name="introduction"
                         rows={3}
+                        defaultValue={profile["company_introduction"]}
                         fullWidth
                         multiline
                     />
 
                     <TextField
                         label="企業プロフィール"
-                        name="industry"
+                        name="business"
                         rows={3}
+                        defaultValue={profile["company_business"]}
                         fullWidth
                         multiline
                     />
 
                     <TextField
                         label="社長.代表.CEO.メッセージ"
-                        name="introduction"
+                        name="ceoMessage"
                         rows={3}
+                        defaultValue={profile["company_ceo_message"]}
                         fullWidth
                         multiline
                     />
                 </ProfileInput>
 
                 <ProfileInput
-                    title="募集専攻"
+                    title="募集項目"
                 >
-                    {/* 配列の中身をすべて文字列から数値に変更する */}
                     <ProfileSelectChip
                         label="専攻"
                         select={courseIds}
@@ -122,9 +121,56 @@ const CompanyProfileEdit = () => {
                         id="course_id"
                         name="course_name"
                     />
+
+                    <ProfileSelectChip
+                        label="業種"
+                        select={occupationIds}
+                        setSelect={setOccupationIds}
+                        lists={occupationsList}
+                        id="occupation_id"
+                        name="occupation_name"
+                    />
+
+                    <ProfileSelectChip
+                        label="都道府県"
+                        select={locationIds}
+                        setSelect={setLocationIds}
+                        lists={locationsList}
+                        id="prefecture_id"
+                        name="prefecture_name"
+                    />
                 </ProfileInput>
-            </CompanyProfileForm>
-        </CompanyProfileEditLayout>
+
+                <ProfileInput
+                    title="本社住所"
+                >
+                    <TextField
+                        label="住所"
+                        name="officeAddress"
+                        defaultValue={profile["company_address"]}
+                        fullWidth
+                    />
+                </ProfileInput>
+
+                <ProfileInput
+                    title="URL"
+                >
+                    <TextField
+                        label="会社ホームページURL"
+                        name="homePageUrl"
+                        defaultValue={profile["company_homepage_url"]}
+                        fullWidth
+                    />
+
+                    <TextField
+                        label="就活サイトURL"
+                        name="jobSiteUrl"
+                        defaultValue={profile["company_jobsite_url"]}
+                        fullWidth
+                    />
+                </ProfileInput>
+            </ProfileForm>
+        </ProfileEditLayout>
     )
 }
 

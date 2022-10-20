@@ -1,6 +1,6 @@
 import { Box } from "@mui/system"
 
-const CompanyProfileEditLayout = (props) => {
+const ProfileEditLayout = (props) => {
     return (
         <Box
             sx={{
@@ -15,4 +15,4 @@ const CompanyProfileEditLayout = (props) => {
     )
 }
 
-export default CompanyProfileEditLayout
+export default ProfileEditLayout
