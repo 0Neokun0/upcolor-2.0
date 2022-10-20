@@ -28,7 +28,7 @@ const CompanyGrid = (props) => {
         >
             <Grid
                 container
-                spacing={4}
+                spacing={0}
                 mt={0}
                 justifyContent="left"
             >
@@ -42,8 +42,7 @@ const CompanyGrid = (props) => {
                             <Grid
                                 item
                                 xs={12}
-                                sm={8}
-                                md={5}
+                                sm={6}
                                 lg={4}
                                 xl={3}
                             >

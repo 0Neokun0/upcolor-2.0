@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, Chip, Stack, Typography } from "@mui/material"
+import { Avatar, Box, Card, Chip, Typography } from "@mui/material"
 import { blue, grey } from "@mui/material/colors"
 
 const CompanyCard = (props) => {
@@ -8,7 +8,7 @@ const CompanyCard = (props) => {
                 mx: "auto",
                 p: 2,
                 mb: 2,
-                width: "250px",
+                width: "80%",
                 borderRadius: "25px",
                 cursor: "pointer",
                 "&:hover": {
