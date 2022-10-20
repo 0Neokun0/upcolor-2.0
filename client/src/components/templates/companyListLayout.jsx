@@ -1,4 +1,4 @@
-import { Box,  Stack } from "@mui/material"
+import { Box, Stack } from "@mui/material"
 import { CompanyGrid, CompanySearch } from "components/organisms"
 
 const CompanyListLayout = (props) => {
