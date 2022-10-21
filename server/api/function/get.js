@@ -93,3 +93,18 @@ exports.list = async (type) => {
 
     return types
 }
+
+exports.joinedTeamId = async (userId) => {
+    const sqlSelectTeam = `
+        SELECT
+            is_colaborating
+        FROM
+            student_profiles
+        WHERE
+            user_id = ?
+    `
+
+    const joinedTeamId = await sql.handleSelect(sqlSelectTeam, [userId])
+
+    return joinedTeamId[0]["is_colaborating"]
+}

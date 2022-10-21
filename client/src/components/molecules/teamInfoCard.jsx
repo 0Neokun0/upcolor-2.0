@@ -1,31 +1,41 @@
-import { Card, Typography } from "@mui/material"
+import { Button, Card, CardActions, CardContent, Typography } from "@mui/material"
 
 const TeamInfoCard = (props) => {
     return (
         <Card
-            sx={{
-                p: 1,
-                width: "30%",
-                wordBreak: "break-word",
-            }}
+            variant="outlined"
         >
-            <Typography
-                sx={{
-                    fontWeight: "bold",
-                }}
-            >
-                {props.title}
-            </Typography>
+            <CardContent>
+                <Typography
+                    variant="h5"
+                    sx={{
+                        borderBottom: 1,
+                        mb: 2,
+                    }}
+                >
+                    {props["title"]}
+                </Typography>
 
-            <Typography>
-                {
-                    props.content
-                        ?
-                        props.content
-                        :
-                        "未設定"
-                }
-            </Typography>
+                <Typography
+                    sx={{
+                        whiteSpace: "pre-wrap",
+                    }}
+                >
+                    {
+                        props["content"]
+                            ?
+                            props["content"]
+                            :
+                            "情報なし"
+                    }
+                </Typography>
+            </CardContent>
+
+            <CardActions>
+                <Button>
+                    ボタン
+                </Button>
+            </CardActions>
         </Card>
     )
 }
