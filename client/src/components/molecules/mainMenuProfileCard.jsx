@@ -8,6 +8,7 @@ import {
     Switch,
     Typography,
 } from '@mui/material'
+import { server } from 'components/config'
 
 const MainMenuProfileCard = (props) => {
     return (
@@ -24,7 +25,9 @@ const MainMenuProfileCard = (props) => {
                     alignItems: "center",
                 }}
             >
-                <Avatar />
+                <Avatar
+                    src={server.host + "/images/icon/" + props.profile.image_url}
+                />
 
                 <Typography
                     fontWeight="bold"
@@ -41,6 +44,7 @@ const MainMenuProfileCard = (props) => {
                 }}
             />
 
+            ↓*** 要検討 ***↓
             <Box
                 justifyContent={"space-between"}
                 sx={{

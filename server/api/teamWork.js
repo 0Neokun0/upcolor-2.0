@@ -461,4 +461,46 @@ router.post("/updateJoinTeam", async (req, res) => {
     }
 })
 
+router.post("/getSetting", async (req, res) => {
+    const teamWorkId = req.body.teamWorkId
+
+    const sqlSelectSetting = `
+        SELECT
+            publish_team_chat,
+            publish_team_ganttchart,
+            registered_team_work_on
+        FROM
+            team_works_list
+        WHERE
+            team_work_id = ?
+    `
+
+    const settings = await sql.handleSelect(sqlSelectSetting, [teamWorkId])
+
+    res.json({
+        chat: settings[0]["publish_team_chat"],
+        gantt: settings[0]["publish_team_ganttchart"],
+        invite: settings[0]["registered_team_work_on"]
+    })
+})
+
+router.post("/updateSetting", async (req, res) => {
+    const teamWorkId = req.body.teamWorkId
+    const chatState = req.body.chatState
+    const ganttState = req.body.ganttState
+    const inviteState = req.body.inviteState
+
+    const sqlUpdateInviteState = `
+        UPDATE
+            team_works_list
+        SET
+            publish_team_chat = ?,
+            publish_team_ganttchart = ?,
+            registered_team_work_on = ?
+        WHERE
+            team_work_id = ?
+    `
+    await sql.handleUpdate(sqlUpdateInviteState, [chatState, ganttState, inviteState, teamWorkId])
+})
+
 module.exports = router
