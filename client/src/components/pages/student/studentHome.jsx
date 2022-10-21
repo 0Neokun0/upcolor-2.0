@@ -40,7 +40,7 @@ const Home = () => {
         },
         {
             value: "ユーザー",
-            url: "#",
+            url: "/list/student",
             icon: <PersonSearchIcon />,
         },
         {

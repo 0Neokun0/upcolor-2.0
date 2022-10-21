@@ -12,7 +12,7 @@ const ProfileSelect = (props) => {
             <InputLabel>{props["label"]}</InputLabel>
             <Select
                 label={props["label"]}
-                name={props["getName"]}
+                name={props["name"]}
                 value={props["value"]}
                 onChange={handleChange}
             >
@@ -21,9 +21,9 @@ const ProfileSelect = (props) => {
                         return (
                             <MenuItem
                                 key={index}
-                                value={item[props["id"]]}
+                                value={item[props["sqlId"]]}
                             >
-                                {item[props["name"]]}
+                                {item[props["sqlName"]]}
                             </MenuItem>
                         )
                     })

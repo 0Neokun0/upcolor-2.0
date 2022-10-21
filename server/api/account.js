@@ -293,7 +293,7 @@ router.post("/getStudentProfile", async (req, res) => {
     `
 
     const profile = await sql.handleSelect(sqlSelectUser, [userId])
-
+    
     res.json(profile)
 })
 
@@ -307,7 +307,7 @@ router.post("/editProfile", async (req, res) => {
     const tools = await get.list("tool")
     const languages = await get.list("language")
 
-    res.json([{
+    res.json({
         profile: profile[0],
         courses: courses,
         years: years,
@@ -315,22 +315,21 @@ router.post("/editProfile", async (req, res) => {
         programs: programs,
         tools: tools,
         languages: languages
-    }][0])
+    })
 })
 
 router.post("/updateProfile", async (req, res) => {
     const userId = get.userId(req)
 
     const name = req.body.name
-    const mail = req.body.mail
     const introduction = req.body.introduction
 
     const course = req.body.course
     const year = req.body.year
-    const qualifications = req.body.qualifications.join(",")
-    const programming_languages = req.body.programming_languages.join(",")
-    const tools_and_framework = req.body.tools_and_framework.join(",")
-    const country_language = req.body.country_language.join(",")
+    const qualifications = req.body.qualifications
+    const programming_languages = req.body.programming_languages
+    const tools_and_framework = req.body.tools_and_framework
+    const country_language = req.body.country_language
     const github = req.body.github
 
     const sqlUpdateUserProfile = `

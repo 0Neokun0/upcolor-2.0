@@ -34,10 +34,10 @@ const ProfileEdit = () => {
             name: data.get("name"),
             course: data.get("course"),
             year: data.get("year"),
-            qualifications: qualificationIds,
-            programming_languages: programIds,
-            tools_and_framework: toolIds,
-            country_language: languageIds,
+            qualifications: qualificationIds.join(),
+            programming_languages: programIds.join(),
+            tools_and_framework: toolIds.join(),
+            country_language: languageIds.join(),
             introduction: data.get("introduction"),
             github: data.get("github"),
         })
@@ -52,7 +52,6 @@ const ProfileEdit = () => {
             .catch((error) => {
                 console.log(error)
             })
-
     }
 
     useEffect(() => {
@@ -136,22 +135,22 @@ const ProfileEdit = () => {
                 >
                     <ProfileSelect
                         label="専攻"
-                        getName="course"
+                        name="course"
                         value={courseId}
                         lists={coursesList}
                         set={setCourseId}
-                        id="course_id"
-                        name="course_name"
+                        sqlId="course_id"
+                        sqlName="course_name"
                     />
 
                     <ProfileSelect
                         label="学年"
-                        getName="year"
+                        name="year"
                         value={yearId}
                         lists={yearsList}
                         set={setYearId}
-                        id="year_id"
-                        name="year_name"
+                        sqlId="year_id"
+                        sqlName="year_name"
                     />
                 </ProfileInput>
 
@@ -176,8 +175,8 @@ const ProfileEdit = () => {
                         select={qualificationIds}
                         setSelect={setQualificationIds}
                         lists={qualificationsList}
-                        id="qualification_id"
-                        name="qualification_name"
+                        sqlId="qualification_id"
+                        sqlName="qualification_name"
                     />
 
                     <ProfileSelectChip
@@ -185,8 +184,8 @@ const ProfileEdit = () => {
                         select={programIds}
                         setSelect={setProgramIds}
                         lists={programsList}
-                        id="program_id"
-                        name="program_name"
+                        sqlId="program_id"
+                        sqlName="program_name"
                     />
 
                     <ProfileSelectChip
@@ -194,8 +193,8 @@ const ProfileEdit = () => {
                         select={toolIds}
                         setSelect={setToolIds}
                         lists={toolsList}
-                        id="tool_id"
-                        name="tool_name"
+                        sqlId="tool_id"
+                        sqlName="tool_name"
                     />
 
                     <ProfileSelectChip
@@ -203,8 +202,8 @@ const ProfileEdit = () => {
                         select={languageIds}
                         setSelect={setLanguageIds}
                         lists={languagesList}
-                        id="language_id"
-                        name="language_name"
+                        sqlId="language_id"
+                        sqlName="language_name"
                     />
                 </ProfileInput>
 
@@ -220,32 +219,6 @@ const ProfileEdit = () => {
                 </ProfileInput>
             </ProfileForm>
         </ProfileEditLayout>
-
-        // <TeamWorkInfoLayout
-        //     component={
-        //         <ProfileForm
-        //             profile={profile}
-        //             courses={courses}
-        //             years={years}
-        //             programs={programs}
-        //             qualifications={qualifications}
-        //             tools={tools}
-        //             languages={languages}
-
-        //             selectQualifications={selectQualifications}
-        //             selectPrograms={selectPrograms}
-        //             selectTools={selectTools}
-        //             selectLanguages={selectLanguages}
-        //             setSelectQualifications={setSelectQualifications}
-        //             setSelectPrograms={setSelectPrograms}
-        //             setSelectTools={setSelectTools}
-        //             setSelectLanguages={setSelectLanguages}
-
-        //             handleIcon={handleIcon}
-        //             handleSubmit={handleSubmit}
-        //         />
-        //     }
-        // />
     )
 }
 
