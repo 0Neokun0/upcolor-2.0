@@ -12,7 +12,7 @@ const ProfileForm = (props) => {
                     mt: 2,
                 }
             }}
-        >
+        >            
             {props.children}
 
             <Button

@@ -3,11 +3,9 @@ import axios from "axios"
 import { ProfileEditLayout } from "components/templates"
 import { ProfileForm } from "components/organisms"
 import { ProfileInput, ProfileSelect, ProfileSelectChip } from "components/molecules"
-import { TextField } from "@mui/material"
+import { Box, Button, TextField } from "@mui/material"
 
 const ProfileEdit = () => {
-    // const [icon, setIcon] = useState([])
-
     const [profile, setProfile] = useState(false)
     const [coursesList, setCoursesList] = useState([])
     const [courseId, setCourseId] = useState("")
@@ -22,14 +20,15 @@ const ProfileEdit = () => {
     const [languagesList, setLanguagesList] = useState([])
     const [languageIds, setLanguageIds] = useState([])
 
-    // const handleIcon = (e) => {
-    //     setIcon(e.target.files[0])
-    // }
-
     const handleSubmit = (e) => {
         e.preventDefault()
 
         const data = new FormData(e.currentTarget)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
 
         axios.post("/account/updateProfile", {
             name: data.get("name"),
@@ -42,18 +41,17 @@ const ProfileEdit = () => {
             introduction: data.get("introduction"),
             github: data.get("github"),
         })
-
-
-        // const image = new FormData()
-        // image.append("icon", icon)
-
-        // axios.post("/account/getImage", image, {
-        //     headers: {
-        //         "Content-Type": "multipart/form-data",
-        //     },
-        // })
-
-        window.location.href = "/profile"
+        axios.post("/account/updateUserIcon", {
+            icon: data.get("icon"),
+        },
+            config
+        )
+            .then(() => {
+                window.location.href = "/profile"
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
     useEffect(() => {
@@ -113,13 +111,23 @@ const ProfileEdit = () => {
                         disabled
                     />
 
-                    {/* <Box
-                        component="input"
-                        type="file"
-                        accept="image/*"
-                        name="icon"
-                        onChange={(e) => props.handleIcon(e)}
-                    /> */}
+                    <Button
+                        variant="contained"
+                        fullWidth
+                        component="label"
+                        sx={{
+                            mt: 2,
+                        }}
+                    >
+                        アイコンの選択
+                        <Box
+                            component="input"
+                            type="file"
+                            name="icon"
+                            accept=".png, .jpg, .jpeg"
+                            hidden
+                        />
+                    </Button>
                 </ProfileInput>
 
                 <ProfileInput
@@ -209,7 +217,6 @@ const ProfileEdit = () => {
                         defaultValue={profile["student_github"]}
                     />
                 </ProfileInput>
-
             </ProfileForm>
         </ProfileEditLayout>
     )

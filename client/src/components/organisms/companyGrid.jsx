@@ -1,4 +1,4 @@
-import { Box } from "@mui/material"
+import { Box, Grid } from "@mui/material"
 import { CompanyCard } from "components/molecules"
 
 const CompanyGrid = (props) => {
@@ -7,9 +7,12 @@ const CompanyGrid = (props) => {
     return (
         <Box
             sx={{
+                justifyItems: "center",
                 width: "100%",
+                minHeight: "80vh",
+                maxHeight: "80vh",
                 p: 2,
-                overflowY: "scroll",
+                overflow: "auto",
                 "::-webkit-scrollbar": {
                     width: "5px",
                 },
@@ -20,24 +23,40 @@ const CompanyGrid = (props) => {
                 "::-webkit-scrollbar-track": {
                     boxShadow: 2,
                 },
+
             }}
         >
-            {
-                props.companies
-                &&
-                props.companies.map((company, index) => {
-                    return (
-                        company
-                        &&
-                        <CompanyCard
-                            key={index}
-                            image={userPictureUrl}
-                            name={company["company_name"]}
-                            recruite={"プログラマーなど"}
-                        />
-                    )
-                })
-            }
+            <Grid
+                container
+                spacing={0}
+                mt={0}
+                justifyContent="left"
+            >
+                {
+                    props.companies
+                    &&
+                    props.companies.map((company, index) => {
+                        return (
+                            company
+                            &&
+                            <Grid
+                                item
+                                xs={12}
+                                sm={6}
+                                lg={4}
+                                xl={3}
+                            >
+                                <CompanyCard
+                                    key={index}
+                                    image={userPictureUrl}
+                                    name={company["company_name"]}
+                                    recruite={"プログラマーなど"}
+                                />
+                            </Grid>
+                        )
+                    })
+                }
+            </Grid>
         </Box>
     )
 }

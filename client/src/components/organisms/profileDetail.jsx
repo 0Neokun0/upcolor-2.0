@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { Avatar, Box, Button, Card, Grid, Tooltip, Typography } from "@mui/material"
+import { server } from "components/config"
 
 const ProfileDetail = (props) => {
     return (
@@ -27,6 +28,7 @@ const ProfileDetail = (props) => {
                         }}
                     >
                         <Avatar
+                            src={server.host + "/images/icon/" + props.profile["image_url"]}
                             sx={{
                                 width: "150px",
                                 height: "150px",
