@@ -234,7 +234,9 @@ router.post("/sendChat", async (req, res) => {
 })
 
 router.post("/getGantt", async (req, res) => {
-    const teamWorkId = req.body.teamWorkId
+    const userId = get.userId(req)
+    const teamId = await get.teamId(userId)
+
 
     const sqlSelectTasks = `
         SELECT
@@ -249,7 +251,7 @@ router.post("/getGantt", async (req, res) => {
         WHERE
             team_work_id = ?
     `
-    const tasks = await sql.handleSelect(sqlSelectTasks, [teamWorkId])
+    const tasks = await sql.handleSelect(sqlSelectTasks, [teamId])
 
     const sqlSelectLinks = `
         SELECT
@@ -262,7 +264,7 @@ router.post("/getGantt", async (req, res) => {
         WHERE
             team_work_id = ?
     `
-    const links = await sql.handleSelect(sqlSelectLinks, [teamWorkId])
+    const links = await sql.handleSelect(sqlSelectLinks, [teamId])
 
     res.json({
         tasks: tasks,
@@ -272,7 +274,7 @@ router.post("/getGantt", async (req, res) => {
 
 router.post("/saveGantt", async (req, res) => {
     const userId = get.userId(req)
-    const joinedTeamId = await get.joinedTeamId(userId)
+    const joinedTeamId = await get.teamId(userId)
     const tasks = req.body.tasks
     const links = req.body.links
 
@@ -506,7 +508,7 @@ router.post("/updateSetting", async (req, res) => {
 
 router.post("/getJoinedTeam", async (req, res) => {
     const userId = get.userId(req)
-    const joinedTeamId = await get.joinedTeamId(userId)
+    const joinedTeamId = await get.teamId(userId)
 
     const sqlSelectTeamInfo = `
         SELECT

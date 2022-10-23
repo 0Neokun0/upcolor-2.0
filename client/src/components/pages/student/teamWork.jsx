@@ -1,13 +1,13 @@
 import axios from "axios"
 import { gantt } from 'dhtmlx-gantt'
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 import { TeamWorkLayout } from "components/templates"
 import { TeamDetail, TeamJoinForm, TeamOutline } from "components/organisms"
 import Gantt from "components/atoms/gantt"
 import Toolbar from "components/atoms/toolbar"
 
-import { Box, Button, Divider, Hidden, IconButton, List, ListItemButton, Stack, Tooltip, Typography } from "@mui/material"
+import { Box, Button, Divider, Hidden, Stack } from "@mui/material"
 import { TeamInfoCard } from "components/molecules"
 
 const TeamWork = () => {
@@ -16,17 +16,6 @@ const TeamWork = () => {
     const [settingToggle, setSettingToggle] = useState(false)
     const [currentZoom, setCurrentZoom] = useState("Days")
 
-    const data = {
-        data: [
-            { id: 1, text: 'Task #1', start_date: '2020-02-12', duration: 3, progress: 0.6 },
-            { id: 2, text: 'Task #2', start_date: '2020-02-16', duration: 3, progress: 0.4 }
-        ],
-        links: [
-            { id: 1, source: 1, target: 2, type: '0' }
-        ],
-    }
-    // const [teamId, setTeamId] = useState(null)
-    // const [teamMembers, setTeamMembers] = useState([])
     // const [anchorEl, setAnchorEl] = useState(null)
     // const [leaveModal, setLeaveModal] = useState(false)
 
@@ -34,10 +23,10 @@ const TeamWork = () => {
     // const [chatState, setChatState] = useState(false)
     // const [ganttState, setGanttState] = useState(false)
 
-    // const data = {
-    //     data: [],
-    //     links: [],
-    // }
+    const data = {
+        data: [],
+        links: [],
+    }
 
     // const saveSetting = () => {
     //     axios.post("/teamWork/updateSetting", {
@@ -92,53 +81,51 @@ const TeamWork = () => {
         setCurrentZoom(zoom)
     }
 
-    // const setGantt = useCallback(() => {
-    //     const formatDate = (currentDatetime) => {
-    //         // let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()
-    //         let formattedDate = currentDatetime.getFullYear() + "-" + (currentDatetime.getMonth() + 1) + "-" + currentDatetime.getDate()
+    const setGantt = useCallback(() => {
+        const formatDate = (currentDatetime) => {
+            // let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()
+            let formattedDate = currentDatetime.getFullYear() + "-" + (currentDatetime.getMonth() + 1) + "-" + currentDatetime.getDate()
 
-    //         return formattedDate
-    //     }
+            return formattedDate
+        }
 
-    //     axios.post("/teamWork/getGantt", {
-    //         teamWorkId: teamId,
-    //     })
-    //         .then((res) => {
-    //             const tasks = res.data.tasks
-    //             const links = res.data.links
+        axios.post("/teamWork/getGantt")
+            .then((res) => {
+                const tasks = res.data.tasks
+                const links = res.data.links
 
-    //             if (tasks.length) {
-    //                 tasks.map((task) => {
-    //                     const start_date = formatDate(new Date(task["task_start"]))
-    //                     const end_date = formatDate(new Date(task["task_end"]))
+                if (tasks.length) {
+                    tasks.map((task) => {
+                        const start_date = formatDate(new Date(task["task_start"]))
+                        const end_date = formatDate(new Date(task["task_end"]))
 
-    //                     return (
-    //                         gantt.addTask({
-    //                             id: task["task_id"],
-    //                             text: task["task_name"],
-    //                             start_date: start_date,
-    //                             end_date: end_date,
-    //                             progress: task["task_progress"],
-    //                             parent: task["parent_task_id"],
-    //                         })
-    //                     )
-    //                 })
-    //             }
+                        return (
+                            gantt.addTask({
+                                id: task["task_id"],
+                                text: task["task_name"],
+                                start_date: start_date,
+                                end_date: end_date,
+                                progress: task["task_progress"],
+                                parent: task["parent_task_id"],
+                            })
+                        )
+                    })
+                }
 
-    //             if (links) {
-    //                 links.map((link) => {
-    //                     return (
-    //                         gantt.addLink({
-    //                             id: link["link_id"],
-    //                             source: link["source"],
-    //                             target: link["target"],
-    //                             type: link["type"],
-    //                         })
-    //                     )
-    //                 })
-    //             }
-    //         })
-    // }, [teamId])
+                if (links) {
+                    links.map((link) => {
+                        return (
+                            gantt.addLink({
+                                id: link["link_id"],
+                                source: link["source"],
+                                target: link["target"],
+                                type: link["type"],
+                            })
+                        )
+                    })
+                }
+            })
+    }, [])
 
     const saveGantt = () => {
         const tasks = []
@@ -177,26 +164,15 @@ const TeamWork = () => {
     //         })
     // }, [])
 
-    // useEffect(() => {
-    //     setGantt()
-    // }, [teamId, setGantt])
-
-    // useEffect(() => {
-    //     axios.post("/teamWork/getTeamMembers", {
-    //         teamWorkId: teamId,
-    //     })
-    //         .then((res) => {
-    //             setTeamMembers(res.data)
-    //         })
-    // }, [teamId])
-
     useEffect(() => {
         axios.post("/teamWork/getJoinedTeam")
             .then((res) => {
                 setTeam(res.data)
                 console.log(res.data)
             })
-    }, [])
+        
+        setGantt()
+    }, [setGantt])
 
     return (
         <TeamWorkLayout>
