@@ -22,7 +22,7 @@ import GroupCreateLayout from "components/templates/groupCreateLayout"
 function App() {
     const [open, setOpen] = useState(false)
     const [signInState, setSignInState] = useState("")
-
+    
     const menus = [
         {
             icon: <PeopleAltRoundedIcon />,
@@ -32,7 +32,7 @@ function App() {
         {
             icon: <SchoolRoundedIcon />,
             value: "学校",
-            url: "/teacher/home",
+            url: "classroom",
         },
         {
             icon: <BusinessRoundedIcon />,
