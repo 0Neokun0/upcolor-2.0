@@ -27,12 +27,14 @@ const Signin = () => {
     }
 
     return (
-        <SignLayout>
-            <SignInBox
-                submit={handleSubmit}
-                availability={availability}
-            />
-        </SignLayout>
+        <SignLayout
+            component={
+                <SignInBox
+                    submit={handleSubmit}
+                    availability={availability}
+                />
+            }
+        />
     );
 }
 
