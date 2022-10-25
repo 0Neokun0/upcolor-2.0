@@ -7,9 +7,9 @@ const LandingPageFeature = (props) => {
             variant="outlined"
             sx={{
                 width: "900px",
-                borderRadius: "0px",
+                borderRadius: "25px",
                 display: "flex",
-                justifyContent: "space-between"
+                justifyContent: "space-between",
             }}
         >
             {

@@ -1,4 +1,5 @@
-import { Alert, Box, Button, Card, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
+import { Alert, Box, Button, Card, FormControl, InputLabel, MenuItem, Select, TextField, Typography, Link as Mlink} from "@mui/material"
+import { Link } from "react-router-dom"
 import logo from "components/atoms/logo/upcolor_logo.svg"
 
 const SignUpBox = (props) => {
@@ -10,6 +11,7 @@ const SignUpBox = (props) => {
                 py: 5,
                 px: 3,
                 textAlign: "center",
+                borderRadius: '25px',
             }}
         >
             <img
@@ -20,8 +22,9 @@ const SignUpBox = (props) => {
 
             <Typography
                 variant="h5"
+                fontWeight={1000}
             >
-                SignUp
+                サインアップ
             </Typography>
 
             {
@@ -49,7 +52,8 @@ const SignUpBox = (props) => {
                     size="small"
                     required
                     fullWidth
-                    label="Username"
+                    label="ユーザ名"
+                    helperText="例 : neokun95, chasity, speeedy"
                     name="name"
                     autoComplete="name"
                     autoFocus
@@ -60,7 +64,8 @@ const SignUpBox = (props) => {
                     size="small"
                     required
                     fullWidth
-                    label="Email Address"
+                    label="メール"
+                    helperText="注 : 学校から指定されたメールアドレス"
                     name="email"
                     autoComplete="email"
                     error={props.checkExist}
@@ -72,7 +77,7 @@ const SignUpBox = (props) => {
                     required
                     fullWidth
                     name="password"
-                    label="Password"
+                    label="パスワード"
                     type="password"
                     autoComplete="current-password"
                 />
@@ -89,11 +94,11 @@ const SignUpBox = (props) => {
                         }}
                     >
                         <InputLabel>
-                            コース
+                            コース・専攻
                         </InputLabel>
 
                         <Select
-                            label="コース"
+                            label="コース・専攻"
                             value={props.course}
                             onChange={(e) => props.setCourse(e.target.value)}
                         >
@@ -151,10 +156,14 @@ const SignUpBox = (props) => {
 
                 <Button
                     type="submit"
+                    color="primary"
+                    size="large"
                     fullWidth
                     variant="contained"
                     sx={{
                         mt: 2,
+                        fontWeight: 600,
+
                     }}
                 >
                     アカウント作成
@@ -170,6 +179,21 @@ const SignUpBox = (props) => {
                     </Alert>
                 }
             </Box>
+
+            <Mlink
+                component={Link}
+                to="/signIn/"
+                underline="none"
+                sx={{
+                    mt: 2,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}
+            >
+                サインイン
+            </Mlink>
+
         </Card>
     );
 }

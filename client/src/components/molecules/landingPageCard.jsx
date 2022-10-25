@@ -1,15 +1,15 @@
-import { Box, Button, Chip, Paper, Typography } from "@mui/material"
+import { Box, Button, Chip, Card, Typography } from "@mui/material"
 import { blueGrey, lightGreen } from "@mui/material/colors"
 
 const LandingPageCard = (props) => {
     return (
-        <Paper
+        <Card
             variant="outlined"
             sx={{
                 width: "900px",
                 py: 8,
                 textAlign: "center",
-                borderRadius: "0px"
+                borderRadius: "25px",
             }}
         >
             <img
@@ -74,7 +74,7 @@ const LandingPageCard = (props) => {
                     サインイン
                 </Button>
             </Box>
-        </Paper>
+        </Card>
     )
 }
 

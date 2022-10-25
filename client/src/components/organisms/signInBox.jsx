@@ -1,16 +1,17 @@
-import { Alert, Box, Button, Paper, TextField, Typography, Link as Mlink } from "@mui/material"
+import { Alert, Box, Button, Card, TextField, Typography, Link as Mlink } from "@mui/material"
 import { Link } from "react-router-dom"
 import logo from "components/atoms/logo/upcolor_logo.svg"
 
 const SignInBox = (props) => {
     return (
-        <Paper
+        <Card
             sx={{
                 width: "300px",
                 m: "auto",
                 py: 5,
                 px: 3,
                 textAlign: "center",
+                borderRadius: '25px',
             }}
         >
             <img
@@ -21,8 +22,9 @@ const SignInBox = (props) => {
 
             <Typography
                 variant="h5"
+                fontWeight={1000}
             >
-                SignIn
+                サインイン
             </Typography>
 
             <Box
@@ -38,7 +40,7 @@ const SignInBox = (props) => {
                     required
                     fullWidth
                     id="email"
-                    label="Email Address"
+                    label="メールアドレス"
                     name="email"
                     autoComplete="email"
                     autoFocus
@@ -50,7 +52,7 @@ const SignInBox = (props) => {
                     required
                     fullWidth
                     name="password"
-                    label="Password"
+                    label="パスワード"
                     type="password"
                     id="password"
                     autoComplete="current-password"
@@ -58,10 +60,12 @@ const SignInBox = (props) => {
 
                 <Button
                     type="submit"
+                    size="large"
                     fullWidth
                     variant="contained"
                     sx={{
                         mt: 5,
+                        fontWeight: 600,
                     }}
                 >
                     サインイン
@@ -76,7 +80,7 @@ const SignInBox = (props) => {
                             mt: 2,
                         }}
                     >
-                        Email Address と Password の組み合わせが存在しません
+                    メールアドレス と Password の組み合わせが存在しません
                     </Alert>
                 }
             </Box>
@@ -84,6 +88,7 @@ const SignInBox = (props) => {
             <Mlink
                 component={Link}
                 to="/signup/student"
+                underline="none"
                 sx={{
                     mt: 2,
                     display: "flex",
@@ -93,7 +98,7 @@ const SignInBox = (props) => {
             >
                 アカウント作成
             </Mlink>
-        </Paper>
+        </Card>
     );
 }
 
