@@ -381,6 +381,108 @@ CREATE TABLE lecture_term(
     end_date INT
 );
 
+CREATE VIEW student_infomation(
+    user_id,
+    student_id,
+    name,
+    mail,
+    image,
+    course_id,
+    course_name,
+    year_id,
+    year_name,
+    introduction,
+    qualification_ids,
+    program_ids,
+    tool_ids,
+    language_ids,
+    github
+) AS
+SELECT
+    student_profiles.user_id,
+    student_profiles.student_id,
+    user_profiles.user_name,
+    user_profiles.user_mail,
+    images.image_url,
+    student_profiles.student_course_id,
+    courses.course_name,
+    student_profiles.student_year,
+    years.year_name,
+    user_profiles.user_introduction,
+    student_profiles.student_qualifications,
+    student_profiles.student_programming_languages,
+    student_profiles.student_tools_and_framework,
+    student_profiles.student_country_language,
+    student_profiles.student_github
+FROM
+    student_profiles
+    INNER JOIN
+        user_profiles
+    ON  student_profiles.user_id = user_profiles.user_id
+    INNER JOIN
+        courses
+    ON  student_profiles.student_course_id = courses.course_id
+    INNER JOIN
+        years
+    ON  student_profiles.student_year = years.year_id
+    LEFT OUTER JOIN
+        images
+    ON  student_profiles.user_id = images.image_id
+    AND images.image_type = 1
+ORDER BY
+    student_profiles.student_id;
+
+CREATE VIEW student_registed(
+    user_id,
+    student_id,
+    name,
+    mail,
+    image,
+    course_id,
+    course_name,
+    year_id,
+    year_name,
+    introduction,
+    qualification_ids,
+    program_ids,
+    tool_ids,
+    language_ids,
+    github
+) AS
+SELECT
+    student_profiles.user_id,
+    student_profiles.student_id,
+    user_profiles.user_name,
+    user_profiles.user_mail,
+    images.image_url,
+    student_profiles.student_course_id,
+    courses.course_name,
+    student_profiles.student_year,
+    years.year_name,
+    user_profiles.user_introduction,
+    student_profiles.student_qualifications,
+    student_profiles.student_programming_languages,
+    student_profiles.student_tools_and_framework,
+    student_profiles.student_country_language,
+    student_profiles.student_github
+FROM
+    student_profiles
+    INNER JOIN
+        user_profiles
+    ON  student_profiles.user_id = user_profiles.user_id
+    INNER JOIN
+        courses
+    ON  student_profiles.student_course_id = courses.course_id
+    INNER JOIN
+        years
+    ON  student_profiles.student_year = years.year_id
+    LEFT OUTER JOIN
+        images
+    ON  student_profiles.user_id = images.image_id
+    AND images.image_type = 1
+ORDER BY
+    student_profiles.student_id;
+
 INSERT INTO
     user_types(type_name)
 VALUES

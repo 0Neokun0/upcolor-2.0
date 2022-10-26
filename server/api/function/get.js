@@ -51,28 +51,24 @@ exports.password = (token, password) => {
 exports.user = async (userId) => {
     const sqlSelectUser = `
         SELECT
-            user_profiles.user_name,
-            user_profiles.user_mail,
-            user_profiles.user_introduction,
-            student_profiles.student_year,
-            student_profiles.student_programming_languages,
-            student_profiles.student_tools_and_framework,
-            student_profiles.student_country_language,
-            student_profiles.student_qualifications,
-            student_profiles.student_github,
-            student_profiles.is_colaborating,
-            courses.course_id,
-            courses.course_name
+            user_id,
+            name,
+            mail,
+            image,
+            course_id,
+            course_name,
+            year_id,
+            year_name,
+            introduction,
+            qualification_ids,
+            program_ids,
+            tool_ids,
+            language_ids,
+            github
         FROM
-            user_profiles
-        INNER JOIN
-            student_profiles ON
-            user_profiles.user_id = student_profiles.user_id
-        INNER JOIN
-            courses ON
-            student_profiles.student_course_id = courses.course_id
+            student_infomation
         WHERE
-            user_profiles.user_id = ?
+            user_id = ?
     `
 
     const profile = await sql.handleSelect(sqlSelectUser, [userId])

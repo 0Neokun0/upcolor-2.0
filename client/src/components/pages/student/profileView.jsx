@@ -18,42 +18,40 @@ const ProfileView = () => {
             userId: userId,
         })
             .then((res) => {
-                setProfile(res.data[0])
+                setProfile(res.data)
                 setProfileLists([
                     {
                         title: "取得資格",
                         icon: <WorkspacePremiumRoundedIcon />,
-                        content: res.data[0]["student_qualifications"]
+                        content: res.data["qualification_names"]
                     },
                     {
                         title: "プログラミング言語",
                         icon: <TerminalRoundedIcon />,
-                        content: res.data[0]["student_programming_languages"]
+                        content: res.data["program_names"]
                     },
                     {
                         title: "メールアドレス",
                         icon: <EmailRoundedIcon />,
-                        content: res.data[0]["user_mail"],
+                        content: res.data["mail"],
                     },
                     {
                         title: "Github",
                         icon: <GitHubIcon />,
-                        content: res.data[0]["student_github"],
+                        content: res.data["github"],
                     },
                 ])
             })
     }, [userId])
 
     return (
-        <ProfileLayout
-            component={
-                <ProfileStudentDetail
-                    profile={profile}
-                    profileLists={profileLists}
-                />
-            }
-        />
-    );
+        <ProfileLayout>
+            <ProfileStudentDetail
+                profile={profile}
+                profileLists={profileLists}
+            />
+        </ProfileLayout>
+    )
 }
 
 export default ProfileView

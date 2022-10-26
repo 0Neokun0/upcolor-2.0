@@ -6,10 +6,22 @@ const sql = require("./function/sql")
 
 router.post("/list", async (req, res) => {
     const sqlSelectStudents = `
-        SELECT *
-        FROM student_profiles
-        INNER JOIN user_profiles
-        ON student_profiles.user_id = user_profiles.user_id
+        SELECT
+            user_id,
+            name,
+            mail,
+            image,
+            course_id,
+            course_name,
+            year_id,
+            year_name,
+            introduction,
+            qualification_ids,
+            program_ids,
+            tool_ids,
+            language_ids
+        FROM
+            student_infomation
     `
     const students = await sql.handleSelect(sqlSelectStudents, [])
 
