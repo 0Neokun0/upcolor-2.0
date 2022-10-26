@@ -1,54 +1,56 @@
-import { Box, Container } from "@mui/material"
+import { Box, Container, Grid } from "@mui/material"
 import { ClassRoomCard } from "components/molecules"
 import ClassRoomPageHeader from "components/molecules/classRoomPageHeader"
-import { useState } from "react"
 
 const ClassRoomLayout = (props) => {
-
-    const classRoomTitle = "Classroom"
-    const classRoomTitleImage = "https://wallpaperaccess.com/full/859076.jpg"
-
-    const [openCreate, setOpenCreate] = useState(false);
-    const [openJoin, setOpenJoin] = useState(false);
-    const handleOpenClassRoomCreate = () => setOpenCreate(true);
-    const handleCloseClassRoomCreate = () => setOpenCreate(false);
-    const handleOpenClassRoomJoin = () => setOpenJoin(true);
-    const handleCloseClassRoomJoin = () => setOpenJoin(false);
 
     return (
         <Box>
             <ClassRoomPageHeader
-                classRoomTitle={classRoomTitle}
-                classRoomTitleImage={classRoomTitleImage}
-                openCreate={openCreate}
-                openJoin={openJoin}
-                handleOpenClassRoomCreate={handleOpenClassRoomCreate}
-                handleCloseClassRoomCreate={handleCloseClassRoomCreate}
-                handleOpenClassRoomJoin={handleOpenClassRoomJoin}
-                handleCloseClassRoomJoin={handleCloseClassRoomJoin}
+                classRoomTitle={props.classRoomTitle}
+                classRoomTitleImage={props.classRoomTitleImage}
+                openCreate={props.openCreate}
+                openJoin={props.openJoin}
+                setOpenCreate={props.setOpenCreate}
+                setOpenJoin={props.setOpenJoin}
+
+                createClass={props.createClass}
             />
+
             <Container
                 maxWidth="xl"
                 sx={{
                     p: 2,
-
-                }}>
-                <Box>
-                    {/* {classes.length === 0 ? (
-                        <Typography>
-                            クラスは無いです。! 参加 or 作成 してください!
-                      </Typography>
-                      ) : (
-                    //     props.classRooms.map((class, index) => {
-                    //   <ClassRoomCard />
-                        // })
-                      )} */}
-                    <ClassRoomCard />
-
-
-
-                </Box>
-
+                }}
+            >
+                <Grid
+                    container
+                    spacing={0}
+                    mb={0}
+                    justifyContent="left"
+                >
+                    {
+                        props.classRoomList.map((classRoom, index) => {
+                            return (
+                                classRoom
+                                &&
+                                <Grid
+                                    item
+                                    xs={12}
+                                    sm={6}
+                                    lg={4}
+                                    xl={3}
+                                >
+                                    <ClassRoomCard
+                                        key={index}
+                                        className={classRoom["class_name"]}
+                                        onclick={'/classroomFeed'}
+                                    />
+                                </Grid>
+                            )
+                        })
+                    }
+                </Grid>
             </Container>
         </Box>
     )

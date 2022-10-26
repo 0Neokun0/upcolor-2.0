@@ -55,35 +55,36 @@ const ClassRoomPageHeader = (props) => {
                             placement="bottom"
                         >
                             <IconButton
-                                onClick={props.handleOpenClassRoomCreate}
+                                onClick={() => props.setOpenCreate(true)}
                             >
                                 <ClassRoundedIcon />
                             </IconButton>
                         </Tooltip>
-                        <Dialog
-                            open={props.openCreate}
-                            onClose={props.handleCloseClassRoomCreate}
-                        >
-                            <ClassRoomCreateClass />
-                        </Dialog>
 
+                        <ClassRoomCreateClass
+                            openCreate={props.openCreate}
+                            setOpenCreate={props.setOpenCreate}
+
+                            createClass={props.createClass}
+                        />
 
                         <Tooltip
                             title="参加"
                             placement="bottom"
                         >
                             <IconButton
-                                onClick={props.handleOpenClassRoomJoin}
+                                onClick={() => props.setOpenJoin(true)}
                             >
                                 <AddRoundedIcon />
                             </IconButton>
                         </Tooltip>
-                        <Dialog
+
+                        <ClassRoomJoinClass
                             open={props.openJoin}
-                            onClose={props.handleCloseClassRoomJoin}
-                        >
-                            <ClassRoomJoinClass />
-                        </Dialog>
+                            setOpenJoin={props.setOpenJoin}
+
+                        />
+
                     </Box>
                 </Box>
             </Card>
