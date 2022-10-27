@@ -1,6 +1,7 @@
-import { useState } from "react"
-import { Box, Divider, IconButton, List, ListItemButton, Tooltip, Typography } from "@mui/material"
+import { Link } from "react-router-dom"
+import { Box, Divider, IconButton, List, ListItemButton, Popover, Tooltip, Typography } from "@mui/material"
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded'
+import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded'
 
 const TeamOutline = (props) => {
     return (
@@ -20,18 +21,22 @@ const TeamOutline = (props) => {
                     {props["team"]["teamInfo"]["team_work_name"]}
                 </Typography>
 
-                <Box>
-                    <Tooltip
-                        title="チーム設定の変更"
-                    >
-                        <IconButton
-                            color="primary"
-                            onClick={() => props["setSettingToggle"](true)}
+                {
+                    props["auth"]
+                    &&
+                    <Box>
+                        <Tooltip
+                            title="チーム設定の変更"
                         >
-                            <SettingsRoundedIcon />
-                        </IconButton>
-                    </Tooltip>
-                </Box>
+                            <IconButton
+                                color="primary"
+                                onClick={() => props["setSettingToggle"](true)}
+                            >
+                                <SettingsRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
+                }
             </Box>
 
             <Divider
@@ -40,12 +45,63 @@ const TeamOutline = (props) => {
                 }}
             />
 
-            <Typography
-                textAlign="center"
-                fontWeight="bold"
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center"
+                }}
             >
-                {props["team"]["teamInfo"]["team_name"]}
-            </Typography>
+                <Typography
+                    fontWeight="bold"
+                    sx={{
+                        m: "auto"
+                    }}
+                >
+                    {props["team"]["teamInfo"]["team_name"]}
+                </Typography>
+
+                {
+                    props["auth"]
+                    &&
+                    <Box>
+                        <Tooltip
+                            title="招待"
+                        >
+                            <IconButton
+                                color="primary"
+                                onClick={(e) => props["genInviteUrl"](e)}
+                            >
+                                <PersonAddAltRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
+
+                        {/* <<< コピー通知 */}
+                        <Popover
+                            open={Boolean(props["togglePopover"])}
+                            anchorEl={props["togglePopover"]}
+                            onClose={() => props["setTogglePopover"](null)}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'center',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'center',
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    p: 1,
+                                }}
+                            >
+                                コピー完了
+                            </Typography>
+                        </Popover>
+                        {/* コピー通知 >>> */}
+                    </Box>
+                }
+            </Box>
 
             <List
                 disablePadding
@@ -55,6 +111,8 @@ const TeamOutline = (props) => {
                         return (
                             <ListItemButton
                                 key={member["user_id"]}
+                                component={Link}
+                                to={"/profile/" + member["user_id"]}
                             >
                                 {member["user_name"]}
                             </ListItemButton>

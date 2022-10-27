@@ -1,4 +1,4 @@
-import { Box, Card, Typography } from "@mui/material"
+import { Box, Card, CardActionArea, Typography } from "@mui/material"
 
 const TeamView = (props) => {
     return (
@@ -16,18 +16,25 @@ const TeamView = (props) => {
                             key={team["team_work_id"]}
                             sx={{
                                 width: "200px",
-                                mx: 2,
                             }}
                         >
-                            <Typography
-                                variant="h6"
+                            <CardActionArea
+                                onClick={() => window.location.href = "/teamwork/" + team["team_work_id"]}
                             >
-                                {team["team_name"]}
-                            </Typography>
+                                <Typography
+                                    variant="h6"
+                                >
+                                    {team["team_work_name"]}
+                                </Typography>
 
-                            <Typography>
-                                {team["team_work_description"]}
-                            </Typography>
+                                <Typography>
+                                    {team["team_name"]}
+                                </Typography>
+
+                                <Typography>
+                                    {team["team_work_description"]}
+                                </Typography>
+                            </CardActionArea>
                         </Card>
                     )
                 })
