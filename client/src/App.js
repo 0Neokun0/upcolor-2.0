@@ -6,10 +6,10 @@ import { Box } from "@mui/material"
 import { LandingPage, NotFound, Signin } from "components/pages"
 
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite, CompanyList, GroupInvite } from "components/pages/student"
-import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherHome} from "components/pages/teacher"
+import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherHome, ClassRoomFeed} from "components/pages/teacher"
 import { CompanySignup, CompanyHome, Recruitment } from "components/pages/company"
 
-import { ClassRoomFeedLayout, ClassRoomLayout, GroupChatLayout } from "components/templates"
+import { ClassRoomFeedLayout, GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
 
 import logo from "components/atoms/logo/upcolor_logo.svg"
@@ -17,6 +17,7 @@ import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
 import GroupCreateLayout from "components/templates/groupCreateLayout"
+import ClassRoomHome from "components/pages/teacher/classRoomHome"
 
 
 function App() {
@@ -27,12 +28,12 @@ function App() {
         {
             icon: <PeopleAltRoundedIcon />,
             value: "学生",
-            url: "/",
+            url: "/home",
         },
         {
             icon: <SchoolRoundedIcon />,
             value: "学校",
-            url: "classroom",
+            url: "teacherHome",
         },
         {
             icon: <BusinessRoundedIcon />,
@@ -203,8 +204,10 @@ function App() {
 
                     <Route path="company/recruitment" element={<Recruitment />} />
 
-                    <Route path="teacherHome" element={<TeacherHome />} />
-                    <Route path="classroomFeed" element={<ClassRoomFeedLayout />} />
+                    <Route path="classRoomHome">
+                        <Route path="" element={<ClassRoomHome />} />
+                        <Route path=":classId" element={<ClassRoomFeed />} />
+                    </Route>
                 </Routes>
             </BrowserRouter>
         </Box>

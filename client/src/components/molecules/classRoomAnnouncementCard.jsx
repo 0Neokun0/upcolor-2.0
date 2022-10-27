@@ -5,7 +5,7 @@ const ClassRoomAnnouncementCard = () => {
     return (
         <Box sx={{
             width: '100%',
-            p: 1,
+            p: 2,
             borderRadius: '25px',
             border: 0.5,
             boxShadow: 3,

@@ -1,4 +1,4 @@
-import { Box, Card, CardMedia, Dialog, IconButton, Tooltip, Typography } from "@mui/material";
+import { Avatar, Box, Card, CardMedia, Chip, Dialog, IconButton, Tooltip, Typography } from "@mui/material";
 
 import ClassRoundedIcon from '@mui/icons-material/ClassRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
@@ -12,9 +12,9 @@ const ClassRoomPageHeader = (props) => {
             <Card
                 sx={{
                     m: 2,
-                    mt: 1,
                     p: 2,
                     borderRadius: '10px',
+                    boxShadow: 3,
                 }}
             >
                 <Box
@@ -48,43 +48,56 @@ const ClassRoomPageHeader = (props) => {
                             m: 1,
                             display: 'flex',
                             flexDirection: 'row',
+                            justifyContent: 'space-between',
                         }}
                     >
-                        <Tooltip
-                            title="作成"
-                            placement="bottom"
-                        >
-                            <IconButton
-                                onClick={() => props.setOpenCreate(true)}
-                            >
-                                <ClassRoundedIcon />
-                            </IconButton>
-                        </Tooltip>
-
-                        <ClassRoomCreateClass
-                            openCreate={props.openCreate}
-                            setOpenCreate={props.setOpenCreate}
-
-                            createClass={props.createClass}
+                        <Chip
+                            avatar=
+                            {
+                                <Avatar
+                                    alt="userProfileAvatar"
+                                    src="/static/images/avatar/1.jpg"
+                                />
+                            }
+                            label="Username"
+                            variant="outlined"
                         />
 
-                        <Tooltip
-                            title="参加"
-                            placement="bottom"
-                        >
-                            <IconButton
-                                onClick={() => props.setOpenJoin(true)}
+                        <Box>
+                            <Tooltip
+                                title="作成"
+                                placement="bottom"
                             >
-                                <AddRoundedIcon />
-                            </IconButton>
-                        </Tooltip>
+                                <IconButton
+                                    onClick={() => props.setOpenCreate(true)}
+                                >
+                                    <ClassRoundedIcon />
+                                </IconButton>
+                            </Tooltip>
+
+                            <ClassRoomCreateClass
+                                openCreate={props.openCreate}
+                                setOpenCreate={props.setOpenCreate}
+
+                                createClass={props.createClass}
+                            />
+
+                            <Tooltip
+                                title="参加"
+                                placement="bottom"
+                            >
+                                <IconButton
+                                    onClick={() => props.setOpenJoin(true)}
+                                >
+                                    <AddRoundedIcon />
+                                </IconButton>
+                            </Tooltip>
+                        </Box>
 
                         <ClassRoomJoinClass
                             open={props.openJoin}
                             setOpenJoin={props.setOpenJoin}
-
                         />
-
                     </Box>
                 </Box>
             </Card>

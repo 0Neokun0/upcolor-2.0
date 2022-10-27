@@ -5,7 +5,9 @@ import ClassRoomPageHeader from "components/molecules/classRoomPageHeader"
 const ClassRoomLayout = (props) => {
 
     return (
-        <Box>
+        <Box sx={{
+            margin: 'auto',
+        }}>
             <ClassRoomPageHeader
                 classRoomTitle={props.classRoomTitle}
                 classRoomTitleImage={props.classRoomTitleImage}
@@ -43,7 +45,9 @@ const ClassRoomLayout = (props) => {
                                 >
                                     <ClassRoomCard
                                         key={index}
+                                        classId={classRoom["class_id"]}
                                         className={classRoom["class_name"]}
+                                        classCreator={classRoom["user_name"]}
                                         onclick={'/classroomFeed'}
                                     />
                                 </Grid>

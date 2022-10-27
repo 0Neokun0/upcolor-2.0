@@ -1,8 +1,9 @@
 import axios from "axios"
 import { ClassRoomLayout } from "components/templates"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 
-const TeacherHome = () => {
+
+const ClassRoomHome = () => {
 
     const classRoomTitle = "Classroom"
     const classRoomTitleImage = "https://wallpaperaccess.com/full/859076.jpg"
@@ -11,6 +12,8 @@ const TeacherHome = () => {
     const [openJoin, setOpenJoin] = useState(false);
 
     const [classRoomList, setClassRoomList] = useState(false);
+
+
 
     useEffect(() => {
         axios.post("/classRoom/viewClassRoom")
@@ -52,7 +55,8 @@ const TeacherHome = () => {
                 createClass={createClass}
             />
         </>
+
     )
 }
 
-export default TeacherHome
+export default ClassRoomHome

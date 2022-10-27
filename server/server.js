@@ -7,6 +7,7 @@ const generateLink = require("./api/generateLink")
 const post = require("./api/post")
 const check = require("./api/check")
 const company = require("./api/company")
+const classRoom = require("./api/classRoom")
 
 const express = require("express")
 
@@ -24,3 +25,4 @@ app.use("/generateLink", generateLink)
 app.use("/post", post)
 app.use("/check", check)
 app.use("/company", company)
+app.use("/classRoom", classRoom)
