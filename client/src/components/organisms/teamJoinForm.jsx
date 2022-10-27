@@ -4,11 +4,14 @@ const TeamJoinForm = (props) => {
     return (
         <Card
             sx={{
-                width: "300px",
-                borderRadius: "0px",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
+                textAlign: "center",
+                width: "fit-content",
+                borderRadius: "15px",
+                mx: "auto",
+                mt: "80px",
+                px: 2,
                 py: 5,
             }}
         >
@@ -42,7 +45,7 @@ const TeamJoinForm = (props) => {
                             mb: 2,
                         }}
                     />
-    
+
                     <TextField
                         label="作品名"
                         name="teamWorkName"

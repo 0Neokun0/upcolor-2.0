@@ -1,31 +1,29 @@
+import { useParams } from "react-router-dom"
 import axios from "axios"
 import { gantt } from 'dhtmlx-gantt'
 import { useCallback, useEffect, useState } from "react"
 
 import { TeamWorkLayout } from "components/templates"
-import { TeamJoinForm, TeamOutline } from "components/organisms"
+import { TeamOutline } from "components/organisms"
 import { TeamInfoCard } from "components/molecules"
 import Gantt from "components/atoms/gantt"
 import Toolbar from "components/atoms/toolbar"
 import { client } from "components/config"
 
-import { Box, Button, Dialog, DialogActions, DialogTitle, Divider, Drawer, FormControlLabel, Hidden, IconButton, Stack, Switch, Tooltip } from "@mui/material"
-import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded'
+import { Box, Divider, Hidden, Stack, Typography } from "@mui/material"
 
 const TeamWork = () => {
-    const auth = true
+    const auth = false
 
     // 取得したチーム情報
+    const teamId = useParams()["teamId"]
     const [team, setTeam] = useState(false)
 
     const [changeFlg, setChangeFlg] = useState(false)
 
     // チーム設定
-    const [settingToggle, setSettingToggle] = useState(false)
-    const [inviteState, setInviteState] = useState(false)
-    const [publishChat, setPublishChat] = useState(false)
+    // const [publishChat, setPublishChat] = useState(false)
     const [publishGantt, setPublishGantt] = useState(false)
-    const [leaveModal, setLeaveModal] = useState(false)
 
     // Popover切り替え
     const [togglePopover, setTogglePopover] = useState(null)
@@ -40,15 +38,6 @@ const TeamWork = () => {
     const data = {
         data: [],
         links: [],
-    }
-
-    // チーム設定保存
-    const saveSetting = () => {
-        axios.post("/teamWork/updateSetting", {
-            inviteState: inviteState,
-            publishChat: publishChat,
-            publishGantt: publishGantt,
-        })
     }
 
     const onSubmit = (e) => {
@@ -72,21 +61,6 @@ const TeamWork = () => {
                     setStrategy(!strategy)
                 }
             })
-    }
-
-    const handleTeamCreate = (e) => {
-        e.preventDefault()
-
-        const data = new FormData(e.currentTarget)
-
-        axios.post("teamWork/addTeamWork", {
-            teamName: data.get("teamName"),
-            teamWorkName: data.get("teamWorkName"),
-            setChatPublish: true,
-            setGanttPublish: true,
-        })
-
-        window.location.reload()
     }
 
     // 招待Url取得
@@ -152,29 +126,10 @@ const TeamWork = () => {
             })
     }, [])
 
-    // ガントチャート保存
-    const saveGantt = () => {
-        const tasks = []
-        const links = gantt.getLinks()
-
-        gantt.eachTask((task) => {
-            tasks.push(task)
-        })
-
-        axios.post("/teamWork/saveGantt", {
-            tasks: tasks,
-            links: links,
-        })
-    }
-
-    const leaveTeam = () => {
-        axios.post("/teamWork/leaveTeam")
-
-        window.location.reload()
-    }
-
     useEffect(() => {
-        axios.post("/teamWork/getJoinedTeam")
+        axios.post("/teamWork/getTeamWork", {
+            teamId: teamId,
+        })
             .then((res) => {
                 setTeam(res.data)
                 console.log(res.data)
@@ -182,15 +137,14 @@ const TeamWork = () => {
                 if (res.data["teamInfo"]) {
                     axios.post("/teamWork/getSetting")
                         .then((res) => {
-                            setInviteState(Boolean(res.data["invite"]))
-                            setPublishChat(Boolean(res.data["chat"]))
+                            // setPublishChat(Boolean(res.data["chat"]))
                             setPublishGantt(Boolean(res.data["gantt"]))
                         })
                 }
             })
 
         setGantt()
-    }, [setGantt, changeFlg])
+    }, [setGantt, changeFlg, teamId])
 
     return (
         team["teamInfo"]
@@ -220,7 +174,6 @@ const TeamWork = () => {
                                             team={team}
                                             togglePopover={togglePopover}
                                             setTogglePopover={setTogglePopover}
-                                            setSettingToggle={setSettingToggle}
                                             genInviteUrl={genInviteUrl}
                                         />
                                     </Box>
@@ -243,7 +196,6 @@ const TeamWork = () => {
                                                 team={team}
                                                 togglePopover={togglePopover}
                                                 setTogglePopover={setTogglePopover}
-                                                setSettingToggle={setSettingToggle}
                                                 genInviteUrl={genInviteUrl}
                                             />
 
@@ -304,154 +256,44 @@ const TeamWork = () => {
                         </Box>
                     </Stack>
 
-                    <Box>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                            }}
-                        >
-                            <Box>
-                                <Toolbar
+                    {
+                        publishGantt
+                        &&
+                        <Box>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <Box>
+                                    <Toolbar
+                                        zoom={currentZoom}
+                                        onZoomChange={handleZoomChange}
+                                    />
+                                </Box>
+                            </Box>
+
+                            <Box
+                                className="gantt-container"
+                                sx={{
+                                    height: "400px",
+                                }}
+                            >
+                                <Gantt
                                     zoom={currentZoom}
-                                    onZoomChange={handleZoomChange}
+                                    tasks={data}
                                 />
                             </Box>
-
-                            <Button
-                                variant="contained"
-                                size="small"
-                                onClick={saveGantt}
-                            >
-                                保存
-                            </Button>
                         </Box>
-
-                        <Box
-                            className="gantt-container"
-                            sx={{
-                                height: "400px",
-                            }}
-                        >
-                            <Gantt
-                                zoom={currentZoom}
-                                tasks={data}
-                            />
-                        </Box>
-                    </Box>
-
-                    <Drawer
-                        anchor={"left"}
-                        open={settingToggle}
-                        onClose={() => setSettingToggle(false)}
-                    >
-                        <Box
-                            sx={{
-                                px: 5,
-                                py: 2,
-                            }}
-                        >
-                            <Box
-                                sx={{
-                                    mb: 2,
-                                }}
-                            >
-                                <Box>
-                                    <FormControlLabel
-                                        label="メンバー募集状態"
-                                        control={
-                                            <Switch
-                                                checked={inviteState}
-                                                onChange={(e) => setInviteState(e.target.checked)}
-                                            />
-                                        }
-                                    />
-                                </Box>
-
-                                <Box>
-                                    <FormControlLabel
-                                        label="チャット公開"
-                                        control={
-                                            <Switch
-                                                checked={publishChat}
-                                                onChange={(e) => setPublishChat(e.target.checked)}
-                                            />
-                                        }
-                                    />
-                                </Box>
-
-                                <Box>
-                                    <FormControlLabel
-                                        label="ガントチャート公開"
-                                        control={
-                                            <Switch
-                                                checked={publishGantt}
-                                                onChange={(e) => setPublishGantt(e.target.checked)}
-                                            />
-                                        }
-                                    />
-                                </Box>
-
-                                <Button
-                                    variant="contained"
-                                    size="small"
-                                    fullWidth
-                                    sx={{ mt: "auto" }}
-                                    onClick={saveSetting}
-                                >
-                                    設定を保存
-                                </Button>
-                            </Box>
-
-                            <Box
-                                sx={{
-                                    textAlign: "end"
-                                }}
-                            >
-                                <Tooltip
-                                    title="チームを脱退"
-                                    color="error"
-                                >
-                                    <IconButton
-                                        onClick={() => setLeaveModal(true)}
-                                    >
-                                        <LogoutRoundedIcon />
-                                    </IconButton>
-                                </Tooltip>
-                            </Box>
-                        </Box>
-                    </Drawer>
+                    }
                 </TeamWorkLayout>
-
-                {/* チーム脱退ダイアログ */}
-                <Dialog
-                    open={Boolean(leaveModal)}
-                    onClose={() => setLeaveModal(false)}
-                >
-                    <DialogTitle>
-                        本当にチームを抜けますか?
-                    </DialogTitle>
-
-                    <DialogActions>
-                        <Button
-                            onClick={() => setLeaveModal(false)}
-                        >
-                            キャンセル
-                        </Button>
-
-                        <Button
-                            onClick={leaveTeam}
-                        >
-                            チームを抜ける
-                        </Button>
-                    </DialogActions>
-                </Dialog>
             </>
             :
-            <TeamJoinForm
-                handleTeamCreate={handleTeamCreate}
-            />
+            <Typography>
+                チームが見つかりません
+            </Typography>
     )
 }
 
