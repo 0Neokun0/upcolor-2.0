@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Box, Card, Stack } from "@mui/material";
-import { GroupMenu } from "components/organisms";
-import ChatUserCard from "components/molecules/chatUserCard";
+
 import GroupSideBar from "components/organisms/groupSideBar";
 
 const GroupLayout = (props) => {
