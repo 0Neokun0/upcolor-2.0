@@ -27,14 +27,24 @@ const ClassRoomFeedHeader = (props) => {
                 />
                 <Box
                     sx={{
+                        bgcolor: 'white',
+                        p:1,
                         position: 'absolute',
+                        borderRadius: '25px',
                         color: 'white',
                         top: 8,
                         left: '50%',
                         transform: 'translateX(-50%)',
+                        boxShadow: '0 0 2px 5px #bdbdbd',
                     }}
                 >
-                    <Typography variant="h3">
+                    <Typography
+                        variant="h3"
+                        sx={{
+                            fontSize: 50,
+                            color: "black"
+                        }}
+                    >
                         {props.enterClassRoom["class_name"]}
                     </Typography>
 
@@ -55,7 +65,7 @@ const ClassRoomFeedHeader = (props) => {
                                 src="/static/images/avatar/1.jpg"
                             />
                         }
-                        label="Username"
+                        label={props.profile.user_name}
                         variant="outlined"
                     />
                 </Box>

@@ -1,16 +1,18 @@
 import { MoreVert } from "@material-ui/icons"
-import { Avatar, Box, IconButton, Typography } from "@mui/material"
+import { Avatar, Box, Card, IconButton, Typography } from "@mui/material"
 
 const ClassRoomAnnouncementCard = () => {
     return (
-        <Box sx={{
-            width: '100%',
-            p: 2,
-            borderRadius: '25px',
-            border: 0.5,
-            boxShadow: 3,
-            mb: 2,
-        }}
+        <Card
+            component={"form"}
+            sx={{
+                width: '80%',
+                p: 2,
+                borderRadius: '25px',
+                border: 0.5,
+                boxShadow: 3,
+                mb: 2,
+            }}
         >
             <Box sx={{
                 display: 'flex',
@@ -67,7 +69,7 @@ const ClassRoomAnnouncementCard = () => {
                 no school today.
             </Typography>
 
-        </Box>
+        </Card>
     )
 }
 

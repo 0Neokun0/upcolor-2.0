@@ -13,7 +13,17 @@ const ClassRoomHome = () => {
 
     const [classRoomList, setClassRoomList] = useState(false);
 
+    const [profile, setProfile] = useState([])
 
+    useEffect(() => {
+        axios.post("/account/getProfile")
+            .then((res) => {
+                
+                console.log(res.data)
+
+                setProfile(res.data[0])
+            })
+    }, [])
 
     useEffect(() => {
         axios.post("/classRoom/viewClassRoom")
@@ -21,7 +31,11 @@ const ClassRoomHome = () => {
 
                 console.log(res.data)
 
-                setClassRoomList(res.data)
+                if (res.data) {
+                    setClassRoomList(res.data)
+                } else {
+                    setClassRoomList([])
+                }
 
             })
     }, [])
@@ -43,6 +57,8 @@ const ClassRoomHome = () => {
         &&
         <>
             <ClassRoomLayout
+                profile={profile}
+
                 classRoomTitle={classRoomTitle}
                 classRoomTitleImage={classRoomTitleImage}
                 openCreate={openCreate}

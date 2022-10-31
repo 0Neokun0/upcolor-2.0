@@ -32,14 +32,23 @@ const ClassRoomPageHeader = (props) => {
                     />
                     <Box
                         sx={{
+                            bgcolor: 'white',
+                            p: 1,
                             position: 'absolute',
+                            borderRadius: '25px',
                             color: 'white',
                             top: 8,
                             left: '50%',
                             transform: 'translateX(-50%)',
+                            boxShadow: '0 0 2px 5px #e0e0e0',
                         }}
                     >
-                        <Typography variant="h3">
+                        <Typography
+                            variant="h3"
+                            sx={{
+                                fontSize: 50,
+                                color: "black"
+                            }}>
                             {props.classRoomTitle}
                         </Typography>
                     </Box>
@@ -59,10 +68,9 @@ const ClassRoomPageHeader = (props) => {
                                     src="/static/images/avatar/1.jpg"
                                 />
                             }
-                            label="Username"
+                            label={props.profile.user_name}
                             variant="outlined"
                         />
-
                         <Box>
                             <Tooltip
                                 title="作成"

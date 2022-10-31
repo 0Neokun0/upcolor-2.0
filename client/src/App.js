@@ -33,7 +33,7 @@ function App() {
         {
             icon: <SchoolRoundedIcon />,
             value: "学校",
-            url: "teacherHome",
+            url: "/classRoomHome",
         },
         {
             icon: <BusinessRoundedIcon />,
@@ -206,7 +206,7 @@ function App() {
 
                     <Route path="classRoomHome">
                         <Route path="" element={<ClassRoomHome />} />
-                        <Route path=":classId" element={<ClassRoomFeed />} />
+                        <Route path=":classId/:className" element={<ClassRoomFeed />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

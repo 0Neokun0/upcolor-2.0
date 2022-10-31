@@ -44,7 +44,7 @@ const ClassCard = (props) => {
                     }}
                 >
                     <Link
-                        href={"classRoomHome/" + props.classId}
+                        href={"classRoomHome/" + props.classId + "/" + props.className}
                         underline="hover"
                         sx={{
                             color: 'text.primary',

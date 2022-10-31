@@ -9,6 +9,8 @@ const ClassRoomLayout = (props) => {
             margin: 'auto',
         }}>
             <ClassRoomPageHeader
+                profile={props.profile}
+
                 classRoomTitle={props.classRoomTitle}
                 classRoomTitleImage={props.classRoomTitleImage}
                 openCreate={props.openCreate}
