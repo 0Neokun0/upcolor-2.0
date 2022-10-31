@@ -34,6 +34,11 @@ const GroupLayout = (props) => {
                             groups: props.groups,
                             selectGroupId: props.selectGroupId,
                             setSelectGroupId: props.setSelectGroupId,
+                            menuOpen: props.menuOpen,
+                            setMenuOpen: props.setMenuOpen,
+                            copyOpen: props.copyOpen,
+                            setCopyOpen: props.setCopyOpen,
+
                             handleCreateSubmit: props.handleCreateSubmit,
                             handleGenerateInviteUrl: props.handleGenerateInviteUrl,
                             handleLeaveGroup: props.handleLeaveGroup,

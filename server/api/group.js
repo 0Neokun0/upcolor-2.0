@@ -99,10 +99,10 @@ router.post("/getJoinedGroupList", async (req, res) => {
             groups_list.created_user_id,
             groups_list.group_name
         FROM
-            users_joined_group
-            INNER JOIN
-                groups_list ON
-                users_joined_group.group_id = groups_list.group_id
+            groups_list
+        INNER JOIN
+            users_joined_group ON
+            groups_list.group_id = users_joined_group.group_id
         WHERE
             users_joined_group.joined_user_id = ?
     `

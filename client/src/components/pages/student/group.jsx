@@ -7,6 +7,8 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded'
 const Group = () => {
     const [groups, setGroups] = useState([])
     const [selectGroupId, setSelectGroupId] = useState(null)
+    const [menuOpen, setMenuOpen] = useState(null)
+    const [copyOpen, setCopyOpen] = useState(false)
     const [userId, setUserId] = useState(null)
 
     const [chats, setChats] = useState([])
@@ -54,9 +56,10 @@ const Group = () => {
         axios.post("/group/getInviteUrl", {
             groupId: groupId,
         })
-        .then((res) => {
-            navigator.clipboard.writeText("http://localhost:3000/groupinvite/" + res.data)
-        })
+            .then((res) => {
+                navigator.clipboard.writeText("http://localhost:3000/groupinvite/" + res.data)
+                setCopyOpen(true)
+            })
     }
 
     const handleLeaveGroup = (groupId) => {
@@ -94,6 +97,11 @@ const Group = () => {
             groups={groups}
             selectGroupId={selectGroupId}
             setSelectGroupId={setSelectGroupId}
+            menuOpen={menuOpen}
+            setMenuOpen={setMenuOpen}
+            copyOpen={copyOpen}
+            setCopyOpen={setCopyOpen}
+
             handleCreateSubmit={handleCreateSubmit}
 
             handleGenerateInviteUrl={handleGenerateInviteUrl}
