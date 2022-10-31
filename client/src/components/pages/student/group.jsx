@@ -1,17 +1,23 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
+import { io } from "socket.io-client"
+import config from "components/config"
 import GroupLayout from "components/templates/groupLayout"
 import CommentRoundedIcon from '@mui/icons-material/CommentRounded'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
 
 const Group = () => {
+    const socket = io(config.socket.host)
+
     const [groups, setGroups] = useState([])
     const [selectGroupId, setSelectGroupId] = useState(null)
     const [menuOpen, setMenuOpen] = useState(null)
+    const [menuId, setMenuId] = useState(null)
     const [copyOpen, setCopyOpen] = useState(false)
     const [userId, setUserId] = useState(null)
 
     const [chats, setChats] = useState([])
+    console.log(chats)
 
     const menus = [
         {
@@ -25,6 +31,11 @@ const Group = () => {
             url: "/group/create",
         },
     ]
+
+    const groupClick = (id) => {
+        setSelectGroupId(id)
+        socket.emit("groupChat join", id)
+    }
 
     const handleCreateSubmit = (e) => {
         e.preventDefault()
@@ -50,6 +61,8 @@ const Group = () => {
 
         const elem = document.getElementById("chatInput")
         elem.value = ""
+
+        socket.emit("groupChat msg", selectGroupId, data.get("text"))
     }
 
     const handleGenerateInviteUrl = (groupId) => {
@@ -57,7 +70,7 @@ const Group = () => {
             groupId: groupId,
         })
             .then((res) => {
-                navigator.clipboard.writeText("http://localhost:3000/groupinvite/" + res.data)
+                navigator.clipboard.writeText(config.client.host + "/groupinvite/" + res.data)
                 setCopyOpen(true)
             })
     }
@@ -79,6 +92,13 @@ const Group = () => {
     }, [])
 
     useEffect(() => {
+        socket.on("groupChat", (msg) => {
+            console.log(msg)
+        })
+    }, [socket])
+    
+
+    useEffect(() => {
         if (selectGroupId) {
             axios.post("/group/getGroupChat", {
                 groupId: selectGroupId,
@@ -96,11 +116,13 @@ const Group = () => {
             userId={userId}
             groups={groups}
             selectGroupId={selectGroupId}
-            setSelectGroupId={setSelectGroupId}
             menuOpen={menuOpen}
             setMenuOpen={setMenuOpen}
+            menuId={menuId}
+            setMenuId={setMenuId}
             copyOpen={copyOpen}
             setCopyOpen={setCopyOpen}
+            groupClick={groupClick}
 
             handleCreateSubmit={handleCreateSubmit}
 

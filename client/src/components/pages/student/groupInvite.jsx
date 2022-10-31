@@ -7,7 +7,7 @@ import { useState } from "react"
 
 const GroupInvite = () => {
     const inviteToken = useParams()["inviteToken"]
-    const [joinCheck, setJoinCheck] = useState(false);
+    const [joinCheck, setJoinCheck] = useState(false)
 
     useEffect(() => {
         axios.post("/group/joinGroup", {
@@ -16,6 +16,8 @@ const GroupInvite = () => {
             .then((res) => {
                 if (!res.data) {
                     setJoinCheck(true)
+                } else {
+                    window.location.href = "/group"
                 }
             })
     }, [inviteToken])

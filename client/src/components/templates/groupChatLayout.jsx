@@ -7,11 +7,14 @@ const GroupChatLayout = () => {
     const userId = useOutletContext()["userId"]
     const groups = useOutletContext()["groups"]
     const selectGroupId = useOutletContext()["selectGroupId"]
-    const setSelectGroupId = useOutletContext()["setSelectGroupId"]
     const menuOpen = useOutletContext()["menuOpen"]
     const setMenuOpen = useOutletContext()["setMenuOpen"]
+    const menuId = useOutletContext()["menuId"]
+    const setMenuId = useOutletContext()["setMenuId"]
     const copyOpen = useOutletContext()["copyOpen"]
     const setCopyOpen = useOutletContext()["setCopyOpen"]
+    const groupClick = useOutletContext()["groupClick"]
+
     const handleGenerateInviteUrl = useOutletContext()["handleGenerateInviteUrl"]
     const handleLeaveGroup = useOutletContext()["handleLeaveGroup"]
 
@@ -36,11 +39,13 @@ const GroupChatLayout = () => {
                     userId={userId}
                     groups={groups}
                     selectGroupId={selectGroupId}
-                    setSelectGroupId={setSelectGroupId}
                     menuOpen={menuOpen}
                     setMenuOpen={setMenuOpen}
+                    menuId={menuId}
+                    setMenuId={setMenuId}
                     copyOpen={copyOpen}
                     setCopyOpen={setCopyOpen}
+                    groupClick={groupClick}
 
                     handleGenerateInviteUrl={handleGenerateInviteUrl}
                     handleLeaveGroup={handleLeaveGroup}

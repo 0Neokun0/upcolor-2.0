@@ -24,15 +24,18 @@ const GroupList = (props) => {
                                 secondaryAction={
                                     <>
                                         <IconButton
-                                            onClick={(e) => props["setMenuOpen"](e.currentTarget)}
+                                            onClick={(e) => {
+                                                props["setMenuOpen"](e.currentTarget)
+                                                props["setMenuId"](group["group_id"])
+                                            }}
                                         >
                                             <MoreVertRoundedIcon />
                                         </IconButton>
 
                                         <Menu
                                             anchorEl={props["menuOpen"]}
-                                            open={Boolean(props["menuOpen"])}
-                                            onClose={() => props["setMenuOpen"](null)}
+                                            open={Boolean(group["group_id"] === props["menuId"])}
+                                            onClose={() => props["setMenuId"](null)}
                                         >
                                             <MenuItem
                                                 onClick={() => props["handleGenerateInviteUrl"](group["group_id"])}
@@ -54,7 +57,7 @@ const GroupList = (props) => {
                                 }
                             >
                                 <ListItemButton
-                                    onClick={() => props["setSelectGroupId"](group["group_id"])}
+                                    onClick={() => props["groupClick"](group["group_id"])}
                                 >
                                     <Typography
                                         variant="h6"
@@ -66,7 +69,7 @@ const GroupList = (props) => {
                         )
                     })
                     :
-                    <p>情報なし</p>
+                    <p>参加しているグループが見つかりません</p>
             }
 
             {/* コピー通知 */}
