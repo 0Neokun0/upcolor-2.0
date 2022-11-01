@@ -47,7 +47,7 @@ const AddLectures = () => {
                         for (let k = 0; k < 3; k ++) {
                             timeTable[n][k] = csv[i + k][j]
                         }
-                        
+
                         timeTable[n][3] = Math.floor(i / 15)
                         timeTable[n][4] = Math.floor(i % 15 / 3)
 

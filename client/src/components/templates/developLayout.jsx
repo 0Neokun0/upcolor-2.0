@@ -1,9 +1,11 @@
-import { Box } from "@mui/material"
+import { Box } from "@mui/material";
 
 const DevelopLayout = (props) => {
     return (
         <Box
             sx={{
+                display: "flex",
+                justifyContent: "center",
                 width: "80%",
                 mx: "auto",
                 textAlign: "center",
@@ -11,7 +13,7 @@ const DevelopLayout = (props) => {
         >
             {props.children}
         </Box>
-    )
-}
+    );
+};
 
-export default DevelopLayout
+export default DevelopLayout;
