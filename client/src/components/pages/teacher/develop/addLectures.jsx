@@ -1,5 +1,8 @@
+import { Box, Button, Card, Typography } from "@mui/material"
 import axios from "axios"
 import { useState } from "react"
+
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 const AddLectures = () => {
 
@@ -44,7 +47,7 @@ const AddLectures = () => {
                     for (let j = 0; j < csv[0].length; j++) {
                         let n = i / 3 * csv[0].length + j
 
-                        for (let k = 0; k < 3; k ++) {
+                        for (let k = 0; k < 3; k++) {
                             timeTable[n][k] = csv[i + k][j]
                         }
 
@@ -77,12 +80,12 @@ const AddLectures = () => {
                 axios.post("/timeTable/addLectures", {
                     timeTable: timeTable,
                 })
-                .then((res) => {
-                    console.log(res.data)
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
+                    .then((res) => {
+                        console.log(res.data)
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
             }
 
             // ファイルの読み込み
@@ -91,10 +94,72 @@ const AddLectures = () => {
     }
 
     return (
-        <div>
-            <input type="file" onChange={handleOnChange}/>
-            <button type="submit" onClick={handleSubmit}>登録</button>
-        </div>
+        <Box
+
+            sx={{
+                pt: 2,
+                textAlign: "center",
+            }}
+        >
+            <Card
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                    width: "15%",
+                    minWidth: "350px",
+                    mx: "auto",
+                    borderRadius: '15px',
+                    boxShadow: 10,
+                    p: 3,
+                }}
+            >
+                <Box>
+                    <Typography sx={{
+                        mb: 2,
+                    }}
+                        variant="subtitle2"
+                    >
+                        履修登録のexcelファイルをアップロードしてください。
+                    </Typography>
+                </Box>
+                <Box>
+                    <Button
+                        component="label"
+                        color="error"
+                        cursor="pointer"
+                    >
+                        <input
+                            type="file"
+                            onChange={handleOnChange}
+                        />
+                    </Button>
+
+                </Box>
+
+                <Box>
+                    <Button sx={{
+                        mt: 2,
+                    }}
+                        type="submit"
+                        variant="contained"
+                        color="error"
+                        size="small"
+
+                        onClick={handleSubmit}
+
+                        startIcon={<FileUploadIcon />}
+                    >
+                        登録
+                    </Button>
+                </Box>
+
+
+            </Card>
+
+        </Box>
+
+
     )
 }
 

@@ -1,9 +1,9 @@
 import {
     Button,
     Card,
-    CardActionArea,
     CardContent,
     CardMedia,
+    Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -15,14 +15,20 @@ const DevelopMenus = (props) => {
                 <Card sx={props.cardSx}>
                     <CardMedia
                         sx={{
-                            borderRadius: 1,
+                            borderRadius: 2,
+                            minwidth: 300,
+                            height: 80,
                         }}
                         component="img"
-                        width="250px"
-                        height="70px"
                         image={menu["image"]}
                     />
                     <CardContent>
+                        <Typography
+                            variant="subtitle2"
+                            color="text.secondary"
+                        >
+                            {menu["text"]}
+                        </Typography>
                         <Button
                             key={index}
                             variant="outlined"
