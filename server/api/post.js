@@ -210,4 +210,63 @@ router.use("/getPostList", async (req, res) => {
     res.json(posts)
 })
 
+router.use("/updateLike", async (req, res) => {
+    const userId = get.userId(req)
+    const postId = req.body.postId
+    const state = req.body.state
+
+    try {
+        if (state) {        // like状態時の処理
+            const sqlDeleteLike = `
+            DELETE FROM post_likes
+            WHERE
+                post_id = ? AND
+                like_user_id = ?
+        `
+            await sql.handleDelete(sqlDeleteLike, [postId, userId])
+        } else {            // 非like状態時の処理
+            const sqlInsertLike = `
+            INSERT INTO post_likes(
+                post_id,
+                like_user_id
+            )
+            VALUES(
+                ?,
+                ?
+            )
+        `
+            await sql.handleInsert(sqlInsertLike, [postId, userId])
+        }
+
+        res.json(true)
+    } catch (error) {
+        console.log(error)
+        res.json(false)
+    }
+})
+
+router.use("/getLike", async (req, res) => {
+    const userId = get.userId(req)
+    const postId = req.body.postId
+
+    try {
+        const sqlSelectLike = `
+            SELECT
+                COUNT(*) AS state
+            FROM
+                post_likes
+            WHERE
+                post_id = ? AND
+                like_user_id = ?
+        `
+        const like = await sql.handleSelect(sqlSelectLike, [postId, userId])
+
+        res.json(like)
+    } catch (error) {
+        console.log(error)
+
+        res.json(false)
+    }
+})
+
 module.exports = router

@@ -2,7 +2,6 @@ import { Alert, Box, Button, Card, Typography } from "@mui/material"
 import logo from "components/atoms/logo/upcolor_logo.svg"
 
 const TeamWorkInviteForm = (props) => {
-    console.log(props["team"])
     return (
         <Card
             sx={{

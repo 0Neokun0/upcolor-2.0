@@ -67,6 +67,8 @@ const HomeLayout = (props) => {
                             posts: props.posts,
                             replys: props.replys,
                             toggleReplyModalOpen: props.toggleReplyModalOpen,
+                            like: props.like,
+                            handleLike: props.handleLike,
                         }}
                     />
                 </Box>
