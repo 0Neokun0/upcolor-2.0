@@ -1,18 +1,18 @@
-import { Box } from "@mui/material"
+import { Container } from "@mui/material"
 
 const TeamWorkLayout = (props) => {
     return (
-        <Box
+        <Container
+            disableGutters
+            maxWidth="md"
             sx={{
-                py: 2,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
+                backgroundColor: "white",
+                p: 2,
             }}
         >
-            {props.component}
-        </Box>
+            {props.children}
+        </Container>
     );
 }
 
-export default TeamWorkLayout;
+export default TeamWorkLayout

@@ -1,5 +1,8 @@
-import { Box, Button, Card, IconButton, Modal, TextField } from "@mui/material"
+import { Avatar, Box, Button, Card, IconButton, Modal, TextField, Tooltip } from "@mui/material"
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
+import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
+import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded'
+import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded'
 
 const ReplyModal = (props) => {
     return (
@@ -33,21 +36,91 @@ const ReplyModal = (props) => {
                     </IconButton>
                 </Box>
 
-                <TextField
-                    name="text"
-                    variant="standard"
-                    placeholder="返信を入力"
-                    fullWidth
-                    multiline
-                    rows={3}
-                    autoFocus
-                />
+                <Box
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Avatar
+                        variant="rounded"
+                        sx={{
+                            width: '50',
+                            height: '50',
+                            borderRadius: '50%',
+                            objectFit: 'cover',
+                            mr: '20px',
+                        }}
+                    />
+
+                    <TextField
+                        name="text"
+                        variant="standard"
+                        placeholder="返信を入力"
+                        fullWidth
+                        multiline
+                        rows={4}
+                        autoFocus
+                    />
+                </Box>
+
+                <Box
+                    justifyContent={'end'}
+                    sx={{
+                        display: 'flex',
+                    }}
+                >
+                    <Tooltip
+                        title="写真"
+                        placement="right"
+                    >
+                        <IconButton
+                            size="small"
+                            color="success"
+                            component="label"
+                        >
+                            <input
+                                type="file"
+                                name="image"
+                                accept=".png, .jpg, .jpeg"
+                                hidden
+                            />
+
+                            <AddPhotoAlternateRoundedIcon />
+                        </IconButton>
+                    </Tooltip>
+
+                    <Tooltip
+                        title="ビデオ"
+                        placement="right"
+                    >
+                        <IconButton
+                            size="small"
+                            color="primary"
+                        >
+                            <VideoCallRoundedIcon />
+                        </IconButton>
+                    </Tooltip>
+
+                    <Tooltip
+                        title="タグ"
+                        placement="right"
+                    >
+                        <IconButton
+                            size="small"
+                            color="error"
+                        >
+                            <LocalOfferRoundedIcon />
+                        </IconButton>
+                    </Tooltip>
+                </Box>
 
                 <input type="hidden" name="parentId" value={props.postId} />
 
                 <Button
                     variant="contained"
                     type="submit"
+                    size="small"
                     fullWidth
                     sx={{
                         mt: 2,

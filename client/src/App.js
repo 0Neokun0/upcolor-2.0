@@ -3,11 +3,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
-import { LandingPage, NotFound, Signin } from "components/pages"
+import { LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
 
-import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamWorkInfo, TeamList, TeamWorkInvite, CompanyList, GroupInvite } from "components/pages/student"
-import { TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherHome, ClassRoomFeed} from "components/pages/teacher"
-import { CompanySignup, CompanyHome, Recruitment } from "components/pages/company"
+import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite } from "components/pages/student"
+import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews, TeacherHome, ClassRoomFeed} from "components/pages/teacher"
+import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment } from "components/pages/company"
 
 import { ClassRoomFeedLayout, GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
@@ -38,7 +38,8 @@ function App() {
         {
             icon: <BusinessRoundedIcon />,
             value: "企業",
-            url: "/company/home",
+            url: "/companyList",
+
         },
     ]
 
@@ -171,9 +172,11 @@ function App() {
                         <Route path=":inviteToken" element={<GroupInvite />} />
                     </Route>
 
-                    <Route path="teamWork" element={<TeamWork />} />
+                    <Route path="teamWork">
+                        <Route path="" element={<TeamWork />} />
+                        <Route path=":teamId" element={<ViewTeamWork />} />
+                    </Route>
                     <Route path="teamList" element={<TeamList />} />
-                    <Route path="teamWorkInfo" element={<TeamWorkInfo />} />
                     <Route path="teamWorkInvite">
                         <Route path="" element={<NotFound />} />
                         <Route path=":inviteToken" element={<TeamWorkInvite />} />
@@ -186,7 +189,8 @@ function App() {
 
                     <Route path="profile/edit" element={<ProfileEdit />} />
 
-                    <Route path="companyList" element={<CompanyList />} />
+                    <Route path="list/student" element={<StudentList />} />
+                    <Route path="list/company" element={<CompanyList />} />
 
 
                     <Route path="timeTable" element={<ShowTimeTable />} />
@@ -195,6 +199,9 @@ function App() {
                     {/* <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} />
                     <Route path="timeTable/regist" element={<ReqAuthStu component={<RegistTimeTable />} />} /> */}
 
+                    <Route path="teacher" element={<ReqAuthTea component={<TeacherHome />} />} />
+                    <Route path="teacher/teacherNews" element={<ReqAuthTea component={<TeacherNews />} />} />
+
                     <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />
                     <Route path="develop/addLectures" element={<ReqAuthAdm component={<AddLectures />} />} />
                     <Route path="develop/genTeacherSign" element={<ReqAuthAdm component={<GenTeacherSign />} />} />
@@ -202,7 +209,7 @@ function App() {
 
                     <Route path="company/home" element={<CompanyHome />} />
 
-                    <Route path="company/recruitment" element={<Recruitment />} />
+                    <Route path="company/profile/edit" element={<CompanyProfileEdit />} />
 
                     <Route path="classRoomHome">
                         <Route path="" element={<ClassRoomHome />} />

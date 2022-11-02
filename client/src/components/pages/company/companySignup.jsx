@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { CompanySignupLayout, SignLayout } from "components/templates"
+import { SignLayout } from "components/templates"
 import { SignUpBox } from "components/organisms"
 
 const CompanySignup = () => {
@@ -47,21 +47,17 @@ const CompanySignup = () => {
     }
 
     return (
-        <CompanySignupLayout
-            component={
-                <SignLayout
-                    component={
-                        <SignUpBox
-                            handleSubmit={handleSubmit}
-                            checkExist={checkExist}
-                            company={company}
-                        />
-                    }
+        <SignLayout>
+            {
+                companyExist
+                &&
+                <SignUpBox
+                    handleSubmit={handleSubmit}
+                    checkExist={checkExist}
+                    company={company}
                 />
             }
-            companyExist={companyExist}
-        />
-
+        </SignLayout>
     )
 }
 

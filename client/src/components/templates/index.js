@@ -9,9 +9,13 @@ export { default as DevelopLayout } from "./developLayout"
 export { default as TeamWorkInfoLayout } from "./teamWorkInfoLayout"
 export { default as ProfileLayout } from "./profileLayout"
 export { default as TeamListLayout } from "./teamListLayout"
-export { default as TeacherSignupLayout } from "./teacherSignupLayout"
-export { default as CompanySignupLayout } from "./companySignupLayout"
 export { default as ViewTimeTableLayout } from "./viewTimeTableLayout"
 export { default as CompanyListLayout } from "./companyListLayout"
+<<<<<<< HEAD
 export { default as ClassRoomLayout } from "./classRoomLayout"
 export { default as ClassRoomFeedLayout } from "./classRoomFeedLayout"
+=======
+export { default as ProfileEditLayout } from "./profileEditLayout"
+export { default as TeacherNewsLayout } from "./teacherNewsLayout"
+export { default as ListLayout } from "./listLayout"
+>>>>>>> develop

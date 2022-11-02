@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom"
 import {
     MainMenu,
-    News,
+    NewsList,
     ReplyModal,
     SendPost,
 } from "components/organisms"
@@ -42,7 +42,17 @@ const HomeLayout = (props) => {
                         borderRight: 1,
                         p: 2,
                         borderColor: "rgba(0, 0, 0, 0.12)",
-                        backgroundColor: "white"
+                        backgroundColor: "white",
+                        "::-webkit-scrollbar": {
+                            width: "5px",
+                        },
+                        "::-webkit-scrollbar-thumb": {
+                            backgroundColor: "rgba(0, 0, 50, .5)",
+                            borderRadius: "5px",
+                        },
+                        "::-webkit-scrollbar-track": {
+                            boxShadow: 2,
+                        },
                     }}
                 >
                     {/* <PostBox
@@ -67,10 +77,11 @@ const HomeLayout = (props) => {
                     <Box
                         sx={{
                             p: 2,
+                            pt: 0,
                             width: "40%",
                         }}
                     >
-                        <News
+                        <NewsList
                             news={props.news}
                         />
                     </Box>

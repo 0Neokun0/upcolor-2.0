@@ -7,7 +7,11 @@ const Header = (props) => {
             postion="static"
             color="default"
         >
-            <Toolbar>
+            <Toolbar
+                sx={{
+                    height: "64px",
+                }}
+            >
                 <Link
                     href="/home"
                     sx={{

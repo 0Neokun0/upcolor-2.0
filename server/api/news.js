@@ -4,117 +4,37 @@ const router = express.Router()
 const get = require("./function/get")
 const sql = require("./function/sql")
 
-router.use((req, res, next) => {
-    console.log("[news] Time: ", Date.now())
-    next()
-})
-
-router.post("/addNews/", async (req, res) => {
-    const userId = get.userId(req);
-    const text = req.body.text
-
-    const sqlInsertNews = `
-        INSERT INTO news(
-            news_user_id,
-            news_title,
-            news_text,
-            target_course_id,
-            parent_id
-        )
-        VALUES(
-            ?,
-            ?,
-            ?,
-            0,
-            0,
-            0
-        )
-    `
-    const addNews = await sql.handleInsert(sqlInsertNews, [userId, text])
-
-    res.json(addNews["insertId"])
-})
-
-router.post("/addReply", async (req, res) => {
+router.post("/getStudentNews", async (req, res) => {
     const userId = get.userId(req)
-    const text = req.body.text
-    const parentId = req.body.parentId
 
-    const sqlInsertReply = `
-        INSERT INTO newss(
-            news_user_id,
-            news_text,
-            news_likes,
-            parent_id
-        )
-        VALUES(
-            ?,
-            ?,
-            0,
-            ?
-        )
+    const sqlSelectStudentCourse = `
+        SELECT
+            student_course_id
+        FROM
+            student_profiles
+        WHERE
+            user_id = ?
     `
-    const addReply = await sql.handleInsert(sqlInsertReply, [userId, text, parentId])
-
-    res.json(addReply["insertId"])
-})
-
-router.use("/getNews", async (req, res) => {
-    const newsId = req.body.newsId
+    const studentCourse = await sql.handleSelect(sqlSelectStudentCourse, [userId])
 
     const sqlSelectNews = `
         SELECT
-            newss.*,
-            user_profiles.user_name
+            user_profiles.user_name,
+            news.news_id,
+            news.news_title,
+            news.news_text,
+            news.created_at
         FROM
-            newss
-            INNER JOIN
-                user_profiles ON
-                newss.news_user_id = user_profiles.user_id
+            news
+        INNER JOIN
+            user_profiles ON
+            news.news_user_id = user_profiles.user_id
         WHERE
-            news_id = ?
+            news.target_course_id LIKE "%?%"
     `
-    const news = await sql.handleSelect(sqlSelectNews, [newsId])
+    const news = await sql.handleSelect(sqlSelectNews, [studentCourse[0]["student_course_id"]])
 
-    const sqlSelectReplys = `
-        SELECT
-            newss.*,
-            user_profiles.user_name
-        FROM
-            newss
-            INNER JOIN
-                user_profiles ON
-                newss.news_user_id = user_profiles.user_id
-        WHERE
-            parent_id = ?
-        ORDER BY
-            newss.created_at DESC
-    `
-    const replys = await sql.handleSelect(sqlSelectReplys, [newsId])
-
-    res.json({
-        news: news,
-        replys: replys,
-    })
-})
-
-router.use("/getNewsList", async (req, res) => {
-    const sqlSelectNewss = `
-        SELECT
-            newss.*,
-            user_profiles.user_name
-        FROM
-            newss
-            INNER JOIN
-                user_profiles ON
-                newss.news_user_id = user_profiles.user_id
-        WHERE parent_id = 0
-        ORDER BY
-            newss.created_at DESC
-    `
-    const newss = await sql.handleSelect(sqlSelectNewss, [])
-
-    res.json(newss)
+    res.json(news)
 })
 
 module.exports = router

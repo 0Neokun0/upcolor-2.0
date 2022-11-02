@@ -1,7 +1,10 @@
-import { Avatar, Box, Button, Card, IconButton, Modal, TextField } from "@mui/material"
+import { Avatar, Box, Button, Card, IconButton, Modal, TextField, Tooltip } from "@mui/material"
 import AddIcon from '@mui/icons-material/Add'
 import { cyan } from "@mui/material/colors"
-import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual'
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
+import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
+import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded'
+import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded'
 
 const SendPost = (props) => {
     return (
@@ -40,6 +43,16 @@ const SendPost = (props) => {
                     }}
                 >
                     <Box
+                        textAlign="right"
+                    >
+                        <IconButton
+                            onClick={props.togglePostModalClose}
+                        >
+                            <CloseRoundedIcon />
+                        </IconButton>
+                    </Box>
+
+                    <Box
                         sx={{
                             display: 'flex',
                             alignItems: 'center',
@@ -58,13 +71,17 @@ const SendPost = (props) => {
 
                         <TextField
                             name="text"
-                            id="outlined-multiline-flexible"
                             variant="standard"
                             placeholder="今どうしてる?"
                             fullWidth
                             multiline
-                            rows={2}
+                            rows={4}
+                            type="text"
                             autoFocus
+                            inputProps={{
+                                minLength: 5,
+                            }}
+                            required
                         />
                     </Box>
 
@@ -72,29 +89,53 @@ const SendPost = (props) => {
                         justifyContent={'end'}
                         sx={{
                             display: 'flex',
-                            mt: 2,
                         }}
                     >
-                        <Button
-                            color="success"
-                            startIcon={<PhotoSizeSelectActualIcon />}
-                        >
-                            写真
-                        </Button>
 
-                        <Button
-                            color="primary"
-                            startIcon={<PhotoSizeSelectActualIcon />}
+                        <Tooltip
+                            title="写真"
+                            placement="right"
                         >
-                            ビデオ
-                        </Button>
+                            <IconButton
+                                size="small"
+                                color="success"
+                                component="label"
+                            >
+                                <Box
+                                    component="input"
+                                    type="file"
+                                    name="image"
+                                    accept=".png, .jpg, .jpeg"
+                                    hidden
+                                />
 
-                        <Button
-                            color="error"
-                            startIcon={<PhotoSizeSelectActualIcon />}
+                                <AddPhotoAlternateRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip
+                            title="ビデオ"
+                            placement="right"
                         >
-                            Tag
-                        </Button>
+                            <IconButton
+                                size="small"
+                                color="primary"
+                            >
+                                <VideoCallRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip
+                            title="タグ"
+                            placement="right"
+                        >
+                            <IconButton
+                                size="small"
+                                color="error"
+                            >
+                                <LocalOfferRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
                     </Box>
 
                     <Button

@@ -1,133 +1,225 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { TeamWorkInfoLayout } from "components/templates"
+import { ProfileEditLayout } from "components/templates"
 import { ProfileForm } from "components/organisms"
+import { ProfileInput, ProfileSelect, ProfileSelectChip } from "components/molecules"
+import { Box, Button, TextField } from "@mui/material"
 
 const ProfileEdit = () => {
-    const [profile, setProfile] = useState([])
-    const [courses, setCourses] = useState([])
-
-    const [selectQualifications, setSelectQualifications] = useState([])
-    const [selectPrograms, setSelectPrograms] = useState([])
-    const [selectTools, setSelectTools] = useState([])
-    const [selectLanguages, setSelectLanguages] = useState([])
-
-    const years = [
-        {
-            value: 1,
-            item: "1年",
-        },
-        {
-            value: 2,
-            item: "2年",
-        },
-        {
-            value: 3,
-            item: "3年",
-        },
-        {
-            value: 4,
-            item: "4年",
-        },
-    ]
-
-    // データベースにしたほうがいいと思う
-    const qualifications = [
-        "MOS/WORD",
-        "MOS/EXCEL",
-        "ITパスポート",
-        "基本情報技術者試験",
-        "応用情報技術者試験",
-        "セキュリティマネジメント",
-    ]
-
-    const programs = [
-        "C言語",
-        "C#",
-        "C++",
-        "PHP",
-        "HTML5/CSS3",
-        "JavaScript",
-        "Java",
-        "Python",
-        "SQL",
-        "Visual Basic(VB, VBA)",
-        "Ruby",
-    ]
-
-    const tools = [
-        "Adobe Photoshop",
-        "Adobe Premiere Pro",
-        "Adobe illustrator",
-    ]
-
-    const languages = [
-        "日本語",
-        "英語",
-        "ヒンディー語",
-    ]
+    const [profile, setProfile] = useState(false)
+    const [coursesList, setCoursesList] = useState([])
+    const [courseId, setCourseId] = useState("")
+    const [yearsList, setYearsList] = useState([])
+    const [yearId, setYearId] = useState("")
+    const [qualificationsList, setQualificationsList] = useState([])
+    const [qualificationIds, setQualificationIds] = useState([])
+    const [programsList, setProgramsList] = useState([])
+    const [programIds, setProgramIds] = useState([])
+    const [toolsList, setToolsList] = useState([])
+    const [toolIds, setToolIds] = useState([])
+    const [languagesList, setLanguagesList] = useState([])
+    const [languageIds, setLanguageIds] = useState([])
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
         const data = new FormData(e.currentTarget)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
 
         axios.post("/account/updateProfile", {
             name: data.get("name"),
-            mail: data.get("mail"),
             course: data.get("course"),
             year: data.get("year"),
-            qualifications: selectQualifications,
-            programming_languages: selectPrograms,
-            tools_and_framework: selectTools,
-            country_language: selectLanguages,
+            qualifications: qualificationIds.join(),
+            programming_languages: programIds.join(),
+            tools_and_framework: toolIds.join(),
+            country_language: languageIds.join(),
             introduction: data.get("introduction"),
             github: data.get("github"),
         })
-
-        window.location.href = "/profile"
+        axios.post("/account/updateUserIcon", {
+            icon: data.get("icon"),
+        },
+            config
+        )
+            .then(() => {
+                window.location.href = "/profile"
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
     useEffect(() => {
-        axios.post("/account/getProfile")
+        axios.post("/account/editProfile")
             .then((res) => {
-                setProfile(res.data)
-            })
-
-        axios.post("/course/course")
-            .then((res) => {
-                setCourses(res.data)
+                console.log(res.data)
+                if (res.data["profile"]["course_id"]) {
+                    setCourseId(res.data["profile"]["course_id"])
+                }
+                if (res.data["profile"]["student_year"]) {
+                    setYearId(res.data["profile"]["student_year"])
+                }
+                if (res.data["profile"]["student_qualifications"]) {
+                    setQualificationIds(res.data["profile"]["student_qualifications"].split(",").map(Number))
+                }
+                if (res.data["profile"]["student_programming_languages"]) {
+                    setProgramIds(res.data["profile"]["student_programming_languages"].split(",").map(Number))
+                }
+                if (res.data["profile"]["student_tools_and_framework"]) {
+                    setToolIds(res.data["profile"]["student_tools_and_framework"].split(",").map(Number))
+                }
+                if (res.data["profile"]["student_country_language"]) {
+                    setLanguageIds(res.data["profile"]["student_country_language"].split(",").map(Number))
+                }
+                setProfile(res.data["profile"])
+                setCoursesList(res.data["courses"])
+                setYearsList(res.data["years"])
+                setQualificationsList(res.data["qualifications"])
+                setProgramsList(res.data["programs"])
+                setToolsList(res.data["tools"])
+                setLanguagesList(res.data["languages"])
             })
     }, [])
 
     return (
-        profile.length
+        profile
         &&
-        <TeamWorkInfoLayout
-            component={
-                <ProfileForm
-                    profile={profile}
-                    courses={courses}
-                    years={years}
-                    programs={programs}
-                    qualifications={qualifications}
-                    tools={tools}
-                    languages={languages}
+        <ProfileEditLayout>
+            <ProfileForm
+                handleSubmit={handleSubmit}
+            >
+                <ProfileInput
+                    title="一般"
+                >
+                    <TextField
+                        label="ユーザー名"
+                        name="name"
+                        defaultValue={profile["user_name"]}
+                        fullWidth
+                    />
 
-                    selectQualifications={selectQualifications}
-                    selectPrograms={selectPrograms}
-                    selectTools={selectTools}
-                    selectLanguages={selectLanguages}
-                    setSelectQualifications={setSelectQualifications}
-                    setSelectPrograms={setSelectPrograms}
-                    setSelectTools={setSelectTools}
-                    setSelectLanguages={setSelectLanguages}
+                    <TextField
+                        label="メールアドレス"
+                        name="mail"
+                        defaultValue={profile["user_mail"]}
+                        fullWidth
+                        disabled
+                    />
 
-                    handleSubmit={handleSubmit}
-                />
-            }
-        />
-    );
+                    <Button
+                        variant="contained"
+                        fullWidth
+                        component="label"
+                        sx={{
+                            mt: 2,
+                        }}
+                    >
+                        アイコンの選択
+                        <Box
+                            component="input"
+                            type="file"
+                            name="icon"
+                            accept=".png, .jpg, .jpeg"
+                            hidden
+                        />
+                    </Button>
+                </ProfileInput>
+
+                <ProfileInput
+                    title="専攻情報"
+                >
+                    <ProfileSelect
+                        label="専攻"
+                        name="course"
+                        value={courseId}
+                        lists={coursesList}
+                        set={setCourseId}
+                        sqlId="course_id"
+                        sqlName="course_name"
+                    />
+
+                    <ProfileSelect
+                        label="学年"
+                        name="year"
+                        value={yearId}
+                        lists={yearsList}
+                        set={setYearId}
+                        sqlId="year_id"
+                        sqlName="year_name"
+                    />
+                </ProfileInput>
+
+                <ProfileInput
+                    title="自己紹介・自己アピール"
+                >
+                    <TextField
+                        label="自己紹介・自己アピール"
+                        name="introduction"
+                        rows={3}
+                        fullWidth
+                        multiline
+                        defaultValue={profile["user_introduction"]}
+                    />
+                </ProfileInput>
+
+                <ProfileInput
+                    title="スキル"
+                >
+                    <ProfileSelectChip
+                        label="資格"
+                        select={qualificationIds}
+                        setSelect={setQualificationIds}
+                        lists={qualificationsList}
+                        sqlId="qualification_id"
+                        sqlName="qualification_name"
+                    />
+
+                    <ProfileSelectChip
+                        label="プログラミング言語"
+                        select={programIds}
+                        setSelect={setProgramIds}
+                        lists={programsList}
+                        sqlId="program_id"
+                        sqlName="program_name"
+                    />
+
+                    <ProfileSelectChip
+                        label="ツール・フレームワーク"
+                        select={toolIds}
+                        setSelect={setToolIds}
+                        lists={toolsList}
+                        sqlId="tool_id"
+                        sqlName="tool_name"
+                    />
+
+                    <ProfileSelectChip
+                        label="言語"
+                        select={languageIds}
+                        setSelect={setLanguageIds}
+                        lists={languagesList}
+                        sqlId="language_id"
+                        sqlName="language_name"
+                    />
+                </ProfileInput>
+
+                <ProfileInput
+                    title="Github"
+                >
+                    <TextField
+                        label="Github"
+                        name="github"
+                        fullWidth
+                        defaultValue={profile["student_github"]}
+                    />
+                </ProfileInput>
+            </ProfileForm>
+        </ProfileEditLayout>
+    )
 }
 
 export default ProfileEdit

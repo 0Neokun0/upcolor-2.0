@@ -6,20 +6,20 @@ import { TeamWorkInviteForm } from "components/organisms"
 
 const TeamWorkInvite = () => {
     const inviteToken = useParams()["inviteToken"]
-    const [teamWork, setTeamWork] = useState([])
+    const [team, setTeam] = useState(null)
     const [joinCheck, setJoinCheck] = useState(false)
 
-    const teamJoinSubmit = () => {
+    const joinTeam = () => {
         axios.post("/teamWork/updateJoinTeam", {
             token: inviteToken,
         })
-        .then((res) => {
-            if (res) {
-                window.location.href = "teamwork"
-            } else {
-                setJoinCheck(true)
-            }
-        })
+            .then((res) => {
+                if (res.data) {
+                    window.location.href = "/teamwork"
+                } else {
+                    setJoinCheck(true)
+                }
+            })
     }
 
     useEffect(() => {
@@ -27,21 +27,18 @@ const TeamWorkInvite = () => {
             token: inviteToken,
         })
             .then((res) => {
-                setTeamWork(res.data[0])
+                setTeam(res.data)
             })
     }, [inviteToken])
 
     return (
-        <TeamWorkLayout
-            component={
-                <TeamWorkInviteForm
-                    teamWork={teamWork}
-                    teamJoinSubmit={teamJoinSubmit}
-
-                    joinCheck={joinCheck}
-                />
-            }
-        />
+        <TeamWorkLayout>
+            <TeamWorkInviteForm
+                team={team}
+                joinCheck={joinCheck}
+                joinTeam={joinTeam}
+            />
+        </TeamWorkLayout>
     )
 }
 

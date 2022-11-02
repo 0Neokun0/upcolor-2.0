@@ -4,7 +4,7 @@ const router = express.Router()
 const get = require("./function/get")
 const sql = require("./function/sql")
 
-router.post("/recruitment", async (req, res) => {
+router.post("/editProfile", async (req, res) => {
     const userId = get.userId(req)
 
     const sqlSelectCompany = `
@@ -14,31 +14,64 @@ router.post("/recruitment", async (req, res) => {
     `
     const company = await sql.handleSelect(sqlSelectCompany, [userId])
 
-    res.json(company[0])
+    const sqlSelectCourses = `
+        SELECT
+            course_id,
+            course_name
+        FROM
+            courses
+    `
+    const courses = await sql.handleSelect(sqlSelectCourses, [])
+
+    const sqlSelectOccupations = `
+        SELECT
+            occupation_id,
+            occupation_name
+        FROM
+            occupations
+    `
+    const occupations = await sql.handleSelect(sqlSelectOccupations, [])
+
+    const selectLocations = `
+        SELECT
+            prefecture_id,
+            prefecture_name
+        FROM
+            prefectures
+    `
+
+    const locations = await sql.handleSelect(selectLocations, [])
+
+    res.json([{
+        company : company[0],
+        courses : courses,
+        occupations : occupations,
+        locations : locations,
+    }][0])
 })
 
-router.post("/list" , async (req, res) => {
-    const sqlSelectCompany = `
+router.post("/list", async (req, res) => {
+    const sqlSelectCompanies = `
         SELECT *
         FROM company_profiles
     `
-    const sqlSelectOccupation = `
+    const sqlSelectOccupations = `
         SELECT occupation_id, occupation_name
         FROM occupations
     `
-    const sqlSelectCourse = `
+    const sqlSelectCourses = `
         SELECT course_id, course_name
         FROM courses
     `
-    const sqlSelectPrefecture = `
+    const sqlSelectPrefectures = `
         SELECT prefecture_id, prefecture_name
         FROM prefectures
     `
 
-    const companies = await sql.handleSelect(sqlSelectCompany, [])
-    const occupations = await sql.handleSelect(sqlSelectOccupation, [])
-    const courses = await sql.handleSelect(sqlSelectCourse, [])
-    const prefectures = await sql.handleSelect(sqlSelectPrefecture, [])
+    const companies = await sql.handleSelect(sqlSelectCompanies, [])
+    const occupations = await sql.handleSelect(sqlSelectOccupations, [])
+    const courses = await sql.handleSelect(sqlSelectCourses, [])
+    const prefectures = await sql.handleSelect(sqlSelectPrefectures, [])
 
     const list = [
         {
@@ -52,28 +85,53 @@ router.post("/list" , async (req, res) => {
     res.json(list[0])
 })
 
-router.post("/regist", async (req, res) => {
+router.post("/update", async (req, res) => {
     const userId = get.userId(req)
 
     // 募集対象 1.専攻 2.業種 3.地域
-    const courseIds = req.courseIds
-    const occupationIds = req.occupationIds
-    const locationIds = req.locationIds
+    const courseIds = req.body.courseIds
+    const occupationIds = req.body.occupationIds
+    const locationIds = req.body.locationIds
 
     // 会社紹介
-    const introduction = req.introduction
+    const introduction = req.body.introduction
     // 事業紹介
-    const business = req.business
+    const business = req.body.business
+    // 代表メッセージ
+    const ceoMessage = req.body.ceoMessage
     // 本社住所
-    const officeAdress = req.officeAdress
+    const officeAddress = req.body.officeAddress
 
     // 企業ホームページURL・就活サイトURL
-    const companyUrl = req.companyUrl
-    const jobSiteUrl = req.jobSiteUrl
+    const homePageUrl = req.body.homePageUrl
+    const jobSiteUrl = req.body.jobSiteUrl
 
-    // 専攻フロー（未定）
+    try {
+        const sqlUpdateCompanyProfiles = `
+            UPDATE
+                company_profiles
+            SET
+                company_course_id = ?,
+                company_occupation_id = ?,
+                company_location_id = ?,
+                company_introduction = ?,
+                company_business = ?,
+                company_ceo_message = ?,
+                company_address = ?,
+                company_homepage_url = ?,
+                company_jobsite_url = ?
+            WHERE
+                user_id = ?
+        `
 
-    res.json(true)
+        await sql.handleUpdate(sqlUpdateCompanyProfiles, [courseIds, occupationIds, locationIds, introduction, business, ceoMessage, officeAddress, homePageUrl, jobSiteUrl, userId])
+
+        // 専攻フロー（未定）
+
+        res.json(true)
+    } catch (err) {
+        res.json(false)
+    }
 })
 
 module.exports = router

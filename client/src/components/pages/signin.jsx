@@ -27,15 +27,13 @@ const Signin = () => {
     }
 
     return (
-        <SignLayout
-            component={
-                <SignInBox
-                    submit={handleSubmit}
-                    availability={availability}
-                />
-            }
-        />
-    );
+        <SignLayout>
+            <SignInBox
+                submit={handleSubmit}
+                availability={availability}
+            />
+        </SignLayout>
+    )
 }
 
 export default Signin;

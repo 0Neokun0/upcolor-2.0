@@ -1,4 +1,4 @@
-import InboxIcon from '@mui/icons-material/MoveToInbox'
+
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 
@@ -20,42 +20,71 @@ const SearchEntry = (props) => {
     }
 
     return (
-        <Box>
+        <Box sx={{
+            m:1,
+        }}
+        >
             <ListItem onClick={handleClick}>
                 <ListItemIcon>
-                    <InboxIcon />
+                    {props.icon}
                 </ListItemIcon>
-                <ListItemText primary={props.title} />
-                {open ? <ExpandLess /> : <ExpandMore />}
+                <ListItemText
+                    primary={props.title}
+                />
+                {open
+                    ?
+                    <ExpandLess />
+                    :
+                    <ExpandMore />
+                }
             </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                    <ToggleButtonGroup
-                        orientation="vertical"
-                        name={props.name}
-                        value={formats}
-                        onChange={handleFormat}
-                        sx={{
-                            width: "100%",
-                            maxHeight: "50vh",
-                            overflowY: "scroll",
-                        }}
+                <Collapse
+                    in={open}
+                    timeout="auto"
+                    unmountOnExit
+                >
+                    <List
+                        component="div"
+                        disablePadding
                     >
-                        {
-                            props.select.map((value, index) => {
-                                return (
-                                    <ToggleButton
-                                        key={index}
-                                        value={value[props.sqlId]}
-                                    >
-                                        {value[props.sqlName]}
-                                    </ToggleButton>
-                                )
-                            })
-                        }
-                    </ToggleButtonGroup>
-                </List>
-            </Collapse>
+                        <ToggleButtonGroup
+                            orientation="vertical"
+                            name={props.name}
+                            value={formats}
+                            onChange={handleFormat}
+                            sx={{
+                                width: 1,
+                                maxHeight: "30vh",
+                                overflow: "auto",
+                                "::-webkit-scrollbar": {
+                                    width: "5px",
+                                },
+                                "::-webkit-scrollbar-thumb": {
+                                    backgroundColor: "rgba(0, 0, 50, .5)",
+                                    borderRadius: "5px",
+                                },
+                                "::-webkit-scrollbar-track": {
+                                    boxShadow: 2,
+                                },
+                            }}
+                        >
+                            {
+                                props.select.map((value, index) => {
+                                    return (
+                                        <ToggleButton sx={{
+                                            borderRadius: '10px'
+                                            }}
+                                            key={index}
+                                            value={value[props.sqlId]}
+                                        >
+                                            {value[props.sqlName]}
+                                        </ToggleButton>
+                                    )
+                                })
+                            }
+                        </ToggleButtonGroup>
+                    </List>
+                </Collapse>
         </Box>
     )
 }

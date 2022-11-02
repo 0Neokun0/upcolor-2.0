@@ -1,4 +1,5 @@
 import { Avatar, Box, Card, Grid, Tooltip, Typography } from "@mui/material"
+import { server } from "components/config"
 
 const ProfileStudentDetail = (props) => {
     return (
@@ -26,6 +27,7 @@ const ProfileStudentDetail = (props) => {
                         }}
                     >
                         <Avatar
+                            src={server.host + "/images/icon/" + props.profile["image_url"]}
                             sx={{
                                 width: "150px",
                                 height: "150px",

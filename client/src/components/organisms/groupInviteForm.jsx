@@ -3,7 +3,6 @@ import { Alert, Box } from "@mui/material"
 const GroupInviteForm = (props) => {
     return (
         <Box>
-            hi
             {
                 props.joinCheck
                 &&

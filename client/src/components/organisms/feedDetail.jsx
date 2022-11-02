@@ -7,6 +7,7 @@ const FeedDetail = () => {
     const replys = useOutletContext()["replys"]
     const toggleReplyModalOpen = useOutletContext()["toggleReplyModalOpen"]
 
+    console.log(post)
     return (
         <>
             {
@@ -39,6 +40,8 @@ const FeedDetail = () => {
                                     name={reply["user_name"]}
                                     time={reply["created_at"]}
                                     content={reply["post_text"]}
+                                    url_icon={reply["url_icon"]}
+                                    url_post={reply["url_post"]}
                                 />
                             )
                         })

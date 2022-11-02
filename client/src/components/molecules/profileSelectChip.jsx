@@ -18,37 +18,80 @@ const MenuProps = {
 
 const MultipleSelectChip = (props) => {
     const handleChange = (event) => {
-        const {
-            target: { value },
-        } = event
-        props["setSelect"](
-            typeof value === 'string' ? value.split(',') : value,
-        )
+        const value = event.target.value
+        if (!value.includes(-1)) {
+            props["setSelect"] (
+                typeof value === 'string' ? value.split(',') : value,
+            )
+        } else {
+            if (value.slice(-1)[0] === -1) {
+                props["setSelect"] ([value.slice(-1)[0]])
+            } else if (value[0] === -1 && value.length === 1) {
+                props["setSelect"] ([])
+            } else {
+                value.shift()
+                props["setSelect"] (
+                    typeof value === 'string' ? value.split(',') : value,
+                )
+            }
+        }
     }
 
     return (
         <FormControl fullWidth>
             <InputLabel>{props["label"]}</InputLabel>
+
             <Select
                 multiple
                 value={props["select"]}
                 onChange={handleChange}
                 input={<OutlinedInput label={props["label"]} />}
                 renderValue={(selected) => (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                        {selected.map((value) => (
-                            <Chip key={value} label={value} sx={{ mt: "0 !important" }} />
-                        ))}
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: 0.5
+                        }}
+                    >
+                        {
+                            selected.map((value, index) => (
+                                value !== -1 ?
+                                <Chip
+                                    key={index}
+                                    label={props.lists[value - 1][props["sqlName"]]}
+                                    sx={{
+                                        mt: "0 !important"
+                                    }}
+                                />
+                                :
+                                <Chip
+                                    key={index}
+                                    label="なし"
+                                    sx={{
+                                        mt: "0 !important"
+                                    }}
+                                />
+                            ))
+
+                        }
+
                     </Box>
                 )}
                 MenuProps={MenuProps}
             >
-                {props.lists.map((name) => (
+                <MenuItem
+                    value={-1}
+                >
+                    なし
+                </MenuItem>
+
+                {props.lists.map((item, index) => (
                     <MenuItem
-                        key={name}
-                        value={name}
+                        key={index}
+                        value={item[props["sqlId"]]}
                     >
-                        {name}
+                        {item[props["sqlName"]]}
                     </MenuItem>
                 ))}
             </Select>

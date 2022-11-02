@@ -21,7 +21,7 @@ export default class Toolbar extends Component {
 
         return (
             <div className="tool-bar">
-                <b>拡大率</b>
+                <b>ズームレベル</b>
                     { zoomRadios }
             </div>
         );

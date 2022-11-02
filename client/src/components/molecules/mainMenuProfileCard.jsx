@@ -8,6 +8,7 @@ import {
     Switch,
     Typography,
 } from '@mui/material'
+import { server } from 'components/config'
 
 const MainMenuProfileCard = (props) => {
     return (
@@ -24,14 +25,17 @@ const MainMenuProfileCard = (props) => {
                     alignItems: "center",
                 }}
             >
-                <Avatar />
+                <Avatar
+                    src={server.host + "/images/icon/" + props.profile.image_url}
+                />
 
                 <Typography
                     fontWeight="bold"
                     textAlign={"center"}
                     width="100%"
                 >
-                    {props.profile.user_name}
+                    {/* {props.profile.user_name} */}
+                    {/* {props["displayValue"]["user_name"]} */}
                 </Typography>
             </Box>
 
@@ -41,6 +45,7 @@ const MainMenuProfileCard = (props) => {
                 }}
             />
 
+            ↓*** 要検討 ***↓
             <Box
                 justifyContent={"space-between"}
                 sx={{

@@ -19,6 +19,7 @@ const Home = () => {
     const [posts, setPosts] = useState([])
     const [replys, setReplys] = useState([])
     const [profile, setProfile] = useState([])
+    const [news, setNews] = useState([])
 
     const menus = [
         {
@@ -39,7 +40,7 @@ const Home = () => {
         },
         {
             value: "ユーザー",
-            url: "#",
+            url: "/list/student",
             icon: <PersonSearchIcon />,
         },
         {
@@ -59,28 +60,22 @@ const Home = () => {
         },
     ]
 
-    const news = [
-        {
-            id: 1,
-            title: "体調チェックアンケート",
-            name: "八木勇貴 先生",
-            content: "再度体調チェックアンケートを実施する事となりました。本日の9:20までに回答お願いします。※授業が無い学生も回答お願いします。",
-        },
-        {
-            id: 2,
-            title: "SPI模試",
-            name: "友金牧人 先生",
-            content: "キャリタスのSPI模試が本日からスタートしました。22日(木)までWebで受験できます。無料で受けられる貴重な練習の機会です。無駄にしないようにしてください。",
-        },
-    ]
-
     const handleSubmit = (e) => {
         e.preventDefault()
+
         const data = new FormData(e.currentTarget)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
 
         axios.post("/post/addPost", {
             text: data.get("text"),
-        })
+            image: data.get("image"),
+        },
+            config
+        )
             .then(() => {
                 window.location.reload()
             })
@@ -89,14 +84,21 @@ const Home = () => {
         e.preventDefault()
 
         const data = new FormData(e.currentTarget)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
 
         axios.post("/post/addReply", {
             text: data.get("text"),
+            image: data.get("image"),
             parentId: data.get("parentId"),
-        })
+        },
+            config
+        )
             .then(() => {
                 window.location.reload()
-                console.log("run")
             })
     }
 
@@ -118,6 +120,17 @@ const Home = () => {
         axios.post("/post/getPostList")
             .then((res) => {
                 setPosts(res.data)
+                console.log(res.data)
+            })
+
+        axios.post("/account/getProfile")
+            .then((res) => {
+                setProfile(res.data[0])
+            })
+
+        axios.post("/news/getStudentNews")
+            .then((res) => {
+                setNews(res.data)
             })
     }, []);
 
@@ -132,13 +145,6 @@ const Home = () => {
                 setReplys(res.data["replys"])
             })
     }, [postId]);
-
-    useEffect(() => {
-        axios.post("/account/getProfile")
-            .then((res) => {
-                setProfile(res.data[0])
-            })
-    }, [])
 
     return (
         <>
@@ -166,4 +172,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default Home

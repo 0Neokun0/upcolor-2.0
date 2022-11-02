@@ -1,6 +1,6 @@
 import Gantt from "components/atoms/gantt"
 import { Link } from "react-router-dom"
-import { Box, Button, Card, Dialog, DialogActions, DialogTitle, Typography } from "@mui/material"
+import { Box, Button, Card, Dialog, DialogActions, DialogTitle, FormControlLabel, FormGroup, Switch, Typography } from "@mui/material"
 import { TeamMembers } from "components/organisms"
 import { TeamInfoCard } from "components/molecules"
 import Toolbar from "components/atoms/toolbar"
@@ -43,6 +43,52 @@ const TeamDetail = (props) => {
                         anchorEl={props.anchorEl}
                         handleClose={props.handleClose}
                     />
+
+                    <Box>
+                        <FormGroup>
+                            <FormControlLabel
+                                control={
+                                    <Switch
+                                        checked={props["inviteState"]}
+                                        onChange={(e) => props["setInviteState"](e.target.checked)}
+                                    />
+                                }
+                                label="募集状態"
+                            />
+                        </FormGroup>
+
+                        <FormGroup>
+                            <FormControlLabel
+                                control={
+                                    <Switch
+                                        checked={props["chatState"]}
+                                        onChange={(e) => props["setChatState"](e.target.checked)}
+                                    />
+                                }
+                                label="チームチャット公開"
+                            />
+                        </FormGroup>
+
+                        <FormGroup>
+                            <FormControlLabel
+                                control={
+                                    <Switch
+                                        checked={props["ganttState"]}
+                                        onChange={(e) => props["setGanttState"](e.target.checked)}
+                                    />
+                                }
+                                label="ガントチャート公開"
+                            />
+                        </FormGroup>
+
+                        <Button
+                            variant="contained"
+                            size="small"
+                            onClick={props["saveSetting"]}
+                        >
+                            保存
+                        </Button>
+                    </Box>
 
                     <Box
                         sx={{
