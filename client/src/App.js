@@ -6,7 +6,7 @@ import { Box } from "@mui/material"
 import { LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
 
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite } from "components/pages/student"
-import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews, TeacherHome, ClassRoomFeed} from "components/pages/teacher"
+import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews, ClassRoomFeed} from "components/pages/teacher"
 import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment } from "components/pages/company"
 
 import { ClassRoomFeedLayout, GroupChatLayout } from "components/templates"
