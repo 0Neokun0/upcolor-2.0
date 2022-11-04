@@ -19,6 +19,7 @@ const GroupChatLayout = () => {
     const handleLeaveGroup = useOutletContext()["handleLeaveGroup"]
 
     const chats = useOutletContext()["chats"]
+    const addChats = useOutletContext()["addChats"]
     const handleSendChat = useOutletContext()["handleSendChat"]
 
     return (
@@ -61,22 +62,24 @@ const GroupChatLayout = () => {
                 }}
             >
                 <Box
+                    id="chatBox"
                     sx={{
+                        width: "100%",
                         height: "100%",
-                        position: "relative",
                     }}
                 >
                     <GroupChat
                         chats={chats}
+                        addChats={addChats}
                     />
 
                     <Box
                         component={"form"}
                         onSubmit={handleSendChat}
                         sx={{
-                            width: "100%",
+                            height: "40px",
                             display: "flex",
-                            position: "absolute",
+                            position: "fixed",
                             bottom: 0,
                             backgroundColor: "white",
                         }}
@@ -90,12 +93,14 @@ const GroupChatLayout = () => {
                             name="text"
                         />
 
-                        <IconButton
-                            color={"primary"}
-                            type={"submit"}
-                        >
-                            <SendRoundedIcon />
-                        </IconButton>
+                        <Box>
+                            <IconButton
+                                color={"primary"}
+                                type={"submit"}
+                            >
+                                <SendRoundedIcon />
+                            </IconButton>
+                        </Box>
                     </Box>
                 </Box>
             </Grid>

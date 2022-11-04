@@ -35,37 +35,9 @@ app.use("/company", company)
 app.use("/teacher", teacher)
 app.use("/news", news)
 
-
-const { Server } = require("socket.io")
+// 双方向通信
 const server = require("http").createServer(app)
+require("./api/socket")(app, server)
 
-const io = new Server(server, {
-    cors: {
-        origin: "*",
-        methods: ["GET", "POST"],
-    },
-})
-
-io.on("connection", (socket) => {
-    // ブラウザから接続されたときの処理
-    console.log("a user connected")
-
-    // ブラウザが切断したときの処理
-    socket.on("disconnect", () => {
-        console.log("user disconnected")
-    })
-
-    socket.on("groupChat join", (id) => {
-        socket.join(id)
-        console.log(id)
-    })
-
-    socket.on("groupChat msg", (id, msg) => {
-        io.to(id).emit("groupChat", msg)
-        console.log(id, msg)
-    })
-
-})
-
-server.listen(socketPort);
-console.log(`socket open port ${socketPort}`);
+server.listen(socketPort)
+console.log(`socket open port ${socketPort}`)

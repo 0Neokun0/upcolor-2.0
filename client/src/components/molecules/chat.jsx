@@ -11,19 +11,15 @@ const Chat = (props) => {
     var ss = dd.getSeconds()
 
     return (
-        <Box
-            sx={{
-                mb: 2,
-            }}
-        >
+        <Box>
             {props.chat["user_name"]}
 
             <Box
                 sx={{
                     width: "fit-content",
                     p: 1,
-                    borderRadius: "5px",
-                    backgroundColor: "whitesmoke",
+                    borderRadius: "0px 8px 8px 8px",
+                    backgroundColor: "#DCDCDC",
                 }}
             >
                 {props.chat["sent_text"]}
