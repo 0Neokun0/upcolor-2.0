@@ -20,6 +20,7 @@ const GroupChatLayout = () => {
 
     const chats = useOutletContext()["chats"]
     const addChats = useOutletContext()["addChats"]
+    // const scrollDown = useOutletContext()["scrollDown"]
     const handleSendChat = useOutletContext()["handleSendChat"]
 
     return (
@@ -56,41 +57,51 @@ const GroupChatLayout = () => {
             <Grid
                 item
                 xs={8}
-                sx={{
-                    height: "calc(100vh - 64px)",
-                    overflowY: "scroll",
-                }}
             >
                 <Box
-                    id="chatBox"
                     sx={{
                         width: "100%",
                         height: "100%",
                     }}
                 >
-                    <GroupChat
-                        chats={chats}
-                        addChats={addChats}
-                    />
+                    <Box
+                        id="chatBox"
+                        sx={{
+                            height: "calc(100vh - 104px)",
+                            overflowY: "scroll",
+                            "::-webkit-scrollbar": {
+                                width: "5px",
+                            },
+                            "::-webkit-scrollbar-thumb": {
+                                backgroundColor: "rgba(0, 0, 50, .5)",
+                                borderRadius: "5px",
+                            },
+                            "::-webkit-scrollbar-track": {
+                                boxShadow: 2,
+                            },
+                        }}
+                    >
+                        <GroupChat
+                            chats={chats}
+                            addChats={addChats}
+                        />
+                    </Box>
 
                     <Box
                         component={"form"}
                         onSubmit={handleSendChat}
                         sx={{
-                            height: "40px",
                             display: "flex",
-                            position: "fixed",
-                            bottom: 0,
-                            backgroundColor: "white",
                         }}
                     >
                         <TextField
                             id="chatInput"
                             variant="outlined"
                             size="small"
+                            name="text"
+                            multiline
                             fullWidth
                             required
-                            name="text"
                         />
 
                         <Box>

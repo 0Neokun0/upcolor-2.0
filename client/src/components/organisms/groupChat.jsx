@@ -6,7 +6,6 @@ const GroupChat = (props) => {
         <Box
             sx={{
                 p: 2,
-                pb: "40px",
                 "div + div": {
                     mt: 1,
                 }

@@ -31,9 +31,18 @@ const Group = () => {
         },
     ]
 
+    const scrollDown = () => {
+        const chatBox = document.getElementById("chatBox")
+        chatBox.scrollTop = chatBox.scrollHeight
+    }
+
     const groupClick = (id) => {
         socket.emit("groupChat join", selectGroupId, id)
         setSelectGroupId(id)
+
+        setTimeout(() => {
+            scrollDown()
+        }, 500)
     }
 
     const handleCreateSubmit = (e) => {
@@ -58,10 +67,13 @@ const Group = () => {
         //     text: data.get("text"),
         // })
 
-        // const elem = document.getElementById("chatInput")
-        // elem.value = ""
-
         socket.emit("groupChat msg", token, selectGroupId, data.get("text"))
+
+        document.getElementById("chatInput").value = ""
+
+        setTimeout(() => {
+            scrollDown()
+        }, 500)
     }
 
     const handleGenerateInviteUrl = (groupId) => {
@@ -129,6 +141,7 @@ const Group = () => {
 
             chats={chats}
             addChats={addChats}
+            scrollDown={scrollDown}
             handleSendChat={handleSendChat}
         />
     );

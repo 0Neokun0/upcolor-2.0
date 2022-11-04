@@ -1,4 +1,4 @@
-import { Box, IconButton, List, ListItem, ListItemButton, ListItemText, Menu, MenuItem, Snackbar, Tooltip, Typography } from "@mui/material"
+import { IconButton, List, ListItem, ListItemButton, Menu, MenuItem, Snackbar, Typography } from "@mui/material"
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded'
 
 const GroupList = (props) => {

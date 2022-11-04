@@ -12,14 +12,19 @@ const Chat = (props) => {
 
     return (
         <Box>
-            {props.chat["user_name"]}
+            <Typography
+                variant="caption"
+            >
+                {props.chat["user_name"]}
+            </Typography>
 
             <Box
                 sx={{
+                    px: 2,
                     width: "fit-content",
-                    p: 1,
                     borderRadius: "0px 8px 8px 8px",
-                    backgroundColor: "#DCDCDC",
+                    backgroundColor: "#EEEEEE",
+                    whiteSpace: "pre-wrap",
                 }}
             >
                 {props.chat["sent_text"]}
