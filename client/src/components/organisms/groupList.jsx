@@ -1,5 +1,9 @@
-import { IconButton, List, ListItem, ListItemButton, Menu, MenuItem, Snackbar, Typography } from "@mui/material"
+import { IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Snackbar, Typography } from "@mui/material"
+
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded'
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import GroupRemoveIcon from '@mui/icons-material/GroupRemove';
 
 const GroupList = (props) => {
     return (
@@ -40,17 +44,38 @@ const GroupList = (props) => {
                                             <MenuItem
                                                 onClick={() => props["handleGenerateInviteUrl"](group["group_id"])}
                                             >
-                                                招待urlコピー
+                                                <ListItemIcon>
+                                                    <GroupAddIcon fontSize="small" />
+                                                </ListItemIcon>
+
+                                                <ListItemText>
+                                                    招待urlコピー
+                                                </ListItemText>
+
                                             </MenuItem>
 
                                             <MenuItem
                                                 onClick={() => props["handleLeaveGroup"](group["group_id"])}
                                             >
-                                                グループを抜ける
+                                                <ListItemIcon>
+                                                    <PersonRemoveIcon fontSize="small" />
+                                                </ListItemIcon>
+
+                                                <ListItemText>
+                                                    グループを抜ける
+                                                </ListItemText>
+
                                             </MenuItem>
 
                                             <MenuItem>
-                                                ##グループを削除
+                                                <ListItemIcon>
+                                                    <GroupRemoveIcon fontSize="small" />
+                                                </ListItemIcon>
+
+                                                <ListItemText>
+                                                    グループを削除
+                                                </ListItemText>
+
                                             </MenuItem>
                                         </Menu>
                                     </>
@@ -64,6 +89,7 @@ const GroupList = (props) => {
                                     >
                                         {group["group_name"]}
                                     </Typography>
+
                                 </ListItemButton>
                             </ListItem>
                         )

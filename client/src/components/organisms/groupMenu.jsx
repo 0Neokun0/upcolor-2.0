@@ -1,10 +1,13 @@
-import { IconButton, Link, List, ListItem, Tooltip } from "@mui/material"
+import { Box, IconButton, Link, ListItem, Tooltip } from "@mui/material"
 
 const GroupMenu = (props) => {
     return (
-        <List
-            disablePadding
-        >
+        <Box sx={{
+            p: 1,
+            m: 1,
+            display: 'flex',
+            justifyContent: 'flex-start',
+        }}>
             {
                 props.menus.map((menu, index) => {
                     return (
@@ -14,7 +17,7 @@ const GroupMenu = (props) => {
                         >
                             <Tooltip
                                 title={menu.value}
-                                placement="right"
+                                placement="bottom"
                             >
                                 <IconButton
                                     LinkComponent={Link}
@@ -30,7 +33,7 @@ const GroupMenu = (props) => {
                     )
                 })
             }
-        </List>
+        </Box>
     )
 }
 

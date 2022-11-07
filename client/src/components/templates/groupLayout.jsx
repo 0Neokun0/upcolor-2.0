@@ -1,33 +1,30 @@
 import { Outlet } from "react-router-dom"
-import { Container, Grid } from "@mui/material"
-import { GroupMenu } from "components/organisms"
+import { Box, Card, Grid, Stack } from "@mui/material"
+import { GroupMenu, GroupSideBar } from "components/organisms"
 
 const GroupLayout = (props) => {
     return (
-        <Container>
-            <Grid
-                container
+        <Box sx={{
+            p:2,
+        }}>
+
+            <Stack
+                direction="row"
+                spacing={2}
                 sx={{
-                    background: "white",
+                    height: "calc(100vh - 64px)",
                 }}
             >
-                <Grid
-                    item
-                    xs={1}
+                <GroupSideBar menus={props.menus} />
+
+                <Card
                     sx={{
-                        borderRight: 1,
-                        borderColor: "rgba(0, 0, 0, 0.12)",
+                        width: 1,
                     }}
                 >
-                    <GroupMenu
-                        menus={props.menus}
-                    />
-                </Grid>
 
-                <Grid
-                    item
-                    xs={11}
-                >
+
+
                     <Outlet
                         context={{
                             userId: props.userId,
@@ -51,9 +48,10 @@ const GroupLayout = (props) => {
                             handleSendChat: props.handleSendChat,
                         }}
                     />
-                </Grid>
-            </Grid>
-        </Container>
+                </Card>
+
+            </Stack>
+        </Box>
     );
 }
 
