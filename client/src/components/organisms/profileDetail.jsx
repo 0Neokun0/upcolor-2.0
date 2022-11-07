@@ -28,7 +28,7 @@ const ProfileDetail = (props) => {
                         }}
                     >
                         <Avatar
-                            src={server.host + "/images/icon/" + props.profile["image_url"]}
+                            src={server.host + "/images/icon/" + props.profile["image"]}
                             sx={{
                                 width: "150px",
                                 height: "150px",
@@ -45,6 +45,9 @@ const ProfileDetail = (props) => {
 
                         <Typography
                             variant="subtitle2"
+                            sx={{
+                                whiteSpace: "pre-wrap",
+                            }}
                         >
                             {props.profile["course_name"]}
                         </Typography>
@@ -77,11 +80,18 @@ const ProfileDetail = (props) => {
                                             <Grid
                                                 item
                                                 xs={10}
+                                                sx={{
+                                                    whiteSpace: "pre-wrap",
+                                                }}
                                             >
                                                 {
                                                     profileLists["content"]
                                                         ?
-                                                        profileLists["content"]
+                                                        profileLists["content"] !== "-1"
+                                                            ?
+                                                            profileLists["content"]
+                                                            :
+                                                            "なし"
                                                         :
                                                         "未設定"
                                                 }

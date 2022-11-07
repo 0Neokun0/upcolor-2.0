@@ -1,4 +1,3 @@
-import InboxIcon from '@mui/icons-material/MoveToInbox'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 
@@ -23,7 +22,7 @@ const SearchList = (props) => {
         <Box>
             <ListItem onClick={handleClick}>
                 <ListItemIcon>
-                    <InboxIcon />
+                    {props.icon}
                 </ListItemIcon>
                 <ListItemText primary={props.title} />
                 {open ? <ExpandLess /> : <ExpandMore />}

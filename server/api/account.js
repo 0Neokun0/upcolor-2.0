@@ -219,79 +219,70 @@ router.post("/signout", (req, res) => {
 // 自分 *生徒専用
 router.post("/getProfile", async (req, res) => {
     const userId = get.userId(req)
+    const profile = await get.user(userId)
+    const qualifications = await get.list("qualification")
+    const programs = await get.list("program")
+    const tools = await get.list("tool")
+    const languages = await get.list("language")
 
-    const sqlSelectUser = `
-        SELECT
-            user_profiles.user_id,
-            user_profiles.user_name,
-            user_profiles.user_mail,
-            user_profiles.user_introduction,
-            student_profiles.student_course_id,
-            student_profiles.student_year,
-            student_profiles.student_programming_languages,
-            student_profiles.student_tools_and_framework,
-            student_profiles.student_country_language,
-            student_profiles.student_qualifications,
-            student_profiles.student_github,
-            student_profiles.is_colaborating,
-            courses.course_name,
-            images.image_url
-        FROM
-            user_profiles
-        INNER JOIN
-            student_profiles ON
-            user_profiles.user_id = student_profiles.user_id
-        INNER JOIN
-            courses ON
-            student_profiles.student_course_id = courses.course_id
-        INNER JOIN
-            images ON
-            user_profiles.user_id = images.image_id AND images.image_type = 1
-        WHERE
-            user_profiles.user_id = ?
-    `
+    profile[0]["course_name"] = profile[0]["course_name"].split("/").join("\n")
 
-    const profile = await sql.handleSelect(sqlSelectUser, [userId])
+    profile[0]["qualification_names"] = ["未設定"]
+    if (profile[0]["qualification_ids"]) {
+        profile[0]["qualification_names"] = profile[0]["qualification_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : qualifications[Number(id) - 1]["qualification_name"]).join("\n")
+    }
 
-    res.json(profile)
+    profile[0]["program_names"] = ["未設定"]
+    if (profile[0]["program_ids"]) {
+        profile[0]["program_names"] = profile[0]["program_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : programs[Number(id) - 1]["program_name"]).join("\n")
+    }
+
+    profile[0]["tool_names"] = ["未設定"]
+    if (profile[0]["tool_ids"]) {
+        profile[0]["tool_names"] = profile[0]["tool_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : tools[Number(id) - 1]["tool_name"]).join("\n")
+    }
+
+    profile[0]["language_names"] = ["未設定"]
+    if (profile[0]["language_ids"]) {
+        profile[0]["language_names"] = profile[0]["language_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : languages[Number(id) - 1]["language_name"]).join("\n")
+    }
+
+    res.json(profile[0])
 })
 
 // 他人
 router.post("/getStudentProfile", async (req, res) => {
     const userId = req.body.userId
 
-    const sqlSelectUser = `
-        SELECT
-            user_profiles.user_name,
-            user_profiles.user_mail,
-            user_profiles.user_introduction,
-            student_profiles.student_year,
-            student_profiles.student_programming_languages,
-            student_profiles.student_tools_and_framework,
-            student_profiles.student_country_language,
-            student_profiles.student_qualifications,
-            student_profiles.student_github,
-            student_profiles.is_colaborating,
-            courses.course_name,
-            images.image_url
-        FROM
-            user_profiles
-        INNER JOIN
-            student_profiles ON
-            user_profiles.user_id = student_profiles.user_id
-        INNER JOIN
-            courses ON
-            student_profiles.student_course_id = courses.course_id
-        INNER JOIN
-            images ON
-            user_profiles.user_id = images.image_id AND images.image_type = 1
-        WHERE
-            user_profiles.user_id = ?
-    `
+    const profile = await get.user(userId)
+    const qualifications = await get.list("qualification")
+    const programs = await get.list("program")
+    const tools = await get.list("tool")
+    const languages = await get.list("language")
 
-    const profile = await sql.handleSelect(sqlSelectUser, [userId])
+    profile[0]["course_name"] = profile[0]["course_name"].split("/").join("\n")
+    
+    profile[0]["qualification_names"] = ["未設定"]
+    if (profile[0]["qualification_ids"]) {
+        profile[0]["qualification_names"] = profile[0]["qualification_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : qualifications[Number(id) - 1]["qualification_name"]).join("\n")
+    }
 
-    res.json(profile)
+    profile[0]["program_names"] = ["未設定"]
+    if (profile[0]["program_ids"]) {
+        profile[0]["program_names"] = profile[0]["program_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : programs[Number(id) - 1]["program_name"]).join("\n")
+    }
+
+    profile[0]["tool_names"] = ["未設定"]
+    if (profile[0]["tool_ids"]) {
+        profile[0]["tool_names"] = profile[0]["tool_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : tools[Number(id) - 1]["tool_name"]).join("\n")
+    }
+
+    profile[0]["language_names"] = ["未設定"]
+    if (profile[0]["language_ids"]) {
+        profile[0]["language_names"] = profile[0]["language_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : languages[Number(id) - 1]["language_name"]).join("\n")
+    }
+
+    res.json(profile[0])
 })
 
 router.post("/editProfile", async (req, res) => {
@@ -355,10 +346,12 @@ router.post("/updateProfile", async (req, res) => {
 
     await sql.handleUpdate(sqlUpdateUserProfile, [name, introduction, userId])
     await sql.handleUpdate(sqlUpdateStudentProfile, [course, year, qualifications, programming_languages, tools_and_framework, country_language, github, userId])
+
+    res.json(true)
 })
 
 router.post("/updateUserIcon", upload.single("icon"), async (req, res) => {
-    if (req.file) {
+    // if (req.file) {
         const userId = get.userId(req)
         const sqlUpdateIcon = `
             UPDATE
@@ -371,8 +364,8 @@ router.post("/updateUserIcon", upload.single("icon"), async (req, res) => {
         `
         const icon = await sql.handleUpdate(sqlUpdateIcon, [req.file.filename, userId])
 
-        res.json(icon)
-    }
+    // }
+    // res.json(true)
 })
 
 module.exports = router
