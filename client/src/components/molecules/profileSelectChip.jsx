@@ -20,22 +20,23 @@ const MultipleSelectChip = (props) => {
     const handleChange = (event) => {
         const value = event.target.value
         if (!value.includes(-1)) {
-            props["setSelect"] (
+            props["setSelect"](
                 typeof value === 'string' ? value.split(',') : value,
-            )
-        } else {
-            if (value.slice(-1)[0] === -1) {
-                props["setSelect"] ([value.slice(-1)[0]])
-            } else if (value[0] === -1 && value.length === 1) {
-                props["setSelect"] ([])
-            } else {
-                value.shift()
-                props["setSelect"] (
-                    typeof value === 'string' ? value.split(',') : value,
                 )
-            }
+        } else if (value.slice(-1)[0] === -1) {
+            props["setSelect"]([value.slice(-1)[0]])
+        } else if (value.length === 1) {
+            props["setSelect"]([])
+        } else {
+            props["setSelect"]([value[1]])
         }
     }
+
+    props["select"].sort((a,b) => {
+        if( a < b ) return -1
+        if( a > b ) return 1
+        return 0
+    })
 
     return (
         <FormControl fullWidth>
@@ -57,21 +58,21 @@ const MultipleSelectChip = (props) => {
                         {
                             selected.map((value, index) => (
                                 value !== -1 ?
-                                <Chip
-                                    key={index}
-                                    label={props.lists[value - 1][props["sqlName"]]}
-                                    sx={{
-                                        mt: "0 !important"
-                                    }}
-                                />
-                                :
-                                <Chip
-                                    key={index}
-                                    label="なし"
-                                    sx={{
-                                        mt: "0 !important"
-                                    }}
-                                />
+                                    <Chip
+                                        key={index}
+                                        label={props.lists[value - 1][props["sqlName"]]}
+                                        sx={{
+                                            mt: "0 !important"
+                                        }}
+                                    />
+                                    :
+                                    <Chip
+                                        key={index}
+                                        label="なし"
+                                        sx={{
+                                            mt: "0 !important"
+                                        }}
+                                    />
                             ))
 
                         }

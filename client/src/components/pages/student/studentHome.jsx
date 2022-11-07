@@ -140,7 +140,7 @@ const Home = () => {
 
         axios.post("/account/getProfile")
             .then((res) => {
-                setProfile(res.data[0])
+                setProfile(res.data)
             })
 
         axios.post("/news/getStudentNews")

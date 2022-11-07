@@ -44,6 +44,9 @@ const ProfileStudentDetail = (props) => {
 
                         <Typography
                             variant="subtitle2"
+                            sx={{
+                                whiteSpace: "pre-wrap",
+                            }}
                         >
                             {props.profile["course_name"]}
                         </Typography>
@@ -76,6 +79,9 @@ const ProfileStudentDetail = (props) => {
                                             <Grid
                                                 item
                                                 xs={10}
+                                                sx={{
+                                                    whiteSpace: "pre-wrap",
+                                                }}
                                             >
                                                 {
                                                     profileLists["content"]

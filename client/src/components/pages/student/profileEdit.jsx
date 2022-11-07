@@ -29,23 +29,25 @@ const ProfileEdit = () => {
                 'content-type': 'multipart/form-data'
             }
         }
-
+        
+        if (data.get("icon")["name"]) {
+            axios.post("/account/updateUserIcon", {
+                icon: data.get("icon"),
+            },
+                config
+            )
+        }
         axios.post("/account/updateProfile", {
             name: data.get("name"),
             course: data.get("course"),
             year: data.get("year"),
+            introduction: data.get("introduction"),
             qualifications: qualificationIds.join(),
             programming_languages: programIds.join(),
             tools_and_framework: toolIds.join(),
             country_language: languageIds.join(),
-            introduction: data.get("introduction"),
             github: data.get("github"),
         })
-        axios.post("/account/updateUserIcon", {
-            icon: data.get("icon"),
-        },
-            config
-        )
             .then(() => {
                 window.location.href = "/profile"
             })
@@ -57,24 +59,23 @@ const ProfileEdit = () => {
     useEffect(() => {
         axios.post("/account/editProfile")
             .then((res) => {
-                console.log(res.data)
                 if (res.data["profile"]["course_id"]) {
                     setCourseId(res.data["profile"]["course_id"])
                 }
-                if (res.data["profile"]["student_year"]) {
-                    setYearId(res.data["profile"]["student_year"])
+                if (res.data["profile"]["year_id"]) {
+                    setYearId(res.data["profile"]["year_id"])
                 }
-                if (res.data["profile"]["student_qualifications"]) {
-                    setQualificationIds(res.data["profile"]["student_qualifications"].split(",").map(Number))
+                if (res.data["profile"]["qualification_ids"]) {
+                    setQualificationIds(res.data["profile"]["qualification_ids"].split(",").map(Number))
                 }
-                if (res.data["profile"]["student_programming_languages"]) {
-                    setProgramIds(res.data["profile"]["student_programming_languages"].split(",").map(Number))
+                if (res.data["profile"]["program_ids"]) {
+                    setProgramIds(res.data["profile"]["program_ids"].split(",").map(Number))
                 }
-                if (res.data["profile"]["student_tools_and_framework"]) {
-                    setToolIds(res.data["profile"]["student_tools_and_framework"].split(",").map(Number))
+                if (res.data["profile"]["tool_ids"]) {
+                    setToolIds(res.data["profile"]["tool_ids"].split(",").map(Number))
                 }
-                if (res.data["profile"]["student_country_language"]) {
-                    setLanguageIds(res.data["profile"]["student_country_language"].split(",").map(Number))
+                if (res.data["profile"]["language_ids"]) {
+                    setLanguageIds(res.data["profile"]["language_ids"].split(",").map(Number))
                 }
                 setProfile(res.data["profile"])
                 setCoursesList(res.data["courses"])
@@ -99,14 +100,14 @@ const ProfileEdit = () => {
                     <TextField
                         label="ユーザー名"
                         name="name"
-                        defaultValue={profile["user_name"]}
+                        defaultValue={profile["name"]}
                         fullWidth
                     />
 
                     <TextField
                         label="メールアドレス"
                         name="mail"
-                        defaultValue={profile["user_mail"]}
+                        defaultValue={profile["mail"]}
                         fullWidth
                         disabled
                     />
@@ -163,7 +164,7 @@ const ProfileEdit = () => {
                         rows={3}
                         fullWidth
                         multiline
-                        defaultValue={profile["user_introduction"]}
+                        defaultValue={profile["introduction"]}
                     />
                 </ProfileInput>
 
@@ -214,7 +215,7 @@ const ProfileEdit = () => {
                         label="Github"
                         name="github"
                         fullWidth
-                        defaultValue={profile["student_github"]}
+                        defaultValue={profile["github"]}
                     />
                 </ProfileInput>
             </ProfileForm>

@@ -26,7 +26,7 @@ const MainMenuProfileCard = (props) => {
                 }}
             >
                 <Avatar
-                    src={server.host + "/images/icon/" + props.profile.image_url}
+                    src={server.host + "/images/icon/" + props.profile.image}
                 />
 
                 <Typography
@@ -34,8 +34,7 @@ const MainMenuProfileCard = (props) => {
                     textAlign={"center"}
                     width="100%"
                 >
-                    {/* {props.profile.user_name} */}
-                    {/* {props["displayValue"]["user_name"]} */}
+                    {props.profile.user_name}
                 </Typography>
             </Box>
 
