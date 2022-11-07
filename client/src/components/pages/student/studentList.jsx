@@ -7,10 +7,16 @@ import { ListLayout } from "components/templates"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
+String.prototype.nullSplit = function(sep){
+    if (!this) {
+        return [""]
+    }
+    return this.split(sep)
+}
+
 const StudentList = () => {
     const [originalStudents, setOriginalStudents] = useState(false)
     const [displayStudents, setDisplayStudents] = useState(false)
-    const [nullOmitStudent, setNullOmitStudent] = useState([])
     const [searchList, setSearchList] = useState([])
     const [courses, setCourses] = useState([])
     const [years, setYears] = useState([])
@@ -19,13 +25,31 @@ const StudentList = () => {
     const [tools, setTools] = useState([])
     const [languages, setLanguages] = useState([])
 
+    const singleIdCheck = (value, select, flg) => {
+        // length: 絞り込み要素が選ばれているか
+        // includes: select に value が含まれているか
+        if (select.length && !select.includes(value)) {
+            flg = false
+        }
+        return flg
+    }
+
+    const multiIdCheck = (value, select, flg) => {
+        // length: 絞り込み要素が選ばれているか
+        // some: 絞り込み用配列の要素を (element) に一つずつ渡す 一つでも条件をクリアしたら true を返す
+        // split: student["ids"] 文字列なので "," で区切って一文字ずつの配列にする
+        // map: split で区切った配列を文字型から数値型に変換する
+        // includes: student["ids"] の数値型配列に element が含まれている場合 true を返す
+        if (select.length && !select.some((num) => value ? value.split(",").map(Number).includes(num) : false)) {
+            flg = false
+        }
+        return flg
+    }
+
     useEffect(() => {
         axios.post("/student/list")
             .then((res) => {
                 setOriginalStudents(res.data["students"])
-                setNullOmitStudent(res.data["students"].filter((student) => {
-                    return student["qualification_ids"] && student["program_ids"] && student["tool_ids"] && student["language_ids"]
-                }))
                 setDisplayStudents(res.data["students"])
                 setSearchList(res.data["search"])
             })
@@ -33,66 +57,30 @@ const StudentList = () => {
 
     useEffect(() => {
         // 絞り込みを一つでも選択しているか
-        if (courses.length || years.length || qualifications.length || programs.length || tools.length || languages.length) {
-
-            // 絞り込まれた結果を渡す用の配列
-            let search = []
+        if (originalStudents) {
 
             // 絞り込み用の配列を map する
-            nullOmitStudent.map((student) => {
+            setDisplayStudents(originalStudents.map((student) => {
 
                 // この生徒を画面に出力するか判別するフラグ
-                let displayFlg = true
+                var displayFlg = true
 
                 // この絞り込みを選択しているか && 絞り込みの要素に生徒が含まれているか
-                // length: 絞り込み要素が選ばれているか 選ばれていない場合0を返す
-                // includes: student["ids"] の数値型配列に element が含まれている場合 true を返す
-                if (courses.length && !courses.includes(student["course_id"])) {
-                    displayFlg = false
-                }
-
-                if (years.length && !years.includes(student["year_id"])) {
-                    displayFlg = false
-                }
+                displayFlg = singleIdCheck(student["course_id"], courses, displayFlg)
+                displayFlg = singleIdCheck(student["year_id"], years, displayFlg)
 
                 // この絞り込みを選択しているか && 絞り込みの要素に生徒が選んだものが一つでも含まれているか
-                // length: 絞り込み要素が選ばれているか 選ばれていない場合0を返す
-                // some: 絞り込み用配列の要素を (element) に一つずつ渡す
-                // split: student["ids"] 文字列なので "," で区切って一文字ずつの配列にする
-                // map: split で区切った配列を文字型から数値型に変換する
-                // includes: student["ids"] の数値型配列に element が含まれている場合 true を返す
-                if (qualifications.length && !qualifications.some(element => student["qualification_ids"].split(",").map(Number).includes(element))) {
-                    displayFlg = false
-                }
+                displayFlg = multiIdCheck(student["qualification_ids"], qualifications, displayFlg)
+                displayFlg = multiIdCheck(student["program_ids"], programs, displayFlg)
+                displayFlg = multiIdCheck(student["tool_ids"], tools, displayFlg)
+                displayFlg = multiIdCheck(student["language_ids"], languages, displayFlg)
 
-                if (programs.length && !programs.some(element => student["program_ids"].split(",").map(Number).includes(element))) {
-                    displayFlg = false
-                }
-
-                if (tools.length && !tools.some(element => student["tool_ids"].split(",").map(Number).includes(element))) {
-                    displayFlg = false
-                }
-
-                if (languages.length && !languages.some(element => student["language_ids"].split(",").map(Number).includes(element))) {
-                    displayFlg = false
-                }
-
-                // displayFlg が true のままの場合配列に追加する
-                if (displayFlg) {
-                    search.push(student)
-                }
-
-                return 0
-            })
-
-            // 画面に表示する生徒が含まれている配列を DisplayStudents に set する
-            setDisplayStudents(search)
-        } else {
-            setDisplayStudents(originalStudents)
+                return displayFlg && student
+            }).filter((element) => element))
         }
 
         // 絞り込み要素がどれか選択されたときに useEffect が動くようにする
-    }, [courses, years, qualifications, programs, tools, languages, originalStudents, nullOmitStudent])
+    }, [courses, years, qualifications, programs, tools, languages, originalStudents])
 
     return (
         displayStudents
