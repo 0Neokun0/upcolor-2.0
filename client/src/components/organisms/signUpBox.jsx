@@ -80,17 +80,33 @@ const SignUpBox = (props) => {
                 <TextField
                     margin="normal"
                     size="small"
-                    required
-                    fullWidth
                     name="password"
                     label="パスワード"
                     type="password"
                     autoComplete="current-password"
                     placeholder="空白を含まない8文字以上"
+                    required
+                    fullWidth
                     inputProps={{
                         minLength: 8,
                         pattern: "^[\\S]+$"
                     }}
+                    onChange={(e) => props["setOriginPass"](e.target.value)}
+                />
+
+                <TextField
+                    margin="normal"
+                    size="small"
+                    name="password"
+                    label="確認用パスワード"
+                    type="password"
+                    autoComplete="current-password"
+                    placeholder="確認用パスワード"
+                    required
+                    fullWidth
+                    onChange={(e) => props["setCheckPass"](e.target.value)}
+                    error={props["originPass"] !== props["checkPass"]}
+                    helperText={props["originPass"] !== props["checkPass"] && "パスワードが一致しません"}
                 />
 
                 {
