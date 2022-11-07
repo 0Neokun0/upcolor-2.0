@@ -21,6 +21,7 @@ const Home = () => {
     const [replys, setReplys] = useState([])
     const [profile, setProfile] = useState([])
     const [news, setNews] = useState([])
+    const [fileCheck, setFileCheck] = useState(false)
 
     const menus = [
         {
@@ -72,23 +73,27 @@ const Home = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
         const data = new FormData(e.currentTarget)
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        }
 
-        axios.post("/post/addPost", {
-            text: data.get("text"),
-            image: data.get("image"),
-        },
-            config
-        )
-            .then(() => {
-                window.location.reload()
-            })
+        if (data.get("image")["type"] === "image/png") {
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+
+            axios.post("/post/addPost", {
+                text: data.get("text"),
+                image: data.get("image"),
+            },
+                config
+            )
+                .then(() => {
+                    window.location.reload()
+                })
+        } else {
+            setFileCheck(true)
+        }
     }
     const handleReplySubmit = (e) => {
         e.preventDefault()
@@ -117,6 +122,7 @@ const Home = () => {
     }
     const togglePostModalClose = () => {
         setOpenPostModal(false)
+        setFileCheck(false)
     }
 
     const toggleReplyModalOpen = () => {
@@ -175,6 +181,7 @@ const Home = () => {
                 openPostModal={openPostModal}
                 togglePostModalOpen={togglePostModalOpen}
                 togglePostModalClose={togglePostModalClose}
+                fileCheck={fileCheck}
 
                 handleReplySubmit={handleReplySubmit}
                 openReplyModal={openReplyModal}

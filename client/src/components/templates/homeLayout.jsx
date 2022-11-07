@@ -95,6 +95,7 @@ const HomeLayout = (props) => {
                 openPostModal={props.openPostModal}
                 togglePostModalOpen={props.togglePostModalOpen}
                 togglePostModalClose={props.togglePostModalClose}
+                fileCheck={props.fileCheck}
             />
 
             <ReplyModal
