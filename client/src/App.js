@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
-import { LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
+import { ClassNews, ClassNewsFeed, LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
 
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite } from "components/pages/student"
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
@@ -199,6 +199,11 @@ function App() {
 
                     <Route path="teacher" element={<ReqAuthTea component={<TeacherHome />} />} />
                     <Route path="teacher/teacherNews" element={<ReqAuthTea component={<TeacherNews />} />} />
+
+                    <Route path="classNews">
+                        <Route path="" element={<ClassNews />} />
+                        <Route path=":classId" element={<ClassNewsFeed />} />
+                    </Route>
 
                     <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />
                     <Route path="develop/addLectures" element={<ReqAuthAdm component={<AddLectures />} />} />

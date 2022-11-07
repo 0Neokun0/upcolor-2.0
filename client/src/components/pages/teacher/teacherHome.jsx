@@ -1,10 +1,15 @@
 import { DevelopMenus } from "components/organisms"
 import { DevelopLayout } from "components/templates"
+import GroupAddRoundedIcon from "@mui/icons-material/GroupAddRounded"
 
 const TeacherHome = () => {
     const menus = [
         {
             value: "ニュース",
+            image: "https://i-seifu.jp/wp-content/themes/i-seifu_wp/images/cp-kyujin.png",
+            color: "success",
+            text: "ここから教師を追加してください。",
+            startIcon: <GroupAddRoundedIcon />,
             url: "./teachernews",
         },
     ]
@@ -18,14 +23,12 @@ const TeacherHome = () => {
     }]
 
     return (
-        <DevelopLayout
-            component={
-                <DevelopMenus
-                    menus={menus}
-                    sx={sx}
-                />
-            }
-        />
+        <DevelopLayout>
+            <DevelopMenus
+                menus={menus}
+                sx={sx}
+            />
+        </DevelopLayout>
     )
 }
 
