@@ -18,11 +18,11 @@ const TeacherSignup = () => {
             token: token,
             password: data.get("tokenPassword"),
         })
-        .then((res) => {
-            if (res.data) {
-                setDialog(false)
-            }
-        })
+            .then((res) => {
+                if (res.data) {
+                    setDialog(false)
+                }
+            })
     }
 
     const handleSubmit = (e) => {
@@ -35,13 +35,13 @@ const TeacherSignup = () => {
             password: data.get("password"),
             userType: 2,
         })
-        .then((res) => {
-            if (res.data) {
-                window.location.href = "/home"
-            } else {
-                setCheckExist(true)
-            }
-        })
+            .then((res) => {
+                if (res.data) {
+                    window.location.href = "/home"
+                } else {
+                    setCheckExist(true)
+                }
+            })
     }
 
     return (
