@@ -1,10 +1,10 @@
-import { Avatar, Box, Button, Card, IconButton, Modal, TextField, Tooltip } from "@mui/material"
+import { Alert, Avatar, Box, Button, Card, IconButton, Modal, TextField, Tooltip } from "@mui/material"
 import AddIcon from '@mui/icons-material/Add'
 import { cyan } from "@mui/material/colors"
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
-import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded'
-import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded'
+// import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded'
+// import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded'
 
 const SendPost = (props) => {
     return (
@@ -113,7 +113,7 @@ const SendPost = (props) => {
                             </IconButton>
                         </Tooltip>
 
-                        <Tooltip
+                        {/* <Tooltip
                             title="ビデオ"
                             placement="right"
                         >
@@ -135,7 +135,7 @@ const SendPost = (props) => {
                             >
                                 <LocalOfferRoundedIcon />
                             </IconButton>
-                        </Tooltip>
+                        </Tooltip> */}
                     </Box>
 
                     <Button
@@ -149,6 +149,19 @@ const SendPost = (props) => {
                     >
                         投稿
                     </Button>
+
+                    {
+                        props["fileCheck"]
+                        &&
+                        <Alert
+                            severity="error"
+                            sx={{
+                                mt: 2,
+                            }}
+                        >
+                            ファイルが読み込めません
+                        </Alert>
+                    }
                 </Card>
             </Modal>
         </Box>

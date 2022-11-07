@@ -5,10 +5,9 @@ import config from "components/config"
 import GroupLayout from "components/templates/groupLayout"
 import CommentRoundedIcon from '@mui/icons-material/CommentRounded'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
+const socket = io(config.socket.host)
 
 const Group = () => {
-    const socket = io(config.socket.host)
-
     const [groups, setGroups] = useState([])
     const [selectGroupId, setSelectGroupId] = useState(null)
     const [menuOpen, setMenuOpen] = useState(null)
@@ -17,7 +16,8 @@ const Group = () => {
     const [userId, setUserId] = useState(null)
 
     const [chats, setChats] = useState([])
-    
+    const [addChats, setAddChats] = useState([])
+
     const menus = [
         {
             icon: <CommentRoundedIcon />,
@@ -31,9 +31,18 @@ const Group = () => {
         },
     ]
 
+    const scrollDown = () => {
+        const chatBox = document.getElementById("chatBox")
+        chatBox.scrollTop = chatBox.scrollHeight
+    }
+
     const groupClick = (id) => {
+        socket.emit("groupChat join", selectGroupId, id)
         setSelectGroupId(id)
-        socket.emit("groupChat join", id)
+
+        setTimeout(() => {
+            scrollDown()
+        }, 500)
     }
 
     const handleCreateSubmit = (e) => {
@@ -50,18 +59,21 @@ const Group = () => {
 
     const handleSendChat = (e) => {
         e.preventDefault()
-
         const data = new FormData(e.currentTarget)
+        const token = document.cookie.split("=")[1]
 
-        axios.post("/group/sendChat", {
-            groupId: selectGroupId,
-            text: data.get("text"),
-        })
+        // axios.post("/group/sendChat", {
+        //     groupId: selectGroupId,
+        //     text: data.get("text"),
+        // })
 
-        const elem = document.getElementById("chatInput")
-        elem.value = ""
+        socket.emit("groupChat msg", token, selectGroupId, data.get("text"))
 
-        socket.emit("groupChat msg", selectGroupId, data.get("text"))
+        document.getElementById("chatInput").value = ""
+
+        setTimeout(() => {
+            scrollDown()
+        }, 500)
     }
 
     const handleGenerateInviteUrl = (groupId) => {
@@ -92,9 +104,9 @@ const Group = () => {
 
     useEffect(() => {
         socket.on("groupChat", (msg) => {
-            console.log(msg)
+            setAddChats((addChats) => [...addChats, msg])
         })
-    }, [socket])
+    }, [])
 
     useEffect(() => {
         if (selectGroupId) {
@@ -128,9 +140,11 @@ const Group = () => {
             handleLeaveGroup={handleLeaveGroup}
 
             chats={chats}
+            addChats={addChats}
+            scrollDown={scrollDown}
             handleSendChat={handleSendChat}
         />
     );
 }
 
-export default Group;
+export default Group

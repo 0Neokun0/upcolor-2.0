@@ -42,28 +42,39 @@ const SignUpBox = (props) => {
                 onSubmit={props.handleSubmit}
                 sx={{
                     mt: 2,
+                    textAlign: "initial",
                 }}
             >
                 <TextField
                     margin="normal"
                     size="small"
-                    required
-                    fullWidth
-                    label="Username"
+                    label="名前"
                     name="name"
                     autoComplete="name"
+                    placeholder="空白を含まない15文字以内"
                     autoFocus
+                    fullWidth
+                    required
+                    inputProps={{
+                        maxLength: 15,
+                        pattern: "^[\\S]+$"
+                    }}
                 />
 
                 <TextField
                     margin="normal"
                     size="small"
-                    required
-                    fullWidth
-                    label="Email Address"
+                    label="メールアドレス"
                     name="email"
                     autoComplete="email"
+                    placeholder="空白を含まない30文字以内"
                     error={props.checkExist}
+                    fullWidth
+                    required
+                    inputProps={{
+                        maxLength: 30,
+                        pattern: "^[\\S]+$"
+                    }}
                 />
 
                 <TextField
@@ -72,9 +83,14 @@ const SignUpBox = (props) => {
                     required
                     fullWidth
                     name="password"
-                    label="Password"
+                    label="パスワード"
                     type="password"
                     autoComplete="current-password"
+                    placeholder="空白を含まない8文字以上"
+                    inputProps={{
+                        minLength: 8,
+                        pattern: "^[\\S]+$"
+                    }}
                 />
 
                 {

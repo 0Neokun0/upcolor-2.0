@@ -46,6 +46,8 @@ const GroupLayout = (props) => {
                             handleLeaveGroup: props.handleLeaveGroup,
 
                             chats: props.chats,
+                            addChats: props.addChats,
+                            scrollDown: props.scrollDown,
                             handleSendChat: props.handleSendChat,
                         }}
                     />

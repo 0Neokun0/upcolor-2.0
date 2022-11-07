@@ -19,7 +19,6 @@ const config = require("./config")
 const get = require("./function/get")
 const sql = require("./function/sql")
 
-
 router.use((req, res, next) => {
     console.log("[account] Time: ", Date.now())
     next()
@@ -107,7 +106,6 @@ router.post("/signup", async (req, res) => {
         res.cookie("token", token, {
             expires: expires,
             path: "/",
-            httpOnly: true,
         })
 
         if (userType === 1) {
@@ -201,7 +199,6 @@ router.post("/signin", async (req, res) => {
         res.cookie("token", token, {
             expires: expires,
             path: "/",
-            httpOnly: true,
         })
 
         res.json(user[0])
