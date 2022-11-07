@@ -7,6 +7,7 @@ import TerminalRoundedIcon from '@mui/icons-material/TerminalRounded'
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import GitHubIcon from '@mui/icons-material/GitHub'
 
+// comment
 
 const Profile = () => {
     const [profile, setProfile] = useState([])
