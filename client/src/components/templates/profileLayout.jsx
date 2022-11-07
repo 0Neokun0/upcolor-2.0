@@ -7,7 +7,7 @@ const ProfileLayout = (props) => {
                 pt: 2,
             }}
         >
-            {props.component}
+            {props.children}
         </Box>
     )
 }
