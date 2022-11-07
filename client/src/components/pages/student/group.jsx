@@ -17,8 +17,7 @@ const Group = () => {
     const [userId, setUserId] = useState(null)
 
     const [chats, setChats] = useState([])
-    console.log(chats)
-
+    
     const menus = [
         {
             icon: <CommentRoundedIcon />,
@@ -96,7 +95,6 @@ const Group = () => {
             console.log(msg)
         })
     }, [socket])
-    
 
     useEffect(() => {
         if (selectGroupId) {

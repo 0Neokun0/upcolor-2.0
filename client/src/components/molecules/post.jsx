@@ -54,10 +54,12 @@ const Post = (props) => {
                         }}
                     >
                         <Typography
-                            dangerouslySetInnerHTML={{
-                                __html: props.content
+                            sx={{
+                                whiteSpace: "pre-wrap",
                             }}
-                        />
+                        >
+                            {props.content}
+                        </Typography>
 
                         {
                             props.url_post

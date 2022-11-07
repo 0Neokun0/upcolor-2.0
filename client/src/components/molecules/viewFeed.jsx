@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom"
+import { server } from "components/config"
 import { Avatar, Box, Divider, IconButton, Typography, Link as Mlink } from "@mui/material"
 import CommentRoundedIcon from '@mui/icons-material/CommentRounded'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
-import { grey } from "@mui/material/colors"
-import { server } from "components/config"
+import { grey, pink } from "@mui/material/colors"
 
 const ViewFeed = (props) => {
     return (
@@ -39,7 +39,13 @@ const ViewFeed = (props) => {
                     mt: 1,
                 }}
             >
-                {props.post["post_text"]}
+                <Typography
+                    sx={{
+                        whiteSpace: "pre-wrap",
+                    }}
+                >
+                    {props.post["post_text"]}
+                </Typography>
 
                 {
                     props.post["url_post"]
@@ -90,11 +96,22 @@ const ViewFeed = (props) => {
                     <CommentRoundedIcon />
                 </IconButton>
 
-                <IconButton>
+                <IconButton
+                    sx={
+                        props["like"]
+                            ?
+                            {
+                                color: pink[400],
+                            }
+                            :
+                            {}
+                    }
+                    onClick={() => props["handleLike"](props["post"]["post_id"])}
+                >
                     <FavoriteRoundedIcon />
                 </IconButton>
             </Box>
-        </Box>
+        </Box >
     )
 }
 

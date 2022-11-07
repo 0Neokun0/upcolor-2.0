@@ -6,8 +6,9 @@ const FeedDetail = () => {
     const post = useOutletContext()["post"]
     const replys = useOutletContext()["replys"]
     const toggleReplyModalOpen = useOutletContext()["toggleReplyModalOpen"]
+    const like = useOutletContext()["like"]
+    const handleLike = useOutletContext()["handleLike"]
 
-    console.log(post)
     return (
         <>
             {
@@ -16,6 +17,8 @@ const FeedDetail = () => {
                 <ViewFeed
                     post={post}
                     toggleReplyModalOpen={toggleReplyModalOpen}
+                    like={like}
+                    handleLike={handleLike}
                 />
             }
 

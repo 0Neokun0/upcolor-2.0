@@ -132,7 +132,6 @@ const TeamWork = () => {
         })
             .then((res) => {
                 setTeam(res.data)
-                console.log(res.data)
 
                 if (res.data["teamInfo"]) {
                     axios.post("/teamWork/getSetting")

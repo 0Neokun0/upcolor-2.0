@@ -2,19 +2,20 @@ import axios from "axios"
 import { HomeLayout } from "components/templates"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import WorkspacesIcon from '@mui/icons-material/Workspaces';
-import GroupWorkIcon from '@mui/icons-material/GroupWork';
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
-import PersonSearchIcon from '@mui/icons-material/PersonSearch';
-import BadgeIcon from '@mui/icons-material/Badge';
-import ViewTimelineIcon from '@mui/icons-material/ViewTimeline';
-import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
+import WorkspacesIcon from '@mui/icons-material/Workspaces'
+import GroupWorkIcon from '@mui/icons-material/GroupWork'
+import AccountTreeIcon from '@mui/icons-material/AccountTree'
+import PersonSearchIcon from '@mui/icons-material/PersonSearch'
+import BadgeIcon from '@mui/icons-material/Badge'
+import ViewTimelineIcon from '@mui/icons-material/ViewTimeline'
+import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest'
 
 const Home = () => {
     const postId = useParams()["postId"]
 
     const [openPostModal, setOpenPostModal] = useState(false)
     const [openReplyModal, setOpenReplyModal] = useState(false)
+    const [like, setLike] = useState(null)
     const [post, setPost] = useState([])
     const [posts, setPosts] = useState([])
     const [replys, setReplys] = useState([])
@@ -59,6 +60,15 @@ const Home = () => {
             icon: <SettingsSuggestIcon />,
         },
     ]
+
+    const handleLike = (postId) => {
+        axios.post("/post/updateLike", {
+            postId: postId,
+            state: like,
+        })
+
+        setLike(!like)
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -120,7 +130,6 @@ const Home = () => {
         axios.post("/post/getPostList")
             .then((res) => {
                 setPosts(res.data)
-                console.log(res.data)
             })
 
         axios.post("/account/getProfile")
@@ -132,7 +141,7 @@ const Home = () => {
             .then((res) => {
                 setNews(res.data)
             })
-    }, []);
+    }, [])
 
     useEffect(() => {
         setPost([])
@@ -144,7 +153,18 @@ const Home = () => {
                 setPost(res.data["post"][0])
                 setReplys(res.data["replys"])
             })
-    }, [postId]);
+
+        axios.post("/post/getLike", {
+            postId: postId,
+        })
+            .then((res) => {
+                if (res.data[0]["state"]) {
+                    setLike(true)
+                } else {
+                    setLike(false)
+                }
+            })
+    }, [postId])
 
     return (
         <>
@@ -167,9 +187,11 @@ const Home = () => {
                 replys={replys}
                 menus={menus}
                 news={news}
+                like={like}
+                handleLike={handleLike}
             />
         </>
-    );
+    )
 }
 
 export default Home
