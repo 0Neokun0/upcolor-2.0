@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom"
-import { Box, Divider, IconButton, List, ListItemButton, Popover, Tooltip, Typography } from "@mui/material"
+import { Avatar, Box, Card, Divider, IconButton, List, ListItemAvatar, ListItemButton, Popover, Tooltip, Typography } from "@mui/material"
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded'
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded'
 
 const TeamOutline = (props) => {
     return (
-        <>
+        <Card sx={{
+            p: 2,
+            borderRadius: "25px",
+            boxShadow: 3,
+
+        }}>
             <Box
                 sx={{
                     display: "flex",
@@ -114,13 +119,16 @@ const TeamOutline = (props) => {
                                 component={Link}
                                 to={"/profile/" + member["user_id"]}
                             >
+                                <ListItemAvatar>
+                                    <Avatar/>
+                                </ListItemAvatar>
                                 {member["user_name"]}
                             </ListItemButton>
                         )
                     })
                 }
             </List>
-        </>
+        </Card>
     )
 }
 

@@ -1,5 +1,19 @@
-import { Box, Button, Card, FormControlLabel, FormGroup, Switch, TextField, Typography } from "@mui/material"
+import {
+    Box,
+    Button,
+    Card,
+    FormControlLabel,
+    FormGroup,
+    InputAdornment,
+    Switch,
+    TextField,
+    Typography,
+} from "@mui/material";
 
+import GroupWorkRoundedIcon from "@mui/icons-material/GroupWorkRounded";
+import DriveFileRenameOutlineRoundedIcon from "@mui/icons-material/DriveFileRenameOutlineRounded";
+import BadgeRoundedIcon from "@mui/icons-material/BadgeRounded";
+import SaveAsRoundedIcon from "@mui/icons-material/SaveAsRounded";
 const TeamJoinForm = (props) => {
     return (
         <Card
@@ -9,23 +23,34 @@ const TeamJoinForm = (props) => {
                 textAlign: "center",
                 width: "fit-content",
                 borderRadius: "15px",
+                boxShadow: 3,
                 mx: "auto",
                 mt: "80px",
-                px: 2,
-                py: 5,
+                py: 2,
+                px: 5,
             }}
         >
-            <Typography
-                variant="h6"
+            <Box
+                sx={{
+                    mt: 2,
+                    display: "flex",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                    justifyContent: "space-evenly",
+                }}
             >
-                進級制作チーム作成
-            </Typography>
+                <GroupWorkRoundedIcon sx={{
+                    mr:2,
+                }} fontSize="large" />
+                <Typography variant="h5">進級制作チーム作成</Typography>
+            </Box>
 
             <Box
                 component={"form"}
                 onSubmit={props.handleTeamCreate}
                 sx={{
                     mt: 2,
+                    my: 4,
                 }}
             >
                 <Box
@@ -44,6 +69,13 @@ const TeamJoinForm = (props) => {
                         sx={{
                             mb: 2,
                         }}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <DriveFileRenameOutlineRoundedIcon />
+                                </InputAdornment>
+                            ),
+                        }}
                     />
 
                     <TextField
@@ -52,28 +84,35 @@ const TeamJoinForm = (props) => {
                         variant="outlined"
                         size="small"
                         required
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <BadgeRoundedIcon />
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                 </Box>
 
-                <FormGroup>
-                    <FormControlLabel
-                        label="進捗の公開"
-                        control={
-                            <Switch
-                            />
-                        }
-                    />
-                </FormGroup>
+                <Box
+                    sx={{
+                        mt: 4,
+                    }}
+                >
+                    <FormGroup>
+                        <FormControlLabel
+                            label="進捗の公開"
+                            control={<Switch />}
+                        />
+                    </FormGroup>
 
-                <FormGroup>
-                    <FormControlLabel
-                        label="チャットの公開"
-                        control={
-                            <Switch
-                            />
-                        }
-                    />
-                </FormGroup>
+                    <FormGroup>
+                        <FormControlLabel
+                            label="チャットの公開"
+                            control={<Switch />}
+                        />
+                    </FormGroup>
+                </Box>
 
                 <Button
                     type="submit"
@@ -83,12 +122,13 @@ const TeamJoinForm = (props) => {
                     sx={{
                         mt: 5,
                     }}
+                    startIcon={<SaveAsRoundedIcon />}
                 >
                     作成
                 </Button>
             </Box>
         </Card>
     );
-}
+};
 
 export default TeamJoinForm;

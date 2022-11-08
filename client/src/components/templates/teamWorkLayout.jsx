@@ -4,13 +4,12 @@ const TeamWorkLayout = (props) => {
     return (
         <Container
             disableGutters
-            maxWidth="md"
+            maxWidth="lg"
             sx={{
-                backgroundColor: "white",
                 p: 2,
             }}
         >
-            {props.children}
+            {props["children"]}
         </Container>
     );
 }
