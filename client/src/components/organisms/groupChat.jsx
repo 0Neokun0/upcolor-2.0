@@ -6,7 +6,9 @@ const GroupChat = (props) => {
         <Box
             sx={{
                 p: 2,
-                pb: 0,
+                "div + div": {
+                    mt: 1,
+                }
             }}
         >
             {
@@ -17,6 +19,19 @@ const GroupChat = (props) => {
                         <Chat
                             key={chat["chat_id"]}
                             chat={chat}
+                        />
+                    )
+                })
+            }
+
+            {
+                props.addChats
+                &&
+                props.addChats.map((addChat) => {
+                    return (
+                        <Chat
+                            key={addChat["chat_id"]}
+                            chat={addChat}
                         />
                     )
                 })
