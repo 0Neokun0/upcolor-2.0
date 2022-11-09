@@ -40,7 +40,7 @@ const ProfileDetail = (props) => {
                         <Typography
                             variant="h5"
                         >
-                            {props.profile["user_name"]}
+                            {props.profile["name"]}
                         </Typography>
 
                         <Typography
@@ -125,9 +125,9 @@ const ProfileDetail = (props) => {
                         </Typography>
 
                         {
-                            props.profile["user_introduction"]
+                            props.profile["introduction"]
                                 ?
-                                props.profile["user_introduction"]
+                                props.profile["introduction"]
                                 :
                                 "未設定"
                         }
