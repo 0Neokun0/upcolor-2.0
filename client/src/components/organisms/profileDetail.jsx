@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import { Avatar, Box, Button, Card, Grid, Tooltip, Typography } from "@mui/material"
 import { server } from "components/config"
 
@@ -135,8 +134,7 @@ const ProfileDetail = (props) => {
                 </Grid>
 
                 <Button
-                    component={Link}
-                    to="./edit"
+                    onClick={() => window.location.replace("/profile/edit")}
                     variant="contained"
                     size="small"
                     sx={{
