@@ -1,13 +1,14 @@
-import { Paper } from "@mui/material"
+import { Avatar, Box, Card, CardContent, Chip, Grid, Paper, Typography } from "@mui/material"
 import axios from "axios"
 import InboxIcon from '@mui/icons-material/MoveToInbox'
-import { SearchList } from "components/molecules"
+import { SearchList, StudentListProfileCard } from "components/molecules"
 import { ListDisplayBox, SearchListBox } from "components/organisms"
 import { ListLayout } from "components/templates"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { grey } from "@mui/material/colors"
 
-String.prototype.nullSplit = function(sep){
+String.prototype.nullSplit = function (sep) {
     if (!this) {
         return [""]
     }
@@ -150,29 +151,17 @@ const StudentList = () => {
 
             <ListDisplayBox>
                 {
-                    displayStudents.map((value, index) => {
+                    displayStudents.map((student, index) => {
                         return (
-                            <Paper
+                            <StudentListProfileCard
                                 key={index}
-                                sx={{
-                                    "a,a:visited": {
-                                        color: "inherit",
-                                    },
-                                    "a:hover": {
-                                        color: "red",
-                                    },
-                                }}
-                            >
-                                <Link
-                                    to={"/profile/" + value["user_id"]}
-                                >
-                                    {value["user_id"] + value["name"] + value["course_name"] + value["year_name"] + value["mail"]}
-                                </Link>
-                            </Paper>
+                                student={student}
+                            />
                         )
                     })
                 }
             </ListDisplayBox>
+
         </ListLayout>
     )
 }

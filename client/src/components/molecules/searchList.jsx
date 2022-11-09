@@ -19,7 +19,10 @@ const SearchList = (props) => {
     }
 
     return (
-        <Box>
+        <Box sx={{
+            m: 1,
+        }}
+        >
             <ListItem onClick={handleClick}>
                 <ListItemIcon>
                     {props.icon}
@@ -27,23 +30,42 @@ const SearchList = (props) => {
                 <ListItemText primary={props.title} />
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
+            <Collapse
+                in={open}
+                timeout="auto"
+                unmountOnExit
+            >
+                <List
+                    component="div"
+                    disablePadding
+                >
                     <ToggleButtonGroup
                         orientation="vertical"
                         name={props.name}
                         value={formats}
                         onChange={handleFormat}
                         sx={{
-                            width: "100%",
-                            maxHeight: "50vh",
-                            overflowY: "scroll",
+                            width: 1,
+                            maxHeight: "30vh",
+                            overflow: "auto",
+                            "::-webkit-scrollbar": {
+                                width: "5px",
+                            },
+                            "::-webkit-scrollbar-thumb": {
+                                backgroundColor: "rgba(0, 0, 50, .5)",
+                                borderRadius: "5px",
+                            },
+                            "::-webkit-scrollbar-track": {
+                                boxShadow: 2,
+                            },
                         }}
                     >
                         {
                             props.list.map((value, index) => {
                                 return (
-                                    <ToggleButton
+                                    <ToggleButton sx={{
+                                        borderRadius: '10px'
+                                    }}
                                         key={index}
                                         value={value[props.sqlId]}
                                     >
