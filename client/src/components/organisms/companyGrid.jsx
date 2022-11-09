@@ -30,7 +30,7 @@ const CompanyGrid = (props) => {
                 container
                 spacing={0}
                 mt={0}
-                justifyContent="left"
+                justifyContent="flex-start"
             >
                 {
                     props.companies
@@ -40,6 +40,7 @@ const CompanyGrid = (props) => {
                             company
                             &&
                             <Grid
+                                key={index}
                                 item
                                 xs={12}
                                 sm={6}
@@ -47,7 +48,6 @@ const CompanyGrid = (props) => {
                                 xl={3}
                             >
                                 <CompanyCard
-                                    key={index}
                                     image={userPictureUrl}
                                     name={company["company_name"]}
                                     recruite={"プログラマーなど"}
