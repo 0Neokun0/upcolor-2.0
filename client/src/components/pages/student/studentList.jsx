@@ -7,12 +7,12 @@ import { ListLayout } from "components/templates"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
-String.prototype.nullSplit = function(sep){
-    if (!this) {
-        return [""]
-    }
-    return this.split(sep)
-}
+// String.prototype.nullSplit = function(sep){
+//     if (!this) {
+//         return [""]
+//     }
+//     return this.split(sep)
+// }
 
 const StudentList = () => {
     const [originalStudents, setOriginalStudents] = useState(false)

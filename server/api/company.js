@@ -52,37 +52,39 @@ router.post("/editProfile", async (req, res) => {
 
 router.post("/list", async (req, res) => {
     const sqlSelectCompanies = `
-        SELECT *
-        FROM company_profiles
-    `
-    const sqlSelectOccupations = `
-        SELECT occupation_id, occupation_name
-        FROM occupations
-    `
-    const sqlSelectCourses = `
-        SELECT course_id, course_name
-        FROM courses
-    `
-    const sqlSelectPrefectures = `
-        SELECT prefecture_id, prefecture_name
-        FROM prefectures
+        SELECT
+            user_id,
+            company_id,
+            company_name,
+            manager_name,
+            manager_mail,
+            manager_image,
+            introduction,
+            business,
+            ceo_message,
+            address,
+            course_ids,
+            occupation_ids,
+            prefecture_ids,
+            homepage_url,
+            jobsite_url
+        FROM
+            company_infomation
     `
 
     const companies = await sql.handleSelect(sqlSelectCompanies, [])
-    const occupations = await sql.handleSelect(sqlSelectOccupations, [])
-    const courses = await sql.handleSelect(sqlSelectCourses, [])
-    const prefectures = await sql.handleSelect(sqlSelectPrefectures, [])
+    const courses = await get.list("course")
+    const occupations = await get.list("occupation")
+    const prefectures = await get.list("prefecture")
 
-    const list = [
-        {
-            company: companies,
-            occupation: occupations,
-            course: courses,
-            prefecture: prefectures,
+    res.json({
+        companies: companies,
+        search: {
+            courses: courses,
+            occupations: occupations,
+            prefectures: prefectures,
         }
-    ]
-
-    res.json(list[0])
+    })
 })
 
 router.post("/update", async (req, res) => {
