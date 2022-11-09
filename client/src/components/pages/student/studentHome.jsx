@@ -74,8 +74,9 @@ const Home = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const data = new FormData(e.currentTarget)
+        const imgType = data.get("image"["type"])
 
-        if (data.get("image")["type"] === "image/png") {
+        if (imgType === null || imgType === "image/png") {
             const config = {
                 headers: {
                     'content-type': 'multipart/form-data'
@@ -95,6 +96,7 @@ const Home = () => {
             setFileCheck(true)
         }
     }
+    
     const handleReplySubmit = (e) => {
         e.preventDefault()
 
