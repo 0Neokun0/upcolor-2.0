@@ -47,6 +47,7 @@ const GroupLayout = (props) => {
 
                             chats: props.chats,
                             addChats: props.addChats,
+                            members: props.members,
                             scrollDown: props.scrollDown,
                             handleSendChat: props.handleSendChat,
                         }}
@@ -57,4 +58,4 @@ const GroupLayout = (props) => {
     );
 }
 
-export default GroupLayout;
+export default GroupLayout
