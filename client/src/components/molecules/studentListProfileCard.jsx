@@ -1,30 +1,76 @@
-import { Card, Grid, Avatar } from "@mui/material"
-import { Link } from "react-router-dom"
+import { Card, Grid, Avatar, Typography, Button } from "@mui/material"
+
+import PersonSearchRoundedIcon from '@mui/icons-material/PersonSearchRounded';
 
 const StudentListProfileCard = (props) => {
     return (
         <Grid
             item
-            xs={12}
-            sm={6}
-            lg={4}
-            xl={3}
         >
-            <Card>
+            <Card
+                variant="outlined"
+                sx={{
+                    bgcolor: "white",
+                    width: 420,
+                    height: 200,
+                    p: 2,
+                    m: 2,
+                    overflow: "hidden",
+                    borderRadius: "25px",
+                    transition: "transform 0.3s, border 0.3s",
+                    "&:hover": {
+                        transform: "translateY(-2px)",
+                    },
+                    "& > *": { minWidth: "clamp(0px, (360px - 100%) * 999,100%)" },
+                }}>
                 <Grid
                     container
-                    spacing={0}
                     direction="column"
+                    justifyContent="space-evenly"
                     alignItems="center"
                 >
-                    <Avatar />
+                    <Avatar sx={{
+                        m: 1,
+                    }}
+                    />
+
+                    <Typography
+                        variant="h4"
+                        gutterBottom
+                    >
+                        {props.student["name"]}
+                    </Typography>
+
+                    <Typography
+                        sx={{
+                            fontSize: 17,
+                        }}
+                        gutterBottom
+                    >
+                        {props.student["year_name"]}
+                    </Typography>
+
+                    <Typography
+                        sx={{
+                            fontSize: 14,
+                            mb: 1,
+                        }}
+                    >
+                        {props.student["course_name"]}
+                    </Typography>
+
+                    <Button
+                        color="inherit"
+                        sx={{
+                            borderRadius: 3,
+                        }}
+                        startIcon={<PersonSearchRoundedIcon />}
+                        href={"/profile/" + props.student["user_id"]}
+                    >
+                        プロフィール
+                    </Button>
                 </Grid>
             </Card>
-            {/* <Link
-                to={"/profile/" + props.student["user_id"]}
-            >
-                {props.student["user_id"] + props.student["name"] + props.student["course_name"] + props.student["year_name"] + props.student["mail"]}
-            </Link> */}
         </Grid>
     )
 }

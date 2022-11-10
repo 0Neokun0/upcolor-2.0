@@ -31,23 +31,24 @@ const SearchListBox = (props) => {
                     subheader={"UPCOLORを利用するユーザーを検索してください。"}
                 />
                 <List
-                sx={{
-                    maxWidth: 350,
-                    p: 1,
+                    sx={{
+                        maxWidth: 350,
+                        p: 1,
+                    }}
+                    component="nav"
+                    subheader={
+                        <ListSubheader>
+                            <Box sx={{
+                                textAlign: 'center',
+                            }}>
+                                絞り込み
+                            </Box>
+                        </ListSubheader>
+                    }
+                >
+                    {props.children}
+                </List>
 
-                }}
-                component="nav"
-                subheader={
-                    <ListSubheader>
-                        <Box sx={{
-                            textAlign: 'center',
-                        }}>
-                            絞り込み
-                        </Box>
-                    </ListSubheader>
-                }
-            ></List>
-                {props.children}
             </Card>
         </Hidden>
     )

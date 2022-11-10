@@ -1,12 +1,15 @@
-import { Avatar, Box, Card, CardContent, Chip, Grid, Paper, Typography } from "@mui/material"
 import axios from "axios"
-import InboxIcon from '@mui/icons-material/MoveToInbox'
+
 import { SearchList, StudentListProfileCard } from "components/molecules"
 import { ListDisplayBox, SearchListBox } from "components/organisms"
 import { ListLayout } from "components/templates"
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import { grey } from "@mui/material/colors"
+import SubjectRoundedIcon from '@mui/icons-material/SubjectRounded';
+import FormatListNumberedRoundedIcon from '@mui/icons-material/FormatListNumberedRounded';
+import ApprovalRoundedIcon from '@mui/icons-material/ApprovalRounded';
+import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
+import TerminalRoundedIcon from '@mui/icons-material/TerminalRounded';
+import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
 
 String.prototype.nullSplit = function (sep) {
     if (!this) {
@@ -90,7 +93,7 @@ const StudentList = () => {
             <SearchListBox>
                 <SearchList
                     title="専攻/コース"
-                    icon={<InboxIcon />}
+                    icon={<SubjectRoundedIcon />}
                     name="course"
                     list={searchList["courses"]}
                     set={setCourses}
@@ -100,7 +103,7 @@ const StudentList = () => {
 
                 <SearchList
                     title="学年"
-                    icon={<InboxIcon />}
+                    icon={<FormatListNumberedRoundedIcon />}
                     name="year"
                     list={searchList["years"]}
                     set={setYears}
@@ -110,7 +113,7 @@ const StudentList = () => {
 
                 <SearchList
                     title="資格"
-                    icon={<InboxIcon />}
+                    icon={<ApprovalRoundedIcon />}
                     name="qualification"
                     list={searchList["qualifications"]}
                     set={setQualifications}
@@ -120,7 +123,7 @@ const StudentList = () => {
 
                 <SearchList
                     title="プログラミング言語"
-                    icon={<InboxIcon />}
+                    icon={<CodeRoundedIcon />}
                     name="program"
                     list={searchList["programs"]}
                     set={setPrograms}
@@ -130,7 +133,7 @@ const StudentList = () => {
 
                 <SearchList
                     title="ツール"
-                    icon={<InboxIcon />}
+                    icon={<TerminalRoundedIcon />}
                     name="tool"
                     list={searchList["tools"]}
                     set={setTools}
@@ -140,7 +143,7 @@ const StudentList = () => {
 
                 <SearchList
                     title="言語"
-                    icon={<InboxIcon />}
+                    icon={<TranslateRoundedIcon />}
                     name="language"
                     list={searchList["languages"]}
                     set={setLanguages}

@@ -28,7 +28,12 @@ const SearchList = (props) => {
                     {props.icon}
                 </ListItemIcon>
                 <ListItemText primary={props.title} />
-                {open ? <ExpandLess /> : <ExpandMore />}
+                {open
+                    ?
+                    <ExpandLess />
+                    :
+                    <ExpandMore />
+                }
             </ListItem>
             <Collapse
                 in={open}

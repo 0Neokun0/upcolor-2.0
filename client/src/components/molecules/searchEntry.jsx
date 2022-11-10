@@ -21,7 +21,7 @@ const SearchEntry = (props) => {
 
     return (
         <Box sx={{
-            m:1,
+            m: 1,
         }}
         >
             <ListItem onClick={handleClick}>
@@ -38,53 +38,53 @@ const SearchEntry = (props) => {
                     <ExpandMore />
                 }
             </ListItem>
-                <Collapse
-                    in={open}
-                    timeout="auto"
-                    unmountOnExit
+            <Collapse
+                in={open}
+                timeout="auto"
+                unmountOnExit
+            >
+                <List
+                    component="div"
+                    disablePadding
                 >
-                    <List
-                        component="div"
-                        disablePadding
+                    <ToggleButtonGroup
+                        orientation="vertical"
+                        name={props.name}
+                        value={formats}
+                        onChange={handleFormat}
+                        sx={{
+                            width: 1,
+                            maxHeight: "30vh",
+                            overflow: "auto",
+                            "::-webkit-scrollbar": {
+                                width: "5px",
+                            },
+                            "::-webkit-scrollbar-thumb": {
+                                backgroundColor: "rgba(0, 0, 50, .5)",
+                                borderRadius: "5px",
+                            },
+                            "::-webkit-scrollbar-track": {
+                                boxShadow: 2,
+                            },
+                        }}
                     >
-                        <ToggleButtonGroup
-                            orientation="vertical"
-                            name={props.name}
-                            value={formats}
-                            onChange={handleFormat}
-                            sx={{
-                                width: 1,
-                                maxHeight: "30vh",
-                                overflow: "auto",
-                                "::-webkit-scrollbar": {
-                                    width: "5px",
-                                },
-                                "::-webkit-scrollbar-thumb": {
-                                    backgroundColor: "rgba(0, 0, 50, .5)",
-                                    borderRadius: "5px",
-                                },
-                                "::-webkit-scrollbar-track": {
-                                    boxShadow: 2,
-                                },
-                            }}
-                        >
-                            {
-                                props.select.map((value, index) => {
-                                    return (
-                                        <ToggleButton sx={{
-                                            borderRadius: '10px'
-                                            }}
-                                            key={index}
-                                            value={value[props.sqlId]}
-                                        >
-                                            {value[props.sqlName]}
-                                        </ToggleButton>
-                                    )
-                                })
-                            }
-                        </ToggleButtonGroup>
-                    </List>
-                </Collapse>
+                        {
+                            props.select.map((value, index) => {
+                                return (
+                                    <ToggleButton sx={{
+                                        borderRadius: '10px'
+                                    }}
+                                        key={index}
+                                        value={value[props.sqlId]}
+                                    >
+                                        {value[props.sqlName]}
+                                    </ToggleButton>
+                                )
+                            })
+                        }
+                    </ToggleButtonGroup>
+                </List>
+            </Collapse>
         </Box>
     )
 }
