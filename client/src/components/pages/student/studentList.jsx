@@ -4,6 +4,7 @@ import { SearchList, StudentListProfileCard } from "components/molecules"
 import { ListDisplayBox, SearchListBox } from "components/organisms"
 import { ListLayout } from "components/templates"
 import { useState, useEffect } from "react"
+
 import SubjectRoundedIcon from '@mui/icons-material/SubjectRounded';
 import FormatListNumberedRoundedIcon from '@mui/icons-material/FormatListNumberedRounded';
 import ApprovalRoundedIcon from '@mui/icons-material/ApprovalRounded';
@@ -17,6 +18,7 @@ String.prototype.nullSplit = function (sep) {
     }
     return this.split(sep)
 }
+
 
 const StudentList = () => {
     const [originalStudents, setOriginalStudents] = useState(false)

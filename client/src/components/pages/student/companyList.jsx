@@ -1,111 +1,111 @@
 import axios from "axios"
-import { CompanyListLayout } from "components/templates"
-import { useState, useEffect, useRef } from "react"
-
-import ReduceCapacityIcon from '@mui/icons-material/ReduceCapacity';
-import LocalConvenienceStoreIcon from '@mui/icons-material/LocalConvenienceStore';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import { Paper } from "@mui/material"
+import { useState, useEffect } from "react"
+import InboxIcon from '@mui/icons-material/MoveToInbox'
+import { SearchList } from "components/molecules"
+import { ListDisplayBox, SearchListBox } from "components/organisms"
+import { ListLayout } from "components/templates"
+import { Link } from "react-router-dom"
 
 const CompanyList = () => {
-    const [companies, setCompanies] = useState([])
-    const [viewCompanies, setViewCompanies] = useState([])
-    const [occupations, setOccupations] = useState([])
+    const [originalCompanies, setOriginalCompanies] = useState(false)
+    const [displayCompanies, setDisplayCompanies] = useState(false)
     const [courses, setCourses] = useState([])
+    const [occupations, setOccupations] = useState([])
     const [prefectures, setPrefectures] = useState([])
     const [searchList, setSearchList] = useState([])
 
-    const isFirstRender = useRef(false)
+    const multiIdCheck = (value, select, flg) => {
+        if (select.length && !select.some((num) => value ? value.split(",").map(Number).includes(num) : false)) {
+            flg = false
+        }
+        return flg
+    }
 
     useEffect(() => {
         axios.post("/company/list")
             .then((res) => {
-                // 0.登録企業 1.専攻 2.業種 3.地域
-                const list = res.data
-
-                // 専攻、業種、地域すべてが登録されている企業だけ配列にセットする
-                setCompanies(list["company"].filter((company) => {
-                    return company["company_occupation_id"] && company["company_course_preference_id"] && company["company_location_id"]
-                }))
-
-                const search = [
-                    {
-                        title: "募集専攻",
-                        selectList: list["course"],
-                        name: "courses",
-                        sqlId: "course_id",
-                        sqlName: "course_name",
-                        set: setCourses,
-                        icon: <ReduceCapacityIcon />,
-                    },
-                    {
-                        title: "業種",
-                        selectList: list["occupation"],
-                        name: "occupations",
-                        sqlId: "occupation_id",
-                        sqlName: "occupation_name",
-                        set: setOccupations,
-                        icon: <LocalConvenienceStoreIcon />,
-                    },
-                    {
-                        title: "地域",
-                        selectList: list["prefecture"],
-                        name: "prefectures",
-                        sqlId: "prefecture_id",
-                        sqlName: "prefecture_name",
-                        set: setPrefectures,
-                        icon: <TravelExploreIcon />,
-                    },
-                ]
-                setSearchList(search)
+                setOriginalCompanies(res.data["companies"])
+                setSearchList(res.data["search"])
             })
-        // 初回通るときに true
-        isFirstRender.current = true
     }, [])
 
-    // 初回動かない useEffect
     useEffect(() => {
-        // 初回 true
-        if (isFirstRender.current) {
-            // 二回目から false
-            isFirstRender.current = false
-        } else {
-            let search = []
+        if (originalCompanies) {
+            setDisplayCompanies(originalCompanies.map((company) => {
+                var displayFlg = true
 
-            // 登録されている企業をすべて map する
-            companies.map((company) => {
-                let searchFlg = true
+                displayFlg = multiIdCheck(company["course_ids"], courses, displayFlg)
+                displayFlg = multiIdCheck(company["occupation_ids"], occupations, displayFlg)
+                displayFlg = multiIdCheck(company["prefecture_ids"], prefectures, displayFlg)
 
-                // 絞り込み要素が選択されていて、選択した要素と企業が登録している要素が一致しなかった場合 searchFlg を false にする
-                if (occupations.length && !occupations.some(element => company["company_occupation_id"].includes(element))) {
-                    searchFlg = false
-                }
-                if (courses.length && !courses.some(element => company["company_course_preference_id"].includes(element))) {
-                    searchFlg = false
-                }
-                if (prefectures.length && !prefectures.some(element => company["company_location_id"].includes(element))) {
-                    searchFlg = false
-                }
-
-                // searchFlg が true の場合に企業を配列に追加する
-                if (searchFlg) {
-                    search.push(company)
-                }
-
-                return 0
-            })
-
-            // 配列に入っている企業を表示用 useState にセットする
-            setViewCompanies(search)
+                return displayFlg && company
+            }).filter((element) => element))
         }
-
-        // 下記に書いてある変数が変更される度に useEffect が動作する
-    }, [occupations, courses, prefectures, companies])
+    }, [courses, occupations, prefectures, originalCompanies])
 
     return (
-        <CompanyListLayout
-            companies={viewCompanies}
-            searchList={searchList}
-        />
+        displayCompanies
+        &&
+        <ListLayout>
+            <SearchListBox>
+                <SearchList
+                    title="専攻/コース"
+                    icon={<InboxIcon />}
+                    name="course"
+                    list={searchList["courses"]}
+                    set={setCourses}
+                    sqlId="course_id"
+                    sqlName="course_name"
+                />
+
+                <SearchList
+                    title="業種"
+                    icon={<InboxIcon />}
+                    name="occupation"
+                    list={searchList["occupations"]}
+                    set={setOccupations}
+                    sqlId="occupation_id"
+                    sqlName="occupation_name"
+                />
+
+                <SearchList
+                    title="都道府県"
+                    icon={<InboxIcon />}
+                    name="prefecture"
+                    list={searchList["prefectures"]}
+                    set={setPrefectures}
+                    sqlId="prefecture_id"
+                    sqlName="prefecture_name"
+                />
+            </SearchListBox>
+
+            <ListDisplayBox>
+                {
+                    displayCompanies.map((value, index) => {
+                        return (
+                            <Paper
+                                key={index}
+                                sx={{
+                                    "a,a:visited": {
+                                        color: "inherit",
+                                    },
+                                    "a:hover": {
+                                        color: "red",
+                                    },
+                                }}
+                            >
+                                <Link
+                                    to={"/profile/" + value["user_id"]}
+                                >
+                                    {value["user_id"] + value["company_name"]}
+                                </Link>
+                            </Paper>
+                        )
+                    })
+                }
+            </ListDisplayBox>
+        </ListLayout>
     )
 }
 

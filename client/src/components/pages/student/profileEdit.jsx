@@ -49,7 +49,7 @@ const ProfileEdit = () => {
             github: data.get("github"),
         })
             .then(() => {
-                window.location.href = "/profile"
+                window.location.replace("/profile")
             })
             .catch((error) => {
                 console.log(error)
