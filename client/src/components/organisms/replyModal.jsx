@@ -1,8 +1,8 @@
-import { Avatar, Box, Button, Card, IconButton, Modal, TextField, Tooltip } from "@mui/material"
+import { Alert, Avatar, Box, Button, Card, IconButton, Modal, TextField, Tooltip } from "@mui/material"
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
-import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded'
-import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded'
+// import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded'
+// import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded'
 
 const ReplyModal = (props) => {
     return (
@@ -78,8 +78,10 @@ const ReplyModal = (props) => {
                             size="small"
                             color="success"
                             component="label"
+                            onClick={() => props.setFileCheck(false)}
                         >
-                            <input
+                            <Box
+                                component="input"
                                 type="file"
                                 name="image"
                                 accept=".png, .jpg, .jpeg"
@@ -90,29 +92,29 @@ const ReplyModal = (props) => {
                         </IconButton>
                     </Tooltip>
 
-                    <Tooltip
-                        title="ビデオ"
-                        placement="right"
-                    >
-                        <IconButton
-                            size="small"
-                            color="primary"
+                    {/* <Tooltip
+                            title="ビデオ"
+                            placement="right"
                         >
-                            <VideoCallRoundedIcon />
-                        </IconButton>
-                    </Tooltip>
+                            <IconButton
+                                size="small"
+                                color="primary"
+                            >
+                                <VideoCallRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
 
-                    <Tooltip
-                        title="タグ"
-                        placement="right"
-                    >
-                        <IconButton
-                            size="small"
-                            color="error"
+                        <Tooltip
+                            title="タグ"
+                            placement="right"
                         >
-                            <LocalOfferRoundedIcon />
-                        </IconButton>
-                    </Tooltip>
+                            <IconButton
+                                size="small"
+                                color="error"
+                            >
+                                <LocalOfferRoundedIcon />
+                            </IconButton>
+                        </Tooltip> */}
                 </Box>
 
                 <input type="hidden" name="parentId" value={props.postId} />
@@ -126,8 +128,21 @@ const ReplyModal = (props) => {
                         mt: 2,
                     }}
                 >
-                    投稿
+                    返信
                 </Button>
+
+                {
+                    props["fileCheck"]
+                    &&
+                    <Alert
+                        severity="error"
+                        sx={{
+                            mt: 2,
+                        }}
+                    >
+                        ファイルが読み込めません
+                    </Alert>
+                }
             </Card>
         </Modal>
     )
