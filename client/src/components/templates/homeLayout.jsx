@@ -104,7 +104,7 @@ const HomeLayout = (props) => {
                 toggleReplyModalClose={props.toggleReplyModalClose}
                 postId={props.postId}
             />
-
+            
             <Footer />
         </Box>
     )

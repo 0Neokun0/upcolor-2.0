@@ -20,6 +20,7 @@ const GroupList = (props) => {
                             <ListItem
                                 key={group["group_id"]}
                                 selected={group["group_id"] === props["selectGroupId"]}
+                                disableGutters
                                 disablePadding
                                 secondaryAction={
                                     <>
