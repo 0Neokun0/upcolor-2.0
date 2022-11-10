@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { ProfileLayout } from "components/templates"
+import { ContainerLg } from "components/templates"
 import { ProfileDetail } from "components/organisms"
 import WorkspacePremiumRoundedIcon from '@mui/icons-material/WorkspacePremiumRounded'
 import TerminalRoundedIcon from '@mui/icons-material/TerminalRounded'
@@ -11,6 +11,7 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 const Profile = () => {
     const [profile, setProfile] = useState([])
     const [profileLists, setProfileLists] = useState([])
+    const [selectTab, setSelectTab] = useState(1)
 
     useEffect(() => {
         axios.post("/account/getProfile")
@@ -44,12 +45,14 @@ const Profile = () => {
     return (
         profile
         &&
-        <ProfileLayout>
+        <ContainerLg>
             <ProfileDetail
                 profile={profile}
                 profileLists={profileLists}
+                selectTab={selectTab}
+                setSelectTab={setSelectTab}
             />
-        </ProfileLayout>
+        </ContainerLg>
     )
 }
 
