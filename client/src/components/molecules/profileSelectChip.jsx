@@ -39,7 +39,7 @@ const MultipleSelectChip = (props) => {
     })
 
     return (
-        <FormControl fullWidth>
+        <FormControl fullWidth size="small">
             <InputLabel>{props["label"]}</InputLabel>
 
             <Select
@@ -61,6 +61,7 @@ const MultipleSelectChip = (props) => {
                                     <Chip
                                         key={index}
                                         label={props.lists[value - 1][props["sqlName"]]}
+                                        size="small"
                                         sx={{
                                             mt: "0 !important"
                                         }}
@@ -69,6 +70,7 @@ const MultipleSelectChip = (props) => {
                                     <Chip
                                         key={index}
                                         label="なし"
+                                        size="small"
                                         sx={{
                                             mt: "0 !important"
                                         }}

@@ -1,6 +1,7 @@
-import { Avatar, Box, Button, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs, Tooltip, Typography } from "@mui/material"
+import { Box, Button, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material"
 import { grey, teal } from "@mui/material/colors"
 import { server } from "components/config"
+import { ProfileFormUnit, TabPanel } from "components/molecules"
 
 const ProfileDetail = (props) => {
     return (
@@ -21,6 +22,8 @@ const ProfileDetail = (props) => {
                             px: 4,
                             backgroundColor: teal[50],
                             minWidth: "300px",
+                            borderRight: 1,
+                            borderColor: "divider",
                         }}
                     >
                         <Box
@@ -128,7 +131,10 @@ const ProfileDetail = (props) => {
 
                     <Grid
                         item
-                        xs={8}
+                        xs
+                        sx={{
+                            minWidth: "65%",
+                        }}
                     >
                         <Tabs
                             value={props["selectTab"]}
@@ -149,160 +155,79 @@ const ProfileDetail = (props) => {
                                 onClick={() => props["setSelectTab"](2)}
                             />
 
-                            {/* <Tab
+                            <Tab
                                 value={3}
-                                label="進級制作"
-                                onClick={() => props["setSelectTabs"](3)}
-                            /> */}
+                                label="投稿"
+                                onClick={() => props["setSelectTab"](3)}
+                            />
+
+                            {/* 自分のページだけ */}
+                            <Tab
+                                value={4}
+                                label="編集"
+                                onClick={() => props["setSelectTab"](4)}
+                                sx={{
+                                    ml: "auto"
+                                }}
+                            />
                         </Tabs>
+
+                        <Box
+                            sx={{
+                                p: 2,
+                            }}
+                        >
+                            <TabPanel
+                                value={props["selectTab"]}
+                                index={1}
+                            >
+                                {
+                                    props["profile"]["introduction"]
+                                        ?
+                                        props["profile"]["introduction"]
+                                        :
+                                        "未設定"
+                                }
+                            </TabPanel>
+
+                            <TabPanel
+                                value={props["selectTab"]}
+                                index={2}
+                            >
+                                進級制作
+                            </TabPanel>
+
+                            <TabPanel
+                                value={props["selectTab"]}
+                                index={3}
+                            >
+                                投稿
+                            </TabPanel>
+
+                            <TabPanel
+                                value={props["selectTab"]}
+                                index={4}
+                            >
+                                <ProfileFormUnit
+                                    title="一般"
+                                >
+                                    <TextField
+                                        fullWidth
+                                    />
+                                </ProfileFormUnit>
+                            </TabPanel>
+                        </Box>
                     </Grid>
                 </Grid>
             </Card>
 
-            -----------------------------------------
-            <Card
-                sx={{
-                    width: "1000px",
-                    mx: "auto",
-                    borderRadius: 0,
-                }}
+            <Button
+                onClick={() => window.location = "/profile/edit"}
+                variant="contained"
+                fullWidth
             >
-                <Grid
-                    container
-                    sx={{
-                        p: 2,
-                    }}
-                >
-                    <Grid
-                        item
-                        xs={4}
-                    >
-                        <Box
-                            sx={{
-                                textAlign: "center",
-                                p: 5,
-                            }}
-                        >
-                            <Avatar
-                                src={server.host + "/images/icon/" + props.profile["image"]}
-                                sx={{
-                                    width: "150px",
-                                    height: "150px",
-                                    mx: "auto",
-                                    mb: 5,
-                                }}
-                            />
-
-                            <Typography
-                                variant="h5"
-                            >
-                                {props.profile["name"]}
-                            </Typography>
-
-                            <Typography
-                                variant="subtitle2"
-                                sx={{
-                                    whiteSpace: "pre-wrap",
-                                }}
-                            >
-                                {props.profile["course_name"]}
-                            </Typography>
-
-                            <Box
-                                sx={{
-                                    textAlign: "left",
-                                    mt: 2,
-                                }}
-                            >
-                                {
-                                    props.profileLists.map((profileLists, index) => {
-                                        return (
-                                            <Grid
-                                                key={index}
-                                                container
-                                            >
-                                                <Grid
-                                                    item
-                                                    xs={2}
-                                                >
-                                                    <Tooltip
-                                                        title={profileLists["title"]}
-                                                        placement="right"
-                                                    >
-                                                        {profileLists["icon"]}
-                                                    </Tooltip>
-                                                </Grid>
-
-                                                <Grid
-                                                    item
-                                                    xs={10}
-                                                    sx={{
-                                                        whiteSpace: "pre-wrap",
-                                                    }}
-                                                >
-                                                    {
-                                                        profileLists["content"]
-                                                            ?
-                                                            profileLists["content"] !== "-1"
-                                                                ?
-                                                                profileLists["content"]
-                                                                :
-                                                                "なし"
-                                                            :
-                                                            "未設定"
-                                                    }
-                                                </Grid>
-                                            </Grid>
-                                        )
-                                    })
-                                }
-                            </Box>
-                        </Box>
-                    </Grid>
-
-                    <Grid
-                        item
-                        xs={8}
-                    >
-                        <Box
-                            sx={{
-                                p: 5,
-                            }}
-                        >
-                            <Typography
-                                variant="h5"
-                                sx={{
-                                    borderBottom: 1,
-                                    fontWeight: "bold",
-                                    mb: 2,
-                                }}
-                            >
-                                自己紹介
-                            </Typography>
-
-                            {
-                                props.profile["introduction"]
-                                    ?
-                                    props.profile["introduction"]
-                                    :
-                                    "未設定"
-                            }
-                        </Box>
-                    </Grid>
-
-                    <Button
-                        onClick={() => window.location.replace("/profile/edit")}
-                        variant="contained"
-                        size="small"
-                        sx={{
-                            width: "80%",
-                            mx: "auto",
-                        }}
-                    >
-                        編集
-                    </Button>
-                </Grid>
-            </Card >
+                編集
+            </Button>
         </>
     )
 }

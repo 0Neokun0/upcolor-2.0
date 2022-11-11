@@ -8,7 +8,7 @@ const ProfileSelect = (props) => {
     }
 
     return (
-        <FormControl fullWidth>
+        <FormControl fullWidth size="small">
             <InputLabel>{props["label"]}</InputLabel>
             <Select
                 label={props["label"]}
