@@ -1,42 +1,70 @@
-import { AppBar, Box, Button, Dialog, DialogActions, DialogTitle, Link, Toolbar, Typography } from "@mui/material"
+import axios from "axios";
+import {
+    AppBar,
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogTitle,
+    Link,
+    Toolbar,
+    Typography,
+} from "@mui/material";
+import { NavbarMenu } from "components/molecules";
+import { HeaderLayout } from "components/templates";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
+
+import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from "@mui/icons-material/Login";
 
 const Header = (props) => {
+    const { pathname } = useLocation();
+
+    const [profile, setProfile] = useState([]);
+
+    useEffect(() => {
+        axios.post("/account/getProfile").then((res) => {
+            setProfile(res.data);
+            console.log(res.data);
+        });
+    }, []);
+
     return (
-        <AppBar
-            postion="static"
-            color="default"
-        >
-            <Toolbar
-                sx={{
-                    height: "64px",
-                }}
-            >
-                <Link
-                    href="/home"
+        <HeaderLayout>
+            <AppBar postion="static" color="default">
+                <Toolbar
                     sx={{
-                        display: "flex",
-                        alignItems: "center"
+                        height: "64px",
                     }}
                 >
-                    <img
-                        src={props.logoSrc}
-                        alt="ロゴの画像"
-                        height="30px"
-                    />
-                </Link>
+                    <Link
+                        href="/"
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                        }}
+                    >
+                        <img
+                            src={props.logoSrc}
+                            alt="ロゴの画像"
+                            height="30px"
+                        />
+                    </Link>
 
-                <Typography
-                    variant="h6"
-                    sx={{
-                        ml: 3,
-                        flexGrow: 1,
-                    }}
-                >
-                    {props.name}
-                </Typography>
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            ml: 3,
+                            flexGrow: 1,
+                            fontWeight: 600,
+                        }}
+                    >
+                        {props.name}
+                    </Typography>
 
-                {
-                    props.menus.map((menu, index) => {
+                    {props.menus.map((menu, index) => {
                         return (
                             <Link
                                 key={index}
@@ -49,64 +77,84 @@ const Header = (props) => {
                                     color: "gray",
                                     textDecorationLine: "none",
                                     ":hover": {
-                                        color: "dimgray"
-                                    }
+                                        color: "dimgray",
+                                    },
                                 }}
                             >
                                 {menu.icon}
                                 {menu.value}
                             </Link>
-                        )
-                    })
-                }
+                        );
+                    })}
 
-                <Box
-                    sx={{
-                        ml: 5,
-                    }}
+                    {pathname === "/" ? (
+                        <Box
+                            sx={{
+                                ml: 5,
+                            }}
+                        >
+                            {props.signInState ? (
+                                <Button
+                                    variant="contained"
+                                    onClick={props.toggleAlertOpen}
+                                >
+                                    サインアウト
+                                </Button>
+                            ) : (
+                                <Button variant="contained" href="/signin">
+                                    サインイン
+                                </Button>
+                            )}
+                        </Box>
+                    ) : (
+                        <NavbarMenu
+                            profile={profile}
+                            signInState={props.signInState}
+                            toggleAlertOpen={props.toggleAlertOpen}
+                        />
+                    )}
+                </Toolbar>
+
+                {/* サインアウトダイアログ */}
+                <Dialog
+                    open={Boolean(props.open)}
+                    onClose={props.toggleAlertClose}
                 >
-                    {
-                        props.signInState
-                            ?
-                            <Button
-                                variant="contained"
-                                onClick={props.toggleAlertOpen}
-                            >
-                                サインアウト
-                            </Button>
-                            :
-                            <Button
-                                variant="contained"
-                                href="/signin"
-                            >
-                                サインイン
-                            </Button>
-                    }
-                </Box>
-            </Toolbar>
-
-            {/* サインアウトダイアログ */}
-            <Dialog open={Boolean(props.open)} onClose={props.toggleAlertClose}>
-                <DialogTitle>
-                    本当にサインアウトしますか?
-                </DialogTitle>
-
-                <DialogActions>
-                    <Button
-                        onClick={props.toggleAlertClose}
+                    <DialogTitle
+                        sx={{
+                            fontWeight: 600,
+                        }}
                     >
-                        キャンセル
-                    </Button>
+                        本当にサインアウトしますか?
+                    </DialogTitle>
 
-                    <Button
-                        onClick={props.toggleSignout}
-                    >
-                        サインアウト
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </AppBar>
-    )
-}
+                    <DialogActions>
+                        <Button
+                            sx={{
+                                mr: 2,
+                            }}
+                            color="success"
+                            startIcon={<LoginIcon />}
+                            variant="outlined"
+                            onClick={props.toggleAlertClose}
+                        >
+                            キャンセル
+                        </Button>
 
-export default Header
+                        <Button
+                            color="error"
+                            startIcon={<LogoutIcon />}
+                            variant="outlined"
+                            onClick={props.toggleSignout}
+                            href="/"
+                        >
+                            サインアウト
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </AppBar>
+        </HeaderLayout>
+    );
+};
+
+export default Header;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
     Avatar,
     Box,
@@ -7,17 +7,18 @@ import {
     Divider,
     Switch,
     Typography,
-} from '@mui/material'
-import { server } from 'components/config'
+} from "@mui/material";
+import { server } from "components/config";
 
 const MainMenuProfileCard = (props) => {
     return (
-        <Card sx={{
-            p: 2,
-            borderRadius: '15px',
-            boxShadow: 10,
-            mb: 2
-        }}
+        <Card
+            sx={{
+                p: 2,
+                borderRadius: "15px",
+                boxShadow: 10,
+                mb: 2,
+            }}
         >
             <Box
                 sx={{
@@ -29,21 +30,15 @@ const MainMenuProfileCard = (props) => {
                     src={server.host + "/images/icon/" + props.profile.image}
                 />
 
-                <Typography
-                    fontWeight="bold"
-                    textAlign={"center"}
-                    width="100%"
-                >
-                    {props.profile.user_name}
+                <Typography fontWeight="bold" textAlign={"center"} width="100%">
+                    {props.profile.name}
                 </Typography>
             </Box>
-
             <Divider
                 sx={{
                     my: 2,
                 }}
             />
-
             ↓*** 要検討 ***↓
             <Box
                 justifyContent={"space-between"}
@@ -52,13 +47,11 @@ const MainMenuProfileCard = (props) => {
                     alignItems: "center",
                 }}
             >
-                <Chip
-                    label="naoko"
-                />
+                <Chip label="naoko" />
                 <Switch />
             </Box>
         </Card>
-    )
-}
+    );
+};
 
-export default MainMenuProfileCard
+export default MainMenuProfileCard;

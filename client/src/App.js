@@ -26,17 +26,17 @@ function App() {
         {
             icon: <PeopleAltRoundedIcon />,
             value: "学生",
-            url: "/",
+            url: "/home",
         },
         {
             icon: <SchoolRoundedIcon />,
             value: "学校",
-            url: "/teacher/home",
+            url: "/classNewsHome",
         },
         {
             icon: <BusinessRoundedIcon />,
             value: "企業",
-            url: "/companyList",
+            url: "/list/company",
 
         },
     ]
@@ -129,6 +129,7 @@ function App() {
 
     return (
         <Box>
+            <BrowserRouter>
             <Header
                 logoSrc={logo}
                 name={"UPCOLOR"}
@@ -140,9 +141,9 @@ function App() {
                 toggleSignout={toggleSignout}
             />
 
-            <BrowserRouter>
+
                 <Routes>
-                    <Route path="" element={<LandingPage />} />
+                    <Route path="/" element={<LandingPage />} />
                     <Route path="*" element={<NotFound />} />
 
                     {/* <Route path="student/signup" element={<ReqNoAuth component={<StudentSignup />} />} /> */}
