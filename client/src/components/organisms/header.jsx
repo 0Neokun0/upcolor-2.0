@@ -8,6 +8,7 @@ import {
     DialogTitle,
     Link,
     Toolbar,
+    Tooltip,
     Typography,
 } from "@mui/material";
 import { NavbarMenu } from "components/molecules";
@@ -66,24 +67,26 @@ const Header = (props) => {
 
                     {props.menus.map((menu, index) => {
                         return (
-                            <Link
-                                key={index}
-                                href={menu.url}
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    mx: 1,
-                                    color: "gray",
-                                    textDecorationLine: "none",
-                                    ":hover": {
-                                        color: "dimgray",
-                                    },
-                                }}
-                            >
-                                {menu.icon}
-                                {menu.value}
-                            </Link>
+                            <Tooltip key={index} title={menu.label}>
+                                <Link
+                                    key={index}
+                                    href={menu.url}
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        mx: 1,
+                                        color: "gray",
+                                        textDecorationLine: "none",
+                                        ":hover": {
+                                            color: "dimgray",
+                                        },
+                                    }}
+                                >
+                                    {menu.icon}
+                                    {menu.value}
+                                </Link>
+                            </Tooltip>
                         );
                     })}
 
@@ -108,6 +111,7 @@ const Header = (props) => {
                         </Box>
                     ) : (
                         <NavbarMenu
+                            pathname={pathname}
                             profile={profile}
                             signInState={props.signInState}
                             toggleAlertOpen={props.toggleAlertOpen}

@@ -1,24 +1,13 @@
-import { Outlet } from "react-router-dom"
-import {
-    MainMenu,
-    NewsList,
-    ReplyModal,
-    SendPost,
-} from "components/organisms"
-import { Box, Hidden, Stack } from "@mui/material"
-import Footer from "components/organisms/footer/footer"
+import { Outlet } from "react-router-dom";
+import { MainMenu, NewsList, ReplyModal, SendPost } from "components/organisms";
+import { Box, Hidden, Stack } from "@mui/material";
+import Footer from "components/organisms/footer/footer";
 
 const HomeLayout = (props) => {
     return (
-        <Box
-            bgcolor={"#f5f5f5"}
-        >
-            <Stack
-                direction={"row"}
-            >
-                <Hidden
-                    lgDown
-                >
+        <Box bgcolor={"#f5f5f5"}>
+            <Stack direction={"row"}>
+                <Hidden mdDown>
                     <Box
                         sx={{
                             p: 2,
@@ -73,9 +62,7 @@ const HomeLayout = (props) => {
                     />
                 </Box>
 
-                <Hidden
-                    lgDown
-                >
+                <Hidden lgDown>
                     <Box
                         sx={{
                             p: 2,
@@ -83,9 +70,7 @@ const HomeLayout = (props) => {
                             width: "40%",
                         }}
                     >
-                        <NewsList
-                            news={props.news}
-                        />
+                        <NewsList news={props.news} />
                     </Box>
                 </Hidden>
             </Stack>
@@ -100,6 +85,7 @@ const HomeLayout = (props) => {
             />
 
             <ReplyModal
+                profile={props.profile}
                 handleReplySubmit={props.handleReplySubmit}
                 openReplyModal={props.openReplyModal}
                 toggleReplyModalClose={props.toggleReplyModalClose}
@@ -110,7 +96,7 @@ const HomeLayout = (props) => {
 
             <Footer />
         </Box>
-    )
-}
+    );
+};
 
-export default HomeLayout
+export default HomeLayout;

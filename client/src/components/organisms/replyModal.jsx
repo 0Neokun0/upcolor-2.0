@@ -1,8 +1,19 @@
-import { Alert, Avatar, Box, Button, Card, IconButton, Modal, TextField, Tooltip } from "@mui/material"
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
-import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
+import {
+    Alert,
+    Avatar,
+    Box,
+    Button,
+    Card,
+    IconButton,
+    Modal,
+    TextField,
+    Tooltip,
+} from "@mui/material";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import AddPhotoAlternateRoundedIcon from "@mui/icons-material/AddPhotoAlternateRounded";
 // import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded'
 // import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded'
+import { server } from "components/config";
 
 const ReplyModal = (props) => {
     return (
@@ -26,31 +37,30 @@ const ReplyModal = (props) => {
                     borderRadius: "10px",
                 }}
             >
-                <Box
-                    textAlign="right"
-                >
-                    <IconButton
-                        onClick={props.toggleReplyModalClose}
-                    >
+                <Box textAlign="right">
+                    <IconButton onClick={props.toggleReplyModalClose}>
                         <CloseRoundedIcon />
                     </IconButton>
                 </Box>
 
                 <Box
                     sx={{
-                        display: 'flex',
-                        alignItems: 'center',
+                        display: "flex",
+                        alignItems: "center",
                     }}
                 >
                     <Avatar
                         variant="rounded"
                         sx={{
-                            width: '50',
-                            height: '50',
-                            borderRadius: '50%',
-                            objectFit: 'cover',
-                            mr: '20px',
+                            width: "50",
+                            height: "50",
+                            borderRadius: "50%",
+                            objectFit: "cover",
+                            mr: "20px",
                         }}
+                        src={
+                            server.host + "/images/icon/" + props.profile.image
+                        }
                     />
 
                     <TextField
@@ -65,15 +75,12 @@ const ReplyModal = (props) => {
                 </Box>
 
                 <Box
-                    justifyContent={'end'}
+                    justifyContent={"end"}
                     sx={{
-                        display: 'flex',
+                        display: "flex",
                     }}
                 >
-                    <Tooltip
-                        title="写真"
-                        placement="right"
-                    >
+                    <Tooltip title="写真" placement="right">
                         <IconButton
                             size="small"
                             color="success"
@@ -131,9 +138,7 @@ const ReplyModal = (props) => {
                     返信
                 </Button>
 
-                {
-                    props["fileCheck"]
-                    &&
+                {props["fileCheck"] && (
                     <Alert
                         severity="error"
                         sx={{
@@ -142,10 +147,10 @@ const ReplyModal = (props) => {
                     >
                         ファイルが読み込めません
                     </Alert>
-                }
+                )}
             </Card>
         </Modal>
-    )
-}
+    );
+};
 
-export default ReplyModal
+export default ReplyModal;

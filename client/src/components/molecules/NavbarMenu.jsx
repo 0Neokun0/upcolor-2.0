@@ -13,15 +13,18 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { server } from "components/config";
 
 import ChatIcon from "@mui/icons-material/Chat";
 import ManageAccountsRoundedIcon from "@mui/icons-material/ManageAccountsRounded";
 import { Settings } from "@material-ui/icons";
 import PersonAddAltRounded from "@mui/icons-material/PersonAddAltRounded";
-import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 
 const NavbarMenu = (props) => {
+    const { pathname } = useLocation();
+
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -50,7 +53,11 @@ const NavbarMenu = (props) => {
                         aria-expanded={open ? "true" : undefined}
                     >
                         <Avatar
-                            sx={{ width: 40, height: 40 }}
+                            sx={{
+                                width: 40,
+                                height: 40,
+                                border: "2px solid lightgray",
+                            }}
                             src={
                                 server.host +
                                 "/images/icon/" +
@@ -62,13 +69,13 @@ const NavbarMenu = (props) => {
             </Box>
             <Menu
                 anchorEl={anchorEl}
-                id="account-menu"
                 open={open}
                 onClose={handleClose}
                 onClick={handleClose}
                 PaperProps={{
                     elevation: 0,
                     sx: {
+                        borderRadius: "15px",
                         overflow: "visible",
                         filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
                         mt: 1.5,
@@ -95,13 +102,23 @@ const NavbarMenu = (props) => {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
-                <ListItemButton component={Link} href="/profile">
-                    <Avatar
-                        sx={{ width: 40, height: 40 }}
-                        src={
-                            server.host + "/images/icon/" + props.profile.image
-                        }
-                    />
+                <ListItemButton
+                    sx={{
+                        borderRadius: 5,
+                    }}
+                    component={Link}
+                    href="/profile"
+                >
+                    <ListItemIcon>
+                        <Avatar
+                            sx={{ width: 40, height: 40 }}
+                            src={
+                                server.host +
+                                "/images/icon/" +
+                                props.profile.image
+                            }
+                        />
+                    </ListItemIcon>
                     <Typography
                         sx={{
                             display: "flex",
@@ -112,63 +129,58 @@ const NavbarMenu = (props) => {
                     </Typography>
                 </ListItemButton>
 
-                <ListItemButton
-                    component={Link}
-                    href="#"
-                >
-                    <ChatIcon
-                        sx={{
-                            mr: 1,
-                        }}
-                    />
+                <ListItemButton component={Link} href="#">
+                    <ListItemIcon>
+                        <ChatIcon
+                            sx={{
+                                mr: 1,
+                            }}
+                        />
+                    </ListItemIcon>
                     チャット
                 </ListItemButton>
 
                 <Divider />
 
-                <ListItemButton
-                    component={Link}
-                    href="/signup/student"
-                >
+                <ListItemButton component={Link} href="/signup/student">
                     <ListItemIcon>
                         <PersonAddAltRounded fontSize="small" />
                     </ListItemIcon>
-                        他のアカウント作成
+                    他のアカウント作成
                 </ListItemButton>
 
-                <ListItemButton
-                    component={Link}
-                    href="/profile/edit"
-                >
+                <ListItemButton component={Link} href="/profile/edit">
                     <ListItemIcon>
                         <ManageAccountsRoundedIcon fontSize="small" />
                     </ListItemIcon>
-                        プロフィール編集
+                    プロフィール編集
                 </ListItemButton>
 
                 <ListItemButton>
                     <ListItemIcon>
                         <Settings fontSize="small" />
                     </ListItemIcon>
-                        設定
+                    設定
                 </ListItemButton>
 
-                {props.signInState ? (
-                    <Button
-                        sx={{
-                            ml: 7,
-                        }}
-                        startIcon={<LogoutRoundedIcon />}
-                        variant="contained"
-                        onClick={props.toggleAlertOpen}
-                    >
-                        サインアウト
-                    </Button>
-                ) : (
-                    <Button variant="contained" href="/signin">
-                        サインイン
-                    </Button>
-                )}
+                <ListItemButton>
+                    {props.signInState ? (
+                        <Button
+                            sx={{
+                                ml: 4,
+                            }}
+                            startIcon={<LogoutRoundedIcon />}
+                            variant="contained"
+                            onClick={props.toggleAlertOpen}
+                        >
+                            サインアウト
+                        </Button>
+                    ) : (
+                        <Button variant="contained" href="/signin">
+                            サインイン
+                        </Button>
+                    )}
+                </ListItemButton>
             </Menu>
         </>
     );
