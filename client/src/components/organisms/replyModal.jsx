@@ -138,16 +138,20 @@ const ReplyModal = (props) => {
                     返信
                 </Button>
 
-                {props["fileCheck"] && (
-                    <Alert
-                        severity="error"
-                        sx={{
-                            mt: 2,
-                        }}
-                    >
-                        ファイルが読み込めません
-                    </Alert>
-                )}
+                {
+                    props["fileCheck"] 
+                    && 
+                    (
+                        <Alert
+                            severity="error"
+                            sx={{
+                                mt: 2,
+                            }}
+                         >
+                            ファイルが読み込めません
+                         </Alert>
+                    )
+                }
             </Card>
         </Modal>
     )
