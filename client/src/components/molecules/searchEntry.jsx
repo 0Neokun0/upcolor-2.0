@@ -1,18 +1,15 @@
-
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-
 import { Box, Collapse, List, ListItem, ListItemIcon, ListItemText, ToggleButton, ToggleButtonGroup } from "@mui/material"
 import { useState } from 'react'
 
 const SearchEntry = (props) => {
     const [open, setOpen] = useState(false)
-
+    const [formats, setFormats] = useState(() => [])
+    
     const handleClick = () => {
         setOpen(!open)
     }
-
-    const [formats, setFormats] = useState(() => [])
 
     const handleFormat = (event, newFormats) => {
         setFormats(newFormats)
@@ -20,11 +17,14 @@ const SearchEntry = (props) => {
     }
 
     return (
-        <Box sx={{
-            m:1,
-        }}
+        <Box
+            sx={{
+                m: 1,
+            }}
         >
-            <ListItem onClick={handleClick}>
+            <ListItem
+                onClick={handleClick}
+            >
                 <ListItemIcon>
                     {props.icon}
                 </ListItemIcon>
@@ -38,53 +38,55 @@ const SearchEntry = (props) => {
                     <ExpandMore />
                 }
             </ListItem>
-                <Collapse
-                    in={open}
-                    timeout="auto"
-                    unmountOnExit
+            
+            <Collapse
+                in={open}
+                timeout="auto"
+                unmountOnExit
+            >
+                <List
+                    component="div"
+                    disablePadding
                 >
-                    <List
-                        component="div"
-                        disablePadding
+                    <ToggleButtonGroup
+                        orientation="vertical"
+                        name={props.name}
+                        value={formats}
+                        onChange={handleFormat}
+                        sx={{
+                            width: 1,
+                            maxHeight: "30vh",
+                            overflow: "auto",
+                            "::-webkit-scrollbar": {
+                                width: "5px",
+                            },
+                            "::-webkit-scrollbar-thumb": {
+                                backgroundColor: "rgba(0, 0, 50, .5)",
+                                borderRadius: "5px",
+                            },
+                            "::-webkit-scrollbar-track": {
+                                boxShadow: 2,
+                            },
+                        }}
                     >
-                        <ToggleButtonGroup
-                            orientation="vertical"
-                            name={props.name}
-                            value={formats}
-                            onChange={handleFormat}
-                            sx={{
-                                width: 1,
-                                maxHeight: "30vh",
-                                overflow: "auto",
-                                "::-webkit-scrollbar": {
-                                    width: "5px",
-                                },
-                                "::-webkit-scrollbar-thumb": {
-                                    backgroundColor: "rgba(0, 0, 50, .5)",
-                                    borderRadius: "5px",
-                                },
-                                "::-webkit-scrollbar-track": {
-                                    boxShadow: 2,
-                                },
-                            }}
-                        >
-                            {
-                                props.select.map((value, index) => {
-                                    return (
-                                        <ToggleButton sx={{
+                        {
+                            props.select.map((value, index) => {
+                                return (
+                                    <ToggleButton
+                                        key={index}
+                                        value={value[props.sqlId]}
+                                        sx={{
                                             borderRadius: '10px'
-                                            }}
-                                            key={index}
-                                            value={value[props.sqlId]}
-                                        >
-                                            {value[props.sqlName]}
-                                        </ToggleButton>
-                                    )
-                                })
-                            }
-                        </ToggleButtonGroup>
-                    </List>
-                </Collapse>
+                                        }}
+                                    >
+                                        {value[props.sqlName]}
+                                    </ToggleButton>
+                                )
+                            })
+                        }
+                    </ToggleButtonGroup>
+                </List>
+            </Collapse>
         </Box>
     )
 }
