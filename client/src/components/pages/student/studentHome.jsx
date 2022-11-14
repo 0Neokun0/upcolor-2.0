@@ -74,8 +74,9 @@ const Home = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const data = new FormData(e.currentTarget)
+        const imgType = data.get("image")["type"]
 
-        if (data.get("image")["type"] === "image/png") {
+        if (imgType === "application/octet-stream" || imgType === "image/png") {
             const config = {
                 headers: {
                     'content-type': 'multipart/form-data'
@@ -95,26 +96,32 @@ const Home = () => {
             setFileCheck(true)
         }
     }
+
     const handleReplySubmit = (e) => {
         e.preventDefault()
-
         const data = new FormData(e.currentTarget)
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        }
+        const imgType = data.get("image")["type"]
 
-        axios.post("/post/addReply", {
-            text: data.get("text"),
-            image: data.get("image"),
-            parentId: data.get("parentId"),
-        },
-            config
-        )
-            .then(() => {
-                window.location.reload()
-            })
+        if (imgType === "application/octet-stream" || imgType === "image/png") {
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+
+            axios.post("/post/addReply", {
+                text: data.get("text"),
+                image: data.get("image"),
+                parentId: data.get("parentId"),
+            },
+                config
+            )
+                .then(() => {
+                    window.location.reload()
+                })
+        } else {
+            setFileCheck(true)
+        }
     }
 
     const togglePostModalOpen = () => {
@@ -130,6 +137,7 @@ const Home = () => {
     }
     const toggleReplyModalClose = () => {
         setOpenReplyModal(false)
+        setFileCheck(false)
     }
 
     useEffect(() => {
@@ -182,6 +190,7 @@ const Home = () => {
                 togglePostModalOpen={togglePostModalOpen}
                 togglePostModalClose={togglePostModalClose}
                 fileCheck={fileCheck}
+                setFileCheck={setFileCheck}
 
                 handleReplySubmit={handleReplySubmit}
                 openReplyModal={openReplyModal}

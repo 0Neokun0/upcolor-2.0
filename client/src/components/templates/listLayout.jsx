@@ -1,17 +1,22 @@
-import { Stack } from "@mui/material"
+import { Box, Stack } from "@mui/material"
 
 const ListLayout = (props) => {
     return (
-        <Stack
-            direction="row"
+        <Box
             sx={{
-                width: "80%",
-                pt: 2,
-                mx: "auto",
+                p: 2,
             }}
         >
-            {props.children}
-        </Stack>
+            <Stack
+                direction="row"
+                spacing={2}
+                sx={{
+                    height: "calc(100vh - 64px)",
+                }}
+            >
+                {props.children}
+            </Stack>
+        </Box>
     )
 }
 

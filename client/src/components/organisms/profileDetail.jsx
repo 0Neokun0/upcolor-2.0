@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import { Avatar, Box, Button, Card, Grid, Tooltip, Typography } from "@mui/material"
 import { server } from "components/config"
 
@@ -40,7 +39,7 @@ const ProfileDetail = (props) => {
                         <Typography
                             variant="h5"
                         >
-                            {props.profile["user_name"]}
+                            {props.profile["name"]}
                         </Typography>
 
                         <Typography
@@ -125,9 +124,9 @@ const ProfileDetail = (props) => {
                         </Typography>
 
                         {
-                            props.profile["user_introduction"]
+                            props.profile["introduction"]
                                 ?
-                                props.profile["user_introduction"]
+                                props.profile["introduction"]
                                 :
                                 "未設定"
                         }
@@ -135,8 +134,7 @@ const ProfileDetail = (props) => {
                 </Grid>
 
                 <Button
-                    component={Link}
-                    to="./edit"
+                    onClick={() => window.location.replace("/profile/edit")}
                     variant="contained"
                     size="small"
                     sx={{

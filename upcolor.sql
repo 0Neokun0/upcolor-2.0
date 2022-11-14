@@ -483,6 +483,55 @@ FROM
 ORDER BY
     student_profiles.student_id;
 
+CREATE VIEW company_infomation (
+    user_id,
+    company_id,
+    company_name,
+    manager_name,
+    manager_mail,
+    manager_image,
+    introduction,
+    business,
+    ceo_message,
+    address,
+    course_ids,
+    occupation_ids,
+    prefecture_ids,
+    homepage_url,
+    jobsite_url
+) AS
+SELECT
+    company_profiles.user_id,
+    company_profiles.company_id,
+    company_profiles.company_name,
+    user_profiles.user_name,
+    user_profiles.user_mail,
+    images.image_url,
+    company_profiles.company_introduction,
+    company_profiles.company_business,
+    company_profiles.company_ceo_message,
+    company_profiles.company_address,
+    company_profiles.company_course_id,
+    company_profiles.company_occupation_id,
+    company_profiles.company_location_id,
+    company_profiles.company_homepage_url,
+    company_profiles.company_jobsite_url
+FROM
+    company_profiles
+    INNER JOIN
+        user_profiles
+        ON company_profiles.user_id = user_profiles.user_id
+    LEFT OUTER JOIN
+        images
+    ON  company_profiles.user_id = images.image_id
+    AND images.image_type = 1
+    LEFT OUTER JOIN
+        images
+    ON  company_profiles.company_id = images.image_id
+    AND images.image_type = 1
+ORDER BY
+    company_profiles.company_id;
+
 INSERT INTO
     user_types(type_name)
 VALUES
