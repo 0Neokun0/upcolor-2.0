@@ -44,10 +44,11 @@ function App() {
     ]
 
     const toggleSignout = () => {
-        axios.post("/account/signout").then(() => {
-            sessionStorage.removeItem("AUTHORITY")
-            window.location.reload()
-        })
+        axios.post("/account/signout").
+            then(() => {
+                sessionStorage.removeItem("AUTHORITY")
+                window.location.reload()
+            })
     }
 
     const toggleAlertOpen = () => {
