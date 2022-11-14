@@ -100,6 +100,7 @@ const SendPost = (props) => {
                                 size="small"
                                 color="success"
                                 component="label"
+                                onClick={() => props.setFileCheck(false)}
                             >
                                 <Box
                                     component="input"

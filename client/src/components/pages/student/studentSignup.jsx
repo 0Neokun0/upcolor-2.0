@@ -9,6 +9,9 @@ const SignUp = () => {
     const [course, setCourse] = useState("")
     const [year, setYear] = useState("")
 
+    const [originPass, setOriginPass] = useState("")
+    const [checkPass, setCheckPass] = useState("")
+
     const years = [
         {
             value: 1,
@@ -49,14 +52,14 @@ const SignUp = () => {
                     setCheckExist(true)
                 }
             })
-    };
+    }
 
     useEffect(() => {
         axios.post("/course/course")
             .then((res) => {
                 setCourseList(res.data)
             })
-    }, []);
+    }, [])
 
     return (
         <SignLayout>
@@ -69,6 +72,11 @@ const SignUp = () => {
                 year={year}
                 setCourse={setCourse}
                 setYear={setYear}
+
+                originPass={originPass}
+                checkPass={checkPass}
+                setOriginPass={setOriginPass}
+                setCheckPass={setCheckPass}
             />
         </SignLayout>
     )

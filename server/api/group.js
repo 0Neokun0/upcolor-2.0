@@ -158,15 +158,36 @@ router.post("/getGroupChat", async (req, res) => {
             user_profiles.user_name
         FROM
             group_chat
-            INNER JOIN
-                user_profiles ON
-                group_chat.sent_user_id = user_profiles.user_id
+        INNER JOIN
+            user_profiles ON
+            group_chat.sent_user_id = user_profiles.user_id
         WHERE
             received_group_id = ?
     `
     const groupChat = await sql.handleSelect(sqlSelectGroupChat, [groupId])
 
     res.json(groupChat)
+})
+
+router.post("/getGroupMembers", async (req, res) => {
+    const groupId = req.body.groupId
+
+    const sqlSelectGroupMembers = `
+        SELECT
+            user_profiles.user_id,
+            user_profiles.user_name
+        FROM
+            users_joined_group
+        INNER JOIN
+            user_profiles ON
+            users_joined_group.joined_user_id = user_profiles.user_id
+        WHERE
+            group_id = ?
+    `
+
+    const members = await sql.handleSelect(sqlSelectGroupMembers, [groupId])
+
+    res.json(members)
 })
 
 /**

@@ -6,12 +6,11 @@ import { useState } from 'react'
 
 const SearchList = (props) => {
     const [open, setOpen] = useState(false)
-
+    const [formats, setFormats] = useState(() => [])
+    
     const handleClick = () => {
         setOpen(!open)
     }
-
-    const [formats, setFormats] = useState(() => [])
 
     const handleFormat = (event, newFormats) => {
         setFormats(newFormats)
@@ -19,31 +18,65 @@ const SearchList = (props) => {
     }
 
     return (
-        <Box>
-            <ListItem onClick={handleClick}>
+        <Box 
+            sx={{
+                m: 1,
+            }}
+        >
+            <ListItem
+                onClick={handleClick}
+            >
                 <ListItemIcon>
                     {props.icon}
                 </ListItemIcon>
-                <ListItemText primary={props.title} />
-                {open ? <ExpandLess /> : <ExpandMore />}
+                <ListItemText
+                    primary={props.title}
+                />
+                {
+                    open
+                    ?
+                    <ExpandLess />
+                    :
+                    <ExpandMore />
+                }
             </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
+            <Collapse
+                in={open}
+                timeout="auto"
+                unmountOnExit
+            >
+                <List
+                    component="div"
+                    disablePadding
+                >
                     <ToggleButtonGroup
                         orientation="vertical"
                         name={props.name}
                         value={formats}
                         onChange={handleFormat}
                         sx={{
-                            width: "100%",
-                            maxHeight: "50vh",
-                            overflowY: "scroll",
+                            width: 1,
+                            maxHeight: "30vh",
+                            overflow: "auto",
+                            "::-webkit-scrollbar": {
+                                width: "5px",
+                            },
+                            "::-webkit-scrollbar-thumb": {
+                                backgroundColor: "rgba(0, 0, 50, .5)",
+                                borderRadius: "5px",
+                            },
+                            "::-webkit-scrollbar-track": {
+                                boxShadow: 2,
+                            },
                         }}
                     >
                         {
                             props.list.map((value, index) => {
                                 return (
                                     <ToggleButton
+                                        sx={{
+                                            borderRadius: '10px'
+                                        }}
                                         key={index}
                                         value={value[props.sqlId]}
                                     >

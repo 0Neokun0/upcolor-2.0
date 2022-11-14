@@ -96,6 +96,7 @@ const HomeLayout = (props) => {
                 togglePostModalOpen={props.togglePostModalOpen}
                 togglePostModalClose={props.togglePostModalClose}
                 fileCheck={props.fileCheck}
+                setFileCheck={props.setFileCheck}
             />
 
             <ReplyModal
@@ -103,6 +104,8 @@ const HomeLayout = (props) => {
                 openReplyModal={props.openReplyModal}
                 toggleReplyModalClose={props.toggleReplyModalClose}
                 postId={props.postId}
+                fileCheck={props.fileCheck}
+                setFileCheck={props.setFileCheck}
             />
 
             <Footer />
