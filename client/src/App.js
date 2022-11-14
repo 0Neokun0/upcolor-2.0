@@ -1,54 +1,26 @@
-import axios from "axios";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import axios from "axios"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { Box } from "@mui/material"
 
-import { LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages";
+import { LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
 
-import {
-    StudentSignup,
-    StudentHome,
-    Group,
-    Profile,
-    ProfileEdit,
-    ProfileView,
-    RegistTimeTable,
-    ShowTimeTable,
-    TeamWork,
-    TeamList,
-    TeamWorkInvite,
-    StudentList,
-    CompanyList,
-    GroupInvite,
-} from "components/pages/student";
-import {
-    TeacherHome,
-    TeacherSignup,
-    DevelopHome,
-    AddLectures,
-    GenTeacherSign,
-    GenCompanySign,
-    TeacherNews,
-} from "components/pages/teacher";
-import {
-    CompanySignup,
-    CompanyHome,
-    CompanyProfileEdit,
-    Recruitment,
-} from "components/pages/company";
+import {StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite } from "components/pages/student"
+import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
+import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment } from "components/pages/company"
 
-import { GroupChatLayout } from "components/templates";
-import { Feed, FeedDetail, Header } from "components/organisms";
+import { GroupChatLayout } from "components/templates"
+import { Feed, FeedDetail, Header } from "components/organisms"
 
-import logo from "components/atoms/logo/upcolor_logo.svg";
-import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
-import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
-import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded";
-import GroupCreateLayout from "components/templates/groupCreateLayout";
+import logo from "components/atoms/logo/upcolor_logo.svg"
+import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded"
+import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded"
+import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded"
+import GroupCreateLayout from "components/templates/groupCreateLayout"
 
 function App() {
-    const [open, setOpen] = useState(false);
-    const [signInState, setSignInState] = useState("");
+    const [open, setOpen] = useState(false)
+    const [signInState, setSignInState] = useState("")
 
     const menus = [
         {
@@ -69,91 +41,91 @@ function App() {
             value: "企業",
             url: "/list/company",
         },
-    ];
+    ]
 
     const toggleSignout = () => {
         axios.post("/account/signout").then(() => {
-            sessionStorage.removeItem("AUTHORITY");
-            window.location.reload();
-        });
-    };
+            sessionStorage.removeItem("AUTHORITY")
+            window.location.reload()
+        })
+    }
 
     const toggleAlertOpen = () => {
-        setOpen(true);
-    };
+        setOpen(true)
+    }
     const toggleAlertClose = () => {
-        setOpen(false);
-    };
+        setOpen(false)
+    }
 
     const ReqAuthStu = (props) => {
-        const myAuthority = sessionStorage.getItem("AUTHORITY");
+        const myAuthority = sessionStorage.getItem("AUTHORITY")
 
         if (myAuthority === "STUDENT") {
-            return props.component;
+            return props.component
         } else if (myAuthority === null) {
-            document.location = "/login";
+            document.location = "/login"
         }
 
-        document.location = "/";
-    };
+        document.location = "/"
+    }
 
     const ReqAuthTea = (props) => {
-        const myAuthority = sessionStorage.getItem("AUTHORITY");
+        const myAuthority = sessionStorage.getItem("AUTHORITY")
 
         if (myAuthority === "TEACHER" || myAuthority === "ADMIN") {
-            return props.component;
+            return props.component
         } else if (myAuthority === null) {
-            document.location = "/login";
+            document.location = "/login"
         }
 
-        document.location = "/";
-    };
+        document.location = "/"
+    }
 
     const ReqAuthCom = (props) => {
-        const myAuthority = sessionStorage.getItem("AUTHORITY");
+        const myAuthority = sessionStorage.getItem("AUTHORITY")
 
         if (myAuthority === "COMPANY") {
-            return props.component;
+            return props.component
         } else if (myAuthority === null) {
-            document.location = "/login";
+            document.location = "/login"
         }
 
-        document.location = "/";
-    };
+        document.location = "/"
+    }
 
     const ReqAuthAdm = (props) => {
-        const myAuthority = sessionStorage.getItem("AUTHORITY");
+        const myAuthority = sessionStorage.getItem("AUTHORITY")
 
         if (myAuthority === "ADMIN") {
-            return props.component;
+            return props.component
         } else if (myAuthority === null) {
-            document.location = "/login";
+            document.location = "/login"
         }
 
-        document.location = "/";
-    };
+        document.location = "/"
+    }
 
     const ReqNoAuth = (props) => {
-        const myAuthority = sessionStorage.getItem("AUTHORITY");
+        const myAuthority = sessionStorage.getItem("AUTHORITY")
 
         if (myAuthority === null) {
-            return props.component;
+            return props.component
         }
 
-        document.location = "/";
-    };
+        document.location = "/"
+    }
 
     useEffect(() => {
         axios.post("/account/signState").then((res) => {
             if (res.data) {
-                const authority = res.data["type_name"];
-                sessionStorage.setItem("AUTHORITY", authority);
-                setSignInState(true);
+                const authority = res.data["type_name"]
+                sessionStorage.setItem("AUTHORITY", authority)
+                setSignInState(true)
             } else {
-                setSignInState(false);
+                setSignInState(false)
             }
-        });
-    }, []);
+        })
+    }, [])
 
     return (
         <Box>
@@ -273,7 +245,7 @@ function App() {
                 </Routes>
             </BrowserRouter>
         </Box>
-    );
+    )
 }
 
-export default App;
+export default App
