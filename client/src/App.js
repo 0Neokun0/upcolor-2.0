@@ -45,10 +45,10 @@ function App() {
 
     const toggleSignout = () => {
         axios.post("/account/signout")
-        .then(() => {
-            sessionStorage.removeItem("AUTHORITY")
-            window.location.reload()
-        })
+            .then(() => {
+                sessionStorage.removeItem("AUTHORITY")
+                window.location.reload()
+            })
     }
 
     const toggleAlertOpen = () => {
@@ -117,15 +117,16 @@ function App() {
     }
 
     useEffect(() => {
-        axios.post("/account/signState").then((res) => {
-            if (res.data) {
-                const authority = res.data["type_name"]
-                sessionStorage.setItem("AUTHORITY", authority)
-                setSignInState(true)
-            } else {
-                setSignInState(false)
-            }
-        })
+        axios.post("/account/signState")
+            .then((res) => {
+                if (res.data) {
+                    const authority = res.data["type_name"]
+                    sessionStorage.setItem("AUTHORITY", authority)
+                    setSignInState(true)
+                } else {
+                    setSignInState(false)
+                }
+            })
     }, [])
 
     useEffect(() => {
