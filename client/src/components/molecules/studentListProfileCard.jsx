@@ -29,9 +29,10 @@ const StudentListProfileCard = (props) => {
                     justifyContent="space-evenly"
                     alignItems="center"
                 >
-                    <Avatar sx={{
-                        m: 1,
-                    }}
+                    <Avatar
+                        sx={{
+                            m: 1,
+                        }}
                     />
 
                     <Typography
