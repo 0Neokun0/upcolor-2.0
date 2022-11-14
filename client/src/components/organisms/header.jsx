@@ -115,6 +115,10 @@ const Header = (props) => {
                             <NavbarMenu
                                 pathname={pathname}
                                 profile={props.profile}
+                                anchorEl={props.anchorEl}
+                                openNavbar={props.openNavbar}
+                                handleClick={props.handleClick}
+                                handleClose={props.handleClose}
                                 signInState={props.signInState}
                                 toggleAlertOpen={props.toggleAlertOpen}
                             />

@@ -12,16 +12,6 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded"
 
 const NavbarMenu = (props) => {
 
-
-    const [anchorEl, setAnchorEl] = useState(null)
-    const open = Boolean(anchorEl)
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget)
-    }
-    const handleClose = () => {
-        setAnchorEl(null)
-    }
-
     return (
         <>
             <Box
@@ -33,12 +23,12 @@ const NavbarMenu = (props) => {
             >
                 <Tooltip title="アカウント設定">
                     <IconButton
-                        onClick={handleClick}
+                        onClick={props.handleClick}
                         size="small"
                         sx={{ ml: 2 }}
-                        aria-controls={open ? "account-menu" : undefined}
+                        aria-controls={props.openNavbar ? "account-menu" : undefined}
                         aria-haspopup="true"
-                        aria-expanded={open ? "true" : undefined}
+                        aria-expanded={props.openNavbar ? "true" : undefined}
                     >
                         <Avatar
                             sx={{
@@ -52,10 +42,10 @@ const NavbarMenu = (props) => {
                 </Tooltip>
             </Box>
             <Menu
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                onClick={handleClose}
+                anchorEl={props.anchorEl}
+                open={props.openNavbar}
+                onClose={props.handleClose}
+                onClick={props.handleClose}
                 PaperProps={{
                     elevation: 0,
                     sx: {

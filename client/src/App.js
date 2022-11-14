@@ -22,6 +22,16 @@ function App() {
     const [signInState, setSignInState] = useState("")
     const [profile, setProfile] = useState([])
 
+    const [anchorEl, setAnchorEl] = useState(null)
+    const openNavbar = Boolean(anchorEl)
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget)
+    }
+    const handleClose = () => {
+        setAnchorEl(null)
+    }
+
     const menus = [
         {
             label: "学生フェード",
@@ -145,6 +155,10 @@ function App() {
                     name={"UPCOLOR"}
                     menus={menus}
                     signInState={signInState}
+                    openNavbar={openNavbar}
+                    anchorEl={anchorEl}
+                    handleClick={handleClick}
+                    handleClose={handleClose}
                     open={open}
                     profile={profile}
                     toggleAlertOpen={toggleAlertOpen}
