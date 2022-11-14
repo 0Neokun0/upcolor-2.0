@@ -1,6 +1,5 @@
 import { Avatar, Box, Button, Divider, IconButton, Link, ListItemButton, ListItemIcon, Menu, Tooltip, Typography } from "@mui/material"
 import React from "react"
-import { useState } from "react"
 
 import { server } from "components/config"
 
@@ -21,14 +20,28 @@ const NavbarMenu = (props) => {
                     textAlign: "center",
                 }}
             >
-                <Tooltip title="アカウント設定">
+                <Tooltip
+                    title="アカウント設定"
+                >
                     <IconButton
                         onClick={props.handleClick}
                         size="small"
                         sx={{ ml: 2 }}
-                        aria-controls={props.openNavbar ? "account-menu" : undefined}
+                        aria-controls={
+                            props.openNavbar
+                                ?
+                                "account-menu"
+                                :
+                                undefined
+                        }
                         aria-haspopup="true"
-                        aria-expanded={props.openNavbar ? "true" : undefined}
+                        aria-expanded={
+                            props.openNavbar
+                                ?
+                                "true"
+                                :
+                                undefined
+                        }
                     >
                         <Avatar
                             sx={{
@@ -73,8 +86,14 @@ const NavbarMenu = (props) => {
                         },
                     },
                 }}
-                transformOrigin={{ horizontal: "right", vertical: "top" }}
-                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                transformOrigin={{
+                    horizontal: "right",
+                    vertical: "top"
+                }}
+                anchorOrigin={{
+                    horizontal: "right",
+                    vertical: "bottom"
+                }}
             >
                 <ListItemButton
                     sx={{
@@ -85,7 +104,10 @@ const NavbarMenu = (props) => {
                 >
                     <ListItemIcon>
                         <Avatar
-                            sx={{ width: 40, height: 40 }}
+                            sx={{
+                                width: 40,
+                                height: 40
+                            }}
                             src={
                                 server.host +
                                 "/images/icon/" +
@@ -103,7 +125,10 @@ const NavbarMenu = (props) => {
                     </Typography>
                 </ListItemButton>
 
-                <ListItemButton component={Link} href="#">
+                <ListItemButton
+                    component={Link}
+                    href="#"
+                >
                     <ListItemIcon>
                         <ChatIcon
                             sx={{
@@ -116,45 +141,62 @@ const NavbarMenu = (props) => {
 
                 <Divider />
 
-                <ListItemButton component={Link} href="/signup/student">
+                <ListItemButton
+                    component={Link}
+                    href="/signup/student"
+                >
                     <ListItemIcon>
-                        <PersonAddAltRounded fontSize="small" />
+                        <PersonAddAltRounded
+                            fontSize="small"
+                        />
                     </ListItemIcon>
                     他のアカウント作成
                 </ListItemButton>
 
-                <ListItemButton component={Link} href="/profile/edit">
+                <ListItemButton
+                    component={Link}
+                    href="/profile/edit"
+                >
                     <ListItemIcon>
-                        <ManageAccountsRoundedIcon fontSize="small" />
+                        <ManageAccountsRoundedIcon
+                            fontSize="small"
+                        />
                     </ListItemIcon>
                     プロフィール編集
                 </ListItemButton>
 
                 <ListItemButton>
                     <ListItemIcon>
-                        <Settings fontSize="small" />
+                        <Settings
+                            fontSize="small"
+                        />
                     </ListItemIcon>
                     設定
                 </ListItemButton>
 
                 <ListItemButton>
-                    {props.signInState ? (
-                        <Button
-                            sx={{
-                                ml: 4,
-                            }}
-                            startIcon={<LogoutRoundedIcon />}
-                            variant="contained"
-                            onClick={props.toggleAlertOpen}
-                        >
-                            サインアウト
-                        </Button>
-                    ) :
-                        (
-                            <Button variant="contained" href="/signin">
-                                サインイン
-                            </Button>
-                        )}
+                    {
+                        props.signInState
+                            ?
+                            (
+                                <Button
+                                    sx={{
+                                        ml: 4,
+                                    }}
+                                    startIcon={<LogoutRoundedIcon />}
+                                    variant="contained"
+                                    onClick={props.toggleAlertOpen}
+                                >
+                                    サインアウト
+                                </Button>
+                            )
+                            :
+                            (
+                                <Button variant="contained" href="/signin">
+                                    サインイン
+                                </Button>
+                            )
+                    }
                 </ListItemButton>
             </Menu>
         </>
