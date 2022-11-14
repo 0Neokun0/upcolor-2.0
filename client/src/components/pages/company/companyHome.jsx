@@ -1,4 +1,5 @@
 // import axios from 'axios'
+import { Box, Grid, Stack } from '@mui/material';
 import { CompanyProfilePageLayout } from 'components/templates'
 // import { useEffect, useState } from 'react'
 // import { useParams } from 'react-router-dom'
@@ -19,7 +20,6 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import MainMenuCompany from "components/organisms/mainMenuCompany"
 import { CompanyHomeLayout } from "components/templates"
 import CompanyProfile from "./companyProfile"
-import { Box, Grid, Stack } from '@mui/material';
 
 const CompanyHome = () => {
     const menus = [
@@ -37,7 +37,7 @@ const CompanyHome = () => {
         },
         {
             value: "企業プロフィール編集",
-            url: "/company/recruitment",
+            url: "/company/profile/edit",
         },
         {
             value: "ユーザープロフィール編集",
