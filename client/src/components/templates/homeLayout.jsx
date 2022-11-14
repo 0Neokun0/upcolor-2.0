@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom";
-import { MainMenu, NewsList, ReplyModal, SendPost } from "components/organisms";
-import { Box, Hidden, Stack } from "@mui/material";
-import Footer from "components/organisms/footer/footer";
+import { Outlet } from "react-router-dom"
+import { MainMenu, NewsList, ReplyModal, SendPost } from "components/organisms"
+import { Box, Hidden, Stack } from "@mui/material"
+import Footer from "components/organisms/footer/footer"
 
 const HomeLayout = (props) => {
     return (
@@ -96,7 +96,7 @@ const HomeLayout = (props) => {
 
             <Footer />
         </Box>
-    );
-};
+    )
+}
 
-export default HomeLayout;
+export default HomeLayout

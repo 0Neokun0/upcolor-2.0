@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import {
     Avatar,
     Box,
@@ -7,8 +7,8 @@ import {
     Divider,
     Switch,
     Typography,
-} from "@mui/material";
-import { server } from "components/config";
+} from "@mui/material"
+import { server } from "components/config"
 
 const MainMenuProfileCard = (props) => {
     return (
@@ -51,7 +51,7 @@ const MainMenuProfileCard = (props) => {
                 <Switch />
             </Box>
         </Card>
-    );
-};
+    )
+}
 
-export default MainMenuProfileCard;
+export default MainMenuProfileCard

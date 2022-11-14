@@ -8,12 +8,12 @@ import {
     Modal,
     TextField,
     Tooltip,
-} from "@mui/material";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import AddPhotoAlternateRoundedIcon from "@mui/icons-material/AddPhotoAlternateRounded";
+} from "@mui/material"
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
+import AddPhotoAlternateRoundedIcon from "@mui/icons-material/AddPhotoAlternateRounded"
 // import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded'
 // import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded'
-import { server } from "components/config";
+import { server } from "components/config"
 
 const ReplyModal = (props) => {
     return (
@@ -150,7 +150,7 @@ const ReplyModal = (props) => {
                 )}
             </Card>
         </Modal>
-    );
-};
+    )
+}
 
-export default ReplyModal;
+export default ReplyModal

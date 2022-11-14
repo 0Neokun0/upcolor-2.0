@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"
 import {
     AppBar,
     Box,
@@ -10,27 +10,27 @@ import {
     Toolbar,
     Tooltip,
     Typography,
-} from "@mui/material";
-import { NavbarMenu } from "components/molecules";
-import { HeaderLayout } from "components/templates";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { useState } from "react";
+} from "@mui/material"
+import { NavbarMenu } from "components/molecules"
+import { HeaderLayout } from "components/templates"
+import { useEffect } from "react"
+import { useLocation } from "react-router-dom"
+import { useState } from "react"
 
-import LogoutIcon from "@mui/icons-material/Logout";
-import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout"
+import LoginIcon from "@mui/icons-material/Login"
 
 const Header = (props) => {
-    const { pathname } = useLocation();
+    const { pathname } = useLocation()
 
-    const [profile, setProfile] = useState([]);
+    const [profile, setProfile] = useState([])
 
     useEffect(() => {
         axios.post("/account/getProfile").then((res) => {
-            setProfile(res.data);
-            console.log(res.data);
-        });
-    }, []);
+            setProfile(res.data)
+            console.log(res.data)
+        })
+    }, [])
 
     return (
         <HeaderLayout>
@@ -87,7 +87,7 @@ const Header = (props) => {
                                     {menu.value}
                                 </Link>
                             </Tooltip>
-                        );
+                        )
                     })}
 
                     {pathname === "/" ? (
@@ -158,7 +158,7 @@ const Header = (props) => {
                 </Dialog>
             </AppBar>
         </HeaderLayout>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header

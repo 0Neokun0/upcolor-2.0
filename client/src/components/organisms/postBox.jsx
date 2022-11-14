@@ -2,6 +2,8 @@ import { Avatar, Box, Button, Card, IconButton, Modal, TextField } from '@mui/ma
 import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual'
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 
+import { server } from "components/config"
+
 const PostBox = (props) => {
     return (
         <Card
@@ -29,6 +31,9 @@ const PostBox = (props) => {
                         objectFit: 'cover',
                         mr: '20px',
                     }}
+                    src={
+                        server.host + "/images/icon/" + props.profile.image
+                    }
                 />
 
                 <TextField
