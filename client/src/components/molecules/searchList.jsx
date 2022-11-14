@@ -6,12 +6,11 @@ import { useState } from 'react'
 
 const SearchList = (props) => {
     const [open, setOpen] = useState(false)
-
+    const [formats, setFormats] = useState(() => [])
+    
     const handleClick = () => {
         setOpen(!open)
     }
-
-    const [formats, setFormats] = useState(() => [])
 
     const handleFormat = (event, newFormats) => {
         setFormats(newFormats)
@@ -19,16 +18,22 @@ const SearchList = (props) => {
     }
 
     return (
-        <Box sx={{
-            m: 1,
-        }}
+        <Box 
+            sx={{
+                m: 1,
+            }}
         >
-            <ListItem onClick={handleClick}>
+            <ListItem
+                onClick={handleClick}
+            >
                 <ListItemIcon>
                     {props.icon}
                 </ListItemIcon>
-                <ListItemText primary={props.title} />
-                {open
+                <ListItemText
+                    primary={props.title}
+                />
+                {
+                    open
                     ?
                     <ExpandLess />
                     :
@@ -68,9 +73,10 @@ const SearchList = (props) => {
                         {
                             props.list.map((value, index) => {
                                 return (
-                                    <ToggleButton sx={{
-                                        borderRadius: '10px'
-                                    }}
+                                    <ToggleButton
+                                        sx={{
+                                            borderRadius: '10px'
+                                        }}
                                         key={index}
                                         value={value[props.sqlId]}
                                     >
