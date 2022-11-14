@@ -79,35 +79,45 @@ const Header = (props) => {
                     )
                 })}
 
-                {pathname === "/" ? (
-                    <Box
-                        sx={{
-                            ml: 5,
-                        }}
-                    >
-                        {props.signInState ? (
-                            <Button
-                                variant="contained"
-                                onClick={props.toggleAlertOpen}
+                {
+                    pathname === "/"
+                        ?
+                        (
+                            <Box
+                                sx={{
+                                    ml: 5,
+                                }}
                             >
-                                サインアウト
-                            </Button>
-                        ) :
-                            (
-                                <Button variant="contained" href="/signin">
-                                    サインイン
-                                </Button>
-                            )}
-                    </Box>
-                ) :
-                    (
-                        <NavbarMenu
-                            pathname={pathname}
-                            profile={props.profile}
-                            signInState={props.signInState}
-                            toggleAlertOpen={props.toggleAlertOpen}
-                        />
-                    )}
+                                {
+                                    props.signInState
+                                        ?
+                                        (
+                                            <Button
+                                                variant="contained"
+                                                onClick={props.toggleAlertOpen}
+                                            >
+                                                サインアウト
+                                            </Button>
+                                        )
+                                        :
+                                        (
+                                            <Button variant="contained" href="/signin">
+                                                サインイン
+                                            </Button>
+                                        )
+                                }
+                            </Box>
+                        )
+                        :
+                        (
+                            <NavbarMenu
+                                pathname={pathname}
+                                profile={props.profile}
+                                signInState={props.signInState}
+                                toggleAlertOpen={props.toggleAlertOpen}
+                            />
+                        )
+                }
             </Toolbar>
 
             {/* サインアウトダイアログ */}
