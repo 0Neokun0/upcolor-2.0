@@ -12,6 +12,11 @@ import TryIcon from '@mui/icons-material/Try';
 import HailIcon from '@mui/icons-material/Hail';
 import SchemaIcon from '@mui/icons-material/Schema';
 import EventSeatIcon from '@mui/icons-material/EventSeat';
+import GroupsIcon from '@mui/icons-material/Groups';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ContactsIcon from '@mui/icons-material/Contacts';
 
 import TodayIcon from '@mui/icons-material/Today';
 import WebIcon from '@mui/icons-material/Web';
@@ -25,22 +30,27 @@ const CompanyHome = () => {
     const menus = [
         {
             value: "グループ投稿",
+            icon: <GroupsIcon/>,
             url: "#",
         },
         {
             value: "グループ認証",
+            icon: <LockOpenIcon/>,
             url: "#",
         },
         {
             value: "グループ管理",
+            icon: <ManageAccountsIcon/>,
             url: "#",
         },
         {
             value: "企業プロフィール編集",
+            icon: <SettingsIcon/>,
             url: "/company/profile/edit",
         },
         {
-            value: "ユーザープロフィール編集",
+            value: "学生プロフィール閲覧",
+            icon: <ContactsIcon/>,
             url: "#",
         },
     ]
