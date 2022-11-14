@@ -1,14 +1,4 @@
-import {
-    Alert,
-    Avatar,
-    Box,
-    Button,
-    Card,
-    IconButton,
-    Modal,
-    TextField,
-    Tooltip,
-} from "@mui/material"
+import { Alert, Avatar, Box, Button, Card, IconButton, Modal, TextField, Tooltip } from "@mui/material"
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 import AddPhotoAlternateRoundedIcon from "@mui/icons-material/AddPhotoAlternateRounded"
 // import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded'
@@ -139,8 +129,8 @@ const ReplyModal = (props) => {
                 </Button>
 
                 {
-                    props["fileCheck"] 
-                    && 
+                    props["fileCheck"]
+                    &&
                     (
                         <Alert
                             severity="error"
