@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom"
-import { GroupChat, GroupList } from "components/organisms"
+import { GroupChat, GroupList, GroupMembers } from "components/organisms"
 import { Box, Grid, IconButton, TextField } from "@mui/material"
 import SendRoundedIcon from '@mui/icons-material/SendRounded'
 
@@ -20,6 +20,7 @@ const GroupChatLayout = () => {
 
     const chats = useOutletContext()["chats"]
     const addChats = useOutletContext()["addChats"]
+    const members = useOutletContext()["members"]
     // const scrollDown = useOutletContext()["scrollDown"]
     const handleSendChat = useOutletContext()["handleSendChat"]
 
@@ -29,7 +30,7 @@ const GroupChatLayout = () => {
         >
             <Grid
                 item
-                xs={4}
+                xs={3}
                 sx={{
                     height: "calc(100vh - 64px)",
                     overflowY: "scroll",
@@ -56,7 +57,11 @@ const GroupChatLayout = () => {
 
             <Grid
                 item
-                xs={8}
+                xs={7}
+                sx={{
+                    borderRight: 1,
+                    borderColor: "rgba(0, 0, 0, 0.12)",
+                }}
             >
                 <Box
                     sx={{
@@ -115,8 +120,21 @@ const GroupChatLayout = () => {
                     </Box>
                 </Box>
             </Grid>
+
+            <Grid
+                item
+                xs={2}
+                sx={{
+                    height: "calc(100vh - 64px)",
+                    overflowY: "scroll",
+                }}
+            >
+                <GroupMembers
+                    members={members}
+                />
+            </Grid>
         </Grid>
     );
 }
 
-export default GroupChatLayout;
+export default GroupChatLayout

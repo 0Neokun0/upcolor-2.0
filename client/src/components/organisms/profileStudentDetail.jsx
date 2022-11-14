@@ -27,7 +27,7 @@ const ProfileStudentDetail = (props) => {
                         }}
                     >
                         <Avatar
-                            src={server.host + "/images/icon/" + props.profile["image_url"]}
+                            src={server.host + "/images/icon/" + props.profile["image"]}
                             sx={{
                                 width: "150px",
                                 height: "150px",
@@ -39,7 +39,7 @@ const ProfileStudentDetail = (props) => {
                         <Typography
                             variant="h5"
                         >
-                            {props.profile["user_name"]}
+                            {props.profile["name"]}
                         </Typography>
 
                         <Typography
