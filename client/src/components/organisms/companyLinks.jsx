@@ -35,7 +35,13 @@ const CompanyLinks = (props) => {
                                             mr: 2,
                                         }}
                                     >
-                                        {companyElem['companyLinkIcon']}
+                                        {
+                                            companyElem['companyLinkIcon']
+                                                ?
+                                                companyElem['companyLinkIcon']
+                                                :
+                                                "未設定"
+                                        }
                                     </Grid>
 
                                     <Divider
@@ -48,7 +54,13 @@ const CompanyLinks = (props) => {
 
                                     <Grid item>
                                         <Typography>
-                                            {companyElem['companyLinksRow']}
+                                            {
+                                                companyElem['companyLinksRow']
+                                                    ?
+                                                    companyElem['companyLinksRow']
+                                                    :
+                                                    "未設定"
+                                            }
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -56,7 +68,13 @@ const CompanyLinks = (props) => {
 
                             <AccordionDetails>
                                 <Typography>
-                                    {companyElem['companyLinksData']}
+                                    {
+                                        companyElem['companyLinksData']
+                                            ?
+                                            companyElem['companyLinksData']
+                                            :
+                                            "未設定"
+                                    }
                                 </Typography>
                             </AccordionDetails>
                         </Accordion>
