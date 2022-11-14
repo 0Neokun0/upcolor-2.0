@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, CardMedia, Chip, IconButton, InputBase, Typography } from "@mui/material"
+import { Avatar, Box, Card, CardMedia, Chip, Typography } from "@mui/material"
 
 const ClassNewsFeedHeader = (props) => {
     return (

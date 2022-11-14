@@ -1,5 +1,5 @@
 import { ClassNewsRoomCreate, ClassNewsRoomJoin } from "components/molecules"
-import { Avatar, Box, Card, CardMedia, Chip, Dialog, IconButton, Tooltip, Typography } from "@mui/material"
+import { Avatar, Box, Card, CardMedia, Chip, IconButton, Tooltip, Typography } from "@mui/material"
 
 import ClassRoundedIcon from '@mui/icons-material/ClassRounded'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
@@ -65,7 +65,7 @@ const ClassNewsHeader = (props) => {
                                 src="/static/images/avatar/1.jpg"
                             />
                         }
-
+                        label="username"
                         variant="outlined"
                     />
                     <Box>

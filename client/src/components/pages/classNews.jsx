@@ -25,7 +25,7 @@ const ClassNews = () => {
         axios.post("/classNews/viewClassNewsRoom")
             .then((res) => {
                 if (res.data) {
-                    console.log(res.data)
+                    console.log(res.data[0])
 
                     setClassNewsRooms(res.data)
                 } else {

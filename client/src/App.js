@@ -31,7 +31,7 @@ function App() {
         {
             icon: <SchoolRoundedIcon />,
             value: "学校",
-            url: "/teacher/home",
+            url: "/classNews",
         },
         {
             icon: <BusinessRoundedIcon />,
