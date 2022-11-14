@@ -27,10 +27,16 @@ const MainMenuProfileCard = (props) => {
                 }}
             >
                 <Avatar
-                    src={server.host + "/images/icon/" + props.profile.image}
+                    src={
+                        server.host + "/images/icon/" + props.profile.image
+                    }
                 />
 
-                <Typography fontWeight="bold" textAlign={"center"} width="100%">
+                <Typography
+                    fontWeight="bold"
+                    textAlign={"center"}
+                    width="100%"
+                >
                     {props.profile.name}
                 </Typography>
             </Box>
@@ -47,7 +53,9 @@ const MainMenuProfileCard = (props) => {
                     alignItems: "center",
                 }}
             >
-                <Chip label="naoko" />
+                <Chip
+                    label="naoko"
+                />
                 <Switch />
             </Box>
         </Card>

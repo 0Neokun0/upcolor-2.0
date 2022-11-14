@@ -1,5 +1,5 @@
-import { Box, Button, Chip, Paper, Typography } from "@mui/material";
-import { blueGrey, lightGreen } from "@mui/material/colors";
+import { Box, Button, Chip, Paper, Typography } from "@mui/material"
+import { blueGrey, lightGreen } from "@mui/material/colors"
 
 const LandingPageCard = (props) => {
     return (
@@ -75,7 +75,7 @@ const LandingPageCard = (props) => {
                 </Button>
             </Box>
         </Paper>
-    );
-};
+    )
+}
 
-export default LandingPageCard;
+export default LandingPageCard

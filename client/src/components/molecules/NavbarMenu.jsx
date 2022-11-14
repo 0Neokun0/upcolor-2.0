@@ -1,19 +1,7 @@
-import {
-    Avatar,
-    Box,
-    Button,
-    Divider,
-    IconButton,
-    Link,
-    ListItemButton,
-    ListItemIcon,
-    Menu,
-    Tooltip,
-    Typography,
-} from "@mui/material"
+import {Avatar, Box, Button, Divider, IconButton, Link, ListItemButton, ListItemIcon, Menu, Tooltip, Typography } from "@mui/material"
 import React from "react"
 import { useState } from "react"
-import { useLocation } from "react-router-dom"
+
 import { server } from "components/config"
 
 import ChatIcon from "@mui/icons-material/Chat"
@@ -23,7 +11,7 @@ import PersonAddAltRounded from "@mui/icons-material/PersonAddAltRounded"
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded"
 
 const NavbarMenu = (props) => {
-    const { pathname } = useLocation()
+
 
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)

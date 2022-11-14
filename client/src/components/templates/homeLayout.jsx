@@ -5,9 +5,15 @@ import Footer from "components/organisms/footer/footer"
 
 const HomeLayout = (props) => {
     return (
-        <Box bgcolor={"#f5f5f5"}>
-            <Stack direction={"row"}>
-                <Hidden mdDown>
+        <Box
+            bgcolor={"#f5f5f5"}
+        >
+            <Stack
+                direction={"row"}
+            >
+                <Hidden
+                    mdDown
+                >
                     <Box
                         sx={{
                             p: 2,
@@ -62,7 +68,9 @@ const HomeLayout = (props) => {
                     />
                 </Box>
 
-                <Hidden lgDown>
+                <Hidden
+                    lgDown
+                >
                     <Box
                         sx={{
                             p: 2,
@@ -70,7 +78,9 @@ const HomeLayout = (props) => {
                             width: "40%",
                         }}
                     >
-                        <NewsList news={props.news} />
+                        <NewsList
+                            news={props.news}
+                        />
                     </Box>
                 </Hidden>
             </Stack>

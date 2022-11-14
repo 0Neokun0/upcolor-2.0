@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
 import { LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
-
 import {StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite } from "components/pages/student"
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment } from "components/pages/company"
@@ -21,7 +20,8 @@ import GroupCreateLayout from "components/templates/groupCreateLayout"
 function App() {
     const [open, setOpen] = useState(false)
     const [signInState, setSignInState] = useState("")
-
+    const [profile, setProfile] = useState([])
+    
     const menus = [
         {
             label: "学生フェード",
@@ -127,6 +127,13 @@ function App() {
         })
     }, [])
 
+    useEffect(() => {
+        axios.post("/account/getProfile").then((res) => {
+            setProfile(res.data)
+            console.log(res.data)
+        })
+    }, [])
+
     return (
         <Box>
             <BrowserRouter>
@@ -136,6 +143,7 @@ function App() {
                     menus={menus}
                     signInState={signInState}
                     open={open}
+                    profile={profile}
                     toggleAlertOpen={toggleAlertOpen}
                     toggleAlertClose={toggleAlertClose}
                     toggleSignout={toggleSignout}
