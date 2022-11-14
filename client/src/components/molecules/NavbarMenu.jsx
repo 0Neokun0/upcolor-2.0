@@ -10,29 +10,29 @@ import {
     Menu,
     Tooltip,
     Typography,
-} from "@mui/material";
-import React from "react";
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { server } from "components/config";
+} from "@mui/material"
+import React from "react"
+import { useState } from "react"
+import { useLocation } from "react-router-dom"
+import { server } from "components/config"
 
-import ChatIcon from "@mui/icons-material/Chat";
-import ManageAccountsRoundedIcon from "@mui/icons-material/ManageAccountsRounded";
-import { Settings } from "@material-ui/icons";
-import PersonAddAltRounded from "@mui/icons-material/PersonAddAltRounded";
-import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import ChatIcon from "@mui/icons-material/Chat"
+import ManageAccountsRoundedIcon from "@mui/icons-material/ManageAccountsRounded"
+import { Settings } from "@material-ui/icons"
+import PersonAddAltRounded from "@mui/icons-material/PersonAddAltRounded"
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded"
 
 const NavbarMenu = (props) => {
-    const { pathname } = useLocation();
+    const { pathname } = useLocation()
 
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
+    const [anchorEl, setAnchorEl] = useState(null)
+    const open = Boolean(anchorEl)
     const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+        setAnchorEl(event.currentTarget)
+    }
     const handleClose = () => {
-        setAnchorEl(null);
-    };
+        setAnchorEl(null)
+    }
 
     return (
         <>
@@ -183,7 +183,7 @@ const NavbarMenu = (props) => {
                 </ListItemButton>
             </Menu>
         </>
-    );
-};
+    )
+}
 
-export default NavbarMenu;
+export default NavbarMenu
