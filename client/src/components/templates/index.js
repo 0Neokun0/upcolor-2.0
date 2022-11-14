@@ -14,4 +14,3 @@ export { default as CompanyListLayout } from "./companyListLayout"
 export { default as ProfileEditLayout } from "./profileEditLayout"
 export { default as TeacherNewsLayout } from "./teacherNewsLayout"
 export { default as ListLayout } from "./listLayout"
-
