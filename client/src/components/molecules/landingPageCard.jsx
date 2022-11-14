@@ -54,7 +54,7 @@ const LandingPageCard = (props) => {
             <Box
                 sx={{
                     mt: 5,
-                    a: {
+                    "a": {
                         mx: 3,
                     },
                 }}

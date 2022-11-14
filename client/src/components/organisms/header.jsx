@@ -51,33 +51,35 @@ const Header = (props) => {
                     {props.name}
                 </Typography>
 
-                {props.menus.map((menu, index) => {
-                    return (
-                        <Tooltip
-                            key={index}
-                            title={menu.label}
-                        >
-                            <Link
+                {
+                    props.menus.map((menu, index) => {
+                        return (
+                            <Tooltip
                                 key={index}
-                                href={menu.url}
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    mx: 1,
-                                    color: "gray",
-                                    textDecorationLine: "none",
-                                    ":hover": {
-                                        color: "dimgray",
-                                    },
-                                }}
+                                title={menu.label}
                             >
-                                {menu.icon}
-                                {menu.value}
-                            </Link>
-                        </Tooltip>
-                    )
-                })}
+                                <Link
+                                    key={index}
+                                    href={menu.url}
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        mx: 1,
+                                        color: "gray",
+                                        textDecorationLine: "none",
+                                        ":hover": {
+                                            color: "dimgray",
+                                        },
+                                    }}
+                                >
+                                    {menu.icon}
+                                    {menu.value}
+                                </Link>
+                            </Tooltip>
+                        )
+                    })
+                }
 
                 {
                     pathname === "/"

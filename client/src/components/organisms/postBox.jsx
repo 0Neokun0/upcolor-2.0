@@ -31,9 +31,7 @@ const PostBox = (props) => {
                         objectFit: 'cover',
                         mr: '20px',
                     }}
-                    src={
-                        server.host + "/images/icon/" + props.profile.image
-                    }
+                    src={server.host + "/images/icon/" + props.profile.image}
                 />
 
                 <TextField
