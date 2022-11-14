@@ -27,9 +27,7 @@ const MainMenuProfileCard = (props) => {
                 }}
             >
                 <Avatar
-                    src={
-                        server.host + "/images/icon/" + props.profile.image
-                    }
+                    src={ server.host + "/images/icon/" + props.profile.image}
                 />
 
                 <Typography

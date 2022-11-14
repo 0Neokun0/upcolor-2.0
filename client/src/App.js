@@ -21,7 +21,7 @@ function App() {
     const [open, setOpen] = useState(false)
     const [signInState, setSignInState] = useState("")
     const [profile, setProfile] = useState([])
-    
+
     const menus = [
         {
             label: "学生フェード",
@@ -128,10 +128,11 @@ function App() {
     }, [])
 
     useEffect(() => {
-        axios.post("/account/getProfile").then((res) => {
-            setProfile(res.data)
-            console.log(res.data)
-        })
+        axios.post("/account/getProfile")
+            .then((res) => {
+                setProfile(res.data)
+                console.log(res.data)
+            })
     }, [])
 
     return (
@@ -157,22 +158,13 @@ function App() {
                     {/* <Route path="teacher/signup" element={<ReqNoAuth component={<TeacherSignup />} />} /> */}
                     {/* <Route path="company/signup" element={<ReqNoAuth component={<CompanySignup />} />} /> */}
                     <Route path="signup/student" element={<StudentSignup />} />
-                    <Route
-                        path="signup/teacher/:token"
-                        element={<TeacherSignup />}
-                    />
-                    <Route
-                        path="signup/company/:token"
-                        element={<CompanySignup />}
-                    />
+                    <Route path="signup/teacher/:token" element={<TeacherSignup />} />
+                    <Route path="signup/company/:token" element={<CompanySignup />} />
 
                     {/* <Route path="signin" element={<ReqNoAuth component={<Signin />} />} /> */}
                     <Route path="signin" element={<Signin />} />
 
-                    <Route
-                        path="home"
-                        element={<ReqAuthStu component={<StudentHome />} />}
-                    >
+                    <Route path="home" element={<ReqAuthStu component={<StudentHome />} />}>
                         <Route path="" element={<Feed />} />
                         <Route path=":postId" element={<FeedDetail />} />
                     </Route>
@@ -194,10 +186,7 @@ function App() {
                     <Route path="teamList" element={<TeamList />} />
                     <Route path="teamWorkInvite">
                         <Route path="" element={<NotFound />} />
-                        <Route
-                            path=":inviteToken"
-                            element={<TeamWorkInvite />}
-                        />
+                        <Route path=":inviteToken" element={<TeamWorkInvite />} />
                     </Route>
 
                     <Route path="profile">
@@ -211,45 +200,21 @@ function App() {
                     <Route path="list/company" element={<CompanyList />} />
 
                     <Route path="timeTable" element={<ShowTimeTable />} />
-                    <Route
-                        path="timeTable/regist"
-                        element={<RegistTimeTable />}
-                    />
+                    <Route path="timeTable/regist" element={<RegistTimeTable />} />
 
                     {/* <Route path="timeTable" element={<ReqAuthStu component={<ShowTimeTable />} />} />
                     <Route path="timeTable/regist" element={<ReqAuthStu component={<RegistTimeTable />} />} /> */}
 
-                    <Route
-                        path="teacher"
-                        element={<ReqAuthTea component={<TeacherHome />} />}
-                    />
-                    <Route
-                        path="teacher/teacherNews"
-                        element={<ReqAuthTea component={<TeacherNews />} />}
-                    />
+                    <Route path="teacher" element={<ReqAuthTea component={<TeacherHome />} />} />
+                    <Route path="teacher/teacherNews" element={<ReqAuthTea component={<TeacherNews />} />} />
 
-                    <Route
-                        path="develop"
-                        element={<ReqAuthAdm component={<DevelopHome />} />}
-                    />
-                    <Route
-                        path="develop/addLectures"
-                        element={<ReqAuthAdm component={<AddLectures />} />}
-                    />
-                    <Route
-                        path="develop/genTeacherSign"
-                        element={<ReqAuthAdm component={<GenTeacherSign />} />}
-                    />
-                    <Route
-                        path="develop/genCompanySign"
-                        element={<ReqAuthAdm component={<GenCompanySign />} />}
-                    />
+                    <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />
+                    <Route path="develop/addLectures" element={<ReqAuthAdm component={<AddLectures />} />} />
+                    <Route path="develop/genTeacherSign" element={<ReqAuthAdm component={<GenTeacherSign />} />} />
+                    <Route path="develop/genCompanySign" element={<ReqAuthAdm component={<GenCompanySign />} />} />
 
                     <Route path="company/home" element={<CompanyHome />} />
-                    <Route
-                        path="company/profile/edit"
-                        element={<CompanyProfileEdit />}
-                    />
+                    <Route path="company/profile/edit" element={<CompanyProfileEdit />} />
                 </Routes>
             </BrowserRouter>
         </Box>

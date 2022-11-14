@@ -1,4 +1,4 @@
-import {Avatar, Box, Button, Divider, IconButton, Link, ListItemButton, ListItemIcon, Menu, Tooltip, Typography } from "@mui/material"
+import { Avatar, Box, Button, Divider, IconButton, Link, ListItemButton, ListItemIcon, Menu, Tooltip, Typography } from "@mui/material"
 import React from "react"
 import { useState } from "react"
 
@@ -46,11 +46,7 @@ const NavbarMenu = (props) => {
                                 height: 40,
                                 border: "2px solid lightgray",
                             }}
-                            src={
-                                server.host +
-                                "/images/icon/" +
-                                props.profile.image
-                            }
+                            src={server.host + "/images/icon/" + props.profile.image}
                         />
                     </IconButton>
                 </Tooltip>
@@ -163,11 +159,12 @@ const NavbarMenu = (props) => {
                         >
                             サインアウト
                         </Button>
-                    ) : (
-                        <Button variant="contained" href="/signin">
-                            サインイン
-                        </Button>
-                    )}
+                    ) :
+                        (
+                            <Button variant="contained" href="/signin">
+                                サインイン
+                            </Button>
+                        )}
                 </ListItemButton>
             </Menu>
         </>

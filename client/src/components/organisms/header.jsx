@@ -92,20 +92,22 @@ const Header = (props) => {
                             >
                                 サインアウト
                             </Button>
-                        ) : (
-                            <Button variant="contained" href="/signin">
-                                サインイン
-                            </Button>
-                        )}
+                        ) :
+                            (
+                                <Button variant="contained" href="/signin">
+                                    サインイン
+                                </Button>
+                            )}
                     </Box>
-                ) : (
-                    <NavbarMenu
-                        pathname={pathname}
-                        profile={props.profile}
-                        signInState={props.signInState}
-                        toggleAlertOpen={props.toggleAlertOpen}
-                    />
-                )}
+                ) :
+                    (
+                        <NavbarMenu
+                            pathname={pathname}
+                            profile={props.profile}
+                            signInState={props.signInState}
+                            toggleAlertOpen={props.toggleAlertOpen}
+                        />
+                    )}
             </Toolbar>
 
             {/* サインアウトダイアログ */}
