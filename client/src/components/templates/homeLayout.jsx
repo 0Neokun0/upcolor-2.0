@@ -12,7 +12,7 @@ const HomeLayout = (props) => {
                 direction={"row"}
             >
                 <Hidden
-                    mdDown
+                    lgDown
                 >
                     <Box
                         sx={{
