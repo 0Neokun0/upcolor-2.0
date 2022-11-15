@@ -6,7 +6,7 @@ import LogoutIcon from "@mui/icons-material/Logout"
 import LoginIcon from "@mui/icons-material/Login"
 
 const Header = (props) => {
-    const { pathname } = useLocation()
+    const { pathName } = useLocation()
 
     return (
         <AppBar postion="static" color="default">
@@ -71,7 +71,7 @@ const Header = (props) => {
                 }
 
                 {
-                    pathname === "/"
+                    pathName === "/"
                         ?
                         (
                             <Box
@@ -102,7 +102,6 @@ const Header = (props) => {
                         :
                         (
                             <NavbarMenu
-                                pathname={pathname}
                                 profile={props.profile}
                                 anchorEl={props.anchorEl}
                                 openNavbar={props.openNavbar}
