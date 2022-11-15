@@ -1,4 +1,5 @@
 import { Avatar, Box, Card, CardMedia, Chip, Typography } from "@mui/material"
+import { server } from 'components/config'
 
 const ClassNewsFeedHeader = (props) => {
     return (
@@ -59,10 +60,10 @@ const ClassNewsFeedHeader = (props) => {
                         {
                             <Avatar
                                 alt="userProfileAvatar"
-                                src="/static/images/avatar/1.jpg"
+                                src={server.host + "/images/icon/" + props.profile.image}
                             />
                         }
-                        // label={props.profile.user_name}
+                        label={props.profile["name"]}
                         variant="outlined"
                     />
                 </Box>
