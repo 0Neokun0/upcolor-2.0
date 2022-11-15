@@ -8,13 +8,14 @@ const ClassNewsCardList = (props) => {
             <Grid
                 container
                 sx={{
-                    justifyContent: "space-between",
+                    justifyContent: "flex-left",
                 }}
             >
                 {
-                    props["classNewsRooms"].map((classNewsRoom) => {
+                    props["classNewsRooms"].map((classNewsRoom, index) => {
                         return (
                             <Grid
+                            key={index}
                                 item
                             >
                                 <ClassNewsCard

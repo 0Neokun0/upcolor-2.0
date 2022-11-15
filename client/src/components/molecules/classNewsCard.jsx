@@ -8,7 +8,7 @@ const ClassNewsCard = (props) => {
             variant="outlined"
             sx={{
                 width: 325,
-                mt: 2,
+                m: 1,
                 p: 2,
                 borderRadius: "25px",
                 // transition: "transform 0.3s, border 0.3s",

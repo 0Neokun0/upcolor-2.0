@@ -3,6 +3,7 @@ import { Avatar, Box, Card, CardMedia, Chip, IconButton, Tooltip, Typography } f
 
 import ClassRoundedIcon from '@mui/icons-material/ClassRounded'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
+import { server } from 'components/config'
 
 
 const ClassNewsHeader = (props) => {
@@ -62,10 +63,10 @@ const ClassNewsHeader = (props) => {
                         {
                             <Avatar
                                 alt="userProfileAvatar"
-                                src="/static/images/avatar/1.jpg"
+                                src={server.host + "/images/icon/" + props.profile.image}
                             />
                         }
-                        label="username"
+                        label={props.profile["name"]}
                         variant="outlined"
                     />
                     <Box>

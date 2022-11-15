@@ -5,6 +5,7 @@ import { ClassNewsCardList, ClassNewsHeader } from "components/organisms"
 import { useEffect } from "react"
 
 const ClassNews = () => {
+    const [profile, setProfile] = useState([])
     const [openJoin, setOpenJoin] = useState(false)
     const [openCreate, setOpenCreate] = useState(false)
     const [classNewsRooms, setClassNewsRooms] = useState([])
@@ -34,9 +35,18 @@ const ClassNews = () => {
             })
     }, [])
 
+    useEffect(() => {
+        axios.post("/account/getProfile")
+            .then((res) => {
+                console.log(res.data)
+                setProfile(res.data)
+            })
+    }, [])
+
     return (
         <ContainerLg>
             <ClassNewsHeader
+                profile={profile}
                 openJoin={openJoin}
                 openCreate={openCreate}
                 setOpenJoin={setOpenJoin}
