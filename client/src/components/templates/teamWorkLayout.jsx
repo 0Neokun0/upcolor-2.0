@@ -10,7 +10,7 @@ const TeamWorkLayout = (props) => {
                 p: 2,
             }}
         >
-            {props.children}
+            {props["children"]}
         </Container>
     );
 }
