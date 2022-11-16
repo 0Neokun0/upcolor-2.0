@@ -3,13 +3,17 @@ import { NewsCard } from "components/molecules"
 
 const NewsList = (props) => {
     return (
-        <Box>
+        <Box sx={{
+            width: 1,
+        }}
+        >
             {
                 props.news
                 &&
                 props.news.map((elem) => {
                     return (
                         <NewsCard
+                            profile={props.profile}
                             key={elem["news_id"]}
                             name={elem["user_name"]}
                             title={elem["news_title"]}

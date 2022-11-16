@@ -2,12 +2,17 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { ContainerLg } from "components/templates"
-import { ClassNewsFeedAnnouncementCard, ClassNewsFeedHeader } from "components/organisms"
-import { Grid } from "@mui/material"
+import { ClassNewsFeedHeader, NewsForm, NewsList } from "components/organisms"
+import { Divider, Grid } from "@mui/material"
 
 const ClassNewsFeed = () => {
     const [profile, setProfile] = useState([])
     const classId = useParams()["classId"]
+    const [courses, setCourses] = useState([])
+    const [news, setNews] = useState([])
+    const [formState, setFormState] = useState(false)
+
+    const [target, setTarget] = useState([])
 
     const [open, setOpen] = useState();
     const handleOpen = () => setOpen(true);
@@ -18,6 +23,45 @@ const ClassNewsFeed = () => {
     const [newsReplys, setNewsReplys] = useState([])
 
     const [enterClassNewsRoom, setEnterClassNewsRoom] = useState([])
+
+    const handleTarget = (e) => {
+        const {
+            target: { value },
+        } = e
+
+        setTarget(typeof value === 'string' ? value.split(',') : value,)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const data = new FormData(e.currentTarget)
+
+        axios.post("/teacher/addNews", {
+            title: data.get("title"),
+            text: data.get("text"),
+            target: target,
+        })
+    }
+
+    useEffect(() => {
+        axios.post("/teacher/getProfile")
+            .then((res) => {
+                setProfile(res.data[0])
+            })
+
+        axios.post("/course/course")
+            .then((res) => {
+                setCourses(res.data)
+            })
+
+        axios.post("/teacher/getMyNews")
+            .then((res) => {
+                setNews(res.data)
+                console.log(res.data)
+            })
+    }, [])
+
 
     useEffect(() => {
         axios.post("/classNews/enterClassRoom", {
@@ -49,14 +93,38 @@ const ClassNewsFeed = () => {
                 container
                 justifyContent="center"
             >
-                <ClassNewsFeedAnnouncementCard
-                profile={profile}
-                open={open}
-                handleOpen={handleOpen}
-                handleClose={handleClose}
+                <NewsForm
+                    open={open}
+                    handleOpen={handleOpen}
+                    handleClose={handleClose}
+                    formState={formState}
+                    setFormState={setFormState}
 
+                    profile={profile}
+                    courses={courses}
 
+                    target={target}
+                    handleTarget={handleTarget}
+
+                    handleSubmit={handleSubmit}
                 />
+
+                <Divider
+                    sx={{
+                        mt: 2,
+                    }}
+                />
+                <Grid
+                    container
+                    justifyContent="center"
+                >
+                    <NewsList
+                        profile={profile}
+                        news={news}
+                    />
+                </Grid>
+
+
             </Grid>
         </ContainerLg>
     )

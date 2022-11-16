@@ -1,31 +1,43 @@
-import { Avatar, Box, Button, Card, CardActionArea, FormControl, IconButton, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography } from "@mui/material"
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
+import { Avatar, Box, Button, Card, FormControl, IconButton, InputBase, InputLabel, MenuItem, OutlinedInput, Select, TextField, Tooltip, Typography } from "@mui/material"
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
+import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
+import { server } from "components/config"
 
 const NewsForm = (props) => {
     return (
-        <Box>
+        <Box sx={{
+            width: "70%",
+        }}
+        >
             {
                 props.formState
                     ?
                     <Card
                         sx={{
+                            m: 2,
                             p: 2,
                             position: "relative",
                             boxShadow: 2,
-                            borderRadius: '15px',
+                            borderRadius: "15px",
                         }}
                     >
-                        <IconButton
+                        <Tooltip
+                            title="保存なしで、閉じる"
+                            placement="bottom"
+                            >
+                            <IconButton
                             size="small"
                             sx={{
                                 position: "absolute",
-                                top: 0,
-                                right: 0,
+                                top: 10,
+                                right: 10,
                             }}
                             onClick={() => props.setFormState(!props.formState)}
                         >
                             <CloseRoundedIcon />
                         </IconButton>
+                        </Tooltip>
+
 
                         <Box
                             sx={{
@@ -71,7 +83,34 @@ const NewsForm = (props) => {
                                 multiline
                                 fullWidth
                             />
+<Box
+                        justifyContent={'end'}
+                        sx={{
+                            display: 'flex',
+                        }}
+                    >
+                        <Tooltip
+                            title="写真"
+                            placement="right"
+                        >
+                            <IconButton
+                                size="small"
+                                color="success"
+                                component="label"
+                                onClick={() => props.setFileCheck(false)}
+                            >
+                                <Box
+                                    component="input"
+                                    type="file"
+                                    name="image"
+                                    accept=".png, .jpg, .jpeg"
+                                    hidden
+                                />
 
+                                <AddPhotoAlternateRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
                             <FormControl
                                 fullWidth
                             >
@@ -115,22 +154,44 @@ const NewsForm = (props) => {
                         </Box>
                     </Card>
                     :
-                    <Card
-                        sx={{
-                            boxShadow: 2,
-                            borderRadius: '15px',
-                        }}
+                    <Card sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        width: "100%",
+                        p: 2,
+                        mb: 4,
+                        boxShadow: 3,
+                        justifyContent: "space-between",
+                        borderRadius: "25px",
+                        mt: 1,
+                    }}
                     >
-                        <CardActionArea
-                            sx={{
-                                p: 2,
-                            }}
-                            onClick={() => props.setFormState(!props.formState)}
+                        <Avatar sx={{
+                            height: "50px",
+                            width: "50px",
+                        }}
+                            src={server.host + "/images/icon/" + props.profile.image}
+                        />
+                        <Box sx={{
+                            p: 1,
+                            width: "100%",
+                            ml: "20px",
+                            mr: "20px",
+                            fontSize: "17px",
+
+                        }}
                         >
-                            <Typography>
-                                ニュースを投稿
-                            </Typography>
-                        </CardActionArea>
+                            <InputBase
+                                sx={{
+                                    p: 1,
+                                }}
+                                type="text"
+                                placeholder="何かを発表したい事"
+                                onClick={() => props.setFormState(!props.formState)}
+                            >
+
+                            </InputBase>
+                        </Box>
                     </Card>
             }
         </Box>
