@@ -20,8 +20,5 @@ export { default as SearchEntry } from "./searchEntry"
 export { default as SearchList } from "./searchList"
 export { default as TabPanel } from "./tabPanel"
 export { default as ProfileFormUnit } from "./profileFormUnit"
-<<<<<<< HEAD
 export { default as PostProfile } from "./postProfile"
-=======
 export { default as StudentListProfileCard } from "./studentListProfileCard"
->>>>>>> 825d8bc6d0806d1b1b053bb0faadbc08f8c3f784
