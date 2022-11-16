@@ -1,46 +1,29 @@
-import { Box, Card, CardActionArea, Typography } from "@mui/material"
+import { Grid } from "@mui/material"
+import { TeamViewCard } from "components/molecules";
 
 const TeamView = (props) => {
     return (
-        <Box
+        <Grid
+            container
             sx={{
                 mx: "auto",
+                display: "flex",
             }}
         >
             {
                 props.teams
                 &&
-                props.teams.map((team) => {
+                props.teams.map((team, index) => {
                     return (
-                        <Card
-                            key={team["team_work_id"]}
-                            sx={{
-                                width: "200px",
-                            }}
-                        >
-                            <CardActionArea
-                                onClick={() => window.location.href = "/teamwork/" + team["team_work_id"]}
-                            >
-                                <Typography
-                                    variant="h6"
-                                >
-                                    {team["team_work_name"]}
-                                </Typography>
+                        <TeamViewCard
+                            key={index}
+                            team={team}
+                        />
 
-                                <Typography>
-                                    {team["team_name"]}
-                                </Typography>
-
-                                <Typography>
-                                    {team["team_work_description"]}
-                                </Typography>
-                            </CardActionArea>
-                        </Card>
                     )
                 })
             }
-        </Box>
+        </Grid>
     );
 }
-
 export default TeamView
