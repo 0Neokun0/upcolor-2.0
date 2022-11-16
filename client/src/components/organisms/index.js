@@ -34,4 +34,8 @@ export { default as NewsList } from "./newsList"
 export { default as SearchListBox } from "./searchListBox"
 export { default as ListDisplayBox } from "./listDisplayBox"
 export { default as TeamOutline } from "./teamOutline"
+<<<<<<< HEAD
 export { default as FollowUsers } from "./followUsers"
+=======
+export { default as GroupMembers } from "./groupMembers"
+>>>>>>> 825d8bc6d0806d1b1b053bb0faadbc08f8c3f784

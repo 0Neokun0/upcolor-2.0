@@ -17,6 +17,7 @@ const Group = () => {
 
     const [chats, setChats] = useState([])
     const [addChats, setAddChats] = useState([])
+    const [members, setMembers] = useState([])
 
     const menus = [
         {
@@ -62,11 +63,6 @@ const Group = () => {
         const data = new FormData(e.currentTarget)
         const token = document.cookie.split("=")[1]
 
-        // axios.post("/group/sendChat", {
-        //     groupId: selectGroupId,
-        //     text: data.get("text"),
-        // })
-
         socket.emit("groupChat msg", token, selectGroupId, data.get("text"))
 
         document.getElementById("chatInput").value = ""
@@ -99,6 +95,10 @@ const Group = () => {
             .then((res) => {
                 setGroups(res.data["groupsList"])
                 setUserId(res.data["userId"])
+
+                if (res.data["groupsList"].length) {
+                    setSelectGroupId(res.data["groupsList"][0]["group_id"])
+                }
             })
     }, [])
 
@@ -115,6 +115,13 @@ const Group = () => {
             })
                 .then((res) => {
                     setChats(res.data)
+                })
+
+            axios.post("/group/getGroupMembers", {
+                groupId: selectGroupId,
+            })
+                .then((res) => {
+                    setMembers(res.data)
                 })
         }
     }, [selectGroupId])
@@ -141,6 +148,7 @@ const Group = () => {
 
             chats={chats}
             addChats={addChats}
+            members={members}
             scrollDown={scrollDown}
             handleSendChat={handleSendChat}
         />
