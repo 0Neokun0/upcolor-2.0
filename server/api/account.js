@@ -218,71 +218,82 @@ router.post("/signout", (req, res) => {
 
 // 自分 *生徒専用
 router.post("/getProfile", async (req, res) => {
-    const userId = get.userId(req)
-    const profile = await get.user(userId)
-    const qualifications = await get.list("qualification")
-    const programs = await get.list("program")
-    const tools = await get.list("tool")
-    const languages = await get.list("language")
+    try {
+        const userId = get.userId(req)
+        const profile = await get.user(userId)
+        const qualifications = await get.list("qualification")
+        const programs = await get.list("program")
+        const tools = await get.list("tool")
+        const languages = await get.list("language")
 
-    profile[0]["course_name"] = profile[0]["course_name"].split("/").join("\n")
+        profile[0]["course_name"] = profile[0]["course_name"].split("/").join("\n")
 
-    profile[0]["qualification_names"] = ["未設定"]
-    if (profile[0]["qualification_ids"]) {
-        profile[0]["qualification_names"] = profile[0]["qualification_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : qualifications[Number(id) - 1]["qualification_name"]).join("\n")
+        profile[0]["qualification_names"] = ["未設定"]
+        if (profile[0]["qualification_ids"]) {
+            profile[0]["qualification_names"] = profile[0]["qualification_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : qualifications[Number(id) - 1]["qualification_name"]).join("\n")
+        }
+
+        profile[0]["program_names"] = ["未設定"]
+        if (profile[0]["program_ids"]) {
+            profile[0]["program_names"] = profile[0]["program_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : programs[Number(id) - 1]["program_name"]).join("\n")
+        }
+
+        profile[0]["tool_names"] = ["未設定"]
+        if (profile[0]["tool_ids"]) {
+            profile[0]["tool_names"] = profile[0]["tool_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : tools[Number(id) - 1]["tool_name"]).join("\n")
+        }
+
+        profile[0]["language_names"] = ["未設定"]
+        if (profile[0]["language_ids"]) {
+            profile[0]["language_names"] = profile[0]["language_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : languages[Number(id) - 1]["language_name"]).join("\n")
+        }
+
+        res.json(profile[0])
+    } catch (error) {
+        res.json(false)
+        console.log(error)
     }
 
-    profile[0]["program_names"] = ["未設定"]
-    if (profile[0]["program_ids"]) {
-        profile[0]["program_names"] = profile[0]["program_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : programs[Number(id) - 1]["program_name"]).join("\n")
-    }
-
-    profile[0]["tool_names"] = ["未設定"]
-    if (profile[0]["tool_ids"]) {
-        profile[0]["tool_names"] = profile[0]["tool_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : tools[Number(id) - 1]["tool_name"]).join("\n")
-    }
-
-    profile[0]["language_names"] = ["未設定"]
-    if (profile[0]["language_ids"]) {
-        profile[0]["language_names"] = profile[0]["language_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : languages[Number(id) - 1]["language_name"]).join("\n")
-    }
-
-    res.json(profile[0])
 })
 
 // 他人
 router.post("/getStudentProfile", async (req, res) => {
     const userId = req.body.userId
 
-    const profile = await get.user(userId)
-    const qualifications = await get.list("qualification")
-    const programs = await get.list("program")
-    const tools = await get.list("tool")
-    const languages = await get.list("language")
+    try {
+        const profile = await get.user(userId)
+        const qualifications = await get.list("qualification")
+        const programs = await get.list("program")
+        const tools = await get.list("tool")
+        const languages = await get.list("language")
 
-    profile[0]["course_name"] = profile[0]["course_name"].split("/").join("\n")
+        profile[0]["course_name"] = profile[0]["course_name"].split("/").join("\n")
 
-    profile[0]["qualification_names"] = ["未設定"]
-    if (profile[0]["qualification_ids"]) {
-        profile[0]["qualification_names"] = profile[0]["qualification_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : qualifications[Number(id) - 1]["qualification_name"]).join("\n")
+        profile[0]["qualification_names"] = ["未設定"]
+        if (profile[0]["qualification_ids"]) {
+            profile[0]["qualification_names"] = profile[0]["qualification_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : qualifications[Number(id) - 1]["qualification_name"]).join("\n")
+        }
+
+        profile[0]["program_names"] = ["未設定"]
+        if (profile[0]["program_ids"]) {
+            profile[0]["program_names"] = profile[0]["program_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : programs[Number(id) - 1]["program_name"]).join("\n")
+        }
+
+        profile[0]["tool_names"] = ["未設定"]
+        if (profile[0]["tool_ids"]) {
+            profile[0]["tool_names"] = profile[0]["tool_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : tools[Number(id) - 1]["tool_name"]).join("\n")
+        }
+
+        profile[0]["language_names"] = ["未設定"]
+        if (profile[0]["language_ids"]) {
+            profile[0]["language_names"] = profile[0]["language_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : languages[Number(id) - 1]["language_name"]).join("\n")
+        }
+
+        res.json(profile[0])
+    } catch (error) {
+        console.log(error)
+        res.json(false)
     }
-
-    profile[0]["program_names"] = ["未設定"]
-    if (profile[0]["program_ids"]) {
-        profile[0]["program_names"] = profile[0]["program_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : programs[Number(id) - 1]["program_name"]).join("\n")
-    }
-
-    profile[0]["tool_names"] = ["未設定"]
-    if (profile[0]["tool_ids"]) {
-        profile[0]["tool_names"] = profile[0]["tool_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : tools[Number(id) - 1]["tool_name"]).join("\n")
-    }
-
-    profile[0]["language_names"] = ["未設定"]
-    if (profile[0]["language_ids"]) {
-        profile[0]["language_names"] = profile[0]["language_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : languages[Number(id) - 1]["language_name"]).join("\n")
-    }
-
-    res.json(profile[0])
 })
 
 router.post("/editProfile", async (req, res) => {
@@ -366,6 +377,103 @@ router.post("/updateUserIcon", upload.single("icon"), async (req, res) => {
 
     // }
     // res.json(true)
+})
+
+router.post("/follow", async (req, res) => {
+    const userId = get.userId(req)
+    const target = req.body.target
+
+    const sqlSelectFollowState = `
+        SELECT
+            COUNT(*) AS state
+        FROM
+            followers
+        WHERE
+            user_id = ? AND
+            follower_id = ?
+    `
+    const state = await sql.handleSelect(sqlSelectFollowState, [target, userId])
+
+    if (state[0]["state"]) {
+        const sqlDeleteFollow = `
+        DELETE FROM followers
+        WHERE
+        user_id = ? AND
+        follower_id = ?
+        `
+
+        await sql.handleDelete(sqlDeleteFollow, [target, userId])
+    } else {
+        const sqlInsertFollow = `
+            INSERT followers(
+                user_id,
+                follower_id
+            )
+            VALUES(
+                ?,
+                ?
+            )
+        `
+
+        await sql.handleInsert(sqlInsertFollow, [target, userId])
+    }
+
+    res.json(true)
+})
+
+router.post("/getFollow", async (req, res) => {
+    const userId = get.userId(req)
+    const target = req.body.target
+
+    const sqlSelectFollowState = `
+        SELECT
+            COUNT(*) AS state
+        FROM
+            followers
+        WHERE
+            user_id = ? AND
+            follower_id = ?
+    `
+
+    const state = await sql.handleSelect(sqlSelectFollowState, [target, userId])
+    res.json(state[0]["state"])
+})
+
+router.post("/getFollowList", async (req, res) => {
+    const userId = get.userId(req)
+
+    const sqlSelectFollowList = `
+        SELECT
+            user_profiles.user_id,
+            user_profiles.user_name
+        FROM
+            followers
+        INNER JOIN
+            user_profiles ON
+            user_profiles.user_id = followers.user_id
+        WHERE
+            follower_id = ?
+    `
+    const followList = await sql.handleSelect(sqlSelectFollowList, [userId])
+
+    const sqlSelectFollowerList = `
+        SELECT
+            user_profiles.user_id,
+            user_profiles.user_name
+        FROM
+            followers
+        INNER JOIN
+            user_profiles ON
+            user_profiles.user_id = followers.follower_id
+        WHERE
+            followers.user_id = ?
+    `
+    const followerList = await sql.handleSelect(sqlSelectFollowerList, [userId])
+
+    res.json({
+        followList: followList,
+        followerList: followerList,
+    })
 })
 
 module.exports = router

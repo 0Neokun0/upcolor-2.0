@@ -112,7 +112,13 @@ const TeamOutline = (props) => {
                             <ListItemButton
                                 key={member["user_id"]}
                                 component={Link}
-                                to={"/profile/" + member["user_id"]}
+                                to={
+                                    props["student"]
+                                    ?
+                                    "/profile/" + member["user_id"]
+                                    :
+                                    "/company/profile/" + member["user_id"]
+                                }
                             >
                                 {member["user_name"]}
                             </ListItemButton>

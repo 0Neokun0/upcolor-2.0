@@ -269,4 +269,38 @@ router.use("/getLike", async (req, res) => {
     }
 })
 
+router.post("/getMyPost", async (req, res) => {
+    const userId = get.userId(req)
+    const sqlSelectPost = `
+        SELECT
+            *
+        FROM
+            posts
+        WHERE
+            post_user_id = ? AND
+            parent_id = 0
+    `
+
+    const posts = await sql.handleSelect(sqlSelectPost, [userId])
+
+    res.json(posts)
+})
+
+router.post("/getTargetPost", async (req, res) => {
+    const userId = req.body.userId
+    const sqlSelectPost = `
+        SELECT
+            *
+        FROM
+            posts
+        WHERE
+            post_user_id = ? AND
+            parent_id = 0
+    `
+
+    const posts = await sql.handleSelect(sqlSelectPost, [userId])
+
+    res.json(posts)
+})
+
 module.exports = router

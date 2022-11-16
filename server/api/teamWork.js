@@ -291,6 +291,43 @@ router.post("/getGantt", async (req, res) => {
     })
 })
 
+router.post("/getViewGantt", async (req, res) => {
+    const teamId = req.body.teamId
+
+    const sqlSelectTasks = `
+        SELECT
+            task_id,
+            task_name,
+            task_start,
+            task_end,
+            task_progress,
+            parent_task_id
+        FROM
+            gantt_tasks
+        WHERE
+            team_work_id = ?
+    `
+    const tasks = await sql.handleSelect(sqlSelectTasks, [teamId])
+
+    const sqlSelectLinks = `
+        SELECT
+            link_id,
+            source,
+            target,
+            type
+        FROM
+            gantt_links
+        WHERE
+            team_work_id = ?
+    `
+    const links = await sql.handleSelect(sqlSelectLinks, [teamId])
+
+    res.json({
+        tasks: tasks,
+        links: links,
+    })
+})
+
 router.post("/saveGantt", async (req, res) => {
     const userId = get.userId(req)
     const joinedTeamId = await get.teamId(userId)
@@ -509,6 +546,29 @@ router.post("/updateJoinTeam", async (req, res) => {
 router.post("/getSetting", async (req, res) => {
     const userId = get.userId(req)
     const teamId = await get.teamId(userId)
+
+    const sqlSelectSetting = `
+        SELECT
+            publish_team_chat,
+            publish_team_ganttchart,
+            registered_team_work_on
+        FROM
+            team_works_list
+        WHERE
+            team_work_id = ?
+    `
+
+    const settings = await sql.handleSelect(sqlSelectSetting, [teamId])
+
+    res.json({
+        chat: settings[0]["publish_team_chat"],
+        gantt: settings[0]["publish_team_ganttchart"],
+        invite: settings[0]["registered_team_work_on"]
+    })
+})
+
+router.post("/getViewSetting", async (req, res) => {
+    const teamId = req.body.teamId
 
     const sqlSelectSetting = `
         SELECT

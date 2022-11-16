@@ -222,6 +222,7 @@ const TeamWork = () => {
                                             setTogglePopover={setTogglePopover}
                                             setSettingToggle={setSettingToggle}
                                             genInviteUrl={genInviteUrl}
+                                            student={true}
                                         />
                                     </Box>
                                     :
@@ -245,6 +246,7 @@ const TeamWork = () => {
                                                 setTogglePopover={setTogglePopover}
                                                 setSettingToggle={setSettingToggle}
                                                 genInviteUrl={genInviteUrl}
+                                                student={true}
                                             />
 
                                             <Divider
