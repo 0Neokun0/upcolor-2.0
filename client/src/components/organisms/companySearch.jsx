@@ -32,7 +32,7 @@ const CompanySearch = (props) => {
             <List
                 sx={{
                     maxWidth: 350,
-                    p: 2,
+                    p: 1,
 
                 }}
                 component="nav"
