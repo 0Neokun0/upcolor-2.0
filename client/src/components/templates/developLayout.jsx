@@ -16,4 +16,4 @@ const DevelopLayout = (props) => {
     );
 };
 
-export default DevelopLayout;
+export default DevelopLayout
