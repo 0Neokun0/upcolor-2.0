@@ -7,7 +7,7 @@ import { LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
 
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite, ViewCompanyPage } from "components/pages/student"
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
-import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment } from "components/pages/company"
+import { CompanySignup, CompanyHome, CompanyProfileEdit } from "components/pages/company"
 
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
@@ -190,7 +190,6 @@ function App() {
                     <Route path="list/student" element={<StudentList />} />
                     <Route path="list/company" element={<CompanyList />} />
 
-
                     <Route path="timeTable" element={<ShowTimeTable />} />
                     <Route path="timeTable/regist" element={<RegistTimeTable />} />
 
@@ -207,8 +206,6 @@ function App() {
 
                     <Route path="company/home" element={<CompanyHome />} />
                     <Route path="company/viewCompany" element={<ViewCompanyPage />} />
-
-
                     <Route path="company/profile/edit" element={<CompanyProfileEdit />} />
                 </Routes>
             </BrowserRouter>
