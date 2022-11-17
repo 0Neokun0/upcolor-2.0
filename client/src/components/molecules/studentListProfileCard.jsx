@@ -2,6 +2,8 @@ import { Card, Grid, Avatar, Typography, Button } from "@mui/material"
 
 import PersonSearchRoundedIcon from '@mui/icons-material/PersonSearchRounded';
 
+import { server } from 'components/config'
+
 const StudentListProfileCard = (props) => {
     return (
         <Grid
@@ -33,6 +35,7 @@ const StudentListProfileCard = (props) => {
                         sx={{
                             m: 1,
                         }}
+                        src={server.host + "/images/icon/" + props.student["image"]}
                     />
 
                     <Typography
