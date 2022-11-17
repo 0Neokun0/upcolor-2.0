@@ -36,7 +36,7 @@ function App() {
         {
             icon: <BusinessRoundedIcon />,
             value: "企業",
-            url: "/companyList",
+            url: "/list/company",
 
         },
     ]
