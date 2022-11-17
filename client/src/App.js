@@ -7,7 +7,7 @@ import { ClassNews, ClassNewsFeed, LandingPage, NotFound, Signin, ViewTeamWork }
 
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite } from "components/pages/student"
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
-import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment } from "components/pages/company"
+import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment, StudentProfileView } from "components/pages/company"
 
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
@@ -36,7 +36,7 @@ function App() {
         {
             icon: <BusinessRoundedIcon />,
             value: "企業",
-            url: "/companyList",
+            url: "/list/company",
 
         },
     ]
@@ -212,6 +212,9 @@ function App() {
 
                     <Route path="company/home" element={<CompanyHome />} />
                     <Route path="company/profile/edit" element={<CompanyProfileEdit />} />
+                    <Route path="company/profile">
+                        <Route path=":userId" element={<ReqAuthCom component={<StudentProfileView />} />} />
+                    </Route>
                 </Routes>
             </BrowserRouter>
         </Box>

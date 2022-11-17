@@ -2,20 +2,30 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { server } from "components/config"
 import { ContainerLg } from "components/templates"
-import { ProfileFormUnit, ProfileSelect, ProfileSelectChip, TabPanel } from "components/molecules"
+import { PostProfile, ProfileFormUnit, ProfileSelect, ProfileSelectChip, TabPanel } from "components/molecules"
 
-import { Box, Button, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material"
+import { Box, Button, ButtonGroup, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material"
 import { grey, teal } from "@mui/material/colors"
 import PortraitRoundedIcon from '@mui/icons-material/PortraitRounded'
 import WorkspacePremiumRoundedIcon from '@mui/icons-material/WorkspacePremiumRounded'
 import TerminalRoundedIcon from '@mui/icons-material/TerminalRounded'
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import GitHubIcon from '@mui/icons-material/GitHub'
+import { FollowUsers } from "components/organisms"
 
 const Profile = () => {
     const [profile, setProfile] = useState([])
     const [profileLists, setProfileLists] = useState([])
     const [selectTab, setSelectTab] = useState(1)
+
+    // 投稿
+    const [posts, setPosts] = useState([])
+
+    // フレンド
+    const [toggleFollow, setToggleFollow] = useState(1)
+    const [followList, setFollowList] = useState([])
+    const [followerList, setFollowerList] = useState([])
+    const [friendList, setFriendList] = useState([])
 
     // プロフィール編集
     const [editProfile, setEditProfile] = useState(false)
@@ -70,6 +80,18 @@ const Profile = () => {
     }
 
     useEffect(() => {
+        axios.post("/account/getFollowList")
+            .then((res) => {
+                setFollowList(res.data["followList"])
+                setFollowerList(res.data["followerList"])
+                setFriendList(res.data["friendList"])
+            })
+
+        axios.post("/post/getMyPost")
+            .then((res) => {
+                setPosts(res.data)
+            })
+
         axios.post("/account/getProfile")
             .then((res) => {
                 setProfile(res.data)
@@ -295,218 +317,308 @@ const Profile = () => {
                             />
                         </Tabs>
 
-                        <Box
-                            sx={{
-                                py: 2,
-                                mx: "auto",
-                                width: "80%",
-                                minWidth: "300px",
-                            }}
-                        >
-                            {/* 自己紹介 */}
-                            <TabPanel
-                                value={selectTab}
-                                index={1}
+                        <Box>
+                            <Box
+                                sx={{
+                                    mx: "auto",
+                                    width: "80%",
+                                    minWidth: "300px",
+                                    py: 2,
+                                }}
                             >
-                                {
-                                    profile["introduction"]
-                                        ?
-                                        profile["introduction"]
-                                        :
-                                        "未設定"
-                                }
-                            </TabPanel>
-                            {/* 自己紹介 */}
-
-                            {/* 進級制作 */}
-                            <TabPanel
-                                value={selectTab}
-                                index={2}
-                            >
-                                進級制作
-                            </TabPanel>
-                            {/* 進級制作 */}
-
-                            {/* 投稿 */}
-                            <TabPanel
-                                value={selectTab}
-                                index={3}
-                            >
-                                投稿
-                            </TabPanel>
-                            {/* 投稿 */}
-
-                            {/* フレンド */}
-                            <TabPanel
-                                value={selectTab}
-                                index={4}
-                            >
-                                フレンド
-                            </TabPanel>
-                            {/* フレンド */}
-
-                            {/* 編集 */}
-                            <TabPanel
-                                value={selectTab}
-                                index={5}
-                            >
-                                <Box
-                                    component="form"
-                                    onSubmit={handleSubmit}
-                                    sx={{
-                                        "div + div": {
-                                            mt: 4,
-                                        }
-                                    }}
+                                {/* 自己紹介 */}
+                                <TabPanel
+                                    value={selectTab}
+                                    index={1}
                                 >
-                                    <ProfileFormUnit
-                                        title="一般"
-                                    >
-                                        <TextField
-                                            label="ユーザー名"
-                                            name="name"
-                                            size="small"
-                                            defaultValue={editProfile["name"]}
-                                            fullWidth
-                                        />
+                                    {
+                                        profile["introduction"]
+                                            ?
+                                            profile["introduction"]
+                                            :
+                                            "未設定"
+                                    }
+                                </TabPanel>
+                                {/* 自己紹介 */}
 
-                                        <TextField
-                                            label="メールアドレス"
-                                            name="mail"
-                                            size="small"
-                                            defaultValue={editProfile["mail"]}
-                                            fullWidth
-                                            disabled
-                                        />
+                                {/* 進級制作 */}
+                                <TabPanel
+                                    value={selectTab}
+                                    index={2}
+                                >
+                                    進級制作
+                                </TabPanel>
+                                {/* 進級制作 */}
 
-                                        <Button
-                                            variant="outlined"
-                                            component="label"
-                                            fullWidth
-                                            sx={{
-                                                mt: 2,
-                                            }}
-                                        >
-                                            <PortraitRoundedIcon
-                                                sx={{
-                                                    mr: 1,
-                                                }}
-                                            />
-
-                                            アイコンの選択
-
-                                            <Box
-                                                component="input"
-                                                type="file"
-                                                name="icon"
-                                                accept=".png, .jpg, .jpeg"
-                                                hidden
-                                            />
-                                        </Button>
-                                    </ProfileFormUnit>
-
-                                    <ProfileFormUnit
-                                        title="専攻情報"
-                                    >
-                                        <ProfileSelect
-                                            label="専攻"
-                                            name="course"
-                                            value={courseId}
-                                            lists={coursesList}
-                                            set={setCourseId}
-                                            sqlId="course_id"
-                                            sqlName="course_name"
-                                        />
-
-                                        <ProfileSelect
-                                            label="学年"
-                                            name="year"
-                                            value={yearId}
-                                            lists={yearsList}
-                                            set={setYearId}
-                                            sqlId="year_id"
-                                            sqlName="year_name"
-                                        />
-                                    </ProfileFormUnit>
-
-                                    <ProfileFormUnit
-                                        title="自己紹介・自己アピール"
-                                    >
-                                        <TextField
-                                            label="自己紹介・自己アピール"
-                                            name="introduction"
-                                            rows={5}
-                                            fullWidth
-                                            multiline
-                                            defaultValue={editProfile["introduction"]}
-                                        />
-                                    </ProfileFormUnit>
-
-                                    <ProfileFormUnit
-                                        title="スキル"
-                                    >
-                                        <ProfileSelectChip
-                                            label="資格"
-                                            select={qualificationIds}
-                                            setSelect={setQualificationIds}
-                                            lists={qualificationsList}
-                                            sqlId="qualification_id"
-                                            sqlName="qualification_name"
-                                        />
-
-                                        <ProfileSelectChip
-                                            label="プログラミング言語"
-                                            select={programIds}
-                                            setSelect={setProgramIds}
-                                            lists={programsList}
-                                            sqlId="program_id"
-                                            sqlName="program_name"
-                                        />
-
-                                        <ProfileSelectChip
-                                            label="ツール・フレームワーク"
-                                            select={toolIds}
-                                            setSelect={setToolIds}
-                                            lists={toolsList}
-                                            sqlId="tool_id"
-                                            sqlName="tool_name"
-                                        />
-
-                                        <ProfileSelectChip
-                                            label="言語"
-                                            select={languageIds}
-                                            setSelect={setLanguageIds}
-                                            lists={languagesList}
-                                            sqlId="language_id"
-                                            sqlName="language_name"
-                                        />
-                                    </ProfileFormUnit>
-
-                                    <ProfileFormUnit
-                                        title="Github"
-                                    >
-                                        <TextField
-                                            label="Github"
-                                            name="github"
-                                            size="small"
-                                            fullWidth
-                                            defaultValue={editProfile["github"]}
-                                        />
-                                    </ProfileFormUnit>
-
-                                    <Button
-                                        type="submit"
-                                        variant="contained"
-                                        fullWidth
+                                {/* 投稿 */}
+                                <TabPanel
+                                    value={selectTab}
+                                    index={3}
+                                >
+                                    <Box
                                         sx={{
-                                            mt: 5,
+                                            "a": {
+                                                display: "block"
+                                            },
+                                            "a + a": {
+                                                mt: 2,
+                                            },
                                         }}
                                     >
-                                        保存
-                                    </Button>
-                                </Box>
-                            </TabPanel>
-                            {/* 編集 */}
+                                        {
+                                            posts.length
+                                                ?
+                                                posts.map((post) => {
+                                                    return (
+                                                        <PostProfile
+                                                            key={post["post_id"]}
+                                                            post={post}
+                                                        />
+                                                    )
+                                                })
+
+                                                :
+                                                <Typography>
+                                                    投稿がありません
+                                                </Typography>
+                                        }
+                                    </Box>
+                                </TabPanel>
+                                {/* 投稿 */}
+
+                                {/* フレンド */}
+                                <TabPanel
+                                    value={selectTab}
+                                    index={4}
+                                >
+                                    <ButtonGroup
+                                        variant="outlined"
+                                    >
+                                        <Button
+                                            variant={
+                                                toggleFollow === 1
+                                                    ?
+                                                    "contained"
+                                                    :
+                                                    "outlined"
+                                            }
+                                            onClick={() => setToggleFollow(1)}
+                                        >
+                                            フォロー
+                                        </Button>
+
+                                        <Button
+                                            variant={
+                                                toggleFollow === 2
+                                                    ?
+                                                    "contained"
+                                                    :
+                                                    "outlined"
+                                            }
+                                            onClick={() => setToggleFollow(2)}
+                                        >
+                                            フォロワー
+                                        </Button>
+
+                                        <Button
+                                            variant={
+                                                toggleFollow === 3
+                                                    ?
+                                                    "contained"
+                                                    :
+                                                    "outlined"
+                                            }
+                                            onClick={() => setToggleFollow(3)}
+                                        >
+                                            相互フォロー
+                                        </Button>
+                                    </ButtonGroup>
+
+                                    <Box>
+                                        <FollowUsers
+                                            index={1}
+                                            value={toggleFollow}
+                                            lists={followList}
+                                        />
+
+                                        <FollowUsers
+                                            index={2}
+                                            value={toggleFollow}
+                                            lists={followerList}
+                                        />
+
+                                        <FollowUsers
+                                            index={3}
+                                            value={toggleFollow}
+                                            lists={friendList}
+                                        />
+                                    </Box>
+                                </TabPanel>
+                                {/* フレンド */}
+
+                                {/* <<< 編集 */}
+                                <TabPanel
+                                    value={selectTab}
+                                    index={5}
+                                >
+                                    <Box
+                                        component="form"
+                                        onSubmit={handleSubmit}
+                                        sx={{
+                                            "div + div": {
+                                                mt: 4,
+                                            }
+                                        }}
+                                    >
+                                        <ProfileFormUnit
+                                            title="一般"
+                                        >
+                                            <TextField
+                                                label="ユーザー名"
+                                                name="name"
+                                                size="small"
+                                                defaultValue={editProfile["name"]}
+                                                fullWidth
+                                            />
+
+                                            <TextField
+                                                label="メールアドレス"
+                                                name="mail"
+                                                size="small"
+                                                defaultValue={editProfile["mail"]}
+                                                fullWidth
+                                                disabled
+                                            />
+
+                                            <Button
+                                                variant="outlined"
+                                                component="label"
+                                                fullWidth
+                                                sx={{
+                                                    mt: 2,
+                                                }}
+                                            >
+                                                <PortraitRoundedIcon
+                                                    sx={{
+                                                        mr: 1,
+                                                    }}
+                                                />
+
+                                                アイコンの選択
+
+                                                <Box
+                                                    component="input"
+                                                    type="file"
+                                                    name="icon"
+                                                    accept=".png, .jpg, .jpeg"
+                                                    hidden
+                                                />
+                                            </Button>
+                                        </ProfileFormUnit>
+
+                                        <ProfileFormUnit
+                                            title="専攻情報"
+                                        >
+                                            <ProfileSelect
+                                                label="専攻"
+                                                name="course"
+                                                value={courseId}
+                                                lists={coursesList}
+                                                set={setCourseId}
+                                                sqlId="course_id"
+                                                sqlName="course_name"
+                                            />
+
+                                            <ProfileSelect
+                                                label="学年"
+                                                name="year"
+                                                value={yearId}
+                                                lists={yearsList}
+                                                set={setYearId}
+                                                sqlId="year_id"
+                                                sqlName="year_name"
+                                            />
+                                        </ProfileFormUnit>
+
+                                        <ProfileFormUnit
+                                            title="自己紹介・自己アピール"
+                                        >
+                                            <TextField
+                                                label="自己紹介・自己アピール"
+                                                name="introduction"
+                                                rows={5}
+                                                fullWidth
+                                                multiline
+                                                defaultValue={editProfile["introduction"]}
+                                            />
+                                        </ProfileFormUnit>
+
+                                        <ProfileFormUnit
+                                            title="スキル"
+                                        >
+                                            <ProfileSelectChip
+                                                label="資格"
+                                                select={qualificationIds}
+                                                setSelect={setQualificationIds}
+                                                lists={qualificationsList}
+                                                sqlId="qualification_id"
+                                                sqlName="qualification_name"
+                                            />
+
+                                            <ProfileSelectChip
+                                                label="プログラミング言語"
+                                                select={programIds}
+                                                setSelect={setProgramIds}
+                                                lists={programsList}
+                                                sqlId="program_id"
+                                                sqlName="program_name"
+                                            />
+
+                                            <ProfileSelectChip
+                                                label="ツール・フレームワーク"
+                                                select={toolIds}
+                                                setSelect={setToolIds}
+                                                lists={toolsList}
+                                                sqlId="tool_id"
+                                                sqlName="tool_name"
+                                            />
+
+                                            <ProfileSelectChip
+                                                label="言語"
+                                                select={languageIds}
+                                                setSelect={setLanguageIds}
+                                                lists={languagesList}
+                                                sqlId="language_id"
+                                                sqlName="language_name"
+                                            />
+                                        </ProfileFormUnit>
+
+                                        <ProfileFormUnit
+                                            title="Github"
+                                        >
+                                            <TextField
+                                                label="Github"
+                                                name="github"
+                                                size="small"
+                                                fullWidth
+                                                defaultValue={editProfile["github"]}
+                                            />
+                                        </ProfileFormUnit>
+
+                                        <Button
+                                            type="submit"
+                                            variant="contained"
+                                            fullWidth
+                                            sx={{
+                                                mt: 5,
+                                            }}
+                                        >
+                                            保存
+                                        </Button>
+                                    </Box>
+                                </TabPanel>
+                                {/* 編集 >>> */}
+                            </Box>
                         </Box>
                     </Grid>
                 </Grid>

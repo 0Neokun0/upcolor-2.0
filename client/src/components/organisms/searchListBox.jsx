@@ -29,8 +29,8 @@ const SearchListBox = (props) => {
                         textAlign: 'center',
                         p: 1,
                     }}
-                    title={"ユーザー検索"}
-                    subheader={"UPCOLORを利用するユーザーを検索してください。"}
+                    title={"検索"}
+                    subheader={"UPCOLORを利用者を検索してください。"}
                 />
                 <List
                     sx={{

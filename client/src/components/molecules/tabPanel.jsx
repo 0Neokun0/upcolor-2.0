@@ -18,7 +18,7 @@ const TabPanel = (props) => {
                     {children}
                 </Box>
             }
-        </div>    
+        </div>
     )
 }
 
