@@ -1,10 +1,5 @@
 import { Outlet } from "react-router-dom"
-import {
-    MainMenu,
-    NewsList,
-    ReplyModal,
-    SendPost,
-} from "components/organisms"
+import { MainMenu, NewsList, ReplyModal, SendPost } from "components/organisms"
 import { Box, Hidden, Stack } from "@mui/material"
 import Footer from "components/organisms/footer/footer"
 
@@ -100,6 +95,7 @@ const HomeLayout = (props) => {
             />
 
             <ReplyModal
+                profile={props.profile}
                 handleReplySubmit={props.handleReplySubmit}
                 openReplyModal={props.openReplyModal}
                 toggleReplyModalClose={props.toggleReplyModalClose}

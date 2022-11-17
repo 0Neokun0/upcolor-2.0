@@ -9,7 +9,7 @@ const LandingPageCard = (props) => {
                 width: "900px",
                 py: 8,
                 textAlign: "center",
-                borderRadius: "0px"
+                borderRadius: "0px",
             }}
         >
             <img
@@ -56,13 +56,13 @@ const LandingPageCard = (props) => {
                     mt: 5,
                     "a": {
                         mx: 3,
-                    }
+                    },
                 }}
             >
                 <Button
                     variant="outlined"
                     color="secondary"
-                    href="signup/student"
+                    href="/signup/student"
                 >
                     サインアップ
                 </Button>

@@ -4,8 +4,7 @@ import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
 import { LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
-
-import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite } from "components/pages/student"
+import {StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite } from "components/pages/student"
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment, StudentProfileView } from "components/pages/company"
 
@@ -13,38 +12,50 @@ import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
 
 import logo from "components/atoms/logo/upcolor_logo.svg"
-import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
-import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
-import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
+import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded"
+import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded"
+import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded"
 import GroupCreateLayout from "components/templates/groupCreateLayout"
 
 function App() {
     const [open, setOpen] = useState(false)
     const [signInState, setSignInState] = useState("")
+    const [profile, setProfile] = useState([])
+
+    const [anchorEl, setAnchorEl] = useState(null)
+    const openNavbar = Boolean(anchorEl)
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget)
+    }
+    const handleClose = () => {
+        setAnchorEl(null)
+    }
 
     const menus = [
         {
+            label: "学生フェード",
             icon: <PeopleAltRoundedIcon />,
             value: "学生",
-            url: "/",
+            url: "/home",
         },
         {
+            label: "クラスニュース",
             icon: <SchoolRoundedIcon />,
             value: "学校",
-            url: "/teacher/home",
+            url: "/classNewsHome",
         },
         {
+            label: "企業検索",
             icon: <BusinessRoundedIcon />,
             value: "企業",
             url: "/list/company",
-
         },
     ]
 
     const toggleSignout = () => {
         axios.post("/account/signout")
             .then(() => {
-                sessionStorage.removeItem('AUTHORITY')
+                sessionStorage.removeItem("AUTHORITY")
                 window.location.reload()
             })
     }
@@ -127,22 +138,35 @@ function App() {
             })
     }, [])
 
+    useEffect(() => {
+        axios.post("/account/getProfile")
+            .then((res) => {
+                setProfile(res.data)
+                console.log(res.data)
+            })
+    }, [])
+
     return (
         <Box>
-            <Header
-                logoSrc={logo}
-                name={"UPCOLOR"}
-                menus={menus}
-                signInState={signInState}
-                open={open}
-                toggleAlertOpen={toggleAlertOpen}
-                toggleAlertClose={toggleAlertClose}
-                toggleSignout={toggleSignout}
-            />
-
             <BrowserRouter>
+                <Header
+                    logoSrc={logo}
+                    name={"UPCOLOR"}
+                    menus={menus}
+                    signInState={signInState}
+                    openNavbar={openNavbar}
+                    anchorEl={anchorEl}
+                    handleClick={handleClick}
+                    handleClose={handleClose}
+                    open={open}
+                    profile={profile}
+                    toggleAlertOpen={toggleAlertOpen}
+                    toggleAlertClose={toggleAlertClose}
+                    toggleSignout={toggleSignout}
+                />
+
                 <Routes>
-                    <Route path="" element={<LandingPage />} />
+                    <Route path="/" element={<LandingPage />} />
                     <Route path="*" element={<NotFound />} />
 
                     {/* <Route path="student/signup" element={<ReqNoAuth component={<StudentSignup />} />} /> */}
@@ -155,7 +179,7 @@ function App() {
                     {/* <Route path="signin" element={<ReqNoAuth component={<Signin />} />} /> */}
                     <Route path="signin" element={<Signin />} />
 
-                    <Route path="home" element={<ReqAuthStu component={<StudentHome />} />} >
+                    <Route path="home" element={<ReqAuthStu component={<StudentHome />} />}>
                         <Route path="" element={<Feed />} />
                         <Route path=":postId" element={<FeedDetail />} />
                     </Route>
@@ -189,7 +213,6 @@ function App() {
 
                     <Route path="list/student" element={<StudentList />} />
                     <Route path="list/company" element={<CompanyList />} />
-
 
                     <Route path="timeTable" element={<ShowTimeTable />} />
                     <Route path="timeTable/regist" element={<RegistTimeTable />} />
