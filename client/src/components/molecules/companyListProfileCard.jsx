@@ -1,6 +1,6 @@
 import { Avatar, Button, Card, Grid, Typography } from "@mui/material"
 
-import BusinessIcon from '@mui/icons-material/Business';
+import BusinessIcon from '@mui/icons-material/Business'
 
 // import { server } from 'components/config'
 
@@ -23,7 +23,9 @@ const CompanyListProfileCard = (props) => {
                     "&:hover": {
                         transform: "translateY(-2px)",
                     },
-                    "& > *": { minWidth: "clamp(0px, (360px - 100%) * 999,100%)" },
+                    "& > *": {
+                        minWidth: "clamp(0px, (360px - 100%) * 999,100%)"
+                    },
                 }}
             >
                 <Grid
@@ -38,6 +40,7 @@ const CompanyListProfileCard = (props) => {
                             p: 1,
                         }}
                     />
+
                     <Typography
                         variant="h5"
                         sx={{
@@ -59,7 +62,6 @@ const CompanyListProfileCard = (props) => {
                     >
                         会社ページ
                     </Button>
-
                 </Grid>
             </Card>
         </Grid>
