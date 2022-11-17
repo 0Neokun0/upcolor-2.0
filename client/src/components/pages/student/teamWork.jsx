@@ -177,7 +177,6 @@ const TeamWork = () => {
         axios.post("/teamWork/getJoinedTeam")
             .then((res) => {
                 setTeam(res.data)
-                console.log(res.data)
 
                 if (res.data["teamInfo"]) {
                     axios.post("/teamWork/getSetting")
@@ -222,6 +221,7 @@ const TeamWork = () => {
                                             setTogglePopover={setTogglePopover}
                                             setSettingToggle={setSettingToggle}
                                             genInviteUrl={genInviteUrl}
+                                            student={true}
                                         />
                                     </Box>
                                     :
@@ -245,6 +245,7 @@ const TeamWork = () => {
                                                 setTogglePopover={setTogglePopover}
                                                 setSettingToggle={setSettingToggle}
                                                 genInviteUrl={genInviteUrl}
+                                                student={true}
                                             />
 
                                             <Divider

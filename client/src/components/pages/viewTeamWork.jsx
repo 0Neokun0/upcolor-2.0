@@ -88,7 +88,9 @@ const TeamWork = () => {
             return formattedDate
         }
 
-        axios.post("/teamWork/getGantt")
+        axios.post("/teamWork/getViewGantt", {
+            teamId: teamId,
+        })
             .then((res) => {
                 const tasks = res.data.tasks
                 const links = res.data.links
@@ -124,7 +126,7 @@ const TeamWork = () => {
                     })
                 }
             })
-    }, [])
+    }, [teamId])
 
     useEffect(() => {
         axios.post("/teamWork/getTeamWork", {
@@ -134,7 +136,9 @@ const TeamWork = () => {
                 setTeam(res.data)
 
                 if (res.data["teamInfo"]) {
-                    axios.post("/teamWork/getSetting")
+                    axios.post("/teamWork/getViewSetting", {
+                        teamId: teamId,
+                    })
                         .then((res) => {
                             // setPublishChat(Boolean(res.data["chat"]))
                             setPublishGantt(Boolean(res.data["gantt"]))
@@ -174,6 +178,7 @@ const TeamWork = () => {
                                             togglePopover={togglePopover}
                                             setTogglePopover={setTogglePopover}
                                             genInviteUrl={genInviteUrl}
+                                            student={false}
                                         />
                                     </Box>
                                     :
@@ -196,6 +201,7 @@ const TeamWork = () => {
                                                 togglePopover={togglePopover}
                                                 setTogglePopover={setTogglePopover}
                                                 genInviteUrl={genInviteUrl}
+                                                student={false}
                                             />
 
                                             <Divider
