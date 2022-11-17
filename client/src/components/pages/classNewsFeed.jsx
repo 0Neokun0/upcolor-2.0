@@ -10,15 +10,15 @@ const ClassNewsFeed = () => {
     const [profile, setProfile] = useState([])
     const classId = useParams()["classId"]
 
-    const [open, setOpen] = useState();
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const [target, setTarget] = useState([])
+    // const [target, setTarget] = useState([])
 
-    const [openNewsReplyModal, setOpenNewsReplyModal] = useState(false)
-    const [newss, setNewss] = useState([])
-    const [newsReplys, setNewsReplys] = useState([])
+    // const [openNewsReplyModal, setOpenNewsReplyModal] = useState(false)
+    // const [newss, setNewss] = useState([])
+    // const [newsReplys, setNewsReplys] = useState([])
 
     const [enterClassNewsRoom, setEnterClassNewsRoom] = useState([])
 
@@ -42,6 +42,16 @@ const ClassNewsFeed = () => {
             })
     }, [classId])
 
+    const handleSubmitNews = (e) => {
+        e.preventDefault()
+
+        const data = new FormData(e.currentTarget)
+
+        axios.post("/classNews/addNews", {
+            classNewsText: data.get("classNewsText"),
+        })
+    }
+
     useEffect(() => {
         axios.post("/account/getProfile")
             .then((res) => {
@@ -62,12 +72,14 @@ const ClassNewsFeed = () => {
                 justifyContent="center"
             >
                 <ClassNewsFeedForm
-                profile={profile}
-                open={open}
-                handleOpen={handleOpen}
-                handleClose={handleClose}
+                    profile={profile}
+                    open={open}
+                    handleOpen={handleOpen}
+                    handleClose={handleClose}
+                    handleSubmitNews={handleSubmitNews}
                 />
             </Grid>
+
         </ContainerLg>
     )
 }

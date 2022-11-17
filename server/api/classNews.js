@@ -65,4 +65,23 @@ router.post("/enterClassRoom", async (req, res) => {
         res.json(enterClassRoom)
 })
 
+    router.post("/addClassNews", async (req, res) => {
+        const userId = get.userId(req)
+        const classNewsText = req.body.classNewsText
+
+
+        const sqlInsertClassNews = `
+            INSERT INTO class_chat(
+                sent_user_id,
+                sent_text,
+            )
+            VALUES(
+                ?,
+                ?
+            )
+        `
+
+        await sql.handleInsert(sqlInsertClassNews, [userId, classNewsText])
+    })
+
 module.exports = router

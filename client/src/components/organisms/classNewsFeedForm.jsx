@@ -38,32 +38,27 @@ const ClassNewsFeedForm = (props) => {
                     onClick={props.handleOpen}
                 />
                 <Dialog
+                component={"form"}
+                onSubmit={props.handleSubmitNews}
                     PaperProps={{
-                        style: { borderRadius: '25px' }
+                        sx: {
+                            borderRadius: '25px'
+                        }
                     }}
                     open={props.open}
                     onClose={props.handleClose}
                 >
-                    <Card
-                        component={"form"}
-                        onSubmit={props.handleSubmitNews}
-                    >
                         <DialogTitle>クラスニューズ</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
                                 タイトルと内容、両方入力してください。
                             </DialogContentText>
+
                             <TextField
                                 autoFocus
                                 margin="dense"
-                                name="classRoomName"
-                                label="タイトル"
-                                variant="outlined"
-                                type="text"
-                                fullWidth
-                            />
-                            <TextField
                                 label="発表内容"
+                                name="classNewsText"
                                 multiline
                                 rows={4}
                                 variant="outlined"
@@ -90,12 +85,11 @@ const ClassNewsFeedForm = (props) => {
                             <Button onClick={props.handleClose}>キャンセル</Button>
                             <Button
                                 type="submit"
-                                size="small"
                             >
-                                登録
+                                投稿
                             </Button>
                         </DialogActions>
-                    </Card>
+
                 </Dialog>
             </Box>
         </Card>
