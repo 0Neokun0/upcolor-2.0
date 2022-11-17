@@ -11,7 +11,6 @@ const TeamList = () => {
         axios.post("/teamWork/getTeamWorkList")
         .then((res) => {
             setTeams(res.data)
-            console.log(res.data)
         })
     }, [])
 
