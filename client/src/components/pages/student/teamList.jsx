@@ -4,7 +4,7 @@ import { TeamListLayout } from "components/templates"
 import { TeamView } from "components/organisms"
 import { useState } from "react"
 
-const TeamList = () => {
+const TeamList = (props) => {
     const [teams, setTeams] = useState([])
 
     useEffect(() => {
