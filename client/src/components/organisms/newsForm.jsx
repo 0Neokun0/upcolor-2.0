@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Card, FormControl, IconButton, InputBase, InputLabel, MenuItem, OutlinedInput, Select, TextField, Tooltip, Typography } from "@mui/material"
+import { Avatar, Box, Button, Card, CardActions, FormControl, IconButton, InputBase, InputLabel, MenuItem, OutlinedInput, Select, TextField, Tooltip, Typography } from "@mui/material"
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
 import { server } from "components/config"
@@ -6,7 +6,7 @@ import { server } from "components/config"
 const NewsForm = (props) => {
     return (
         <Box sx={{
-            width: "70%",
+            width: "50%",
         }}
         >
             {
@@ -14,7 +14,7 @@ const NewsForm = (props) => {
                     ?
                     <Card
                         sx={{
-                            m: 2,
+                            mt: 2,
                             p: 2,
                             position: "relative",
                             boxShadow: 2,
@@ -24,21 +24,19 @@ const NewsForm = (props) => {
                         <Tooltip
                             title="保存なしで、閉じる"
                             placement="bottom"
-                            >
-                            <IconButton
-                            size="small"
-                            sx={{
-                                position: "absolute",
-                                top: 10,
-                                right: 10,
-                            }}
-                            onClick={() => props.setFormState(!props.formState)}
                         >
-                            <CloseRoundedIcon />
-                        </IconButton>
+                            <IconButton
+                                size="small"
+                                sx={{
+                                    position: "absolute",
+                                    top: 15,
+                                    right: 15,
+                                }}
+                                onClick={() => props.setFormState(!props.formState)}
+                            >
+                                <CloseRoundedIcon />
+                            </IconButton>
                         </Tooltip>
-
-
                         <Box
                             sx={{
                                 display: "flex",
@@ -46,16 +44,15 @@ const NewsForm = (props) => {
                                 mb: 2,
                             }}
                         >
-                            <Avatar>
-                                {props.profile["user_name"]}
-                            </Avatar>
-
+                            <Avatar
+                                src={server.host + "/images/icon/" + props.profile.image}
+                            />
                             <Typography
                                 sx={{
                                     ml: 1,
                                 }}
                             >
-                                {props.profile["user_name"]}
+                                {props.profile["name"]}
                             </Typography>
                         </Box>
 
@@ -79,45 +76,44 @@ const NewsForm = (props) => {
                                 label="ニュース"
                                 name="text"
                                 variant="filled"
-                                rows={6}
+                                rows={3}
                                 multiline
                                 fullWidth
                             />
-<Box
-                        justifyContent={'end'}
-                        sx={{
-                            display: 'flex',
-                        }}
-                    >
-                        <Tooltip
-                            title="写真"
-                            placement="right"
-                        >
-                            <IconButton
-                                size="small"
-                                color="success"
-                                component="label"
-                                onClick={() => props.setFileCheck(false)}
+                            <Box
+                                justifyContent={'end'}
+                                sx={{
+                                    display: 'flex',
+                                }}
                             >
-                                <Box
-                                    component="input"
-                                    type="file"
-                                    name="image"
-                                    accept=".png, .jpg, .jpeg"
-                                    hidden
-                                />
+                                <Tooltip
+                                    title="写真"
+                                    placement="right"
+                                >
+                                    <IconButton
+                                        size="small"
+                                        color="success"
+                                        component="label"
+                                        onClick={() => props.setFileCheck(false)}
+                                    >
+                                        <Box
+                                            component="input"
+                                            type="file"
+                                            name="image"
+                                            accept=".png, .jpg, .jpeg"
+                                            hidden
+                                        />
+                                        <AddPhotoAlternateRoundedIcon />
+                                    </IconButton>
+                                </Tooltip>
+                            </Box>
 
-                                <AddPhotoAlternateRoundedIcon />
-                            </IconButton>
-                        </Tooltip>
-                    </Box>
                             <FormControl
                                 fullWidth
                             >
                                 <InputLabel>
                                     対象コース
                                 </InputLabel>
-
                                 <Select
                                     value={props.target}
                                     input={<OutlinedInput label="対象コース" />}
@@ -139,17 +135,25 @@ const NewsForm = (props) => {
                                 </Select>
                             </FormControl>
 
-                            <Box
-                                sx={{
-                                    textAlign: "end",
-                                }}
+                            <Box sx={{
+                                display: 'flex',
+                                flexDirection: 'row-reverse',
+                            }}
                             >
-                                <Button
-                                    type="submit"
-                                    variant="contained"
-                                >
-                                    投稿
-                                </Button>
+                                <CardActions>
+                                    <Button
+                                        variant="outlined"
+                                        onClick={() => props.setFormState(!props.formState)}
+                                    >
+                                        キャンセル
+                                    </Button>
+                                    <Button
+                                        type="submit"
+                                        variant="outlined"
+                                    >
+                                        投稿
+                                    </Button>
+                                </CardActions>
                             </Box>
                         </Box>
                     </Card>
@@ -159,11 +163,9 @@ const NewsForm = (props) => {
                         alignItems: "center",
                         width: "100%",
                         p: 2,
-                        mb: 4,
+                        mt: 2,
                         boxShadow: 3,
-                        justifyContent: "space-between",
                         borderRadius: "25px",
-                        mt: 1,
                     }}
                     >
                         <Avatar sx={{
@@ -178,7 +180,6 @@ const NewsForm = (props) => {
                             ml: "20px",
                             mr: "20px",
                             fontSize: "17px",
-
                         }}
                         >
                             <InputBase
@@ -188,9 +189,7 @@ const NewsForm = (props) => {
                                 type="text"
                                 placeholder="何かを発表したい事"
                                 onClick={() => props.setFormState(!props.formState)}
-                            >
-
-                            </InputBase>
+                            />
                         </Box>
                     </Card>
             }

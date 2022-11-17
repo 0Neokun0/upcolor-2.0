@@ -1,9 +1,10 @@
 import axios from "axios"
+import { Grid } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { ContainerLg } from "components/templates"
 import { ClassNewsFeedHeader, NewsForm, NewsList } from "components/organisms"
-import { Divider, Grid } from "@mui/material"
+
 
 const ClassNewsFeed = () => {
     const [profile, setProfile] = useState([])
@@ -13,10 +14,6 @@ const ClassNewsFeed = () => {
     const [formState, setFormState] = useState(false)
 
     const [target, setTarget] = useState([])
-
-    const [open, setOpen] = useState();
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
 
     const [openNewsReplyModal, setOpenNewsReplyModal] = useState(false)
     const [newss, setNewss] = useState([])
@@ -94,25 +91,13 @@ const ClassNewsFeed = () => {
                 justifyContent="center"
             >
                 <NewsForm
-                    open={open}
-                    handleOpen={handleOpen}
-                    handleClose={handleClose}
                     formState={formState}
                     setFormState={setFormState}
-
                     profile={profile}
                     courses={courses}
-
                     target={target}
                     handleTarget={handleTarget}
-
                     handleSubmit={handleSubmit}
-                />
-
-                <Divider
-                    sx={{
-                        mt: 2,
-                    }}
                 />
                 <Grid
                     container
@@ -123,8 +108,6 @@ const ClassNewsFeed = () => {
                         news={news}
                     />
                 </Grid>
-
-
             </Grid>
         </ContainerLg>
     )

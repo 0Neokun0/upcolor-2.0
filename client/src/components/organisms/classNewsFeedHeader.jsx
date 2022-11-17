@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, CardMedia, Chip, Typography } from "@mui/material"
+import { Avatar, Box, Card, CardMedia, Chip, Link, Typography } from "@mui/material"
 import { server } from 'components/config'
 
 const ClassNewsFeedHeader = (props) => {
@@ -36,7 +36,9 @@ const ClassNewsFeedHeader = (props) => {
                         boxShadow: '0 0 2px 5px #bdbdbd',
                     }}
                 >
-                    <Typography
+                    <Link
+                        underline="hover"
+                        href="/classnews"
                         variant="h3"
                         sx={{
                             fontSize: 50,
@@ -44,7 +46,7 @@ const ClassNewsFeedHeader = (props) => {
                         }}
                     >
                         {props["enterClassNewsRoom"]["class_name"]}
-                    </Typography>
+                    </Link>
 
                 </Box>
                 <Box

@@ -11,10 +11,13 @@ const ClassNewsCard = (props) => {
                 m: 1,
                 p: 2,
                 borderRadius: "25px",
-                // transition: "transform 0.3s, border 0.3s",
-                // "&:hover": {
-                //     transform: "translateY(-2px)",
-                // },
+                transition: "transform 0.3s, border 0.3s",
+                "&:hover": {
+                    transform: "translateY(-2px)",
+                },
+                "& > *": {
+                    minWidth: "clamp(0px, (360px - 100%) * 999,100%)"
+                },
             }}>
             <Typography
                 variant="h4"
