@@ -1,8 +1,8 @@
 import { Box, Card, CardActionArea, CardMedia, Chip, Typography } from "@mui/material"
 
-import BadgeIcon from "@mui/icons-material/Badge";
-import GroupWorkIcon from "@mui/icons-material/GroupWork";
-import DescriptionIcon from "@mui/icons-material/Description";
+import BadgeIcon from "@mui/icons-material/Badge"
+import GroupWorkIcon from "@mui/icons-material/GroupWork"
+import DescriptionIcon from "@mui/icons-material/Description"
 
 const TeamViewCard = (props) => {
     return (
@@ -19,7 +19,9 @@ const TeamViewCard = (props) => {
                 "&:hover": {
                     transform: "translateY(-2px)",
                 },
-                "& > *": { minWidth: "clamp(0px, (360px - 100%) * 999,100%)" },
+                "& > *": {
+                    minWidth: "clamp(0px, (360px - 100%) * 999,100%)"
+                },
             }}
         >
             <CardActionArea sx={{
@@ -94,7 +96,6 @@ const TeamViewCard = (props) => {
                         {props.team["team_work_description"]}
                     </Typography>
                 </Box>
-
             </CardActionArea>
         </Card>
     )

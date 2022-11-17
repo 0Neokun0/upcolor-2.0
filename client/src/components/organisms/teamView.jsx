@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material"
-import { TeamViewCard } from "components/molecules";
+import { TeamViewCard } from "components/molecules"
 
 const TeamView = (props) => {
     return (
@@ -19,7 +19,6 @@ const TeamView = (props) => {
                             key={index}
                             team={team}
                         />
-
                     )
                 })
             }
