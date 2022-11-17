@@ -4,7 +4,7 @@ import { server } from "components/config"
 import { ContainerLg } from "components/templates"
 import { PostProfile, ProfileFormUnit, ProfileSelect, ProfileSelectChip, TabPanel } from "components/molecules"
 
-import { Box, Button, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material"
+import { Box, Button, ButtonGroup, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material"
 import { grey, teal } from "@mui/material/colors"
 import PortraitRoundedIcon from '@mui/icons-material/PortraitRounded'
 import WorkspacePremiumRoundedIcon from '@mui/icons-material/WorkspacePremiumRounded'
@@ -22,9 +22,10 @@ const Profile = () => {
     const [posts, setPosts] = useState([])
 
     // フレンド
-    const [toggleFollow, setToggleFollow] = useState(true)
+    const [toggleFollow, setToggleFollow] = useState(1)
     const [followList, setFollowList] = useState([])
     const [followerList, setFollowerList] = useState([])
+    const [friendList, setFriendList] = useState([])
 
     // プロフィール編集
     const [editProfile, setEditProfile] = useState(false)
@@ -83,6 +84,7 @@ const Profile = () => {
             .then((res) => {
                 setFollowList(res.data["followList"])
                 setFollowerList(res.data["followerList"])
+                setFriendList(res.data["friendList"])
             })
 
         axios.post("/post/getMyPost")
@@ -321,6 +323,7 @@ const Profile = () => {
                                     mx: "auto",
                                     width: "80%",
                                     minWidth: "300px",
+                                    py: 2,
                                 }}
                             >
                                 {/* 自己紹介 */}
@@ -360,7 +363,6 @@ const Profile = () => {
                                             "a + a": {
                                                 mt: 2,
                                             },
-                                            py: 2,
                                         }}
                                     >
                                         {
@@ -389,30 +391,67 @@ const Profile = () => {
                                     value={selectTab}
                                     index={4}
                                 >
-                                    <Button
-                                        onClick={() => setToggleFollow(true)}
+                                    <ButtonGroup
+                                        variant="outlined"
                                     >
-                                        フォロー
-                                    </Button>
+                                        <Button
+                                            variant={
+                                                toggleFollow === 1
+                                                    ?
+                                                    "contained"
+                                                    :
+                                                    "outlined"
+                                            }
+                                            onClick={() => setToggleFollow(1)}
+                                        >
+                                            フォロー
+                                        </Button>
 
-                                    <Button
-                                        onClick={() => setToggleFollow(false)}
-                                    >
-                                        フォロワー
-                                    </Button>
+                                        <Button
+                                            variant={
+                                                toggleFollow === 2
+                                                    ?
+                                                    "contained"
+                                                    :
+                                                    "outlined"
+                                            }
+                                            onClick={() => setToggleFollow(2)}
+                                        >
+                                            フォロワー
+                                        </Button>
+
+                                        <Button
+                                            variant={
+                                                toggleFollow === 3
+                                                    ?
+                                                    "contained"
+                                                    :
+                                                    "outlined"
+                                            }
+                                            onClick={() => setToggleFollow(3)}
+                                        >
+                                            ??相互フォロー??
+                                        </Button>
+                                    </ButtonGroup>
 
                                     <Box>
-                                        {
-                                            toggleFollow
-                                                ?
-                                                <FollowUsers
-                                                    lists={followList}
-                                                />
-                                                :
-                                                <FollowUsers
-                                                    lists={followerList}
-                                                />
-                                        }
+                                        <FollowUsers
+                                            index={1}
+                                            value={toggleFollow}
+                                            lists={followList}
+                                        />
+
+                                        <FollowUsers
+                                            index={2}
+                                            value={toggleFollow}
+                                            lists={followerList}
+                                        />
+
+                                        <FollowUsers
+                                            index={3}
+                                            value={toggleFollow}
+                                            lists={friendList}
+                                        />
                                     </Box>
                                 </TabPanel>
                                 {/* フレンド */}

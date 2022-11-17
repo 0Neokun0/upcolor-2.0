@@ -363,8 +363,8 @@ router.post("/updateProfile", async (req, res) => {
 
 router.post("/updateUserIcon", upload.single("icon"), async (req, res) => {
     // if (req.file) {
-        const userId = get.userId(req)
-        const sqlUpdateIcon = `
+    const userId = get.userId(req)
+    const sqlUpdateIcon = `
             UPDATE
                 images
             SET
@@ -373,7 +373,7 @@ router.post("/updateUserIcon", upload.single("icon"), async (req, res) => {
                 image_type = 1 AND
                 image_id = ?
         `
-        const icon = await sql.handleUpdate(sqlUpdateIcon, [req.file.filename, userId])
+    const icon = await sql.handleUpdate(sqlUpdateIcon, [req.file.filename, userId])
 
     // }
     // res.json(true)
@@ -470,10 +470,60 @@ router.post("/getFollowList", async (req, res) => {
     `
     const followerList = await sql.handleSelect(sqlSelectFollowerList, [userId])
 
+    const sqlSelectFriendList = `
+    SELECT
+        user_profiles.user_id,
+        user_profiles.user_name
+    FROM
+    (
+        SELECT
+            s1.user_id,
+            s1.follower_id
+        FROM
+        (
+            SELECT
+                fl.user_id AS user_id,
+                fl.follower_id AS follower_id
+            FROM
+                followers fl
+        ) s1
+        INNER JOIN
+        (
+            SELECT
+                flw.follower_id AS user_id,
+                flw.user_id AS follower_id
+            FROM
+                followers flw
+        ) s2
+        ON
+            s1.user_id = s2.user_id AND
+            s1.follower_id = s2.follower_id
+    ) follower_list
+    INNER JOIN
+        user_profiles ON
+        follower_list.follower_id = user_profiles.user_id
+    WHERE
+        follower_list.user_id = ?
+    `
+
+    const friendList = await sql.handleSelect(sqlSelectFriendList, [userId])
+
     res.json({
         followList: followList,
         followerList: followerList,
+        friendList: friendList,
     })
+})
+
+router.post("/selfCheck", async (req, res) => {
+    const userId = get.userId(req)
+    const pageUserId = req.body.userId
+
+    if (userId == pageUserId) {
+        res.json(false)
+    } else {
+        res.json(true)
+    }
 })
 
 module.exports = router

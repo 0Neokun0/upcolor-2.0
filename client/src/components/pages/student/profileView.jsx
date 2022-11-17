@@ -22,6 +22,7 @@ const ProfileView = () => {
 
     // フォロー
     const [state, setState] = useState(false)
+    const [showFollowButton, setShowFollowButton] = useState(false)
 
     // 投稿
     const [posts, setPosts] = useState([])
@@ -35,6 +36,13 @@ const ProfileView = () => {
     }
 
     useEffect(() => {
+        axios.post("/account/selfCheck", {
+            userId: userId,
+        })
+            .then((res) => {
+                setShowFollowButton(res.data)
+            })
+
         axios.post("/account/getFollow", {
             target: userId,
         })
@@ -144,24 +152,28 @@ const ProfileView = () => {
                                 </Typography>
 
                                 {
-                                    state
+                                    showFollowButton
                                         ?
-                                        <Button
-                                            variant="contained"
-                                            fullWidth
-                                            onClick={toggleFollow}
-                                        >
-                                            フォロー解除
-                                        </Button>
+                                        state
+                                            ?
+                                            <Button
+                                                variant="contained"
+                                                fullWidth
+                                                onClick={toggleFollow}
+                                            >
+                                                フォロー解除
+                                            </Button>
 
+                                            :
+                                            <Button
+                                                variant="outlined"
+                                                fullWidth
+                                                onClick={toggleFollow}
+                                            >
+                                                フォロー
+                                            </Button>
                                         :
-                                        <Button
-                                            variant="outlined"
-                                            fullWidth
-                                            onClick={toggleFollow}
-                                        >
-                                            フォロー
-                                        </Button>
+                                        <></>
                                 }
 
                                 <Divider
@@ -327,15 +339,6 @@ const ProfileView = () => {
                                             </Box>
                                         </TabPanel>
                                         {/* 投稿 */}
-
-                                        {/* フレンド */}
-                                        <TabPanel
-                                            value={selectTab}
-                                            index={4}
-                                        >
-                                            フレンド
-                                        </TabPanel>
-                                        {/* フレンド */}
                                     </Box>
                                 </Box>
                             </Grid>
