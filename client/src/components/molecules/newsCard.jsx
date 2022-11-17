@@ -1,11 +1,11 @@
 import { Avatar, Card, CardHeader, Divider, Typography } from "@mui/material"
-import { server } from "components/config"
+// import { server } from "components/config"
 
 const NewsCard = (props) => {
     return (
         <Card
             sx={{
-                borderRadius: '15px',
+                borderRadius: "15px",
                 m: 2,
                 p: 1,
             }}
@@ -13,7 +13,7 @@ const NewsCard = (props) => {
             <CardHeader
                 avatar={
                     <Avatar
-                        src={server.host + "/images/icon/" + props.profile.image}
+                        // src={server.host + "/images/icon/" + props.profile.image}
                     />
                 }
                 title={props.name}

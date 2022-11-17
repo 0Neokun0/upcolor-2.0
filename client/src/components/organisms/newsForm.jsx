@@ -66,6 +66,7 @@ const NewsForm = (props) => {
                             }}
                         >
                             <TextField
+                                autoFocus
                                 label="タイトル"
                                 name="title"
                                 variant="filled"

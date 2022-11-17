@@ -5,6 +5,7 @@ const ContainerLg = (props) => {
         <Container
             size="lg"
             sx={{
+                height: "calc(100vh - 64px)",
                 p: 2,
             }}
         >
