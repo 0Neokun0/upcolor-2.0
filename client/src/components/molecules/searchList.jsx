@@ -18,7 +18,6 @@ const SearchList = (props) => {
     }
 
     return (
-
         <Box
             sx={{
                 m: 1,
