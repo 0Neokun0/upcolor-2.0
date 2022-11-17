@@ -430,7 +430,7 @@ const Profile = () => {
                                             }
                                             onClick={() => setToggleFollow(3)}
                                         >
-                                            ??相互フォロー??
+                                            相互フォロー
                                         </Button>
                                     </ButtonGroup>
 
