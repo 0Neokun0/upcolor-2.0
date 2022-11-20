@@ -5,11 +5,11 @@ import {
     CardMedia,
     Chip,
     Typography,
-} from "@mui/material";
+} from "@mui/material"
 
-import BadgeIcon from "@mui/icons-material/Badge";
-import GroupWorkIcon from "@mui/icons-material/GroupWork";
-import DescriptionIcon from "@mui/icons-material/Description";
+import BadgeIcon from "@mui/icons-material/Badge"
+import GroupWorkIcon from "@mui/icons-material/GroupWork"
+import DescriptionIcon from "@mui/icons-material/Description"
 
 const TeamViewCard = (props) => {
     return (
