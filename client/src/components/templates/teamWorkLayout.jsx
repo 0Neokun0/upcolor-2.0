@@ -12,7 +12,7 @@ const TeamWorkLayout = (props) => {
         >
             {props["children"]}
         </Container>
-    );
+    )
 }
 
 export default TeamWorkLayout
