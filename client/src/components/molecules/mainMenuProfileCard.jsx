@@ -1,13 +1,4 @@
-import React from "react"
-import {
-    Avatar,
-    Box,
-    Card,
-    Chip,
-    Divider,
-    Switch,
-    Typography,
-} from "@mui/material"
+import { Avatar, Box, Card, Chip, Divider, Typography } from "@mui/material"
 import { server } from "components/config"
 
 const MainMenuProfileCard = (props) => {
@@ -43,18 +34,16 @@ const MainMenuProfileCard = (props) => {
                     my: 2,
                 }}
             />
-            ↓*** 要検討 ***↓
             <Box
-                justifyContent={"space-between"}
+                justifyContent={"center"}
                 sx={{
                     display: "flex",
                     alignItems: "center",
                 }}
             >
                 <Chip
-                    label="naoko"
+                    label={props.profile.course_name}
                 />
-                <Switch />
             </Box>
         </Card>
     )

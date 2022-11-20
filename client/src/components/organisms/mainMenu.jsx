@@ -1,13 +1,4 @@
-import { Link } from 'react-router-dom'
-import {
-    Box,
-    Card,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-} from '@mui/material'
-
+import { Box, Card, List, Link, ListItem, ListItemButton, ListItemIcon, Typography } from '@mui/material'
 import MainMenuProfileCard from 'components/molecules/mainMenuProfileCard'
 
 const MainMenu = (props) => {
@@ -16,8 +7,38 @@ const MainMenu = (props) => {
             <Card
                 sx={{
                     p: 2,
+
                 }}
             >
+                <Box sx={{
+                    display: "flex",
+                    mb: 1,
+                    p: 1,
+                }}>
+                <Link
+                    href="/"
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                    }}
+                >
+                    <img
+                        src={props.logo}
+                        alt="ロゴの画像"
+                        height="30px"
+                    />
+                </Link>
+                <Typography
+                    variant="h6"
+                    sx={{
+                        ml: 3,
+                        flexGrow: 1,
+                        fontWeight: 600,
+                    }}
+                >
+                    UPCOLOR
+                </Typography>
+                </Box>
                 <MainMenuProfileCard
                     profile={props.profile}
                 />

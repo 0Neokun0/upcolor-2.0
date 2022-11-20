@@ -3,6 +3,7 @@ import AddIcon from '@mui/icons-material/Add'
 import { cyan } from "@mui/material/colors"
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
+import { server } from "components/config"
 // import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded'
 // import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded'
 
@@ -67,6 +68,7 @@ const SendPost = (props) => {
                                 objectFit: 'cover',
                                 mr: '20px',
                             }}
+                            src={server.host + "/images/icon/" + props.profile.image}
                         />
 
                         <TextField
