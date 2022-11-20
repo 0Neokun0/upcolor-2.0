@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { ProfileEditLayout } from "components/templates"
 import { ProfileForm } from "components/organisms"
 import { ProfileInput, ProfileSelectChip } from "components/molecules"
-import { TextField } from "@mui/material"
+import { Box, Button, TextField } from "@mui/material"
 
 const CompanyProfileEdit = () => {
 
@@ -88,6 +88,24 @@ const CompanyProfileEdit = () => {
                         fullWidth
                         multiline
                     />
+                    <Button
+                        variant="contained"
+                        fullWidth
+                        component="label"
+                        sx={{
+                            mt: 2,
+                            mb: 2,
+                        }}
+                    >
+                        アイコンの選択
+                        <Box
+                            component="input"
+                            type="file"
+                            name="icon"
+                            accept=".png, .jpg, .jpeg"
+                            hidden
+                        />
+                    </Button>
 
                     <TextField
                         label="企業プロフィール"
@@ -97,6 +115,24 @@ const CompanyProfileEdit = () => {
                         fullWidth
                         multiline
                     />
+                    <Button
+                        variant="contained"
+                        fullWidth
+                        component="label"
+                        sx={{
+                            mt: 2,
+                            mb: 2,
+                        }}
+                    >
+                        アイコンの選択
+                        <Box
+                            component="input"
+                            type="file"
+                            name="icon"
+                            accept=".png, .jpg, .jpeg"
+                            hidden
+                        />
+                    </Button>
 
                     <TextField
                         label="社長.代表.CEO.メッセージ"
@@ -106,6 +142,24 @@ const CompanyProfileEdit = () => {
                         fullWidth
                         multiline
                     />
+                    <Button
+                        variant="contained"
+                        fullWidth
+                        component="label"
+                        sx={{
+                            mt: 2,
+                            mb: 2,
+                        }}
+                    >
+                        アイコンの選択
+                        <Box
+                            component="input"
+                            type="file"
+                            name="icon"
+                            accept=".png, .jpg, .jpeg"
+                            hidden
+                        />
+                    </Button>
                 </ProfileInput>
 
                 <ProfileInput
@@ -148,6 +202,25 @@ const CompanyProfileEdit = () => {
                         defaultValue={profile["company_address"]}
                         fullWidth
                     />
+
+                    <Button
+                        variant="contained"
+                        fullWidth
+                        component="label"
+                        sx={{
+                            mt: 2,
+                            mb: 2,
+                        }}
+                    >
+                        アイコンの選択
+                        <Box
+                            component="input"
+                            type="file"
+                            name="icon"
+                            accept=".png, .jpg, .jpeg"
+                            hidden
+                        />
+                    </Button>
                 </ProfileInput>
 
                 <ProfileInput
