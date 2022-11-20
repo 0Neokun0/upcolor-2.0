@@ -117,7 +117,7 @@ const TeamViewCard = (props) => {
                 </Box>
             </CardActionArea>
         </Card>
-    );
-};
+    )
+}
 
-export default TeamViewCard;
+export default TeamViewCard
