@@ -23,6 +23,6 @@ const TeamView = (props) => {
                 })
             }
         </Grid>
-    );
+    )
 }
 export default TeamView
