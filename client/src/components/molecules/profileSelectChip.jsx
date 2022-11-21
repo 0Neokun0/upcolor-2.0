@@ -39,6 +39,8 @@ const MultipleSelectChip = (props) => {
     })
 
     return (
+        props.list
+        &&
         <FormControl fullWidth size="small">
             <InputLabel>{props["label"]}</InputLabel>
 

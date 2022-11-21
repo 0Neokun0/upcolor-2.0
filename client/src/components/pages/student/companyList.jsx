@@ -4,9 +4,9 @@ import { CompanyListProfileCard, SearchList } from "components/molecules"
 import { ListDisplayBox, SearchListBox } from "components/organisms"
 import { ListLayout } from "components/templates"
 
-import ReduceCapacityIcon from '@mui/icons-material/ReduceCapacity'
-import LocalConvenienceStoreIcon from '@mui/icons-material/LocalConvenienceStore'
-import TravelExploreIcon from '@mui/icons-material/TravelExplore'
+import ReduceCapacityIcon from '@mui/icons-material/ReduceCapacity';
+import LocalConvenienceStoreIcon from '@mui/icons-material/LocalConvenienceStore';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 
 const CompanyList = () => {
     const [originalCompanies, setOriginalCompanies] = useState(false)
@@ -46,8 +46,6 @@ const CompanyList = () => {
     }, [courses, occupations, prefectures, originalCompanies])
 
     return (
-        displayCompanies
-        &&
         <ListLayout>
             <SearchListBox>
                 <SearchList
@@ -81,18 +79,22 @@ const CompanyList = () => {
                 />
             </SearchListBox>
 
-            <ListDisplayBox>
-                {
-                    displayCompanies.map((value, index) => {
-                        return (
-                            <CompanyListProfileCard
-                                key={index}
-                                value={value}
-                            />
-                        )
-                    })
-                }
-            </ListDisplayBox>
+            {
+                displayCompanies
+                &&
+                <ListDisplayBox>
+                    {
+                        displayCompanies.map((value, index) => {
+                            return (
+                                <CompanyListProfileCard
+                                    key={index}
+                                    value={value}
+                                />
+                            )
+                        })
+                    }
+                </ListDisplayBox>
+            }
         </ListLayout>
     )
 }

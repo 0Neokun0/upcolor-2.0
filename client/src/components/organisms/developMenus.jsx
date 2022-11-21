@@ -4,8 +4,8 @@ import {
     CardContent,
     CardMedia,
     Typography,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+} from "@mui/material"
+import { Link } from "react-router-dom"
 
 const DevelopMenus = (props) => {
     return (
@@ -21,6 +21,8 @@ const DevelopMenus = (props) => {
                         borderRadius: "15px",
                         boxShadow: 3,
                     }}
+                    key={index}
+                    sx={props.cardSx}
                 >
                     <CardMedia
                         sx={{
@@ -59,9 +61,9 @@ const DevelopMenus = (props) => {
                         </Button>
                     </CardContent>
                 </Card>
-            );
+            )
         })
-    );
-};
+    )
+}
 
-export default DevelopMenus;
+export default DevelopMenus
