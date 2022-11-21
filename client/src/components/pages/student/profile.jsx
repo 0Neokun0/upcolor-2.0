@@ -10,6 +10,11 @@ import PortraitRoundedIcon from '@mui/icons-material/PortraitRounded'
 import WorkspacePremiumRoundedIcon from '@mui/icons-material/WorkspacePremiumRounded'
 import TerminalRoundedIcon from '@mui/icons-material/TerminalRounded'
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
+import AccountBoxRoundedIcon from '@mui/icons-material/AccountBoxRounded'
+import AccountTreeRoundedIcon from '@mui/icons-material/AccountTreeRounded'
+import DynamicFeedRoundedIcon from '@mui/icons-material/DynamicFeedRounded'
+import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
+import ModeEditRoundedIcon from '@mui/icons-material/ModeEditRounded'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { FollowUsers } from "components/organisms"
 import ProfileTeamWork from "components/molecules/profileTeamWork"
@@ -323,6 +328,8 @@ const Profile = () => {
                     >
                         <Tabs
                             value={selectTab}
+                            textColor="inherit"
+                            indicatorColor="primary"
                             sx={{
                                 borderBottom: 1,
                                 borderColor: 'divider',
@@ -330,24 +337,28 @@ const Profile = () => {
                         >
                             <Tab
                                 value={1}
+                                icon={<AccountBoxRoundedIcon />}
                                 label="自己紹介"
                                 onClick={() => setSelectTab(1)}
                             />
 
                             <Tab
                                 value={2}
+                                icon={<AccountTreeRoundedIcon />}
                                 label="進級制作"
                                 onClick={() => setSelectTab(2)}
                             />
 
                             <Tab
                                 value={3}
+                                icon={<DynamicFeedRoundedIcon />}
                                 label="投稿"
                                 onClick={() => setSelectTab(3)}
                             />
 
                             <Tab
                                 value={4}
+                                icon={<PeopleAltRoundedIcon />}
                                 label="フレンド"
                                 onClick={() => setSelectTab(4)}
                             />
@@ -355,6 +366,7 @@ const Profile = () => {
                             {/* 自分のページだけ */}
                             <Tab
                                 value={5}
+                                icon={<ModeEditRoundedIcon />}
                                 label="編集"
                                 onClick={() => setSelectTab(5)}
                                 sx={{
