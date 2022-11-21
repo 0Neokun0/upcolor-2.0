@@ -27,10 +27,10 @@ const MainMenuCompany = (props) => {
                     p: 1,
                 }}>
                     <img
-                            src={props.logo}
-                            alt="ロゴの画像"
-                            height="30px"
-                        />
+                        src={props.logo}
+                        alt="ロゴの画像"
+                        height="30px"
+                    />
                     <Typography
                         variant="h6"
                         sx={{
