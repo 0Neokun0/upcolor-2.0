@@ -46,8 +46,6 @@ const CompanyList = () => {
     }, [courses, occupations, prefectures, originalCompanies])
 
     return (
-        displayCompanies
-        &&
         <ListLayout>
             <SearchListBox>
                 <SearchList
@@ -81,18 +79,22 @@ const CompanyList = () => {
                 />
             </SearchListBox>
 
-            <ListDisplayBox>
-                {
-                    displayCompanies.map((value, index) => {
-                        return (
-                            <CompanyListProfileCard
-                                key={index}
-                                value={value}
-                            />
-                        )
-                    })
-                }
-            </ListDisplayBox>
+            {
+                displayCompanies
+                &&
+                <ListDisplayBox>
+                    {
+                        displayCompanies.map((value, index) => {
+                            return (
+                                <CompanyListProfileCard
+                                    key={index}
+                                    value={value}
+                                />
+                            )
+                        })
+                    }
+                </ListDisplayBox>
+            }
         </ListLayout>
     )
 }
