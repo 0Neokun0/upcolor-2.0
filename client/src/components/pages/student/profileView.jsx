@@ -4,7 +4,7 @@ import axios from "axios"
 import { server } from "components/config"
 
 import { ContainerLg } from "components/templates"
-import { PostProfile, TabPanel } from "components/molecules"
+import { ProfilePost, TabPanel } from "components/molecules"
 
 import { Box, Button, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs, Tooltip, Typography } from "@mui/material"
 import { grey, teal } from "@mui/material/colors"
@@ -324,7 +324,7 @@ const ProfileView = () => {
                                                         ?
                                                         posts.map((post) => {
                                                             return (
-                                                                <PostProfile
+                                                                <ProfilePost
                                                                     key={post["post_id"]}
                                                                     post={post}
                                                                 />
