@@ -7,7 +7,6 @@ const MainMenu = (props) => {
             <Card
                 sx={{
                     p: 2,
-
                 }}
             >
                 <Box sx={{
@@ -15,29 +14,29 @@ const MainMenu = (props) => {
                     mb: 1,
                     p: 1,
                 }}>
-                <Link
-                    href="/"
-                    sx={{
-                        display: "flex",
-                        alignItems: "center",
-                    }}
-                >
-                    <img
-                        src={props.logo}
-                        alt="ロゴの画像"
-                        height="30px"
-                    />
-                </Link>
-                <Typography
-                    variant="h6"
-                    sx={{
-                        ml: 3,
-                        flexGrow: 1,
-                        fontWeight: 600,
-                    }}
-                >
-                    UPCOLOR
-                </Typography>
+                    <Link
+                        href="/"
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                        }}
+                    >
+                        <img
+                            src={props.logo}
+                            alt="ロゴの画像"
+                            height="30px"
+                        />
+                    </Link>
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            ml: 3,
+                            flexGrow: 1,
+                            fontWeight: 600,
+                        }}
+                    >
+                        UPCOLOR
+                    </Typography>
                 </Box>
                 <MainMenuProfileCard
                     profile={props.profile}
