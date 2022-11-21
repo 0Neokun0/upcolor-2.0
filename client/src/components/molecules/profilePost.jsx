@@ -9,7 +9,7 @@ import {
 import { grey } from "@mui/material/colors"
 import { server } from "components/config"
 
-const PostProfile = (props) => {
+const profilePost = (props) => {
     return (
         <Link to={`/home/${props["post"]["post_id"]}`}>
             <Card
@@ -71,4 +71,4 @@ const PostProfile = (props) => {
     )
 }
 
-export default PostProfile
+export default profilePost

@@ -2,9 +2,9 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { server } from "components/config"
 import { ContainerLg } from "components/templates"
-import { PostProfile, ProfileFormUnit, ProfileSelect, ProfileSelectChip, TabPanel } from "components/molecules"
+import { ProfilePost, ProfileFormUnit, ProfileSelect, ProfileSelectChip, TabPanel } from "components/molecules"
 
-import { Box, Button, ButtonGroup, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material"
+import { Box, Button, ButtonGroup, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Skeleton, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material"
 import { grey, teal } from "@mui/material/colors"
 import PortraitRoundedIcon from '@mui/icons-material/PortraitRounded'
 import WorkspacePremiumRoundedIcon from '@mui/icons-material/WorkspacePremiumRounded'
@@ -12,11 +12,15 @@ import TerminalRoundedIcon from '@mui/icons-material/TerminalRounded'
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { FollowUsers } from "components/organisms"
+import ProfileTeamWork from "components/molecules/profileTeamWork"
 
 const Profile = () => {
     const [profile, setProfile] = useState([])
     const [profileLists, setProfileLists] = useState([])
     const [selectTab, setSelectTab] = useState(1)
+
+    // 進級制作
+    const [teamWorkList, setTeamWorkList] = useState([])
 
     // 投稿
     const [posts, setPosts] = useState([])
@@ -80,6 +84,11 @@ const Profile = () => {
     }
 
     useEffect(() => {
+        axios.post("/account/getTeamWorkList")
+            .then((res) => {
+                setTeamWorkList(res.data)
+            })
+
         axios.post("/account/getFollowList")
             .then((res) => {
                 setFollowList(res.data["followList"])
@@ -175,18 +184,24 @@ const Profile = () => {
                         <Box
                             textAlign="center"
                         >
-                            <Box
-                                component="img"
-                                src={server.host + "/images/icon/" + profile["image"]}
-                                sx={{
-                                    width: "100%",
-                                    aspectRatio: "1/1",
-                                    maxWidth: "300px",
-                                    borderRadius: "50%",
-                                    mb: 2,
-                                    objectFit: "cover"
-                                }}
-                            />
+                            {
+                                profile["image"]
+                                    ?
+                                    <Box
+                                        component="img"
+                                        src={server.host + "/images/icon/" + profile["image"]}
+                                        sx={{
+                                            width: "100%",
+                                            aspectRatio: "1/1",
+                                            maxWidth: "300px",
+                                            borderRadius: "50%",
+                                            mb: 2,
+                                            objectFit: "cover"
+                                        }}
+                                    />
+                                    :
+                                    <></>
+                            }
                         </Box>
 
                         <Typography
@@ -346,7 +361,34 @@ const Profile = () => {
                                     value={selectTab}
                                     index={2}
                                 >
-                                    進級制作
+                                    <Box
+                                        sx={{
+                                            "a": {
+                                                display: "block"
+                                            },
+                                            "a + a": {
+                                                mt: 2,
+                                            },
+                                        }}
+                                    >
+                                        {
+                                            teamWorkList.length
+                                                ?
+                                                teamWorkList.map((teamWork) => {
+                                                    return (
+                                                        <ProfileTeamWork
+                                                            key={teamWork["team_work_id"]}
+                                                            teamWork={teamWork}
+                                                        />
+                                                    )
+                                                })
+
+                                                :
+                                                <Typography>
+                                                    チームが見つかりません
+                                                </Typography>
+                                        }
+                                    </Box>
                                 </TabPanel>
                                 {/* 進級制作 */}
 
@@ -370,7 +412,7 @@ const Profile = () => {
                                                 ?
                                                 posts.map((post) => {
                                                     return (
-                                                        <PostProfile
+                                                        <ProfilePost
                                                             key={post["post_id"]}
                                                             post={post}
                                                         />
@@ -623,7 +665,7 @@ const Profile = () => {
                     </Grid>
                 </Grid>
             </Card>
-        </ContainerLg>
+        </ContainerLg >
     )
 }
 

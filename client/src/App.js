@@ -4,12 +4,9 @@ import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
 import { ClassNews, ClassNewsFeed, LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
-
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite } from "components/pages/student"
-
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment, StudentProfileView } from "components/pages/company"
-
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
 
