@@ -362,21 +362,21 @@ router.post("/updateProfile", async (req, res) => {
 })
 
 router.post("/updateUserIcon", upload.single("icon"), async (req, res) => {
-    // if (req.file) {
     const userId = get.userId(req)
     const sqlUpdateIcon = `
-            UPDATE
-                images
-            SET
-                image_url = ?
-            WHERE
-                image_type = 1 AND
-                image_id = ?
-        `
-    const icon = await sql.handleUpdate(sqlUpdateIcon, [req.file.filename, userId])
-
-    // }
-    // res.json(true)
+        UPDATE
+            images
+        SET
+            image_url = ?
+        WHERE
+            image_type = 1 AND
+            image_id = ?
+    `
+    if (req.file) {
+        await sql.handleUpdate(sqlUpdateIcon, [req.file.filename, userId])
+    } else {
+        await sql.handleUpdate(sqlUpdateIcon, ["userIcon.png", userId])
+    }
 })
 
 router.post("/follow", async (req, res) => {
