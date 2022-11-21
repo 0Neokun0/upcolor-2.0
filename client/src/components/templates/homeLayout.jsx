@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom"
-import { MainMenu, NewsList, ReplyModal, SendPost } from "components/organisms"
-import { Box, Drawer, Hidden, IconButton, Grid, Tooltip } from "@mui/material"
+import { NewsList, ReplyModal, SendPost } from "components/organisms"
+import { Box, Hidden, Grid } from "@mui/material"
 import Footer from "components/organisms/footer/footer"
-import MenuIcon from "@mui/icons-material/Menu"
+
 import { useState } from "react"
 import logo from "components/atoms/logo/upcolor_logo.svg"
+import MainMenuDrawer from "components/organisms/mainMenuDrawer"
 
 const HomeLayout = (props) => {
     const [studentMenuOpen, setStudentMenuOpen] = useState(false)
@@ -31,73 +32,13 @@ const HomeLayout = (props) => {
                             width: "30%",
                         }}
                     >
-                        <Tooltip
-                            title="メニュー表示">
-                            <IconButton
-                                sx={{
-                                    m: 2,
-                                    display: {
-                                        md: "block",
-                                        lg: "none",
-                                    },
-                                }}
-                                color="inherit"
-                                edge="start"
-                                onClick={studentMenuOpenToggle}
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                        </Tooltip>
-
-                        <Drawer
-                            sx={{
-                                display: {
-                                    xs: "block",
-                                    lg: "none",
-                                },
-                                "& .MuiDrawer-paper": {
-                                    width: 390,
-                                    borderTopRightRadius: "15px",
-                                    borderBottomRightRadius: "15px",
-                                },
-                            }}
-                            variant="temporary"
-                            open={studentMenuOpen}
-                            onClose={studentMenuOpenToggle}
-                            ModalProps={{
-                                keepMounted: true,
-                            }}
-                        >
-                            <MainMenu
-                                logo={logo}
-                                profile={props.profile}
-                                user={props.user}
-                                menus={props.menus}
-                            />
-                        </Drawer>
-
-                        <Drawer
-                            sx={{
-                                display: {
-                                    xs: "none",
-                                    lg: "block",
-                                },
-                                "& .MuiDrawer-paper": {
-                                    width: 390,
-                                    borderTopRightRadius: "15px",
-                                    borderBottomRightRadius: "15px",
-                                },
-                            }}
-                            open
-                            variant="permanent"
-                        >
-                            <MainMenu
-                                logo={logo}
-                                profile={props.profile}
-                                user={props.user}
-                                menus={props.menus}
-                            />
-                        </Drawer>
+                        <MainMenuDrawer
+                            logo={logo}
+                            menus={props.menus}
+                            profile={props.profile}
+                            studentMenuOpen={studentMenuOpen}
+                            studentMenuOpenToggle={studentMenuOpenToggle}
+                        />
                     </Box>
                 </Grid>
 
