@@ -7,7 +7,7 @@ import { useState } from 'react'
 const SearchList = (props) => {
     const [open, setOpen] = useState(false)
     const [formats, setFormats] = useState(() => [])
-    
+
     const handleClick = () => {
         setOpen(!open)
     }
@@ -18,7 +18,7 @@ const SearchList = (props) => {
     }
 
     return (
-        <Box 
+        <Box
             sx={{
                 m: 1,
             }}
@@ -71,6 +71,8 @@ const SearchList = (props) => {
                         }}
                     >
                         {
+                            props.list
+                            &&
                             props.list.map((value, index) => {
                                 return (
                                     <ToggleButton
