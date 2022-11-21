@@ -1,5 +1,5 @@
 // import axios from 'axios'
-import { Box, Drawer, Grid, IconButton, Stack } from "@mui/material"
+import { Box, Grid, IconButton, Tooltip } from "@mui/material"
 // import { useEffect, useState } from 'react'
 // import { useParams } from 'react-router-dom'
 import CorporateFareIcon from "@mui/icons-material/CorporateFare"
@@ -22,12 +22,13 @@ import WebIcon from "@mui/icons-material/Web"
 import HouseIcon from "@mui/icons-material/House"
 import InstagramIcon from "@mui/icons-material/Instagram"
 import MenuIcon from "@mui/icons-material/Menu"
-import MainMenuCompany from "components/organisms/mainMenuCompany"
 import { CompanyHomeLayout } from "components/templates"
 import { CompanyProfile } from "."
 import { useState } from "react"
+import logo from "components/atoms/logo/upcolor_logo.svg"
+import { MainMenuCompanyDrawer } from "components/organisms"
 
-const CompanyHome = (props) => {
+const CompanyHome = () => {
     const [companyMenuOpen, setCompanyMenuOpen] = useState(false)
 
     const handleDrawerToggle = () => {
@@ -159,49 +160,45 @@ const CompanyHome = (props) => {
     return (
         <CompanyHomeLayout>
             <Box>
-                <Grid container spacing={2} columns={10}>
-                    <Grid item xs={2}>
-                        <Drawer
-                            variant="temporary"
-                            open={companyMenuOpen}
-                            onClose={handleDrawerToggle}
-                            ModalProps={{
-                                keepMounted: true, // Better open performance on mobile.
-                            }}
+                <Grid
+                    container
+                    spacing={2}
+                    columns={10}
+                >
+                    <Grid
+                        item
+                        xs={2}
+                    >
+                        <MainMenuCompanyDrawer
+                            logo={logo}
+                            menus={menus}
+                            companyMenuOpen={companyMenuOpen}
+                            handleDrawerToggle={handleDrawerToggle}
+                        />
+                        <Box
                             sx={{
-                                display: { xs: "block", lg: "none" },
-                                "& .MuiDrawer-paper": {
-                                    boxSizing: "border-box",
-                                    width: 350,
-                                },
+                                p: 2,
+                                width: "30%",
                             }}
                         >
-                            <MainMenuCompany menus={menus} />
-                        </Drawer>
-                        <Drawer
-                            variant="permanent"
-                            sx={{
-                                display: { xs: "none", lg: "block" },
-                                "& .MuiDrawer-paper": {
-                                    boxSizing: "border-box",
-                                    width: 350,
-                                },
-                            }}
-                            open
-                        >
-                            <MainMenuCompany menus={menus} />
-                        </Drawer>
+                            <Tooltip
+                                title="メニュー表示">
+                                <IconButton
+                                    color="inherit"
+                                    edge="start"
+                                    onClick={handleDrawerToggle}
+                                    sx={{ mr: 2, display: { md: "block", lg: "none" } }}
+                                >
+                                    <MenuIcon />
+                                </IconButton>
+                            </Tooltip>
+                        </Box>
                     </Grid>
 
-                    <Grid item xs={8}>
-                        <IconButton
-                            color="inherit"
-                            edge="start"
-                            onClick={handleDrawerToggle}
-                            sx={{ mr: 2, display: { md: "block", lg: "none" } }}
-                        >
-                            <MenuIcon />
-                        </IconButton>
+                    <Grid
+                        item
+                        xs={8}
+                    >
                         <CompanyProfile
                             handleDrawerToggle={handleDrawerToggle}
                             companyName={companyName}

@@ -6,6 +6,7 @@ import {
     ListItem,
     ListItemButton,
     ListItemIcon,
+    Typography,
 } from '@mui/material'
 import { MainMenuCompanyCard } from 'components/molecules'
 
@@ -20,6 +21,27 @@ const MainMenuCompany = (props) => {
                     width: 300,
                 }}
             >
+                <Box sx={{
+                    display: "flex",
+                    mb: 1,
+                    p: 1,
+                }}>
+                    <img
+                            src={props.logo}
+                            alt="ロゴの画像"
+                            height="30px"
+                        />
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            ml: 3,
+                            flexGrow: 1,
+                            fontWeight: 600,
+                        }}
+                    >
+                        UPCOLOR
+                    </Typography>
+                </Box>
                 <MainMenuCompanyCard
                     profile={props.profile}
                 />
