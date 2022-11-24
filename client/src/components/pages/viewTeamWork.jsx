@@ -188,7 +188,7 @@ const TeamWork = () => {
                         width="100%"
                     >
                         <Hidden
-                            mdUp
+                            lgDown
                         >
                             {
                                 team
