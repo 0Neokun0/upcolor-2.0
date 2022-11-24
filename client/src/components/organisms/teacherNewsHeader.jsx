@@ -1,9 +1,5 @@
-import { Avatar, Box, Card, CardMedia, Chip, IconButton, Tooltip, Typography } from "@mui/material"
-
-import ClassRoundedIcon from '@mui/icons-material/ClassRounded'
-import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import { server } from 'components/config'
-
+import { Avatar, Box, Card, CardMedia, Chip, Typography } from "@mui/material"
 
 const TeacherNewsHeader = (props) => {
     return (

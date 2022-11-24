@@ -33,7 +33,7 @@ function App() {
 
     const menus = [
         {
-            label: "学生フェード",
+            label: "学生フィード",
             icon: <PeopleAltRoundedIcon />,
             value: "学生",
             url: "/home",
@@ -42,7 +42,7 @@ function App() {
             label: "クラスニュース",
             icon: <SchoolRoundedIcon />,
             value: "学校",
-            url: "/classNews",
+            url: "/teacher",
         },
         {
             label: "企業検索",
@@ -142,7 +142,6 @@ function App() {
         axios.post("/account/getProfile")
             .then((res) => {
                 setProfile(res.data)
-                console.log(res.data)
             })
     }, [])
 

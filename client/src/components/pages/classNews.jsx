@@ -15,27 +15,21 @@ const ClassNews = () => {
         const data = new FormData(e.currentTarget)
 
         axios.post("/classNews/createClassNewsRoom", {
-            classNewsRoomName: data.get("classNewsRoomName"),
-            classNewsRoomPassword: data.get("classNewsRoomPassword"),
+            name: data.get("classNewsRoomName"),
+            password: data.get("classNewsRoomPassword"),
         })
 
         setOpenCreate(false)
     }
 
     useEffect(() => {
-        axios.post("/classNews/viewClassNewsRoom")
+        axios.post("/classNews/getJoinedClass")
             .then((res) => {
-                if (res.data) {
-                    console.log(res.data[0])
-
+                if (res) {
                     setClassNewsRooms(res.data)
-                } else {
-                    setClassNewsRooms([])
                 }
             })
-    }, [])
 
-    useEffect(() => {
         axios.post("/account/getProfile")
             .then((res) => {
                 console.log(res.data)
@@ -47,6 +41,7 @@ const ClassNews = () => {
         <ContainerLg>
             <ClassNewsHeader
                 profile={profile}
+
                 openJoin={openJoin}
                 openCreate={openCreate}
                 setOpenJoin={setOpenJoin}

@@ -22,7 +22,6 @@ const DevelopMenus = (props) => {
                         boxShadow: 3,
                     }}
                     key={index}
-                    sx={props.cardSx}
                 >
                     <CardMedia
                         sx={{

@@ -256,10 +256,29 @@ router.post("/getProfile", async (req, res) => {
 
 })
 
+// 自分 *type制限なし
+router.post("/getTeacherProfile", async (req, res) => {
+    const userId = get.userId(req)
+
+    const sqlSelectProfile = `
+        SELECT
+            user_id,
+            name,
+            mail,
+            image
+        FROM
+            user_infomation
+        WHERE
+            user_id = ?
+    `
+    const profile = await sql.handleSelect(sqlSelectProfile, [userId])
+
+    res.json(profile[0])
+})
+
 // 他人
 router.post("/getStudentProfile", async (req, res) => {
     const userId = req.body.userId
-
     try {
         const profile = await get.user(userId)
         const qualifications = await get.list("qualification")

@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Dialog, DialogActions, DialogTitle, Link, Toolbar, Tooltip, Typography } from "@mui/material"
+import { AppBar, Box, Button, Dialog, Link, Toolbar, Tooltip, Typography } from "@mui/material"
 import { NavbarMenu } from "components/molecules"
 import { useLocation } from "react-router-dom"
 
@@ -119,37 +119,50 @@ const Header = (props) => {
                 open={Boolean(props.open)}
                 onClose={props.toggleAlertClose}
             >
-                <DialogTitle
+                <Box
                     sx={{
-                        fontWeight: 600,
+                        p: 2,
                     }}
                 >
-                    本当にサインアウトしますか?
-                </DialogTitle>
-
-                <DialogActions>
-                    <Button
+                    <Typography
+                        textAlign="center"
                         sx={{
-                            mr: 2,
+                            fontWeight: 600,
                         }}
-                        color="success"
-                        startIcon={<LoginIcon />}
-                        variant="outlined"
-                        onClick={props.toggleAlertClose}
                     >
-                        キャンセル
-                    </Button>
+                        本当にサインアウトしますか?
+                    </Typography>
 
-                    <Button
-                        color="error"
-                        startIcon={<LogoutIcon />}
-                        variant="outlined"
-                        onClick={props.toggleSignout}
-                        href="/"
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            mt: 2,
+                        }}
                     >
-                        サインアウト
-                    </Button>
-                </DialogActions>
+                        <Button
+                            color="success"
+                            startIcon={<LoginIcon />}
+                            variant="outlined"
+                            onClick={props.toggleAlertClose}
+                        >
+                            キャンセル
+                        </Button>
+
+                        <Button
+                            color="error"
+                            startIcon={<LogoutIcon />}
+                            variant="outlined"
+                            onClick={props.toggleSignout}
+                            href="/"
+                            sx={{
+                                ml: 2,
+                            }}
+                        >
+                            サインアウト
+                        </Button>
+                    </Box>
+                </Box>
             </Dialog>
         </AppBar>
     )

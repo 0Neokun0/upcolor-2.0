@@ -5,83 +5,164 @@ const get = require("./function/get")
 const sql = require("./function/sql")
 
 router.post("/createClassNewsRoom", async (req, res) => {
-	const userId = get.userId(req)
-	const classNewsRoomName = req.body.classNewsRoomName
-	const classNewsRoomPassword = req.body.classNewsRoomPassword
-
-	const sqlInsertClassNewsRoom = `
-        INSERT INTO classes_list (
-            created_user_id,
-            class_name,
-            class_password
-        )
-        VALUES (
-            ?,
-            ?,
-            ?
-        )
-    `
-
-	await sql.handleInsert(sqlInsertClassNewsRoom, [
-		userId,
-		classNewsRoomName,
-		classNewsRoomPassword,
-	])
-})
-
-router.post("/viewClassNewsRoom", async (req, res) => {
-	const userId = get.userId(req)
-
-	const sqlSelectClassRoom = `
-        SELECT
-            *
-        FROM
-            classes_list
-        INNER JOIN
-            user_profiles
-        ON
-            classes_list.created_user_id = user_profiles.user_id
-    `
-
-	const classRooms = await sql.handleSelect(sqlSelectClassRoom, [userId])
-
-	res.json(classRooms)
-})
-
-router.post("/enterClassRoom", async (req, res) => {
-	const classId = req.body.classId
-
-	const sqlSelectEnterClassRoom = `
-        SELECT
-            *
-        FROM
-            classes_list
-        WHERE
-            class_id=?
-        `
-
-        const enterClassRoom = await sql.handleSelect(sqlSelectEnterClassRoom, [classId])
-
-        res.json(enterClassRoom)
-})
-
-    router.post("/addClassNews", async (req, res) => {
+    try {
         const userId = get.userId(req)
-        const classNewsText = req.body.classNewsText
+        const name = req.body.name
+        const password = req.body.password
 
+        const sqlInsertClass = `
+            INSERT INTO classes_list(
+                created_user_id,
+                class_name,
+                class_password
+            )
+            VALUES(
+                ?,
+                ?,
+                ?
+            )
+        `
+        const insert = await sql.handleInsert(sqlInsertClass, [userId, name, password])
 
-        const sqlInsertClassNews = `
-            INSERT INTO class_chat(
-                sent_user_id,
-                sent_text,
+        const sqlInsertJoinedClass = `
+            INSERT INTO users_joined_class(
+                class_id,
+                joined_user_id
             )
             VALUES(
                 ?,
                 ?
             )
         `
+        await sql.handleInsert(sqlInsertJoinedClass, [insert["insertId"], userId])
 
-        await sql.handleInsert(sqlInsertClassNews, [userId, classNewsText])
-    })
+        res.json(true)
+    } catch (error) {
+        console.log(error)
+        res.json(false)
+    }
+})
+
+router.post("/getJoinedClass", async (req, res) => {
+    try {
+        const userId = get.userId(req)
+
+        const sqlSelectJoinedClass = `
+            SELECT
+                classes_list.class_id,
+                classes_list.class_name,
+                user_profiles.user_name
+            FROM
+                users_joined_class
+            INNER JOIN
+                classes_list ON
+                classes_list.class_id = users_joined_class.class_id
+            INNER JOIN
+                user_profiles ON
+                user_profiles.user_id = classes_list.created_user_id
+            WHERE
+                joined_user_id = ?
+        `
+        const joinedClass = await sql.handleSelect(sqlSelectJoinedClass, [userId])
+
+        res.json(joinedClass)
+    } catch (error) {
+        console.log(error)
+        res.json(false)
+    }
+})
+
+router.post("/enterClassRoom", async (req, res) => {
+    try {
+        const classId = req.body.classId
+
+        const sqlSelectClass = `
+            SELECT
+                classes_list.class_name,
+                user_profiles.user_name,
+                images.image_url
+            FROM
+                classes_list
+            INNER JOIN
+                user_profiles ON
+                user_profiles.user_id = classes_list.created_user_id
+            INNER JOIN
+                images ON
+                images.image_id = classes_list.created_user_id
+            WHERE
+                image_type = 1 AND
+                class_id = ?
+        `
+        const enterClass = await sql.handleSelect(sqlSelectClass, [classId])
+
+        res.json(enterClass[0])
+    } catch (error) {
+        console.log(error)
+        res.json(false)
+    }
+})
+
+router.post("/addClassNews", async (req, res) => {
+    try {
+        const userId = get.userId(req)
+        const classId = req.body.classId
+        const text = req.body.text
+
+        const sqlInsertNews = `
+            INSERT INTO class_chat(
+                sent_user_id,
+                received_class_id,
+                sent_text,
+                class_file_url
+            )
+            VALUES(
+                ?,
+                ?,
+                ?,
+                NULL
+            )
+        `
+        await sql.handleInsert(sqlInsertNews, [userId, classId, text])
+
+        res.json(true)
+    } catch (error) {
+        console.log(error)
+        res.json(false)
+    }
+})
+
+router.post("/getClassNews", async (req, res) => {
+    try {
+        const classId = req.body.classId
+
+        const sqlSelectNews = `
+            SELECT
+                class_chat.chat_id,
+                user_profiles.user_id,
+                user_profiles.user_name,
+                class_chat.sent_text,
+                class_chat.class_file_url,
+                images.image_url,
+                class_chat.created_at
+            FROM
+                class_chat
+            INNER JOIN
+                user_profiles ON
+                user_profiles.user_id = class_chat.sent_user_id
+            INNER JOIN
+                images ON
+                images.image_id = class_chat.sent_user_id
+            WHERE
+                received_class_id = ?
+            ORDER BY class_chat.chat_id DESC
+        `
+        const news = await sql.handleSelect(sqlSelectNews, [classId])
+
+        res.json(news)
+    } catch (error) {
+        console.log(error)
+        res.json(false)
+    }
+})
 
 module.exports = router

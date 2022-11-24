@@ -1,9 +1,9 @@
 import { Container } from "@mui/material"
 
-const ContainerLg = (props) => {
+const ContainerMd = (props) => {
     return (
         <Container
-            maxWidth="lg"
+            maxWidth="md"
             sx={{
                 p: 2,
             }}
@@ -13,4 +13,4 @@ const ContainerLg = (props) => {
     );
 }
 
-export default ContainerLg
+export default ContainerMd

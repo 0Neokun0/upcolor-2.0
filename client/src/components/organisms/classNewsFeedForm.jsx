@@ -1,98 +1,136 @@
-import { Avatar, Box, Button, Card, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, IconButton, InputBase, Modal, TextField } from "@mui/material"
-
-import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';
 import { server } from 'components/config'
+import { Avatar, Box, Button, Card, Modal, TextField, Typography } from "@mui/material"
+import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual'
+
 const ClassNewsFeedForm = (props) => {
     return (
-        <Card sx={{
-            display: 'flex',
-            alignItems: 'center',
-            width: '40%',
-            p: 2,
-            mb: 4,
-            boxShadow: 3,
-            justifyContent: 'space-between',
-            borderRadius: '25px',
-            mt: 1,
-        }}
-        >
-            <Avatar sx={{
-                height: '50px',
-                width: '50px',
-            }}
-                src={server.host + "/images/icon/" + props.profile.image}
-            />
-
-            <Box sx={{
-                p: 1,
-                width: '100%',
-                ml: '20px',
-                mr: '20px',
-                fontSize: '17px',
-
-            }}
+        <>
+            <Card
+                variant="outlined"
+                sx={{
+                    p: 2,
+                    mt: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    borderRadius: '15px',
+                    ":hover": {
+                        cursor: "text"
+                    },
+                }}
+                onClick={() => props["setOpen"](true)}
             >
-                <InputBase
-                    type="text"
-                    placeholder="何かを発表したい事"
-                    onClick={props.handleOpen}
-                />
-                <Dialog
-                component={"form"}
-                onSubmit={props.handleSubmitNews}
-                    PaperProps={{
-                        sx: {
-                            borderRadius: '25px'
-                        }
+                <Avatar
+                    sx={{
+                        height: '40px',
+                        width: '40px',
                     }}
-                    open={props.open}
-                    onClose={props.handleClose}
+                    src={server.host + "/images/icon/" + props.profile.image}
+                />
+
+                <Typography
+                    color="gray"
+                    sx={{
+                        ml: 1,
+                    }}
                 >
-                        <DialogTitle>クラスニューズ</DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                                タイトルと内容、両方入力してください。
-                            </DialogContentText>
+                    投稿内容
+                </Typography>
+            </Card>
 
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                label="発表内容"
-                                name="classNewsText"
-                                multiline
-                                rows={4}
-                                variant="outlined"
-                                type="text"
-                                fullWidth
-                            />
-                            <Box
-                                justifyContent={'end'}
-                                sx={{
-                                    display: 'flex',
-                                    mt: 2,
-                                }}
-                            >
-                                <Button
-                                    color="success"
-                                    startIcon={<PhotoSizeSelectActualIcon />}
-                                >
-                                    写真
-                                </Button>
+            {/* ダイアログ */}
+            <Modal
+                open={props["open"]}
+                onClose={() => props["setOpen"](false)}
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <Box
+                    component="form"
+                    onSubmit={props["handleSubmitNews"]}
+                    sx={{
+                        p: 2,
+                        width: "500px",
+                        backgroundColor: "white",
+                        borderRadius: "15px",
+                    }}
+                >
+                    <Typography
+                        variant="h5"
+                    >
+                        クラスニュース
+                    </Typography>
 
-                            </Box>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={props.handleClose}>キャンセル</Button>
+                    <Box
+                        sx={{
+                            mt: 2,
+                        }}
+                    >
+                        <Typography
+                            variant="caption"
+                            color="gray"
+                        >
+                            5文字以上、500文字以内
+                        </Typography>
+
+                        <TextField
+                            sx={{
+                                mt: 1,
+                            }}
+                            variant="outlined"
+                            label="投稿内容"
+                            name="classNewsText"
+                            type="text"
+                            rows={6}
+                            multiline
+                            fullWidth
+                            autoFocus
+                            inputProps={{
+                                minLength: 5,
+                                maxLength: 500,
+                            }}
+                            required
+                        />
+
+                        <Box
+                            display="flex"
+                            justifyContent="end"
+                        >
                             <Button
-                                type="submit"
+                                color="success"
+                                size="small"
+                                startIcon={<PhotoSizeSelectActualIcon />}
                             >
-                                投稿
+                                写真
                             </Button>
-                        </DialogActions>
+                        </Box>
+                    </Box>
 
-                </Dialog>
-            </Box>
-        </Card>
+                    <Box
+                        display="flex"
+                        justifyContent="space-between"
+                        sx={{
+                            mt: 2,
+                        }}
+                    >
+                        <Button
+                            onClick={() => props["setOpen"](false)}
+                        >
+                            キャンセル
+                        </Button>
+
+                        <Button
+                            variant="contained"
+                            type="submit"
+                        >
+                            投稿
+                        </Button>
+                    </Box>
+                </Box>
+            </Modal>
+        </>
     )
 }
 
