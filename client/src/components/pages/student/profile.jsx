@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import axios from "axios"
 import { server } from "components/config"
 import { ContainerLg } from "components/templates"
 import { ProfilePost, ProfileFormUnit, ProfileSelect, ProfileSelectChip, TabPanel } from "components/molecules"
 
-import { Box, Button, ButtonGroup, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material"
+import { Avatar, Box, Button, ButtonGroup, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Skeleton, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material"
 import { grey, teal } from "@mui/material/colors"
 import PortraitRoundedIcon from '@mui/icons-material/PortraitRounded'
 import WorkspacePremiumRoundedIcon from '@mui/icons-material/WorkspacePremiumRounded'
@@ -45,6 +45,35 @@ const Profile = () => {
     const [toolIds, setToolIds] = useState([])
     const [languagesList, setLanguagesList] = useState([])
     const [languageIds, setLanguageIds] = useState([])
+    const [imagePreview, setImagePreview] = useState(undefined)
+    const [imageDb, setImageDb] = useState(undefined)
+
+    const fileInput = useRef(null)
+
+    const onClickReset = () => {
+        fileInput.current.value = ""
+        setImagePreview(undefined)
+    }
+
+    const onChangeFileInput = (e) => {
+        setImagePreview(undefined)
+
+        if (e.target.files.length === 0) {
+            return
+        }
+
+        if (!e.target.files[0].type.match("image.*")) {
+            return
+        }
+
+        const reader = new FileReader()
+
+        reader.onload = (event) => {
+            setImagePreview(event.target.result)
+        }
+
+        reader.readAsDataURL(e.target.files[0])
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -56,7 +85,7 @@ const Profile = () => {
             }
         }
 
-        if (data.get("icon")["name"]) {
+        if (imagePreview !== imageDb) {
             axios.post("/account/updateUserIcon", {
                 icon: data.get("icon"),
             },
@@ -156,6 +185,8 @@ const Profile = () => {
                 setProgramsList(res.data["programs"])
                 setToolsList(res.data["tools"])
                 setLanguagesList(res.data["languages"])
+                setImagePreview(server.host + "/images/icon/" + res.data["profile"]["image"])
+                setImageDb(server.host + "/images/icon/" + res.data["profile"]["image"])
             })
     }, [])
 
@@ -553,8 +584,32 @@ const Profile = () => {
                                                     type="file"
                                                     name="icon"
                                                     accept=".png, .jpg, .jpeg"
+                                                    ref={fileInput}
                                                     hidden
+                                                    onChange={(e) => { onChangeFileInput(e) }}
                                                 />
+                                            </Button>
+
+                                            {
+                                                !!imagePreview
+                                                &&
+                                                <Avatar
+                                                    src={imagePreview}
+                                                    sx={{
+                                                        width: "150px",
+                                                        height: "150px",
+                                                        mx: "auto",
+                                                        mb: 5,
+                                                    }}
+                                                />
+                                            }
+
+                                            <Button
+                                                variant="outlined"
+                                                color="error"
+                                                onClick={onClickReset}
+                                            >
+                                                削除
                                             </Button>
                                         </ProfileFormUnit>
 
