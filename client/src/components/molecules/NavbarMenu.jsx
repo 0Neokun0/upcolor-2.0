@@ -2,10 +2,9 @@ import { Avatar, Box, Button, Divider, IconButton, Link, ListItemButton, ListIte
 import React from "react"
 
 import { server } from "components/config"
+import { Settings } from "@material-ui/icons"
 
 import ChatIcon from "@mui/icons-material/Chat"
-import ManageAccountsRoundedIcon from "@mui/icons-material/ManageAccountsRounded"
-import { Settings } from "@material-ui/icons"
 import PersonAddAltRounded from "@mui/icons-material/PersonAddAltRounded"
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded"
 
@@ -151,18 +150,6 @@ const NavbarMenu = (props) => {
                         />
                     </ListItemIcon>
                     他のアカウント作成
-                </ListItemButton>
-
-                <ListItemButton
-                    component={Link}
-                    href="/profile/edit"
-                >
-                    <ListItemIcon>
-                        <ManageAccountsRoundedIcon
-                            fontSize="small"
-                        />
-                    </ListItemIcon>
-                    プロフィール編集
                 </ListItemButton>
 
                 <ListItemButton>

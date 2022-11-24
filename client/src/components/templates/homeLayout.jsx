@@ -21,9 +21,8 @@ const HomeLayout = (props) => {
                         }}
                     >
                         <MainMenu
-                            profile={props.profile}
-                            user={props.user}
                             menus={props.menus}
+                            profile={props.profile}
                         />
                     </Box>
                 </Hidden>
