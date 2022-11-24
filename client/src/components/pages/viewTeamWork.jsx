@@ -212,7 +212,7 @@ const TeamWork = () => {
                                     <></>
                             }
                         </Hidden>
-                        
+
                         <Box
                             width="100%"
                         >
@@ -285,9 +285,10 @@ const TeamWork = () => {
                                     :
                                     <></>
                             }
-                      </Box>
+                        </Box>
+                    </Box>
                 </Stack>
-
+                
                 {
                     publishGantt
                     &&

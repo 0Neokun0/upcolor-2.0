@@ -5,8 +5,8 @@ import React from "react"
 import Select from "react-select"
 import { ListLayout } from "components/templates"
 import { ListDisplayBox, SearchListBox } from "components/organisms"
-import { SearchList } from "components/molecules"
-import InboxIcon from '@mui/icons-material/MoveToInbox'
+import { SearchList, TeamViewCard } from "components/molecules"
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import { Box } from "@mui/material"
 
 const TeamList = () => {
@@ -69,7 +69,7 @@ const TeamList = () => {
 
                 <SearchList
                     title="専攻"
-                    icon={<InboxIcon />}
+                    icon={<HistoryEduIcon />}
                     name="course"
                     list={search["courses"]}
                     set={setCourses}
@@ -84,12 +84,10 @@ const TeamList = () => {
                     &&
                     displayTeams.map((team, index) => {
                         return (
-                            <Box
-                                item
+                            <TeamViewCard
                                 key={index}
-                            >
-                                {team["team_name"]}
-                            </Box>
+                                team={team}
+                            />
                         )
                     })
                 }
