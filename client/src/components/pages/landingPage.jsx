@@ -1,10 +1,12 @@
-import { Box } from "@mui/material"
 import { LandingPageLayout } from "components/templates"
+import { cyan, deepPurple, green, lightGreen } from "@mui/material/colors"
+
+import { Box, Button, Chip, Typography } from "@mui/material"
 import logo from "components/atoms/logo/upcolor_logo.svg"
+import image from "components/atoms/images/20943572.jpg"
 import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
-import { cyan, deepPurple, green } from "@mui/material/colors"
 
 const LandingPage = () => {
     const card = {
@@ -55,6 +57,94 @@ const LandingPage = () => {
 
     return (
         <Box>
+            <Box
+                sx={{
+                    pl: "150px",
+                    backgroundColor: "white",
+                    height: "calc(100vh - 64px)",
+                    display: "flex",
+                    alignItems: "center",
+                }}
+            >
+                <Box>
+                    {/* <Box
+                        sx={{
+                            textAlign: "center"
+                        }}
+                    >
+                        <img
+                            src={logo}
+                            alt="ロゴの画像"
+                            height="100px"
+                        />
+
+                        <Box>
+                            <Chip
+                                label="Version 2.0"
+                                sx={{
+                                    color: "white",
+                                    backgroundColor: lightGreen["A700"],
+                                    fontWeight: "bold",
+                                }}
+                            />
+                        </Box>
+                    </Box> */}
+
+                    <Typography
+                        variant="h1"
+                    >
+                        UPCOLOR
+                    </Typography>
+
+                    <Typography
+                        variant="subtitle1"
+                        color="gray"
+                    >
+                        去年に引き続きUpColorをバージョンアップして<br />
+                        学内交流アプリケーションにしました。
+                    </Typography>
+
+                    <Box
+                        sx={{
+                            mt: 4,
+                            display: "flex",
+                            justifyContent: "end",
+                        }}
+                    >
+                        <Button
+                            variant="outlined"
+                            color="secondary"
+                            href="/signup/student"
+                        >
+                            サインアップ
+                        </Button>
+
+                        <Button
+                            variant="contained"
+                            href="/signin"
+                            sx={{
+                                ml: 2,
+                            }}
+                        >
+                            サインイン
+                        </Button>
+                    </Box>
+                </Box>
+
+                <Box
+                    sx={{
+                        mx: "auto",
+                    }}
+                >
+                    <img
+                        src={image}
+                        alt="ロゴの画像"
+                        height="600px"
+                    />
+                </Box>
+            </Box>
+
+
             <LandingPageLayout
                 card={card}
                 features={features}
