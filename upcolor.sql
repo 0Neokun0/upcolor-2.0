@@ -487,6 +487,7 @@ CREATE VIEW company_infomation (
     user_id,
     company_id,
     company_name,
+    company_image,
     manager_name,
     manager_mail,
     manager_image,
@@ -504,9 +505,10 @@ SELECT
     company_profiles.user_id,
     company_profiles.company_id,
     company_profiles.company_name,
+    company_image.image_url,
     user_profiles.user_name,
     user_profiles.user_mail,
-    images.image_url,
+    icon.image_url,
     company_profiles.company_introduction,
     company_profiles.company_business,
     company_profiles.company_ceo_message,
@@ -522,13 +524,13 @@ FROM
         user_profiles
         ON company_profiles.user_id = user_profiles.user_id
     LEFT OUTER JOIN
-        images
-    ON  company_profiles.user_id = images.image_id
-    AND images.image_type = 1
+        images AS icon
+    ON  company_profiles.user_id = icon.image_id
+    AND icon.image_type = 1
     LEFT OUTER JOIN
-        images
-    ON  company_profiles.company_id = images.image_id
-    AND images.image_type = 1
+        images AS company_image
+    ON  company_profiles.company_id = company_image.image_id
+    AND company_image.image_type = 4
 ORDER BY
     company_profiles.company_id;
 

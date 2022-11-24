@@ -45,7 +45,7 @@ function App() {
         axios.post("/account/signout")
             .then(() => {
                 sessionStorage.removeItem('AUTHORITY')
-                window.location.reload()
+                window.location.href = "/"
             })
     }
 
@@ -189,7 +189,6 @@ function App() {
 
                     <Route path="list/student" element={<StudentList />} />
                     <Route path="list/company" element={<CompanyList />} />
-
 
                     <Route path="timeTable" element={<ShowTimeTable />} />
                     <Route path="timeTable/regist" element={<RegistTimeTable />} />
