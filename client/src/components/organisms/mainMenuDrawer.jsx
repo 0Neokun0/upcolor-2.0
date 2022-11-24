@@ -1,7 +1,8 @@
 import { Drawer, IconButton, Tooltip } from "@mui/material"
-import { MainMenu } from "."
+
 
 import MenuIcon from "@mui/icons-material/Menu"
+import { MainMenu } from "."
 
 const MainMenuDrawer = (props) => {
     return (
@@ -62,8 +63,9 @@ const MainMenuDrawer = (props) => {
                         borderBottomRightRadius: "15px",
                     },
                 }}
-                open
                 variant="permanent"
+                open
+
             >
                 <MainMenu
                     logo={props.logo}
