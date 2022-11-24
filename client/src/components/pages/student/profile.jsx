@@ -4,7 +4,7 @@ import { server } from "components/config"
 import { ContainerLg } from "components/templates"
 import { ProfilePost, ProfileFormUnit, ProfileSelect, ProfileSelectChip, TabPanel } from "components/molecules"
 
-import { Avatar, Box, Button, ButtonGroup, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Skeleton, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material"
+import { Avatar, Box, Button, ButtonGroup, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material"
 import { grey, teal } from "@mui/material/colors"
 import PortraitRoundedIcon from '@mui/icons-material/PortraitRounded'
 import WorkspacePremiumRoundedIcon from '@mui/icons-material/WorkspacePremiumRounded'

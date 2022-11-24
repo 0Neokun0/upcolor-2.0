@@ -3,22 +3,32 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
+
 import { ClassNews, ClassNewsFeed, LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite } from "components/pages/student"
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment, StudentProfileView } from "components/pages/company"
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header } from "components/organisms"
+import ClassNewsFeedList from "components/organisms/classNewsFeedList"
 
 import logo from "components/atoms/logo/upcolor_logo.svg"
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded"
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded"
 import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded"
 import GroupCreateLayout from "components/templates/groupCreateLayout"
-import ClassNewsFeedList from "components/organisms/classNewsFeedList"
+
+import WorkspacesIcon from '@mui/icons-material/Workspaces'
+import GroupWorkIcon from '@mui/icons-material/GroupWork'
+import AccountTreeIcon from '@mui/icons-material/AccountTree'
+import PersonSearchIcon from '@mui/icons-material/PersonSearch'
+import BadgeIcon from '@mui/icons-material/Badge'
+import ViewTimelineIcon from '@mui/icons-material/ViewTimeline'
+import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest'
 
 function App() {
     const [open, setOpen] = useState(false)
+    const [menuOpen, setMenuOpen] = useState(false)
     const [signInState, setSignInState] = useState("")
     const [profile, setProfile] = useState([])
 
@@ -49,6 +59,45 @@ function App() {
             icon: <BusinessRoundedIcon />,
             value: "企業",
             url: "/list/company",
+        },
+    ]
+
+    const drawerMenus = [
+        {
+            value: "グループ",
+            url: "/group",
+            icon: <WorkspacesIcon />,
+        },
+        {
+            value: "自分の進級制作",
+            url: "/teamwork",
+            icon: <GroupWorkIcon />,
+
+        },
+        {
+            value: "みんなの進級制作",
+            url: "/teamlist",
+            icon: <AccountTreeIcon />,
+        },
+        {
+            value: "ユーザー",
+            url: "/list/student",
+            icon: <PersonSearchIcon />,
+        },
+        {
+            value: "プロフィール",
+            url: "/profile",
+            icon: <BadgeIcon />,
+        },
+        {
+            value: "時間割",
+            url: "/timeTable/regist",
+            icon: <ViewTimelineIcon />,
+        },
+        {
+            value: "設定",
+            url: "#",
+            icon: <SettingsSuggestIcon />,
         },
     ]
 
@@ -152,12 +201,15 @@ function App() {
                     logoSrc={logo}
                     name={"UPCOLOR"}
                     menus={menus}
+                    drawerMenus={drawerMenus}
                     signInState={signInState}
                     openNavbar={openNavbar}
                     anchorEl={anchorEl}
                     handleClick={handleClick}
                     handleClose={handleClose}
                     open={open}
+                    menuOpen={menuOpen}
+                    setMenuOpen={setMenuOpen}
                     profile={profile}
                     toggleAlertOpen={toggleAlertOpen}
                     toggleAlertClose={toggleAlertClose}
