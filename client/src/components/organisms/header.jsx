@@ -1,117 +1,163 @@
-import { AppBar, Box, Button, Dialog, DialogActions, DialogTitle, Link, Toolbar, Tooltip, Typography } from "@mui/material"
-import { NavbarMenu } from "components/molecules"
 import { useLocation } from "react-router-dom"
 
+import { MainMenu } from "components/organisms"
+import { NavbarMenu } from "components/molecules"
+
+import { AppBar, Box, Button, Dialog, DialogActions, DialogTitle, Drawer, Hidden, IconButton, Link, Toolbar, Tooltip, Typography } from "@mui/material"
 import LogoutIcon from "@mui/icons-material/Logout"
 import LoginIcon from "@mui/icons-material/Login"
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
 
 const Header = (props) => {
-    const { pathName } = useLocation()
+    const pathName = useLocation()["pathname"]
 
     return (
-        <AppBar postion="static" color="default">
+        <AppBar
+            postion="static"
+            color="default"
+        >
             <Toolbar
                 sx={{
                     height: "64px",
+                    display: "flex",
+                    justifyContent: "space-between",
                 }}
             >
-                <Link
-                    href="/"
+                <Box
                     sx={{
                         display: "flex",
                         alignItems: "center",
                     }}
                 >
-                    <img
-                        src={props.logoSrc}
-                        alt="ロゴの画像"
-                        height="30px"
-                    />
-                </Link>
+                    <Hidden
+                        lgUp
+                    >
+                        <Box
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                            }}
+                        >
+                            <IconButton
+                                sx={{
+                                    p: "5px",
+                                    borderRadius: "10px",
+                                    border: 1,
+                                    borderColor: "divider"
+                                }}
+                                onClick={() => props["setMenuOpen"](true)}
+                            >
+                                <MenuRoundedIcon />
+                            </IconButton>
+                        </Box>
+                    </Hidden>
 
-                <Typography
-                    variant="h6"
+                    <Link
+                        href="/"
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            ml: 2,
+                        }}
+                    >
+                        <img
+                            src={props.logoSrc}
+                            alt="ロゴの画像"
+                            height="30px"
+                        />
+                    </Link>
+
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            ml: 3,
+                            fontWeight: 600,
+                        }}
+                    >
+                        {props.name}
+                    </Typography>
+
+                </Box>
+
+                <Box
                     sx={{
-                        ml: 3,
-                        flexGrow: 1,
-                        fontWeight: 600,
+                        display: "flex",
+                        alignItems: "center",
                     }}
                 >
-                    {props.name}
-                </Typography>
-
-                {
-                    props.menus.map((menu, index) => {
-                        return (
-                            <Tooltip
-                                key={index}
-                                title={menu.label}
-                            >
-                                <Link
+                    {
+                        props.menus.map((menu, index) => {
+                            return (
+                                <Tooltip
                                     key={index}
-                                    href={menu.url}
+                                    title={menu.label}
+                                >
+                                    <Link
+                                        key={index}
+                                        href={menu.url}
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            alignItems: "center",
+                                            mx: 1,
+                                            color: "gray",
+                                            textDecorationLine: "none",
+                                            ":hover": {
+                                                color: "dimgray",
+                                            },
+                                        }}
+                                    >
+                                        {menu.icon}
+                                        {menu.value}
+                                    </Link>
+                                </Tooltip>
+                            )
+                        })
+                    }
+
+                    {
+                        pathName === "/"
+                            ?
+                            (
+                                <Box
                                     sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "center",
-                                        mx: 1,
-                                        color: "gray",
-                                        textDecorationLine: "none",
-                                        ":hover": {
-                                            color: "dimgray",
-                                        },
+                                        ml: 5,
                                     }}
                                 >
-                                    {menu.icon}
-                                    {menu.value}
-                                </Link>
-                            </Tooltip>
-                        )
-                    })
-                }
-
-                {
-                    pathName === "/"
-                        ?
-                        (
-                            <Box
-                                sx={{
-                                    ml: 5,
-                                }}
-                            >
-                                {
-                                    props.signInState
-                                        ?
-                                        (
-                                            <Button
-                                                variant="contained"
-                                                onClick={props.toggleAlertOpen}
-                                            >
-                                                サインアウト
-                                            </Button>
-                                        )
-                                        :
-                                        (
-                                            <Button variant="contained" href="/signin">
-                                                サインイン
-                                            </Button>
-                                        )
-                                }
-                            </Box>
-                        )
-                        :
-                        (
-                            <NavbarMenu
-                                profile={props.profile}
-                                anchorEl={props.anchorEl}
-                                openNavbar={props.openNavbar}
-                                handleClick={props.handleClick}
-                                handleClose={props.handleClose}
-                                signInState={props.signInState}
-                                toggleAlertOpen={props.toggleAlertOpen}
-                            />
-                        )
-                }
+                                    {
+                                        props.signInState
+                                            ?
+                                            (
+                                                <Button
+                                                    variant="contained"
+                                                    onClick={props.toggleAlertOpen}
+                                                >
+                                                    サインアウト
+                                                </Button>
+                                            )
+                                            :
+                                            (
+                                                <Button variant="contained" href="/signin">
+                                                    サインイン
+                                                </Button>
+                                            )
+                                    }
+                                </Box>
+                            )
+                            :
+                            (
+                                <NavbarMenu
+                                    profile={props.profile}
+                                    anchorEl={props.anchorEl}
+                                    openNavbar={props.openNavbar}
+                                    handleClick={props.handleClick}
+                                    handleClose={props.handleClose}
+                                    signInState={props.signInState}
+                                    toggleAlertOpen={props.toggleAlertOpen}
+                                />
+                            )
+                    }
+                </Box>
             </Toolbar>
 
             {/* サインアウトダイアログ */}
@@ -151,6 +197,23 @@ const Header = (props) => {
                     </Button>
                 </DialogActions>
             </Dialog>
+
+            <Drawer
+                open={props["menuOpen"]}
+                onClose={() => props["setMenuOpen"](false)}
+            >
+                <Box
+                    sx={{
+                        width: "300px",
+                        p: 2,
+                    }}
+                >
+                    <MainMenu
+                        profile={props["profile"]}
+                        menus={props["drawerMenus"]}
+                    />
+                </Box>
+            </Drawer>
         </AppBar>
     )
 }

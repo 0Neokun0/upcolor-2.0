@@ -203,7 +203,7 @@ const TeamWork = () => {
                         }}
                     >
                         <Hidden
-                            mdDown
+                            lgDown
                         >
                             {
                                 team

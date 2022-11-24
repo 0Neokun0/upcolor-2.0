@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import axios from "axios"
 import { server } from "components/config"
 import { ContainerLg } from "components/templates"
-import { PostProfile, ProfileFormUnit, ProfileSelect, ProfileSelectChip, TabPanel } from "components/molecules"
+import { ProfilePost, ProfileFormUnit, ProfileSelect, ProfileSelectChip, TabPanel } from "components/molecules"
 
-import { Box, Button, ButtonGroup, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material"
+import { Avatar, Box, Button, ButtonGroup, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material"
 import { grey, teal } from "@mui/material/colors"
 import PortraitRoundedIcon from '@mui/icons-material/PortraitRounded'
 import WorkspacePremiumRoundedIcon from '@mui/icons-material/WorkspacePremiumRounded'
@@ -12,11 +12,15 @@ import TerminalRoundedIcon from '@mui/icons-material/TerminalRounded'
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { FollowUsers } from "components/organisms"
+import ProfileTeamWork from "components/molecules/profileTeamWork"
 
 const Profile = () => {
     const [profile, setProfile] = useState([])
     const [profileLists, setProfileLists] = useState([])
     const [selectTab, setSelectTab] = useState(1)
+
+    // 進級制作
+    const [teamWorkList, setTeamWorkList] = useState([])
 
     // 投稿
     const [posts, setPosts] = useState([])
@@ -41,6 +45,35 @@ const Profile = () => {
     const [toolIds, setToolIds] = useState([])
     const [languagesList, setLanguagesList] = useState([])
     const [languageIds, setLanguageIds] = useState([])
+    const [imagePreview, setImagePreview] = useState(undefined)
+    const [imageDb, setImageDb] = useState(undefined)
+
+    const fileInput = useRef(null)
+
+    const onClickReset = () => {
+        fileInput.current.value = ""
+        setImagePreview(undefined)
+    }
+
+    const onChangeFileInput = (e) => {
+        setImagePreview(undefined)
+
+        if (e.target.files.length === 0) {
+            return
+        }
+
+        if (!e.target.files[0].type.match("image.*")) {
+            return
+        }
+
+        const reader = new FileReader()
+
+        reader.onload = (event) => {
+            setImagePreview(event.target.result)
+        }
+
+        reader.readAsDataURL(e.target.files[0])
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -52,7 +85,7 @@ const Profile = () => {
             }
         }
 
-        if (data.get("icon")["name"]) {
+        if (imagePreview !== imageDb) {
             axios.post("/account/updateUserIcon", {
                 icon: data.get("icon"),
             },
@@ -80,6 +113,11 @@ const Profile = () => {
     }
 
     useEffect(() => {
+        axios.post("/account/getTeamWorkList")
+            .then((res) => {
+                setTeamWorkList(res.data)
+            })
+
         axios.post("/account/getFollowList")
             .then((res) => {
                 setFollowList(res.data["followList"])
@@ -147,6 +185,8 @@ const Profile = () => {
                 setProgramsList(res.data["programs"])
                 setToolsList(res.data["tools"])
                 setLanguagesList(res.data["languages"])
+                setImagePreview(server.host + "/images/icon/" + res.data["profile"]["image"])
+                setImageDb(server.host + "/images/icon/" + res.data["profile"]["image"])
             })
     }, [])
 
@@ -175,18 +215,24 @@ const Profile = () => {
                         <Box
                             textAlign="center"
                         >
-                            <Box
-                                component="img"
-                                src={server.host + "/images/icon/" + profile["image"]}
-                                sx={{
-                                    width: "100%",
-                                    aspectRatio: "1/1",
-                                    maxWidth: "300px",
-                                    borderRadius: "50%",
-                                    mb: 2,
-                                    objectFit: "cover"
-                                }}
-                            />
+                            {
+                                profile["image"]
+                                    ?
+                                    <Box
+                                        component="img"
+                                        src={server.host + "/images/icon/" + profile["image"]}
+                                        sx={{
+                                            width: "100%",
+                                            aspectRatio: "1/1",
+                                            maxWidth: "300px",
+                                            borderRadius: "50%",
+                                            mb: 2,
+                                            objectFit: "cover"
+                                        }}
+                                    />
+                                    :
+                                    <></>
+                            }
                         </Box>
 
                         <Typography
@@ -346,7 +392,34 @@ const Profile = () => {
                                     value={selectTab}
                                     index={2}
                                 >
-                                    進級制作
+                                    <Box
+                                        sx={{
+                                            "a": {
+                                                display: "block"
+                                            },
+                                            "a + a": {
+                                                mt: 2,
+                                            },
+                                        }}
+                                    >
+                                        {
+                                            teamWorkList.length
+                                                ?
+                                                teamWorkList.map((teamWork) => {
+                                                    return (
+                                                        <ProfileTeamWork
+                                                            key={teamWork["team_work_id"]}
+                                                            teamWork={teamWork}
+                                                        />
+                                                    )
+                                                })
+
+                                                :
+                                                <Typography>
+                                                    チームが見つかりません
+                                                </Typography>
+                                        }
+                                    </Box>
                                 </TabPanel>
                                 {/* 進級制作 */}
 
@@ -370,7 +443,7 @@ const Profile = () => {
                                                 ?
                                                 posts.map((post) => {
                                                     return (
-                                                        <PostProfile
+                                                        <ProfilePost
                                                             key={post["post_id"]}
                                                             post={post}
                                                         />
@@ -511,8 +584,32 @@ const Profile = () => {
                                                     type="file"
                                                     name="icon"
                                                     accept=".png, .jpg, .jpeg"
+                                                    ref={fileInput}
                                                     hidden
+                                                    onChange={(e) => { onChangeFileInput(e) }}
                                                 />
+                                            </Button>
+
+                                            {
+                                                !!imagePreview
+                                                &&
+                                                <Avatar
+                                                    src={imagePreview}
+                                                    sx={{
+                                                        width: "150px",
+                                                        height: "150px",
+                                                        mx: "auto",
+                                                        mb: 5,
+                                                    }}
+                                                />
+                                            }
+
+                                            <Button
+                                                variant="outlined"
+                                                color="error"
+                                                onClick={onClickReset}
+                                            >
+                                                削除
                                             </Button>
                                         </ProfileFormUnit>
 
@@ -623,7 +720,7 @@ const Profile = () => {
                     </Grid>
                 </Grid>
             </Card>
-        </ContainerLg>
+        </ContainerLg >
     )
 }
 

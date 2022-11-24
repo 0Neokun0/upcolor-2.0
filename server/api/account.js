@@ -526,4 +526,26 @@ router.post("/selfCheck", async (req, res) => {
     }
 })
 
+router.post("/getTeamWorkList", async (req, res) => {
+    const userId = get.userId(req)
+
+    const sqlSelectTeamWorkList = `
+        SELECT
+            team_works_list.team_work_id,
+            team_works_list.team_name,
+            team_works_list.team_work_name
+        FROM
+            users_joined_team_work
+        INNER JOIN
+            team_works_list ON
+            users_joined_team_work.team_work_id = team_works_list.team_work_id
+        WHERE
+            users_joined_team_work.joined_user_id = ?
+    `
+
+    const teamWorkList = await sql.handleSelect(sqlSelectTeamWorkList, [userId])
+
+    res.json(teamWorkList)
+})
+
 module.exports = router
