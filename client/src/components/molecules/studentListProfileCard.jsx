@@ -1,6 +1,4 @@
-import { Card, Grid, Avatar, Typography, Button } from "@mui/material"
-
-import PersonSearchRoundedIcon from '@mui/icons-material/PersonSearchRounded';
+import { Card, Grid, Avatar, Typography, CardActionArea } from "@mui/material"
 
 import { server } from 'components/config'
 
@@ -12,68 +10,66 @@ const StudentListProfileCard = (props) => {
             <Card
                 variant="outlined"
                 sx={{
-                    bgcolor: "white",
                     width: 420,
                     height: 200,
-                    p: 2,
                     m: 2,
                     overflow: "hidden",
+                    boxShadow: 2,
                     borderRadius: "25px",
                     transition: "transform 0.3s, border 0.3s",
                     "&:hover": {
                         transform: "translateY(-2px)",
                     },
-                    "& > *": { minWidth: "clamp(0px, (360px - 100%) * 999,100%)" },
-                }}>
-                <Grid
-                    container
-                    direction="column"
-                    justifyContent="space-evenly"
-                    alignItems="center"
+                }}
+            >
+                <CardActionArea
+                    sx={{
+                        p: 2,
+                        borderRadius: 5,
+                    }}
+                    onClick={() =>
+                        (window.location.href = "/profile/" + props.student["user_id"])
+                    }
                 >
-                    <Avatar
-                        sx={{
-                            m: 1,
-                        }}
-                        src={server.host + "/images/icon/" + props.student["image"]}
-                    />
-
-                    <Typography
-                        variant="h4"
-                        gutterBottom
+                    <Grid
+                        container
+                        direction="column"
+                        justifyContent="space-evenly"
+                        alignItems="center"
                     >
-                        {props.student["name"]}
-                    </Typography>
+                        <Avatar
+                            sx={{
+                                m: 1,
+                            }}
+                            src={server.host + "/images/icon/" + props.student["image"]}
+                        />
 
-                    <Typography
-                        sx={{
-                            fontSize: 17,
-                        }}
-                        gutterBottom
-                    >
-                        {props.student["year_name"]}
-                    </Typography>
+                        <Typography
+                            variant="h4"
+                            gutterBottom
+                        >
+                            {props.student["name"]}
+                        </Typography>
 
-                    <Typography
-                        sx={{
-                            fontSize: 14,
-                            mb: 1,
-                        }}
-                    >
-                        {props.student["course_name"]}
-                    </Typography>
+                        <Typography
+                            sx={{
+                                fontSize: 17,
+                            }}
+                            gutterBottom
+                        >
+                            {props.student["year_name"]}
+                        </Typography>
 
-                    <Button
-                        color="inherit"
-                        sx={{
-                            borderRadius: 3,
-                        }}
-                        startIcon={<PersonSearchRoundedIcon />}
-                        href={"/profile/" + props.student["user_id"]}
-                    >
-                        プロフィール
-                    </Button>
-                </Grid>
+                        <Typography
+                            sx={{
+                                fontSize: 14,
+                                mb: 1,
+                            }}
+                        >
+                            {props.student["course_name"]}
+                        </Typography>
+                    </Grid>
+                </CardActionArea>
             </Card>
         </Grid>
     )
