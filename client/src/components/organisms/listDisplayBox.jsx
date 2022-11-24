@@ -25,6 +25,7 @@ const ListDisplayBox = (props) => {
         >
             <Grid
                 container
+                justifyContent="left"
             >
                 {props.children}
             </Grid>

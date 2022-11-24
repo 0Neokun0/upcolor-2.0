@@ -263,6 +263,7 @@ CREATE TABLE team_works_list(
     publish_team_chat INT,
     publish_team_ganttchart INT,
     registered_team_work_on INT,
+    active_on BIT DEFAULT 1,
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
     updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
     FOREIGN KEY(created_user_id) REFERENCES user_profiles(user_id)

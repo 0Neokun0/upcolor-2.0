@@ -1,11 +1,12 @@
 import axios from "axios"
-import { Paper } from "@mui/material"
 import { useState, useEffect } from "react"
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import { SearchList } from "components/molecules"
+import { CompanyListProfileCard, SearchList } from "components/molecules"
 import { ListDisplayBox, SearchListBox } from "components/organisms"
 import { ListLayout } from "components/templates"
-import { Link } from "react-router-dom"
+
+import ReduceCapacityIcon from '@mui/icons-material/ReduceCapacity';
+import LocalConvenienceStoreIcon from '@mui/icons-material/LocalConvenienceStore';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 
 const CompanyList = () => {
     const [originalCompanies, setOriginalCompanies] = useState(false)
@@ -45,13 +46,11 @@ const CompanyList = () => {
     }, [courses, occupations, prefectures, originalCompanies])
 
     return (
-        displayCompanies
-        &&
         <ListLayout>
             <SearchListBox>
                 <SearchList
                     title="専攻/コース"
-                    icon={<InboxIcon />}
+                    icon={<ReduceCapacityIcon />}
                     name="course"
                     list={searchList["courses"]}
                     set={setCourses}
@@ -61,7 +60,7 @@ const CompanyList = () => {
 
                 <SearchList
                     title="業種"
-                    icon={<InboxIcon />}
+                    icon={<LocalConvenienceStoreIcon />}
                     name="occupation"
                     list={searchList["occupations"]}
                     set={setOccupations}
@@ -71,7 +70,7 @@ const CompanyList = () => {
 
                 <SearchList
                     title="都道府県"
-                    icon={<InboxIcon />}
+                    icon={<TravelExploreIcon />}
                     name="prefecture"
                     list={searchList["prefectures"]}
                     set={setPrefectures}
@@ -80,31 +79,22 @@ const CompanyList = () => {
                 />
             </SearchListBox>
 
-            <ListDisplayBox>
-                {
-                    displayCompanies.map((value, index) => {
-                        return (
-                            <Paper
-                                key={index}
-                                sx={{
-                                    "a,a:visited": {
-                                        color: "inherit",
-                                    },
-                                    "a:hover": {
-                                        color: "red",
-                                    },
-                                }}
-                            >
-                                <Link
-                                    to={"/profile/" + value["user_id"]}
-                                >
-                                    {value["user_id"] + value["company_name"]}
-                                </Link>
-                            </Paper>
-                        )
-                    })
-                }
-            </ListDisplayBox>
+            {
+                displayCompanies
+                &&
+                <ListDisplayBox>
+                    {
+                        displayCompanies.map((value, index) => {
+                            return (
+                                <CompanyListProfileCard
+                                    key={index}
+                                    value={value}
+                                />
+                            )
+                        })
+                    }
+                </ListDisplayBox>
+            }
         </ListLayout>
     )
 }

@@ -88,7 +88,9 @@ const TeamWork = () => {
             return formattedDate
         }
 
-        axios.post("/teamWork/getGantt")
+        axios.post("/teamWork/getViewGantt", {
+            teamId: teamId,
+        })
             .then((res) => {
                 const tasks = res.data.tasks
                 const links = res.data.links
@@ -124,7 +126,7 @@ const TeamWork = () => {
                     })
                 }
             })
-    }, [])
+    }, [teamId])
 
     useEffect(() => {
         axios.post("/teamWork/getTeamWork", {
@@ -134,7 +136,9 @@ const TeamWork = () => {
                 setTeam(res.data)
 
                 if (res.data["teamInfo"]) {
-                    axios.post("/teamWork/getSetting")
+                    axios.post("/teamWork/getViewSetting", {
+                        teamId: teamId,
+                    })
                         .then((res) => {
                             // setPublishChat(Boolean(res.data["chat"]))
                             setPublishGantt(Boolean(res.data["gantt"]))
@@ -195,6 +199,7 @@ const TeamWork = () => {
                                             togglePopover={togglePopover}
                                             setTogglePopover={setTogglePopover}
                                             genInviteUrl={genInviteUrl}
+                                            student={false}
                                         />
 
                                         <Divider
@@ -207,51 +212,80 @@ const TeamWork = () => {
                                     <></>
                             }
                         </Hidden>
+                        
+                        <Box
+                            width="100%"
+                        >
+                            <Hidden
+                                mdUp
+                            >
+                                {
+                                    team
+                                        ?
+                                        <>
+                                            <TeamOutline
+                                                team={team}
+                                                togglePopover={togglePopover}
+                                                setTogglePopover={setTogglePopover}
+                                                genInviteUrl={genInviteUrl}
+                                                student={false}
+                                            />
 
-                        {
-                            team["teamInfo"]
-                                ?
-                                <Box
-                                    sx={{
-                                        ".MuiPaper-root + .MuiPaper-root": {
-                                            mt: 2,
-                                        }
-                                    }}
-                                >
-                                    <TeamInfoCard
-                                        auth={auth}
-                                        title="作品説明"
-                                        name="description"
-                                        state={description}
-                                        toggleState={setDescription}
-                                        content={team["teamInfo"]["team_work_description"]}
-                                        onSubmit={onSubmit}
-                                    />
+                                            <Divider
+                                                sx={{
+                                                    mb: 2,
+                                                }}
+                                            />
+                                        </>
+                                        :
+                                        <></>
+                                }
+                            </Hidden>
 
-                                    <TeamInfoCard
-                                        auth={auth}
-                                        title="ターゲット"
-                                        name="target"
-                                        state={target}
-                                        toggleState={setTarget}
-                                        content={team["teamInfo"]["team_target"]}
-                                        onSubmit={onSubmit}
-                                    />
+                            {
+                                team["teamInfo"]
+                                    ?
+                                    <Box
+                                        sx={{
+                                            ".MuiPaper-root + .MuiPaper-root": {
+                                                mt: 2,
+                                            }
+                                        }}
+                                    >
+                                        <TeamInfoCard
+                                            auth={auth}
+                                            title="作品説明"
+                                            name="description"
+                                            state={description}
+                                            toggleState={setDescription}
+                                            content={team["teamInfo"]["team_work_description"]}
+                                            onSubmit={onSubmit}
+                                        />
 
-                                    <TeamInfoCard
-                                        auth={auth}
-                                        title="競合サービス、差別化"
-                                        name="strategy"
-                                        state={strategy}
-                                        toggleState={setStrategy}
-                                        content={team["teamInfo"]["team_strategy"]}
-                                        onSubmit={onSubmit}
-                                    />
-                                </Box>
-                                :
-                                <></>
-                        }
-                    </Box>
+                                        <TeamInfoCard
+                                            auth={auth}
+                                            title="ターゲット"
+                                            name="target"
+                                            state={target}
+                                            toggleState={setTarget}
+                                            content={team["teamInfo"]["team_target"]}
+                                            onSubmit={onSubmit}
+                                        />
+
+                                        <TeamInfoCard
+                                            auth={auth}
+                                            title="競合サービス、差別化"
+                                            name="strategy"
+                                            state={strategy}
+                                            toggleState={setStrategy}
+                                            content={team["teamInfo"]["team_strategy"]}
+                                            onSubmit={onSubmit}
+                                        />
+                                    </Box>
+                                    :
+                                    <></>
+                            }
+                      </Box>
                 </Stack>
 
                 {
