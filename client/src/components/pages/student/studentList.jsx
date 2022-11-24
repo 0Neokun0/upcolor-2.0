@@ -166,7 +166,6 @@ const StudentList = () => {
                     })
                 }
             </ListDisplayBox>
-
         </ListLayout>
     )
 }

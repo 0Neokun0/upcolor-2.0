@@ -1,15 +1,17 @@
-import { Box, Card, Grid, Tab, Tabs, Typography } from '@mui/material'
+import { Box, Grid, Tab, Tabs, Typography } from '@mui/material'
 
 import PropTypes from 'prop-types'
+import MenuIcon from "@mui/icons-material/Menu"
+import { CompanyHomeLayout } from "components/templates"
 
-import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
-import ContactMailIcon from '@mui/icons-material/ContactMail'
-import AutoStoriesIcon from '@mui/icons-material/AutoStories'
+import logo from "components/atoms/logo/upcolor_logo.svg"
+import { MainMenuCompanyDrawer } from "components/organisms"
 
-import { useState } from 'react'
-import { CompanyPageTitle } from 'components/molecules'
-import {  CompanyDetailsTab, CompanyLinksTab, CompanyRecruitmentTab } from 'components/organisms'
-import { CompanyHomeLayout } from 'components/templates'
+
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { CompanyProfile } from '../company'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props
@@ -45,6 +47,18 @@ function a11yProps(index) {
 
 const ViewCompanyPage = (props) => {
     const [value, setValue] = useState(0)
+    const companyId = useParams()["viewCompany"]
+    const [company, setCompany] = useState([])
+
+    useEffect(() => {
+        axios.post("/company/getCompany",
+            {companyId: companyId}
+        )
+        .then((res) => {
+            console.log(res.data)
+            setCompany(res.data)
+        })
+    }, [])
 
     const handleChange = (event, newValue) => {
         setValue(newValue)
@@ -52,87 +66,23 @@ const ViewCompanyPage = (props) => {
 
     return (
         <CompanyHomeLayout>
-            <Box
-                sx={{
-                    p: 2,
-                }}
-            >
+            {company["company_name"]}
+            {/* <Box>
                 <Grid
                     container
-                    direction="row"
-                    spacing={3}
+                    spacing={2}
+                    columns={10}
                 >
-                    <CompanyPageTitle
-                        companyName={props.companyName}
-                        companyOccupation={props.companyOccupation}
-                    />
-
                     <Grid
                         item
-                        xs={12}
-                        sx={{ mt: 2 }}
+                        xs={8}
                     >
-                        <Card
-                            sx={{
-                                borderRadius: '10px',
-                                boxShadow: 3,
-                            }}
-                        >
-                            <Box
-                                sx={{
-                                    borderBottom: 1,
-                                    borderColor: 'divider',
-                                }}
-                            >
-                                <Tabs
-                                    value={value}
-                                    onChange={handleChange}
-                                    centered
-                                >
-                                    <Tab
-                                        label="会社概要"
-                                        icon={<BusinessRoundedIcon />}
-                                        iconPosition="top"
-                                        {...a11yProps(0)}
-                                    />
-
-                                    <Tab
-                                        label="採用データ"
-                                        icon={<ContactMailIcon />}
-                                        iconPosition="top"
-                                        {...a11yProps(1)}
-                                    />
-
-                                    <Tab
-                                        label="説明会・セミナー"
-                                        icon={<AutoStoriesIcon />}
-                                        iconPosition="top"
-                                        {...a11yProps(2)}
-                                    />
-                                </Tabs>
-                            </Box>
-
-                            <TabPanel value={value} index={0}>
-                                <CompanyDetailsTab
-                                    companyDetailsTabs={props.companyDetailsTabs}
-                                />
-                            </TabPanel>
-
-                            <TabPanel value={value} index={1}>
-                                <CompanyRecruitmentTab
-                                    companyRecruitmentTabs={props.companyRecruitmentTabs}
-                                />
-                            </TabPanel>
-
-                            <TabPanel value={value} index={2}>
-                                <CompanyLinksTab
-                                    companyLinksTabs={props.companyLinksTabs}
-                                />
-                            </TabPanel>
-                        </Card>
+                        <CompanyProfile
+                            companyName={company["company_name"]}
+                        />
                     </Grid>
                 </Grid>
-            </Box>
+            </Box> */}
         </CompanyHomeLayout>
     )
 }

@@ -1,7 +1,6 @@
-// import axios from 'axios'
+import axios from 'axios'
 import { Box, Grid, IconButton, Tooltip } from "@mui/material"
-// import { useEffect, useState } from 'react'
-// import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import CorporateFareIcon from "@mui/icons-material/CorporateFare"
 import BadgeIcon from "@mui/icons-material/Badge"
 import MapIcon from "@mui/icons-material/Map"
@@ -24,16 +23,24 @@ import InstagramIcon from "@mui/icons-material/Instagram"
 import MenuIcon from "@mui/icons-material/Menu"
 import { CompanyHomeLayout } from "components/templates"
 import { CompanyProfile } from "."
-import { useState } from "react"
 import logo from "components/atoms/logo/upcolor_logo.svg"
 import { MainMenuCompanyDrawer } from "components/organisms"
 
 const CompanyHome = () => {
     const [companyMenuOpen, setCompanyMenuOpen] = useState(false)
+    const [company, setCompany] = useState([])
 
     const handleDrawerToggle = () => {
         setCompanyMenuOpen(!companyMenuOpen)
     }
+
+    useEffect(() => {
+        axios.post("/company/getCompanyProfile")
+        .then((res) => {
+            console.log(res.data)
+            setCompany(res.data)
+        })
+    }, [])
 
     const menus = [
         {
@@ -63,7 +70,7 @@ const CompanyHome = () => {
         },
     ]
 
-    const companyName = "会社名前"
+    const companyName = company["company_name"]
 
     const companyOccupation = "業種"
 

@@ -58,7 +58,7 @@ const CompanyListProfileCard = (props) => {
                             borderRadius: 3,
                         }}
                         startIcon={<BusinessIcon />}
-                        href={"/profile/" + props.value["user_id"]}
+                        href={"/company/" + props.value["company_id"]}
                     >
                         会社ページ
                     </Button>
