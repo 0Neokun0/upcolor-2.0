@@ -152,13 +152,40 @@ const TeamWork = () => {
     return (
         team["teamInfo"]
             ?
-            <>
-                <TeamWorkLayout>
-                    <Stack
-                        direction="row"
-                        sx={{
-                            mb: 2,
-                        }}
+            <TeamWorkLayout>
+                <Stack
+                    direction="row"
+                    sx={{
+                        mb: 2,
+                    }}
+                >
+                    <Hidden
+                        mdDown
+                    >
+                        {
+                            team
+                                ?
+                                <Box
+                                    sx={{
+                                        width: "400px",
+                                        mr: 2,
+                                    }}
+                                >
+                                    <TeamOutline
+                                        auth={auth}
+                                        team={team}
+                                        togglePopover={togglePopover}
+                                        setTogglePopover={setTogglePopover}
+                                        genInviteUrl={genInviteUrl}
+                                    />
+                                </Box>
+                                :
+                                <></>
+                        }
+                    </Hidden>
+
+                    <Box
+                        width="100%"
                     >
                         <Hidden
                             lgDown
@@ -166,21 +193,21 @@ const TeamWork = () => {
                             {
                                 team
                                     ?
-                                    <Box
-                                        sx={{
-                                            width: "400px",
-                                            mr: 2,
-                                        }}
-                                    >
+                                    <>
                                         <TeamOutline
-                                            auth={auth}
                                             team={team}
                                             togglePopover={togglePopover}
                                             setTogglePopover={setTogglePopover}
                                             genInviteUrl={genInviteUrl}
                                             student={false}
                                         />
-                                    </Box>
+
+                                        <Divider
+                                            sx={{
+                                                mb: 2,
+                                            }}
+                                        />
+                                    </>
                                     :
                                     <></>
                             }
@@ -259,42 +286,42 @@ const TeamWork = () => {
                                     <></>
                             }
                         </Box>
-                    </Stack>
-
-                    {
-                        publishGantt
-                        &&
-                        <Box>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <Box>
-                                    <Toolbar
-                                        zoom={currentZoom}
-                                        onZoomChange={handleZoomChange}
-                                    />
-                                </Box>
-                            </Box>
-
-                            <Box
-                                className="gantt-container"
-                                sx={{
-                                    height: "400px",
-                                }}
-                            >
-                                <Gantt
+                    </Box>
+                </Stack>
+                
+                {
+                    publishGantt
+                    &&
+                    <Box>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                            }}
+                        >
+                            <Box>
+                                <Toolbar
                                     zoom={currentZoom}
-                                    tasks={data}
+                                    onZoomChange={handleZoomChange}
                                 />
                             </Box>
                         </Box>
-                    }
-                </TeamWorkLayout>
-            </>
+
+                        <Box
+                            className="gantt-container"
+                            sx={{
+                                height: "400px",
+                            }}
+                        >
+                            <Gantt
+                                zoom={currentZoom}
+                                tasks={data}
+                            />
+                        </Box>
+                    </Box>
+                }
+            </TeamWorkLayout>
             :
             <Typography>
                 チームが見つかりません
