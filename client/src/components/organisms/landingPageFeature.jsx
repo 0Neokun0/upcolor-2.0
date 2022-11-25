@@ -1,15 +1,20 @@
 import { Card } from "@mui/material"
+import { blueGrey } from "@mui/material/colors"
 import { FeatureCard } from "components/molecules"
 
 const LandingPageFeature = (props) => {
     return (
         <Card
-            variant="outlined"
+            elevation={10}
             sx={{
+                transform: "translate(-50%,-50%)",
+                position: "absolute",
+                top: "100%",
+                left: "50%",
                 width: "900px",
-                borderRadius: "0px",
                 display: "flex",
-                justifyContent: "space-between"
+                justifyContent: "space-between",
+                background: `linear-gradient(to left, ${blueGrey[100]}, white)`,
             }}
         >
             {
