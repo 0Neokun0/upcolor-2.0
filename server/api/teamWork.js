@@ -1,6 +1,8 @@
 const express = require("express")
 const router = express.Router()
 
+const axios = require("axios")
+
 const jwt = require("jsonwebtoken")
 const config = require("./config")
 const get = require("./function/get")
@@ -163,7 +165,7 @@ router.post("/getTeamMembers", async (req, res) => {
     res.json(members)
 })
 
-router.post("/getTeamWorkList", async (req, res) => {
+router.post("/getList", async (req, res) => {
     const sqlSelectTeamList = `
         SELECT
             *
@@ -172,7 +174,57 @@ router.post("/getTeamWorkList", async (req, res) => {
     `
     const teamList = await sql.handleSelect(sqlSelectTeamList)
 
-    res.json(teamList)
+    const sep = (/,|、|\//g)
+    var suggest = teamList.map((value) => {
+        if (value["technology_used"]) {
+            return value["technology_used"].split(sep).map((tech) => {
+                return tech.trim()
+            })
+        }
+    }).flat()
+
+    suggest = [...new Set(suggest)].filter((ele) => ele).join(",")
+
+    const getYomi = async (str) => {
+        const getValue = await new Promise((response, reject) => {
+            axios({
+                method: 'post',
+                url: "https://labs.goo.ne.jp/api/hiragana",
+                headers: {
+                    'Content-Type': `application/json`
+                },
+                data: {
+                    app_id: "28320eb4d74fdd649bd889ecace6f6740d3587991fa525141e643cf677efe46a",
+                    sentence: str,
+                    output_type: "hiragana",
+                }
+            })
+                .then((res) => {
+                    response(res.data.converted)
+                })
+        })
+
+        return getValue
+    }
+
+    var yomi = await getYomi(suggest)
+
+    suggest = suggest.split(",")
+    yomi = yomi.replace(/\s+/g, "").split(",")
+
+    var suggestList = suggest.map((_, index) => {
+        return {label: suggest[index], value: yomi[index]}
+    })
+
+    const courses = await get.list("course")
+
+    res.json({
+        team: teamList,
+        suggest: suggestList,
+        search: {
+            courses: courses,
+        },
+    })
 })
 
 router.post("/getTeamChat", async (req, res) => {

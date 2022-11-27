@@ -26,7 +26,7 @@ const TeamWorkInvite = () => {
         axios.post("/teamWork/checkTeamWork", {
             token: inviteToken,
         })
-            .then((res) => {
+             .then((res) => {
                 setTeam(res.data)
             })
     }, [inviteToken])

@@ -1,19 +1,14 @@
-import { Box } from "@mui/material"
-import { LandingPageLayout } from "components/templates"
+import { cyan, deepPurple, green } from "@mui/material/colors"
+
+import { Box, Button, Hidden, Typography } from "@mui/material"
 import logo from "components/atoms/logo/upcolor_logo.svg"
+import image from "components/atoms/images/20943572.jpg"
 import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
-import { cyan, deepPurple, green } from "@mui/material/colors"
+import { LandingPageFeature } from "components/organisms"
 
 const LandingPage = () => {
-    const card = {
-        logoSrc: logo,
-        title1: "UPCOLOR 2.0",
-        title2: "学内交流ウェブアプリ",
-        subTitle: "去年に引き続きUpColorをバージョンアップして、学内交流アプリケーションにしました。",
-    }
-
     const features = [
         {
             icon: <PeopleAltRoundedIcon />,
@@ -55,12 +50,115 @@ const LandingPage = () => {
 
     return (
         <Box>
-            <LandingPageLayout
-                card={card}
-                features={features}
-            />
+            <Box
+                sx={{
+                    backgroundColor: "white",
+                    position: "relative",
+                }}
+            >
+                <Box
+                    sx={{
+                        width: "fit-content",
+                        height: "calc(100vh - 64px)",
+                        mx: "auto",
+                        display: "flex",
+                        alignItems: "center",
+                    }}
+                >
+                    {/* <<< 左要素 */}
+                    <Box>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                            }}
+                        >
+                            <img
+                                src={logo}
+                                alt="ロゴの画像"
+                                height="100px"
+                            />
+
+                            <Typography
+                                variant="h1"
+                                sx={{
+                                    ml: 2,
+                                }}
+                            >
+                                UPCOLOR
+                            </Typography>
+
+                        </Box>
+
+                        <Typography
+                            color="gray"
+                            sx={{
+                                ml: "129px"
+                            }}
+                        >
+                            ここではプロフィールのテンプレート、<br />
+                            個人間のチャット、ポートフォリオの展示など様々な機能があります。
+                        </Typography>
+
+                        <Box
+                            sx={{
+                                mt: 4,
+                                display: "flex",
+                                justifyContent: "end",
+                            }}
+                        >
+                            <Button
+                                variant="outlined"
+                                href="/signup/student"
+                            >
+                                サインアップ
+                            </Button>
+
+                            <Button
+                                variant="contained"
+                                href="/signin"
+                                sx={{
+                                    ml: 2,
+                                }}
+                            >
+                                サインイン
+                            </Button>
+                        </Box>
+                    </Box>
+                    {/* 左要素 >>> */}
+
+                    {/* <<< 右要素 */}
+                    <Hidden
+                        lgDown
+                    >
+                        <Box
+                            sx={{
+                                ml: 8,
+                            }}
+                        >
+                            <Box
+                                component="img"
+                                src={image}
+                                alt="イメージ"
+                                height="500px"
+                            />
+                        </Box>
+                    </Hidden>
+                    {/* 右要素 >>> */}
+                </Box>
+
+                <Hidden
+                    lgDown
+                >
+                    <LandingPageFeature
+                        features={features}
+                    />
+                </Hidden>
+            </Box>
+
+            下に画像と説明置く予定
         </Box>
-    );
-};
+    )
+}
 
 export default LandingPage
