@@ -215,7 +215,7 @@ function App() {
                 />
 
                 <Routes>
-                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/" element={ <LandingPage signInState={signInState} />} />
                     <Route path="*" element={<NotFound />} />
 
                     {/* <Route path="student/signup" element={<ReqNoAuth component={<StudentSignup />} />} /> */}

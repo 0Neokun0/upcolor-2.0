@@ -8,7 +8,7 @@ import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
 import { LandingPageFeature } from "components/organisms"
 
-const LandingPage = () => {
+const LandingPage = (props) => {
     const features = [
         {
             icon: <PeopleAltRoundedIcon />,
@@ -99,31 +99,57 @@ const LandingPage = () => {
                             ここではプロフィールのテンプレート、<br />
                             個人間のチャット、ポートフォリオの展示など様々な機能があります。
                         </Typography>
+                        
+                            {
+                                props.signInState
+                                    ?
+                                    (
+                                        <Box
+                                            sx={{
+                                                mt: 4,
+                                                display: "flex",
+                                                justifyContent: "end",
+                                            }}
+                                        >
+                                            <Typography
+                                                variant="h3"
+                                                sx={{
+                                                    fontWeight: 600,
+                                                }}
+                                            >
+                                                ようこそ &#x2015;
+                                            </Typography>
 
-                        <Box
-                            sx={{
-                                mt: 4,
-                                display: "flex",
-                                justifyContent: "end",
-                            }}
-                        >
-                            <Button
-                                variant="outlined"
-                                href="/signup/student"
-                            >
-                                サインアップ
-                            </Button>
+                                        </Box>
+                                    )
+                                    :
+                                    (
+                                        <Box
+                                            sx={{
+                                                mt: 4,
+                                                display: "flex",
+                                                justifyContent: "end",
+                                            }}
+                                        >
+                                            <Button
+                                                variant="outlined"
+                                                href="/signup/student"
+                                            >
+                                                サインアップ
+                                            </Button>
 
-                            <Button
-                                variant="contained"
-                                href="/signin"
-                                sx={{
-                                    ml: 2,
-                                }}
-                            >
-                                サインイン
-                            </Button>
-                        </Box>
+                                            <Button
+                                                variant="contained"
+                                                href="/signin"
+                                                sx={{
+                                                    ml: 2,
+                                                }}
+                                            >
+                                                サインイン
+                                            </Button>
+                                        </Box>
+                                    )
+                            }
                     </Box>
                     {/* 左要素 >>> */}
 
