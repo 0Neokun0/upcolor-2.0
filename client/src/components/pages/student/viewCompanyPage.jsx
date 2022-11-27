@@ -4,10 +4,6 @@ import PropTypes from 'prop-types'
 import MenuIcon from "@mui/icons-material/Menu"
 import { CompanyHomeLayout } from "components/templates"
 
-import logo from "components/atoms/logo/upcolor_logo.svg"
-import { MainMenuCompanyDrawer } from "components/organisms"
-
-
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'

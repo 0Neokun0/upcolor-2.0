@@ -22,12 +22,7 @@ import InstagramIcon from "@mui/icons-material/Instagram"
 import { CompanyHomeLayout } from "components/templates"
 
 const CompanyHome = () => {
-    const [companyMenuOpen, setCompanyMenuOpen] = useState(false)
     const [company, setCompany] = useState([])
-
-    const handleDrawerToggle = () => {
-        setCompanyMenuOpen(!companyMenuOpen)
-    }
 
     useEffect(() => {
         axios.post("/company/getCompanyProfile").then((res) => {
@@ -60,7 +55,7 @@ const CompanyHome = () => {
         {
             value: "学生プロフィール閲覧",
             icon: <ContactsIcon />,
-            url: "#",
+            url: "/list/student",
         },
     ]
 
@@ -162,7 +157,6 @@ const CompanyHome = () => {
         <CompanyHomeLayout
             company={company}
             companyMenus={companyMenus}
-            handleDrawerToggle={handleDrawerToggle}
             companyName={companyName}
             companyOccupation={companyOccupation}
             companyDetailsTabs={companyDetailsTabs}

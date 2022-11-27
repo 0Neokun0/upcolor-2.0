@@ -130,10 +130,9 @@ function App() {
         {
             value: "学生プロフィール閲覧",
             icon: <ContactsIcon />,
-            url: "#",
+            url: "/list/student",
         },
     ]
-
 
     const toggleSignout = () => {
         axios.post("/account/signout")
@@ -290,9 +289,14 @@ function App() {
                         <Route path=":inviteToken" element={<TeamWorkInvite />} />
                     </Route>
 
-                    <Route path="profile">
+                    <Route path="company/profile">
                         <Route path="" element={<Profile />} />
                         <Route path=":userId" element={<ProfileView />} />
+                    </Route>
+
+                    <Route path="company">
+                        <Route path="home" element={<CompanyHome />} />
+                        <Route path="company/:userId" element={<ViewCompanyPage />} />
                     </Route>
 
                     <Route path="profile/edit" element={<ProfileEdit />} />

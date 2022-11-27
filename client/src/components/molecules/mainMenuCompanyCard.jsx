@@ -35,7 +35,7 @@ const MainMenuCompanyCard = (props) => {
                     textAlign={"center"}
                     width="100%"
                 >
-                    {props.company.user_name}
+                    {props.company.company_name}
                 </Typography>
             </Box>
 
@@ -44,8 +44,6 @@ const MainMenuCompanyCard = (props) => {
                     my: 2,
                 }}
             />
-
-            ↓*** 要検討 ***↓
             <Box
                 justifyContent={"space-between"}
                 sx={{
@@ -54,7 +52,7 @@ const MainMenuCompanyCard = (props) => {
                 }}
             >
                 <Chip
-                    label="naoko"
+                    label="業種"
                 />
                 <Switch />
             </Box>
