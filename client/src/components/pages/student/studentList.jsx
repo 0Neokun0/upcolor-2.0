@@ -12,13 +12,12 @@ import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
 import TerminalRoundedIcon from '@mui/icons-material/TerminalRounded';
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
 
-String.prototype.nullSplit = function (sep) {
-    if (!this) {
-        return [""]
-    }
-    return this.split(sep)
-}
-
+// String.prototype.nullSplit = function (sep) {
+//     if (!this) {
+//         return [""]
+//     }
+//     return this.split(sep)
+// }
 
 const StudentList = () => {
     const [originalStudents, setOriginalStudents] = useState(false)

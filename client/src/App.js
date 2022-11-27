@@ -104,8 +104,8 @@ function App() {
     const toggleSignout = () => {
         axios.post("/account/signout")
             .then(() => {
-                sessionStorage.removeItem("AUTHORITY")
-                window.location.reload()
+                sessionStorage.removeItem('AUTHORITY')
+                window.location.href = "/"
             })
     }
 
