@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 import {
     Box,
     Card,
@@ -6,11 +6,8 @@ import {
     ListItem,
     ListItemButton,
     ListItemIcon,
-    Typography,
-} from '@mui/material'
-import { MainMenuCompanyCard } from 'components/molecules'
-
-
+} from "@mui/material"
+import { MainMenuCompanyCard } from "components/molecules"
 
 const MainMenuCompany = (props) => {
     return (
@@ -21,55 +18,31 @@ const MainMenuCompany = (props) => {
                     width: 300,
                 }}
             >
-                <Box sx={{
-                    display: "flex",
-                    mb: 1,
-                    p: 1,
-                }}>
-                    <img
-                        src={props.logo}
-                        alt="ロゴの画像"
-                        height="30px"
-                    />
-                    <Typography
-                        variant="h6"
-                        sx={{
-                            ml: 3,
-                            flexGrow: 1,
-                            fontWeight: 600,
-                        }}
-                    >
-                        UPCOLOR
-                    </Typography>
-                </Box>
                 <MainMenuCompanyCard
-                    profile={props.profile}
+                    company={props.company}
                 />
 
                 <List
                     disablePadding
                     sx={{
-                        'li + li': {
+                        "li + li": {
                             borderTop: 1,
-                            borderColor: '#e3f2fd',
+                            borderColor: "#e3f2fd",
                         },
                     }}
                 >
-                    {props.menus.map((menu, index) => {
+                    {props.companyMenus.map((companyMenu, index) => {
                         return (
-                            <ListItem
-                                disablePadding
-                                key={index}
-                            >
+                            <ListItem disablePadding key={index}>
                                 <ListItemButton
                                     component={Link}
-                                    to={menu.url}
+                                    to={companyMenu.url}
                                 >
                                     <ListItemIcon>
-                                        {menu.icon}
+                                        {companyMenu.icon}
                                     </ListItemIcon>
 
-                                    {menu.value}
+                                    {companyMenu.value}
                                 </ListItemButton>
                             </ListItem>
                         )

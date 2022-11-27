@@ -21,7 +21,7 @@ const CompanyPageTitle = (props) => {
                     variant="h2"
                     component="div"
                 >
-                    {props.companyName}
+                    {props.company["company_name"]}
                 </Typography>
 
                 <Stack

@@ -1,6 +1,5 @@
-import axios from 'axios'
-import { Box, Grid, IconButton, Tooltip } from "@mui/material"
-import { useEffect, useState } from 'react'
+import axios from "axios"
+import { useEffect, useState } from "react"
 import CorporateFareIcon from "@mui/icons-material/CorporateFare"
 import BadgeIcon from "@mui/icons-material/Badge"
 import MapIcon from "@mui/icons-material/Map"
@@ -20,11 +19,7 @@ import TodayIcon from "@mui/icons-material/Today"
 import WebIcon from "@mui/icons-material/Web"
 import HouseIcon from "@mui/icons-material/House"
 import InstagramIcon from "@mui/icons-material/Instagram"
-import MenuIcon from "@mui/icons-material/Menu"
 import { CompanyHomeLayout } from "components/templates"
-import { CompanyProfile } from "."
-import logo from "components/atoms/logo/upcolor_logo.svg"
-import { MainMenuCompanyDrawer } from "components/organisms"
 
 const CompanyHome = () => {
     const [companyMenuOpen, setCompanyMenuOpen] = useState(false)
@@ -35,14 +30,13 @@ const CompanyHome = () => {
     }
 
     useEffect(() => {
-        axios.post("/company/getCompanyProfile")
-        .then((res) => {
+        axios.post("/company/getCompanyProfile").then((res) => {
             console.log(res.data)
             setCompany(res.data)
         })
     }, [])
 
-    const menus = [
+    const companyMenus = [
         {
             value: "グループ投稿",
             icon: <GroupsIcon />,
@@ -165,59 +159,16 @@ const CompanyHome = () => {
     ]
 
     return (
-        <CompanyHomeLayout>
-            <Box>
-                <Grid
-                    container
-                    spacing={2}
-                    columns={10}
-                >
-                    <Grid
-                        item
-                        xs={2}
-                    >
-                        <MainMenuCompanyDrawer
-                            logo={logo}
-                            menus={menus}
-                            companyMenuOpen={companyMenuOpen}
-                            handleDrawerToggle={handleDrawerToggle}
-                        />
-                        <Box
-                            sx={{
-                                p: 2,
-                                width: "30%",
-                            }}
-                        >
-                            <Tooltip
-                                title="メニュー表示">
-                                <IconButton
-                                    color="inherit"
-                                    edge="start"
-                                    onClick={handleDrawerToggle}
-                                    sx={{ mr: 2, display: { md: "block", lg: "none" } }}
-                                >
-                                    <MenuIcon />
-                                </IconButton>
-                            </Tooltip>
-                        </Box>
-                    </Grid>
-
-                    <Grid
-                        item
-                        xs={8}
-                    >
-                        <CompanyProfile
-                            handleDrawerToggle={handleDrawerToggle}
-                            companyName={companyName}
-                            companyOccupation={companyOccupation}
-                            companyDetailsTabs={companyDetailsTabs}
-                            companyRecruitmentTabs={companyRecruitmentTabs}
-                            companyLinksTabs={companyLinksTabs}
-                        />
-                    </Grid>
-                </Grid>
-            </Box>
-        </CompanyHomeLayout>
+        <CompanyHomeLayout
+            company={company}
+            companyMenus={companyMenus}
+            handleDrawerToggle={handleDrawerToggle}
+            companyName={companyName}
+            companyOccupation={companyOccupation}
+            companyDetailsTabs={companyDetailsTabs}
+            companyRecruitmentTabs={companyRecruitmentTabs}
+            companyLinksTabs={companyLinksTabs}
+        />
     )
 }
 

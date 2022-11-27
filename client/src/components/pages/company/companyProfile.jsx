@@ -62,6 +62,7 @@ const CompanyProfile = (props) => {
                 spacing={3}
             >
                 <CompanyPageTitle
+                    company={props.company}
                     companyName={props.companyName}
                     companyOccupation={props.companyOccupation}
                 />
@@ -112,6 +113,7 @@ const CompanyProfile = (props) => {
 
                         <TabPanel value={value} index={0}>
                             <CompanyDetailsTab
+                                company={props.company}
                                 companyDetailsTabs={props.companyDetailsTabs}
                             />
                         </TabPanel>

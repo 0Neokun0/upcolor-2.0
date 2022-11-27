@@ -25,6 +25,11 @@ import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import BadgeIcon from '@mui/icons-material/Badge'
 import ViewTimelineIcon from '@mui/icons-material/ViewTimeline'
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest'
+import GroupsIcon from "@mui/icons-material/Groups"
+import LockOpenIcon from "@mui/icons-material/LockOpen"
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
+import SettingsIcon from "@mui/icons-material/Settings"
+import ContactsIcon from "@mui/icons-material/Contacts"
 
 function App() {
     const [open, setOpen] = useState(false)
@@ -100,6 +105,35 @@ function App() {
             icon: <SettingsSuggestIcon />,
         },
     ]
+
+    const companyDrawerMenus = [
+        {
+            value: "グループ投稿",
+            icon: <GroupsIcon />,
+            url: "#",
+        },
+        {
+            value: "グループ認証",
+            icon: <LockOpenIcon />,
+            url: "#",
+        },
+        {
+            value: "グループ管理",
+            icon: <ManageAccountsIcon />,
+            url: "#",
+        },
+        {
+            value: "企業プロフィール編集",
+            icon: <SettingsIcon />,
+            url: "/company/profile/edit",
+        },
+        {
+            value: "学生プロフィール閲覧",
+            icon: <ContactsIcon />,
+            url: "#",
+        },
+    ]
+
 
     const toggleSignout = () => {
         axios.post("/account/signout")
@@ -202,6 +236,7 @@ function App() {
                     name={"UPCOLOR"}
                     menus={menus}
                     drawerMenus={drawerMenus}
+                    companyDrawerMenus={companyDrawerMenus}
                     signInState={signInState}
                     openNavbar={openNavbar}
                     anchorEl={anchorEl}

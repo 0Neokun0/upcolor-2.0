@@ -35,7 +35,7 @@ const MainMenuCompanyCard = (props) => {
                     textAlign={"center"}
                     width="100%"
                 >
-                    {/* {props.company.user_name} */}
+                    {props.company.user_name}
                 </Typography>
             </Box>
 
