@@ -3,7 +3,7 @@ import { Avatar, Box, Card, Divider, Typography } from "@mui/material"
 import { Link } from "react-router-dom"
 
 const NewsCard = (props) => {
-    const { key, name, title, text, time } = props
+    const { id, name, title, text, time } = props
 
     return (
         <Card
@@ -23,7 +23,7 @@ const NewsCard = (props) => {
                     // 変更予定
                     src={`${server.host}/images/icon/userIcon.png`}
                     component={Link}
-                    to={`/profile/${key}`}
+                    to={`/profile/${id}`}
                     sx={{
                         border: 1,
                         borderColor: "divider",
