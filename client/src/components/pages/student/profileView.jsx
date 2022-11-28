@@ -95,8 +95,6 @@ const ProfileView = () => {
                             content: res.data["github"],
                         },
                     ])
-                } else {
-
                 }
             })
     }, [userId])

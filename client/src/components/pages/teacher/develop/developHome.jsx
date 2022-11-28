@@ -34,32 +34,10 @@ const DevelopHome = () => {
         },
     ]
 
-    const ButtonSx = [
-        {
-            mt: 2,
-            fontSize: 20,
-            fontWeight: 'bold',
-            border: 1,
-            borderRadius: 2,
-        },
-    ]
-
-    const cardSx = [
-        {
-            minWidth: 300,
-            m: 2,
-            p: 2,
-            borderRadius: "15px",
-            boxShadow: 3,
-        },
-    ]
-
     return (
         <DevelopLayout>
             <DevelopMenus
                 menus={menus}
-                cardSx={cardSx}
-                ButtonSx={ButtonSx}
             />
         </DevelopLayout>
     )

@@ -1,4 +1,6 @@
 export { default as LandingPage } from "./landingPage"
 export { default as NotFound } from "./notFound"
 export { default as Signin } from "./signin"
-export {default as ViewTeamWork} from "./viewTeamWork"
+export { default as ViewTeamWork } from "./viewTeamWork"
+export { default as ClassNews } from "./classNews"
+export { default as ClassNewsFeed } from "./classNewsFeed"

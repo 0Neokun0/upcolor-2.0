@@ -1,9 +1,10 @@
 import axios from "axios"
-import { TeacherNewsLayout } from "components/templates"
+import { ContainerLg } from "components/templates"
 import { NewsForm, NewsList } from "components/organisms"
 import { useState } from "react"
 import { useEffect } from "react"
-import { Divider } from "@mui/material"
+import { Divider, Grid } from "@mui/material"
+import TeacherNewsHeader from "components/organisms/teacherNewsHeader"
 
 const TeacherNews = () => {
     const [profile, setProfile] = useState([])
@@ -51,20 +52,27 @@ const TeacherNews = () => {
     }, [])
 
     return (
-        <TeacherNewsLayout>
-            <NewsForm
-                formState={formState}
-                setFormState={setFormState}
-
+        <ContainerLg>
+            <TeacherNewsHeader
                 profile={profile}
-                courses={courses}
-
-                target={target}
-                handleTarget={handleTarget}
-
-                handleSubmit={handleSubmit}
             />
+            <Grid
+                container
+                justifyContent="center"
+            >
+                <NewsForm
+                    formState={formState}
+                    setFormState={setFormState}
 
+                    profile={profile}
+                    courses={courses}
+
+                    target={target}
+                    handleTarget={handleTarget}
+
+                    handleSubmit={handleSubmit}
+                />
+            </Grid>
             <Divider
                 sx={{
                     mt: 2,
@@ -74,7 +82,7 @@ const TeacherNews = () => {
             <NewsList
                 news={news}
             />
-        </TeacherNewsLayout>
+        </ContainerLg>
     )
 }
 

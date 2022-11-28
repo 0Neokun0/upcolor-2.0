@@ -9,16 +9,23 @@ import { Link } from "react-router-dom"
 
 const DevelopMenus = (props) => {
     return (
-        props.menus &&
+        props.menus
+        &&
         props.menus.map((menu, index) => {
             return (
                 <Card
+                    sx={{
+                        minWidth: 300,
+                        m: 2,
+                        p: 2,
+                        borderRadius: "15px",
+                        boxShadow: 3,
+                    }}
                     key={index}
-                    sx={props.cardSx}
                 >
                     <CardMedia
                         sx={{
-                            borderRadius: 2,
+                            borderRadius: "15px",
                             minwidth: 300,
                             height: 80,
                         }}
@@ -39,7 +46,13 @@ const DevelopMenus = (props) => {
                             variant="outlined"
                             component={Link}
                             to={menu["url"]}
-                            sx={props.ButtonSx}
+                            sx={{
+                                mt: 2,
+                                fontSize: 20,
+                                fontWeight: 'bold',
+                                border: 1,
+                                borderRadius: 2,
+                            }}
                             color={menu["color"]}
                             startIcon={menu["startIcon"]}
                         >

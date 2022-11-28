@@ -1,40 +1,46 @@
 import { Avatar, Card, CardHeader, Divider, Typography } from "@mui/material"
+// import { server } from "components/config"
 
 const NewsCard = (props) => {
     return (
         <Card
             sx={{
-                boxShadow: 2,
-                borderRadius: '15px',
-                mt: 2,
-                p: 2,
+                borderRadius: "15px",
+                m: 2,
+                p: 1,
             }}
         >
             <CardHeader
-                avatar={<Avatar>{props.name}</Avatar>}
+                avatar={
+                    <Avatar
+                        // src={server.host + "/images/icon/" + props.profile.image}
+                    />
+                }
                 title={props.name}
                 subheader={props.time}
                 sx={{
-                    p: 0,
+                    m: 1,
+                    p: 1,
                 }}
             />
-
             <Divider
                 sx={{
                     my: 2,
                 }}
             />
             <Typography
-                variant="h5"
+                variant="subtitle1"
                 textAlign={"center"}
-                sx={{
-                    mb: 2,
-                }}
+                gutterBottom
             >
                 {props.title}
             </Typography>
+            <Typography
+                variant="body2"
+            >
+                {props.text}
+            </Typography>
 
-            {props.text}
         </Card>
     )
 }
