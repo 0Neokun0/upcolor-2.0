@@ -1,4 +1,4 @@
-import { Box, Card, CardActionArea, CardMedia, Chip, Typography } from "@mui/material"
+import { Box, Card, CardActionArea, Chip, Typography } from "@mui/material"
 
 import BadgeIcon from "@mui/icons-material/Badge"
 import GroupWorkIcon from "@mui/icons-material/GroupWork"

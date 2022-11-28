@@ -8,7 +8,7 @@ import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
 import { LandingPageFeature } from "components/organisms"
 
-const LandingPage = () => {
+const LandingPage = (props) => {
     const features = [
         {
             icon: <PeopleAltRoundedIcon />,
@@ -107,22 +107,35 @@ const LandingPage = () => {
                                 justifyContent: "end",
                             }}
                         >
-                            <Button
-                                variant="outlined"
-                                href="/signup/student"
-                            >
-                                サインアップ
-                            </Button>
+                            {
+                                props["signInState"]
+                                    ?
+                                    <Typography
+                                        variant="h4"
+                                    >
+                                        ようこそ
+                                    </Typography>
 
-                            <Button
-                                variant="contained"
-                                href="/signin"
-                                sx={{
-                                    ml: 2,
-                                }}
-                            >
-                                サインイン
-                            </Button>
+                                    :
+                                    <Box>
+                                        <Button
+                                            variant="outlined"
+                                            href="/signup/student"
+                                        >
+                                            サインアップ
+                                        </Button>
+
+                                        <Button
+                                            variant="contained"
+                                            href="/signin"
+                                            sx={{
+                                                ml: 2,
+                                            }}
+                                        >
+                                            サインイン
+                                        </Button>
+                                    </Box>
+                            }
                         </Box>
                     </Box>
                     {/* 左要素 >>> */}

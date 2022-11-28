@@ -6,8 +6,7 @@ import Select from "react-select"
 import { ListLayout } from "components/templates"
 import { ListDisplayBox, SearchListBox } from "components/organisms"
 import { SearchList, TeamViewCard } from "components/molecules"
-import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
-import { Box } from "@mui/material"
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu'
 
 const TeamList = () => {
     const [suggestion, setSuggestion] = useState([])
