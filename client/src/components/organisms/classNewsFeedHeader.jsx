@@ -1,5 +1,6 @@
 import { server } from 'components/config'
-import { Avatar, Box, Card, Typography } from "@mui/material"
+import { Avatar, Box, Card, IconButton, Typography } from "@mui/material"
+import GroupRoundedIcon from '@mui/icons-material/GroupRounded'
 
 const ClassNewsFeedHeader = (props) => {
     return (
@@ -37,7 +38,8 @@ const ClassNewsFeedHeader = (props) => {
                         backgroundColor: "white",
                         borderRadius: "10px",
                         px: 2,
-                        wordBreak: "keep-all"
+                        wordBreak: "keep-all",
+                        border: 1,
                     }}
                 >
                     {props["enterClassNewsRoom"]["class_name"]}
@@ -77,6 +79,10 @@ const ClassNewsFeedHeader = (props) => {
                 >
                     クラスID: {props["classId"]}
                 </Typography>
+
+                {/* <IconButton>
+                    <GroupRoundedIcon />
+                </IconButton> */}
             </Box>
         </Card>
     )

@@ -17,7 +17,7 @@ const TeacherHome = () => {
             value: "クラス",
             image: "https://i-seifu.jp/wp-content/themes/i-seifu_wp/images/cp-kyujin.png",
             color: "success",
-            text: "ここから教師を追加してください。",
+            text: "クラスの管理",
             startIcon: <GroupAddRoundedIcon />,
         },
     ]
