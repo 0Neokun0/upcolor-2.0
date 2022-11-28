@@ -29,28 +29,34 @@ const Header = (props) => {
                         alignItems: "center",
                     }}
                 >
-                    <Hidden
-                        lgUp
-                    >
-                        <Box
-                            sx={{
-                                display: "flex",
-                                alignItems: "center",
-                            }}
-                        >
-                            <IconButton
-                                sx={{
-                                    p: "5px",
-                                    borderRadius: "10px",
-                                    border: 1,
-                                    borderColor: "divider"
-                                }}
-                                onClick={() => props["setMenuOpen"](true)}
+                    {
+                        pathName === "/"
+                            ?
+                            <></>
+                            :
+                            <Hidden
+                                lgUp
                             >
-                                <MenuRoundedIcon />
-                            </IconButton>
-                        </Box>
-                    </Hidden>
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    <IconButton
+                                        sx={{
+                                            p: "5px",
+                                            borderRadius: "10px",
+                                            border: 1,
+                                            borderColor: "divider"
+                                        }}
+                                        onClick={() => props["setMenuOpen"](true)}
+                                    >
+                                        <MenuRoundedIcon />
+                                    </IconButton>
+                                </Box>
+                            </Hidden>
+                    }
 
                     <Link
                         href="/"
@@ -118,44 +124,40 @@ const Header = (props) => {
                     {
                         pathName === "/"
                             ?
-                            (
-                                <Box
-                                    sx={{
-                                        ml: 5,
-                                    }}
-                                >
-                                    {
-                                        props.signInState
-                                            ?
-                                            (
-                                                <Button
-                                                    variant="contained"
-                                                    onClick={props.toggleAlertOpen}
-                                                >
-                                                    サインアウト
-                                                </Button>
-                                            )
-                                            :
-                                            (
-                                                <Button variant="contained" href="/signin">
-                                                    サインイン
-                                                </Button>
-                                            )
-                                    }
-                                </Box>
-                            )
+                            <Box
+                                sx={{
+                                    ml: 5,
+                                }}
+                            >
+                                {
+                                    props.signInState
+                                        ?
+                                        (
+                                            <Button
+                                                variant="contained"
+                                                onClick={props.toggleAlertOpen}
+                                            >
+                                                サインアウト
+                                            </Button>
+                                        )
+                                        :
+                                        (
+                                            <Button variant="contained" href="/signin">
+                                                サインイン
+                                            </Button>
+                                        )
+                                }
+                            </Box>
                             :
-                            (
-                                <NavbarMenu
-                                    profile={props.profile}
-                                    anchorEl={props.anchorEl}
-                                    openNavbar={props.openNavbar}
-                                    handleClick={props.handleClick}
-                                    handleClose={props.handleClose}
-                                    signInState={props.signInState}
-                                    toggleAlertOpen={props.toggleAlertOpen}
-                                />
-                            )
+                            <NavbarMenu
+                                profile={props.profile}
+                                anchorEl={props.anchorEl}
+                                openNavbar={props.openNavbar}
+                                handleClick={props.handleClick}
+                                handleClose={props.handleClose}
+                                signInState={props.signInState}
+                                toggleAlertOpen={props.toggleAlertOpen}
+                            />
                     }
                 </Box>
             </Toolbar>
