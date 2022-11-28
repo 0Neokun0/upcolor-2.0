@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from "@mui/material";
+import { Box, Button, Dialog, TextField, Typography } from "@mui/material";
 
 const ClassNewsRoomCreate = (props) => {
     return (
@@ -9,16 +9,21 @@ const ClassNewsRoomCreate = (props) => {
             <Box
                 component="form"
                 onSubmit={props["createClassNews"]}
+                sx={{
+                    p: 2,
+                }}
             >
-                <DialogTitle>
+                <Typography
+                    variant="h5"
+                >
                     クラスを作成
-                </DialogTitle>
+                </Typography>
 
-                <DialogContent>
-                    <DialogContentText>
-                        クラスの名前を入力すると、クラスルームが作成されます!
-                    </DialogContentText>
-
+                <Box
+                    sx={{
+                        mt: 2,
+                    }}
+                >
                     <TextField
                         autoFocus
                         margin="dense"
@@ -35,23 +40,31 @@ const ClassNewsRoomCreate = (props) => {
                         type="password"
                         fullWidth
                     />
-                </DialogContent>
+                </Box>
 
-                <DialogActions>
+                <Box
+                    sx={{
+                        mt: 2,
+                        display: "flex",
+                        justifyContent: "end",
+                    }}
+                >
                     <Button
                         onClick={() => props["setOpenCreate"](false)}
-                        color="primary"
                     >
                         キャンセル
                     </Button>
 
                     <Button
                         type="submit"
-                        color="primary"
+                        variant="contained"
+                        sx={{
+                            ml: 2,
+                        }}
                     >
                         作成
                     </Button>
-                </DialogActions>
+                </Box>
             </Box>
         </Dialog>
     );

@@ -46,35 +46,37 @@ const ClassNewsFeedHeader = (props) => {
 
             <Box
                 sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
+                    p: 2,
+                    display: "flex",
+                    alignItems: "center",
                 }}
             >
-                <Box
+                <Avatar
+                    alt={props["enterClassNewsRoom"]["name"]}
+                    src={`${server.host}/images/icon/${props["enterClassNewsRoom"]["image_url"]}`}
                     sx={{
-                        p: 2,
-                        display: "flex",
-                        alignItems: "center",
+                        border: 1,
+                        borderColor: "divider",
+                    }}
+                />
+
+                <Typography
+                    sx={{
+                        ml: 1,
+                        fontWeight: "bold",
                     }}
                 >
-                    <Avatar
-                        alt={props["enterClassNewsRoom"]["name"]}
-                        src={`${server.host}/images/icon/${props["enterClassNewsRoom"]["image_url"]}`}
-                        sx={{
-                            border: 1,
-                            borderColor: "divider",
-                        }}
-                    />
+                    {props["enterClassNewsRoom"]["user_name"]}
+                </Typography>
 
-                    <Typography
-                        sx={{
-                            ml: 1,
-                            fontWeight: "bold",
-                        }}
-                    >
-                        {props["enterClassNewsRoom"]["user_name"]}
-                    </Typography>
-                </Box>
+                <Typography
+                    fontWeight="bold"
+                    sx={{
+                        ml: "auto",
+                    }}
+                >
+                    クラスID: {props["classId"]}
+                </Typography>
             </Box>
         </Card>
     )

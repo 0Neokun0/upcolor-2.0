@@ -1,7 +1,7 @@
 import { ClassNewsRoomCreate, ClassNewsRoomJoin } from "components/molecules"
 import { Box, Card, IconButton, Tooltip, Typography } from "@mui/material"
 
-import ClassRoundedIcon from '@mui/icons-material/ClassRounded'
+import LoginRoundedIcon from '@mui/icons-material/LoginRounded'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
 
 const ClassNewsHeader = (props) => {
@@ -81,18 +81,6 @@ const ClassNewsHeader = (props) => {
                 </Box> */}
 
                 <Tooltip
-                    title="作成"
-                    placement="bottom"
-                >
-                    <IconButton
-                        size="small"
-                        onClick={() => props["setOpenCreate"](true)}
-                    >
-                        <ClassRoundedIcon />
-                    </IconButton>
-                </Tooltip>
-
-                <Tooltip
                     title="参加"
                     placement="bottom"
                 >
@@ -100,9 +88,25 @@ const ClassNewsHeader = (props) => {
                         size="small"
                         onClick={() => props["setOpenJoin"](true)}
                     >
-                        <AddRoundedIcon />
+                        <LoginRoundedIcon />
                     </IconButton>
                 </Tooltip>
+
+                {
+                    props["userType"] === 2
+                    &&
+                    <Tooltip
+                        title="作成"
+                        placement="bottom"
+                    >
+                        <IconButton
+                            size="small"
+                            onClick={() => props["setOpenCreate"](true)}
+                        >
+                            <AddRoundedIcon />
+                        </IconButton>
+                    </Tooltip>
+                }
             </Box>
 
             <ClassNewsRoomCreate
@@ -115,6 +119,8 @@ const ClassNewsHeader = (props) => {
             <ClassNewsRoomJoin
                 openJoin={props["openJoin"]}
                 setOpenJoin={props["setOpenJoin"]}
+
+                joinClassNews={props["joinClassNews"]}
             />
         </Card>
     )

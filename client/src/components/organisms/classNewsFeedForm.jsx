@@ -72,7 +72,7 @@ const ClassNewsFeedForm = (props) => {
                             variant="caption"
                             color="gray"
                         >
-                            5文字以上、500文字以内
+                            5文字以上で入力
                         </Typography>
 
                         <TextField
@@ -89,7 +89,6 @@ const ClassNewsFeedForm = (props) => {
                             autoFocus
                             inputProps={{
                                 minLength: 5,
-                                maxLength: 500,
                             }}
                             required
                         />

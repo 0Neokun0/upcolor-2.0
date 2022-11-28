@@ -1,23 +1,24 @@
-import { Avatar, Box, Button, Card, CardActions, FormControl, IconButton, InputBase, InputLabel, MenuItem, OutlinedInput, Select, TextField, Tooltip, Typography } from "@mui/material"
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
-import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
 import { server } from "components/config"
+import { Avatar, Box, Button, Card, FormControl, IconButton, InputLabel, MenuItem, OutlinedInput, Select, TextField, Tooltip, Typography } from "@mui/material"
+import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 
 const NewsForm = (props) => {
     return (
-        <Box sx={{
-            width: "50%",
-        }}
+        <Box
+            sx={{
+                width: "100%",
+            }}
         >
             {
-                props.formState
+                props["formState"]
                     ?
                     <Card
+                        variant="outlined"
                         sx={{
                             mt: 2,
                             p: 2,
                             position: "relative",
-                            boxShadow: 2,
                             borderRadius: "15px",
                         }}
                     >
@@ -37,6 +38,7 @@ const NewsForm = (props) => {
                                 <CloseRoundedIcon />
                             </IconButton>
                         </Tooltip>
+
                         <Box
                             sx={{
                                 display: "flex",
@@ -47,6 +49,7 @@ const NewsForm = (props) => {
                             <Avatar
                                 src={server.host + "/images/icon/" + props.profile.image}
                             />
+
                             <Typography
                                 sx={{
                                     ml: 1,
@@ -77,15 +80,14 @@ const NewsForm = (props) => {
                                 label="ニュース"
                                 name="text"
                                 variant="filled"
-                                rows={3}
+                                rows={8}
                                 multiline
                                 fullWidth
                             />
+
                             <Box
-                                justifyContent={'end'}
-                                sx={{
-                                    display: 'flex',
-                                }}
+                                display="flex"
+                                justifyContent="end"
                             >
                                 <Tooltip
                                     title="写真"
@@ -115,6 +117,7 @@ const NewsForm = (props) => {
                                 <InputLabel>
                                     対象コース
                                 </InputLabel>
+
                                 <Select
                                     value={props.target}
                                     input={<OutlinedInput label="対象コース" />}
@@ -138,64 +141,63 @@ const NewsForm = (props) => {
 
                             <Box sx={{
                                 display: 'flex',
-                                flexDirection: 'row-reverse',
+                                justifyContent: "end",
                             }}
                             >
-                                <CardActions>
-                                    <Button
-                                        variant="outlined"
-                                        onClick={() => props.setFormState(!props.formState)}
-                                    >
-                                        キャンセル
-                                    </Button>
-                                    <Button
-                                        type="submit"
-                                        variant="outlined"
-                                    >
-                                        投稿
-                                    </Button>
-                                </CardActions>
+                                <Button
+                                    variant="outlined"
+                                    onClick={() => props.setFormState(!props.formState)}
+                                >
+                                    キャンセル
+                                </Button>
+
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    sx={{
+                                        ml: 2,
+                                    }}
+                                >
+                                    投稿
+                                </Button>
                             </Box>
                         </Box>
                     </Card>
                     :
-                    <Card sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        width: "100%",
-                        p: 2,
-                        mt: 2,
-                        boxShadow: 3,
-                        borderRadius: "25px",
-                    }}
-                    >
-                        <Avatar sx={{
-                            height: "50px",
-                            width: "50px",
+                    <Card
+                        variant="outlined"
+                        sx={{
+                            p: 2,
+                            mt: 2,
+                            display: 'flex',
+                            alignItems: 'center',
+                            borderRadius: '15px',
+                            ":hover": {
+                                cursor: "text"
+                            },
                         }}
+                        onClick={() => props["setFormState"](!props["formState"])}
+                    >
+                        <Avatar
+                            sx={{
+                                height: '40px',
+                                width: '40px',
+                            }}
                             src={server.host + "/images/icon/" + props.profile.image}
                         />
-                        <Box sx={{
-                            p: 1,
-                            width: "100%",
-                            ml: "20px",
-                            mr: "20px",
-                            fontSize: "17px",
-                        }}
+
+                        <Typography
+                            color="gray"
+                            sx={{
+                                ml: 1,
+                            }}
                         >
-                            <InputBase
-                                sx={{
-                                    p: 1,
-                                }}
-                                type="text"
-                                placeholder="何かを発表したい事"
-                                onClick={() => props.setFormState(!props.formState)}
-                            />
-                        </Box>
+                            投稿内容
+                        </Typography>
                     </Card>
             }
         </Box>
-    );
+    )
 }
 
 export default NewsForm
