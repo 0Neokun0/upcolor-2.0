@@ -36,7 +36,6 @@ const PostBox = (props) => {
 
                 <TextField
                     name="text"
-                    id="outlined-multiline-flexible"
                     variant="standard"
                     placeholder="今どうしてる?"
                     fullWidth

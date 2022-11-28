@@ -17,7 +17,8 @@ const HomeLayout = (props) => {
                     <Box
                         sx={{
                             p: 2,
-                            width: "60%",
+                            width: "50%",
+                            maxWidth: "400px"
                         }}
                     >
                         <MainMenu

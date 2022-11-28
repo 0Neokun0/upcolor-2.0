@@ -35,7 +35,7 @@ const Header = (props) => {
                             <></>
                             :
                             <Hidden
-                                lgUp
+                                mdUp
                             >
                                 <Box
                                     sx={{
