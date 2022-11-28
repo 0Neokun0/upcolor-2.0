@@ -527,7 +527,12 @@ router.post("/selfCheck", async (req, res) => {
 })
 
 router.post("/getTeamWorkList", async (req, res) => {
-    const userId = get.userId(req)
+    var userId
+    if (req.body.userId) {
+        userId = req.body.userId
+    } else {
+        userId = get.userId(req)
+    }
 
     const sqlSelectTeamWorkList = `
         SELECT
