@@ -80,6 +80,7 @@ const TeamViewCard = (props) => {
                         icon={<GroupWorkIcon />}
                         label="チーム"
                     />
+                    
                     <Typography
                         sx={{
                             width: 300,
