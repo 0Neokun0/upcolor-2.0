@@ -136,4 +136,35 @@ router.post("/update", async (req, res) => {
     }
 })
 
+router.post("/getCompanyProfile", async (req, res) => {
+    try {
+        const userId = get.userId(req)
+        const sqlSelectCompanyId = `
+            SELECT
+                company_id
+            FROM
+                company_profiles
+            WHERE
+                user_id = ?
+        `
+        const companyId = await sql.handleSelect(sqlSelectCompanyId, [userId])
+        const company = await get.company(companyId[0])
+        res.json(company)
+    } catch (err) {
+        console.log(err)
+        res.status(404)
+    }
+})
+
+router.post("/getCompany", async (req, res) => {
+    try {
+        const companyId = req.body.companyId
+        const company = await get.company(companyId)
+        res.json(company)
+    } catch (err) {
+        console.log(err)
+        res.status(404)
+    }
+})
+
 module.exports = router

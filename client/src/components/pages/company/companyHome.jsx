@@ -1,44 +1,200 @@
-import { Box, Paper } from "@mui/material"
-import { MainMenu } from "components/organisms"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import CompanyHomeLayout from "components/templates/companyHomeLayout"
+
+
+import GroupsIcon from "@mui/icons-material/Groups"
+import LockOpenIcon from "@mui/icons-material/LockOpen"
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
+import SettingsIcon from "@mui/icons-material/Settings"
+import ContactsIcon from "@mui/icons-material/Contacts"
+import { CompanyLinksTab, CompanyProfile } from "components/organisms"
+import MainMenuCompany from "components/organisms/mainMenuCompany"
+import CompanyProfileTabs from "components/organisms/companyProfileTabs"
+import CompanyPageTitle from "components/molecules/companyPageTitle"
+
+import PropTypes from 'prop-types'
+
+import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
+import ContactMailIcon from '@mui/icons-material/ContactMail'
+import AutoStoriesIcon from '@mui/icons-material/AutoStories'
+import CorporateFareIcon from "@mui/icons-material/CorporateFare"
+import BadgeIcon from "@mui/icons-material/Badge"
+import MapIcon from "@mui/icons-material/Map"
+import FolderCopyIcon from "@mui/icons-material/FolderCopy"
+import TryIcon from "@mui/icons-material/Try"
+import WebIcon from "@mui/icons-material/Web"
+import HouseIcon from "@mui/icons-material/House"
+
+import HailIcon from "@mui/icons-material/Hail"
+import SchemaIcon from "@mui/icons-material/Schema"
+import EventSeatIcon from "@mui/icons-material/EventSeat"
+
+import { Box, Tab, Tabs } from "@mui/material"
+import CompanyDetailsTab from "components/organisms/companyDetailsTab"
+
+function TabPanel(props) {
+    const { children, value, index, ...other } = props
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box sx={{ p: 3 }}>
+                    {children}
+                </Box>
+            )}
+        </div>
+    )
+}
+
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+}
+
+function a11yProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    }
+}
 
 const CompanyHome = () => {
-    const menus = [
+    const [company, setCompany] = useState([])
+
+    const [value, setValue] = useState(0)
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue)
+    }
+
+    useEffect(() => {
+        axios.post("/company/getCompanyProfile")
+            .then((res) => {
+                setCompany(res.data)
+                console.log(res.data)
+            })
+    }, [])
+
+    const companyMenus = [
         {
             value: "グループ投稿",
+            icon: <GroupsIcon />,
             url: "#",
         },
         {
             value: "グループ認証",
+            icon: <LockOpenIcon />,
             url: "#",
         },
         {
             value: "グループ管理",
+            icon: <ManageAccountsIcon />,
             url: "#",
         },
         {
             value: "企業プロフィール編集",
-            url: "/company/recruitment",
+            icon: <SettingsIcon />,
+            url: "/company/profile/edit",
         },
         {
-            value: "ユーザープロフィール編集",
-            url: "#",
+            value: "学生プロフィール閲覧",
+            icon: <ContactsIcon />,
+            url: "/list/student",
         },
     ]
 
     return (
-        <Box
-            sx={{
-                width: "80%",
-                pt: 2,
-                mx: "auto",
-            }}
-        >
-            <Paper>
-                <MainMenu
-                    menus={menus}
+        company
+        &&
+        <CompanyHomeLayout>
+            <MainMenuCompany
+                company={company}
+                companyMenus={companyMenus}
+            />
+
+            <CompanyProfile>
+                <CompanyPageTitle
+                    company={company}
                 />
-            </Paper>
-        </Box>
+
+                <CompanyProfileTabs>
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        textColor="inherit"
+                        indicatorColor="gray"
+                        centered
+                    >
+                        <Tab
+                            label="会社概要"
+                            icon={<BusinessRoundedIcon />}
+                            iconPosition="top"
+                            {...a11yProps(0)}
+                        />
+
+                        <Tab
+                            label="採用データ"
+                            icon={<ContactMailIcon />}
+                            iconPosition="top"
+                            {...a11yProps(1)}
+                        />
+
+                        <Tab
+                            label="SNS.リンク"
+                            icon={<AutoStoriesIcon />}
+                            iconPosition="top"
+                            {...a11yProps(2)}
+                        />
+                    </Tabs>
+
+                    <TabPanel value={value} index={0}>
+                        <CompanyDetailsTab
+                            title={"会社紹介"}
+                            icon={<CorporateFareIcon />}
+                            introduction={company["introduction"]}
+                        />
+
+                        <CompanyDetailsTab
+                            title={"事業内容"}
+                            icon={<FolderCopyIcon />}
+                            business={company["business"]}
+                        />
+
+                        <CompanyDetailsTab
+                            title={"社長メッセージ"}
+                            icon={<TryIcon />}
+                            ceoMessage={company["ceo_message"]}
+                        />
+                    </TabPanel>
+
+                    <TabPanel value={value} index={1}>
+
+                    </TabPanel>
+
+                    <TabPanel value={value} index={2}>
+                        <CompanyLinksTab
+                            title={"企業ページ"}
+                            icon={<HouseIcon />}
+                            introduction={company["company_homepage_url"]}
+                        />
+                        <CompanyLinksTab
+                            title={"企業リクナビ・マイナビページ"}
+                            icon={<WebIcon />}
+                            introduction={company["company_homepage_url"]}
+                        />
+
+                    </TabPanel>
+                </CompanyProfileTabs>
+            </CompanyProfile>
+        </CompanyHomeLayout>
+
     )
 }
 

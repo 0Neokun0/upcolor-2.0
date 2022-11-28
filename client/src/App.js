@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
 
-import { ClassNews, ClassNewsFeed, LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
+import { ClassNews, ClassNewsFeed, LandingPage, NotFound, Signin, ViewCompanyPage, ViewTeamWork } from "components/pages"
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite } from "components/pages/student"
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment, StudentProfileView } from "components/pages/company"
@@ -25,6 +25,11 @@ import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import BadgeIcon from '@mui/icons-material/Badge'
 import ViewTimelineIcon from '@mui/icons-material/ViewTimeline'
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest'
+import GroupsIcon from "@mui/icons-material/Groups"
+import LockOpenIcon from "@mui/icons-material/LockOpen"
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
+import SettingsIcon from "@mui/icons-material/Settings"
+import ContactsIcon from "@mui/icons-material/Contacts"
 
 function App() {
     const [open, setOpen] = useState(false)
@@ -98,6 +103,34 @@ function App() {
             value: "設定",
             url: "#",
             icon: <SettingsSuggestIcon />,
+        },
+    ]
+
+    const companyDrawerMenus = [
+        {
+            value: "グループ投稿",
+            icon: <GroupsIcon />,
+            url: "#",
+        },
+        {
+            value: "グループ認証",
+            icon: <LockOpenIcon />,
+            url: "#",
+        },
+        {
+            value: "グループ管理",
+            icon: <ManageAccountsIcon />,
+            url: "#",
+        },
+        {
+            value: "企業プロフィール編集",
+            icon: <SettingsIcon />,
+            url: "/company/profile/edit",
+        },
+        {
+            value: "学生プロフィール閲覧",
+            icon: <ContactsIcon />,
+            url: "/list/student",
         },
     ]
 
@@ -202,6 +235,7 @@ function App() {
                     name={"UPCOLOR"}
                     menus={menus}
                     drawerMenus={drawerMenus}
+                    companyDrawerMenus={companyDrawerMenus}
                     signInState={signInState}
                     openNavbar={openNavbar}
                     anchorEl={anchorEl}
@@ -287,6 +321,7 @@ function App() {
 
                     <Route path="company/home" element={<CompanyHome />} />
                     <Route path="company/profile/edit" element={<CompanyProfileEdit />} />
+                    <Route path="company/:viewCompany" element={<ViewCompanyPage />} />
                     <Route path="company/profile">
                         <Route path=":userId" element={<ReqAuthCom component={<StudentProfileView />} />} />
                     </Route>

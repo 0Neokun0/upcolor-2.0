@@ -223,10 +223,17 @@ const Header = (props) => {
                         p: 2,
                     }}
                 >
-                    <MainMenu
-                        profile={props["profile"]}
-                        menus={props["drawerMenus"]}
-                    />
+                    {pathName === "/" ? (
+                        <MainMenu
+                            profile={props["profile"]}
+                            menus={props["drawerMenus"]}
+                        />
+                    ) : (
+                        <MainMenu
+                            profile={props["profile"]}
+                            menus={props["companyDrawerMenus"]}
+                        />
+                    )}
                 </Box>
             </Drawer>
         </AppBar>
