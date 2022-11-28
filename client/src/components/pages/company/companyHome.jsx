@@ -25,7 +25,8 @@ const CompanyHome = () => {
     const [company, setCompany] = useState([])
 
     useEffect(() => {
-        axios.post("/company/getCompanyProfile").then((res) => {
+        axios.post("/company/getCompanyProfile")
+        .then((res) => {
             console.log(res.data)
             setCompany(res.data)
         })

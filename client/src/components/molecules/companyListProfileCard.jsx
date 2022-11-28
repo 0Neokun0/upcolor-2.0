@@ -1,6 +1,4 @@
-import { Avatar, Button, Card, Grid, Typography } from "@mui/material"
-
-import BusinessIcon from '@mui/icons-material/Business'
+import { Avatar, Card, CardActionArea, Grid, Typography } from "@mui/material"
 
 // import { server } from 'components/config'
 
@@ -14,8 +12,7 @@ const CompanyListProfileCard = (props) => {
                 sx={{
                     bgcolor: "white",
                     width: 300,
-                    height: 150,
-                    p: 2,
+                    height: 130,
                     m: 2,
                     overflow: "hidden",
                     borderRadius: "25px",
@@ -23,46 +20,42 @@ const CompanyListProfileCard = (props) => {
                     "&:hover": {
                         transform: "translateY(-2px)",
                     },
-                    "& > *": {
-                        minWidth: "clamp(0px, (360px - 100%) * 999,100%)"
-                    },
                 }}
             >
-                <Grid
-                    container
-                    direction="column"
-                    justifyContent="space-evenly"
-                    alignItems="center"
+                <CardActionArea
+                    sx={{
+                        p: 2,
+                        borderRadius: 5,
+                    }}
+                    onClick={() =>
+                        (window.location.href = "/company/" + props.value["company_id"])
+                    }
                 >
-                    <Avatar
-                        sx={{
-                            m: 1,
-                            p: 1,
-                        }}
-                    />
-
-                    <Typography
-                        variant="h5"
-                        sx={{
-                            fontWeight: "bold",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                        }}
+                    <Grid
+                        container
+                        direction="column"
+                        justifyContent="space-evenly"
+                        alignItems="center"
                     >
-                        {props.value["company_name"]}
-                    </Typography>
+                        <Avatar
+                            sx={{
+                                m: 1,
+                                p: 1,
+                            }}
+                        />
 
-                    <Button
-                        color="inherit"
-                        sx={{
-                            borderRadius: 3,
-                        }}
-                        startIcon={<BusinessIcon />}
-                        href={"/company/" + props.value["company_id"]}
-                    >
-                        会社ページ
-                    </Button>
-                </Grid>
+                        <Typography
+                            variant="h5"
+                            sx={{
+                                fontWeight: "bold",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                            }}
+                        >
+                            {props.value["company_name"]}
+                        </Typography>
+                    </Grid>
+                </CardActionArea>
             </Card>
         </Grid>
     )
