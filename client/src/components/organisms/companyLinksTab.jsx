@@ -54,7 +54,7 @@ const CompanyLinksTab = (props) => {
                 }}
             >
                         <Typography>
-                            {props.introduction}
+                            {props.link}
                         </Typography>
 
             </AccordionDetails>

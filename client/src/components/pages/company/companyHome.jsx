@@ -158,19 +158,19 @@ const CompanyHome = () => {
                         <CompanyDetailsTab
                             title={"会社紹介"}
                             icon={<CorporateFareIcon />}
-                            introduction={company["introduction"]}
+                            content={company["introduction"]}
                         />
 
                         <CompanyDetailsTab
                             title={"事業内容"}
                             icon={<FolderCopyIcon />}
-                            business={company["business"]}
+                            content={company["business"]}
                         />
 
                         <CompanyDetailsTab
                             title={"社長メッセージ"}
                             icon={<TryIcon />}
-                            ceoMessage={company["ceo_message"]}
+                            content={company["ceo_message"]}
                         />
                     </TabPanel>
 
@@ -182,12 +182,12 @@ const CompanyHome = () => {
                         <CompanyLinksTab
                             title={"企業ページ"}
                             icon={<HouseIcon />}
-                            introduction={company["company_homepage_url"]}
+                            link={company["homepage_url"]}
                         />
                         <CompanyLinksTab
                             title={"企業リクナビ・マイナビページ"}
                             icon={<WebIcon />}
-                            introduction={company["company_homepage_url"]}
+                            link={company["homepage_url"]}
                         />
 
                     </TabPanel>

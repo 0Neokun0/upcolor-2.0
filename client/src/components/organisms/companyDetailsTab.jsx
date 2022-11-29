@@ -75,7 +75,7 @@ const CompanyDetailsTab = (props) => {
                         }}
                     >
                         <Typography>
-                            {props.introduction}
+                            {props.content}
                         </Typography>
                     </Box>
                 </Stack>
