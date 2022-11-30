@@ -21,6 +21,7 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories'
 import CorporateFareIcon from "@mui/icons-material/CorporateFare"
 import BadgeIcon from "@mui/icons-material/Badge"
 import MapIcon from "@mui/icons-material/Map"
+import GradeRoundedIcon from '@mui/icons-material/GradeRounded'
 import FolderCopyIcon from "@mui/icons-material/FolderCopy"
 import TryIcon from "@mui/icons-material/Try"
 import WebIcon from "@mui/icons-material/Web"
@@ -29,6 +30,7 @@ import HouseIcon from "@mui/icons-material/House"
 import HailIcon from "@mui/icons-material/Hail"
 import SchemaIcon from "@mui/icons-material/Schema"
 import EventSeatIcon from "@mui/icons-material/EventSeat"
+import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 
 import { Box, Tab, Tabs } from "@mui/material"
 import CompanyDetailsTab from "components/organisms/companyDetailsTab"
@@ -147,14 +149,17 @@ const CompanyHome = () => {
                         />
 
                         <Tab
-                            label="SNS.リンク"
+                            label="リンク・連絡先"
                             icon={<AutoStoriesIcon />}
                             iconPosition="top"
                             {...a11yProps(2)}
                         />
                     </Tabs>
 
-                    <TabPanel value={value} index={0}>
+                    <TabPanel
+                        value={value}
+                        index={0}
+                    >
                         <CompanyDetailsTab
                             title={"会社紹介"}
                             icon={<CorporateFareIcon />}
@@ -168,17 +173,45 @@ const CompanyHome = () => {
                         />
 
                         <CompanyDetailsTab
-                            title={"社長メッセージ"}
+                            title={"社長・CEO"}
+                            icon={<GradeRoundedIcon />}
+                            content={company["manager_name"]}
+                        />
+
+                        <CompanyDetailsTab
+                            title={"社長・CEOメッセージ"}
                             icon={<TryIcon />}
                             content={company["ceo_message"]}
                         />
                     </TabPanel>
 
-                    <TabPanel value={value} index={1}>
+                    <TabPanel
+                        value={value}
+                        index={1}
+                    >
+                        <CompanyDetailsTab
+                            title={"業種情報"}
+                            icon={<SchemaIcon />}
+                            content={company["occupation_id"]}
+                        />
 
+                        <CompanyDetailsTab
+                            title={"専攻募集"}
+                            icon={<HailIcon />}
+                            content={company["course_id"]}
+                        />
+
+                        <CompanyDetailsTab
+                            title={"問合せ先"}
+                            icon={<EventSeatIcon />}
+                            content={company["address"]}
+                        />
                     </TabPanel>
 
-                    <TabPanel value={value} index={2}>
+                    <TabPanel
+                        value={value}
+                        index={2}
+                    >
                         <CompanyLinksTab
                             title={"企業ページ"}
                             icon={<HouseIcon />}
@@ -187,9 +220,13 @@ const CompanyHome = () => {
                         <CompanyLinksTab
                             title={"企業リクナビ・マイナビページ"}
                             icon={<WebIcon />}
-                            link={company["homepage_url"]}
+                            link={company["jobsite_url"]}
                         />
-
+                        <CompanyLinksTab
+                            title={"企業・会社・メール"}
+                            icon={<EmailRoundedIcon />}
+                            link={company["manager_mail"]}
+                        />
                     </TabPanel>
                 </CompanyProfileTabs>
             </CompanyProfile>

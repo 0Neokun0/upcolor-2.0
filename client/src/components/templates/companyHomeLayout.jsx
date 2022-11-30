@@ -1,8 +1,9 @@
 import { Box, Stack } from "@mui/material"
+import { ContainerXl } from "."
 
 const CompanyHomeLayout = (props) => {
     return (
-        <Box
+        <ContainerXl
             bgcolor={"#f5f5f5"}
         >
             <Stack
@@ -10,7 +11,7 @@ const CompanyHomeLayout = (props) => {
             >
                 {props["children"]}
             </Stack>
-        </Box>
+        </ContainerXl>
     )
 }
 

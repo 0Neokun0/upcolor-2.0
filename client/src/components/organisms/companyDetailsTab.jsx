@@ -25,7 +25,13 @@ const CompanyDetailsTab = (props) => {
                             mr: 2,
                         }}
                     >
-                        {props.icon}
+                        {
+                            props.icon
+                            ?
+                            props.icon
+                            :
+                            "情報無し"
+                        }
                     </Grid>
                     <Divider
                         orientation="vertical"
@@ -75,7 +81,13 @@ const CompanyDetailsTab = (props) => {
                         }}
                     >
                         <Typography>
-                            {props.content}
+                        {
+                            props.content
+                            ?
+                            props.content
+                            :
+                            "情報無し"
+                        }
                         </Typography>
                     </Box>
                 </Stack>

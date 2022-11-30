@@ -1,8 +1,5 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Grid, Typography } from "@mui/material"
-
+import { Accordion, AccordionDetails, AccordionSummary, Divider, Grid, Typography } from "@mui/material"
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded'
-
-
 
 const CompanyLinksTab = (props) => {
     return (
@@ -24,7 +21,13 @@ const CompanyLinksTab = (props) => {
                             mr: 2,
                         }}
                     >
-                        {props.icon}
+                        {
+                            props.icon
+                                ?
+                                props.icon
+                                :
+                                "情報無し"
+                        }
                     </Grid>
                     <Divider
                         orientation="vertical"
@@ -41,7 +44,13 @@ const CompanyLinksTab = (props) => {
                             variant="h7"
                             component="div"
                         >
-                            {props.title}
+                            {
+                                props.title
+                                    ?
+                                    props.title
+                                    :
+                                    "情報無し"
+                            }
                         </Typography>
                     </Grid>
                 </Grid>
@@ -53,9 +62,15 @@ const CompanyLinksTab = (props) => {
                     p: 4,
                 }}
             >
-                        <Typography>
-                            {props.link}
-                        </Typography>
+                <Typography>
+                    {
+                        props.link
+                            ?
+                            props.link
+                            :
+                            "情報無し"
+                    }
+                </Typography>
 
             </AccordionDetails>
         </Accordion>

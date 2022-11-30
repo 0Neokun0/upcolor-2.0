@@ -1,15 +1,11 @@
 import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { Box, Grid, Typography, Tab, Tabs } from "@mui/material"
+import { Box, Typography, Tab, Tabs } from "@mui/material"
 import CompanyPageTitle from "components/molecules/companyPageTitle"
 import { CompanyHomeLayout, ContainerXl } from "components/templates"
 import CompanyProfileTabs from "components/organisms/companyProfileTabs"
-import {
-    CompanyDetailsTab,
-    CompanyLinksTab,
-    CompanyProfile,
-} from "components/organisms"
+import { CompanyDetailsTab, CompanyLinksTab, CompanyProfile } from "components/organisms"
 
 import PropTypes from "prop-types"
 
@@ -19,6 +15,7 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories"
 import CorporateFareIcon from "@mui/icons-material/CorporateFare"
 import BadgeIcon from "@mui/icons-material/Badge"
 import MapIcon from "@mui/icons-material/Map"
+import GradeRoundedIcon from '@mui/icons-material/GradeRounded'
 import FolderCopyIcon from "@mui/icons-material/FolderCopy"
 import TryIcon from "@mui/icons-material/Try"
 import WebIcon from "@mui/icons-material/Web"
@@ -27,6 +24,7 @@ import HouseIcon from "@mui/icons-material/House"
 import HailIcon from "@mui/icons-material/Hail"
 import SchemaIcon from "@mui/icons-material/Schema"
 import EventSeatIcon from "@mui/icons-material/EventSeat"
+import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props
@@ -79,7 +77,7 @@ const ViewCompanyPage = (props) => {
         <ContainerXl>
             {
                 company
-                ?
+                    ?
                     (
                         <CompanyHomeLayout>
                             <CompanyProfile>
@@ -134,6 +132,12 @@ const ViewCompanyPage = (props) => {
                                         />
 
                                         <CompanyDetailsTab
+                                            title={"社長・CEO"}
+                                            icon={<GradeRoundedIcon />}
+                                            content={company["manager_name"]}
+                                        />
+
+                                        <CompanyDetailsTab
                                             title={"社長メッセージ"}
                                             icon={<TryIcon />}
                                             content={company["ceo_message"]}
@@ -144,7 +148,23 @@ const ViewCompanyPage = (props) => {
                                         value={value}
                                         index={1}
                                     >
-                                        recruiting details
+                                        <CompanyDetailsTab
+                                            title={"業種情報"}
+                                            icon={<SchemaIcon />}
+                                            content={company["occupation_id"]}
+                                        />
+
+                                        <CompanyDetailsTab
+                                            title={"専攻募集"}
+                                            icon={<HailIcon />}
+                                            content={company["course_id"]}
+                                        />
+
+                                        <CompanyDetailsTab
+                                            title={"問合せ先"}
+                                            icon={<EventSeatIcon />}
+                                            content={company["address"]}
+                                        />
                                     </TabPanel>
 
                                     <TabPanel
@@ -165,6 +185,12 @@ const ViewCompanyPage = (props) => {
                                                 company["jobsite_url"]
                                             }
                                         />
+
+                                        <CompanyLinksTab
+                                            title={"企業・会社・メール"}
+                                            icon={<EmailRoundedIcon />}
+                                            link={company["manager_mail"]}
+                                        />
                                     </TabPanel>
                                 </CompanyProfileTabs>
                             </CompanyProfile>
@@ -176,8 +202,8 @@ const ViewCompanyPage = (props) => {
                             企業プロフィールが見つかりません
                         </Typography>
                     )
-                }
-            </ContainerXl>
+            }
+        </ContainerXl>
     )
 }
 

@@ -10,7 +10,8 @@ const MainMenuCompany = (props) => {
             <Card
                 sx={{
                     p: 2,
-                    width: 300,
+                    borderRadius: "15px",
+                    width: 325,
                     height: 375,
                 }}
             >
@@ -22,15 +23,19 @@ const MainMenuCompany = (props) => {
                     disablePadding
                     sx={{
                         "li + li": {
-                            borderTop: 1,
-                            borderColor: "#e3f2fd",
                         },
                     }}
                 >
                     {props.companyMenus.map((companyMenu, index) => {
                         return (
-                            <ListItem disablePadding key={index}>
+                            <ListItem
+                                disablePadding
+                                key={index}
+                            >
                                 <ListItemButton
+                                    sx={{
+                                        borderRadius: 3,
+                                    }}
                                     component={Link}
                                     to={companyMenu.url}
                                 >
