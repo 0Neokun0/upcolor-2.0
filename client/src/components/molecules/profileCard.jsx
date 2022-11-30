@@ -32,6 +32,7 @@ const ProfileCard = (props) => {
                     <Avatar
                         src={props.image}
                         sx={{
+                            border: "2px solid lightgray",
                             mx: "auto",
                             width: 45,
                             height: 45,

@@ -47,6 +47,9 @@ const NewsForm = (props) => {
                             }}
                         >
                             <Avatar
+                                sx={{
+                                    border: "2px solid lightgray",
+                                }}
                                 src={server.host + "/images/icon/" + props.profile.image}
                             />
 

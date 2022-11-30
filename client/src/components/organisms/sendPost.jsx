@@ -3,8 +3,9 @@ import AddIcon from '@mui/icons-material/Add'
 import { cyan } from "@mui/material/colors"
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
-// import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded'
-// import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded'
+
+import { server } from "components/config"
+
 
 const SendPost = (props) => {
     return (
@@ -63,10 +64,12 @@ const SendPost = (props) => {
                             sx={{
                                 width: '50',
                                 height: '50',
+                                border: "2px solid lightgray",
                                 borderRadius: '50%',
                                 objectFit: 'cover',
                                 mr: '20px',
                             }}
+                            src={server.host + "/images/icon/" + props.profile["image"]}
                         />
 
                         <TextField
@@ -113,30 +116,6 @@ const SendPost = (props) => {
                                 <AddPhotoAlternateRoundedIcon />
                             </IconButton>
                         </Tooltip>
-
-                        {/* <Tooltip
-                            title="ビデオ"
-                            placement="right"
-                        >
-                            <IconButton
-                                size="small"
-                                color="primary"
-                            >
-                                <VideoCallRoundedIcon />
-                            </IconButton>
-                        </Tooltip>
-
-                        <Tooltip
-                            title="タグ"
-                            placement="right"
-                        >
-                            <IconButton
-                                size="small"
-                                color="error"
-                            >
-                                <LocalOfferRoundedIcon />
-                            </IconButton>
-                        </Tooltip> */}
                     </Box>
 
                     <Button
