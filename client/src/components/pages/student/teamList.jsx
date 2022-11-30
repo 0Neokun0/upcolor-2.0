@@ -2,8 +2,8 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 
 import React from "react"
-import Select from "react-select"
 import { ListLayout } from "components/templates"
+import { Select } from "@mui/material"
 import { ListDisplayBox, SearchListBox } from "components/organisms"
 import { SearchList, TeamViewCard } from "components/molecules"
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu'
