@@ -19,14 +19,12 @@ import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
 import ContactMailIcon from '@mui/icons-material/ContactMail'
 import AutoStoriesIcon from '@mui/icons-material/AutoStories'
 import CorporateFareIcon from "@mui/icons-material/CorporateFare"
-import BadgeIcon from "@mui/icons-material/Badge"
-import MapIcon from "@mui/icons-material/Map"
 import GradeRoundedIcon from '@mui/icons-material/GradeRounded'
 import FolderCopyIcon from "@mui/icons-material/FolderCopy"
 import TryIcon from "@mui/icons-material/Try"
 import WebIcon from "@mui/icons-material/Web"
 import HouseIcon from "@mui/icons-material/House"
-
+import HomeWorkIcon from '@mui/icons-material/HomeWork'
 import HailIcon from "@mui/icons-material/Hail"
 import SchemaIcon from "@mui/icons-material/Schema"
 import EventSeatIcon from "@mui/icons-material/EventSeat"
@@ -110,6 +108,11 @@ const CompanyHome = () => {
             icon: <ContactsIcon />,
             url: "/list/student",
         },
+        {
+            value: "企業・会社プロフィール閲覧",
+            icon: <HomeWorkIcon />,
+            url: "/list/company",
+        },
     ]
 
     return (
@@ -192,13 +195,13 @@ const CompanyHome = () => {
                         <CompanyDetailsTab
                             title={"業種情報"}
                             icon={<SchemaIcon />}
-                            content={company["occupation_id"]}
+                            content={company["occupation_ids"]}
                         />
 
                         <CompanyDetailsTab
                             title={"専攻募集"}
                             icon={<HailIcon />}
-                            content={company["course_id"]}
+                            content={company["course_ids"]}
                         />
 
                         <CompanyDetailsTab

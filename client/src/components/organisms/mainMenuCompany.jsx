@@ -11,8 +11,8 @@ const MainMenuCompany = (props) => {
                 sx={{
                     p: 2,
                     borderRadius: "15px",
-                    width: 325,
-                    height: 375,
+                    width: 400,
+                    height: 400,
                 }}
             >
                 <MainMenuCompanyCard
