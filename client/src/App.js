@@ -18,13 +18,14 @@ import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded"
 import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded"
 import GroupCreateLayout from "components/templates/groupCreateLayout"
 
-import WorkspacesIcon from '@mui/icons-material/Workspaces'
-import GroupWorkIcon from '@mui/icons-material/GroupWork'
-import AccountTreeIcon from '@mui/icons-material/AccountTree'
-import PersonSearchIcon from '@mui/icons-material/PersonSearch'
-import BadgeIcon from '@mui/icons-material/Badge'
-import ViewTimelineIcon from '@mui/icons-material/ViewTimeline'
-import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest'
+import WorkspacesIcon from "@mui/icons-material/Workspaces"
+import GroupWorkIcon from "@mui/icons-material/GroupWork"
+import AccountTreeIcon from "@mui/icons-material/AccountTree"
+import PersonSearchIcon from "@mui/icons-material/PersonSearch"
+import BadgeIcon from "@mui/icons-material/Badge"
+import HomeWorkIcon from "@mui/icons-material/HomeWork"
+import ViewTimelineIcon from "@mui/icons-material/ViewTimeline"
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest"
 import GroupsIcon from "@mui/icons-material/Groups"
 import LockOpenIcon from "@mui/icons-material/LockOpen"
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
@@ -132,12 +133,17 @@ function App() {
             icon: <ContactsIcon />,
             url: "/list/student",
         },
+        {
+            value: "企業・会社プロフィール閲覧",
+            icon: <HomeWorkIcon />,
+            url: "/list/company",
+        },
     ]
 
     const toggleSignout = () => {
         axios.post("/account/signout")
             .then(() => {
-                sessionStorage.removeItem('AUTHORITY')
+                sessionStorage.removeItem("AUTHORITY")
                 window.location.href = "/"
             })
     }

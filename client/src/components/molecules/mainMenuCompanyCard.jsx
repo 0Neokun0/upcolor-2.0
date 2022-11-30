@@ -44,7 +44,11 @@ const MainMenuCompanyCard = (props) => {
                 }}
             >
                 <Chip
-                    label="業種"
+                    sx={{
+                        p: 1,
+                        fontWeight: 600,
+                    }}
+                    label={"本社" + " : " + props.company["address"]}
                 />
                 <Switch />
             </Box>

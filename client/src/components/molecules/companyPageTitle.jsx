@@ -29,8 +29,11 @@ const CompanyPageTitle = (props) => {
                     spacing={2}
                 >
                     <Chip
-                        color="info"
-                        label={props.companyOccupation}
+                        sx={{
+                            p: 1,
+                            fontWeight: 600,
+                        }}
+                        label={"業種" + " : " + props.company["occupation_names"]}
                     />
                 </Stack>
             </Card>

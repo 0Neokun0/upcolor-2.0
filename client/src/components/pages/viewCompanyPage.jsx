@@ -6,25 +6,23 @@ import CompanyPageTitle from "components/molecules/companyPageTitle"
 import { CompanyHomeLayout, ContainerXl } from "components/templates"
 import CompanyProfileTabs from "components/organisms/companyProfileTabs"
 import { CompanyDetailsTab, CompanyLinksTab, CompanyProfile } from "components/organisms"
-
 import PropTypes from "prop-types"
 
 import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded"
 import ContactMailIcon from "@mui/icons-material/ContactMail"
 import AutoStoriesIcon from "@mui/icons-material/AutoStories"
 import CorporateFareIcon from "@mui/icons-material/CorporateFare"
-import BadgeIcon from "@mui/icons-material/Badge"
-import MapIcon from "@mui/icons-material/Map"
 import GradeRoundedIcon from '@mui/icons-material/GradeRounded'
 import FolderCopyIcon from "@mui/icons-material/FolderCopy"
 import TryIcon from "@mui/icons-material/Try"
 import WebIcon from "@mui/icons-material/Web"
 import HouseIcon from "@mui/icons-material/House"
-
 import HailIcon from "@mui/icons-material/Hail"
 import SchemaIcon from "@mui/icons-material/Schema"
 import EventSeatIcon from "@mui/icons-material/EventSeat"
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
+import MapsHomeWorkRoundedIcon from "@mui/icons-material/MapsHomeWorkRounded"
+import MapIcon from '@mui/icons-material/Map'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props
@@ -142,6 +140,11 @@ const ViewCompanyPage = (props) => {
                                             icon={<TryIcon />}
                                             content={company["ceo_message"]}
                                         />
+                                        <CompanyDetailsTab
+                                            title={"本社"}
+                                            icon={<EventSeatIcon />}
+                                            content={company["address"]}
+                                        />
                                     </TabPanel>
 
                                     <TabPanel
@@ -151,19 +154,19 @@ const ViewCompanyPage = (props) => {
                                         <CompanyDetailsTab
                                             title={"業種情報"}
                                             icon={<SchemaIcon />}
-                                            content={company["occupation_id"]}
+                                            content={company["occupation_names"]}
                                         />
 
                                         <CompanyDetailsTab
                                             title={"専攻募集"}
                                             icon={<HailIcon />}
-                                            content={company["course_id"]}
+                                            content={company["course_names"]}
                                         />
 
                                         <CompanyDetailsTab
-                                            title={"問合せ先"}
-                                            icon={<EventSeatIcon />}
-                                            content={company["address"]}
+                                            title={"支社地域"}
+                                            icon={<MapIcon />}
+                                            content={company["prefecture_names"]}
                                         />
                                     </TabPanel>
 
@@ -174,16 +177,12 @@ const ViewCompanyPage = (props) => {
                                         <CompanyLinksTab
                                             title={"企業ページ"}
                                             icon={<HouseIcon />}
-                                            link={
-                                                company["homepage_url"]
-                                            }
+                                            link={company["homepage_url"]}
                                         />
                                         <CompanyLinksTab
                                             title={"企業リクナビ・マイナビページ"}
                                             icon={<WebIcon />}
-                                            link={
-                                                company["jobsite_url"]
-                                            }
+                                            link={company["jobsite_url"]}
                                         />
 
                                         <CompanyLinksTab

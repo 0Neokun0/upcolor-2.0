@@ -1,34 +1,33 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import CompanyHomeLayout from "components/templates/companyHomeLayout"
-
+import { CompanyLinksTab, CompanyProfile } from "components/organisms"
+import PropTypes from "prop-types"
 
 import GroupsIcon from "@mui/icons-material/Groups"
 import LockOpenIcon from "@mui/icons-material/LockOpen"
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
 import SettingsIcon from "@mui/icons-material/Settings"
 import ContactsIcon from "@mui/icons-material/Contacts"
-import { CompanyLinksTab, CompanyProfile } from "components/organisms"
 import MainMenuCompany from "components/organisms/mainMenuCompany"
 import CompanyProfileTabs from "components/organisms/companyProfileTabs"
 import CompanyPageTitle from "components/molecules/companyPageTitle"
-
-import PropTypes from 'prop-types'
-
-import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
-import ContactMailIcon from '@mui/icons-material/ContactMail'
-import AutoStoriesIcon from '@mui/icons-material/AutoStories'
+import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded"
+import ContactMailIcon from "@mui/icons-material/ContactMail"
+import AutoStoriesIcon from "@mui/icons-material/AutoStories"
 import CorporateFareIcon from "@mui/icons-material/CorporateFare"
-import GradeRoundedIcon from '@mui/icons-material/GradeRounded'
+import GradeRoundedIcon from "@mui/icons-material/GradeRounded"
 import FolderCopyIcon from "@mui/icons-material/FolderCopy"
 import TryIcon from "@mui/icons-material/Try"
 import WebIcon from "@mui/icons-material/Web"
 import HouseIcon from "@mui/icons-material/House"
-import HomeWorkIcon from '@mui/icons-material/HomeWork'
+import HomeWorkIcon from "@mui/icons-material/HomeWork"
 import HailIcon from "@mui/icons-material/Hail"
 import SchemaIcon from "@mui/icons-material/Schema"
 import EventSeatIcon from "@mui/icons-material/EventSeat"
-import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
+import EmailRoundedIcon from "@mui/icons-material/EmailRounded"
+import MapsHomeWorkRoundedIcon from "@mui/icons-material/MapsHomeWorkRounded"
+import MapIcon from '@mui/icons-material/Map'
 
 import { Box, Tab, Tabs } from "@mui/material"
 import CompanyDetailsTab from "components/organisms/companyDetailsTab"
@@ -61,7 +60,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
     return {
         id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
+        "aria-controls": `simple-tabpanel-${index}`,
     }
 }
 
@@ -186,6 +185,12 @@ const CompanyHome = () => {
                             icon={<TryIcon />}
                             content={company["ceo_message"]}
                         />
+
+                        <CompanyDetailsTab
+                            title={"本社"}
+                            icon={<EventSeatIcon />}
+                            content={company["address"]}
+                        />
                     </TabPanel>
 
                     <TabPanel
@@ -195,19 +200,19 @@ const CompanyHome = () => {
                         <CompanyDetailsTab
                             title={"業種情報"}
                             icon={<SchemaIcon />}
-                            content={company["occupation_ids"]}
+                            content={company["occupation_names"]}
                         />
 
                         <CompanyDetailsTab
                             title={"専攻募集"}
                             icon={<HailIcon />}
-                            content={company["course_ids"]}
+                            content={company["course_names"]}
                         />
 
                         <CompanyDetailsTab
-                            title={"問合せ先"}
-                            icon={<EventSeatIcon />}
-                            content={company["address"]}
+                            title={"支社地域"}
+                            icon={<MapIcon />}
+                            content={company["prefecture_names"]}
                         />
                     </TabPanel>
 
