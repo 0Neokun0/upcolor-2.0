@@ -572,4 +572,25 @@ router.post("/getTeamWorkList", async (req, res) => {
     res.json(teamWorkList)
 })
 
+router.post("/getUserType", async (req, res) => {
+    try {
+        const userId = get.userId(req)
+
+        const sqlSelectUserType = `
+            SELECT
+                user_type_id
+            FROM
+                user_profiles
+            WHERE
+                user_id = ?
+        `
+        const typeId = await sql.handleSelect(sqlSelectUserType, [userId])
+
+        res.json(typeId[0]["user_type_id"])
+    } catch (error) {
+        res.status(404)
+        console.log(error)
+    }
+})
+
 module.exports = router

@@ -1,5 +1,6 @@
 import { server } from 'components/config'
-import { Avatar, Box, Card, Typography } from "@mui/material"
+import { Avatar, Box, Card, IconButton, Typography } from "@mui/material"
+import GroupRoundedIcon from '@mui/icons-material/GroupRounded'
 
 const ClassNewsFeedHeader = (props) => {
     return (
@@ -37,7 +38,8 @@ const ClassNewsFeedHeader = (props) => {
                         backgroundColor: "white",
                         borderRadius: "10px",
                         px: 2,
-                        wordBreak: "keep-all"
+                        wordBreak: "keep-all",
+                        border: 1,
                     }}
                 >
                     {props["enterClassNewsRoom"]["class_name"]}
@@ -46,35 +48,41 @@ const ClassNewsFeedHeader = (props) => {
 
             <Box
                 sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
+                    p: 2,
+                    display: "flex",
+                    alignItems: "center",
                 }}
             >
-                <Box
+                <Avatar
+                    alt={props["enterClassNewsRoom"]["name"]}
+                    src={`${server.host}/images/icon/${props["enterClassNewsRoom"]["image_url"]}`}
                     sx={{
-                        p: 2,
-                        display: "flex",
-                        alignItems: "center",
+                        border: 1,
+                        borderColor: "divider",
+                    }}
+                />
+
+                <Typography
+                    sx={{
+                        ml: 1,
+                        fontWeight: "bold",
                     }}
                 >
-                    <Avatar
-                        alt={props["enterClassNewsRoom"]["name"]}
-                        src={`${server.host}/images/icon/${props["enterClassNewsRoom"]["image_url"]}`}
-                        sx={{
-                            border: 1,
-                            borderColor: "divider",
-                        }}
-                    />
+                    {props["enterClassNewsRoom"]["user_name"]}
+                </Typography>
 
-                    <Typography
-                        sx={{
-                            ml: 1,
-                            fontWeight: "bold",
-                        }}
-                    >
-                        {props["enterClassNewsRoom"]["user_name"]}
-                    </Typography>
-                </Box>
+                <Typography
+                    fontWeight="bold"
+                    sx={{
+                        ml: "auto",
+                    }}
+                >
+                    クラスID: {props["classId"]}
+                </Typography>
+
+                {/* <IconButton>
+                    <GroupRoundedIcon />
+                </IconButton> */}
             </Box>
         </Card>
     )

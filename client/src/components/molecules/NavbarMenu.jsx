@@ -53,6 +53,7 @@ const NavbarMenu = (props) => {
                     </IconButton>
                 </Tooltip>
             </Box>
+
             <Menu
                 anchorEl={props.anchorEl}
                 open={props.openNavbar}
@@ -161,30 +162,29 @@ const NavbarMenu = (props) => {
                     設定
                 </ListItemButton>
 
-                <ListItemButton>
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        mt: 2,
+                    }}
+                >
                     {
-                        props.signInState
+                        props["signInState"]
                             ?
-                            (
-                                <Button
-                                    sx={{
-                                        ml: 4,
-                                    }}
-                                    startIcon={<LogoutRoundedIcon />}
-                                    variant="contained"
-                                    onClick={props.toggleAlertOpen}
-                                >
-                                    サインアウト
-                                </Button>
-                            )
+                            <Button
+                                startIcon={<LogoutRoundedIcon />}
+                                variant="contained"
+                                onClick={props.toggleAlertOpen}
+                            >
+                                サインアウト
+                            </Button>
                             :
-                            (
-                                <Button variant="contained" href="/signin">
-                                    サインイン
-                                </Button>
-                            )
+                            <Button variant="contained" href="/signin">
+                                サインイン
+                            </Button>
                     }
-                </ListItemButton>
+                </Box>
             </Menu>
         </>
     )
