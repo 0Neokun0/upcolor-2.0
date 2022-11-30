@@ -5,7 +5,7 @@ import { Box } from "@mui/material"
 
 
 import { ClassNews, ClassNewsFeed, LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
-import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite } from "components/pages/student"
+import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite, PrivateChat } from "components/pages/student"
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment, StudentProfileView } from "components/pages/company"
 import { GroupChatLayout } from "components/templates"
@@ -25,6 +25,7 @@ import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import BadgeIcon from '@mui/icons-material/Badge'
 import ViewTimelineIcon from '@mui/icons-material/ViewTimeline'
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest'
+import ChatRoundedIcon from '@mui/icons-material/ChatRounded'
 
 function App() {
     const [open, setOpen] = useState(false)
@@ -88,6 +89,11 @@ function App() {
             value: "プロフィール",
             url: "/profile",
             icon: <BadgeIcon />,
+        },
+        {
+            value: "個人チャット",
+            url: "/chat",
+            icon: <ChatRoundedIcon />,
         },
         {
             value: "時間割",
@@ -261,6 +267,10 @@ function App() {
                     </Route>
 
                     <Route path="profile/edit" element={<ProfileEdit />} />
+
+                    <Route path="chat">
+                        <Route path="" element={<PrivateChat />} />
+                    </Route>
 
                     <Route path="list/student" element={<StudentList />} />
                     <Route path="list/company" element={<CompanyList />} />
