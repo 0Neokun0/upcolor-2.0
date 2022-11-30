@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from "@mui/material"
+import { Box, Button, Dialog, TextField, Typography } from "@mui/material"
 
 const ClassNewsRoomJoin = (props) => {
     return (
@@ -6,38 +6,65 @@ const ClassNewsRoomJoin = (props) => {
             open={props["openJoin"]}
             onClose={() => props["setOpenJoin"](false)}
         >
-            <Box>
-                <DialogTitle>
+            <Box
+                component="form"
+                onSubmit={props["joinClassNews"]}
+                sx={{
+                    p: 2,
+                }}
+            >
+                <Typography
+                    variant="h5"
+                >
                     クラスに参加
-                </DialogTitle>
+                </Typography>
 
-                <DialogContent>
-                    <DialogContentText>
-                        クラスのIDを入力して教室に参加
-                    </DialogContentText>
-
+                <Box
+                    sx={{
+                        mt: 2,
+                    }}
+                >
                     <TextField
                         autoFocus
                         margin="dense"
-                        label="クラス名"
+                        name="id"
+                        label="クラスID"
                         type="text"
                         fullWidth
-                    // value={classId}
-                    // onChange={(e) => setClassId(e.target.value)}
                     />
-                </DialogContent>
 
-                <DialogActions>
+                    <TextField
+                        margin="dense"
+                        name="password"
+                        label="パスワード"
+                        type="password"
+                        fullWidth
+                    />
+                </Box>
+
+                <Box
+                    sx={{
+                        mt: 2,
+                        display: "flex",
+                        justifyContent: "end",
+                    }}
+                >
                     <Button
                         onClick={() => props["setOpenJoin"](false)}
                     >
                         キャンセル
                     </Button>
 
-                    <Button>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        sx={{
+                            ml: 2,
+                        }}
+                    >
                         参加
                     </Button>
-                </DialogActions>
+                </Box>
             </Box>
         </Dialog>
     );

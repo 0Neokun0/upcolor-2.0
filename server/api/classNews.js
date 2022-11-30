@@ -43,6 +43,63 @@ router.post("/createClassNewsRoom", async (req, res) => {
     }
 })
 
+// 返却値... 1: 参加, 2: 参加済み, 3: room無し
+router.post("/joinClassNews", async (req, res) => {
+    try {
+        const id = req.body.id
+        const password = req.body.password
+
+        const sqlSelectClass = `
+            SELECT
+                *
+            FROM
+                classes_list
+            WHERE
+                class_id = ? AND
+                class_password = ?
+        `
+        const classRoom = await sql.handleSelect(sqlSelectClass, [id, password])
+
+        if (!!classRoom) {
+            const userId = get.userId(req)
+
+            const sqlSelectJoin = `
+                SELECT
+                    *
+                FROM
+                    users_joined_class
+                WHERE
+                    class_id = ? AND
+                    joined_user_id = ?
+            `
+            const join = await sql.handleSelect(sqlSelectJoin, [id, userId])
+
+            if (!join) {
+                const sqlJoinClass = `
+                    INSERT INTO users_joined_class(
+                        class_id,
+                        joined_user_id
+                    )
+                    VALUES(
+                        ?,
+                        ?
+                    )
+                `
+                await sql.handleInsert(sqlJoinClass, [id, userId])
+
+                res.json(1)
+            } else {
+                res.json(2)
+            }
+        } else {
+            res.json(3)
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(404)
+    }
+})
+
 router.post("/getJoinedClass", async (req, res) => {
     try {
         const userId = get.userId(req)

@@ -1,44 +1,68 @@
-import { Avatar, Card, CardHeader, Divider, Typography } from "@mui/material"
-// import { server } from "components/config"
+import { server } from "components/config"
+import { Avatar, Box, Card, Divider, Typography } from "@mui/material"
+import { Link } from "react-router-dom"
 
 const NewsCard = (props) => {
+    const { id, name, title, text, time } = props
+
     return (
         <Card
             sx={{
                 borderRadius: "15px",
-                m: 2,
-                p: 1,
+                p: 2,
             }}
         >
-            <CardHeader
-                avatar={
-                    <Avatar
-                        // src={server.host + "/images/icon/" + props.profile.image}
-                    />
-                }
-                title={props.name}
-                subheader={props.time}
+            <Box
                 sx={{
-                    m: 1,
-                    p: 1,
+                    display: "flex",
+                    alignItems: "center",
                 }}
-            />
+            >
+                <Avatar
+                    alt={name}
+                    // 変更予定
+                    src={`${server.host}/images/icon/userIcon.png`}
+                    component={Link}
+                    to={`/profile/${id}`}
+                    sx={{
+                        border: 1,
+                        borderColor: "divider",
+                    }}
+                />
+
+                <Box
+                    sx={{
+                        ml: 1,
+                    }}
+                >
+                    <Typography>
+                        {name}
+                    </Typography>
+
+                    <Typography
+                        variant="caption"
+                    >
+                        {time}
+                    </Typography>
+                </Box>
+            </Box>
+
             <Divider
                 sx={{
                     my: 2,
                 }}
             />
-            <Typography
-                variant="subtitle1"
-                textAlign={"center"}
-                gutterBottom
-            >
-                {props.title}
+
+            <Typography>
+                {title}
             </Typography>
+
             <Typography
-                variant="body2"
+                sx={{
+                    whiteSpace: "pre-wrap",
+                }}
             >
-                {props.text}
+                {text}
             </Typography>
 
         </Card>

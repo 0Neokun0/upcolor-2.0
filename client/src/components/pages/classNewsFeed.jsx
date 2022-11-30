@@ -13,7 +13,7 @@ const ClassNewsFeed = () => {
     const [profile, setProfile] = useState([])
     const [enterClassNewsRoom, setEnterClassNewsRoom] = useState([])
     const [news, setNews] = useState(false)
-
+    const [userType, setUserType] = useState()
 
     const handleSubmitNews = (e) => {
         e.preventDefault()
@@ -25,12 +25,18 @@ const ClassNewsFeed = () => {
         })
 
         setOpen(false)
+        window.location.reload()
     }
 
     useEffect(() => {
         axios.post("/account/getProfile")
             .then((res) => {
                 setProfile(res.data)
+            })
+
+        axios.post("/account/getUserType")
+            .then((res) => {
+                setUserType(res.data)
             })
     }, [])
 
@@ -55,15 +61,20 @@ const ClassNewsFeed = () => {
     return (
         <ContainerMd>
             <ClassNewsFeedHeader
+                classId={classId}
                 enterClassNewsRoom={enterClassNewsRoom}
             />
 
-            <ClassNewsFeedForm
-                profile={profile}
-                open={open}
-                setOpen={setOpen}
-                handleSubmitNews={handleSubmitNews}
-            />
+            {
+                userType === 2
+                &&
+                <ClassNewsFeedForm
+                    profile={profile}
+                    open={open}
+                    setOpen={setOpen}
+                    handleSubmitNews={handleSubmitNews}
+                />
+            }
 
             {
                 news

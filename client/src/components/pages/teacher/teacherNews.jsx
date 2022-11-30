@@ -1,9 +1,9 @@
 import axios from "axios"
-import { ContainerLg } from "components/templates"
+import { ContainerMd } from "components/templates"
 import { NewsForm, NewsList } from "components/organisms"
 import { useState } from "react"
 import { useEffect } from "react"
-import { Divider, Grid } from "@mui/material"
+import { Divider } from "@mui/material"
 import TeacherNewsHeader from "components/organisms/teacherNewsHeader"
 
 const TeacherNews = () => {
@@ -35,9 +35,10 @@ const TeacherNews = () => {
     }
 
     useEffect(() => {
-        axios.post("/teacher/getProfile")
+        axios.post("/account/getTeacherProfile")
             .then((res) => {
-                setProfile(res.data[0])
+                setProfile(res.data)
+                console.log(res.data)
             })
 
         axios.post("/course/course")
@@ -48,18 +49,19 @@ const TeacherNews = () => {
         axios.post("/teacher/getMyNews")
             .then((res) => {
                 setNews(res.data)
+                console.log(res.data)
             })
     }, [])
 
     return (
-        <ContainerLg>
+        <ContainerMd>
             <TeacherNewsHeader
                 profile={profile}
             />
-            <Grid
-                container
-                justifyContent="center"
-            >
+
+            {
+                profile
+                ?
                 <NewsForm
                     formState={formState}
                     setFormState={setFormState}
@@ -72,17 +74,20 @@ const TeacherNews = () => {
 
                     handleSubmit={handleSubmit}
                 />
-            </Grid>
+                :
+                <></>
+            }
+
             <Divider
                 sx={{
-                    mt: 2,
+                    my: 2,
                 }}
             />
 
             <NewsList
                 news={news}
             />
-        </ContainerLg>
+        </ContainerMd>
     )
 }
 
