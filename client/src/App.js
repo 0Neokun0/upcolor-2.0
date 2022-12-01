@@ -26,6 +26,7 @@ import BadgeIcon from '@mui/icons-material/Badge'
 import ViewTimelineIcon from '@mui/icons-material/ViewTimeline'
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest'
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded'
+import ClassIcon from '@mui/icons-material/Class'
 
 function App() {
     const [open, setOpen] = useState(false)
@@ -99,6 +100,11 @@ function App() {
             value: "時間割",
             url: "/timeTable/regist",
             icon: <ViewTimelineIcon />,
+        },
+        {
+            value: "クラスニューズ",
+            url: "/classNews",
+            icon: <ClassIcon />,
         },
         {
             value: "設定",
