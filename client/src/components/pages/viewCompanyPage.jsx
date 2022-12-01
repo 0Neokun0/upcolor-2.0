@@ -21,7 +21,6 @@ import HailIcon from "@mui/icons-material/Hail"
 import SchemaIcon from "@mui/icons-material/Schema"
 import EventSeatIcon from "@mui/icons-material/EventSeat"
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
-import MapsHomeWorkRoundedIcon from "@mui/icons-material/MapsHomeWorkRounded"
 import MapIcon from '@mui/icons-material/Map'
 
 function TabPanel(props) {
