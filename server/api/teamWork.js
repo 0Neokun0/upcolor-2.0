@@ -556,6 +556,20 @@ router.post("/updateTeamWorkInfo", async (req, res) => {
         await sql.handleUpdate(sqlUpdateStrategy, [content, teamId])
         res.json(true)
     }
+
+    if (type === "technology") {
+        const sqlUpdateTechnology = `
+            UPDATE
+                team_works_list
+            SET
+                technology_used= ?
+            WHERE
+                team_work_id = ?
+        `
+
+        await sql.handleUpdate(sqlUpdateTechnology, [content, teamId])
+        res.json(true)
+    }
 })
 
 router.post("/updateJoinTeam", async (req, res) => {

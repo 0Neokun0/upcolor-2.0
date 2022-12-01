@@ -32,6 +32,7 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
 import SettingsIcon from "@mui/icons-material/Settings"
 import ContactsIcon from "@mui/icons-material/Contacts"
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded'
+import ClassIcon from '@mui/icons-material/Class'
 
 function App() {
     const [open, setOpen] = useState(false)
@@ -105,6 +106,11 @@ function App() {
             value: "時間割",
             url: "/timeTable/regist",
             icon: <ViewTimelineIcon />,
+        },
+        {
+            value: "クラスニューズ",
+            url: "/classNews",
+            icon: <ClassIcon />,
         },
         {
             value: "設定",

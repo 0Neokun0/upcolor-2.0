@@ -34,6 +34,7 @@ const TeamWork = () => {
     const [description, setDescription] = useState(false)
     const [target, setTarget] = useState(false)
     const [strategy, setStrategy] = useState(false)
+    const [technology, setTechnology] = useState(false)
 
     const [currentZoom, setCurrentZoom] = useState("Days")
 
@@ -70,6 +71,9 @@ const TeamWork = () => {
                 }
                 if (data.get("type") === "strategy") {
                     setStrategy(!strategy)
+                }
+                if (data.get("type") === "technology") {
+                    setTechnology(!technology)
                 }
             })
     }
@@ -296,6 +300,16 @@ const TeamWork = () => {
                                             state={strategy}
                                             toggleState={setStrategy}
                                             content={team["teamInfo"]["team_strategy"]}
+                                            onSubmit={onSubmit}
+                                        />
+
+                                        <TeamInfoCard
+                                            auth={auth}
+                                            title="使用した、技術"
+                                            name="technology"
+                                            state={technology}
+                                            toggleState={setTechnology}
+                                            content={team["teamInfo"]["technology_used"]}
                                             onSubmit={onSubmit}
                                         />
                                     </Box>
