@@ -25,7 +25,7 @@ const NewsCard = (props) => {
                     component={Link}
                     to={`/profile/${id}`}
                     sx={{
-                        border: 1,
+                        border: "2px solid lightgray",
                         borderColor: "divider",
                     }}
                 />

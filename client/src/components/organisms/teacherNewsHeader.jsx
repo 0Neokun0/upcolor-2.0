@@ -54,7 +54,7 @@ const TeacherNewsHeader = (props) => {
                     alt={props["profile"]["user_name"]}
                     src={`${server.host}/images/icon/${props["enterClassNewsRoom"]["image_url"]}`}
                     sx={{
-                        border: 1,
+                        border: "2px solid lightgray",
                         borderColor: "divider",
                     }}
                 />

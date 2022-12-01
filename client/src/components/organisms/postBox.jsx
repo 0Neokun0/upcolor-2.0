@@ -1,6 +1,6 @@
-import { Avatar, Box, Button, Card, IconButton, Modal, TextField } from '@mui/material'
-import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual'
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
+import { Avatar, Box, Button, Card, IconButton, Modal, TextField } from "@mui/material"
+import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual"
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 
 import { server } from "components/config"
 
@@ -8,8 +8,8 @@ const PostBox = (props) => {
     return (
         <Card
             sx={{
-                textAlign: 'center',
-                borderRadius: '15px',
+                textAlign: "center",
+                borderRadius: "15px",
                 boxShadow: 2,
                 mt: 4,
                 p: 2,
@@ -18,20 +18,21 @@ const PostBox = (props) => {
 
             <Box
                 sx={{
-                    display: 'flex',
-                    alignItems: 'center',
+                    display: "flex",
+                    alignItems: "center",
                 }}
             >
                 <Avatar
                     variant="rounded"
                     sx={{
-                        width: '50',
-                        height: '50',
-                        borderRadius: '50%',
-                        objectFit: 'cover',
-                        mr: '20px',
+                        border: "2px solid lightgray",
+                        width: "50",
+                        height: "50",
+                        borderRadius: "50%",
+                        objectFit: "cover",
+                        mr: "20px",
                     }}
-                    src={server.host + "/images/icon/" + props.profile.image}
+                    src={server.host + "/images/icon/" + props.profile["image"]}
                 />
 
                 <TextField
@@ -48,9 +49,9 @@ const PostBox = (props) => {
 
 
             <Box
-                justifyContent={'end'}
+                justifyContent={"end"}
                 sx={{
-                    display: 'flex',
+                    display: "flex",
                     mt: 2,
                 }}
             >
@@ -81,20 +82,20 @@ const PostBox = (props) => {
                 open={Boolean(props.openPostModal)}
                 onClose={props.togglePostModalClose}
                 sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                 }}
             >
                 <Box
-                    component={'form'}
+                    component={"form"}
                     onSubmit={props.handleSubmit}
                     sx={{
-                        backgroundColor: 'white',
-                        width: '400px',
+                        backgroundColor: "white",
+                        width: "400px",
                         py: 2,
                         px: 5,
-                        borderRadius: '10px',
+                        borderRadius: "10px",
                     }}
                 >
                     <Box

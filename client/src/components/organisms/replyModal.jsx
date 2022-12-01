@@ -1,8 +1,7 @@
 import { Alert, Avatar, Box, Button, Card, IconButton, Modal, TextField, Tooltip } from "@mui/material"
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 import AddPhotoAlternateRoundedIcon from "@mui/icons-material/AddPhotoAlternateRounded"
-// import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded'
-// import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded'
+
 import { server } from "components/config"
 
 const ReplyModal = (props) => {
@@ -27,8 +26,12 @@ const ReplyModal = (props) => {
                     borderRadius: "10px",
                 }}
             >
-                <Box textAlign="right">
-                    <IconButton onClick={props.toggleReplyModalClose}>
+                <Box
+                    textAlign="right"
+                >
+                    <IconButton
+                        onClick={props.toggleReplyModalClose}
+                    >
                         <CloseRoundedIcon />
                     </IconButton>
                 </Box>
@@ -44,13 +47,12 @@ const ReplyModal = (props) => {
                         sx={{
                             width: "50",
                             height: "50",
+                            border: "2px solid lightgray",
                             borderRadius: "50%",
                             objectFit: "cover",
                             mr: "20px",
                         }}
-                        src={
-                            server.host + "/images/icon/" + props.profile.image
-                        }
+                        src={server.host + "/images/icon/" + props.profile["image"]}
                     />
 
                     <TextField
@@ -70,7 +72,10 @@ const ReplyModal = (props) => {
                         display: "flex",
                     }}
                 >
-                    <Tooltip title="写真" placement="right">
+                    <Tooltip
+                        title="写真"
+                        placement="right"
+                    >
                         <IconButton
                             size="small"
                             color="success"
@@ -88,33 +93,9 @@ const ReplyModal = (props) => {
                             <AddPhotoAlternateRoundedIcon />
                         </IconButton>
                     </Tooltip>
-
-                    {/* <Tooltip
-                            title="ビデオ"
-                            placement="right"
-                        >
-                            <IconButton
-                                size="small"
-                                color="primary"
-                            >
-                                <VideoCallRoundedIcon />
-                            </IconButton>
-                        </Tooltip>
-
-                        <Tooltip
-                            title="タグ"
-                            placement="right"
-                        >
-                            <IconButton
-                                size="small"
-                                color="error"
-                            >
-                                <LocalOfferRoundedIcon />
-                            </IconButton>
-                        </Tooltip> */}
                 </Box>
 
-                <input type="hidden" name="parentId" value={props.postId} />
+                <input type="hidden" name="parentId" value={props["postId"]} />
 
                 <Button
                     variant="contained"
@@ -137,9 +118,9 @@ const ReplyModal = (props) => {
                             sx={{
                                 mt: 2,
                             }}
-                         >
+                        >
                             ファイルが読み込めません
-                         </Alert>
+                        </Alert>
                     )
                 }
             </Card>
