@@ -155,13 +155,13 @@ router.post("/getCompanyProfile", async (req, res) => {
         const prefectures = await get.list("prefecture")
 
         if (company["course_ids"]) {
-            company["course_names"] = company["course_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : courses[Number(id) - 1]["course_name"]).join('・')
+            company["course_names"] = company["course_ids"].split(",").map((id) => Number(id) === -1 ? "情報無し" : courses[Number(id) - 1]["course_name"]).join('・')
         }
         if (company["occupation_ids"]) {
-            company["occupation_names"] = company["occupation_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : occupations[Number(id) - 1]["occupation_name"]).join('・')
+            company["occupation_names"] = company["occupation_ids"].split(",").map((id) => Number(id) === -1 ? "情報無し" : occupations[Number(id) - 1]["occupation_name"]).join('・')
         }
         if (company["prefecture_ids"]) {
-            company["prefecture_names"] = company["prefecture_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : prefectures[Number(id) - 1]["prefecture_name"]).join('・')
+            company["prefecture_names"] = company["prefecture_ids"].split(",").map((id) => Number(id) === -1 ? "情報無し" : prefectures[Number(id) - 1]["prefecture_name"]).join('・')
         }
         res.json(company)
     } catch (err) {
@@ -188,7 +188,7 @@ router.post("/getCompany", async (req, res) => {
         if (company["prefecture_ids"]) {
             company["prefecture_names"] = company["prefecture_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : prefectures[Number(id) - 1]["prefecture_name"]).join('・')
         }
-        
+
         res.json(company)
     } catch (err) {
         console.log(err)

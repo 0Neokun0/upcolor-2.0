@@ -30,6 +30,12 @@ const CompanyProfileEdit = () => {
             homePageUrl: data.get("homePageUrl"),
             jobSiteUrl: data.get("jobSiteUrl"),
         })
+        .then(() => {
+            window.location.replace("/company/home")
+        })
+        .catch((error) => {
+            console.log(error)
+        })
     }
 
     useEffect(() => {
