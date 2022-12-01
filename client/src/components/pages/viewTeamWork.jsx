@@ -32,6 +32,7 @@ const TeamWork = () => {
     const [description, setDescription] = useState(false)
     const [target, setTarget] = useState(false)
     const [strategy, setStrategy] = useState(false)
+    const [technology, setTechnology] = useState(false)
 
     const [currentZoom, setCurrentZoom] = useState("Days")
 
@@ -59,6 +60,9 @@ const TeamWork = () => {
                 }
                 if (data.get("type") === "strategy") {
                     setStrategy(!strategy)
+                }
+                if (data.get("type") === "technology") {
+                    setTechnology(!technology)
                 }
             })
     }
@@ -160,7 +164,7 @@ const TeamWork = () => {
                     }}
                 >
                     <Hidden
-                        mdDown
+                        lgDown
                     >
                         {
                             team
@@ -188,7 +192,7 @@ const TeamWork = () => {
                         width="100%"
                     >
                         <Hidden
-                            lgDown
+                            mdUp
                         >
                             {
                                 team
@@ -216,32 +220,6 @@ const TeamWork = () => {
                         <Box
                             width="100%"
                         >
-                            <Hidden
-                                mdUp
-                            >
-                                {
-                                    team
-                                        ?
-                                        <>
-                                            <TeamOutline
-                                                team={team}
-                                                togglePopover={togglePopover}
-                                                setTogglePopover={setTogglePopover}
-                                                genInviteUrl={genInviteUrl}
-                                                student={false}
-                                            />
-
-                                            <Divider
-                                                sx={{
-                                                    mb: 2,
-                                                }}
-                                            />
-                                        </>
-                                        :
-                                        <></>
-                                }
-                            </Hidden>
-
                             {
                                 team["teamInfo"]
                                     ?
@@ -281,6 +259,16 @@ const TeamWork = () => {
                                             content={team["teamInfo"]["team_strategy"]}
                                             onSubmit={onSubmit}
                                         />
+
+                                        <TeamInfoCard
+                                            auth={auth}
+                                            title="使用した、技術"
+                                            name="technology"
+                                            state={technology}
+                                            toggleState={setTechnology}
+                                            content={team["teamInfo"]["technology_used"]}
+                                            onSubmit={onSubmit}
+                                        />
                                     </Box>
                                     :
                                     <></>
@@ -288,7 +276,7 @@ const TeamWork = () => {
                         </Box>
                     </Box>
                 </Stack>
-                
+
                 {
                     publishGantt
                     &&
