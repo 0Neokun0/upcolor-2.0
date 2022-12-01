@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom"
-import { Box, Card, CardActionArea, CardContent, Typography } from "@mui/material"
+import {
+    Box,
+    Card,
+    CardActionArea,
+    CardContent,
+    Typography,
+} from "@mui/material"
 import { grey } from "@mui/material/colors"
 import { server } from "components/config"
 

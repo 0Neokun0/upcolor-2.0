@@ -105,7 +105,6 @@ const NavbarMenu = (props) => {
                     <ListItemIcon>
                         <Avatar
                             sx={{
-                                border: "2px solid lightgray",
                                 width: 40,
                                 height: 40
                             }}
@@ -127,9 +126,6 @@ const NavbarMenu = (props) => {
                 </ListItemButton>
 
                 <ListItemButton
-                    sx={{
-                        borderRadius: "15px",
-                    }}
                     component={Link}
                     href="#"
                 >
@@ -143,10 +139,9 @@ const NavbarMenu = (props) => {
                     チャット
                 </ListItemButton>
 
+                <Divider />
+
                 <ListItemButton
-                    sx={{
-                        borderRadius: "15px",
-                    }}
                     component={Link}
                     href="/signup/student"
                 >
@@ -158,11 +153,7 @@ const NavbarMenu = (props) => {
                     他のアカウント作成
                 </ListItemButton>
 
-                <ListItemButton
-                    sx={{
-                        borderRadius: "15px",
-                    }}
-                >
+                <ListItemButton>
                     <ListItemIcon>
                         <Settings
                             fontSize="small"

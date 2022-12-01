@@ -16,7 +16,7 @@ const MainMenuProfileCard = (props) => {
             sx={{
                 p: 2,
                 borderRadius: "15px",
-                boxShadow: 5,
+                boxShadow: 10,
                 mb: 2,
             }}
         >
@@ -27,10 +27,7 @@ const MainMenuProfileCard = (props) => {
                 }}
             >
                 <Avatar
-                    sx={{
-                        border: "2px solid lightgray",
-                    }}
-                    src={server.host + "/images/icon/" + props.profile["image"]}
+                    src={server.host + "/images/icon/" + props.profile.image}
                 />
 
                 <Typography
@@ -38,20 +35,26 @@ const MainMenuProfileCard = (props) => {
                     textAlign={"center"}
                     width="100%"
                 >
-                    {props.profile["name"]}
+                    {props.profile.name}
                 </Typography>
             </Box>
-
+            <Divider
+                sx={{
+                    my: 2,
+                }}
+            />
+            ↓*** 要検討 ***↓
             <Box
+                justifyContent={"space-between"}
                 sx={{
                     display: "flex",
-                    justifyContent: "center",
-                    mt: 2,
+                    alignItems: "center",
                 }}
             >
                 <Chip
-                    label={props.profile["course_name"]}
+                    label="naoko"
                 />
+                <Switch />
             </Box>
         </Card>
     )

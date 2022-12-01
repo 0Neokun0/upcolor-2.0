@@ -24,8 +24,8 @@ const ClassNewsFeedCard = (props) => {
                     component={Link}
                     to={`/profile/${id}`}
                     sx={{
+                        border: 1,
                         borderColor: "divider",
-                        border: "2px solid lightgray",
                     }}
                 />
 

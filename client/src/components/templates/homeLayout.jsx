@@ -50,6 +50,12 @@ const HomeLayout = (props) => {
                         },
                     }}
                 >
+                    {/* <PostBox
+                            openPostModal={props.openPostModal}
+                            togglePostModalOpen={props.togglePostModalOpen}
+                            togglePostModalClose={props.togglePostModalClose}
+                        /> */}
+
                     <Outlet
                         context={{
                             post: props.post,
@@ -91,7 +97,6 @@ const HomeLayout = (props) => {
             </Stack>
 
             <SendPost
-                profile={props.profile}
                 handleSubmit={props.handleSubmit}
                 openPostModal={props.openPostModal}
                 togglePostModalOpen={props.togglePostModalOpen}

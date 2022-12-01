@@ -21,7 +21,6 @@ const ClassNewsFeedForm = (props) => {
             >
                 <Avatar
                     sx={{
-                        border: "2px solid lightgray",
                         height: '40px',
                         width: '40px',
                     }}

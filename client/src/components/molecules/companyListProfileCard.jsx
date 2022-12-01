@@ -36,7 +36,6 @@ const CompanyListProfileCard = (props) => {
                 >
                     <Avatar
                         sx={{
-                            border: "2px solid lightgray",
                             m: 1,
                             p: 1,
                         }}

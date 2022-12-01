@@ -1,5 +1,12 @@
 import { Link } from 'react-router-dom'
-import { Box, Card, List, ListItem, ListItemButton, ListItemIcon } from '@mui/material'
+import {
+    Box,
+    Card,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+} from '@mui/material'
 
 import MainMenuProfileCard from 'components/molecules/mainMenuProfileCard'
 
@@ -9,7 +16,6 @@ const MainMenu = (props) => {
             <Card
                 sx={{
                     p: 2,
-                    borderRadius: "15px",
                 }}
             >
                 <MainMenuProfileCard
@@ -20,6 +26,8 @@ const MainMenu = (props) => {
                     disablePadding
                     sx={{
                         'li + li': {
+                            borderTop: 1,
+                            borderColor: '#e3f2fd',
                         },
                     }}
                 >
@@ -30,9 +38,6 @@ const MainMenu = (props) => {
                                 key={index}
                             >
                                 <ListItemButton
-                                    sx={{
-                                        borderRadius: "15px",
-                                    }}
                                     component={Link}
                                     to={menu.url}
                                 >

@@ -67,7 +67,7 @@ const ClassNewsCard = (props) => {
                         alt={props["classNewsRoom"]["user_name"]}
                         // src={`${server.host}/images/icon/${props["profile"]["image"]}`}
                         sx={{
-                            border: "2px solid lightgray",
+                            border: 1,
                             borderColor: "divider",
                         }}
                     />

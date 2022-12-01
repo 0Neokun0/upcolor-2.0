@@ -40,7 +40,6 @@ const StudentListProfileCard = (props) => {
                         <Avatar
                             sx={{
                                 m: 1,
-                                border: "2px solid lightgray",
                             }}
                             src={server.host + "/images/icon/" + props.student["image"]}
                         />

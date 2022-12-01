@@ -171,7 +171,6 @@ const ProfileEdit = () => {
                         <Avatar
                             src={imagePreview}
                             sx={{
-                                border: "2px solid lightgray",
                                 width: "150px",
                                 height: "150px",
                                 mx: "auto",

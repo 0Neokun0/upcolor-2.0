@@ -15,10 +15,7 @@ const ProfileOnFeed = (props) => {
                 </CardContent>
 
                 <Box sx={{ display: 'flex', alignItems: 'center', p: 1, ml: 2 }}>
-                    <Avatar
-                        sx={{
-                            border: "2px solid lightgray",
-                        }}/>
+                    <Avatar />
                 </Box>
             </Box>
         </Card>
