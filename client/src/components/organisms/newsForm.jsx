@@ -2,8 +2,39 @@ import { server } from "components/config"
 import { Avatar, Box, Button, Card, FormControl, IconButton, InputLabel, MenuItem, OutlinedInput, Select, TextField, Tooltip, Typography } from "@mui/material"
 import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
+import { useState, useRef } from "react"
+import DisabledByDefaultRoundedIcon from '@mui/icons-material/DisabledByDefaultRounded'
 
 const NewsForm = (props) => {
+    const [imagePreview, setImagePreview] = useState(undefined)
+
+    const fileInput = useRef(null)
+
+    const onClickReset = () => {
+        fileInput.current.value = ""
+        setImagePreview(undefined)
+    }
+
+    const onChangeFileInput = (e) => {
+        setImagePreview(undefined)
+
+        if (e.target.files.length === 0) {
+            return
+        }
+
+        if (!e.target.files[0].type.match("image.*")) {
+            return
+        }
+
+        const reader = new FileReader()
+
+        reader.onload = (event) => {
+            setImagePreview(event.target.result)
+        }
+
+        reader.readAsDataURL(e.target.files[0])
+    }
+
     return (
         <Box
             sx={{
@@ -89,29 +120,83 @@ const NewsForm = (props) => {
                             />
 
                             <Box
-                                display="flex"
-                                justifyContent="end"
+                                sx={{
+                                    display: 'flex',
+                                    alignContent: "center",
+                                }}
                             >
-                                <Tooltip
-                                    title="写真"
-                                    placement="right"
-                                >
-                                    <IconButton
-                                        size="small"
-                                        color="success"
-                                        component="label"
-                                        onClick={() => props.setFileCheck(false)}
+                                <Box>
+                                    <Tooltip
+                                        title="写真"
+                                        placement="right"
                                     >
-                                        <Box
-                                            component="input"
-                                            type="file"
-                                            name="image"
-                                            accept=".png, .jpg, .jpeg"
-                                            hidden
-                                        />
-                                        <AddPhotoAlternateRoundedIcon />
-                                    </IconButton>
-                                </Tooltip>
+                                        <IconButton
+                                            sx={{
+                                                mt: 4,
+                                            }}
+                                            size="small"
+                                            color="success"
+                                            component="label"
+                                            ref={fileInput}
+                                            onChange={(e) => { onChangeFileInput(e) }}
+                                        >
+                                            <Box
+                                                component="input"
+                                                type="file"
+                                                name="image"
+                                                accept=".png, .jpg, .jpeg"
+                                                hidden
+                                            />
+                                            <AddPhotoAlternateRoundedIcon />
+                                        </IconButton>
+                                    </Tooltip>
+                                </Box>
+
+                                {
+                                    !!imagePreview
+                                    &&
+                                    <Box
+                                        sx={{
+                                            width: 1,
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            p: 1,
+                                            m: 1,
+                                            borderRadius: 1,
+                                        }}
+                                    >
+                                        <Box>
+                                            <Box
+                                                component="img"
+                                                src={imagePreview}
+                                                sx={{
+                                                    border: "2px solid gray",
+                                                    borderRadius: 3,
+                                                    width: "300px",
+                                                    height: "125px",
+                                                    mx: 25,
+                                                }}
+                                            />
+                                        </Box>
+
+                                        <Box>
+                                            <Tooltip
+                                                title="削除"
+                                                placement="right"
+                                            >
+                                                <IconButton
+                                                    size="small"
+                                                    component="label"
+                                                    variant="outlined"
+                                                    color="error"
+                                                    onClick={onClickReset}
+                                                >
+                                                    <DisabledByDefaultRoundedIcon />
+                                                </IconButton>
+                                            </Tooltip>
+                                        </Box>
+                                    </Box>
+                                }
                             </Box>
 
                             <FormControl
