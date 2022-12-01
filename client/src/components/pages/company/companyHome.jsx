@@ -98,11 +98,6 @@ const CompanyHome = () => {
             url: "#",
         },
         {
-            value: "企業プロフィール編集",
-            icon: <SettingsIcon />,
-            url: "/company/profile/edit",
-        },
-        {
             value: "学生プロフィール閲覧",
             icon: <ContactsIcon />,
             url: "/list/student",
@@ -111,6 +106,11 @@ const CompanyHome = () => {
             value: "企業・会社プロフィール閲覧",
             icon: <HomeWorkIcon />,
             url: "/list/company",
+        },
+        {
+            value: "企業プロフィール編集",
+            icon: <SettingsIcon />,
+            url: "/company/profile/edit",
         },
     ]
 
