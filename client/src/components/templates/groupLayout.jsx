@@ -4,7 +4,9 @@ import { GroupMenu } from "components/organisms"
 
 const GroupLayout = (props) => {
     return (
-        <Container>
+        <Container
+            maxWidth="xl"
+        >
             <Grid
                 container
                 sx={{
@@ -55,7 +57,7 @@ const GroupLayout = (props) => {
                 </Grid>
             </Grid>
         </Container>
-    );
+    )
 }
 
 export default GroupLayout

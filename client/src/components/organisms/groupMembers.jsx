@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
-import { List, ListItem, ListItemButton, ListSubheader } from "@mui/material"
+import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListSubheader } from "@mui/material"
+import RecentActorsRoundedIcon from '@mui/icons-material/RecentActorsRounded'
+import { server } from "components/config"
 
 const GroupMembers = (props) => {
     return (
@@ -16,13 +18,20 @@ const GroupMembers = (props) => {
             >
                 <ListSubheader
                     sx={{
-                        p: 0,
-                        textAlign: "center",
+                        fontWeight: 600,
                     }}
                 >
-                    メンバー一覧
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                    }}>
+                        <ListItemIcon>
+                            <RecentActorsRoundedIcon  />
+                        </ListItemIcon>
+                        メンバー一覧
+                </Box>
                 </ListSubheader>
-
                 {
                     props["members"].map((member) => {
                         return (
@@ -35,6 +44,9 @@ const GroupMembers = (props) => {
                                     component={Link}
                                     to={"/profile/" + member["user_id"]}
                                 >
+                                    {/* <ListItemAvatar
+                                        src={server.host + "/images/icon/" + member.image}
+                                    /> */}
                                     {member["user_name"]}
                                 </ListItemButton>
                             </ListItem>
