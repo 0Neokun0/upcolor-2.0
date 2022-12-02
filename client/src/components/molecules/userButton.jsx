@@ -1,12 +1,13 @@
-import { Avatar, IconButton, ListItemButton, Typography } from "@mui/material"
+import { Link } from "react-router-dom"
+import { Avatar, IconButton, ListItemButton, Menu, MenuItem, Typography } from "@mui/material"
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded'
 
 const UserButton = (props) => {
-    const { id, name, selected, onClick } = props
+    const { index, id, name, selected, onClick, anchorEl, open, onClickIcon, onClose } = props
 
     return (
         <ListItemButton
-            onClick={() => onClick(id)}
+            onClick={() => onClick(index, id)}
             sx={{
                 width: "100%",
                 borderRadius: 50,
@@ -34,6 +35,7 @@ const UserButton = (props) => {
                 id === selected
                 &&
                 <IconButton
+                    onClick={(e) => onClickIcon(e, index)}
                     sx={{
                         ml: "auto",
                     }}
@@ -41,6 +43,27 @@ const UserButton = (props) => {
                     <MoreVertRoundedIcon />
                 </IconButton>
             }
+
+            <Menu
+                anchorEl={anchorEl}
+                open={Boolean(index === open)}
+                onClose={onClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                }}
+            >
+                <MenuItem
+                    component={Link}
+                    to={`/profile/${id}`}
+                >
+                    プロフィール
+                </MenuItem>
+            </Menu>
         </ListItemButton>
     )
 }

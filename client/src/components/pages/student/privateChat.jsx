@@ -7,31 +7,38 @@ import config from "components/config"
 const socket = io(config.socket.host)
 
 const PrivateChat = () => {
-    const [selectedUserId, setSelectedUserId] = useState(1) // 選択ユーザーID
-    const [formInput, setFormInput] = useState()            // chatForm入力
-    const [users, setUsers] = useState()                    // 相互フォローユーザー
-    const [chats, setChats] = useState()                    // 取得チャット
-    const [joinRoom, setJoinRoom] = useState()
-
-    // 選択ユーザー名
-    const selectedUserName = "まつお"
+    const [selectedUserId, setSelectedUserId] = useState(1)     // 選択ユーザーID
+    const [selectedUserName, setSelectedUserName] = useState()  // 選択ユーザー名前
+    const [formInput, setFormInput] = useState()                // chatForm入力
+    const [users, setUsers] = useState()                        // 相互フォローユーザー
+    const [chats, setChats] = useState()                        // 取得チャット
+    const [joinRoom, setJoinRoom] = useState()                  // ルームID保存
+    const [menuAnchorEl, setMenuAnchorEl] = useState()          // userButtonMenuアンカー
+    const [menuOpen, setMenuOpen] = useState()                  // userButtonMenuハンドル
 
     // 選択ユーザー変更時
-    const selectedUserOnChange = (userId) => {
+    const selectedUserOnChange = (index, userId) => {
         const token = document.cookie.split("=")[1]
         socket.emit("privateChat join", token, selectedUserId, userId)
 
         setSelectedUserId(userId)
+        setSelectedUserName(users[index]["name"])
+    }
+
+    // userButtonIconクリック時
+    const userMenuOpen = (e, index) => {
+        setMenuAnchorEl(e.currentTarget)
+        setMenuOpen(index)
+    }
+    const userMenuClose = () => {
+        setMenuAnchorEl(null)
+        setMenuOpen(null)
     }
 
     // チャット送信時
     const sendChat = () => {
         setFormInput("")
 
-        // axios.post("/privateChat/send", {
-        //     selectedUserId: selectedUserId,
-        //     text: formInput,
-        // })
         const token = document.cookie.split("=")[1]
         socket.emit("privateChat msg", token, selectedUserId, joinRoom, formInput)
     }
@@ -40,24 +47,6 @@ const PrivateChat = () => {
     const formInputOnChange = (e) => {
         setFormInput(e.target.value)
     }
-
-    useEffect(() => {
-        // 相互フォロー取得
-        axios.post("/privateChat/getFriend")
-            .then((res) => {
-                setUsers(res["data"])
-            })
-
-        // チャット双方向通信
-        socket.on("privateChat", (chat) => {
-            setChats((chats) => [...chats, chat])
-        })
-
-        // ルームの保存
-        socket.on("privateChat room", (room) => {
-            setJoinRoom(room)
-        })
-    }, [])
 
     // 選択ユーザー変更時チャット取得
     useEffect(() => {
@@ -75,6 +64,32 @@ const PrivateChat = () => {
         chatArea.scrollTop = chatArea.scrollHeight
     }, [chats])
 
+    useEffect(() => {
+        // 相互フォロー取得
+        axios.post("/privateChat/getFriend")
+            .then((res) => {
+                setUsers(res["data"])
+
+                if (res["data"]) {
+                    const token = document.cookie.split("=")[1]
+                    socket.emit("privateChat join", token, selectedUserId, res["data"][0]["id"])
+
+                    setSelectedUserId(res["data"][0]["id"])
+                    setSelectedUserName(res["data"][0]["name"])
+                }
+            })
+
+        // チャット双方向通信
+        socket.on("privateChat", (chat) => {
+            setChats((chats) => [...chats, chat])
+        })
+
+        // ルームの保存
+        socket.on("privateChat room", (room) => {
+            setJoinRoom(room)
+        })
+    }, [])
+
     return (
         <PrivateChatLayout
             list={
@@ -82,6 +97,10 @@ const PrivateChat = () => {
                     users={users}
                     selectedUserId={selectedUserId}
                     selectedUserOnChange={selectedUserOnChange}
+                    menuAnchorEl={menuAnchorEl}
+                    menuOpen={menuOpen}
+                    userMenuOpen={userMenuOpen}
+                    userMenuClose={userMenuClose}
                 />
             }
             chat={
@@ -101,6 +120,7 @@ export default PrivateChat
 
 // テストデータ
 
+// const selectedUserName = "まつお"
 
 // const users = [
 
