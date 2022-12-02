@@ -22,6 +22,7 @@ const PrivateChatUsers = (props) => {
                             index={index}
                             id={user["id"]}
                             name={user["name"]}
+                            icon={user["icon"]}
                             selected={selectedUserId}
                             onClick={selectedUserOnChange}
                             anchorEl={menuAnchorEl}

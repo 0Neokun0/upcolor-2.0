@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom"
+import { server } from "components/config"
 import { Avatar, IconButton, ListItemButton, Menu, MenuItem, Typography } from "@mui/material"
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded'
 
 const UserButton = (props) => {
-    const { index, id, name, selected, onClick, anchorEl, open, onClickIcon, onClose } = props
+    const { index, id, name, icon, selected, onClick, anchorEl, open, onClickIcon, onClose } = props
 
     return (
         <ListItemButton
@@ -19,7 +20,13 @@ const UserButton = (props) => {
                 boxShadow: id === selected ? 1 : 0,
             }}
         >
-            <Avatar />
+            <Avatar
+                src={`${server.host}/images/icon/${icon}`}
+                sx={{
+                    border: 1,
+                    borderColor: "divider",
+                }}
+            />
 
             <Typography
                 sx={{
