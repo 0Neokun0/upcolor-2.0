@@ -15,6 +15,7 @@ const PrivateChat = () => {
     const [joinRoom, setJoinRoom] = useState()                  // ルームID保存
     const [menuAnchorEl, setMenuAnchorEl] = useState()          // userButtonMenuアンカー
     const [menuOpen, setMenuOpen] = useState()                  // userButtonMenuハンドル
+    const [drawerOpen, setDrawerOpen] = useState(false)         // drawerハンドル
 
     // 選択ユーザー変更時
     const selectedUserOnChange = (index, userId) => {
@@ -33,6 +34,16 @@ const PrivateChat = () => {
     const userMenuClose = () => {
         setMenuAnchorEl(null)
         setMenuOpen(null)
+    }
+
+    // drawerButtonクリック時
+    const onDrawerOpen = () => {
+        console.log("drawer open")
+        setDrawerOpen(true)
+    }
+    const onDrawerClose = () => {
+        console.log("drawer close")
+        setDrawerOpen(false)
     }
 
     // チャット送信時
@@ -101,6 +112,8 @@ const PrivateChat = () => {
                     menuOpen={menuOpen}
                     userMenuOpen={userMenuOpen}
                     userMenuClose={userMenuClose}
+                    drawerOpen={drawerOpen}
+                    onDrawerClose={onDrawerClose}
                 />
             }
             chat={
@@ -110,6 +123,7 @@ const PrivateChat = () => {
                     formInput={formInput}
                     formInputOnChange={formInputOnChange}
                     sendChat={sendChat}
+                    onDrawerOpen={onDrawerOpen}
                 />
             }
         />
@@ -117,93 +131,3 @@ const PrivateChat = () => {
 }
 
 export default PrivateChat
-
-// テストデータ
-
-// const selectedUserName = "まつお"
-
-// const users = [
-
-//     // id:      ユーザーID
-//     // name:    ユーザー名
-
-//     {
-//         id: 1,
-//         name: "まつお",
-//     },
-//     {
-//         id: 2,
-//         name: "こめだ",
-//     },
-//     {
-//         id: 3,
-//         name: "ニシャント",
-//     },
-// ]
-
-// const chats = [
-
-// id:      チャットID
-// self:    0...他人の投稿, 1...自分の投稿
-// name:    ユーザー名
-// icon:    アイコンURL
-// time:    投稿時間
-// text:    内容
-
-//     {
-//         id: 1,
-//         self: 1,
-//         name: "ニシャント",
-//         icon: "",
-//         time: "00/00 00:00",
-//         text: "コンテンツコンテンツコンテンツコンテンツコンテンツコンテンツ",
-//     },
-//     {
-//         id: 2,
-//         self: 0,
-//         name: "ニシャント",
-//         icon: "",
-//         time: "00/00 00:00",
-//         text: "コンテンツコンテンツコンテンツコンテンツコンテンツコンテンツ",
-//     },
-//     {
-//         id: 3,
-//         self: 1,
-//         name: "ニシャント",
-//         icon: "",
-//         time: "00/00 00:00",
-//         text: "コンテンツコンテンツコンテンツコンテンツコンテンツコンテンツ",
-//     },
-//     {
-//         id: 4,
-//         self: 1,
-//         name: "ニシャント",
-//         icon: "",
-//         time: "00/00 00:00",
-//         text: "コンテンツコンテンツコンテンツコンテンツコンテンツコンテンツ",
-//     },
-//     {
-//         id: 5,
-//         self: 0,
-//         name: "ニシャント",
-//         icon: "",
-//         time: "00/00 00:00",
-//         text: "コンテンツコンテンツコンテンツコンテンツコンテンツコンテンツ",
-//     },
-//     {
-//         id: 6,
-//         self: 1,
-//         name: "ニシャント",
-//         icon: "",
-//         time: "00/00 00:00",
-//         text: "コンテンツコンテンツコンテンツコンテンツコンテンツコンテンツ",
-//     },
-//     {
-//         id: 7,
-//         self: 0,
-//         name: "ニシャント",
-//         icon: "",
-//         time: "00/00 00:00",
-//         text: "コンテンツコンテンツコンテンツコンテンツコンテンツコンテンツ",
-//     },
-// ]

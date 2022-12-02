@@ -10,12 +10,16 @@ const ChatNew = (props) => {
             ?
             <Box
                 sx={{
-                    ml: "auto",
-                    width: "fit-content",
+                    ml: "48px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "end"
                 }}
             >
                 <Typography
+                    textAlign="end"
                     variant="body2"
+                    whiteSpace="nowrap"
                 >
                     {time}
                 </Typography>
@@ -59,12 +63,14 @@ const ChatNew = (props) => {
                     >
                         <Typography
                             fontWeight="bold"
+                            whiteSpace="nowrap"
                         >
                             {name}
                         </Typography>
 
                         <Typography
                             variant="body2"
+                            whiteSpace="nowrap"
                             sx={{
                                 ml: 2,
                             }}
