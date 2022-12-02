@@ -2,18 +2,20 @@ import { Avatar, IconButton, ListItemButton, Typography } from "@mui/material"
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded'
 
 const UserButton = (props) => {
-    const {name} = props
-    
+    const { id, name, selected, onClick } = props
+
     return (
         <ListItemButton
+            onClick={() => onClick(id)}
             sx={{
                 width: "100%",
                 borderRadius: 50,
                 display: "flex",
                 alignItems: "center",
-                ":hover": {
-                    backgroundColor: "white",
-                }
+
+                // プロパティ: id === selected ? 選択時スタイル: 非選択時スタイル
+                backgroundColor: id === selected ? "white" : "",
+                boxShadow: id === selected ? 1 : 0,
             }}
         >
             <Avatar />
@@ -28,13 +30,17 @@ const UserButton = (props) => {
                 {name}
             </Typography>
 
-            <IconButton
-                sx={{
-                    ml: "auto",
-                }}
-            >
-                <MoreVertRoundedIcon />
-            </IconButton>
+            {
+                id === selected
+                &&
+                <IconButton
+                    sx={{
+                        ml: "auto",
+                    }}
+                >
+                    <MoreVertRoundedIcon />
+                </IconButton>
+            }
         </ListItemButton>
     )
 }
