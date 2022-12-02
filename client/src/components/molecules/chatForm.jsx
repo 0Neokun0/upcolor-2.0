@@ -1,20 +1,38 @@
-import {  TextField } from "@mui/material"
+import { FormControl, IconButton, InputAdornment, OutlinedInput } from "@mui/material"
+import SendRoundedIcon from '@mui/icons-material/SendRounded'
 
-const ChatForm = () => {
+const ChatForm = (props) => {
+    const { input, onChange, onClick } = props
+
     return (
-        <TextField
-            variant="outlined"
-            placeholder="ここにメッセージを入力"
-            size="small"
-            multiline
+        <FormControl
             fullWidth
-            sx={{
-                ".MuiInputBase-root": {
-                    borderRadius: 6,
-                    backgroundColor: "#f0f0f0",
+        >
+            <OutlinedInput
+                variant="outlined"
+                placeholder="ここにメッセージを入力"
+                size="small"
+                value={input}
+                onChange={onChange}
+                multiline
+                endAdornment={
+                    <InputAdornment
+                        position="end"
+                    >
+                        <IconButton
+                            edge="end"
+                            onClick={onClick}
+                        >
+                            <SendRoundedIcon />
+                        </IconButton>
+                    </InputAdornment>
                 }
-            }}
-        />
+                sx={{
+                    borderRadius: 3,
+                    backgroundColor: "#f0f0f0",
+                }}
+            />
+        </FormControl>
     )
 }
 

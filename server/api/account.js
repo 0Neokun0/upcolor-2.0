@@ -490,39 +490,39 @@ router.post("/getFollowList", async (req, res) => {
     const followerList = await sql.handleSelect(sqlSelectFollowerList, [userId])
 
     const sqlSelectFriendList = `
-    SELECT
-        user_profiles.user_id,
-        user_profiles.user_name
-    FROM
-    (
         SELECT
-            s1.user_id,
-            s1.follower_id
+            user_profiles.user_id,
+            user_profiles.user_name
         FROM
         (
             SELECT
-                fl.user_id AS user_id,
-                fl.follower_id AS follower_id
+                s1.user_id,
+                s1.follower_id
             FROM
-                followers fl
-        ) s1
+            (
+                SELECT
+                    fl.user_id AS user_id,
+                    fl.follower_id AS follower_id
+                FROM
+                    followers fl
+            ) s1
+            INNER JOIN
+            (
+                SELECT
+                    flw.follower_id AS user_id,
+                    flw.user_id AS follower_id
+                FROM
+                    followers flw
+            ) s2
+            ON
+                s1.user_id = s2.user_id AND
+                s1.follower_id = s2.follower_id
+        ) follower_list
         INNER JOIN
-        (
-            SELECT
-                flw.follower_id AS user_id,
-                flw.user_id AS follower_id
-            FROM
-                followers flw
-        ) s2
-        ON
-            s1.user_id = s2.user_id AND
-            s1.follower_id = s2.follower_id
-    ) follower_list
-    INNER JOIN
-        user_profiles ON
-        follower_list.follower_id = user_profiles.user_id
-    WHERE
-        follower_list.user_id = ?
+            user_profiles ON
+            follower_list.follower_id = user_profiles.user_id
+        WHERE
+            follower_list.user_id = ?
     `
 
     const friendList = await sql.handleSelect(sqlSelectFriendList, [userId])

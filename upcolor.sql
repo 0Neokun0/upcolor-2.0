@@ -382,6 +382,17 @@ CREATE TABLE lecture_term(
     end_date INT
 );
 
+CREATE TABLE private_chat(
+    chat_id INT AUTO_INCREMENT PRIMARY KEY,
+    sent_user_id INT,
+    received_user_id INT,
+    sent_text varchar(255),
+    created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+    updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+    FOREIGN KEY(sent_user_id) REFERENCES user_profiles(user_id) ON DELETE CASCADE,
+    FOREIGN KEY(received_user_id) REFERENCES user_profiles(user_id) ON DELETE CASCADE
+);
+
 CREATE VIEW user_infomation(
     user_id,
     name,

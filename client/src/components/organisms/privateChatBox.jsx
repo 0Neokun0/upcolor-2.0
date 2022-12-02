@@ -2,7 +2,7 @@ import { ChatForm, ChatNew } from "components/molecules"
 import { Box, Card, Typography } from "@mui/material"
 
 const PrivateChatBox = (props) => {
-    const { selected, chats } = props
+    const { selectedUserName, chats, formInput, formInputOnChange, sendChat } = props
 
     return (
         <Card
@@ -26,12 +26,15 @@ const PrivateChatBox = (props) => {
                     alignItems: "center",
                 }}
             >
-                {selected}
+                {selectedUserName}
             </Typography>
 
             <Box
+                id="chatArea"
                 sx={{
                     height: "calc(100% - 40px - 80px)",
+                    borderBottom: 1,
+                    borderColor: "divider",
                     overflowY: "scroll",
                     "::-webkit-scrollbar": {
                         width: "5px",
@@ -49,7 +52,10 @@ const PrivateChatBox = (props) => {
                     sx={{
                         width: "70%",
                         mx: "auto",
-                        pt: 2,
+                        py: 2,
+                        "div + div": {
+                            mt: 1,
+                        }
                     }}
                 >
                     {
@@ -61,6 +67,7 @@ const PrivateChatBox = (props) => {
                                     key={chat["id"]}
                                     self={chat["self"]}
                                     name={chat["name"]}
+                                    icon={chat["icon"]}
                                     time={chat["time"]}
                                     text={chat["text"]}
                                 />
@@ -79,7 +86,11 @@ const PrivateChatBox = (props) => {
                     alignItems: "center",
                 }}
             >
-                <ChatForm />
+                <ChatForm
+                    input={formInput}
+                    onChange={formInputOnChange}
+                    onClick={sendChat}
+                />
             </Box>
         </Card>
     )
