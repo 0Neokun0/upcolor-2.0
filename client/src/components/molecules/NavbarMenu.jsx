@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Divider, IconButton, Link, ListItemButton, ListItemIcon, Menu, Tooltip, Typography } from "@mui/material"
+import { Avatar, Box, Button, IconButton, Link, ListItemButton, ListItemIcon, Menu, Tooltip, Typography } from "@mui/material"
 import React from "react"
 
 import { server } from "components/config"

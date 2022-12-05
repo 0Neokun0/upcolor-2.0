@@ -4,8 +4,6 @@ import {
     Box,
     Card,
     Chip,
-    Divider,
-    Switch,
     Typography,
 } from "@mui/material"
 import { server } from "components/config"
