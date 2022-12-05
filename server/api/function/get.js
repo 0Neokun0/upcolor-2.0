@@ -104,3 +104,17 @@ exports.teamId = async (userId) => {
 
     return teamId[0]["is_colaborating"]
 }
+
+exports.company = async (companyId) => {
+    const sqlSelectCompany = `
+        SELECT
+            *
+        FROM
+            company_infomation
+        WHERE
+            company_id = ?
+    `
+    const company = await sql.handleSelect(sqlSelectCompany, [companyId])
+
+    return company[0]
+}

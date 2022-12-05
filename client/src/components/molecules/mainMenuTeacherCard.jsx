@@ -2,7 +2,7 @@ import React from "react"
 import { Avatar, Box, Card, Chip, Typography } from "@mui/material"
 import { server } from "components/config"
 
-const MainMenuProfileCard = (props) => {
+const MainMenuTeacherCard = (props) => {
     return (
         <Card
             sx={{
@@ -22,7 +22,7 @@ const MainMenuProfileCard = (props) => {
                     sx={{
                         border: "2px solid lightgray",
                     }}
-                    src={server.host + "/images/icon/" + props.profile["image"]}
+                    src={server.host + "/images/icon/" + props.teacher["image"]}
                 />
 
                 <Typography
@@ -30,7 +30,7 @@ const MainMenuProfileCard = (props) => {
                     textAlign={"center"}
                     width="100%"
                 >
-                    {props.profile["name"]}
+                    {props.teacher["name"]}
                 </Typography>
             </Box>
 
@@ -42,11 +42,11 @@ const MainMenuProfileCard = (props) => {
                 }}
             >
                 <Chip
-                    label={props.profile["course_name"]}
+                    label={props.teacher["course_name"]}
                 />
             </Box>
         </Card>
     )
 }
 
-export default MainMenuProfileCard
+export default MainMenuTeacherCard

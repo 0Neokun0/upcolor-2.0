@@ -26,12 +26,23 @@ import ViewTimelineIcon from '@mui/icons-material/ViewTimeline'
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest'
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded'
 import ClassIcon from '@mui/icons-material/Class'
+import GroupsIcon from "@mui/icons-material/Groups"
+import LockOpenIcon from "@mui/icons-material/LockOpen"
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
+import SettingsIcon from "@mui/icons-material/Settings"
+import ContactsIcon from "@mui/icons-material/Contacts"
+import HomeWorkIcon from "@mui/icons-material/HomeWork"
+import NewspaperIcon from '@mui/icons-material/Newspaper'
 
 function App() {
     const [open, setOpen] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
     const [signInState, setSignInState] = useState("")
     const [profile, setProfile] = useState([])
+    const [teacher, setTeacher] = useState([])
+    const [company, setCompany] = useState([])
+    const [userType, setUserType] = useState([])
+
 
     const [anchorEl, setAnchorEl] = useState(null)
     const openNavbar = Boolean(anchorEl)
@@ -111,6 +122,74 @@ function App() {
             icon: <SettingsSuggestIcon />,
         },
     ]
+
+    const companyDrawerMenus = [
+        {
+            value: "グループ投稿",
+            icon: <GroupsIcon />,
+            url: "#",
+        },
+        {
+            value: "グループ認証",
+            icon: <LockOpenIcon />,
+            url: "#",
+        },
+        {
+            value: "グループ管理",
+            icon: <ManageAccountsIcon />,
+            url: "#",
+        },
+        {
+            value: "学生プロフィール閲覧",
+            icon: <ContactsIcon />,
+            url: "/list/student",
+        },
+        {
+            value: "企業・会社プロフィール閲覧",
+            icon: <HomeWorkIcon />,
+            url: "/list/company",
+        },
+        {
+            value: "企業プロフィール編集",
+            icon: <SettingsIcon />,
+            url: "/company/profile/edit",
+        },
+    ]
+
+    const teacherDrawerMenus = [
+        {
+            value: "ニューズ投稿",
+            icon: <NewspaperIcon/>,
+            url: "/teacher/teachernews",
+        },
+        {
+            value: "クラスニューズ",
+            url: "/classNews",
+            icon: <ClassIcon />,
+        },
+        {
+            value: "学生管理",
+            icon: <ManageAccountsIcon />,
+            url: "#",
+        },
+        {
+            value: "学生プロフィール閲覧",
+            icon: <ContactsIcon />,
+            url: "/list/student",
+        },
+        {
+            value: "企業・会社プロフィール閲覧",
+            icon: <HomeWorkIcon />,
+            url: "/list/company",
+        },
+        {
+            value: "先生プロフィール編集",
+            icon: <SettingsIcon />,
+            url: "#",
+        },
+    ]
+
+
 
     const toggleSignout = () => {
         axios.post("/account/signout")
@@ -202,8 +281,33 @@ function App() {
         axios.post("/account/getProfile")
             .then((res) => {
                 setProfile(res.data)
+                console.log(res.data)
             })
     }, [])
+
+    useEffect(() => {
+        axios.post("/account/getTeacherProfile")
+            .then((res) => {
+                setTeacher(res.data)
+                console.log(res.data)
+            })
+    }, [])
+
+    useEffect(() => {
+        axios.post("/company/getCompanyProfile")
+            .then((res) => {
+                setCompany(res.data)
+                console.log(res.data)
+            })
+    }, [])
+
+    useEffect(() => {
+            axios.post("/account/getUserType")
+                .then((res) => {
+                    setUserType(res.data)
+                    console.log(res.data)
+                })
+        }, [])
 
     return (
         <Box>
@@ -211,8 +315,6 @@ function App() {
                 <Header
                     logoSrc={logo}
                     name={"UPCOLOR"}
-                    menus={menus}
-                    drawerMenus={drawerMenus}
                     signInState={signInState}
                     openNavbar={openNavbar}
                     anchorEl={anchorEl}
@@ -221,10 +323,17 @@ function App() {
                     open={open}
                     menuOpen={menuOpen}
                     setMenuOpen={setMenuOpen}
-                    profile={profile}
                     toggleAlertOpen={toggleAlertOpen}
                     toggleAlertClose={toggleAlertClose}
                     toggleSignout={toggleSignout}
+                    userType={userType}
+                    profile={profile}
+                    teacher={teacher}
+                    company={company}
+                    menus={menus}
+                    drawerMenus={drawerMenus}
+                    companyDrawerMenus={companyDrawerMenus}
+                    teacherDrawerMenus={teacherDrawerMenus}
                 />
 
                 <Routes>

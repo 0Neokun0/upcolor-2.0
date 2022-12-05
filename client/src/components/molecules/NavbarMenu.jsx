@@ -109,11 +109,7 @@ const NavbarMenu = (props) => {
                                 width: 40,
                                 height: 40
                             }}
-                            src={
-                                server.host +
-                                "/images/icon/" +
-                                props.profile.image
-                            }
+                            src={server.host + "/images/icon/" + props.profile["image"]}
                         />
                     </ListItemIcon>
                     <Typography
@@ -122,7 +118,18 @@ const NavbarMenu = (props) => {
                             fontWeight: 600,
                         }}
                     >
-                        {props.profile.name}
+                        {
+                            props.userType === 1
+                                ?
+                                <>{props.profile["name"]}</>
+                                :
+                                props.userType === 2
+                                    ?
+                                    <>{props.teacher["name"]}</>
+                                    :
+                                    <>{props.company["company_name"]}</>
+                        }
+
                     </Typography>
                 </ListItemButton>
 
