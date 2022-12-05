@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Divider, IconButton, Link, ListItemButton, ListItemIcon, Menu, Tooltip, Typography } from "@mui/material"
+import { Avatar, Box, Button, IconButton, Link, ListItemButton, ListItemIcon, Menu, Tooltip, Typography } from "@mui/material"
 import React from "react"
 
 import { server } from "components/config"
@@ -53,6 +53,7 @@ const NavbarMenu = (props) => {
                     </IconButton>
                 </Tooltip>
             </Box>
+
             <Menu
                 anchorEl={props.anchorEl}
                 open={props.openNavbar}
@@ -104,6 +105,7 @@ const NavbarMenu = (props) => {
                     <ListItemIcon>
                         <Avatar
                             sx={{
+                                border: "2px solid lightgray",
                                 width: 40,
                                 height: 40
                             }}
@@ -125,6 +127,9 @@ const NavbarMenu = (props) => {
                 </ListItemButton>
 
                 <ListItemButton
+                    sx={{
+                        borderRadius: "15px",
+                    }}
                     component={Link}
                     href="#"
                 >
@@ -138,9 +143,10 @@ const NavbarMenu = (props) => {
                     チャット
                 </ListItemButton>
 
-                <Divider />
-
                 <ListItemButton
+                    sx={{
+                        borderRadius: "15px",
+                    }}
                     component={Link}
                     href="/signup/student"
                 >
@@ -152,7 +158,11 @@ const NavbarMenu = (props) => {
                     他のアカウント作成
                 </ListItemButton>
 
-                <ListItemButton>
+                <ListItemButton
+                    sx={{
+                        borderRadius: "15px",
+                    }}
+                >
                     <ListItemIcon>
                         <Settings
                             fontSize="small"
@@ -161,30 +171,29 @@ const NavbarMenu = (props) => {
                     設定
                 </ListItemButton>
 
-                <ListItemButton>
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        mt: 2,
+                    }}
+                >
                     {
-                        props.signInState
+                        props["signInState"]
                             ?
-                            (
-                                <Button
-                                    sx={{
-                                        ml: 4,
-                                    }}
-                                    startIcon={<LogoutRoundedIcon />}
-                                    variant="contained"
-                                    onClick={props.toggleAlertOpen}
-                                >
-                                    サインアウト
-                                </Button>
-                            )
+                            <Button
+                                startIcon={<LogoutRoundedIcon />}
+                                variant="contained"
+                                onClick={props.toggleAlertOpen}
+                            >
+                                サインアウト
+                            </Button>
                             :
-                            (
-                                <Button variant="contained" href="/signin">
-                                    サインイン
-                                </Button>
-                            )
+                            <Button variant="contained" href="/signin">
+                                サインイン
+                            </Button>
                     }
-                </ListItemButton>
+                </Box>
             </Menu>
         </>
     )

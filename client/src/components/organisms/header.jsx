@@ -1,9 +1,9 @@
 import { useLocation } from "react-router-dom"
+import { AppBar, Box, Button, Dialog, Drawer, Hidden, IconButton, Link, Toolbar, Tooltip, Typography } from "@mui/material"
 
 import { MainMenu } from "components/organisms"
 import { NavbarMenu } from "components/molecules"
 
-import { AppBar, Box, Button, Dialog, DialogActions, DialogTitle, Drawer, Hidden, IconButton, Link, Toolbar, Tooltip, Typography } from "@mui/material"
 import LogoutIcon from "@mui/icons-material/Logout"
 import LoginIcon from "@mui/icons-material/Login"
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
@@ -29,28 +29,34 @@ const Header = (props) => {
                         alignItems: "center",
                     }}
                 >
-                    <Hidden
-                        lgUp
-                    >
-                        <Box
-                            sx={{
-                                display: "flex",
-                                alignItems: "center",
-                            }}
-                        >
-                            <IconButton
-                                sx={{
-                                    p: "5px",
-                                    borderRadius: "10px",
-                                    border: 1,
-                                    borderColor: "divider"
-                                }}
-                                onClick={() => props["setMenuOpen"](true)}
+                    {
+                        pathName === "/"
+                            ?
+                            <></>
+                            :
+                            <Hidden
+                                mdUp
                             >
-                                <MenuRoundedIcon />
-                            </IconButton>
-                        </Box>
-                    </Hidden>
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    <IconButton
+                                        sx={{
+                                            p: "5px",
+                                            borderRadius: "10px",
+                                            border: 1,
+                                            borderColor: "divider"
+                                        }}
+                                        onClick={() => props["setMenuOpen"](true)}
+                                    >
+                                        <MenuRoundedIcon />
+                                    </IconButton>
+                                </Box>
+                            </Hidden>
+                    }
 
                     <Link
                         href="/"
@@ -118,44 +124,40 @@ const Header = (props) => {
                     {
                         pathName === "/"
                             ?
-                            (
-                                <Box
-                                    sx={{
-                                        ml: 5,
-                                    }}
-                                >
-                                    {
-                                        props.signInState
-                                            ?
-                                            (
-                                                <Button
-                                                    variant="contained"
-                                                    onClick={props.toggleAlertOpen}
-                                                >
-                                                    サインアウト
-                                                </Button>
-                                            )
-                                            :
-                                            (
-                                                <Button variant="contained" href="/signin">
-                                                    サインイン
-                                                </Button>
-                                            )
-                                    }
-                                </Box>
-                            )
+                            <Box
+                                sx={{
+                                    ml: 5,
+                                }}
+                            >
+                                {
+                                    props.signInState
+                                        ?
+                                        (
+                                            <Button
+                                                variant="contained"
+                                                onClick={props.toggleAlertOpen}
+                                            >
+                                                サインアウト
+                                            </Button>
+                                        )
+                                        :
+                                        (
+                                            <Button variant="contained" href="/signin">
+                                                サインイン
+                                            </Button>
+                                        )
+                                }
+                            </Box>
                             :
-                            (
-                                <NavbarMenu
-                                    profile={props.profile}
-                                    anchorEl={props.anchorEl}
-                                    openNavbar={props.openNavbar}
-                                    handleClick={props.handleClick}
-                                    handleClose={props.handleClose}
-                                    signInState={props.signInState}
-                                    toggleAlertOpen={props.toggleAlertOpen}
-                                />
-                            )
+                            <NavbarMenu
+                                profile={props.profile}
+                                anchorEl={props.anchorEl}
+                                openNavbar={props.openNavbar}
+                                handleClick={props.handleClick}
+                                handleClose={props.handleClose}
+                                signInState={props.signInState}
+                                toggleAlertOpen={props.toggleAlertOpen}
+                            />
                     }
                 </Box>
             </Toolbar>
@@ -165,37 +167,50 @@ const Header = (props) => {
                 open={Boolean(props.open)}
                 onClose={props.toggleAlertClose}
             >
-                <DialogTitle
+                <Box
                     sx={{
-                        fontWeight: 600,
+                        p: 2,
                     }}
                 >
-                    本当にサインアウトしますか?
-                </DialogTitle>
-
-                <DialogActions>
-                    <Button
+                    <Typography
+                        textAlign="center"
                         sx={{
-                            mr: 2,
+                            fontWeight: 600,
                         }}
-                        color="success"
-                        startIcon={<LoginIcon />}
-                        variant="outlined"
-                        onClick={props.toggleAlertClose}
                     >
-                        キャンセル
-                    </Button>
+                        本当にサインアウトしますか?
+                    </Typography>
 
-                    <Button
-                        color="error"
-                        startIcon={<LogoutIcon />}
-                        variant="outlined"
-                        onClick={props.toggleSignout}
-                        href="/"
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            mt: 2,
+                        }}
                     >
-                        サインアウト
-                    </Button>
-                </DialogActions>
+                        <Button
+                            color="success"
+                            startIcon={<LoginIcon />}
+                            variant="outlined"
+                            onClick={props.toggleAlertClose}
+                        >
+                            キャンセル
+                        </Button>
+
+                        <Button
+                            color="error"
+                            startIcon={<LogoutIcon />}
+                            variant="outlined"
+                            onClick={props.toggleSignout}
+                            href="/"
+                            sx={{
+                                ml: 2,
+                            }}
+                        >
+                            サインアウト
+                        </Button>
+                    </Box>
+                </Box>
             </Dialog>
 
             <Drawer

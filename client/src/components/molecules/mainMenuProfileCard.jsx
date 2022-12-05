@@ -4,8 +4,6 @@ import {
     Box,
     Card,
     Chip,
-    Divider,
-    Switch,
     Typography,
 } from "@mui/material"
 import { server } from "components/config"
@@ -16,7 +14,7 @@ const MainMenuProfileCard = (props) => {
             sx={{
                 p: 2,
                 borderRadius: "15px",
-                boxShadow: 10,
+                boxShadow: 5,
                 mb: 2,
             }}
         >
@@ -27,7 +25,10 @@ const MainMenuProfileCard = (props) => {
                 }}
             >
                 <Avatar
-                    src={server.host + "/images/icon/" + props.profile.image}
+                    sx={{
+                        border: "2px solid lightgray",
+                    }}
+                    src={server.host + "/images/icon/" + props.profile["image"]}
                 />
 
                 <Typography
@@ -35,26 +36,20 @@ const MainMenuProfileCard = (props) => {
                     textAlign={"center"}
                     width="100%"
                 >
-                    {props.profile.name}
+                    {props.profile["name"]}
                 </Typography>
             </Box>
-            <Divider
-                sx={{
-                    my: 2,
-                }}
-            />
-            ↓*** 要検討 ***↓
+
             <Box
-                justifyContent={"space-between"}
                 sx={{
                     display: "flex",
-                    alignItems: "center",
+                    justifyContent: "center",
+                    mt: 2,
                 }}
             >
                 <Chip
-                    label="naoko"
+                    label={props.profile["course_name"]}
                 />
-                <Switch />
             </Box>
         </Card>
     )

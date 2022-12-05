@@ -16,10 +16,21 @@ const GroupChat = (props) => {
                 &&
                 props.chats.map((chat) => {
                     return (
-                        <Chat
-                            key={chat["chat_id"]}
-                            chat={chat}
-                        />
+                        <>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                justifyContent: 'flex-start',
+                            }}
+                            >
+                                <Chat
+                                    key={chat["chat_id"]}
+                                    chat={chat}
+                                />
+                            </Box>
+                        </>
+
                     )
                 })
             }

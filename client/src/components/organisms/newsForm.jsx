@@ -1,31 +1,43 @@
-import { Avatar, Box, Button, Card, CardActionArea, FormControl, IconButton, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography } from "@mui/material"
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
+import { server } from "components/config"
+import { Avatar, Box, Button, Card, FormControl, IconButton, InputLabel, MenuItem, OutlinedInput, Select, TextField, Tooltip, Typography } from "@mui/material"
+import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 
 const NewsForm = (props) => {
     return (
-        <Box>
+        <Box
+            sx={{
+                width: "100%",
+            }}
+        >
             {
-                props.formState
+                props["formState"]
                     ?
                     <Card
+                        variant="outlined"
                         sx={{
+                            mt: 2,
                             p: 2,
                             position: "relative",
-                            boxShadow: 2,
-                            borderRadius: '15px',
+                            borderRadius: "15px",
                         }}
                     >
-                        <IconButton
-                            size="small"
-                            sx={{
-                                position: "absolute",
-                                top: 0,
-                                right: 0,
-                            }}
-                            onClick={() => props.setFormState(!props.formState)}
+                        <Tooltip
+                            title="保存なしで、閉じる"
+                            placement="bottom"
                         >
-                            <CloseRoundedIcon />
-                        </IconButton>
+                            <IconButton
+                                size="small"
+                                sx={{
+                                    position: "absolute",
+                                    top: 15,
+                                    right: 15,
+                                }}
+                                onClick={() => props.setFormState(!props.formState)}
+                            >
+                                <CloseRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
 
                         <Box
                             sx={{
@@ -34,16 +46,19 @@ const NewsForm = (props) => {
                                 mb: 2,
                             }}
                         >
-                            <Avatar>
-                                {props.profile["user_name"]}
-                            </Avatar>
+                            <Avatar
+                                sx={{
+                                    border: "2px solid lightgray",
+                                }}
+                                src={server.host + "/images/icon/" + props.profile.image}
+                            />
 
                             <Typography
                                 sx={{
                                     ml: 1,
                                 }}
                             >
-                                {props.profile["user_name"]}
+                                {props.profile["name"]}
                             </Typography>
                         </Box>
 
@@ -57,6 +72,7 @@ const NewsForm = (props) => {
                             }}
                         >
                             <TextField
+                                autoFocus
                                 label="タイトル"
                                 name="title"
                                 variant="filled"
@@ -67,10 +83,36 @@ const NewsForm = (props) => {
                                 label="ニュース"
                                 name="text"
                                 variant="filled"
-                                rows={6}
+                                rows={8}
                                 multiline
                                 fullWidth
                             />
+
+                            <Box
+                                display="flex"
+                                justifyContent="end"
+                            >
+                                <Tooltip
+                                    title="写真"
+                                    placement="right"
+                                >
+                                    <IconButton
+                                        size="small"
+                                        color="success"
+                                        component="label"
+                                        onClick={() => props.setFileCheck(false)}
+                                    >
+                                        <Box
+                                            component="input"
+                                            type="file"
+                                            name="image"
+                                            accept=".png, .jpg, .jpeg"
+                                            hidden
+                                        />
+                                        <AddPhotoAlternateRoundedIcon />
+                                    </IconButton>
+                                </Tooltip>
+                            </Box>
 
                             <FormControl
                                 fullWidth
@@ -100,14 +142,24 @@ const NewsForm = (props) => {
                                 </Select>
                             </FormControl>
 
-                            <Box
-                                sx={{
-                                    textAlign: "end",
-                                }}
+                            <Box sx={{
+                                display: 'flex',
+                                justifyContent: "end",
+                            }}
                             >
+                                <Button
+                                    variant="outlined"
+                                    onClick={() => props.setFormState(!props.formState)}
+                                >
+                                    キャンセル
+                                </Button>
+
                                 <Button
                                     type="submit"
                                     variant="contained"
+                                    sx={{
+                                        ml: 2,
+                                    }}
                                 >
                                     投稿
                                 </Button>
@@ -116,25 +168,39 @@ const NewsForm = (props) => {
                     </Card>
                     :
                     <Card
+                        variant="outlined"
                         sx={{
-                            boxShadow: 2,
+                            p: 2,
+                            mt: 2,
+                            display: 'flex',
+                            alignItems: 'center',
                             borderRadius: '15px',
+                            ":hover": {
+                                cursor: "text"
+                            },
                         }}
+                        onClick={() => props["setFormState"](!props["formState"])}
                     >
-                        <CardActionArea
+                        <Avatar
                             sx={{
-                                p: 2,
+                                height: '40px',
+                                width: '40px',
                             }}
-                            onClick={() => props.setFormState(!props.formState)}
+                            src={server.host + "/images/icon/" + props.profile.image}
+                        />
+
+                        <Typography
+                            color="gray"
+                            sx={{
+                                ml: 1,
+                            }}
                         >
-                            <Typography>
-                                ニュースを投稿
-                            </Typography>
-                        </CardActionArea>
+                            投稿内容
+                        </Typography>
                     </Card>
             }
         </Box>
-    );
+    )
 }
 
 export default NewsForm

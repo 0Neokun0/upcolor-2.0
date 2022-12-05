@@ -4,7 +4,7 @@ import axios from "axios"
 import { server } from "components/config"
 
 import { ContainerLg } from "components/templates"
-import { ProfilePost, TabPanel } from "components/molecules"
+import { ProfilePost, ProfileTeamWork, TabPanel } from "components/molecules"
 
 import { Box, Button, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs, Tooltip, Typography } from "@mui/material"
 import { grey, teal } from "@mui/material/colors"
@@ -19,6 +19,9 @@ const ProfileView = () => {
     const [profile, setProfile] = useState(false)
     const [profileLists, setProfileLists] = useState([])
     const [selectTab, setSelectTab] = useState(1)
+
+    // 進級制作
+    const [teamWorkList, setTeamWorkList] = useState([])
 
     // フォロー
     const [state, setState] = useState(false)
@@ -36,6 +39,13 @@ const ProfileView = () => {
     }
 
     useEffect(() => {
+        axios.post("/account/getTeamWorkList", {
+            userId: userId,
+        })
+            .then((res) => {
+                setTeamWorkList(res.data)
+            })
+
         axios.post("/account/selfCheck", {
             userId: userId,
         })
@@ -85,8 +95,6 @@ const ProfileView = () => {
                             content: res.data["github"],
                         },
                     ])
-                } else {
-
                 }
             })
     }, [userId])
@@ -300,7 +308,34 @@ const ProfileView = () => {
                                             value={selectTab}
                                             index={2}
                                         >
-                                            進級制作
+                                            <Box
+                                                sx={{
+                                                    "a": {
+                                                        display: "block"
+                                                    },
+                                                    "a + a": {
+                                                        mt: 2,
+                                                    },
+                                                }}
+                                            >
+                                                {
+                                                    teamWorkList.length
+                                                        ?
+                                                        teamWorkList.map((teamWork) => {
+                                                            return (
+                                                                <ProfileTeamWork
+                                                                    key={teamWork["team_work_id"]}
+                                                                    teamWork={teamWork}
+                                                                />
+                                                            )
+                                                        })
+
+                                                        :
+                                                        <Typography>
+                                                            チームが見つかりません
+                                                        </Typography>
+                                                }
+                                            </Box>
                                         </TabPanel>
                                         {/* 進級制作 */}
 

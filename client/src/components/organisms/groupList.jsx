@@ -1,5 +1,9 @@
-import { IconButton, List, ListItem, ListItemButton, Menu, MenuItem, Snackbar, Typography } from "@mui/material"
+import { Box, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListSubheader, Menu, MenuItem, Snackbar, Typography } from "@mui/material"
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded'
+import ViewListRoundedIcon from '@mui/icons-material/ViewListRounded'
+import AddLinkRoundedIcon from '@mui/icons-material/AddLinkRounded'
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded'
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded'
 
 const GroupList = (props) => {
     return (
@@ -12,6 +16,22 @@ const GroupList = (props) => {
                 }
             }}
         >
+            <ListSubheader
+                sx={{
+                    fontWeight: 600,
+                }}
+            >
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                    }}>
+                        <ListItemIcon>
+                            <ViewListRoundedIcon />
+                        </ListItemIcon>
+                        グループリスト
+                </Box>
+            </ListSubheader>
             {
                 props.groups
                     ?
@@ -34,6 +54,11 @@ const GroupList = (props) => {
                                         </IconButton>
 
                                         <Menu
+                                            PaperProps={{
+                                                sx: {
+                                                    borderRadius: 3,
+                                                },
+                                            }}
                                             anchorEl={props["menuOpen"]}
                                             open={Boolean(group["group_id"] === props["menuId"])}
                                             onClose={() => props["setMenuId"](null)}
@@ -41,17 +66,26 @@ const GroupList = (props) => {
                                             <MenuItem
                                                 onClick={() => props["handleGenerateInviteUrl"](group["group_id"])}
                                             >
+                                                <ListItemIcon>
+                                                    <AddLinkRoundedIcon fontSize="small" />
+                                                </ListItemIcon>
                                                 招待urlコピー
                                             </MenuItem>
 
                                             <MenuItem
                                                 onClick={() => props["handleLeaveGroup"](group["group_id"])}
                                             >
+                                                <ListItemIcon>
+                                                    <LogoutRoundedIcon  fontSize="small" />
+                                                </ListItemIcon>
                                                 グループを抜ける
                                             </MenuItem>
 
                                             <MenuItem>
-                                                ##グループを削除
+                                            <ListItemIcon>
+                                                    <DeleteRoundedIcon fontSize="small" />
+                                                </ListItemIcon>
+                                                グループを削除
                                             </MenuItem>
                                         </Menu>
                                     </>

@@ -11,6 +11,7 @@ const NewsList = (props) => {
                     return (
                         <NewsCard
                             key={elem["news_id"]}
+                            id={elem["news_id"]}
                             name={elem["user_name"]}
                             title={elem["news_title"]}
                             text={elem["news_text"]}

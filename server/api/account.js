@@ -256,10 +256,29 @@ router.post("/getProfile", async (req, res) => {
 
 })
 
+// 自分 *type制限なし
+router.post("/getTeacherProfile", async (req, res) => {
+    const userId = get.userId(req)
+
+    const sqlSelectProfile = `
+        SELECT
+            user_id,
+            name,
+            mail,
+            image
+        FROM
+            user_infomation
+        WHERE
+            user_id = ?
+    `
+    const profile = await sql.handleSelect(sqlSelectProfile, [userId])
+
+    res.json(profile[0])
+})
+
 // 他人
 router.post("/getStudentProfile", async (req, res) => {
     const userId = req.body.userId
-
     try {
         const profile = await get.user(userId)
         const qualifications = await get.list("qualification")
@@ -471,39 +490,39 @@ router.post("/getFollowList", async (req, res) => {
     const followerList = await sql.handleSelect(sqlSelectFollowerList, [userId])
 
     const sqlSelectFriendList = `
-    SELECT
-        user_profiles.user_id,
-        user_profiles.user_name
-    FROM
-    (
         SELECT
-            s1.user_id,
-            s1.follower_id
+            user_profiles.user_id,
+            user_profiles.user_name
         FROM
         (
             SELECT
-                fl.user_id AS user_id,
-                fl.follower_id AS follower_id
+                s1.user_id,
+                s1.follower_id
             FROM
-                followers fl
-        ) s1
+            (
+                SELECT
+                    fl.user_id AS user_id,
+                    fl.follower_id AS follower_id
+                FROM
+                    followers fl
+            ) s1
+            INNER JOIN
+            (
+                SELECT
+                    flw.follower_id AS user_id,
+                    flw.user_id AS follower_id
+                FROM
+                    followers flw
+            ) s2
+            ON
+                s1.user_id = s2.user_id AND
+                s1.follower_id = s2.follower_id
+        ) follower_list
         INNER JOIN
-        (
-            SELECT
-                flw.follower_id AS user_id,
-                flw.user_id AS follower_id
-            FROM
-                followers flw
-        ) s2
-        ON
-            s1.user_id = s2.user_id AND
-            s1.follower_id = s2.follower_id
-    ) follower_list
-    INNER JOIN
-        user_profiles ON
-        follower_list.follower_id = user_profiles.user_id
-    WHERE
-        follower_list.user_id = ?
+            user_profiles ON
+            follower_list.follower_id = user_profiles.user_id
+        WHERE
+            follower_list.user_id = ?
     `
 
     const friendList = await sql.handleSelect(sqlSelectFriendList, [userId])
@@ -527,7 +546,12 @@ router.post("/selfCheck", async (req, res) => {
 })
 
 router.post("/getTeamWorkList", async (req, res) => {
-    const userId = get.userId(req)
+    var userId
+    if (req.body.userId) {
+        userId = req.body.userId
+    } else {
+        userId = get.userId(req)
+    }
 
     const sqlSelectTeamWorkList = `
         SELECT
@@ -546,6 +570,27 @@ router.post("/getTeamWorkList", async (req, res) => {
     const teamWorkList = await sql.handleSelect(sqlSelectTeamWorkList, [userId])
 
     res.json(teamWorkList)
+})
+
+router.post("/getUserType", async (req, res) => {
+    try {
+        const userId = get.userId(req)
+
+        const sqlSelectUserType = `
+            SELECT
+                user_type_id
+            FROM
+                user_profiles
+            WHERE
+                user_id = ?
+        `
+        const typeId = await sql.handleSelect(sqlSelectUserType, [userId])
+
+        res.json(typeId[0]["user_type_id"])
+    } catch (error) {
+        res.status(404)
+        console.log(error)
+    }
 })
 
 module.exports = router

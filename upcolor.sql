@@ -209,7 +209,7 @@ CREATE TABLE class_chat(
     chat_id INT AUTO_INCREMENT PRIMARY KEY,
     sent_user_id INT,
     received_class_id INT,
-    sent_text varchar(255),
+    sent_text TEXT,
     class_file_url varchar(255),
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
     updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
@@ -221,7 +221,7 @@ CREATE TABLE news(
     news_id INT AUTO_INCREMENT PRIMARY KEY,
     news_user_id INT,
     news_title VARCHAR(255),
-    news_text VARCHAR(255),
+    news_text TEXT,
     target_course_id VARCHAR(255),
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
     updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
@@ -381,6 +381,37 @@ CREATE TABLE lecture_term(
     start_date INT,
     end_date INT
 );
+
+CREATE TABLE private_chat(
+    chat_id INT AUTO_INCREMENT PRIMARY KEY,
+    sent_user_id INT,
+    received_user_id INT,
+    sent_text varchar(255),
+    created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+    updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+    FOREIGN KEY(sent_user_id) REFERENCES user_profiles(user_id) ON DELETE CASCADE,
+    FOREIGN KEY(received_user_id) REFERENCES user_profiles(user_id) ON DELETE CASCADE
+);
+
+CREATE VIEW user_infomation(
+    user_id,
+    name,
+    mail,
+    image
+) AS
+SELECT
+    user_profiles.user_id,
+    user_profiles.user_name,
+    user_profiles.user_mail,
+    images.image_url
+FROM
+    user_profiles
+INNER JOIN
+    images ON
+    user_profiles.user_id = images.image_id
+    AND images.image_type = 1
+ORDER BY
+    user_profiles.user_id;
 
 CREATE VIEW student_infomation(
     user_id,

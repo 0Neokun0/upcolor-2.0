@@ -2,7 +2,8 @@ import { useEffect, useState, useRef } from "react"
 import axios from "axios"
 import { server } from "components/config"
 import { ContainerLg } from "components/templates"
-import { ProfilePost, ProfileFormUnit, ProfileSelect, ProfileSelectChip, TabPanel } from "components/molecules"
+import { FollowUsers } from "components/organisms"
+import { ProfilePost, ProfileFormUnit, ProfileSelect, ProfileSelectChip, TabPanel, ProfileTeamWork } from "components/molecules"
 
 import { Avatar, Box, Button, ButtonGroup, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs, TextField, Tooltip, Typography } from "@mui/material"
 import { grey, teal } from "@mui/material/colors"
@@ -16,8 +17,6 @@ import DynamicFeedRoundedIcon from '@mui/icons-material/DynamicFeedRounded'
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import ModeEditRoundedIcon from '@mui/icons-material/ModeEditRounded'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import { FollowUsers } from "components/organisms"
-import ProfileTeamWork from "components/molecules/profileTeamWork"
 
 const Profile = () => {
     const [profile, setProfile] = useState([])
@@ -337,37 +336,62 @@ const Profile = () => {
                         >
                             <Tab
                                 value={1}
-                                icon={<AccountBoxRoundedIcon />}
-                                label="自己紹介"
+                                icon={
+                                    <Tooltip
+                                        title="自己紹介"
+                                    >
+                                        <AccountBoxRoundedIcon />
+                                    </Tooltip>
+                                }
                                 onClick={() => setSelectTab(1)}
                             />
 
                             <Tab
                                 value={2}
-                                icon={<AccountTreeRoundedIcon />}
-                                label="進級制作"
+                                icon={
+                                    <Tooltip
+                                        title="進級制作"
+                                    >
+                                        <AccountTreeRoundedIcon />
+                                    </Tooltip>
+                                }
                                 onClick={() => setSelectTab(2)}
                             />
 
                             <Tab
                                 value={3}
-                                icon={<DynamicFeedRoundedIcon />}
-                                label="投稿"
+                                icon={
+                                    <Tooltip
+                                        title="投稿"
+                                    >
+                                        <DynamicFeedRoundedIcon />
+                                    </Tooltip>
+                                }
                                 onClick={() => setSelectTab(3)}
                             />
 
                             <Tab
                                 value={4}
-                                icon={<PeopleAltRoundedIcon />}
-                                label="フレンド"
+                                icon={
+                                    <Tooltip
+                                        title="フレンド"
+                                    >
+                                        <PeopleAltRoundedIcon />
+                                    </Tooltip>
+                                }
                                 onClick={() => setSelectTab(4)}
                             />
 
                             {/* 自分のページだけ */}
                             <Tab
                                 value={5}
-                                icon={<ModeEditRoundedIcon />}
-                                label="編集"
+                                icon={
+                                    <Tooltip
+                                        title="編集"
+                                    >
+                                        <ModeEditRoundedIcon />
+                                    </Tooltip>
+                                }
                                 onClick={() => setSelectTab(5)}
                                 sx={{
                                     ml: "auto"
@@ -608,6 +632,7 @@ const Profile = () => {
                                                 <Avatar
                                                     src={imagePreview}
                                                     sx={{
+                                                        border: "2px solid lightgray",
                                                         width: "150px",
                                                         height: "150px",
                                                         mx: "auto",

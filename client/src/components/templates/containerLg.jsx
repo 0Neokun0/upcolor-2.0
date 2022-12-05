@@ -3,7 +3,7 @@ import { Container } from "@mui/material"
 const ContainerLg = (props) => {
     return (
         <Container
-            size="lg"
+            maxWidth="lg"
             sx={{
                 p: 2,
             }}

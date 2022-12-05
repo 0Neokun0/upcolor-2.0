@@ -1,9 +1,10 @@
 import axios from "axios"
-import { TeacherNewsLayout } from "components/templates"
+import { ContainerMd } from "components/templates"
 import { NewsForm, NewsList } from "components/organisms"
 import { useState } from "react"
 import { useEffect } from "react"
 import { Divider } from "@mui/material"
+import TeacherNewsHeader from "components/organisms/teacherNewsHeader"
 
 const TeacherNews = () => {
     const [profile, setProfile] = useState([])
@@ -31,12 +32,14 @@ const TeacherNews = () => {
             text: data.get("text"),
             target: target,
         })
+        window.location.reload()
     }
 
     useEffect(() => {
-        axios.post("/teacher/getProfile")
+        axios.post("/account/getTeacherProfile")
             .then((res) => {
-                setProfile(res.data[0])
+                setProfile(res.data)
+                console.log(res.data)
             })
 
         axios.post("/course/course")
@@ -47,34 +50,45 @@ const TeacherNews = () => {
         axios.post("/teacher/getMyNews")
             .then((res) => {
                 setNews(res.data)
+                console.log(res.data)
             })
     }, [])
 
     return (
-        <TeacherNewsLayout>
-            <NewsForm
-                formState={formState}
-                setFormState={setFormState}
-
+        <ContainerMd>
+            <TeacherNewsHeader
                 profile={profile}
-                courses={courses}
-
-                target={target}
-                handleTarget={handleTarget}
-
-                handleSubmit={handleSubmit}
             />
+
+            {
+                profile
+                ?
+                <NewsForm
+                    formState={formState}
+                    setFormState={setFormState}
+
+                    profile={profile}
+                    courses={courses}
+
+                    target={target}
+                    handleTarget={handleTarget}
+
+                    handleSubmit={handleSubmit}
+                />
+                :
+                <></>
+            }
 
             <Divider
                 sx={{
-                    mt: 2,
+                    my: 2,
                 }}
             />
 
             <NewsList
                 news={news}
             />
-        </TeacherNewsLayout>
+        </ContainerMd>
     )
 }
 

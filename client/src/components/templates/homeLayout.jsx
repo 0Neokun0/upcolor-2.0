@@ -12,12 +12,13 @@ const HomeLayout = (props) => {
                 direction={"row"}
             >
                 <Hidden
-                    lgDown
+                    mdDown
                 >
                     <Box
                         sx={{
                             p: 2,
-                            width: "40%",
+                            width: "50%",
+                            maxWidth: "400px"
                         }}
                     >
                         <MainMenu
@@ -29,7 +30,7 @@ const HomeLayout = (props) => {
 
                 <Box
                     sx={{
-                        height: "100vh",
+                        height: "calc(100vh - 64px)",
                         width: "100%",
                         overflowY: "scroll",
                         borderLeft: 1,
@@ -49,12 +50,6 @@ const HomeLayout = (props) => {
                         },
                     }}
                 >
-                    {/* <PostBox
-                            openPostModal={props.openPostModal}
-                            togglePostModalOpen={props.togglePostModalOpen}
-                            togglePostModalClose={props.togglePostModalClose}
-                        /> */}
-
                     <Outlet
                         context={{
                             post: props.post,
@@ -73,8 +68,19 @@ const HomeLayout = (props) => {
                     <Box
                         sx={{
                             p: 2,
-                            pt: 0,
-                            width: "40%",
+                            height: "calc(100vh - 64px)",
+                            overflowY: "scroll",
+                            width: "50%",
+                            "::-webkit-scrollbar": {
+                                width: "5px",
+                            },
+                            "::-webkit-scrollbar-thumb": {
+                                backgroundColor: "rgba(0, 0, 50, .5)",
+                                borderRadius: "5px",
+                            },
+                            "::-webkit-scrollbar-track": {
+                                boxShadow: 2,
+                            },
                         }}
                     >
                         <NewsList
@@ -85,6 +91,7 @@ const HomeLayout = (props) => {
             </Stack>
 
             <SendPost
+                profile={props.profile}
                 handleSubmit={props.handleSubmit}
                 openPostModal={props.openPostModal}
                 togglePostModalOpen={props.togglePostModalOpen}

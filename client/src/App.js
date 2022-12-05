@@ -3,19 +3,20 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
-import { LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
-import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite } from "components/pages/student"
+
+import { ClassNews, ClassNewsFeed, LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
+import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite, PrivateChat } from "components/pages/student"
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews, DevelopTabPage } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, CompanyProfileEdit, StudentProfileView } from "components/pages/company"
-
 import { GroupChatLayout } from "components/templates"
-import { Feed, FeedDetail, Header, ManagementStudent } from "components/organisms"
-
+import { Feed, FeedDetail, Header } from "components/organisms"
+import ClassNewsFeedList from "components/organisms/classNewsFeedList"
 import logo from "components/atoms/logo/upcolor_logo.svg"
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded"
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded"
 import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded"
 import GroupCreateLayout from "components/templates/groupCreateLayout"
+
 import WorkspacesIcon from '@mui/icons-material/Workspaces'
 import GroupWorkIcon from '@mui/icons-material/GroupWork'
 import AccountTreeIcon from '@mui/icons-material/AccountTree'
@@ -23,6 +24,8 @@ import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import BadgeIcon from '@mui/icons-material/Badge'
 import ViewTimelineIcon from '@mui/icons-material/ViewTimeline'
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest'
+import ChatRoundedIcon from '@mui/icons-material/ChatRounded'
+import ClassIcon from '@mui/icons-material/Class'
 
 function App() {
     const [open, setOpen] = useState(false)
@@ -41,7 +44,7 @@ function App() {
 
     const menus = [
         {
-            label: "学生フェード",
+            label: "学生フィード",
             icon: <PeopleAltRoundedIcon />,
             value: "学生",
             url: "/home",
@@ -50,7 +53,7 @@ function App() {
             label: "クラスニュース",
             icon: <SchoolRoundedIcon />,
             value: "学校",
-            url: "/classNewsHome",
+            url: "/teacher",
         },
         {
             label: "企業検索",
@@ -88,9 +91,19 @@ function App() {
             icon: <BadgeIcon />,
         },
         {
+            value: "個人チャット",
+            url: "/chat",
+            icon: <ChatRoundedIcon />,
+        },
+        {
             value: "時間割",
             url: "/timeTable/regist",
             icon: <ViewTimelineIcon />,
+        },
+        {
+            value: "クラスニューズ",
+            url: "/classNews",
+            icon: <ClassIcon />,
         },
         {
             value: "設定",
@@ -215,7 +228,7 @@ function App() {
                 />
 
                 <Routes>
-                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/" element={<LandingPage signInState={signInState} />} />
                     <Route path="*" element={<NotFound />} />
 
                     {/* <Route path="student/signup" element={<ReqNoAuth component={<StudentSignup />} />} /> */}
@@ -262,6 +275,10 @@ function App() {
 
                     <Route path="profile/edit" element={<ProfileEdit />} />
 
+                    <Route path="chat">
+                        <Route path="" element={<PrivateChat />} />
+                    </Route>
+
                     <Route path="list/student" element={<StudentList />} />
                     <Route path="list/company" element={<CompanyList />} />
 
@@ -275,6 +292,13 @@ function App() {
                     <Route path="teacher/teacherNews" element={<ReqAuthTea component={<TeacherNews />} />} />
 
                     {/* <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />
+                    <Route path="classNews">
+                        <Route path="" element={<ClassNews />} />
+                        <Route path=":classId" element={<ClassNewsFeed />} />
+                        <Route path=":classNewsTextId" element={<ClassNewsFeedList />} />
+                    </Route>
+
+                    <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />
                     <Route path="develop/addLectures" element={<ReqAuthAdm component={<AddLectures />} />} />
                     <Route path="develop/genTeacherSign" element={<ReqAuthAdm component={<GenTeacherSign />} />} />
                     <Route path="develop/genCompanySign" element={<ReqAuthAdm component={<GenCompanySign />} />} />
