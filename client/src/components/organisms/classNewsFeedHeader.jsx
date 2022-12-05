@@ -1,6 +1,6 @@
 import { server } from 'components/config'
-import { Avatar, Box, Card, Typography } from "@mui/material"
-// import GroupRoundedIcon from '@mui/icons-material/GroupRounded'
+import { Avatar, Box, Card, IconButton, TextField, Tooltip, Typography } from "@mui/material"
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded'
 
 const ClassNewsFeedHeader = (props) => {
     return (
@@ -80,9 +80,32 @@ const ClassNewsFeedHeader = (props) => {
                     クラスID: {props["classId"]}
                 </Typography>
 
-                {/* <IconButton>
-                    <GroupRoundedIcon />
-                </IconButton> */}
+                {
+                    props["userType"] === 2
+                    &&
+                    <>
+                        <Tooltip
+                            title="パスワード表示"
+                        >
+                            <IconButton
+                                size="small"
+                                onClick={() => props["setPassView"](!props["passView"])}
+                            >
+                                <VisibilityRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
+
+                        {
+                            props["enterClassNewsRoom"]["class_password"]
+                            &&
+                            <TextField
+                                type={props["passView"] ? "" : "password"}
+                                size="small"
+                                value={props["enterClassNewsRoom"]["class_password"]}
+                            />
+                        }
+                    </>
+                }
             </Box>
         </Card>
     )
