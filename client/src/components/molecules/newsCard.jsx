@@ -10,6 +10,7 @@ const NewsCard = (props) => {
             sx={{
                 borderRadius: "15px",
                 p: 2,
+                mb: 2,
             }}
         >
             <Box
