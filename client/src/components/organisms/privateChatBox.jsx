@@ -1,8 +1,9 @@
 import { ChatForm, ChatNew } from "components/molecules"
-import { Box, Card, Typography } from "@mui/material"
+import { Box, Card, Hidden, IconButton, Typography } from "@mui/material"
+import ListRoundedIcon from '@mui/icons-material/ListRounded'
 
 const PrivateChatBox = (props) => {
-    const { selectedUserName, chats, formInput, formInputOnChange, sendChat } = props
+    const { selectedUserName, chats, formInput, formInputOnChange, sendChat, onDrawerOpen } = props
 
     return (
         <Card
@@ -14,20 +15,40 @@ const PrivateChatBox = (props) => {
                 borderRadius: 6,
             }}
         >
-            <Typography
+            <Box
                 sx={{
                     height: "40px",
-                    pl: 12,
                     borderBottom: 1,
                     borderColor: "divider",
-                    fontWeight: "bold",
-                    fontSize: "1.3em",
                     display: "flex",
                     alignItems: "center",
                 }}
             >
-                {selectedUserName}
-            </Typography>
+                <Hidden
+                    mdUp
+                >
+                    <IconButton
+                        size="small"
+                        sx={{
+                            ml: 2,
+                            borderRadius: 2,
+                        }}
+                        onClick={onDrawerOpen}
+                    >
+                        <ListRoundedIcon />
+                    </IconButton>
+                </Hidden>
+
+                <Typography
+                    sx={{
+                        fontWeight: "bold",
+                        fontSize: "1.3em",
+                        ml: 2,
+                    }}
+                >
+                    {selectedUserName}
+                </Typography>
+            </Box>
 
             <Box
                 id="chatArea"

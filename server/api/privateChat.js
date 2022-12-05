@@ -11,7 +11,8 @@ router.post("/getFriend", async (req, res) => {
         const sqlSelectFriend = `
             SELECT
                 user_profiles.user_id AS id,
-                user_profiles.user_name AS name
+                user_profiles.user_name AS name,
+                images.image_url AS icon
             FROM
             (
                 SELECT
@@ -40,6 +41,10 @@ router.post("/getFriend", async (req, res) => {
             INNER JOIN
                 user_profiles ON
                 follower_list.follower_id = user_profiles.user_id
+            INNER JOIN
+                images ON
+                images.image_id = user_profiles.user_id AND
+                images.image_type = 1
             WHERE
                 follower_list.user_id = ?
         `
