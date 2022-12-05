@@ -47,12 +47,12 @@ const TeacherHome = () => {
 
     const teacherMenus = [
         {
-            value: "ニューズ投稿",
+            value: "ニュース投稿",
             icon: <NewspaperIcon />,
             url: "/teacher/teachernews",
         },
         {
-            value: "クラスニューズ",
+            value: "クラスニュース",
             url: "/classNews",
             icon: <ClassIcon />,
         },
