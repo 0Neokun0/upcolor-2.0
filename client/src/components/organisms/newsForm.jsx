@@ -127,7 +127,7 @@ const NewsForm = (props) => {
                             >
                                 <Box>
                                     <Tooltip
-                                        title="写真"
+                                        title="プレビューを閉じる"
                                         placement="right"
                                     >
                                         <IconButton

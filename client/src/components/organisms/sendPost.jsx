@@ -177,7 +177,7 @@ const SendPost = (props) => {
 
                                 <Box>
                                     <Tooltip
-                                        title="削除"
+                                        title="プレビューを閉じる"
                                         placement="right"
                                     >
                                         <IconButton
