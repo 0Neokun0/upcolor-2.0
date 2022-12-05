@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
-import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListSubheader } from "@mui/material"
+import { Box, List, ListItem, ListItemButton, ListItemIcon, ListSubheader } from "@mui/material"
 import RecentActorsRoundedIcon from '@mui/icons-material/RecentActorsRounded'
-import { server } from "components/config"
 
 const GroupMembers = (props) => {
     return (

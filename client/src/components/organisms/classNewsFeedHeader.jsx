@@ -1,6 +1,6 @@
 import { server } from 'components/config'
-import { Avatar, Box, Card, IconButton, Typography } from "@mui/material"
-import GroupRoundedIcon from '@mui/icons-material/GroupRounded'
+import { Avatar, Box, Card, Typography } from "@mui/material"
+// import GroupRoundedIcon from '@mui/icons-material/GroupRounded'
 
 const ClassNewsFeedHeader = (props) => {
     return (
