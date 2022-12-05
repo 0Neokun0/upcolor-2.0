@@ -1,8 +1,31 @@
-import { DevelopMenus } from "components/organisms"
-import { DevelopLayout } from "components/templates"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { DevelopMenus, MainMenu } from "components/organisms"
+import { ContainerLg, DevelopLayout } from "components/templates"
 import GroupAddRoundedIcon from "@mui/icons-material/GroupAddRounded"
+import ClassIcon from '@mui/icons-material/Class'
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
+import SettingsIcon from "@mui/icons-material/Settings"
+import ContactsIcon from "@mui/icons-material/Contacts"
+import HomeWorkIcon from "@mui/icons-material/HomeWork"
+import NewspaperIcon from '@mui/icons-material/Newspaper'
+import MainMenuTeacher from "components/organisms/mainMenuTeacher"
+import { Box, Hidden, Stack } from "@mui/material"
+
+
 
 const TeacherHome = () => {
+
+    const [teacher, setTeacher] = useState([])
+
+    useEffect(() => {
+        axios.post("/account/getTeacherProfile")
+            .then((res) => {
+                setTeacher(res.data)
+                console.log(res.data)
+            })
+    }, [])
+
     const menus = [
         {
             url: "./teachernews",
@@ -22,12 +45,69 @@ const TeacherHome = () => {
         },
     ]
 
+    const teacherMenus = [
+        {
+            value: "ニューズ投稿",
+            icon: <NewspaperIcon />,
+            url: "/teacher/teachernews",
+        },
+        {
+            value: "クラスニューズ",
+            url: "/classNews",
+            icon: <ClassIcon />,
+        },
+        {
+            value: "学生管理",
+            icon: <ManageAccountsIcon />,
+            url: "#",
+        },
+        {
+            value: "学生プロフィール閲覧",
+            icon: <ContactsIcon />,
+            url: "/list/student",
+        },
+        {
+            value: "企業・会社プロフィール閲覧",
+            icon: <HomeWorkIcon />,
+            url: "/list/company",
+        },
+        {
+            value: "先生プロフィール編集",
+            icon: <SettingsIcon />,
+            url: "#",
+        },
+    ]
+
     return (
-        <DevelopLayout>
-            <DevelopMenus
-                menus={menus}
-            />
-        </DevelopLayout>
+        <ContainerLg>
+            <Stack
+                direction={"row"}
+            >
+                <Hidden
+                    mdDown
+                >
+                    <Box
+                        sx={{
+                            p: 2,
+                            width: "50%",
+                            maxWidth: "400px"
+                        }}
+                    >
+                        <MainMenuTeacher
+                            teacher={teacher}
+                            teacherMenus={teacherMenus}
+                        />
+                    </Box>
+
+                </Hidden>
+                <DevelopLayout>
+                    <DevelopMenus
+                        menus={menus}
+                    />
+                </DevelopLayout>
+            </Stack>
+
+        </ContainerLg>
     )
 }
 
