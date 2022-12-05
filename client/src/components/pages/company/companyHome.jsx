@@ -1,27 +1,56 @@
+import axios from "axios"
+import { useEffect, useState } from "react"
 import { Box, Paper } from "@mui/material"
-import { MainMenu } from "components/organisms"
 
+import GroupsIcon from "@mui/icons-material/Groups"
+import LockOpenIcon from "@mui/icons-material/LockOpen"
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
+import SettingsIcon from "@mui/icons-material/Settings"
+import ContactsIcon from "@mui/icons-material/Contacts"
+import HomeWorkIcon from "@mui/icons-material/HomeWork"
+import MainMenuCompany from "components/organisms/mainMenuCompany"
 const CompanyHome = () => {
-    const menus = [
+
+    const [company, setCompany] = useState([])
+
+    useEffect(() => {
+        axios.post("/company/getCompanyProfile")
+            .then((res) => {
+                setCompany(res.data)
+                console.log(res.data)
+            })
+    }, [])
+
+    const companyMenus = [
         {
             value: "グループ投稿",
+            icon: <GroupsIcon />,
             url: "#",
         },
         {
             value: "グループ認証",
+            icon: <LockOpenIcon />,
             url: "#",
         },
         {
             value: "グループ管理",
+            icon: <ManageAccountsIcon />,
             url: "#",
+        },
+        {
+            value: "学生プロフィール閲覧",
+            icon: <ContactsIcon />,
+            url: "/list/student",
+        },
+        {
+            value: "企業・会社プロフィール閲覧",
+            icon: <HomeWorkIcon />,
+            url: "/list/company",
         },
         {
             value: "企業プロフィール編集",
-            url: "/company/recruitment",
-        },
-        {
-            value: "ユーザープロフィール編集",
-            url: "#",
+            icon: <SettingsIcon />,
+            url: "/company/profile/edit",
         },
     ]
 
@@ -34,8 +63,9 @@ const CompanyHome = () => {
             }}
         >
             <Paper>
-                <MainMenu
-                    menus={menus}
+                <MainMenuCompany
+                    company={company}
+                    companyMenus={companyMenus}
                 />
             </Paper>
         </Box>

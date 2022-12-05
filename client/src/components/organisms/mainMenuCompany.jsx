@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom'
-import { Card, List, ListItem, ListItemButton, ListItemIcon } from '@mui/material'
-import { MainMenuProfileCard } from 'components/molecules'
+import { Link } from "react-router-dom"
+import { Card, List, ListItem, ListItemButton, ListItemIcon } from "@mui/material"
 
+import { MainMenuCompanyCard } from "components/molecules"
 
-const MainMenu = (props) => {
+const MainMenuCompany = (props) => {
     return (
         <Card
             sx={{
@@ -11,18 +11,18 @@ const MainMenu = (props) => {
                 borderRadius: "15px",
             }}
         >
-            <MainMenuProfileCard
-                profile={props["profile"]}
+            <MainMenuCompanyCard
+                company={props["company"]}
             />
 
             <List
                 disablePadding
                 sx={{
-                    'li + li': {
+                    "li + li": {
                     },
                 }}
             >
-                {props.menus.map((menu, index) => {
+                {props.companyMenus.map((companyMenu, index) => {
                     return (
                         <ListItem
                             disablePadding
@@ -30,16 +30,16 @@ const MainMenu = (props) => {
                         >
                             <ListItemButton
                                 sx={{
-                                    borderRadius: "15px",
+                                    borderRadius: 3,
                                 }}
                                 component={Link}
-                                to={menu.url}
+                                to={companyMenu.url}
                             >
                                 <ListItemIcon>
-                                    {menu.icon}
+                                    {companyMenu.icon}
                                 </ListItemIcon>
 
-                                {menu.value}
+                                {companyMenu.value}
                             </ListItemButton>
                         </ListItem>
                     )
@@ -49,4 +49,4 @@ const MainMenu = (props) => {
     )
 }
 
-export default MainMenu
+export default MainMenuCompany
