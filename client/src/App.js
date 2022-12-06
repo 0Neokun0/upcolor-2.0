@@ -113,7 +113,7 @@ function App() {
             icon: <ViewTimelineIcon />,
         },
         {
-            value: "クラスニューズ",
+            value: "クラスニュース",
             url: "/classNews",
             icon: <ClassIcon />,
         },
