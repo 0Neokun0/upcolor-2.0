@@ -442,7 +442,7 @@ function App() {
                     </Route>
 
                     <Route path="company/home" element={<CompanyHome />} />
-                    <Route path="company/profile/edit" element={<CompanyProfileEdit />} />
+                    <Route path="company/profile/edit" element={<ReqAuthCom component={<CompanyProfileEdit />} />} />
                     <Route path="company/:viewCompany" element={<ViewCompanyPage />} />
                     <Route path="company/profile">
                         <Route path=":userId" element={<ReqAuthCom component={<StudentProfileView />} />} />

@@ -14,6 +14,7 @@ const CompanyListProfileCard = (props) => {
                     width: 300,
                     m: 2,
                     overflow: "hidden",
+                    boxShadow: 2,
                     borderRadius: "25px",
                     transition: "transform 0.3s, border 0.3s",
                     "&:hover": {
