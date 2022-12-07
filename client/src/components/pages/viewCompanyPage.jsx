@@ -52,7 +52,7 @@ function a11yProps(index) {
     }
 }
 
-const ViewCompanyPage = (props) => {
+const ViewCompanyPage = () => {
     const companyId = useParams()["viewCompany"]
     const [company, setCompany] = useState([])
 

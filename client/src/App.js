@@ -279,7 +279,6 @@ function App() {
         axios.post("/account/getProfile")
             .then((res) => {
                 setProfile(res.data)
-                console.log(res.data)
             })
     }, [])
 
@@ -287,7 +286,6 @@ function App() {
         axios.post("/account/getTeacherProfile")
             .then((res) => {
                 setTeacher(res.data)
-                console.log(res.data)
             })
     }, [])
 
@@ -295,7 +293,6 @@ function App() {
         axios.post("/company/getCompanyProfile")
             .then((res) => {
                 setCompany(res.data)
-                console.log(res.data)
             })
     }, [])
 
@@ -303,7 +300,6 @@ function App() {
             axios.post("/account/getUserType")
                 .then((res) => {
                     setUserType(res.data)
-                    console.log(res.data)
                 })
         }, [])
 

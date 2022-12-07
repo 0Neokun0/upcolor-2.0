@@ -77,7 +77,6 @@ const CompanyHome = () => {
         axios.post("/company/getCompanyProfile")
             .then((res) => {
                 setCompany(res.data)
-                console.log(res.data)
             })
     }, [])
 

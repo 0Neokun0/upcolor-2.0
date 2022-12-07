@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, CardActionArea, Chip, Grid, Typography } from "@mui/material"
+import { Avatar, Card, CardActionArea, Chip, Grid, Typography } from "@mui/material"
 
 import { server } from 'components/config'
 

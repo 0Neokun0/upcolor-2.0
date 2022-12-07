@@ -1,11 +1,7 @@
-
 import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Grid, Stack, Typography } from '@mui/material'
-
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded'
-import CorporateFareIcon from "@mui/icons-material/CorporateFare"
 
 const CompanyDetailsTab = (props) => {
-
     return (
         <Accordion>
             <AccordionSummary
@@ -27,10 +23,10 @@ const CompanyDetailsTab = (props) => {
                     >
                         {
                             props.icon
-                            ?
-                            props.icon
-                            :
-                            "情報無し"
+                                ?
+                                props.icon
+                                :
+                                "情報無し"
                         }
                     </Grid>
                     <Divider
@@ -81,13 +77,13 @@ const CompanyDetailsTab = (props) => {
                         }}
                     >
                         <Typography>
-                        {
-                            props.content
-                            ?
-                            props.content
-                            :
-                            "情報無し"
-                        }
+                            {
+                                props.content
+                                    ?
+                                    props.content
+                                    :
+                                    "情報無し"
+                            }
                         </Typography>
                     </Box>
                 </Stack>

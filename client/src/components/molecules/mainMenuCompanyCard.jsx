@@ -1,4 +1,3 @@
-import React from 'react'
 import { Avatar, Box, Card, Chip, Divider, Typography } from '@mui/material'
 import { server } from 'components/config'
 

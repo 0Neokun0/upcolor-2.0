@@ -1,5 +1,4 @@
 import { Avatar, Box, Card, Chip, Grid, Stack, Typography } from '@mui/material'
-
 import { server } from 'components/config'
 
 const CompanyPageTitle = (props) => {

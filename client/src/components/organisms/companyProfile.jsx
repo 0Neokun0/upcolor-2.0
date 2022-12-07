@@ -1,4 +1,4 @@
-import { Box, Card, Grid } from "@mui/material"
+import { Box, Grid } from "@mui/material"
 
 const CompanyProfile = (props) => {
     return (

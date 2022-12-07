@@ -7,7 +7,6 @@ import { Avatar, Box, Button, TextField } from "@mui/material"
 import { server } from "components/config"
 
 const CompanyProfileEdit = () => {
-
     const [profile, setProfile] = useState(false)
     const [courseIds, setCourseIds] = useState([])
     const [coursesList, setCoursesList] = useState([])
