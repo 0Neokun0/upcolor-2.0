@@ -414,7 +414,8 @@ function App() {
                     <Route path="teacher" element={<ReqAuthTea component={<TeacherHome />} />} />
                     <Route path="teacher/teacherNews" element={<ReqAuthTea component={<TeacherNews />} />} />
 
-                    {/* <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />
+                    <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />
+                    
                     <Route path="classNews">
                         <Route path="" element={<ClassNews />} />
                         <Route path=":classId" element={<ClassNewsFeed />} />
@@ -425,7 +426,7 @@ function App() {
                     <Route path="develop/addLectures" element={<ReqAuthAdm component={<AddLectures />} />} />
                     <Route path="develop/genTeacherSign" element={<ReqAuthAdm component={<GenTeacherSign />} />} />
                     <Route path="develop/genCompanySign" element={<ReqAuthAdm component={<GenCompanySign />} />} />
-                    <Route path="develop/management" element={<ManagementStudent />} /> */}
+                    <Route path="develop/management" element={<ManagementStudent />} />
 
                     <Route path="develop">
                         <Route path="" element={<DevelopHome />} />
@@ -437,7 +438,7 @@ function App() {
                         </Route>
                     </Route>
 
-                    <Route path="company/home" element={<CompanyHome />} />
+                    <Route path="company/home" element={<ReqAuthCom component={<CompanyHome />} />} />
                     <Route path="company/profile/edit" element={<ReqAuthCom component={<CompanyProfileEdit />} />} />
                     <Route path="company/:viewCompany" element={<ViewCompanyPage />} />
                     <Route path="company/profile">
