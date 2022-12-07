@@ -1,8 +1,9 @@
 import { ChatForm, ChatNew } from "components/molecules"
-import { Box, Card, Typography } from "@mui/material"
+import { Box, Card, Hidden, IconButton, Typography } from "@mui/material"
+import ListRoundedIcon from '@mui/icons-material/ListRounded'
 
 const PrivateChatBox = (props) => {
-    const { selected, chats } = props
+    const { selectedUserName, chats, formInput, formInputOnChange, sendChat, onDrawerOpen } = props
 
     return (
         <Card
@@ -14,24 +15,47 @@ const PrivateChatBox = (props) => {
                 borderRadius: 6,
             }}
         >
-            <Typography
+            <Box
                 sx={{
                     height: "40px",
-                    pl: 12,
                     borderBottom: 1,
                     borderColor: "divider",
-                    fontWeight: "bold",
-                    fontSize: "1.3em",
                     display: "flex",
                     alignItems: "center",
                 }}
             >
-                {selected}
-            </Typography>
+                <Hidden
+                    mdUp
+                >
+                    <IconButton
+                        size="small"
+                        sx={{
+                            ml: 2,
+                            borderRadius: 2,
+                        }}
+                        onClick={onDrawerOpen}
+                    >
+                        <ListRoundedIcon />
+                    </IconButton>
+                </Hidden>
+
+                <Typography
+                    sx={{
+                        fontWeight: "bold",
+                        fontSize: "1.3em",
+                        ml: 2,
+                    }}
+                >
+                    {selectedUserName}
+                </Typography>
+            </Box>
 
             <Box
+                id="chatArea"
                 sx={{
                     height: "calc(100% - 40px - 80px)",
+                    borderBottom: 1,
+                    borderColor: "divider",
                     overflowY: "scroll",
                     "::-webkit-scrollbar": {
                         width: "5px",
@@ -49,7 +73,10 @@ const PrivateChatBox = (props) => {
                     sx={{
                         width: "70%",
                         mx: "auto",
-                        pt: 2,
+                        py: 2,
+                        "div + div": {
+                            mt: 1,
+                        }
                     }}
                 >
                     {
@@ -61,6 +88,7 @@ const PrivateChatBox = (props) => {
                                     key={chat["id"]}
                                     self={chat["self"]}
                                     name={chat["name"]}
+                                    icon={chat["icon"]}
                                     time={chat["time"]}
                                     text={chat["text"]}
                                 />
@@ -79,7 +107,11 @@ const PrivateChatBox = (props) => {
                     alignItems: "center",
                 }}
             >
-                <ChatForm />
+                <ChatForm
+                    input={formInput}
+                    onChange={formInputOnChange}
+                    onClick={sendChat}
+                />
             </Box>
         </Card>
     )

@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom"
 import { AppBar, Box, Button, Dialog, Drawer, Hidden, IconButton, Link, Toolbar, Tooltip, Typography } from "@mui/material"
 
-import { MainMenu } from "components/organisms"
+import { MainMenu, MainMenuCompany, MainMenuTeacher } from "components/organisms"
 import { NavbarMenu } from "components/molecules"
 
 import LogoutIcon from "@mui/icons-material/Logout"
@@ -150,7 +150,10 @@ const Header = (props) => {
                             </Box>
                             :
                             <NavbarMenu
+                                userType={props.userType}
                                 profile={props.profile}
+                                teacher={props.teacher}
+                                company={props.company}
                                 anchorEl={props.anchorEl}
                                 openNavbar={props.openNavbar}
                                 handleClick={props.handleClick}
@@ -223,17 +226,26 @@ const Header = (props) => {
                         p: 2,
                     }}
                 >
-                    {pathName === "/" ? (
-                        <MainMenu
-                            profile={props["profile"]}
-                            menus={props["drawerMenus"]}
-                        />
-                    ) : (
-                        <MainMenu
-                            profile={props["profile"]}
-                            menus={props["companyDrawerMenus"]}
-                        />
-                    )}
+                    {
+                        props.userType === 1
+                            ?
+                            <MainMenu
+                                profile={props["profile"]}
+                                menus={props["drawerMenus"]}
+                            />
+                            :
+                            props.userType === 2
+                                ?
+                                <MainMenuTeacher
+                                    teacher={props["teacher"]}
+                                    teacherMenus={props["teacherDrawerMenus"]}
+                                />
+                                :
+                                <MainMenuCompany
+                                    company={props["company"]}
+                                    companyMenus={props["companyDrawerMenus"]}
+                                />
+                    }
                 </Box>
             </Drawer>
         </AppBar>

@@ -14,6 +14,7 @@ const ClassNewsFeed = () => {
     const [enterClassNewsRoom, setEnterClassNewsRoom] = useState([])
     const [news, setNews] = useState(false)
     const [userType, setUserType] = useState()
+    const [passView, setPassView] = useState(false)
 
     const handleSubmitNews = (e) => {
         e.preventDefault()
@@ -63,6 +64,9 @@ const ClassNewsFeed = () => {
             <ClassNewsFeedHeader
                 classId={classId}
                 enterClassNewsRoom={enterClassNewsRoom}
+                userType={userType}
+                passView={passView}
+                setPassView={setPassView}
             />
 
             {

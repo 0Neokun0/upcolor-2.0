@@ -3,21 +3,19 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
-
 import { ClassNews, ClassNewsFeed, LandingPage, NotFound, Signin, ViewCompanyPage, ViewTeamWork } from "components/pages"
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite, PrivateChat } from "components/pages/student"
-import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
-import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment, StudentProfileView } from "components/pages/company"
+import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews, DevelopTabPage } from "components/pages/teacher"
+import { CompanySignup, CompanyHome, CompanyProfileEdit, StudentProfileView } from "components/pages/company"
 import { GroupChatLayout } from "components/templates"
-import { Feed, FeedDetail, Header } from "components/organisms"
+import { Feed, FeedDetail, Header, ManagementStudent } from "components/organisms"
 import ClassNewsFeedList from "components/organisms/classNewsFeedList"
-
 import logo from "components/atoms/logo/upcolor_logo.svg"
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded"
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded"
 import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded"
 import GroupCreateLayout from "components/templates/groupCreateLayout"
-
+import GroupsIcon from "@mui/icons-material/Groups"
 import WorkspacesIcon from "@mui/icons-material/Workspaces"
 import GroupWorkIcon from "@mui/icons-material/GroupWork"
 import AccountTreeIcon from "@mui/icons-material/AccountTree"
@@ -26,19 +24,23 @@ import BadgeIcon from "@mui/icons-material/Badge"
 import HomeWorkIcon from "@mui/icons-material/HomeWork"
 import ViewTimelineIcon from "@mui/icons-material/ViewTimeline"
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest"
-import GroupsIcon from "@mui/icons-material/Groups"
+import ChatRoundedIcon from '@mui/icons-material/ChatRounded'
+import ClassIcon from '@mui/icons-material/Class'
 import LockOpenIcon from "@mui/icons-material/LockOpen"
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
 import SettingsIcon from "@mui/icons-material/Settings"
 import ContactsIcon from "@mui/icons-material/Contacts"
-import ChatRoundedIcon from '@mui/icons-material/ChatRounded'
-import ClassIcon from '@mui/icons-material/Class'
+import NewspaperIcon from '@mui/icons-material/Newspaper'
 
 function App() {
     const [open, setOpen] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
     const [signInState, setSignInState] = useState("")
     const [profile, setProfile] = useState([])
+    const [teacher, setTeacher] = useState([])
+    const [company, setCompany] = useState([])
+    const [userType, setUserType] = useState([])
+
 
     const [anchorEl, setAnchorEl] = useState(null)
     const openNavbar = Boolean(anchorEl)
@@ -108,7 +110,7 @@ function App() {
             icon: <ViewTimelineIcon />,
         },
         {
-            value: "クラスニューズ",
+            value: "クラスニュース",
             url: "/classNews",
             icon: <ClassIcon />,
         },
@@ -149,6 +151,39 @@ function App() {
             value: "企業プロフィール編集",
             icon: <SettingsIcon />,
             url: "/company/profile/edit",
+        },
+    ]
+
+    const teacherDrawerMenus = [
+        {
+            value: "ニューズ投稿",
+            icon: <NewspaperIcon/>,
+            url: "/teacher/teachernews",
+        },
+        {
+            value: "クラスニューズ",
+            url: "/classNews",
+            icon: <ClassIcon />,
+        },
+        {
+            value: "学生管理",
+            icon: <ManageAccountsIcon />,
+            url: "#",
+        },
+        {
+            value: "学生プロフィール閲覧",
+            icon: <ContactsIcon />,
+            url: "/list/student",
+        },
+        {
+            value: "企業・会社プロフィール閲覧",
+            icon: <HomeWorkIcon />,
+            url: "/list/company",
+        },
+        {
+            value: "先生プロフィール編集",
+            icon: <SettingsIcon />,
+            url: "#",
         },
     ]
 
@@ -242,8 +277,33 @@ function App() {
         axios.post("/account/getProfile")
             .then((res) => {
                 setProfile(res.data)
+                console.log(res.data)
             })
     }, [])
+
+    useEffect(() => {
+        axios.post("/account/getTeacherProfile")
+            .then((res) => {
+                setTeacher(res.data)
+                console.log(res.data)
+            })
+    }, [])
+
+    useEffect(() => {
+        axios.post("/company/getCompanyProfile")
+            .then((res) => {
+                setCompany(res.data)
+                console.log(res.data)
+            })
+    }, [])
+
+    useEffect(() => {
+            axios.post("/account/getUserType")
+                .then((res) => {
+                    setUserType(res.data)
+                    console.log(res.data)
+                })
+        }, [])
 
     return (
         <Box>
@@ -251,9 +311,6 @@ function App() {
                 <Header
                     logoSrc={logo}
                     name={"UPCOLOR"}
-                    menus={menus}
-                    drawerMenus={drawerMenus}
-                    companyDrawerMenus={companyDrawerMenus}
                     signInState={signInState}
                     openNavbar={openNavbar}
                     anchorEl={anchorEl}
@@ -262,10 +319,17 @@ function App() {
                     open={open}
                     menuOpen={menuOpen}
                     setMenuOpen={setMenuOpen}
-                    profile={profile}
                     toggleAlertOpen={toggleAlertOpen}
                     toggleAlertClose={toggleAlertClose}
                     toggleSignout={toggleSignout}
+                    userType={userType}
+                    profile={profile}
+                    teacher={teacher}
+                    company={company}
+                    menus={menus}
+                    drawerMenus={drawerMenus}
+                    companyDrawerMenus={companyDrawerMenus}
+                    teacherDrawerMenus={teacherDrawerMenus}
                 />
 
                 <Routes>
@@ -275,9 +339,11 @@ function App() {
                     {/* <Route path="student/signup" element={<ReqNoAuth component={<StudentSignup />} />} /> */}
                     {/* <Route path="teacher/signup" element={<ReqNoAuth component={<TeacherSignup />} />} /> */}
                     {/* <Route path="company/signup" element={<ReqNoAuth component={<CompanySignup />} />} /> */}
-                    <Route path="signup/student" element={<StudentSignup />} />
-                    <Route path="signup/teacher/:token" element={<TeacherSignup />} />
-                    <Route path="signup/company/:token" element={<CompanySignup />} />
+                    <Route path="signup">
+                        <Route path="student" element={<StudentSignup />} />
+                        <Route path="teacher/:token" element={<TeacherSignup />} />
+                        <Route path="company/:token" element={<CompanySignup />} />
+                    </Route>
 
                     {/* <Route path="signin" element={<ReqNoAuth component={<Signin />} />} /> */}
                     <Route path="signin" element={<Signin />} />
@@ -330,6 +396,7 @@ function App() {
                     <Route path="teacher" element={<ReqAuthTea component={<TeacherHome />} />} />
                     <Route path="teacher/teacherNews" element={<ReqAuthTea component={<TeacherNews />} />} />
 
+                    {/* <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />
                     <Route path="classNews">
                         <Route path="" element={<ClassNews />} />
                         <Route path=":classId" element={<ClassNewsFeed />} />
@@ -340,6 +407,17 @@ function App() {
                     <Route path="develop/addLectures" element={<ReqAuthAdm component={<AddLectures />} />} />
                     <Route path="develop/genTeacherSign" element={<ReqAuthAdm component={<GenTeacherSign />} />} />
                     <Route path="develop/genCompanySign" element={<ReqAuthAdm component={<GenCompanySign />} />} />
+                    <Route path="develop/management" element={<ManagementStudent />} /> */}
+
+                    <Route path="develop">
+                        <Route path="" element={<DevelopHome />} />
+                        <Route path="tab" element={<DevelopTabPage />}>
+                            <Route path="management" element={<ManagementStudent />} />
+                            <Route path="addLectures" element={<AddLectures />} />
+                            <Route path="genTeacherSign" element={<GenTeacherSign />} />
+                            <Route path="genCompanySign" element={<GenCompanySign />} />
+                        </Route>
+                    </Route>
 
                     <Route path="company/home" element={<CompanyHome />} />
                     <Route path="company/profile/edit" element={<CompanyProfileEdit />} />

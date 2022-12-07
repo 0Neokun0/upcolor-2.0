@@ -74,4 +74,24 @@ router.post("/getMyNews", async (req, res) => {
     res.json(news)
 })
 
+router.post("/getStudentList", async (req, res) => {
+    const sqlSelectStudentList = `
+        SELECT
+            student_id,
+            name,
+            mail,
+            image,
+            course_name,
+            year_name
+        FROM
+            student_infomation
+        ORDER BY
+            year_id,
+            course_id
+    `
+    const studentList = await sql.handleSelect(sqlSelectStudentList, [])
+
+    res.json(studentList)
+})
+
 module.exports = router

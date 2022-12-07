@@ -1,4 +1,4 @@
-import { Box, } from "@mui/material";
+import { Box } from "@mui/material"
 
 const DevelopLayout = (props) => {
     return (
@@ -6,14 +6,15 @@ const DevelopLayout = (props) => {
             sx={{
                 display: "flex",
                 justifyContent: "center",
-                width: "80%",
+                width: 1,
+                height: 250,
                 mx: "auto",
                 textAlign: "center",
             }}
         >
             {props.children}
         </Box>
-    );
-};
+    )
+}
 
 export default DevelopLayout

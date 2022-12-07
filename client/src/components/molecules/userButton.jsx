@@ -1,22 +1,32 @@
-import { Avatar, IconButton, ListItemButton, Typography } from "@mui/material"
+import { Link } from "react-router-dom"
+import { server } from "components/config"
+import { Avatar, IconButton, ListItemButton, Menu, MenuItem, Typography } from "@mui/material"
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded'
 
 const UserButton = (props) => {
-    const {name} = props
-    
+    const { index, id, name, icon, selected, onClick, anchorEl, open, onClickIcon, onClose } = props
+
     return (
         <ListItemButton
+            onClick={() => onClick(index, id)}
             sx={{
                 width: "100%",
                 borderRadius: 50,
                 display: "flex",
                 alignItems: "center",
-                ":hover": {
-                    backgroundColor: "white",
-                }
+
+                // プロパティ: id === selected ? 選択時スタイル: 非選択時スタイル
+                backgroundColor: id === selected ? "white" : "",
+                boxShadow: id === selected ? 1 : 0,
             }}
         >
-            <Avatar />
+            <Avatar
+                src={`${server.host}/images/icon/${icon}`}
+                sx={{
+                    border: 1,
+                    borderColor: "divider",
+                }}
+            />
 
             <Typography
                 sx={{
@@ -28,13 +38,39 @@ const UserButton = (props) => {
                 {name}
             </Typography>
 
-            <IconButton
-                sx={{
-                    ml: "auto",
+            {
+                id === selected
+                &&
+                <IconButton
+                    onClick={(e) => onClickIcon(e, index)}
+                    sx={{
+                        ml: "auto",
+                    }}
+                >
+                    <MoreVertRoundedIcon />
+                </IconButton>
+            }
+
+            <Menu
+                anchorEl={anchorEl}
+                open={Boolean(index === open)}
+                onClose={onClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
                 }}
             >
-                <MoreVertRoundedIcon />
-            </IconButton>
+                <MenuItem
+                    component={Link}
+                    to={`/profile/${id}`}
+                >
+                    プロフィール
+                </MenuItem>
+            </Menu>
         </ListItemButton>
     )
 }

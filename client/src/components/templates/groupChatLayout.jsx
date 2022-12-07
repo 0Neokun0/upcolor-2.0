@@ -87,6 +87,8 @@ const GroupChatLayout = () => {
                         }}
                     >
                         <GroupChat
+                            groups={groups}
+                            groupClick={groupClick}
                             chats={chats}
                             addChats={addChats}
                         />
@@ -134,7 +136,7 @@ const GroupChatLayout = () => {
                 />
             </Grid>
         </Grid>
-    );
+    )
 }
 
 export default GroupChatLayout

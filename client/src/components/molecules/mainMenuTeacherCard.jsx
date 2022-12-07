@@ -1,15 +1,15 @@
-import React from 'react'
-import { Avatar, Box, Card, Chip, Divider, Typography } from '@mui/material'
-import { server } from 'components/config'
+import React from "react"
+import { Avatar, Box, Card, Chip, Typography } from "@mui/material"
+import { server } from "components/config"
 
-const MainMenuCompanyCard = (props) => {
+const MainMenuTeacherCard = (props) => {
     return (
         <Card
             sx={{
                 p: 2,
-                borderRadius: '15px',
+                borderRadius: "15px",
                 boxShadow: 5,
-                mb: 2
+                mb: 2,
             }}
         >
             <Box
@@ -19,7 +19,10 @@ const MainMenuCompanyCard = (props) => {
                 }}
             >
                 <Avatar
-                    src={server.host + "/images/icon/" + props.company.manager_image}
+                    sx={{
+                        border: "2px solid lightgray",
+                    }}
+                    src={server.host + "/images/icon/" + props.teacher["image"]}
                 />
 
                 <Typography
@@ -27,15 +30,10 @@ const MainMenuCompanyCard = (props) => {
                     textAlign={"center"}
                     width="100%"
                 >
-                    {props.company["company_name"]}
+                    {props.teacher["name"]}
                 </Typography>
             </Box>
 
-            <Divider
-                sx={{
-                    my: 2,
-                }}
-            />
             <Box
                 sx={{
                     display: "flex",
@@ -44,15 +42,11 @@ const MainMenuCompanyCard = (props) => {
                 }}
             >
                 <Chip
-                    sx={{
-                        p: 1,
-                        fontWeight: 600,
-                    }}
-                    label={"本社" + " : " + props.company["address"]}
+                    label={props.teacher["course_name"]}
                 />
             </Box>
         </Card>
     )
 }
 
-export default MainMenuCompanyCard
+export default MainMenuTeacherCard

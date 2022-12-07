@@ -1,8 +1,38 @@
 import { server } from 'components/config'
-import { Avatar, Box, Button, Card, Modal, TextField, Typography } from "@mui/material"
-import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual'
+import { Avatar, Box, Button, Card, IconButton, Modal, TextField, Tooltip, Typography } from "@mui/material"
+import { useState, useRef } from "react"
+import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded'
+import DisabledByDefaultRoundedIcon from '@mui/icons-material/DisabledByDefaultRounded'
 
 const ClassNewsFeedForm = (props) => {
+    const [imagePreview, setImagePreview] = useState(undefined)
+
+    const fileInput = useRef(null)
+
+    const onClickReset = () => {
+        fileInput.current.value = ""
+        setImagePreview(undefined)
+    }
+
+    const onChangeFileInput = (e) => {
+        setImagePreview(undefined)
+
+        if (e.target.files.length === 0) {
+            return
+        }
+
+        if (!e.target.files[0].type.match("image.*")) {
+            return
+        }
+
+        const reader = new FileReader()
+
+        reader.onload = (event) => {
+            setImagePreview(event.target.result)
+        }
+
+        reader.readAsDataURL(e.target.files[0])
+    }
     return (
         <>
             <Card
@@ -95,16 +125,82 @@ const ClassNewsFeedForm = (props) => {
                         />
 
                         <Box
-                            display="flex"
-                            justifyContent="end"
+                            sx={{
+                                display: 'flex',
+                                alignContent: "center",
+                            }}
                         >
-                            <Button
-                                color="success"
-                                size="small"
-                                startIcon={<PhotoSizeSelectActualIcon />}
-                            >
-                                写真
-                            </Button>
+                            <Box>
+                                <Tooltip
+                                    title="写真"
+                                    placement="right"
+                                >
+                                    <IconButton
+                                        sx={{
+                                            mt: 1,
+                                        }}
+                                        size="small"
+                                        color="success"
+                                        component="label"
+                                        ref={fileInput}
+                                        onChange={(e) => { onChangeFileInput(e) }}
+                                    >
+                                        <Box
+                                            component="input"
+                                            type="file"
+                                            name="image"
+                                            accept=".png, .jpg, .jpeg"
+                                            hidden
+                                        />
+                                        <AddPhotoAlternateRoundedIcon />
+                                    </IconButton>
+                                </Tooltip>
+                            </Box>
+                            {
+                                !!imagePreview
+                                &&
+                                <Box
+                                    sx={{
+                                        width: 1,
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        p: 1,
+                                        m: 1,
+                                        borderRadius: 1,
+                                    }}
+                                >
+                                    <Box>
+                                        <Box
+                                            component="img"
+                                            src={imagePreview}
+                                            sx={{
+                                                border: "2px solid gray",
+                                                borderRadius: 3,
+                                                width: "250px",
+                                                height: "125px",
+                                                mx: 10,
+                                            }}
+                                        />
+                                    </Box>
+
+                                    <Box>
+                                        <Tooltip
+                                            title="プレビューを閉じる"
+                                            placement="right"
+                                        >
+                                            <IconButton
+                                                size="small"
+                                                component="label"
+                                                variant="outlined"
+                                                color="error"
+                                                onClick={onClickReset}
+                                            >
+                                                <DisabledByDefaultRoundedIcon />
+                                            </IconButton>
+                                        </Tooltip>
+                                    </Box>
+                                </Box>
+                            }
                         </Box>
                     </Box>
 

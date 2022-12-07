@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { Box, Typography, Tab, Tabs } from "@mui/material"
+import { Box, Typography, Tab, Tabs, Tooltip, IconButton } from "@mui/material"
 import CompanyPageTitle from "components/molecules/companyPageTitle"
 import { CompanyHomeLayout, ContainerXl } from "components/templates"
 import CompanyProfileTabs from "components/organisms/companyProfileTabs"
@@ -22,6 +22,7 @@ import SchemaIcon from "@mui/icons-material/Schema"
 import EventSeatIcon from "@mui/icons-material/EventSeat"
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import MapIcon from '@mui/icons-material/Map'
+import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props
@@ -72,134 +73,141 @@ const ViewCompanyPage = (props) => {
 
     return (
         <ContainerXl>
+            <Tooltip
+                title="企業・会社一覧に戻る"
+                placement="right"
+                size="small"
+            >
+                <IconButton
+                    href="/list/company">
+                    <KeyboardBackspaceRoundedIcon />
+                </IconButton>
+            </Tooltip>
             {
                 company
                     ?
-                    (
-                        <CompanyHomeLayout>
-                            <CompanyProfile>
-                                <CompanyPageTitle
-                                    company={company}
-                                />
+                    <CompanyHomeLayout>
+                        <CompanyProfile>
+                            <CompanyPageTitle
+                                company={company}
+                            />
 
-                                <CompanyProfileTabs>
-                                    <Tabs
-                                        value={value}
-                                        onChange={handleChange}
-                                        textColor="inherit"
-                                        indicatorColor="gray"
-                                        centered
-                                    >
-                                        <Tab
-                                            label="会社概要"
-                                            icon={<BusinessRoundedIcon />}
-                                            iconPosition="top"
-                                            {...a11yProps(0)}
-                                        />
+                            <CompanyProfileTabs>
+                                <Tabs
+                                    value={value}
+                                    onChange={handleChange}
+                                    textColor="inherit"
+                                    indicatorColor="gray"
+                                    centered
+                                >
+                                    <Tab
+                                        label="会社概要"
+                                        icon={<BusinessRoundedIcon />}
+                                        iconPosition="top"
+                                        {...a11yProps(0)}
+                                    />
 
-                                        <Tab
-                                            label="採用データ"
-                                            icon={<ContactMailIcon />}
-                                            iconPosition="top"
-                                            {...a11yProps(1)}
-                                        />
+                                    <Tab
+                                        label="採用データ"
+                                        icon={<ContactMailIcon />}
+                                        iconPosition="top"
+                                        {...a11yProps(1)}
+                                    />
 
-                                        <Tab
-                                            label="SNS.リンク"
-                                            icon={<AutoStoriesIcon />}
-                                            iconPosition="top"
-                                            {...a11yProps(2)}
-                                        />
-                                    </Tabs>
+                                    <Tab
+                                        label="SNS.リンク"
+                                        icon={<AutoStoriesIcon />}
+                                        iconPosition="top"
+                                        {...a11yProps(2)}
+                                    />
+                                </Tabs>
 
-                                    <TabPanel
-                                        value={value}
-                                        index={0}
-                                    >
-                                        <CompanyDetailsTab
-                                            title={"会社紹介"}
-                                            icon={<CorporateFareIcon />}
-                                            content={company["introduction"]}
-                                        />
+                                <TabPanel
+                                    value={value}
+                                    index={0}
+                                >
+                                    <CompanyDetailsTab
+                                        title={"会社紹介"}
+                                        icon={<CorporateFareIcon />}
+                                        content={company["introduction"]}
+                                    />
 
-                                        <CompanyDetailsTab
-                                            title={"事業内容"}
-                                            icon={<FolderCopyIcon />}
-                                            content={company["business"]}
-                                        />
+                                    <CompanyDetailsTab
+                                        title={"事業内容"}
+                                        icon={<FolderCopyIcon />}
+                                        content={company["business"]}
+                                    />
 
-                                        <CompanyDetailsTab
-                                            title={"社長・CEO"}
-                                            icon={<GradeRoundedIcon />}
-                                            content={company["manager_name"]}
-                                        />
+                                    <CompanyDetailsTab
+                                        title={"社長・CEO"}
+                                        icon={<GradeRoundedIcon />}
+                                        content={company["manager_name"]}
+                                    />
 
-                                        <CompanyDetailsTab
-                                            title={"社長メッセージ"}
-                                            icon={<TryIcon />}
-                                            content={company["ceo_message"]}
-                                        />
-                                        <CompanyDetailsTab
-                                            title={"本社"}
-                                            icon={<EventSeatIcon />}
-                                            content={company["address"]}
-                                        />
-                                    </TabPanel>
+                                    <CompanyDetailsTab
+                                        title={"社長メッセージ"}
+                                        icon={<TryIcon />}
+                                        content={company["ceo_message"]}
+                                    />
+                                    <CompanyDetailsTab
+                                        title={"本社"}
+                                        icon={<EventSeatIcon />}
+                                        content={company["address"]}
+                                    />
+                                </TabPanel>
 
-                                    <TabPanel
-                                        value={value}
-                                        index={1}
-                                    >
-                                        <CompanyDetailsTab
-                                            title={"業種情報"}
-                                            icon={<SchemaIcon />}
-                                            content={company["occupation_names"]}
-                                        />
+                                <TabPanel
+                                    value={value}
+                                    index={1}
+                                >
+                                    <CompanyDetailsTab
+                                        title={"業種情報"}
+                                        icon={<SchemaIcon />}
+                                        content={company["occupation_names"]}
+                                    />
 
-                                        <CompanyDetailsTab
-                                            title={"専攻募集"}
-                                            icon={<HailIcon />}
-                                            content={company["course_names"]}
-                                        />
+                                    <CompanyDetailsTab
+                                        title={"専攻募集"}
+                                        icon={<HailIcon />}
+                                        content={company["course_names"]}
+                                    />
 
-                                        <CompanyDetailsTab
-                                            title={"支社地域"}
-                                            icon={<MapIcon />}
-                                            content={company["prefecture_names"]}
-                                        />
-                                    </TabPanel>
+                                    <CompanyDetailsTab
+                                        title={"支社地域"}
+                                        icon={<MapIcon />}
+                                        content={company["prefecture_names"]}
+                                    />
+                                </TabPanel>
 
-                                    <TabPanel
-                                        value={value}
-                                        index={2}
-                                    >
-                                        <CompanyLinksTab
-                                            title={"企業ページ"}
-                                            icon={<HouseIcon />}
-                                            link={company["homepage_url"]}
-                                        />
-                                        <CompanyLinksTab
-                                            title={"企業リクナビ・マイナビページ"}
-                                            icon={<WebIcon />}
-                                            link={company["jobsite_url"]}
-                                        />
+                                <TabPanel
+                                    value={value}
+                                    index={2}
+                                >
+                                    <CompanyLinksTab
+                                        title={"企業ページ"}
+                                        icon={<HouseIcon />}
+                                        link={company["homepage_url"]}
+                                    />
+                                    <CompanyLinksTab
+                                        title={"企業リクナビ・マイナビページ"}
+                                        icon={<WebIcon />}
+                                        link={company["jobsite_url"]}
+                                    />
 
-                                        <CompanyLinksTab
-                                            title={"企業・会社・メール"}
-                                            icon={<EmailRoundedIcon />}
-                                            link={company["manager_mail"]}
-                                        />
-                                    </TabPanel>
-                                </CompanyProfileTabs>
-                            </CompanyProfile>
-                        </CompanyHomeLayout>
-                    )
+                                    <CompanyLinksTab
+                                        title={"企業・会社・メール"}
+                                        icon={<EmailRoundedIcon />}
+                                        link={company["manager_mail"]}
+                                    />
+                                </TabPanel>
+                            </CompanyProfileTabs>
+                        </CompanyProfile>
+                    </CompanyHomeLayout>
                     :
-                    (
-                        <Typography>
-                            企業プロフィールが見つかりません
-                        </Typography>
-                    )
+                    <Typography>
+                        企業プロフィールが見つかりません
+                    </Typography>
+
             }
         </ContainerXl>
     )

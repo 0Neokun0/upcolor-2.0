@@ -1,13 +1,5 @@
 import React from "react"
-import {
-    Avatar,
-    Box,
-    Card,
-    Chip,
-    Divider,
-    Switch,
-    Typography,
-} from "@mui/material"
+import { Avatar, Box, Card, Chip, Typography } from "@mui/material"
 import { server } from "components/config"
 
 const MainMenuProfileCard = (props) => {

@@ -1,18 +1,19 @@
 import { Link } from 'react-router-dom'
-import { Card, List, ListItem, ListItemButton, ListItemIcon } from '@mui/material'
-import { MainMenuProfileCard } from 'components/molecules'
+import { Box, Card, List, ListItem, ListItemButton, ListItemIcon } from '@mui/material'
 
+import { MainMenuTeacherCard } from 'components/molecules'
 
-const MainMenu = (props) => {
+const MainMenuTeacher = (props) => {
     return (
         <Card
             sx={{
                 p: 2,
+
                 borderRadius: "15px",
             }}
         >
-            <MainMenuProfileCard
-                profile={props["profile"]}
+            <MainMenuTeacherCard
+                teacher={props["teacher"]}
             />
 
             <List
@@ -22,7 +23,7 @@ const MainMenu = (props) => {
                     },
                 }}
             >
-                {props.menus.map((menu, index) => {
+                {props.teacherMenus.map((teacherMenu, index) => {
                     return (
                         <ListItem
                             disablePadding
@@ -33,13 +34,13 @@ const MainMenu = (props) => {
                                     borderRadius: "15px",
                                 }}
                                 component={Link}
-                                to={menu.url}
+                                to={teacherMenu.url}
                             >
                                 <ListItemIcon>
-                                    {menu.icon}
+                                    {teacherMenu.icon}
                                 </ListItemIcon>
 
-                                {menu.value}
+                                {teacherMenu.value}
                             </ListItemButton>
                         </ListItem>
                     )
@@ -49,4 +50,4 @@ const MainMenu = (props) => {
     )
 }
 
-export default MainMenu
+export default MainMenuTeacher

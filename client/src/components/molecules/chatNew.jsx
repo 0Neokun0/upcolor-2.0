@@ -1,25 +1,25 @@
+import { server } from "components/config"
 import { Avatar, Box, Typography } from "@mui/material"
 
 const ChatNew = (props) => {
     // self: 0...他人の投稿, 1...自分の投稿
-    // const { self, name, icon, time, text } = props
-    const { self, name, time, text } = props
+    const { self, name, icon, time, text } = props
 
     return (
         self
             ?
             <Box
                 sx={{
-                    width: "fit-content",
-                    ml: "auto",
+                    ml: "48px",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "end",
+                    justifyContent: "end"
                 }}
             >
                 <Typography
-                    variant="body2"
                     textAlign="end"
+                    variant="body2"
+                    whiteSpace="nowrap"
                 >
                     {time}
                 </Typography>
@@ -27,6 +27,8 @@ const ChatNew = (props) => {
                 <Typography
                     sx={{
                         p: 1,
+                        ml: "auto",
+                        width: "fit-content",
                         maxWidth: "350px",
                         whiteSpace: "pre-wrap",
                         backgroundColor: "#F0F0F0",
@@ -44,7 +46,10 @@ const ChatNew = (props) => {
                     display: "flex",
                 }}
             >
-                <Avatar />
+                <Avatar
+                    alt={name}
+                    src={`${server.host}/images/icon/${icon}`}
+                />
 
                 <Box
                     sx={{
@@ -58,12 +63,14 @@ const ChatNew = (props) => {
                     >
                         <Typography
                             fontWeight="bold"
+                            whiteSpace="nowrap"
                         >
                             {name}
                         </Typography>
 
                         <Typography
                             variant="body2"
+                            whiteSpace="nowrap"
                             sx={{
                                 ml: 2,
                             }}
@@ -75,6 +82,7 @@ const ChatNew = (props) => {
                     <Typography
                         sx={{
                             p: 1,
+                            width: "fit-content",
                             maxWidth: "350px",
                             whiteSpace: "pre-wrap",
                             backgroundColor: "#F0F0F0",
