@@ -144,6 +144,10 @@ const Home = () => {
         setFileCheck(false)
     }
 
+    const backPage = () => {
+        window.history.back()
+    }
+
     const toggleReplyModalOpen = () => {
         setOpenReplyModal(true)
     }
@@ -217,6 +221,8 @@ const Home = () => {
                 news={news}
                 like={like}
                 handleLike={handleLike}
+
+                backPage={backPage}
             />
         </>
     )
