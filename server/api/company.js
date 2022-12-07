@@ -148,7 +148,9 @@ router.post("/getCompanyProfile", async (req, res) => {
                 user_id = ?
         `
         const companyId = await sql.handleSelect(sqlSelectCompanyId, [userId])
-        const company = await get.company(companyId[0])
+        const company = await get.company(companyId[0]["company_id"])
+
+        console.log(company)
 
         const courses = await get.list("course")
         const occupations = await get.list("occupation")

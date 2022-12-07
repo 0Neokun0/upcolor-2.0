@@ -1,6 +1,6 @@
 import React from 'react'
 import { Avatar, Box, Card, Chip, Divider, Switch, Typography } from '@mui/material'
-// import { server } from 'components/config'
+import { server } from 'components/config'
 
 const MainMenuCompanyCard = (props) => {
     return (
@@ -19,7 +19,7 @@ const MainMenuCompanyCard = (props) => {
                 }}
             >
                 <Avatar
-                    // src={server.host + "/images/icon/" + props.company.image}
+                    src={server.host + "/images/icon/" + props.company.manager_image}
                 />
 
                 <Typography
