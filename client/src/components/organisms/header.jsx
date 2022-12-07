@@ -160,7 +160,8 @@ const Header = (props) => {
                                 handleClose={props.handleClose}
                                 signInState={props.signInState}
                                 toggleAlertOpen={props.toggleAlertOpen}
-                                src={props.src}
+                                headerAvatarsrc={props.headerAvatarsrc}
+                                headerHref={props.headerHref}
                             />
                     }
                 </Box>

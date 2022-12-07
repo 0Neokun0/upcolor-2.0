@@ -307,13 +307,22 @@ function App() {
                 })
         }, [])
 
-        var src
+        var headerAvatarsrc
         if (userType === 1) {
-            src = server.host + "/images/icon/" + profile["image"]
+            headerAvatarsrc = server.host + "/images/icon/" + profile["image"]
         } else if (userType === 2) {
-            src = server.host + "/images/icon/" + profile["image"]
+            headerAvatarsrc = server.host + "/images/icon/" + profile["image"]
         } else {
-            src = server.host + "/images/icon/" + company["manager_image"]
+            headerAvatarsrc = server.host + "/images/icon/" + company["manager_image"]
+        }
+
+        var headerHref
+        if (userType === 1) {
+            headerHref="/profile"
+        } else if (userType === 2) {
+            headerHref="/profile"
+        } else {
+            headerHref="/company/home"
         }
 
     return (
@@ -341,7 +350,8 @@ function App() {
                     drawerMenus={drawerMenus}
                     companyDrawerMenus={companyDrawerMenus}
                     teacherDrawerMenus={teacherDrawerMenus}
-                    src={src}
+                    headerAvatarsrc={headerAvatarsrc}
+                    headerHref={headerHref}
                 />
 
                 <Routes>
