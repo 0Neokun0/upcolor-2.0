@@ -20,7 +20,7 @@ const MainMenuCompanyCard = (props) => {
             >
                 <Avatar
                     sx={{
-                        mr:2,
+                        mr: 2,
                     }}
                     variant="rounded"
 

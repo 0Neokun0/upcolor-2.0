@@ -31,32 +31,32 @@ const CompanyListProfileCard = (props) => {
                         (window.location.href = "/company/" + props.company["company_id"])
                     }
                 >
-                <Grid
-                    container
-                    direction="column"
-                    justifyContent="space-evenly"
-                    alignItems="center"
-                >
-                    <Avatar
-                        sx={{
-                            border: "2px solid lightgray",
-                            m: 1,
-                            p: 1,
-                        }}
-                        variant="rounded"
-                    />
-
-                    <Typography
-                        variant="h5"
-                        sx={{
-                            fontWeight: "bold",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                        }}
+                    <Grid
+                        container
+                        direction="column"
+                        justifyContent="space-evenly"
+                        alignItems="center"
                     >
-                        {props.company["company_name"]}
-                    </Typography>
-                    {/* <Typography
+                        <Avatar
+                            sx={{
+                                border: "2px solid lightgray",
+                                m: 1,
+                                p: 1,
+                            }}
+                            variant="rounded"
+                        />
+
+                        <Typography
+                            variant="h5"
+                            sx={{
+                                fontWeight: "bold",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                            }}
+                        >
+                            {props.company["company_name"]}
+                        </Typography>
+                        {/* <Typography
                         variant="h5"
                         sx={{
                             fontWeight: "bold",
@@ -67,7 +67,7 @@ const CompanyListProfileCard = (props) => {
                         {props.company["occupation_names"]}
                     </Typography> */}
 
-                </Grid>
+                    </Grid>
                 </CardActionArea>
             </Card>
         </Grid>
