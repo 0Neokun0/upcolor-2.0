@@ -5,12 +5,11 @@ import { Box } from "@mui/material"
 
 import { ClassNews, ClassNewsFeed, LandingPage, NotFound, Signin, ViewCompanyPage, ViewTeamWork } from "components/pages"
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite, PrivateChat } from "components/pages/student"
-import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
-import { CompanySignup, CompanyHome, CompanyProfileEdit, Recruitment, StudentProfileView } from "components/pages/company"
+import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews, DevelopTabPage } from "components/pages/teacher"
+import { CompanySignup, CompanyHome, CompanyProfileEdit, StudentProfileView } from "components/pages/company"
 import { GroupChatLayout } from "components/templates"
-import { Feed, FeedDetail, Header } from "components/organisms"
+import { Feed, FeedDetail, Header, ManagementStudent } from "components/organisms"
 import ClassNewsFeedList from "components/organisms/classNewsFeedList"
-
 import logo from "components/atoms/logo/upcolor_logo.svg"
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded"
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded"
@@ -347,9 +346,11 @@ function App() {
                     {/* <Route path="student/signup" element={<ReqNoAuth component={<StudentSignup />} />} /> */}
                     {/* <Route path="teacher/signup" element={<ReqNoAuth component={<TeacherSignup />} />} /> */}
                     {/* <Route path="company/signup" element={<ReqNoAuth component={<CompanySignup />} />} /> */}
-                    <Route path="signup/student" element={<StudentSignup />} />
-                    <Route path="signup/teacher/:token" element={<TeacherSignup />} />
-                    <Route path="signup/company/:token" element={<CompanySignup />} />
+                    <Route path="signup">
+                        <Route path="student" element={<StudentSignup />} />
+                        <Route path="teacher/:token" element={<TeacherSignup />} />
+                        <Route path="company/:token" element={<CompanySignup />} />
+                    </Route>
 
                     {/* <Route path="signin" element={<ReqNoAuth component={<Signin />} />} /> */}
                     <Route path="signin" element={<Signin />} />
@@ -402,6 +403,7 @@ function App() {
                     <Route path="teacher" element={<ReqAuthTea component={<TeacherHome />} />} />
                     <Route path="teacher/teacherNews" element={<ReqAuthTea component={<TeacherNews />} />} />
 
+                    {/* <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />
                     <Route path="classNews">
                         <Route path="" element={<ClassNews />} />
                         <Route path=":classId" element={<ClassNewsFeed />} />
@@ -412,6 +414,17 @@ function App() {
                     <Route path="develop/addLectures" element={<ReqAuthAdm component={<AddLectures />} />} />
                     <Route path="develop/genTeacherSign" element={<ReqAuthAdm component={<GenTeacherSign />} />} />
                     <Route path="develop/genCompanySign" element={<ReqAuthAdm component={<GenCompanySign />} />} />
+                    <Route path="develop/management" element={<ManagementStudent />} /> */}
+
+                    <Route path="develop">
+                        <Route path="" element={<DevelopHome />} />
+                        <Route path="tab" element={<DevelopTabPage />}>
+                            <Route path="management" element={<ManagementStudent />} />
+                            <Route path="addLectures" element={<AddLectures />} />
+                            <Route path="genTeacherSign" element={<GenTeacherSign />} />
+                            <Route path="genCompanySign" element={<GenCompanySign />} />
+                        </Route>
+                    </Route>
 
                     <Route path="company/home" element={<CompanyHome />} />
                     <Route path="company/profile/edit" element={<CompanyProfileEdit />} />

@@ -14,7 +14,7 @@ const DevelopHome = () => {
             color: "success",
             text: "ここから教師を追加してください。",
             startIcon: <GroupAddRoundedIcon />,
-            url: "./genTeacherSign",
+            url: "./tab/genTeacherSign",
         },
         {
             value: "時間割登録",
@@ -22,7 +22,7 @@ const DevelopHome = () => {
             color: "error",
             text: "ここから時刻表を追加してください。",
             startIcon: <HistoryEduRoundedIcon />,
-            url: "./addLectures",
+            url: "./tab/addLectures",
         },
         {
             value: "企業登録",
@@ -30,7 +30,15 @@ const DevelopHome = () => {
             color: "secondary",
             text: "こちらから企業を招待してください。",
             startIcon: <BusinessRoundedIcon />,
-            url: "./genCompanySign",
+            url: "./tab/genCompanySign",
+        },
+        {
+            value: "生徒管理",
+            image: "https://scontent-itm1-1.xx.fbcdn.net/v/t1.6435-9/83455413_872271626552391_6675737040484564992_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_ohc=hEuUzvhMVawAX-0gIm4&_nc_ht=scontent-itm1-1.xx&oh=00_AfCGXIGlHiRUZ91O69Td4qTBAg1b8MAtKy-zhLbS3_eB2w&oe=6385B0A3",
+            color: "secondary",
+            text: "こちらから生徒を退学させてください。",
+            startIcon: <BusinessRoundedIcon />,
+            url: "./tab/management",
         },
     ]
 
