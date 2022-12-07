@@ -32,6 +32,8 @@ import SettingsIcon from "@mui/icons-material/Settings"
 import ContactsIcon from "@mui/icons-material/Contacts"
 import NewspaperIcon from '@mui/icons-material/Newspaper'
 
+import { server } from "components/config"
+
 function App() {
     const [open, setOpen] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
@@ -305,6 +307,15 @@ function App() {
                 })
         }, [])
 
+        var src
+        if (userType === 1) {
+            src = server.host + "/images/icon/" + profile["image"]
+        } else if (userType === 2) {
+            src = server.host + "/images/icon/" + profile["image"]
+        } else {
+            src = server.host + "/images/icon/" + company["manager_image"]
+        }
+
     return (
         <Box>
             <BrowserRouter>
@@ -330,6 +341,7 @@ function App() {
                     drawerMenus={drawerMenus}
                     companyDrawerMenus={companyDrawerMenus}
                     teacherDrawerMenus={teacherDrawerMenus}
+                    src={src}
                 />
 
                 <Routes>

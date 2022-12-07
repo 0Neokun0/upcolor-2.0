@@ -7,9 +7,6 @@ const CompanyPageTitle = (props) => {
         <Grid
             item
             xs={12}
-            sx={{
-                mt: 2,
-            }}
         >
             <Card
                 sx={{
