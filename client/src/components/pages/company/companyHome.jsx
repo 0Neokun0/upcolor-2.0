@@ -1,8 +1,11 @@
+import { Box, Hidden, Tab, Tabs } from "@mui/material"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import PropTypes from "prop-types"
+
 import CompanyHomeLayout from "components/templates/companyHomeLayout"
 import { CompanyLinksTab, CompanyProfile } from "components/organisms"
-import PropTypes from "prop-types"
+import CompanyDetailsTab from "components/organisms/companyDetailsTab"
 
 import GroupsIcon from "@mui/icons-material/Groups"
 import LockOpenIcon from "@mui/icons-material/LockOpen"
@@ -26,12 +29,7 @@ import HailIcon from "@mui/icons-material/Hail"
 import SchemaIcon from "@mui/icons-material/Schema"
 import EventSeatIcon from "@mui/icons-material/EventSeat"
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded"
-import MapsHomeWorkRoundedIcon from "@mui/icons-material/MapsHomeWorkRounded"
 import MapIcon from '@mui/icons-material/Map'
-
-import { Box, Tab, Tabs } from "@mui/material"
-import CompanyDetailsTab from "components/organisms/companyDetailsTab"
-
 function TabPanel(props) {
     const { children, value, index, ...other } = props
     return (
@@ -64,13 +62,8 @@ function a11yProps(index) {
     }
 }
 
-import GroupsIcon from "@mui/icons-material/Groups"
-import LockOpenIcon from "@mui/icons-material/LockOpen"
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
-import SettingsIcon from "@mui/icons-material/Settings"
-import ContactsIcon from "@mui/icons-material/Contacts"
-import HomeWorkIcon from "@mui/icons-material/HomeWork"
-import MainMenuCompany from "components/organisms/mainMenuCompany"
+
+
 const CompanyHome = () => {
     const [company, setCompany] = useState([])
 
@@ -105,12 +98,12 @@ const CompanyHome = () => {
             url: "#",
         },
         {
-            value: "学生プロフィール閲覧",
+            value: "学生閲覧",
             icon: <ContactsIcon />,
             url: "/list/student",
         },
         {
-            value: "企業・会社プロフィール閲覧",
+            value: "企業・会社閲覧",
             icon: <HomeWorkIcon />,
             url: "/list/company",
         },
@@ -125,10 +118,23 @@ const CompanyHome = () => {
         company
         &&
         <CompanyHomeLayout>
-            <MainMenuCompany
-                company={company}
-                companyMenus={companyMenus}
-            />
+            <Hidden
+                mdDown
+            >
+                <Box
+                    sx={{
+                        p: 2,
+                        width: "50%",
+                        width: 400,
+                        height: 400,
+                    }}
+                ><MainMenuCompany
+                        company={company}
+                        companyMenus={companyMenus}
+                    />
+                </Box>
+            </Hidden>
+
 
             <CompanyProfile>
                 <CompanyPageTitle

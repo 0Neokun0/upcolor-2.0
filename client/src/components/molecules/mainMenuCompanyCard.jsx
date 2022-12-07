@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, Box, Card, Chip, Divider, Switch, Typography } from '@mui/material'
+import { Avatar, Box, Card, Chip, Divider, Typography } from '@mui/material'
 
 import { server } from 'components/config'
 
@@ -38,10 +38,10 @@ const MainMenuCompanyCard = (props) => {
                 }}
             />
             <Box
-                justifyContent={"space-between"}
                 sx={{
                     display: "flex",
-                    alignItems: "center",
+                    justifyContent: "center",
+                    mt: 2,
                 }}
             >
                 <Chip
@@ -51,7 +51,6 @@ const MainMenuCompanyCard = (props) => {
                     }}
                     label={"本社" + " : " + props.company["address"]}
                 />
-                <Switch />
             </Box>
         </Card>
     )

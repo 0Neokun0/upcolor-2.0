@@ -15,7 +15,7 @@ import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded"
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded"
 import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded"
 import GroupCreateLayout from "components/templates/groupCreateLayout"
-
+import GroupsIcon from "@mui/icons-material/Groups"
 import WorkspacesIcon from "@mui/icons-material/Workspaces"
 import GroupWorkIcon from "@mui/icons-material/GroupWork"
 import AccountTreeIcon from "@mui/icons-material/AccountTree"
@@ -24,19 +24,12 @@ import BadgeIcon from "@mui/icons-material/Badge"
 import HomeWorkIcon from "@mui/icons-material/HomeWork"
 import ViewTimelineIcon from "@mui/icons-material/ViewTimeline"
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest"
-import GroupsIcon from "@mui/icons-material/Groups"
-import LockOpenIcon from "@mui/icons-material/LockOpen"
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
-import SettingsIcon from "@mui/icons-material/Settings"
-import ContactsIcon from "@mui/icons-material/Contacts"
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded'
 import ClassIcon from '@mui/icons-material/Class'
-import GroupsIcon from "@mui/icons-material/Groups"
 import LockOpenIcon from "@mui/icons-material/LockOpen"
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
 import SettingsIcon from "@mui/icons-material/Settings"
 import ContactsIcon from "@mui/icons-material/Contacts"
-import HomeWorkIcon from "@mui/icons-material/HomeWork"
 import NewspaperIcon from '@mui/icons-material/Newspaper'
 
 function App() {
