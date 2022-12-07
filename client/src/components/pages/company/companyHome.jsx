@@ -123,11 +123,11 @@ const CompanyHome = () => {
                 <Box
                     sx={{
                         p: 2,
-                        width: "50%",
                         width: 400,
                         height: 400,
                     }}
-                ><MainMenuCompany
+                >
+                    <MainMenuCompany
                         company={company}
                         companyMenus={companyMenus}
                     />
