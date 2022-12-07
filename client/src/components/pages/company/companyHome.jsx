@@ -64,6 +64,13 @@ function a11yProps(index) {
     }
 }
 
+import GroupsIcon from "@mui/icons-material/Groups"
+import LockOpenIcon from "@mui/icons-material/LockOpen"
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
+import SettingsIcon from "@mui/icons-material/Settings"
+import ContactsIcon from "@mui/icons-material/Contacts"
+import HomeWorkIcon from "@mui/icons-material/HomeWork"
+import MainMenuCompany from "components/organisms/mainMenuCompany"
 const CompanyHome = () => {
     const [company, setCompany] = useState([])
 
@@ -239,7 +246,6 @@ const CompanyHome = () => {
                 </CompanyProfileTabs>
             </CompanyProfile>
         </CompanyHomeLayout>
-
     )
 }
 

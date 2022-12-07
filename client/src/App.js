@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
-
 import { ClassNews, ClassNewsFeed, LandingPage, NotFound, Signin, ViewCompanyPage, ViewTeamWork } from "components/pages"
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite, PrivateChat } from "components/pages/student"
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews } from "components/pages/teacher"
@@ -33,12 +32,23 @@ import SettingsIcon from "@mui/icons-material/Settings"
 import ContactsIcon from "@mui/icons-material/Contacts"
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded'
 import ClassIcon from '@mui/icons-material/Class'
+import GroupsIcon from "@mui/icons-material/Groups"
+import LockOpenIcon from "@mui/icons-material/LockOpen"
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
+import SettingsIcon from "@mui/icons-material/Settings"
+import ContactsIcon from "@mui/icons-material/Contacts"
+import HomeWorkIcon from "@mui/icons-material/HomeWork"
+import NewspaperIcon from '@mui/icons-material/Newspaper'
 
 function App() {
     const [open, setOpen] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
     const [signInState, setSignInState] = useState("")
     const [profile, setProfile] = useState([])
+    const [teacher, setTeacher] = useState([])
+    const [company, setCompany] = useState([])
+    const [userType, setUserType] = useState([])
+
 
     const [anchorEl, setAnchorEl] = useState(null)
     const openNavbar = Boolean(anchorEl)
@@ -108,7 +118,7 @@ function App() {
             icon: <ViewTimelineIcon />,
         },
         {
-            value: "クラスニューズ",
+            value: "クラスニュース",
             url: "/classNews",
             icon: <ClassIcon />,
         },
@@ -149,6 +159,39 @@ function App() {
             value: "企業プロフィール編集",
             icon: <SettingsIcon />,
             url: "/company/profile/edit",
+        },
+    ]
+
+    const teacherDrawerMenus = [
+        {
+            value: "ニューズ投稿",
+            icon: <NewspaperIcon/>,
+            url: "/teacher/teachernews",
+        },
+        {
+            value: "クラスニューズ",
+            url: "/classNews",
+            icon: <ClassIcon />,
+        },
+        {
+            value: "学生管理",
+            icon: <ManageAccountsIcon />,
+            url: "#",
+        },
+        {
+            value: "学生プロフィール閲覧",
+            icon: <ContactsIcon />,
+            url: "/list/student",
+        },
+        {
+            value: "企業・会社プロフィール閲覧",
+            icon: <HomeWorkIcon />,
+            url: "/list/company",
+        },
+        {
+            value: "先生プロフィール編集",
+            icon: <SettingsIcon />,
+            url: "#",
         },
     ]
 
@@ -242,8 +285,33 @@ function App() {
         axios.post("/account/getProfile")
             .then((res) => {
                 setProfile(res.data)
+                console.log(res.data)
             })
     }, [])
+
+    useEffect(() => {
+        axios.post("/account/getTeacherProfile")
+            .then((res) => {
+                setTeacher(res.data)
+                console.log(res.data)
+            })
+    }, [])
+
+    useEffect(() => {
+        axios.post("/company/getCompanyProfile")
+            .then((res) => {
+                setCompany(res.data)
+                console.log(res.data)
+            })
+    }, [])
+
+    useEffect(() => {
+            axios.post("/account/getUserType")
+                .then((res) => {
+                    setUserType(res.data)
+                    console.log(res.data)
+                })
+        }, [])
 
     return (
         <Box>
@@ -251,9 +319,6 @@ function App() {
                 <Header
                     logoSrc={logo}
                     name={"UPCOLOR"}
-                    menus={menus}
-                    drawerMenus={drawerMenus}
-                    companyDrawerMenus={companyDrawerMenus}
                     signInState={signInState}
                     openNavbar={openNavbar}
                     anchorEl={anchorEl}
@@ -262,10 +327,17 @@ function App() {
                     open={open}
                     menuOpen={menuOpen}
                     setMenuOpen={setMenuOpen}
-                    profile={profile}
                     toggleAlertOpen={toggleAlertOpen}
                     toggleAlertClose={toggleAlertClose}
                     toggleSignout={toggleSignout}
+                    userType={userType}
+                    profile={profile}
+                    teacher={teacher}
+                    company={company}
+                    menus={menus}
+                    drawerMenus={drawerMenus}
+                    companyDrawerMenus={companyDrawerMenus}
+                    teacherDrawerMenus={teacherDrawerMenus}
                 />
 
                 <Routes>

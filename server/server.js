@@ -14,6 +14,7 @@ const company = require("./api/company")
 const teacher = require("./api/teacher")
 const news = require("./api/news")
 const classNews = require("./api/classNews")
+const privateChat = require("./api/privateChat")
 
 const express = require("express")
 
@@ -36,6 +37,7 @@ app.use("/company", company)
 app.use("/teacher", teacher)
 app.use("/news", news)
 app.use("/classNews", classNews)
+app.use("/privateChat", privateChat)
 
 // 双方向通信
 const server = require("http").createServer(app)

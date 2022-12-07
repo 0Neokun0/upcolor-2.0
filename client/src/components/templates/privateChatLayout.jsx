@@ -1,7 +1,7 @@
 import { Container, Stack } from "@mui/material"
 
 const PrivateChatLayout = (props) => {
-    const { list, chat } = props
+    const { list, chat, drawer } = props
 
     return (
         <Container
@@ -23,6 +23,8 @@ const PrivateChatLayout = (props) => {
                 {list}
                 {chat}
             </Stack>
+
+            {drawer}
         </Container>
     )
 }

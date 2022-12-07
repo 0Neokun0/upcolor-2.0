@@ -32,6 +32,7 @@ const TeacherNews = () => {
             text: data.get("text"),
             target: target,
         })
+        window.location.reload()
     }
 
     useEffect(() => {

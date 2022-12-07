@@ -136,6 +136,7 @@ router.post("/enterClassRoom", async (req, res) => {
         const sqlSelectClass = `
             SELECT
                 classes_list.class_name,
+                classes_list.class_password,
                 user_profiles.user_name,
                 images.image_url
             FROM
