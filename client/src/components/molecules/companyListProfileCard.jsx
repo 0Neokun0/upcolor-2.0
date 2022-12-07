@@ -1,6 +1,6 @@
-import { Avatar, Button, Card, CardActionArea, Grid, Typography } from "@mui/material"
+import { Avatar, Button, Card, CardActionArea, Chip, Grid, Typography } from "@mui/material"
 
-// import { server } from 'components/config'
+import { server } from 'components/config'
 
 const CompanyListProfileCard = (props) => {
     return (
@@ -12,7 +12,6 @@ const CompanyListProfileCard = (props) => {
                 sx={{
                     bgcolor: "white",
                     width: 300,
-                    height: 140,
                     m: 2,
                     overflow: "hidden",
                     borderRadius: "25px",
@@ -41,9 +40,9 @@ const CompanyListProfileCard = (props) => {
                             sx={{
                                 border: "2px solid lightgray",
                                 m: 1,
-                                p: 1,
                             }}
                             variant="rounded"
+                            src={server.host + "/images/icon/" + props.company["manager_image"]}
                         />
 
                         <Typography
@@ -56,16 +55,14 @@ const CompanyListProfileCard = (props) => {
                         >
                             {props.company["company_name"]}
                         </Typography>
-                        {/* <Typography
-                        variant="h5"
-                        sx={{
-                            fontWeight: "bold",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                        }}
-                    >
-                        {props.company["occupation_names"]}
-                    </Typography> */}
+                        <Chip
+                            size="small"
+                            sx={{
+                                p: 1,
+                                fontWeight: 600,
+                            }}
+                            label={"業種 : " + props.company["occupation_names"]}
+                        />
 
                     </Grid>
                 </CardActionArea>

@@ -77,6 +77,12 @@ router.post("/list", async (req, res) => {
     const occupations = await get.list("occupation")
     const prefectures = await get.list("prefecture")
 
+    companies.map((company, index) => {
+        if (company["occupation_ids"]) {
+                company["occupation_names"] = company["occupation_ids"].split(",").map((id) => Number(id) === -1 ? "情報無し" : occupations[Number(id) - 1]["occupation_name"]).join('・')
+            }
+    })
+
     res.json({
         companies: companies,
         search: {
