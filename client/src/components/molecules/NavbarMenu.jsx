@@ -1,7 +1,4 @@
 import { Avatar, Box, Button, IconButton, Link, ListItemButton, ListItemIcon, Menu, Tooltip, Typography } from "@mui/material"
-import React from "react"
-
-import { server } from "components/config"
 import { Settings } from "@material-ui/icons"
 
 import ChatIcon from "@mui/icons-material/Chat"
@@ -9,7 +6,6 @@ import PersonAddAltRounded from "@mui/icons-material/PersonAddAltRounded"
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded"
 
 const NavbarMenu = (props) => {
-
     return (
         <>
             <Box
@@ -48,7 +44,7 @@ const NavbarMenu = (props) => {
                                 height: 40,
                                 border: "2px solid lightgray",
                             }}
-                            src={server.host + "/images/icon/" + props.profile.image}
+                            src={props.headerAvatarsrc}
                         />
                     </IconButton>
                 </Tooltip>
@@ -100,7 +96,7 @@ const NavbarMenu = (props) => {
                         borderRadius: 5,
                     }}
                     component={Link}
-                    href="/profile"
+                    href={props.headerHref}
                 >
                     <ListItemIcon>
                         <Avatar
@@ -109,7 +105,7 @@ const NavbarMenu = (props) => {
                                 width: 40,
                                 height: 40
                             }}
-                            src={server.host + "/images/icon/" + props.profile["image"]}
+                            src={props.headerAvatarsrc}
                         />
                     </ListItemIcon>
                     <Typography
@@ -121,13 +117,13 @@ const NavbarMenu = (props) => {
                         {
                             props.userType === 1
                                 ?
-                                <>{props.profile["name"]}</>
+                                props.profile["name"]
                                 :
                                 props.userType === 2
                                     ?
-                                    <>{props.teacher["name"]}</>
+                                    props.teacher["name"]
                                     :
-                                    <>{props.company["company_name"]}</>
+                                    props.company["company_name"]
                         }
 
                     </Typography>

@@ -3,7 +3,7 @@ import { server } from "components/config"
 import { Avatar, Box, Divider, IconButton, Typography, Link as Mlink, Card, Tooltip } from "@mui/material"
 import CommentRoundedIcon from '@mui/icons-material/CommentRounded'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
-import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded';
+import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded'
 import { grey, pink } from "@mui/material/colors"
 
 const ViewFeed = (props) => {

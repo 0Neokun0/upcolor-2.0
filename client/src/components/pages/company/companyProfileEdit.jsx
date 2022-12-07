@@ -1,12 +1,12 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { ProfileEditLayout } from "components/templates"
 import { ProfileForm } from "components/organisms"
 import { ProfileInput, ProfileSelectChip } from "components/molecules"
-import { TextField } from "@mui/material"
+import { Avatar, Box, Button, TextField } from "@mui/material"
+import { server } from "components/config"
 
 const CompanyProfileEdit = () => {
-
     const [profile, setProfile] = useState(false)
     const [courseIds, setCourseIds] = useState([])
     const [coursesList, setCoursesList] = useState([])
@@ -14,10 +14,52 @@ const CompanyProfileEdit = () => {
     const [occupationsList, setOccupationsList] = useState([])
     const [locationIds, setLocationIds] = useState([])
     const [locationsList, setLocationsList] = useState([])
+    const [imagePreview, setImagePreview] = useState(undefined)
+    const [imageDb, setImageDb] = useState(undefined)
+
+    const fileInput = useRef(null)
+
+    const onClickReset = () => {
+        fileInput.current.value = ""
+        setImagePreview(undefined)
+    }
+
+    const onChangeFileInput = (e) => {
+        setImagePreview(undefined)
+
+        if (e.target.files.length === 0) {
+            return
+        }
+
+        if (!e.target.files[0].type.match("image.*")) {
+            return
+        }
+
+        const reader = new FileReader()
+
+        reader.onload = (event) => {
+            setImagePreview(event.target.result)
+        }
+
+        reader.readAsDataURL(e.target.files[0])
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         const data = new FormData(e.currentTarget)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+
+        if (imagePreview !== imageDb) {
+            axios.post("/account/updateUserIcon", {
+                icon: data.get("icon"),
+            },
+                config
+            )
+        }
 
         axios.post("/company/update", {
             introduction: data.get("introduction"),
@@ -30,6 +72,12 @@ const CompanyProfileEdit = () => {
             homePageUrl: data.get("homePageUrl"),
             jobSiteUrl: data.get("jobSiteUrl"),
         })
+            .then(() => {
+                window.location.replace("/company/home")
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
     useEffect(() => {
@@ -48,6 +96,8 @@ const CompanyProfileEdit = () => {
                 setCoursesList(res.data["courses"])
                 setOccupationsList(res.data["occupations"])
                 setLocationsList(res.data["locations"])
+                setImagePreview(server.host + "/images/icon/" + res.data["company"]["manager_image"])
+                setImageDb(server.host + "/images/icon/" + res.data["company"]["manager_image"])
             })
     }, [])
 
@@ -68,13 +118,50 @@ const CompanyProfileEdit = () => {
                         defaultValue={profile["company_name"]}
                     />
 
-                    {/* <Box
-                        component="input"
-                        type="file"
-                        accept="image/*"
-                        name="icon"
-                        onChange={(e) => props.handleIcon(e)}
-                    /> */}
+                    <Button
+                        variant="contained"
+                        fullWidth
+                        component="label"
+                        sx={{
+                            mt: 2,
+                        }}
+                    >
+                        アイコンの選択
+                        <Box
+                            component="input"
+                            type="file"
+                            name="icon"
+                            accept=".png, .jpg, .jpeg"
+                            ref={fileInput}
+                            hidden
+                            onChange={(e) => { onChangeFileInput(e) }}
+                        />
+                    </Button>
+
+                    {
+                        !!imagePreview
+                        &&
+                        <Avatar
+                            src={imagePreview}
+                            variant="rounded"
+                            sx={{
+                                border: "2px solid lightgray",
+                                width: "150px",
+                                height: "150px",
+                                mx: "auto",
+                                mb: 5,
+                                mt: 5,
+                            }}
+                        />
+                    }
+
+                    <Button
+                        variant="outlined"
+                        color="error"
+                        onClick={onClickReset}
+                    >
+                        削除
+                    </Button>
                 </ProfileInput>
 
                 <ProfileInput

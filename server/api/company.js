@@ -77,6 +77,12 @@ router.post("/list", async (req, res) => {
     const occupations = await get.list("occupation")
     const prefectures = await get.list("prefecture")
 
+    companies.map((company, index) => {
+        if (company["occupation_ids"]) {
+                company["occupation_names"] = company["occupation_ids"].split(",").map((id) => Number(id) === -1 ? "情報無し" : occupations[Number(id) - 1]["occupation_name"]).join('・')
+            }
+    })
+
     res.json({
         companies: companies,
         search: {
@@ -148,7 +154,9 @@ router.post("/getCompanyProfile", async (req, res) => {
                 user_id = ?
         `
         const companyId = await sql.handleSelect(sqlSelectCompanyId, [userId])
-        const company = await get.company(companyId[0])
+        const company = await get.company(companyId[0]["company_id"])
+
+        console.log(company)
 
         const courses = await get.list("course")
         const occupations = await get.list("occupation")
@@ -163,6 +171,32 @@ router.post("/getCompanyProfile", async (req, res) => {
         if (company["prefecture_ids"]) {
             company["prefecture_names"] = company["prefecture_ids"].split(",").map((id) => Number(id) === -1 ? "情報無し" : prefectures[Number(id) - 1]["prefecture_name"]).join('・')
         }
+        res.json(company)
+    } catch (err) {
+        console.log(err)
+        res.status(404)
+    }
+})
+
+router.post("/getCompany", async (req, res) => {
+    try {
+        const companyId = req.body.companyId
+        const company = await get.company(companyId)
+
+        const courses = await get.list("course")
+        const occupations = await get.list("occupation")
+        const prefectures = await get.list("prefecture")
+
+        if (company["course_ids"]) {
+            company["course_names"] = company["course_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : courses[Number(id) - 1]["course_name"]).join('・')
+        }
+        if (company["occupation_ids"]) {
+            company["occupation_names"] = company["occupation_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : occupations[Number(id) - 1]["occupation_name"]).join('・')
+        }
+        if (company["prefecture_ids"]) {
+            company["prefecture_names"] = company["prefecture_ids"].split(",").map((id) => Number(id) === -1 ? "なし" : prefectures[Number(id) - 1]["prefecture_name"]).join('・')
+        }
+
         res.json(company)
     } catch (err) {
         console.log(err)

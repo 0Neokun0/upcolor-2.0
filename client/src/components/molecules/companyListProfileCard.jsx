@@ -1,8 +1,6 @@
-import { Avatar, Button, Card, Grid, Typography } from "@mui/material"
+import { Avatar, Card, CardActionArea, Chip, Grid, Typography } from "@mui/material"
 
-import BusinessIcon from '@mui/icons-material/Business'
-
-// import { server } from 'components/config'
+import { server } from 'components/config'
 
 const CompanyListProfileCard = (props) => {
     return (
@@ -14,56 +12,61 @@ const CompanyListProfileCard = (props) => {
                 sx={{
                     bgcolor: "white",
                     width: 300,
-                    height: 150,
-                    p: 2,
                     m: 2,
                     overflow: "hidden",
+                    boxShadow: 2,
                     borderRadius: "25px",
                     transition: "transform 0.3s, border 0.3s",
                     "&:hover": {
                         transform: "translateY(-2px)",
                     },
-                    "& > *": {
-                        minWidth: "clamp(0px, (360px - 100%) * 999,100%)"
-                    },
                 }}
             >
-                <Grid
-                    container
-                    direction="column"
-                    justifyContent="space-evenly"
-                    alignItems="center"
+                <CardActionArea
+                    sx={{
+                        p: 2,
+                        borderRadius: 5,
+                    }}
+                    onClick={() =>
+                        (window.location.href = "/company/" + props.company["company_id"])
+                    }
                 >
-                    <Avatar
-                        sx={{
-                            border: "2px solid lightgray",
-                            m: 1,
-                            p: 1,
-                        }}
-                    />
-
-                    <Typography
-                        variant="h5"
-                        sx={{
-                            fontWeight: "bold",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                        }}
+                    <Grid
+                        container
+                        direction="column"
+                        justifyContent="space-evenly"
+                        alignItems="center"
                     >
-                        {props.value["company_name"]}
-                    </Typography>
+                        <Avatar
+                            sx={{
+                                border: "2px solid lightgray",
+                                m: 1,
+                            }}
+                            variant="rounded"
+                            src={server.host + "/images/icon/" + props.company["manager_image"]}
+                        />
 
-                    <Button
-                        color="inherit"
-                        sx={{
-                            borderRadius: 3,
-                        }}
-                        startIcon={<BusinessIcon />}
-                        href={"/profile/" + props.value["user_id"]}
-                    >
-                        会社ページ
-                    </Button>
-                </Grid>
+                        <Typography
+                            variant="h5"
+                            sx={{
+                                fontWeight: "bold",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                            }}
+                        >
+                            {props.company["company_name"]}
+                        </Typography>
+                        <Chip
+                            size="small"
+                            sx={{
+                                p: 1,
+                                fontWeight: 600,
+                            }}
+                            label={"業種 : " + props.company["occupation_names"]}
+                        />
+
+                    </Grid>
+                </CardActionArea>
             </Card>
         </Grid>
     )

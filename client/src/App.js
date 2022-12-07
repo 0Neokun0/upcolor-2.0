@@ -3,8 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
-
-import { ClassNews, ClassNewsFeed, LandingPage, NotFound, Signin, ViewTeamWork } from "components/pages"
+import { ClassNews, ClassNewsFeed, LandingPage, NotFound, Signin, ViewCompanyPage, ViewTeamWork } from "components/pages"
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite, PrivateChat } from "components/pages/student"
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews, DevelopTabPage } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, CompanyProfileEdit, StudentProfileView } from "components/pages/company"
@@ -16,23 +15,24 @@ import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded"
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded"
 import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded"
 import GroupCreateLayout from "components/templates/groupCreateLayout"
-
-import WorkspacesIcon from '@mui/icons-material/Workspaces'
-import GroupWorkIcon from '@mui/icons-material/GroupWork'
-import AccountTreeIcon from '@mui/icons-material/AccountTree'
-import PersonSearchIcon from '@mui/icons-material/PersonSearch'
-import BadgeIcon from '@mui/icons-material/Badge'
-import ViewTimelineIcon from '@mui/icons-material/ViewTimeline'
-import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest'
+import GroupsIcon from "@mui/icons-material/Groups"
+import WorkspacesIcon from "@mui/icons-material/Workspaces"
+import GroupWorkIcon from "@mui/icons-material/GroupWork"
+import AccountTreeIcon from "@mui/icons-material/AccountTree"
+import PersonSearchIcon from "@mui/icons-material/PersonSearch"
+import BadgeIcon from "@mui/icons-material/Badge"
+import HomeWorkIcon from "@mui/icons-material/HomeWork"
+import ViewTimelineIcon from "@mui/icons-material/ViewTimeline"
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest"
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded'
 import ClassIcon from '@mui/icons-material/Class'
-import GroupsIcon from "@mui/icons-material/Groups"
 import LockOpenIcon from "@mui/icons-material/LockOpen"
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
 import SettingsIcon from "@mui/icons-material/Settings"
 import ContactsIcon from "@mui/icons-material/Contacts"
-import HomeWorkIcon from "@mui/icons-material/HomeWork"
 import NewspaperIcon from '@mui/icons-material/Newspaper'
+
+import { server } from "components/config"
 
 function App() {
     const [open, setOpen] = useState(false)
@@ -189,12 +189,10 @@ function App() {
         },
     ]
 
-
-
     const toggleSignout = () => {
         axios.post("/account/signout")
             .then(() => {
-                sessionStorage.removeItem('AUTHORITY')
+                sessionStorage.removeItem("AUTHORITY")
                 window.location.href = "/"
             })
     }
@@ -281,7 +279,6 @@ function App() {
         axios.post("/account/getProfile")
             .then((res) => {
                 setProfile(res.data)
-                console.log(res.data)
             })
     }, [])
 
@@ -289,7 +286,6 @@ function App() {
         axios.post("/account/getTeacherProfile")
             .then((res) => {
                 setTeacher(res.data)
-                console.log(res.data)
             })
     }, [])
 
@@ -297,7 +293,6 @@ function App() {
         axios.post("/company/getCompanyProfile")
             .then((res) => {
                 setCompany(res.data)
-                console.log(res.data)
             })
     }, [])
 
@@ -305,9 +300,26 @@ function App() {
             axios.post("/account/getUserType")
                 .then((res) => {
                     setUserType(res.data)
-                    console.log(res.data)
                 })
         }, [])
+
+        var headerAvatarsrc
+        if (userType === 1) {
+            headerAvatarsrc = server.host + "/images/icon/" + profile["image"]
+        } else if (userType === 2) {
+            headerAvatarsrc = server.host + "/images/icon/" + profile["image"]
+        } else {
+            headerAvatarsrc = server.host + "/images/icon/" + company["manager_image"]
+        }
+
+        var headerHref
+        if (userType === 1) {
+            headerHref="/profile"
+        } else if (userType === 2) {
+            headerHref="/profile"
+        } else {
+            headerHref="/company/home"
+        }
 
     return (
         <Box>
@@ -334,6 +346,8 @@ function App() {
                     drawerMenus={drawerMenus}
                     companyDrawerMenus={companyDrawerMenus}
                     teacherDrawerMenus={teacherDrawerMenus}
+                    headerAvatarsrc={headerAvatarsrc}
+                    headerHref={headerHref}
                 />
 
                 <Routes>
@@ -424,7 +438,8 @@ function App() {
                     </Route>
 
                     <Route path="company/home" element={<CompanyHome />} />
-                    <Route path="company/profile/edit" element={<CompanyProfileEdit />} />
+                    <Route path="company/profile/edit" element={<ReqAuthCom component={<CompanyProfileEdit />} />} />
+                    <Route path="company/:viewCompany" element={<ViewCompanyPage />} />
                     <Route path="company/profile">
                         <Route path=":userId" element={<ReqAuthCom component={<StudentProfileView />} />} />
                     </Route>
