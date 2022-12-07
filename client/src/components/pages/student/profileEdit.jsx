@@ -176,6 +176,7 @@ const ProfileEdit = () => {
                                 height: "150px",
                                 mx: "auto",
                                 mb: 5,
+                                mt: 5,
                             }}
                         />
                     }

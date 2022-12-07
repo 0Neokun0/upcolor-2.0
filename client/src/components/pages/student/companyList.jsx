@@ -84,11 +84,11 @@ const CompanyList = () => {
                 &&
                 <ListDisplayBox>
                     {
-                        displayCompanies.map((value, index) => {
+                        displayCompanies.map((company, index) => {
                             return (
                                 <CompanyListProfileCard
                                     key={index}
-                                    value={value}
+                                    company={company}
                                 />
                             )
                         })

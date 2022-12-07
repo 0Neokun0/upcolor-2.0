@@ -1,4 +1,6 @@
-import { Card, Chip, Grid, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Card, Chip, Grid, Stack, Typography } from '@mui/material'
+
+import { server } from 'components/config'
 
 const CompanyPageTitle = (props) => {
     return (
@@ -16,13 +18,33 @@ const CompanyPageTitle = (props) => {
                     borderRadius: '10px',
                 }}
             >
-                <Typography
-                    gutterBottom
-                    variant="h2"
-                    component="div"
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                    }}
                 >
-                    {props.company["company_name"]}
-                </Typography>
+                    <Avatar
+                        sx={{
+                            width: 75,
+                            height: 75,
+                            mr: 2,
+                            mb: 2,
+                            border: "2px solid lightgray",
+                        }}
+                        variant="rounded"
+                        src={server.host + "/images/icon/" + props.company["manager_image"]}
+                    />
+                    <Typography
+                        gutterBottom
+                        variant="h2"
+                        component="div"
+                    >
+                        {props.company["company_name"]}
+                    </Typography>
+                </Box>
+
+
 
                 <Stack
                     direction="row"

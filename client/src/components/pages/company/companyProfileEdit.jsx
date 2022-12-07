@@ -97,8 +97,8 @@ const CompanyProfileEdit = () => {
                 setCoursesList(res.data["courses"])
                 setOccupationsList(res.data["occupations"])
                 setLocationsList(res.data["locations"])
-                setImagePreview(server.host + "/images/icon/" + res.data["profile"]["image"])
-                setImageDb(server.host + "/images/icon/" + res.data["profile"]["image"])
+                setImagePreview(server.host + "/images/icon/" + res.data["company"]["manager_image"])
+                setImageDb(server.host + "/images/icon/" + res.data["company"]["manager_image"])
             })
     }, [])
 
@@ -144,12 +144,14 @@ const CompanyProfileEdit = () => {
                         &&
                         <Avatar
                             src={imagePreview}
+                            variant="rounded"
                             sx={{
                                 border: "2px solid lightgray",
                                 width: "150px",
                                 height: "150px",
                                 mx: "auto",
                                 mb: 5,
+                                mt: 5,
                             }}
                         />
                     }

@@ -1,6 +1,4 @@
-import { Avatar, Button, Card, Grid, Typography } from "@mui/material"
-
-import BusinessIcon from '@mui/icons-material/Business'
+import { Avatar, Button, Card, CardActionArea, Grid, Typography } from "@mui/material"
 
 // import { server } from 'components/config'
 
@@ -14,8 +12,7 @@ const CompanyListProfileCard = (props) => {
                 sx={{
                     bgcolor: "white",
                     width: 300,
-                    height: 150,
-                    p: 2,
+                    height: 140,
                     m: 2,
                     overflow: "hidden",
                     borderRadius: "25px",
@@ -23,11 +20,17 @@ const CompanyListProfileCard = (props) => {
                     "&:hover": {
                         transform: "translateY(-2px)",
                     },
-                    "& > *": {
-                        minWidth: "clamp(0px, (360px - 100%) * 999,100%)"
-                    },
                 }}
             >
+                <CardActionArea
+                    sx={{
+                        p: 2,
+                        borderRadius: 5,
+                    }}
+                    onClick={() =>
+                        (window.location.href = "/company/" + props.company["company_id"])
+                    }
+                >
                 <Grid
                     container
                     direction="column"
@@ -40,6 +43,7 @@ const CompanyListProfileCard = (props) => {
                             m: 1,
                             p: 1,
                         }}
+                        variant="rounded"
                     />
 
                     <Typography
@@ -50,20 +54,21 @@ const CompanyListProfileCard = (props) => {
                             textOverflow: "ellipsis",
                         }}
                     >
-                        {props.value["company_name"]}
+                        {props.company["company_name"]}
                     </Typography>
-
-                    <Button
-                        color="inherit"
+                    {/* <Typography
+                        variant="h5"
                         sx={{
-                            borderRadius: 3,
+                            fontWeight: "bold",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
                         }}
-                        startIcon={<BusinessIcon />}
-                        href={"/company/" + props.value["company_id"]}
                     >
-                        会社ページ
-                    </Button>
+                        {props.company["occupation_names"]}
+                    </Typography> */}
+
                 </Grid>
+                </CardActionArea>
             </Card>
         </Grid>
     )
