@@ -1,5 +1,5 @@
 import { ClassNewsCard } from "components/molecules"
-import { Grid, Typography } from "@mui/material"
+import { Box, Grid, Typography } from "@mui/material"
 
 const ClassNewsCardList = (props) => {
     return (
@@ -29,9 +29,22 @@ const ClassNewsCardList = (props) => {
             </Grid>
 
             :
-            <Typography>
+            <Box
+                sx={{
+                    p: 2,
+                    display: "flex",
+                    justifyContent: 'center',
+
+                }}>
+                <Typography
+                    variant= "h6"
+                    sx= {{
+                        fontWeight: 600,
+                    }}>
                 クラスが見つかりません
             </Typography>
+            </Box>
+
     )
 }
 
