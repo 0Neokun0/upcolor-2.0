@@ -4,9 +4,11 @@ import { CompanyListProfileCard, SearchList } from "components/molecules"
 import { ListDisplayBox, SearchListBox } from "components/organisms"
 import { ListLayout } from "components/templates"
 
-import ReduceCapacityIcon from '@mui/icons-material/ReduceCapacity';
-import LocalConvenienceStoreIcon from '@mui/icons-material/LocalConvenienceStore';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import ReduceCapacityIcon from '@mui/icons-material/ReduceCapacity'
+import LocalConvenienceStoreIcon from '@mui/icons-material/LocalConvenienceStore'
+import TravelExploreIcon from '@mui/icons-material/TravelExplore'
+
+import { useNavigate } from "react-router-dom"
 
 const CompanyList = () => {
     const [originalCompanies, setOriginalCompanies] = useState(false)
@@ -15,6 +17,7 @@ const CompanyList = () => {
     const [occupations, setOccupations] = useState([])
     const [prefectures, setPrefectures] = useState([])
     const [searchList, setSearchList] = useState([])
+    const navigate = useNavigate()
 
     const multiIdCheck = (value, select, flg) => {
         if (select.length && !select.some((num) => value ? value.split(",").map(Number).includes(num) : false)) {
@@ -78,11 +81,12 @@ const CompanyList = () => {
                     sqlName="prefecture_name"
                 />
             </SearchListBox>
-
             {
                 displayCompanies
                 &&
-                <ListDisplayBox>
+                <ListDisplayBox
+                    navigate={navigate}
+                >
                     {
                         displayCompanies.map((company, index) => {
                             return (

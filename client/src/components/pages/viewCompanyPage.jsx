@@ -130,29 +130,34 @@ const ViewCompanyPage = () => {
                                         title={"会社紹介"}
                                         icon={<CorporateFareIcon />}
                                         content={company["introduction"]}
+                                        imageSrc="https://i.ibb.co/vBYCcGx/Company-Profile.jpg"
                                     />
 
                                     <CompanyDetailsTab
                                         title={"事業内容"}
                                         icon={<FolderCopyIcon />}
                                         content={company["business"]}
+                                        imageSrc="https://i.ibb.co/HCkYD7V/company-Content.png"
                                     />
 
                                     <CompanyDetailsTab
                                         title={"社長・CEO"}
                                         icon={<GradeRoundedIcon />}
                                         content={company["manager_name"]}
+                                        imageSrc="https://i.ibb.co/jyCvZYn/managername.png"
                                     />
 
                                     <CompanyDetailsTab
                                         title={"社長メッセージ"}
                                         icon={<TryIcon />}
                                         content={company["ceo_message"]}
+                                        imageSrc="https://i.ibb.co/X89S1Zn/manager-Speech.png"
                                     />
                                     <CompanyDetailsTab
                                         title={"本社"}
                                         icon={<EventSeatIcon />}
                                         content={company["address"]}
+                                        imageSrc="https://i.ibb.co/JpFNK60/location-headquarters.jpg"
                                     />
                                 </TabPanel>
 
@@ -164,18 +169,21 @@ const ViewCompanyPage = () => {
                                         title={"業種情報"}
                                         icon={<SchemaIcon />}
                                         content={company["occupation_names"]}
+                                        imageSrc="https://i.ibb.co/By2DNpr/companyoccupations.jpg"
                                     />
 
                                     <CompanyDetailsTab
                                         title={"専攻募集"}
                                         icon={<HailIcon />}
                                         content={company["course_names"]}
+                                        imageSrc="https://i.ibb.co/mD0TS6m/recruiting.jpg"
                                     />
 
                                     <CompanyDetailsTab
                                         title={"支社地域"}
                                         icon={<MapIcon />}
                                         content={company["prefecture_names"]}
+                                        imageSrc="https://i.ibb.co/mRQw5Gh/companylocations.jpg"
                                     />
                                 </TabPanel>
 

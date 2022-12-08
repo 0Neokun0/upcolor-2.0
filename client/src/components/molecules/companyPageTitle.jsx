@@ -26,7 +26,7 @@ const CompanyPageTitle = (props) => {
                             height: 75,
                             mr: 2,
                             mb: 2,
-                            border: "2px solid lightgray",
+                            border: "2px solid gray",
                         }}
                         variant="rounded"
                         src={server.host + "/images/icon/" + props.company["manager_image"]}

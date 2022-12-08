@@ -4,6 +4,7 @@ import { SearchList, StudentListProfileCard } from "components/molecules"
 import { ListDisplayBox, SearchListBox } from "components/organisms"
 import { ListLayout } from "components/templates"
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 import SubjectRoundedIcon from '@mui/icons-material/SubjectRounded';
 import FormatListNumberedRoundedIcon from '@mui/icons-material/FormatListNumberedRounded';
@@ -29,6 +30,7 @@ const StudentList = () => {
     const [programs, setPrograms] = useState([])
     const [tools, setTools] = useState([])
     const [languages, setLanguages] = useState([])
+    const navigate = useNavigate()
 
     const singleIdCheck = (value, select, flg) => {
         // length: 絞り込み要素が選ばれているか
@@ -153,7 +155,9 @@ const StudentList = () => {
                 />
             </SearchListBox>
 
-            <ListDisplayBox>
+            <ListDisplayBox
+                navigate={navigate}
+            >
                 {
                     displayStudents.map((student, index) => {
                         return (
