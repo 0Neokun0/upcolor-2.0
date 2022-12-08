@@ -6,7 +6,7 @@ import { Box } from "@mui/material"
 import { ClassNews, ClassNewsFeed, LandingPage, NotFound, Signin, ViewCompanyPage, ViewTeamWork } from "components/pages"
 import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, RegistTimeTable, ShowTimeTable, TeamWork, TeamList, TeamWorkInvite, StudentList, CompanyList, GroupInvite, PrivateChat } from "components/pages/student"
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews, DevelopTabPage } from "components/pages/teacher"
-import { CompanySignup, CompanyHome, CompanyProfileEdit, StudentProfileView } from "components/pages/company"
+import { CompanySignup, CompanyHome, CompanyProfileEdit, StudentProfileView, CompanyNews } from "components/pages/company"
 import { GroupChatLayout } from "components/templates"
 import { Feed, FeedDetail, Header, ManagementStudent } from "components/organisms"
 import ClassNewsFeedList from "components/organisms/classNewsFeedList"
@@ -413,9 +413,10 @@ function App() {
 
                     <Route path="teacher" element={<ReqAuthTea component={<TeacherHome />} />} />
                     <Route path="teacher/teacherNews" element={<ReqAuthTea component={<TeacherNews />} />} />
+                    <Route path="company/groupNews" element={<ReqAuthCom component={<CompanyNews />} />} />
 
                     <Route path="develop" element={<ReqAuthAdm component={<DevelopHome />} />} />
-                    
+
                     <Route path="classNews">
                         <Route path="" element={<ClassNews />} />
                         <Route path=":classId" element={<ClassNewsFeed />} />

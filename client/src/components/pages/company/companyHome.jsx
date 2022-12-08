@@ -83,18 +83,13 @@ const CompanyHome = () => {
         {
             value: "グループ投稿",
             icon: <GroupsIcon />,
-            url: "#",
+            url: "/company/groupNews",
         },
-        {
-            value: "グループ認証",
-            icon: <LockOpenIcon />,
-            url: "#",
-        },
-        {
-            value: "グループ管理",
-            icon: <ManageAccountsIcon />,
-            url: "#",
-        },
+        // {
+        //     value: "グループ管理",
+        //     icon: <ManageAccountsIcon />,
+        //     url: "#",
+        // },
         {
             value: "学生閲覧",
             icon: <ContactsIcon />,

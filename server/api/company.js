@@ -204,4 +204,55 @@ router.post("/getCompany", async (req, res) => {
     }
 })
 
+router.post("/addCompanyNews", async (req, res) => {
+    const userId = get.userId(req)
+    const title = req.body.title
+    const text = req.body.text
+    const target = req.body.target.join(",")
+
+    const sqlInsertCompanyNews = `
+        INSERT INTO company_news(
+            company_news_user_id,
+            company_news_title,
+            company_news_text,
+            target_course_id
+        )
+        VALUES(
+            ?,
+            ?,
+            ?,
+            ?
+        )
+    `
+
+    await sql.handleInsert(sqlInsertCompanyNews, [userId, title, text, target])
+})
+
+// 自分が投稿したニュースを送信
+router.post("/getMyCompanyNews", async (req, res) => {
+    const userId = get.userId(req)
+
+    const sqlSelectMyCompanyNews = `
+        SELECT
+            user_profiles.user_name,
+            company_news.company_news_id,
+            company_news.company_news_user_id,
+            company_news.company_news_text,
+            company_news.company_news_title,
+            company_news.created_at
+        FROM
+            company_news
+        INNER JOIN
+            user_profiles ON
+            company_news.company_news_user_id = user_profiles.user_id
+        WHERE
+            company_news.company_news_user_id = ?
+        ORDER BY company_news.created_at DESC
+    `
+
+    const companyNews = await sql.handleSelect(sqlSelectMyCompanyNews, [userId])
+
+    res.json(companyNews)
+})
+
 module.exports = router

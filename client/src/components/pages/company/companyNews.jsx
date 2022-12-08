@@ -1,15 +1,16 @@
 import axios from "axios"
 import { ContainerMd } from "components/templates"
-import { NewsForm, NewsList } from "components/organisms"
+import { CompanyNewsForm, CompanyNewsHeader, NewsList } from "components/organisms"
 import { useState } from "react"
 import { useEffect } from "react"
 import { Divider } from "@mui/material"
-import TeacherNewsHeader from "components/organisms/teacherNewsHeader"
+import CompanyNewsList from "components/organisms/companyNewsList"
 
-const TeacherNews = () => {
-    const [profile, setProfile] = useState([])
+
+const CompanyNews = () => {
+    const [company, setCompany] = useState([])
     const [courses, setCourses] = useState([])
-    const [news, setNews] = useState([])
+    const [companyNews, setCompanyNews] = useState([])
     const [formState, setFormState] = useState(false)
 
     const [target, setTarget] = useState([])
@@ -27,7 +28,7 @@ const TeacherNews = () => {
 
         const data = new FormData(e.currentTarget)
 
-        axios.post("/teacher/addNews", {
+        axios.post("/company/addCompanyNews", {
             title: data.get("title"),
             text: data.get("text"),
             target: target,
@@ -36,47 +37,46 @@ const TeacherNews = () => {
     }
 
     useEffect(() => {
-        axios.post("/account/getTeacherProfile")
+        axios.post("/company/getCompanyProfile")
             .then((res) => {
-                setProfile(res.data)
-                console.log(res.data)
+                setCompany(res.data)
             })
 
-        axios.post("/course/course")
+            axios.post("/course/course")
             .then((res) => {
                 setCourses(res.data)
             })
 
-        axios.post("/teacher/getMyNews")
+        axios.post("/company/getMyCompanyNews")
             .then((res) => {
-                setNews(res.data)
+                setCompanyNews(res.data)
                 console.log(res.data)
             })
     }, [])
 
     return (
         <ContainerMd>
-            <TeacherNewsHeader
-                profile={profile}
+            <CompanyNewsHeader
+                company={company}
             />
 
             {
-                profile
-                    ?
-                    <NewsForm
-                        formState={formState}
-                        setFormState={setFormState}
+                company
+                ?
+                <CompanyNewsForm
+                    formState={formState}
+                    setFormState={setFormState}
 
-                        profile={profile}
-                        courses={courses}
+                    company={company}
+                    courses={courses}
 
-                        target={target}
-                        handleTarget={handleTarget}
+                    target={target}
+                    handleTarget={handleTarget}
 
-                        handleSubmit={handleSubmit}
-                    />
-                    :
-                    <></>
+                    handleSubmit={handleSubmit}
+                />
+                :
+                <></>
             }
 
             <Divider
@@ -85,11 +85,11 @@ const TeacherNews = () => {
                 }}
             />
 
-            <NewsList
-                news={news}
+            <CompanyNewsList
+                companyNews={companyNews}
             />
         </ContainerMd>
     )
 }
 
-export default TeacherNews
+export default CompanyNews
