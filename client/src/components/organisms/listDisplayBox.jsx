@@ -1,4 +1,5 @@
-import { Box, Grid } from "@mui/material"
+import { Box, Grid, IconButton, Tooltip } from "@mui/material"
+import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded'
 
 const ListDisplayBox = (props) => {
     return (
@@ -23,6 +24,17 @@ const ListDisplayBox = (props) => {
 
             }}
         >
+            <Tooltip
+                title="戻る"
+                placement="right"
+                size="large"
+            >
+                <IconButton
+                    onClick={() => props.navigate(-1)}
+                >
+                    <KeyboardBackspaceRoundedIcon />
+                </IconButton>
+            </Tooltip>
             <Grid
                 container
                 justifyContent="left"

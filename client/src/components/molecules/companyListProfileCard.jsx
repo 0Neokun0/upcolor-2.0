@@ -1,5 +1,4 @@
 import { Avatar, Card, CardActionArea, Chip, Grid, Typography } from "@mui/material"
-
 import { server } from 'components/config'
 
 const CompanyListProfileCard = (props) => {
@@ -39,7 +38,7 @@ const CompanyListProfileCard = (props) => {
                     >
                         <Avatar
                             sx={{
-                                border: "2px solid lightgray",
+                                border: "1px solid gray",
                                 m: 1,
                             }}
                             variant="rounded"

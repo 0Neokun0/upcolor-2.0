@@ -62,13 +62,16 @@ const CompanyDetailsTab = (props) => {
                     justifyContent="flex-start"
                 >
                     <Box
-                        component="img"
-                        alt="companyAriticleImage"
-                        src="https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg?cs=srgb&dl=pexels-pixabay-269077.jpg&fm=jpg"
                         sx={{
                             width: '150px',
                             height: '120px',
+                            borderRadius: 2,
+                            border: "2px solid gray",
                         }}
+                        component="img"
+                        alt="companyAriticleImage"
+                        src={props.imageSrc}
+
                     />
                     <Box
                         sx={{

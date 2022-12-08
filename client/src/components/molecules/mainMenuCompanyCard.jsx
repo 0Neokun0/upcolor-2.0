@@ -18,6 +18,9 @@ const MainMenuCompanyCard = (props) => {
                 }}
             >
                 <Avatar
+                    sx={{
+                        border: "1px solid gray",
+                    }}
                     variant="rounded"
                     src={server.host + "/images/icon/" + props.company["manager_image"]}
                 />
