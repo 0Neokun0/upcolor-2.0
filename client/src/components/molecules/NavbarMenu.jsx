@@ -134,7 +134,7 @@ const NavbarMenu = (props) => {
                         borderRadius: "15px",
                     }}
                     component={Link}
-                    href="#"
+                    href="/chat"
                 >
                     <ListItemIcon>
                         <ChatIcon
