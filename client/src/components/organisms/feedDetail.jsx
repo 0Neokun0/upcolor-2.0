@@ -8,6 +8,7 @@ const FeedDetail = () => {
     const toggleReplyModalOpen = useOutletContext()["toggleReplyModalOpen"]
     const like = useOutletContext()["like"]
     const handleLike = useOutletContext()["handleLike"]
+    const deletePost = useOutletContext()["deletePost"]
 
     return (
         <>
@@ -19,6 +20,7 @@ const FeedDetail = () => {
                     toggleReplyModalOpen={toggleReplyModalOpen}
                     like={like}
                     handleLike={handleLike}
+                    deletePost={deletePost}
                 />
             }
 

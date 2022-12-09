@@ -152,6 +152,14 @@ const Home = () => {
         setFileCheck(false)
     }
 
+    const deletePost = (postId) => {
+        axios.post("/post/deletePost", {
+            postId: postId,
+        })
+
+        window.location.href = "/home"
+    }
+
     useEffect(() => {
         axios.post("/post/getPostList")
             .then((res) => {
@@ -217,6 +225,8 @@ const Home = () => {
                 news={news}
                 like={like}
                 handleLike={handleLike}
+
+                deletePost={deletePost}
             />
         </>
     )
