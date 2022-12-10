@@ -15,7 +15,8 @@ const ViewFeed = (props) => {
                 size="large"
             >
                 <IconButton
-                    href="/home">
+                    onClick={props["backPage"]}
+                >
                     <KeyboardBackspaceRoundedIcon />
                 </IconButton>
             </Tooltip>
