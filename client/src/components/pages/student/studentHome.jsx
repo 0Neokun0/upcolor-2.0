@@ -23,6 +23,7 @@ const Home = () => {
     const [replys, setReplys] = useState([])
     const [profile, setProfile] = useState([])
     const [news, setNews] = useState([])
+    const [companyNews, setCompanyNews] = useState([])
     const [fileCheck, setFileCheck] = useState(false)
 
     const menus = [
@@ -171,6 +172,10 @@ const Home = () => {
             .then((res) => {
                 setNews(res.data)
             })
+        axios.post("/companyNews/getStudentNews")
+            .then((res) => {
+                setCompanyNews(res.data)
+            })
     }, [])
 
     useEffect(() => {
@@ -218,6 +223,7 @@ const Home = () => {
                 posts={posts}
                 replys={replys}
                 menus={menus}
+                companyNews={companyNews}
                 news={news}
                 like={like}
                 handleLike={handleLike}

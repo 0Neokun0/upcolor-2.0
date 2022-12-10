@@ -15,11 +15,12 @@ const teacher = require("./api/teacher")
 const news = require("./api/news")
 const classNews = require("./api/classNews")
 const privateChat = require("./api/privateChat")
+const companyNews = require("./api/companyNews")
 
 const express = require("express")
 
 const app = express()
-app.use(express.static('public'))
+app.use(express.static("public"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.listen(port, () => console.log(`open port ${port}`))
@@ -38,6 +39,7 @@ app.use("/teacher", teacher)
 app.use("/news", news)
 app.use("/classNews", classNews)
 app.use("/privateChat", privateChat)
+app.use("/companyNews", companyNews)
 
 // 双方向通信
 const server = require("http").createServer(app)

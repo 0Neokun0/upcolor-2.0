@@ -227,6 +227,16 @@ CREATE TABLE news(
     updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
     FOREIGN KEY(news_user_id) REFERENCES user_profiles(user_id) ON DELETE cascade
 );
+CREATE TABLE company_news(
+    company_news_id INT AUTO_INCREMENT PRIMARY KEY,
+    company_news_user_id INT,
+    company_news_title VARCHAR(255),
+    company_news_text TEXT,
+    target_course_id VARCHAR(255),
+    created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+    updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+    FOREIGN KEY(company_news_user_id) REFERENCES user_profiles(user_id) ON DELETE cascade
+);
 
 CREATE TABLE users_joined_company(
     ID INT AUTO_INCREMENT PRIMARY KEY,
