@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 import React from "react"
 import Select from "react-select"
@@ -15,6 +16,7 @@ const TeamList = () => {
     const [search, setSearch] = useState([])
     const [courses, setCourses] = useState([])
     const [technologies, setTechnologies] = useState([])
+    const navigate = useNavigate()
 
     const singleIdCheck = (value, select, flg) => {
         // length: 絞り込み要素が選ばれているか
@@ -77,7 +79,9 @@ const TeamList = () => {
                 />
             </SearchListBox>
 
-            <ListDisplayBox>
+            <ListDisplayBox
+                navigate={navigate}
+            >
                 {
                     displayTeams
                     &&

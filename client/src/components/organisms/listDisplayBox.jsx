@@ -30,7 +30,7 @@ const ListDisplayBox = (props) => {
                 size="large"
             >
                 <IconButton
-                    onClick={() => props.navigate(-1)}
+                    onClick={props["backPage"]}
                 >
                     <KeyboardBackspaceRoundedIcon />
                 </IconButton>
