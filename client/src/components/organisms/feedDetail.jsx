@@ -9,6 +9,7 @@ const FeedDetail = () => {
     const like = useOutletContext()["like"]
     const handleLike = useOutletContext()["handleLike"]
     const deletePost = useOutletContext()["deletePost"]
+    const backPage = useOutletContext()["backPage"]
 
     return (
         <>
@@ -21,6 +22,7 @@ const FeedDetail = () => {
                     like={like}
                     handleLike={handleLike}
                     deletePost={deletePost}
+                    backPage={backPage}
                 />
             }
 

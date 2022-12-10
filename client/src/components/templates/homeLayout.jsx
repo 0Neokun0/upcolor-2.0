@@ -59,6 +59,8 @@ const HomeLayout = (props) => {
                             like: props.like,
                             handleLike: props.handleLike,
                             deletePost: props.deletePost,
+                            backPage: props.backPage,
+
                         }}
                     />
                 </Box>

@@ -17,6 +17,7 @@ import DynamicFeedRoundedIcon from '@mui/icons-material/DynamicFeedRounded'
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import ModeEditRoundedIcon from '@mui/icons-material/ModeEditRounded'
 import GitHubIcon from '@mui/icons-material/GitHub'
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 
 const Profile = () => {
     const [profile, setProfile] = useState([])
@@ -28,6 +29,7 @@ const Profile = () => {
 
     // 投稿
     const [posts, setPosts] = useState([])
+    const [favorites, setFavorites] = useState([])
 
     // フレンド
     const [toggleFollow, setToggleFollow] = useState(1)
@@ -132,6 +134,11 @@ const Profile = () => {
         axios.post("/post/getMyPost")
             .then((res) => {
                 setPosts(res.data)
+            })
+
+        axios.post("/post/getFavorite")
+            .then((res) => {
+                setFavorites(res.data)
             })
 
         axios.post("/account/getProfile")
@@ -371,6 +378,18 @@ const Profile = () => {
                             />
 
                             <Tab
+                                value={6}
+                                icon={
+                                    <Tooltip
+                                        title="お気に入り投稿"
+                                    >
+                                        <FavoriteRoundedIcon />
+                                    </Tooltip>
+                                }
+                                onClick={() => setSelectTab(6)}
+                            />
+
+                            <Tab
                                 value={4}
                                 icon={
                                     <Tooltip
@@ -494,6 +513,32 @@ const Profile = () => {
                                     </Box>
                                 </TabPanel>
                                 {/* 投稿 */}
+
+                                {/* お気に入り投稿 */}
+                                <TabPanel
+                                value={selectTab}
+                                index={6}
+                                >
+                                    <Box>
+                                        {
+                                            favorites.length
+                                                ?
+                                                favorites.map((favorite) => {
+                                                    return (
+                                                        <ProfilePost
+                                                            key={favorite["post_id"]}
+                                                            post={favorite}
+                                                        />
+                                                    )
+                                                })
+                                                :
+                                                <Typography>
+                                                    お気に入り投稿がありません
+                                                </Typography>
+                                        }
+                                    </Box>
+                                </TabPanel>
+                                {/* お気に入り投稿 */}
 
                                 {/* フレンド */}
                                 <TabPanel

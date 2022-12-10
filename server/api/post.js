@@ -297,6 +297,26 @@ router.post("/getMyPost", async (req, res) => {
     res.json(posts)
 })
 
+router.post("/getFavorite", async (req, res) => {
+    const userId = get.userId(req)
+    const sqlSelectFavorite = `
+        SELECT
+            *
+        FROM
+            post_likes
+        INNER JOIN
+            posts
+        ON
+            post_likes.post_id = posts.post_id
+        WHERE
+            like_user_id = ?
+    `
+
+    const favorite = await sql.handleSelect(sqlSelectFavorite, [userId])
+
+    res.json(favorite)
+})
+
 router.post("/getTargetPost", async (req, res) => {
     const userId = req.body.userId
     const sqlSelectPost = `
