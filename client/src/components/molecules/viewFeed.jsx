@@ -4,7 +4,8 @@ import { Avatar, Box, Divider, IconButton, Typography, Link as Mlink, Card, Tool
 import CommentRoundedIcon from '@mui/icons-material/CommentRounded'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded'
-import { grey, pink } from "@mui/material/colors"
+import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded'
+import { grey, pink, red } from "@mui/material/colors"
 
 const ViewFeed = (props) => {
     return (
@@ -12,10 +13,10 @@ const ViewFeed = (props) => {
             <Tooltip
                 title="戻る"
                 placement="right"
-                size="large"
             >
                 <IconButton
-                    href="/home">
+                    onClick={props["backPage"]}
+                >
                     <KeyboardBackspaceRoundedIcon />
                 </IconButton>
             </Tooltip>
@@ -55,7 +56,22 @@ const ViewFeed = (props) => {
                     >
                         {props.post["user_name"]}
                     </Mlink>
+
+                    {
+                        !!props.post["self"]
+                        &&
+                        <IconButton
+                            sx={{
+                                color: red[300],
+                                ml: "auto",
+                            }}
+                            onClick={() => props["deletePost"](props.post["post_id"])}
+                        >
+                            <DeleteForeverRoundedIcon />
+                        </IconButton>
+                    }
                 </Box>
+
                 <Divider />
 
                 <Box

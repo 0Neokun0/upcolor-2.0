@@ -58,6 +58,9 @@ const HomeLayout = (props) => {
                             toggleReplyModalOpen: props.toggleReplyModalOpen,
                             like: props.like,
                             handleLike: props.handleLike,
+                            deletePost: props.deletePost,
+                            backPage: props.backPage,
+
                         }}
                     />
                 </Box>

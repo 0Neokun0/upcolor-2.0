@@ -144,12 +144,24 @@ const Home = () => {
         setFileCheck(false)
     }
 
+    const backPage = () => {
+        window.history.back()
+    }
+
     const toggleReplyModalOpen = () => {
         setOpenReplyModal(true)
     }
     const toggleReplyModalClose = () => {
         setOpenReplyModal(false)
         setFileCheck(false)
+    }
+
+    const deletePost = (postId) => {
+        axios.post("/post/deletePost", {
+            postId: postId,
+        })
+
+        window.location.href = "/home"
     }
 
     useEffect(() => {
@@ -217,6 +229,9 @@ const Home = () => {
                 news={news}
                 like={like}
                 handleLike={handleLike}
+
+                deletePost={deletePost}
+                backPage={backPage}
             />
         </>
     )
