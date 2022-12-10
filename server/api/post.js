@@ -102,7 +102,6 @@ router.post("/addReply", upload.single("image"), async (req, res) => {
 })
 
 router.use("/getPost", async (req, res) => {
-    const userId = get.userId(req)
     const postId = req.body.postId
 
     const sqlSelectPost = `
@@ -110,13 +109,7 @@ router.use("/getPost", async (req, res) => {
             posts.*,
             user_profiles.user_name,
             url_icon.image_url AS url_icon,
-            url_post.image_url AS url_post,
-            CASE posts.post_user_id
-                WHEN ? THEN
-                    1
-                ELSE
-                    0
-                END AS self
+            url_post.image_url AS url_post
         FROM
             posts
         INNER JOIN
@@ -137,10 +130,9 @@ router.use("/getPost", async (req, res) => {
             posts.post_id = url_post.image_id AND
             url_post.image_type = 3
         WHERE
-            post_id = ? AND
-            deleted = 0
+            post_id = ?
     `
-    const post = await sql.handleSelect(sqlSelectPost, [userId, postId])
+    const post = await sql.handleSelect(sqlSelectPost, [postId])
 
     const sqlSelectReplys = `
         SELECT
@@ -168,8 +160,7 @@ router.use("/getPost", async (req, res) => {
             posts.post_id = url_post.image_id AND
             url_post.image_type = 3
         WHERE
-            parent_id = ? AND
-            deleted = 0
+            parent_id = ?
         ORDER BY
             posts.created_at DESC
     `
@@ -209,8 +200,7 @@ router.use("/getPostList", async (req, res) => {
             posts.post_id = url_post.image_id AND
             url_post.image_type = 3
         WHERE
-            parent_id = 0 AND
-            deleted = 0
+            parent_id = 0
         ORDER BY
             posts.created_at
         DESC
@@ -288,8 +278,7 @@ router.post("/getMyPost", async (req, res) => {
             posts
         WHERE
             post_user_id = ? AND
-            parent_id = 0 AND
-            deleted  = 0
+            parent_id = 0
     `
 
     const posts = await sql.handleSelect(sqlSelectPost, [userId])
@@ -326,36 +315,12 @@ router.post("/getTargetPost", async (req, res) => {
             posts
         WHERE
             post_user_id = ? AND
-            parent_id = 0 AND
-            deleted = 0
+            parent_id = 0
     `
 
     const posts = await sql.handleSelect(sqlSelectPost, [userId])
 
     res.json(posts)
-})
-
-router.post("/deletePost", async (req, res) => {
-    try {
-        const userId = get.userId(req)
-        const postId = req.body.postId
-        const sqlUpdatePost = `
-            UPDATE
-                posts
-            SET
-                deleted = 1
-            WHERE
-                post_user_id = ? AND
-                post_id = ?
-        `
-
-        await sql.handleUpdate(sqlUpdatePost, [userId, postId])
-
-        res.status(200)
-    } catch (error) {
-        console.log(error)
-        res.status(404)
-    }
 })
 
 module.exports = router
