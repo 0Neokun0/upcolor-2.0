@@ -30,7 +30,10 @@ const StudentList = () => {
     const [programs, setPrograms] = useState([])
     const [tools, setTools] = useState([])
     const [languages, setLanguages] = useState([])
-    const navigate = useNavigate()
+
+    const backPage = () => {
+        window.history.back()
+    }
 
     const singleIdCheck = (value, select, flg) => {
         // length: 絞り込み要素が選ばれているか
@@ -156,7 +159,7 @@ const StudentList = () => {
             </SearchListBox>
 
             <ListDisplayBox
-                navigate={navigate}
+                backPage={backPage}
             >
                 {
                     displayStudents.map((student, index) => {
