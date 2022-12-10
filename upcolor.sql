@@ -129,6 +129,7 @@ CREATE TABLE posts(
     post_likes INT,
     post_file_url VARCHAR(255),
     parent_id INT,
+    deleted BIT DEFAULT 0,
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
     updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
     FOREIGN KEY(post_user_id) REFERENCES user_profiles(user_id) ON DELETE cascade
