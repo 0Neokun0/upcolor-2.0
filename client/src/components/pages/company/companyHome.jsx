@@ -8,8 +8,6 @@ import { CompanyLinksTab, CompanyProfile } from "components/organisms"
 import CompanyDetailsTab from "components/organisms/companyDetailsTab"
 
 import GroupsIcon from "@mui/icons-material/Groups"
-import LockOpenIcon from "@mui/icons-material/LockOpen"
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
 import SettingsIcon from "@mui/icons-material/Settings"
 import ContactsIcon from "@mui/icons-material/Contacts"
 import MainMenuCompany from "components/organisms/mainMenuCompany"

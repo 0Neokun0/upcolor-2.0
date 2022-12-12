@@ -1,6 +1,6 @@
 import axios from "axios"
 import { ContainerMd } from "components/templates"
-import { CompanyNewsForm, CompanyNewsHeader, NewsList } from "components/organisms"
+import { CompanyNewsForm, CompanyNewsHeader } from "components/organisms"
 import { useState } from "react"
 import { useEffect } from "react"
 import { Divider } from "@mui/material"
