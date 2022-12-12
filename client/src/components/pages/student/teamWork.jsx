@@ -305,7 +305,7 @@ const TeamWork = () => {
 
                                         <TeamInfoCard
                                             auth={auth}
-                                            title="使用した、技術"
+                                            title="使用した技術"
                                             name="technology"
                                             state={technology}
                                             toggleState={setTechnology}
