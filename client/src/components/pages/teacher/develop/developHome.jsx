@@ -26,7 +26,7 @@ const DevelopHome = () => {
         },
         {
             value: "企業登録",
-            image: "https://scontent-itm1-1.xx.fbcdn.net/v/t1.6435-9/83455413_872271626552391_6675737040484564992_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_ohc=hEuUzvhMVawAX-0gIm4&_nc_ht=scontent-itm1-1.xx&oh=00_AfCGXIGlHiRUZ91O69Td4qTBAg1b8MAtKy-zhLbS3_eB2w&oe=6385B0A3",
+            image: "https://i.ibb.co/JpFNK60/location-headquarters.jpg",
             color: "secondary",
             text: "こちらから企業を招待してください。",
             startIcon: <BusinessRoundedIcon />,
@@ -34,7 +34,7 @@ const DevelopHome = () => {
         },
         {
             value: "生徒管理",
-            image: "https://scontent-itm1-1.xx.fbcdn.net/v/t1.6435-9/83455413_872271626552391_6675737040484564992_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_ohc=hEuUzvhMVawAX-0gIm4&_nc_ht=scontent-itm1-1.xx&oh=00_AfCGXIGlHiRUZ91O69Td4qTBAg1b8MAtKy-zhLbS3_eB2w&oe=6385B0A3",
+            image: "http://gsk-sg.com/wp-content/uploads/2017/06/student-management.jpg",
             color: "secondary",
             text: "こちらから生徒を退学させてください。",
             startIcon: <BusinessRoundedIcon />,
