@@ -1,12 +1,13 @@
 import { cyan, deepPurple, green } from "@mui/material/colors"
 
-import { Box, Button, Hidden, Typography } from "@mui/material"
+import { Box, Button, Container, Hidden, Typography } from "@mui/material"
 import logo from "components/atoms/logo/upcolor_logo.svg"
 import image from "components/atoms/images/20943572.jpg"
 import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
 import { LandingPageFeature } from "components/organisms"
+import Footer from "components/organisms/footer/footer"
 
 const LandingPage = (props) => {
     const features = [
@@ -169,7 +170,122 @@ const LandingPage = (props) => {
                 </Hidden>
             </Box>
 
-            下に画像と説明置く予定
+            <Container
+                maxWidth="md"
+                sx={{
+                    mt: 24,
+                    py: 2,
+                }}
+            >
+                <Box
+                    sx={{
+                        display: "flex"
+                    }}
+                >
+                    <Box
+                        component="img"
+                        src="/company.png"
+                        sx={{
+                            border: 1,
+                            width: "400px",
+                            borderColor: "gray",
+                        }}
+                    />
+
+                    <Box
+                        sx={{
+                            ml: 8,
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                fontSize: "1.5em",
+                                fontWeight: "bold",
+                            }}
+                        >
+                            登録企業閲覧
+                        </Typography>
+
+                        <Typography>
+                            学生は企業様に登録していただいた会社情報を、業種や都道府県等でフィルターし、閲覧することができます。
+                        </Typography>
+                    </Box>
+                </Box>
+
+                <Box
+                    sx={{
+                        display: "flex",
+                        mt: 12,
+                    }}
+                >
+                    <Box
+                        sx={{
+                            mr: 8,
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                fontSize: "1.5em",
+                                fontWeight: "bold",
+                            }}
+                        >
+                            進級制作管理
+                        </Typography>
+
+                        <Typography>
+                            進級制作の作品説明や、差別化点などを登録することができます。また、ガントチャートにより進捗を管理することもできます。
+                        </Typography>
+                    </Box>
+
+                    <Box
+                        component="img"
+                        src="/teamWork.png"
+                        sx={{
+                            border: 1,
+                            width: "400px",
+                            borderColor: "gray",
+                        }}
+                    />
+                </Box>
+
+                <Box
+                    sx={{
+                        display: "flex",
+                        mt: 12,
+                    }}
+                >
+                    <Box
+                        component="img"
+                        src="/class.png"
+                        sx={{
+                            border: 1,
+                            width: "400px",
+                            borderColor: "gray",
+                        }}
+                    />
+
+                    <Box
+                        sx={{
+                            ml: 8,
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                fontSize: "1.5em",
+                                fontWeight: "bold",
+                            }}
+                        >
+                            ニュース
+                        </Typography>
+
+                        <Typography>
+                            投稿されたニュースは、設定された対象コースに応じて、学生のホームに表示されます。
+                        </Typography>
+                    </Box>
+                </Box>
+            </Container>
+
+            <Footer />
         </Box>
     )
 }

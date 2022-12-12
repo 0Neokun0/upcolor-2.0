@@ -36,6 +36,9 @@ const TeamWork = () => {
 
     const [currentZoom, setCurrentZoom] = useState("Days")
 
+    // // gantt切り変え
+    // const [ganttState, setGanttState] = useState(false)
+
     const data = {
         data: [],
         links: [],
@@ -99,36 +102,38 @@ const TeamWork = () => {
                 const tasks = res.data.tasks
                 const links = res.data.links
 
-                if (tasks.length) {
-                    tasks.map((task) => {
-                        const start_date = formatDate(new Date(task["task_start"]))
-                        const end_date = formatDate(new Date(task["task_end"]))
+                setTimeout(() => {
+                    if (tasks.length) {
+                        tasks.map((task) => {
+                            const start_date = formatDate(new Date(task["task_start"]))
+                            const end_date = formatDate(new Date(task["task_end"]))
 
-                        return (
-                            gantt.addTask({
-                                id: task["task_id"],
-                                text: task["task_name"],
-                                start_date: start_date,
-                                end_date: end_date,
-                                progress: task["task_progress"],
-                                parent: task["parent_task_id"],
-                            })
-                        )
-                    })
-                }
+                            return (
+                                gantt.addTask({
+                                    id: task["task_id"],
+                                    text: task["task_name"],
+                                    start_date: start_date,
+                                    end_date: end_date,
+                                    progress: task["task_progress"],
+                                    parent: task["parent_task_id"],
+                                })
+                            )
+                        })
+                    }
 
-                if (links) {
-                    links.map((link) => {
-                        return (
-                            gantt.addLink({
-                                id: link["link_id"],
-                                source: link["source"],
-                                target: link["target"],
-                                type: link["type"],
-                            })
-                        )
-                    })
-                }
+                    if (links) {
+                        links.map((link) => {
+                            return (
+                                gantt.addLink({
+                                    id: link["link_id"],
+                                    source: link["source"],
+                                    target: link["target"],
+                                    type: link["type"],
+                                })
+                            )
+                        })
+                    }
+                }, 500)
             })
     }, [teamId])
 

@@ -1,5 +1,5 @@
 import { UserButton } from "components/molecules"
-import { Box, Drawer, Hidden, List } from "@mui/material"
+import { Alert, Box, Drawer, Hidden, List } from "@mui/material"
 
 const PrivateChatUsers = (props) => {
     const { users, selectedUserId, selectedUserOnChange, menuAnchorEl, menuOpen, userMenuOpen, userMenuClose, drawerOpen, onDrawerClose } = props
@@ -18,7 +18,7 @@ const PrivateChatUsers = (props) => {
                 >
                     {
                         users
-                        &&
+                        ?
                         users.map((user, index) => {
                             return (
                                 <UserButton
@@ -36,6 +36,12 @@ const PrivateChatUsers = (props) => {
                                 />
                             )
                         })
+                        :
+                        <Alert
+                            severity="error"
+                        >
+                            相互フォローユーザーが見つかりません
+                        </Alert>
                     }
                 </List>
             </Hidden>

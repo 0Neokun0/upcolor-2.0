@@ -89,7 +89,7 @@ const Home = () => {
         const data = new FormData(e.currentTarget)
         const imgType = data.get("image")["type"]
 
-        if (imgType === "application/octet-stream" || imgType === "image/png") {
+        if (imgType === "application/octet-stream" || imgType === "image/png" || imgType === "image/jpg" || imgType === "image/jpeg") {
             const config = {
                 headers: {
                     'content-type': 'multipart/form-data'
@@ -108,6 +108,7 @@ const Home = () => {
         } else {
             setFileCheck(true)
         }
+        console.log(imgType)
     }
 
     const handleReplySubmit = (e) => {
@@ -115,7 +116,7 @@ const Home = () => {
         const data = new FormData(e.currentTarget)
         const imgType = data.get("image")["type"]
 
-        if (imgType === "application/octet-stream" || imgType === "image/png") {
+        if (imgType === "application/octet-stream" || imgType === "image/png" || imgType === "image/jpg" || imgType === "image/jpeg") {
             const config = {
                 headers: {
                     'content-type': 'multipart/form-data'

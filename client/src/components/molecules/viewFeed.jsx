@@ -21,18 +21,15 @@ const ViewFeed = (props) => {
                 </IconButton>
             </Tooltip>
 
-            <Card
+            <Box
                 sx={{
-                    p: 2,
-                    my: 2,
-                    borderRadius: "15px",
-                    boxShadow: 3,
-                }}>
+                    mt: 2,
+                }}
+            >
                 <Box
                     sx={{
                         display: "flex",
                         alignItems: "center",
-                        mb: 1,
                     }}
                 >
                     <Avatar
@@ -72,14 +69,16 @@ const ViewFeed = (props) => {
                     }
                 </Box>
 
-                <Divider />
+                <Divider
+                    sx={{
+                        my: 2,
+                    }}
+                />
 
                 <Box
                     sx={{
                         width: "80%",
                         m: "auto",
-                        mt: 1,
-                        p: 1,
                     }}
                 >
                     <Typography
@@ -119,10 +118,12 @@ const ViewFeed = (props) => {
                     textAlign={"end"}
                     sx={{
                         mt: 2,
+                        color: "gray",
                     }}
                 >
                     {props.post["created_at"]}
                 </Typography>
+
                 <Box
                     sx={{
                         width: "80%",
@@ -152,7 +153,13 @@ const ViewFeed = (props) => {
                         <FavoriteRoundedIcon />
                     </IconButton>
                 </Box>
-            </Card>
+            </Box>
+
+            <Divider
+                sx={{
+                    my: 2,
+                }}
+            />
         </>
     )
 }

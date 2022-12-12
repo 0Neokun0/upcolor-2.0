@@ -107,11 +107,15 @@ const PrivateChatBox = (props) => {
                     alignItems: "center",
                 }}
             >
-                <ChatForm
-                    input={formInput}
-                    onChange={formInputOnChange}
-                    onClick={sendChat}
-                />
+                {
+                    selectedUserName
+                    &&
+                    <ChatForm
+                        input={formInput}
+                        onChange={formInputOnChange}
+                        onClick={sendChat}
+                    />
+                }
             </Box>
         </Card>
     )
