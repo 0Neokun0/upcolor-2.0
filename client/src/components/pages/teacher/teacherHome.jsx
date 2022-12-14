@@ -59,7 +59,7 @@ const TeacherHome = () => {
         {
             value: "学生管理",
             icon: <ManageAccountsIcon />,
-            url: "#",
+            url: "/develop/tab/management",
         },
         {
             value: "学生プロフィール閲覧",
