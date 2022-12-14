@@ -115,18 +115,21 @@ const TeacherProfileEdit = () => {
                 setImageDb(server.host + "/images/icon/" + res.data["teacher"]["image"])
             })
     }, [])
-  return (
-    teacher
-    &&
-    <ProfileEditLayout>
-        <ProfileForm
-                handleSubmit={handleSubmit}
-            >
+    return (
+        // teacher
+        // &&
+        // <ProfileEditLayout>
+        //     <ProfileForm
+        //             handleSubmit={handleSubmit}
+        //         >
 
-            </ProfileForm>
-    </ProfileEditLayout>
+        <>
+            Hello
+        </>
+        //         </ProfileForm>
+        // </ProfileEditLayout>
 
-  )
+    )
 }
 
 export default TeacherProfileEdit
