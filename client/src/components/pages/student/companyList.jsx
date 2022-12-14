@@ -17,7 +17,10 @@ const CompanyList = () => {
     const [occupations, setOccupations] = useState([])
     const [prefectures, setPrefectures] = useState([])
     const [searchList, setSearchList] = useState([])
-    const navigate = useNavigate()
+
+    const backPage = () => {
+        window.history.back()
+    }
 
     const multiIdCheck = (value, select, flg) => {
         if (select.length && !select.some((num) => value ? value.split(",").map(Number).includes(num) : false)) {
@@ -85,7 +88,7 @@ const CompanyList = () => {
                 displayCompanies
                 &&
                 <ListDisplayBox
-                    navigate={navigate}
+                    backPage={backPage}
                 >
                     {
                         displayCompanies.map((company, index) => {
