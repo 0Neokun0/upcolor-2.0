@@ -29,6 +29,7 @@ const Feed = () => {
                                 content={post["post_text"]}
                                 url_icon={post["url_icon"]}
                                 url_post={post["url_post"]}
+                                cnt={post["cnt"]}
                             />
                         )
                     })

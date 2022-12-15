@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
-import { Avatar, Box, Card, CardActionArea, CardContent, CardHeader, Divider, Typography } from '@mui/material'
+import { Avatar, Badge, Box, Card, CardActionArea, CardContent, CardHeader, Divider, Typography } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import { server } from "components/config"
+import CommentRoundedIcon from '@mui/icons-material/CommentRounded'
 
 const Post = (props) => {
     return (
@@ -75,6 +76,25 @@ const Post = (props) => {
                             </Box>
                         }
                     </CardContent>
+
+                    {
+                        !!props.cnt
+                        &&
+                        <Box
+                            sx={{
+                                mt: 4,
+                                display: "flex",
+                                justifyContent: "end",
+                            }}
+                        >
+                            <Badge
+                                badgeContent={props.cnt}
+                                color="primary"
+                            >
+                                <CommentRoundedIcon color="action" />
+                            </Badge>
+                        </Box>
+                    }
                 </CardActionArea>
             </Card>
         </Link>
