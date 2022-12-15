@@ -22,9 +22,9 @@ const CompanyNewsCard = (props) => {
                 <Avatar
                     alt={name}
                     // 変更予定
-                    src={server.host + "/images/icon/" + props.company["manager_image"]}
+                    src={`${server.host}/images/icon/userIcon.png`}
                     component={Link}
-                    to={`/profile/${id}`}
+                    to={`/company/${id}`}
                     sx={{
                         border: "2px solid lightgray",
                         borderColor: "divider",
