@@ -187,7 +187,8 @@ router.use("/getPostList", async (req, res) => {
             posts.*,
             user_profiles.user_name,
             url_icon.image_url AS url_icon,
-            url_post.image_url AS url_post
+            url_post.image_url AS url_post,
+            COUNT(rep.post_id) AS cnt
         FROM
             posts
         INNER JOIN
@@ -208,9 +209,15 @@ router.use("/getPostList", async (req, res) => {
         ON
             posts.post_id = url_post.image_id AND
             url_post.image_type = 3
+        LEFT JOIN
+            posts rep
+        ON
+            posts.post_id = rep.parent_id
         WHERE
-            parent_id = 0 AND
-            deleted = 0
+            posts.parent_id = 0 AND
+            posts.deleted = 0
+        GROUP BY
+            posts.post_id
         ORDER BY
             posts.created_at
         DESC
