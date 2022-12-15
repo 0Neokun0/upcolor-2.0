@@ -1,6 +1,6 @@
 import { cyan, deepPurple, green } from "@mui/material/colors"
 
-import { Box, Button, Container, Hidden, Typography } from "@mui/material"
+import { Box, Button, Container, Hidden, IconButton, Typography } from "@mui/material"
 import logo from "components/atoms/logo/upcolor_logo.svg"
 import image from "components/atoms/images/20943572.jpg"
 import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
@@ -8,8 +8,23 @@ import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
 import { LandingPageFeature } from "components/organisms"
 import Footer from "components/organisms/footer/footer"
+import { useEffect, useState } from "react"
 
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 const LandingPage = (props) => {
+    const [showsScrolBtn, setShowScrolBtn] = useState(false)
+
+    useEffect(() => {
+        const handleButtonVisibility = () => {
+            window.pageYOffset > 300 ? setShowScrolBtn(true) : setShowScrolBtn(false)
+        }
+
+        window.addEventListener("scroll", handleButtonVisibility)
+        return () => {
+            window.addEventListener("scroll", handleButtonVisibility)
+        }
+    }, [])
+
     const features = [
         {
             icon: <PeopleAltRoundedIcon />,
@@ -283,6 +298,31 @@ const LandingPage = (props) => {
                         </Typography>
                     </Box>
                 </Box>
+
+                {
+                    showsScrolBtn
+                    &&
+                    <IconButton
+                        sx={{
+                            position: 'fixed',
+                            bottom: '40px',
+                            right: '40px',
+                            bgcolor: "#42a5f5",
+                            color: '#fff',
+                            textAlign: 'center',
+                        }}
+                        onClick={() => {
+                            window.scrollTo({
+                                top: 0,
+                                left: 0,
+                                behavior: "smooth",
+                            })
+                        }}
+
+                    >
+                        <KeyboardArrowUpIcon />
+                    </IconButton>
+                }
             </Container>
 
             <Footer />
