@@ -10,6 +10,7 @@ const CompanyNewsList = (props) => {
                 props.companyNews.map((elem) => {
                     return (
                         <CompanyNewsCard
+                            company={props.company}
                             key={elem["company_news_id"]}
                             id={elem["company_news_id"]}
                             name={elem["user_name"]}
