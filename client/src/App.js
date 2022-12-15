@@ -8,7 +8,7 @@ import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, R
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews, DevelopTabPage } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, CompanyProfileEdit, StudentProfileView, CompanyNews } from "components/pages/company"
 import { GroupChatLayout } from "components/templates"
-import { Feed, FeedDetail, Header, ManagementStudent } from "components/organisms"
+import { Feed, FeedDetail, Header, Footer, ManagementStudent } from "components/organisms"
 import ClassNewsFeedList from "components/organisms/classNewsFeedList"
 import logo from "components/atoms/logo/upcolor_logo.svg"
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded"
@@ -159,7 +159,7 @@ function App() {
     const teacherDrawerMenus = [
         {
             value: "ニューズ投稿",
-            icon: <NewspaperIcon/>,
+            icon: <NewspaperIcon />,
             url: "/teacher/teachernews",
         },
         {
@@ -297,29 +297,29 @@ function App() {
     }, [])
 
     useEffect(() => {
-            axios.post("/account/getUserType")
-                .then((res) => {
-                    setUserType(res.data)
-                })
-        }, [])
+        axios.post("/account/getUserType")
+            .then((res) => {
+                setUserType(res.data)
+            })
+    }, [])
 
-        var navBarMenuAvatarSrc
-        if (userType === 1 || userType === 4) {
-            navBarMenuAvatarSrc = server.host + "/images/icon/" + profile["image"]
-        } else if (userType === 2) {
-            navBarMenuAvatarSrc = server.host + "/images/icon/" + teacher["image"]
-        } else {
-            navBarMenuAvatarSrc = server.host + "/images/icon/" + company["manager_image"]
-        }
+    var navBarMenuAvatarSrc
+    if (userType === 1 || userType === 4) {
+        navBarMenuAvatarSrc = server.host + "/images/icon/" + profile["image"]
+    } else if (userType === 2) {
+        navBarMenuAvatarSrc = server.host + "/images/icon/" + teacher["image"]
+    } else {
+        navBarMenuAvatarSrc = server.host + "/images/icon/" + company["manager_image"]
+    }
 
-        var navBarMenuHref
-        if (userType === 1 || userType === 4) {
-            navBarMenuHref="/profile"
-        } else if (userType === 2) {
-            navBarMenuHref="/profile"
-        } else {
-            navBarMenuHref="/company/home"
-        }
+    var navBarMenuHref
+    if (userType === 1 || userType === 4) {
+        navBarMenuHref = "/profile"
+    } else if (userType === 2) {
+        navBarMenuHref = "/profile"
+    } else {
+        navBarMenuHref = "/company/home"
+    }
 
     return (
         <Box>
@@ -447,8 +447,21 @@ function App() {
                     </Route>
                 </Routes>
             </BrowserRouter>
+
+            <BrowserRouter>
+                <Footer
+                    logoSrc={logo}
+                />
+            </BrowserRouter>
+
         </Box>
+
+        
     )
+
+
+
+
 }
 
 export default App
