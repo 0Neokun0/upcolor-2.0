@@ -7,6 +7,9 @@ const TeamInfoCard = (props) => {
     return (
         <Card
             variant="outlined"
+            sx={{
+                borderRadius: 3,
+            }}
         >
             <Box
                 component="form"

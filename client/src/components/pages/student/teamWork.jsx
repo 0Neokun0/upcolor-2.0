@@ -1,7 +1,7 @@
 import axios from "axios"
 import { gantt } from 'dhtmlx-gantt'
 import { useCallback, useEffect, useState } from "react"
-
+import { Box, Button, Dialog, DialogActions, DialogTitle, Divider, Drawer, FormControlLabel, Hidden, IconButton, Stack, Switch, Tooltip } from "@mui/material"
 import { TeamWorkLayout } from "components/templates"
 import { TeamJoinForm, TeamOutline } from "components/organisms"
 import { TeamInfoCard } from "components/molecules"
@@ -9,8 +9,9 @@ import Gantt from "components/atoms/gantt"
 import Toolbar from "components/atoms/toolbar"
 import { client } from "components/config"
 
-import { Box, Button, Dialog, DialogActions, DialogTitle, Divider, Drawer, FormControlLabel, Hidden, IconButton, Stack, Switch, Tooltip } from "@mui/material"
+
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded'
+import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded'
 
 const TeamWork = () => {
     const auth = true
@@ -41,6 +42,10 @@ const TeamWork = () => {
     const data = {
         data: [],
         links: [],
+    }
+
+    const backPage = () => {
+        window.history.back()
     }
 
     // チーム設定保存
@@ -199,6 +204,23 @@ const TeamWork = () => {
         team["teamInfo"]
             ?
             <>
+                <Box
+                    sx={{
+                        ml: 55,
+                    }}>
+                    <Tooltip
+                        title="戻る"
+                        placement="right"
+                        size="large"
+                    >
+                        <IconButton
+                            onClick={backPage}
+                        >
+                            <KeyboardBackspaceRoundedIcon />
+                        </IconButton>
+                    </Tooltip>
+                </Box>
+
                 <TeamWorkLayout>
                     <Stack
                         direction="row"

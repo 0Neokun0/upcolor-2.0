@@ -8,6 +8,7 @@ const TeamWorkLayout = (props) => {
             sx={{
                 backgroundColor: "white",
                 p: 2,
+                borderRadius: 3,
             }}
         >
             {props.children}
