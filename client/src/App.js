@@ -170,7 +170,7 @@ function App() {
         {
             value: "学生管理",
             icon: <ManageAccountsIcon />,
-            url: "#",
+            url: "/develop/tab/management",
         },
         {
             value: "学生プロフィール閲覧",
@@ -303,22 +303,22 @@ function App() {
                 })
         }, [])
 
-        var headerAvatarsrc
-        if (userType === 1) {
-            headerAvatarsrc = server.host + "/images/icon/" + profile["image"]
+        var navBarMenuAvatarSrc
+        if (userType === 1 || userType === 4) {
+            navBarMenuAvatarSrc = server.host + "/images/icon/" + profile["image"]
         } else if (userType === 2) {
-            headerAvatarsrc = server.host + "/images/icon/" + profile["image"]
+            navBarMenuAvatarSrc = server.host + "/images/icon/" + teacher["image"]
         } else {
-            headerAvatarsrc = server.host + "/images/icon/" + company["manager_image"]
+            navBarMenuAvatarSrc = server.host + "/images/icon/" + company["manager_image"]
         }
 
-        var headerHref
-        if (userType === 1) {
-            headerHref="/profile"
+        var navBarMenuHref
+        if (userType === 1 || userType === 4) {
+            navBarMenuHref="/profile"
         } else if (userType === 2) {
-            headerHref="/profile"
+            navBarMenuHref="/profile"
         } else {
-            headerHref="/company/home"
+            navBarMenuHref="/company/home"
         }
 
     return (
@@ -346,8 +346,8 @@ function App() {
                     drawerMenus={drawerMenus}
                     companyDrawerMenus={companyDrawerMenus}
                     teacherDrawerMenus={teacherDrawerMenus}
-                    headerAvatarsrc={headerAvatarsrc}
-                    headerHref={headerHref}
+                    navBarMenuAvatarSrc={navBarMenuAvatarSrc}
+                    navBarMenuHref={navBarMenuHref}
                 />
 
                 <Routes>

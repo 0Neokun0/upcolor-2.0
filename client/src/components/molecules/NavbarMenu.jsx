@@ -44,7 +44,7 @@ const NavbarMenu = (props) => {
                                 height: 40,
                                 border: "2px solid lightgray",
                             }}
-                            src={props.headerAvatarsrc}
+                            src={props.navBarMenuAvatarSrc}
                         />
                     </IconButton>
                 </Tooltip>
@@ -96,7 +96,7 @@ const NavbarMenu = (props) => {
                         borderRadius: 5,
                     }}
                     component={Link}
-                    href={props.headerHref}
+                    href={props.navBarMenuHref}
                 >
                     <ListItemIcon>
                         <Avatar
@@ -105,7 +105,7 @@ const NavbarMenu = (props) => {
                                 width: 40,
                                 height: 40
                             }}
-                            src={props.headerAvatarsrc}
+                            src={props.navBarMenuAvatarSrc}
                         />
                     </ListItemIcon>
                     <Typography
