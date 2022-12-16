@@ -7,7 +7,7 @@ import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
 import { LandingPageFeature } from "components/organisms"
-import Footer from "components/organisms/footer/footer"
+import Footer from "components/organisms/footer"
 import { useEffect, useState } from "react"
 
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
@@ -324,8 +324,6 @@ const LandingPage = (props) => {
                     </IconButton>
                 }
             </Container>
-
-            <Footer />
         </Box>
     )
 }
