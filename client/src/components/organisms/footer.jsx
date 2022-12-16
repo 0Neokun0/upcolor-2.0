@@ -1,5 +1,6 @@
-import { Box, Typography, Link } from '@mui/material'
+import { Box, Typography, Link, Button, IconButton } from '@mui/material'
 import logo from "components/atoms/logo/upcolor_logo.svg"
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 const Footer = () => {
     return (
@@ -21,7 +22,7 @@ const Footer = () => {
             >
                 <Box
                     sx={{
-                        marginRight: "1250px",
+                        marginRight: "1050px",
                         marginBottom: "-55px",
                     }}
                 >
@@ -36,7 +37,7 @@ const Footer = () => {
             <Typography
                 sx={{
                     fontSize: "1.4em",
-                    marginRight: "1100px",
+                    marginRight: "900px",
                 }}
             >
                 UpColor
@@ -44,29 +45,27 @@ const Footer = () => {
 
             <Typography
                 sx={{
-                    marginRight: "1100px",
+                    marginRight: "920px",
                 }}
                 variant="caption"
             >
                 &copy 2022 - NAOKO 進級制作2022
             </Typography>
 
-            <Typography>
-                PAGETOP
-            </Typography>
-
-            <Typography>
-                トップ
-            </Typography>
-
-            <Typography>
-                学校
-            </Typography>
-
-            <Typography>
-                企業
-            </Typography>
-            
+            <a>
+                <IconButton
+                    href="https://github.com/0Neokun0/upcolor-2.0"
+                    sx={{
+                        width:"50px",
+                    }}
+                >
+                    <GitHubIcon
+                        sx={{
+                            color: "red",
+                        }}
+                    />
+                </IconButton>
+            </a>
         </Box>
     )
 }
