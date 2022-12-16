@@ -86,6 +86,7 @@ const CompanyNews = () => {
             />
 
             <CompanyNewsList
+                company={company}
                 companyNews={companyNews}
             />
         </ContainerMd>

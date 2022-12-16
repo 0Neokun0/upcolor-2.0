@@ -58,6 +58,10 @@ const ViewCompanyPage = () => {
 
     const [value, setValue] = useState(0)
 
+    const backPage = () => {
+        window.history.back()
+    }
+
     const handleChange = (event, newValue) => {
         setValue(newValue)
     }
@@ -79,7 +83,8 @@ const ViewCompanyPage = () => {
                 size="small"
             >
                 <IconButton
-                    href="/list/company">
+                    onClick={backPage}
+                >
                     <KeyboardBackspaceRoundedIcon />
                 </IconButton>
             </Tooltip>

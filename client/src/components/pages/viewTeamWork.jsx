@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom"
 import axios from "axios"
-import { gantt } from 'dhtmlx-gantt'
+import { useParams } from "react-router-dom"
 import { useCallback, useEffect, useState } from "react"
+import { Box, Divider, Hidden, IconButton, Stack, Tooltip, Typography } from "@mui/material"
+import { gantt } from 'dhtmlx-gantt'
 
 import { TeamWorkLayout } from "components/templates"
 import { TeamOutline } from "components/organisms"
@@ -9,8 +10,7 @@ import { TeamInfoCard } from "components/molecules"
 import Gantt from "components/atoms/gantt"
 import Toolbar from "components/atoms/toolbar"
 import { client } from "components/config"
-
-import { Box, Divider, Hidden, Stack, Typography } from "@mui/material"
+import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded'
 
 const TeamWork = () => {
     const auth = false
@@ -42,6 +42,10 @@ const TeamWork = () => {
     const data = {
         data: [],
         links: [],
+    }
+
+    const backPage = () => {
+        window.history.back()
     }
 
     const onSubmit = (e) => {
@@ -161,62 +165,50 @@ const TeamWork = () => {
     return (
         team["teamInfo"]
             ?
-            <TeamWorkLayout>
-                <Stack
-                    direction="row"
+            <>
+                <Box
                     sx={{
-                        mb: 2,
-                    }}
-                >
-                    <Hidden
-                        lgDown
+                        ml: 55,
+                    }}>
+                    <Tooltip
+                        title="戻る"
+                        placement="right"
+                        size="large"
                     >
-                        {
-                            team
-                                ?
-                                <Box
-                                    sx={{
-                                        width: "400px",
-                                        mr: 2,
-                                    }}
-                                >
-                                    <TeamOutline
-                                        auth={auth}
-                                        team={team}
-                                        togglePopover={togglePopover}
-                                        setTogglePopover={setTogglePopover}
-                                        genInviteUrl={genInviteUrl}
-                                    />
-                                </Box>
-                                :
-                                <></>
-                        }
-                    </Hidden>
-
-                    <Box
-                        width="100%"
+                        <IconButton
+                            onClick={backPage}
+                        >
+                            <KeyboardBackspaceRoundedIcon />
+                        </IconButton>
+                    </Tooltip>
+                </Box>
+                <TeamWorkLayout>
+                    <Stack
+                        direction="row"
+                        sx={{
+                            mb: 2,
+                        }}
                     >
                         <Hidden
-                            mdUp
+                            lgDown
                         >
                             {
                                 team
                                     ?
-                                    <>
+                                    <Box
+                                        sx={{
+                                            width: "400px",
+                                            mr: 2,
+                                        }}
+                                    >
                                         <TeamOutline
+                                            auth={auth}
                                             team={team}
                                             togglePopover={togglePopover}
                                             setTogglePopover={setTogglePopover}
                                             genInviteUrl={genInviteUrl}
-                                            student={false}
                                         />
-
-                                        <Divider
-                                            sx={{
-                                                mb: 2,
-                                            }}
-                                        />
-                                    </>
+                                    </Box>
                                     :
                                     <></>
                             }
@@ -225,100 +217,131 @@ const TeamWork = () => {
                         <Box
                             width="100%"
                         >
-                            {
-                                team["teamInfo"]
-                                    ?
-                                    <Box
-                                        sx={{
-                                            ".MuiPaper-root + .MuiPaper-root": {
-                                                mt: 2,
-                                            }
-                                        }}
-                                    >
-                                        <TeamInfoCard
-                                            auth={auth}
-                                            title="作品説明"
-                                            name="description"
-                                            state={description}
-                                            toggleState={setDescription}
-                                            content={team["teamInfo"]["team_work_description"]}
-                                            onSubmit={onSubmit}
-                                        />
+                            <Hidden
+                                mdUp
+                            >
+                                {
+                                    team
+                                        ?
+                                        <>
+                                            <TeamOutline
+                                                team={team}
+                                                togglePopover={togglePopover}
+                                                setTogglePopover={setTogglePopover}
+                                                genInviteUrl={genInviteUrl}
+                                                student={false}
+                                            />
 
-                                        <TeamInfoCard
-                                            auth={auth}
-                                            title="ターゲット"
-                                            name="target"
-                                            state={target}
-                                            toggleState={setTarget}
-                                            content={team["teamInfo"]["team_target"]}
-                                            onSubmit={onSubmit}
-                                        />
+                                            <Divider
+                                                sx={{
+                                                    mb: 2,
+                                                }}
+                                            />
+                                        </>
+                                        :
+                                        <></>
+                                }
+                            </Hidden>
 
-                                        <TeamInfoCard
-                                            auth={auth}
-                                            title="競合サービス、差別化"
-                                            name="strategy"
-                                            state={strategy}
-                                            toggleState={setStrategy}
-                                            content={team["teamInfo"]["team_strategy"]}
-                                            onSubmit={onSubmit}
-                                        />
+                            <Box
+                                width="100%"
+                            >
+                                {
+                                    team["teamInfo"]
+                                        ?
+                                        <Box
+                                            sx={{
+                                                ".MuiPaper-root + .MuiPaper-root": {
+                                                    mt: 2,
+                                                }
+                                            }}
+                                        >
+                                            <TeamInfoCard
+                                                auth={auth}
+                                                title="作品説明"
+                                                name="description"
+                                                state={description}
+                                                toggleState={setDescription}
+                                                content={team["teamInfo"]["team_work_description"]}
+                                                onSubmit={onSubmit}
+                                            />
 
-                                        <TeamInfoCard
-                                            auth={auth}
-                                            title="使用した、技術"
-                                            name="technology"
-                                            state={technology}
-                                            toggleState={setTechnology}
-                                            content={team["teamInfo"]["technology_used"]}
-                                            onSubmit={onSubmit}
-                                        />
-                                    </Box>
-                                    :
-                                    <></>
-                            }
+                                            <TeamInfoCard
+                                                auth={auth}
+                                                title="ターゲット"
+                                                name="target"
+                                                state={target}
+                                                toggleState={setTarget}
+                                                content={team["teamInfo"]["team_target"]}
+                                                onSubmit={onSubmit}
+                                            />
+
+                                            <TeamInfoCard
+                                                auth={auth}
+                                                title="競合サービス、差別化"
+                                                name="strategy"
+                                                state={strategy}
+                                                toggleState={setStrategy}
+                                                content={team["teamInfo"]["team_strategy"]}
+                                                onSubmit={onSubmit}
+                                            />
+
+                                            <TeamInfoCard
+                                                auth={auth}
+                                                title="使用した、技術"
+                                                name="technology"
+                                                state={technology}
+                                                toggleState={setTechnology}
+                                                content={team["teamInfo"]["technology_used"]}
+                                                onSubmit={onSubmit}
+                                            />
+                                        </Box>
+                                        :
+                                        <></>
+                                }
+                            </Box>
                         </Box>
-                    </Box>
-                </Stack>
+                    </Stack>
 
-                {
-                    publishGantt
-                    &&
-                    <Box>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                            }}
-                        >
-                            <Box>
-                                <Toolbar
+                    {
+                        publishGantt
+                        &&
+                        <Box>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <Box>
+                                    <Toolbar
+                                        zoom={currentZoom}
+                                        onZoomChange={handleZoomChange}
+                                    />
+                                </Box>
+                            </Box>
+
+                            <Box
+                                className="gantt-container"
+                                sx={{
+                                    height: "400px",
+                                }}
+                            >
+                                <Gantt
                                     zoom={currentZoom}
-                                    onZoomChange={handleZoomChange}
+                                    tasks={data}
                                 />
                             </Box>
                         </Box>
-
-                        <Box
-                            className="gantt-container"
-                            sx={{
-                                height: "400px",
-                            }}
-                        >
-                            <Gantt
-                                zoom={currentZoom}
-                                tasks={data}
-                            />
-                        </Box>
-                    </Box>
-                }
-            </TeamWorkLayout>
+                    }
+                </TeamWorkLayout>
+            </>
             :
             <Typography>
                 チームが見つかりません
             </Typography>
+
     )
 }
 
