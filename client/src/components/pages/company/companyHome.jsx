@@ -27,7 +27,8 @@ import HailIcon from "@mui/icons-material/Hail"
 import SchemaIcon from "@mui/icons-material/Schema"
 import EventSeatIcon from "@mui/icons-material/EventSeat"
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded"
-import MapIcon from '@mui/icons-material/Map'
+import MapIcon from "@mui/icons-material/Map"
+import AccountTreeIcon from "@mui/icons-material/AccountTree"
 function TabPanel(props) {
     const { children, value, index, ...other } = props
     return (
@@ -92,6 +93,11 @@ const CompanyHome = () => {
             value: "学生閲覧",
             icon: <ContactsIcon />,
             url: "/list/student",
+        },
+        {
+            value: "進級制作閲覧",
+            icon: <AccountTreeIcon />,
+            url: "/teamlist",
         },
         {
             value: "企業・会社閲覧",

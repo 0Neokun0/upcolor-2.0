@@ -24,16 +24,17 @@ import BadgeIcon from "@mui/icons-material/Badge"
 import HomeWorkIcon from "@mui/icons-material/HomeWork"
 import ViewTimelineIcon from "@mui/icons-material/ViewTimeline"
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest"
-import ChatRoundedIcon from '@mui/icons-material/ChatRounded'
-import ClassIcon from '@mui/icons-material/Class'
+import ChatRoundedIcon from "@mui/icons-material/ChatRounded"
+import ClassIcon from "@mui/icons-material/Class"
 import LockOpenIcon from "@mui/icons-material/LockOpen"
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
 import SettingsIcon from "@mui/icons-material/Settings"
 import ContactsIcon from "@mui/icons-material/Contacts"
-import NewspaperIcon from '@mui/icons-material/Newspaper'
-import LocationCityIcon from '@mui/icons-material/LocationCity'
-import ContactMailIcon from '@mui/icons-material/ContactMail'
-import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications'
+import NewspaperIcon from "@mui/icons-material/Newspaper"
+import ContactMailIcon from "@mui/icons-material/ContactMail"
+import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications"
+import ApartmentRoundedIcon from '@mui/icons-material/ApartmentRounded';
+
 import { server } from "components/config"
 
 function App() {
@@ -57,7 +58,7 @@ function App() {
 
     let menus
         if (userType === 1) {
-             menus = [
+            menus = [
                 {
                     label: "学生フィード",
                     icon: <PeopleAltRoundedIcon />,
@@ -78,7 +79,7 @@ function App() {
                 },
             ]
         } else if (userType === 2) {
-             menus = [
+            menus = [
                 {
                     label: "教員ホーム",
                     icon: <ContactMailIcon />,
@@ -86,7 +87,7 @@ function App() {
                     url: "/teacher",
                 },
                 {
-                    label: "ク学生閲覧",
+                    label: "学生閲覧",
                     icon: <SchoolRoundedIcon />,
                     value: "学校",
                     url: "/list/student",
@@ -101,22 +102,28 @@ function App() {
         } else if (userType === 3) {
             menus = [
                {
-                   label: "企業ホーム",
-                   icon: <LocationCityIcon />,
-                   value: "教員",
-                   url: "/develop",
+                    label: "企業ホーム",
+                    icon: <ApartmentRoundedIcon />,
+                    value: "企業",
+                    url: "/company/home",
                },
                {
-                   label: "学生閲覧",
-                   icon: <PeopleAltRoundedIcon />,
-                   value: "学生",
-                   url: "/list/student",
+                    label: "学生閲覧",
+                    icon: <PeopleAltRoundedIcon />,
+                    value: "学生",
+                    url: "/list/student",
                },
                {
-                   label: "企業検索",
-                   icon: <BusinessRoundedIcon />,
-                   value: "企業",
-                   url: "/list/company",
+                    label: "進級制作閲覧",
+                    icon: <AccountTreeIcon />,
+                    value: "進級制作",
+                    url: "/teamlist",
+                },
+               {
+                    label: "企業検索",
+                    icon: <BusinessRoundedIcon />,
+                    value: "企業",
+                    url: "/list/company",
                },
            ]
        } else if (userType === 4) {
@@ -141,7 +148,7 @@ function App() {
             },
         ]
         } else {
-             menus = [
+            menus = [
                 {
                     label: "学生閲覧",
                     icon: <PeopleAltRoundedIcon />,

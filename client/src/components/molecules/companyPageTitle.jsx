@@ -51,7 +51,7 @@ const CompanyPageTitle = (props) => {
                             p: 1,
                             fontWeight: 600,
                         }}
-                        label={"業種" + " : " + props.company["occupation_names"]}
+                        label={"業種 : " + props.company["occupation_names"]}
                     />
                 </Stack>
             </Card>
