@@ -39,9 +39,6 @@ const CompanyPageTitle = (props) => {
                         {props.company["company_name"]}
                     </Typography>
                 </Box>
-
-
-
                 <Stack
                     direction="row"
                     spacing={2}
