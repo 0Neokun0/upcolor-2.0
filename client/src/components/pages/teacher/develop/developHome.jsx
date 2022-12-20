@@ -35,7 +35,7 @@ const DevelopHome = () => {
         {
             value: "生徒管理",
             image: "http://gsk-sg.com/wp-content/uploads/2017/06/student-management.jpg",
-            color: "secondary",
+            color: "primary",
             text: "こちらから生徒を管理してください。",
             startIcon: <BusinessRoundedIcon />,
             url: "./tab/management",

@@ -1,14 +1,14 @@
-import { Avatar, Box, Card, Chip, Divider, Typography } from '@mui/material'
-import { server } from 'components/config'
+import { Avatar, Box, Card, Chip, Divider, Typography } from "@mui/material"
+import { server } from "components/config"
 
 const MainMenuCompanyCard = (props) => {
     return (
         <Card
             sx={{
                 p: 2,
-                borderRadius: '15px',
+                borderRadius: "15px",
                 boxShadow: 5,
-                mb: 2
+                mb: 2,
             }}
         >
             <Box
@@ -22,14 +22,14 @@ const MainMenuCompanyCard = (props) => {
                         border: "1px solid gray",
                     }}
                     variant="rounded"
-                    src={server.host + "/images/icon/" + props.company["manager_image"]}
+                    src={
+                        server.host +
+                        "/images/icon/" +
+                        props.company["manager_image"]
+                    }
                 />
 
-                <Typography
-                    fontWeight="bold"
-                    textAlign={"center"}
-                    width="100%"
-                >
+                <Typography fontWeight="bold" textAlign={"center"} width="100%">
                     {props.company["company_name"]}
                 </Typography>
             </Box>
@@ -43,15 +43,28 @@ const MainMenuCompanyCard = (props) => {
                 sx={{
                     display: "flex",
                     justifyContent: "center",
+                    alignItems: "center",
                     mt: 2,
                 }}
             >
+                <Box
+                    sx={{
+                        p: 1,
+                        fontWeight: 600,
+                    }}
+                >
+                    本社 :
+                </Box>
                 <Chip
                     sx={{
                         p: 1,
                         fontWeight: 600,
                     }}
-                    label={"本社" + " : " + props.company["address"]}
+                    label={
+                        props.company["address"]
+                            ? props.company["address"]
+                            : "情報無し"
+                    }
                 />
             </Box>
         </Card>
