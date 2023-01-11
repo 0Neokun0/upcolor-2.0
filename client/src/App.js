@@ -24,13 +24,16 @@ import BadgeIcon from "@mui/icons-material/Badge"
 import HomeWorkIcon from "@mui/icons-material/HomeWork"
 import ViewTimelineIcon from "@mui/icons-material/ViewTimeline"
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest"
-import ChatRoundedIcon from '@mui/icons-material/ChatRounded'
-import ClassIcon from '@mui/icons-material/Class'
+import ChatRoundedIcon from "@mui/icons-material/ChatRounded"
+import ClassIcon from "@mui/icons-material/Class"
 import LockOpenIcon from "@mui/icons-material/LockOpen"
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts"
 import SettingsIcon from "@mui/icons-material/Settings"
 import ContactsIcon from "@mui/icons-material/Contacts"
-import NewspaperIcon from '@mui/icons-material/Newspaper'
+import NewspaperIcon from "@mui/icons-material/Newspaper"
+import ContactMailIcon from "@mui/icons-material/ContactMail"
+import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications"
+import ApartmentRoundedIcon from '@mui/icons-material/ApartmentRounded';
 
 import { server } from "components/config"
 
@@ -53,26 +56,119 @@ function App() {
         setAnchorEl(null)
     }
 
-    const menus = [
-        {
-            label: "学生フィード",
-            icon: <PeopleAltRoundedIcon />,
-            value: "学生",
-            url: "/home",
-        },
-        {
-            label: "クラスニュース",
-            icon: <SchoolRoundedIcon />,
-            value: "学校",
-            url: "/teacher",
-        },
-        {
-            label: "企業検索",
-            icon: <BusinessRoundedIcon />,
-            value: "企業",
-            url: "/list/company",
-        },
-    ]
+    let menus
+        if (userType === 1) {
+            menus = [
+                {
+                    label: "学生フィード",
+                    icon: <PeopleAltRoundedIcon />,
+                    value: "学生",
+                    url: "/home",
+                },
+                {
+                    label: "クラスニュース",
+                    icon: <SchoolRoundedIcon />,
+                    value: "学校",
+                    url: "/classNews",
+                },
+                {
+                    label: "企業検索",
+                    icon: <BusinessRoundedIcon />,
+                    value: "企業",
+                    url: "/list/company",
+                },
+            ]
+        } else if (userType === 2) {
+            menus = [
+                {
+                    label: "教員ホーム",
+                    icon: <ContactMailIcon />,
+                    value: "教員",
+                    url: "/teacher",
+                },
+                {
+                    label: "学生閲覧",
+                    icon: <SchoolRoundedIcon />,
+                    value: "学校",
+                    url: "/list/student",
+                },
+                {
+                    label: "企業検索",
+                    icon: <BusinessRoundedIcon />,
+                    value: "企業",
+                    url: "/list/company",
+                },
+            ]
+        } else if (userType === 3) {
+            menus = [
+               {
+                    label: "企業ホーム",
+                    icon: <ApartmentRoundedIcon />,
+                    value: "企業",
+                    url: "/company/home",
+               },
+               {
+                    label: "学生閲覧",
+                    icon: <PeopleAltRoundedIcon />,
+                    value: "学生",
+                    url: "/list/student",
+               },
+               {
+                    label: "進級制作閲覧",
+                    icon: <AccountTreeIcon />,
+                    value: "進級制作",
+                    url: "/teamlist",
+                },
+               {
+                    label: "企業検索",
+                    icon: <BusinessRoundedIcon />,
+                    value: "企業",
+                    url: "/list/company",
+               },
+           ]
+       } else if (userType === 4) {
+            menus = [
+            {
+                label: "管理ホーム",
+                icon: <SettingsApplicationsIcon />,
+                value: "管理",
+                url: "/develop",
+            },
+            {
+                label: "クラスニュース",
+                icon: <SchoolRoundedIcon />,
+                value: "学校",
+                url: "/teacher",
+            },
+            {
+                label: "企業検索",
+                icon: <BusinessRoundedIcon />,
+                value: "企業",
+                url: "/list/company",
+            },
+        ]
+        } else {
+            menus = [
+                {
+                    label: "学生閲覧",
+                    icon: <PeopleAltRoundedIcon />,
+                    value: "学生",
+                    url: "/list/student",
+                },
+                {
+                    label: "進級制作閲覧",
+                    icon: <SchoolRoundedIcon />,
+                    value: "進級制作",
+                    url: "/teamlist",
+                },
+                {
+                    label: "企業検索",
+                    icon: <BusinessRoundedIcon />,
+                    value: "企業",
+                    url: "/list/company",
+                },
+            ]
+        }
 
     const drawerMenus = [
         {

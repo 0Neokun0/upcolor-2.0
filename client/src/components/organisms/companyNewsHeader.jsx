@@ -28,7 +28,7 @@ const CompanyNewsHeader = (props) => {
                 />
 
                 <Typography
-                    variant="h3"
+                    variant="h5"
                     sx={{
                         position: "absolute",
                         transform: "translate(-50%,-50%)",
@@ -40,7 +40,7 @@ const CompanyNewsHeader = (props) => {
                         px: 2,
                     }}
                 >
-                    {props.company["name"]}
+                    {props.company["company_name"]}
 
                 </Typography>
             </Box>

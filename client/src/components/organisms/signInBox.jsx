@@ -11,6 +11,7 @@ const SignInBox = (props) => {
                 py: 5,
                 px: 3,
                 textAlign: "center",
+                borderRadius: 3,
             }}
         >
             <img

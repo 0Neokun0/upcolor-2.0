@@ -63,7 +63,6 @@ const CompanyListProfileCard = (props) => {
                             }}
                             label={"業種 : " + props.company["occupation_names"]}
                         />
-
                     </Grid>
                 </CardActionArea>
             </Card>
