@@ -15,4 +15,3 @@ https://docs.google.com/spreadsheets/d/1ATyFf5UQ7-Wi44JZAP2N3qNWEzrTLsFu/edit?rt
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 <br>
-10月まで、８０％ぐらいの機能を作りましょう。
