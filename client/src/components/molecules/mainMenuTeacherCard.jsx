@@ -34,7 +34,7 @@ const MainMenuTeacherCard = (props) => {
                 </Typography>
             </Box>
 
-            <Box
+            {/* <Box
                 sx={{
                     display: "flex",
                     justifyContent: "center",
@@ -44,7 +44,7 @@ const MainMenuTeacherCard = (props) => {
                 <Chip
                     label={props.teacher["course_name"]}
                 />
-            </Box>
+            </Box> */}
         </Card>
     )
 }

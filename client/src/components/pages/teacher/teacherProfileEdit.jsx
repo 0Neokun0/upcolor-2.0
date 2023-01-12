@@ -195,7 +195,7 @@ const TeacherProfileEdit = () => {
                     />
                 </ProfileInput> */}
 
-                <ProfileInput
+                {/* <ProfileInput
                     title="自己紹介・自己アピール"
                 >
                     <TextField
@@ -206,7 +206,7 @@ const TeacherProfileEdit = () => {
                         multiline
                         defaultValue={teacher["introduction"]}
                     />
-                </ProfileInput>
+                </ProfileInput> */}
 
                 {/* <ProfileInput
                     title="スキル"
