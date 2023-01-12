@@ -13,7 +13,7 @@ import TerminalRoundedIcon from '@mui/icons-material/TerminalRounded'
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import GitHubIcon from '@mui/icons-material/GitHub'
 
-const ProfileView = () => {
+const ProfileView = (props) => {
     const userId = useParams()["userId"]
 
     const [profile, setProfile] = useState(false)
@@ -160,7 +160,9 @@ const ProfileView = () => {
                                 </Typography>
 
                                 {
-                                    showFollowButton
+                                    props.userType == 1
+                                        &&
+                                        showFollowButton
                                         ?
                                         state
                                             ?
@@ -269,11 +271,15 @@ const ProfileView = () => {
                                         onClick={() => setSelectTab(2)}
                                     />
 
-                                    <Tab
-                                        value={3}
-                                        label="投稿"
-                                        onClick={() => setSelectTab(3)}
-                                    />
+                                    {
+                                        props.userType == 1
+                                        &&
+                                        <Tab
+                                            value={3}
+                                            label="投稿"
+                                            onClick={() => setSelectTab(3)}
+                                        />
+                                    }
                                 </Tabs>
 
                                 <Box

@@ -489,7 +489,7 @@ function App() {
 
                     <Route path="profile">
                         <Route path="" element={<Profile />} />
-                        <Route path=":userId" element={<ProfileView />} />
+                        <Route path=":userId" element={<ProfileView userType={userType}/>} />
                     </Route>
 
                     <Route path="profile/edit" element={<ProfileEdit />} />
