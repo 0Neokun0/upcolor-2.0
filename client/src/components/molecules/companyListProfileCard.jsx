@@ -61,7 +61,11 @@ const CompanyListProfileCard = (props) => {
                                 p: 1,
                                 fontWeight: 600,
                             }}
-                            label={"業種 : " + props.company["occupation_names"]}
+                            label={
+                                props.company["occupation_names"]
+                                    ? props.company["occupation_names"]
+                                    : "情報無し"
+                            }
                         />
                     </Grid>
                 </CardActionArea>

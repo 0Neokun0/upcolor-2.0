@@ -43,12 +43,24 @@ const CompanyPageTitle = (props) => {
                     direction="row"
                     spacing={2}
                 >
+                    <Box
+                    sx={{
+                        p: 0.5,
+                        fontWeight: 600,
+                    }}
+                >
+                    業種 :
+                </Box>
                     <Chip
                         sx={{
                             p: 1,
                             fontWeight: 600,
                         }}
-                        label={"業種 : " + props.company["occupation_names"]}
+                        label={
+                            props.company["occupation_names"]
+                                ? props.company["occupation_names"]
+                                : "情報無し"
+                        }
                     />
                 </Stack>
             </Card>
