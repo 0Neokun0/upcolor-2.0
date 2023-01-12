@@ -335,6 +335,24 @@ router.post("/editProfile", async (req, res) => {
         languages: languages
     })
 })
+router.post("/editTeacher", async (req, res) => {
+    const userId = get.userId(req)
+    const teacher = await get.user(userId)
+    const courses = await get.list("course")
+    const qualifications = await get.list("qualification")
+    const programs = await get.list("program")
+    const tools = await get.list("tool")
+    const languages = await get.list("language")
+
+    res.json({
+        teacher: teacher[0],
+        courses: courses,
+        qualifications: qualifications,
+        programs: programs,
+        tools: tools,
+        languages: languages
+    })
+})
 
 router.post("/updateProfile", async (req, res) => {
     const userId = get.userId(req)
@@ -376,6 +394,44 @@ router.post("/updateProfile", async (req, res) => {
 
     await sql.handleUpdate(sqlUpdateUserProfile, [name, introduction, userId])
     await sql.handleUpdate(sqlUpdateStudentProfile, [course, year, qualifications, programming_languages, tools_and_framework, country_language, github, userId])
+
+    res.json(true)
+})
+router.post("/updateTeacher", async (req, res) => {
+    const userId = get.userId(req)
+
+    const name = req.body.name
+
+    const course = req.body.course
+    const qualifications = req.body.qualifications
+    const programming_languages = req.body.programming_languages
+    const tools_and_framework = req.body.tools_and_framework
+    const country_language = req.body.country_language
+    const github = req.body.github
+
+    const sqlUpdateUserTeacher = `
+        UPDATE
+            user_profiles
+        SET
+            user_name = ?,
+        WHERE
+            user_id = ?
+    `
+    const sqlUpdateTeacherProfile = `
+        UPDATE
+            teacher_profiles
+        SET
+            teacher_course_id = ?,
+            teacher_qualifications = ?,
+            teacher_programming_languages = ?,
+            teacher_tools_and_framework = ?,
+            teacher_country_language = ?,
+        WHERE
+            user_id = ?
+    `
+
+    await sql.handleUpdate(sqlUpdateUserTeacher, [name, userId])
+    await sql.handleUpdate(sqlUpdateTeacherProfile, [course, qualifications, programming_languages, tools_and_framework, country_language, userId])
 
     res.json(true)
 })

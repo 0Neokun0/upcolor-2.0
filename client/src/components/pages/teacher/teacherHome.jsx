@@ -74,7 +74,7 @@ const TeacherHome = () => {
         {
             value: "先生プロフィール編集",
             icon: <SettingsIcon />,
-            url: "#",
+            url: "./profile/edit",
         },
     ]
 

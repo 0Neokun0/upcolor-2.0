@@ -36,6 +36,7 @@ import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications"
 import ApartmentRoundedIcon from '@mui/icons-material/ApartmentRounded';
 
 import { server } from "components/config"
+import TeacherProfileEdit from "components/pages/teacher/teacherProfileEdit"
 
 function App() {
     const [open, setOpen] = useState(false)
@@ -493,6 +494,7 @@ function App() {
                     </Route>
 
                     <Route path="profile/edit" element={<ProfileEdit />} />
+                    <Route path="teacher/profile/edit" element={<TeacherProfileEdit />} />
 
                     <Route path="chat">
                         <Route path="" element={<PrivateChat />} />
