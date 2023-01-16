@@ -70,7 +70,7 @@ const TeamList = () => {
                     onChange={(value) => { setTechnologies(value) }}
                 />
 
-                <SearchList
+                {/* <SearchList
                     title="専攻"
                     icon={<HistoryEduIcon />}
                     name="course"
@@ -78,7 +78,7 @@ const TeamList = () => {
                     set={setCourses}
                     sqlId="course_id"
                     sqlName="course_name"
-                />
+                /> */}
             </SearchListBox>
 
             <ListDisplayBox
