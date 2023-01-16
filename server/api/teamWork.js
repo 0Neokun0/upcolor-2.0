@@ -575,6 +575,20 @@ router.post("/updateTeamWorkInfo", async (req, res) => {
         await sql.handleUpdate(sqlUpdateTechnology, [content, teamId])
         res.json(true)
     }
+
+    if (type === "teamCourse") {
+        const sqlUpdateTeamCourse = `
+            UPDATE
+                team_works_list
+            SET
+                team_work_course= ?
+            WHERE
+                team_work_id = ?
+        `
+
+        await sql.handleUpdate(sqlUpdateTeamCourse, [content, teamId])
+        res.json(true)
+    }
 })
 
 router.post("/updateJoinTeam", async (req, res) => {
@@ -719,12 +733,26 @@ router.post("/getJoinedTeam", async (req, res) => {
             user_id
     `
 
+    const sqlSelectTeamCourse = `
+        SELECT
+            course_id,
+            course_name
+        FROM
+            courses
+    `
+
     const teamInfo = await sql.handleSelect(sqlSelectTeamInfo, [joinedTeamId])
     const teamMembers = await sql.handleSelect(sqlSelectTeamMembers, [joinedTeamId])
+    const teamCourse = await sql.handleSelect(sqlSelectTeamCourse, [])
+
+    if (teamInfo[0]["team_work_course"]) {
+        teamInfo[0]["team_work_course_name"] = teamInfo[0]["team_work_course"].split(",").map((id) => Number(id) === -1 ? "情報無し" : teamCourse[Number(id) - 1]["course_name"]).join('・')
+    }
 
     res.json({
         "teamInfo": teamInfo[0],
         "teamMembers": teamMembers,
+        "teamCourse": teamCourse,
     })
 })
 

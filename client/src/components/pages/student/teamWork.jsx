@@ -12,6 +12,7 @@ import { client } from "components/config"
 
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded'
 import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded'
+import TeamInfoCardSelectChip from "components/molecules/teamInfoCardSelectChip"
 
 const TeamWork = () => {
     const auth = true
@@ -36,6 +37,11 @@ const TeamWork = () => {
     const [target, setTarget] = useState(false)
     const [strategy, setStrategy] = useState(false)
     const [technology, setTechnology] = useState(false)
+    const [teamCourse, setTeamCourse] = useState(false)
+    const [coursesList, setCoursesList] = useState([])
+    const [courseId, setCourseId] = useState("")
+
+
 
     const [currentZoom, setCurrentZoom] = useState("Days")
 
@@ -195,6 +201,10 @@ const TeamWork = () => {
                             setPublishGantt(Boolean(res.data["gantt"]))
                         })
                 }
+                if (res.data["teamInfo"]["team_work_course"]) {
+                    setCourseId(res.data["teamInfo"]["team_work_course"])
+                }
+                setCoursesList(res.data["teamCourse"])
             })
 
         setGantt()
@@ -332,6 +342,18 @@ const TeamWork = () => {
                                             state={technology}
                                             toggleState={setTechnology}
                                             content={team["teamInfo"]["technology_used"]}
+                                            onSubmit={onSubmit}
+                                        />
+                                        <TeamInfoCardSelectChip
+                                            auth={auth}
+                                            title="チーム専攻"
+                                            label="専攻リスト"
+                                            name="teamCourse"
+                                            value={courseId}
+                                            lists={coursesList}
+                                            state={teamCourse}
+                                            toggleState={setTeamCourse}
+                                            content={team["teamInfo"]["team_work_course_name"]}
                                             onSubmit={onSubmit}
                                         />
                                     </Box>
