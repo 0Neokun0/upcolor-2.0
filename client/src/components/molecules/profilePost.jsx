@@ -4,6 +4,20 @@ import { grey } from "@mui/material/colors"
 import { server } from "components/config"
 
 const profilePost = (props) => {
+    const date = new Date(props.post["created_at"])
+
+    const formattedDate =
+        date.getFullYear() +
+        "/" +
+        ("0" + (date.getMonth() + 1)).slice(-2) +
+        "/" +
+        ("0" + date.getDate()).slice(-2) +
+        " " +
+        ("0" + date.getHours()).slice(-2) +
+        ":" +
+        ("0" + date.getMinutes()).slice(-2) +
+        ":" +
+        ("0" + date.getSeconds()).slice(-2)
     return (
         <Link to={`/home/${props["post"]["post_id"]}`}>
             <Card
@@ -56,7 +70,7 @@ const profilePost = (props) => {
                             textAlign="end"
                             variant="subtitle2"
                         >
-                            {props["post"]["created_at"]}
+                            {[formattedDate]}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

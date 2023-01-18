@@ -83,13 +83,27 @@ const PrivateChatBox = (props) => {
                         chats
                         &&
                         chats.map((chat) => {
+                            const date = new Date(chat["time"])
+
+                            const formattedDate =
+                                date.getFullYear() +
+                                "/" +
+                                ("0" + (date.getMonth() + 1)).slice(-2) +
+                                "/" +
+                                ("0" + date.getDate()).slice(-2) +
+                                " " +
+                                ("0" + date.getHours()).slice(-2) +
+                                ":" +
+                                ("0" + date.getMinutes()).slice(-2) +
+                                ":" +
+                                ("0" + date.getSeconds()).slice(-2)
                             return (
                                 <ChatNew
                                     key={chat["id"]}
                                     self={chat["self"]}
                                     name={chat["name"]}
                                     icon={chat["icon"]}
-                                    time={chat["time"]}
+                                    time={formattedDate}
                                     text={chat["text"]}
                                 />
                             )

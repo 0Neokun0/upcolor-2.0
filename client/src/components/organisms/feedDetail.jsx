@@ -40,12 +40,28 @@ const FeedDetail = () => {
                     replys
                         ?
                         replys.map((reply) => {
+                            const date = new Date(reply["created_at"])
+
+                            const formattedDate =
+                                date.getFullYear() +
+                                "/" +
+                                ("0" + (date.getMonth() + 1)).slice(-2) +
+                                "/" +
+                                ("0" + date.getDate()).slice(-2) +
+                                " " +
+                                ("0" + date.getHours()).slice(-2) +
+                                ":" +
+                                ("0" + date.getMinutes()).slice(-2) +
+                                ":" +
+                                ("0" + date.getSeconds()).slice(-2)
+
+
                             return (
                                 <Post
                                     key={reply["post_id"]}
                                     id={reply["post_id"]}
                                     name={reply["user_name"]}
-                                    time={reply["created_at"]}
+                                    time={formattedDate}
                                     content={reply["post_text"]}
                                     url_icon={reply["url_icon"]}
                                     url_post={reply["url_post"]}

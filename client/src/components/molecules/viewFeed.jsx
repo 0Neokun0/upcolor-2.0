@@ -8,6 +8,21 @@ import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded'
 import { grey, pink, red } from "@mui/material/colors"
 
 const ViewFeed = (props) => {
+    const date = new Date(props.post["created_at"])
+
+    const formattedDate =
+        date.getFullYear() +
+        "/" +
+        ("0" + (date.getMonth() + 1)).slice(-2) +
+        "/" +
+        ("0" + date.getDate()).slice(-2) +
+        " " +
+        ("0" + date.getHours()).slice(-2) +
+        ":" +
+        ("0" + date.getMinutes()).slice(-2) +
+        ":" +
+        ("0" + date.getSeconds()).slice(-2)
+
     return (
         <>
             <Tooltip
@@ -121,7 +136,7 @@ const ViewFeed = (props) => {
                         color: "gray",
                     }}
                 >
-                    {props.post["created_at"]}
+                    {[formattedDate]}
                 </Typography>
 
                 <Box

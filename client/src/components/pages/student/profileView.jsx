@@ -160,7 +160,7 @@ const ProfileView = (props) => {
                                 </Typography>
 
                                 {
-                                    props.userType == 1
+                                    props.userType === 1
                                         &&
                                         showFollowButton
                                         ?
@@ -272,7 +272,7 @@ const ProfileView = (props) => {
                                     />
 
                                     {
-                                        props.userType == 1
+                                        props.userType === 1
                                         &&
                                         <Tab
                                             value={3}
