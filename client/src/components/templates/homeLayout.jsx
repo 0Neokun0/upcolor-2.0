@@ -117,7 +117,6 @@ const HomeLayout = (props) => {
                 setFileCheck={props.setFileCheck}
             />
 
-            <Footer />
         </Box>
     )
 }

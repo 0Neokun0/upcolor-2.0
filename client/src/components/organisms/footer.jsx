@@ -6,13 +6,12 @@ const Footer = () => {
     return (
         <Box
             sx={{
-                py: 4,
+                py: 3,
                 textAlign: "center",
                 backgroundColor: "#bdbdbd",
                 boxShadow: 2,
             }}
         >
-            {/* ここのカンパニーpngの指定するときって././でいけるっけ？ */}
             <Link
                 href="/"
                 sx={{
@@ -22,8 +21,8 @@ const Footer = () => {
             >
                 <Box
                     sx={{
-                        marginRight: "1050px",
-                        marginBottom: "-55px",
+                        marginRight: "200px",
+                        marginBottom: "-60px",
                     }}
                 >
                     <img
@@ -37,7 +36,7 @@ const Footer = () => {
             <Typography
                 sx={{
                     fontSize: "1.4em",
-                    marginRight: "900px",
+                    marginRight: "50px",
                 }}
             >
                 UpColor
@@ -45,27 +44,31 @@ const Footer = () => {
 
             <Typography
                 sx={{
-                    marginRight: "920px",
+                    marginRight: "60px",
+                    verticalAlign: "middle",
                 }}
                 variant="caption"
             >
                 &copy 2022 - NAOKO 進級制作2022
             </Typography>
 
-            <a>
+            <Box>
                 <IconButton
                     href="https://github.com/0Neokun0/upcolor-2.0"
                     sx={{
-                        width:"50px",
+                        width: "50px",
+                        height:"50px",
+                        marginLeft:"90px",
+                        marginTop:"-105px",
                     }}
                 >
                     <GitHubIcon
                         sx={{
-                            color: "red",
+                            color: "normal",
                         }}
                     />
                 </IconButton>
-            </a>
+            </Box>
         </Box>
     )
 }

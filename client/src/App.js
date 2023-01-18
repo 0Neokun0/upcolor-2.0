@@ -8,7 +8,7 @@ import { StudentSignup, StudentHome, Group, Profile, ProfileEdit, ProfileView, R
 import { TeacherHome, TeacherSignup, DevelopHome, AddLectures, GenTeacherSign, GenCompanySign, TeacherNews, DevelopTabPage } from "components/pages/teacher"
 import { CompanySignup, CompanyHome, CompanyProfileEdit, StudentProfileView, CompanyNews } from "components/pages/company"
 import { GroupChatLayout } from "components/templates"
-import { Feed, FeedDetail, Header, Footer, ManagementStudent } from "components/organisms"
+import { Feed, FeedDetail, Header, ManagementStudent } from "components/organisms"
 import ClassNewsFeedList from "components/organisms/classNewsFeedList"
 import logo from "components/atoms/logo/upcolor_logo.svg"
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded"
@@ -543,16 +543,7 @@ function App() {
                     </Route>
                 </Routes>
             </BrowserRouter>
-
-            <BrowserRouter>
-                <Footer
-                    logoSrc={logo}
-                />
-            </BrowserRouter>
-
         </Box>
-
-        
     )
 
 

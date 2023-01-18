@@ -292,6 +292,9 @@ const ProfileView = () => {
                                         <TabPanel
                                             value={selectTab}
                                             index={1}
+                                            sx={{
+                                                borderBottom:1,
+                                            }}
                                         >
                                             {
                                                 profile["introduction"]
