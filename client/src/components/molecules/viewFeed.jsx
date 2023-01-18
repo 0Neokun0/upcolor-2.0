@@ -136,7 +136,7 @@ const ViewFeed = (props) => {
                         color: "gray",
                     }}
                 >
-                    {[formattedDate]}
+                    {formattedDate}
                 </Typography>
 
                 <Box
