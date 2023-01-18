@@ -1,13 +1,11 @@
 import { cyan, deepPurple, green } from "@mui/material/colors"
-
 import { Box, Button, Container, Hidden, IconButton, Typography } from "@mui/material"
 import logo from "components/atoms/logo/upcolor_logo.svg"
 import image from "components/atoms/images/20943572.jpg"
 import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
-import { LandingPageFeature } from "components/organisms"
-import Footer from "components/organisms/footer/footer"
+import { Footer, LandingPageFeature } from "components/organisms"
 import { useEffect, useState } from "react"
 
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
@@ -324,8 +322,7 @@ const LandingPage = (props) => {
                     </IconButton>
                 }
             </Container>
-
-            <Footer />
+            <Footer/>
         </Box>
     )
 }

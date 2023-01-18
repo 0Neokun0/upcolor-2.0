@@ -255,7 +255,7 @@ function App() {
     const teacherDrawerMenus = [
         {
             value: "ニューズ投稿",
-            icon: <NewspaperIcon/>,
+            icon: <NewspaperIcon />,
             url: "/teacher/teachernews",
         },
         {
@@ -393,29 +393,29 @@ function App() {
     }, [])
 
     useEffect(() => {
-            axios.post("/account/getUserType")
-                .then((res) => {
-                    setUserType(res.data)
-                })
-        }, [])
+        axios.post("/account/getUserType")
+            .then((res) => {
+                setUserType(res.data)
+            })
+    }, [])
 
-        var navBarMenuAvatarSrc
-        if (userType === 1 || userType === 4) {
-            navBarMenuAvatarSrc = server.host + "/images/icon/" + profile["image"]
-        } else if (userType === 2) {
-            navBarMenuAvatarSrc = server.host + "/images/icon/" + teacher["image"]
-        } else {
-            navBarMenuAvatarSrc = server.host + "/images/icon/" + company["manager_image"]
-        }
+    var navBarMenuAvatarSrc
+    if (userType === 1 || userType === 4) {
+        navBarMenuAvatarSrc = server.host + "/images/icon/" + profile["image"]
+    } else if (userType === 2) {
+        navBarMenuAvatarSrc = server.host + "/images/icon/" + teacher["image"]
+    } else {
+        navBarMenuAvatarSrc = server.host + "/images/icon/" + company["manager_image"]
+    }
 
-        var navBarMenuHref
-        if (userType === 1 || userType === 4) {
-            navBarMenuHref="/profile"
-        } else if (userType === 2) {
-            navBarMenuHref="/profile"
-        } else {
-            navBarMenuHref="/company/home"
-        }
+    var navBarMenuHref
+    if (userType === 1 || userType === 4) {
+        navBarMenuHref = "/profile"
+    } else if (userType === 2) {
+        navBarMenuHref = "/profile"
+    } else {
+        navBarMenuHref = "/company/home"
+    }
 
     return (
         <Box>
@@ -545,6 +545,10 @@ function App() {
             </BrowserRouter>
         </Box>
     )
+
+
+
+
 }
 
 export default App

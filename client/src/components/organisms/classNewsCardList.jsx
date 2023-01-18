@@ -5,11 +5,11 @@ const ClassNewsCardList = (props) => {
     return (
         props["classNewsRooms"]
             ?
+
             <Grid
                 container
                 sx={{
                     justifyContent: "space-between",
-
                 }}
             >
                 {
@@ -32,6 +32,7 @@ const ClassNewsCardList = (props) => {
             <Box
                 sx={{
                     p: 2,
+                    height:"100%",
                     display: "flex",
                     justifyContent: 'center',
 

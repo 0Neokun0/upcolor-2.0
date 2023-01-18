@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom"
 import { MainMenu, NewsList, ReplyModal, SendPost } from "components/organisms"
 import { Box, Hidden, Stack } from "@mui/material"
-import Footer from "components/organisms/footer/footer"
+import Footer from "components/organisms/footer"
 import CompanyNewsList from "components/organisms/companyNewsList"
 
 const HomeLayout = (props) => {
@@ -117,7 +117,6 @@ const HomeLayout = (props) => {
                 setFileCheck={props.setFileCheck}
             />
 
-            <Footer />
         </Box>
     )
 }
