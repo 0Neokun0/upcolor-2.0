@@ -70,7 +70,7 @@ const profilePost = (props) => {
                             textAlign="end"
                             variant="subtitle2"
                         >
-                            {[formattedDate]}
+                            {formattedDate}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
