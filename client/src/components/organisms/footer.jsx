@@ -1,4 +1,4 @@
-import { Box, Typography, Link, Button, IconButton } from '@mui/material'
+import { Box, Typography, Link, IconButton } from '@mui/material'
 import logo from "components/atoms/logo/upcolor_logo.svg"
 import GitHubIcon from '@mui/icons-material/GitHub';
 

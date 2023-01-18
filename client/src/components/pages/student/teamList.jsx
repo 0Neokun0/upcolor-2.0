@@ -5,15 +5,14 @@ import React from "react"
 import Select from "react-select"
 import { ListLayout } from "components/templates"
 import { ListDisplayBox, SearchListBox } from "components/organisms"
-import { SearchList, TeamViewCard } from "components/molecules"
-import HistoryEduIcon from '@mui/icons-material/HistoryEdu'
+import { TeamViewCard } from "components/molecules"
 
 const TeamList = () => {
     const [suggestion, setSuggestion] = useState([])
     const [originalTeams, setOriginalTeams] = useState([])
     const [displayTeams, setDisplayTeams] = useState([])
     const [search, setSearch] = useState([])
-    const [courses, setCourses] = useState([])
+    // const [courses, setCourses] = useState([])
     const [technologies, setTechnologies] = useState([])
 
     const backPage = () => {
@@ -52,13 +51,13 @@ const TeamList = () => {
                     var displayFlg = true
 
                     displayFlg = technologyCheck(team["technology_used"], technologies["label"], displayFlg)
-                    displayFlg = singleIdCheck(team["team_work_course"], courses, displayFlg)
+                    // displayFlg = singleIdCheck(team["team_work_course"], courses, displayFlg)
 
                     return displayFlg && team
                 }).filter((element) => element)
             )
         }
-    }, [technologies, courses, originalTeams])
+    }, [technologies, originalTeams])
 
     console.log(displayTeams)
 

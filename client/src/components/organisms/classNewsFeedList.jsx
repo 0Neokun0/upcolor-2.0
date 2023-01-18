@@ -20,6 +20,21 @@ const ClassNewsFeedList = (props) => {
                 props["news"]
                 &&
                 props["news"].map((news) => {
+                    const date = new Date(news["created_at"])
+
+                    const formattedDate =
+                        date.getFullYear() +
+                        "/" +
+                        ("0" + (date.getMonth() + 1)).slice(-2) +
+                        "/" +
+                        ("0" + date.getDate()).slice(-2) +
+                        " " +
+                        ("0" + date.getHours()).slice(-2) +
+                        ":" +
+                        ("0" + date.getMinutes()).slice(-2) +
+                        ":" +
+                        ("0" + date.getSeconds()).slice(-2)
+
                     return (
                         <ClassNewsFeedCard
                             key={news["chat_id"]}
@@ -27,7 +42,7 @@ const ClassNewsFeedList = (props) => {
                             name={news["user_name"]}
                             text={news["sent_text"]}
                             icon={news["image_url"]}
-                            time={news["created_at"]}
+                            time={formattedDate}
                         />
                     )
                 })
