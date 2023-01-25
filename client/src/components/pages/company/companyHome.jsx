@@ -80,7 +80,7 @@ const CompanyHome = () => {
 
     const companyMenus = [
         {
-            value: "グループ投稿",
+            value: "投稿",
             icon: <GroupsIcon />,
             url: "/company/groupNews",
         },
