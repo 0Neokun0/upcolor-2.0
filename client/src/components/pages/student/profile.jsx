@@ -516,10 +516,19 @@ const Profile = () => {
 
                                 {/* お気に入り投稿 */}
                                 <TabPanel
-                                value={selectTab}
-                                index={6}
+                                    value={selectTab}
+                                    index={6}
                                 >
-                                    <Box>
+                                    <Box
+                                        sx={{
+                                            "a": {
+                                                display: "block"
+                                            },
+                                            "a + a": {
+                                                mt: 2,
+                                            },
+                                        }}
+                                    >
                                         {
                                             favorites.length
                                                 ?

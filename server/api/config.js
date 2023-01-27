@@ -5,7 +5,7 @@ module.exports = {
         password: "",
         database: "upcolor",
     },
-    
+
     jwt: {
         secret: "KARISECRETKEYKARISECRETKEYKARISECRETKEY",
         options: {
@@ -15,6 +15,6 @@ module.exports = {
     },
 
     server: {
-        host: "localhost:3000"
+        host: "192.168.22.106:3000"
     },
 }
